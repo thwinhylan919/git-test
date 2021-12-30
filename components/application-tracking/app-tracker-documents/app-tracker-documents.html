@@ -1,0 +1,42 @@
+<div class="status-history">
+	<div class="status-history-card">
+		<!-- ko if: $component.dataLoaded() -->
+		<div class="documents-list">
+			<!-- ko foreach: $component.applicantDocuments() -->
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="document-category oj-flex-item oj-sm-12 oj-md-10 oj-lg-10 oj-lg-offset-1 oj-md-offset-1">
+					<h4 class="form-heading" data-bind=" text: $data.categoryId"></h4>
+				</div>
+			</div>
+			<!-- ko foreach: $data.contentDTOs -->
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 oj-lg-offset-2 oj-md-offset-2">
+					<oj-label class=""><span data-bind="text:$data.documentTypeId"></span></oj-label>
+				</div>
+			</div>
+			<!-- ko if: $data['documentId'] -->
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-md-offset-2 oj-lg-2 oj-lg-offset-2">
+					<a class="link" href="#"
+						data-bind="click: $component.downloadFile.bind($data, $data.contentId, $component.applicantId), text: $data.description ? $data.description : $data.documentId.displayValue, attr:{alt: $component.resource.documentDownloadClick, title: $component.resource.documentDownloadClickTitle}"></a>
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- /ko -->
+		</div>
+		<!-- /ko -->
+	</div>
+</div>
+
+<modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'NOFILE', header: $component.resource.generic.common.error">
+	<div class="oj-flex oj-flex-items-pad">
+		<div class="oj-flex-item oj-sm-12 message-text scroll" data-bind="text:$component.resource.noFile"></div>
+		<div class="oj-flex-item oj-sm-12 message-btn button-container">
+			<oj-button id="hideButton" class="oj-button action-button-primary"
+				on-click="[[$baseModel.modalInteraction.bind($data, '#NOFILE', 'closeModal', null)]]">
+				<span data-bind="text:$component.resource.ok"></span>
+			</oj-button>
+		</div>
+	</div>
+</modal-window>

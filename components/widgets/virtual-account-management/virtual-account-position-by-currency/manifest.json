@@ -1,0 +1,14 @@
+{
+    "componentName": "virtual-account-position-by-currency",
+    "module": "virtual-account-management",
+    "segment": ["corporateuser"],
+    "width": {
+      "large": "4",
+      "medium": "4"
+    },
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+}
+  

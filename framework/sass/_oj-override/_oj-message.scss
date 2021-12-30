@@ -1,0 +1,35 @@
+.oj-message-status-icon {
+  vertical-align: middle;
+  padding-bottom: 0.2rem;
+}
+
+.oj-message-summary {
+  display: none;
+}
+
+.oj-message-detail {
+  font-size:  var(--alert-notification-body-font-size);
+  font-weight:  var(--alert-notification-body-font-weight);
+  color: var(--alert-notification-body-foreground-color);
+  width: 100%;
+}
+
+.oj-message {
+  .oj-message-content {
+    white-space: normal;
+    position: relative;
+    bottom: 0.2rem;
+  }
+}
+.oj-messages-notification .oj-message-body,.oj-messages-notification .oj-message-header{
+  background-color: inherit;
+}
+.oj-messages-container .oj-message-container{
+  background: linear-gradient(to var(--alert-notification-gradient-direction), var(--alert-notification-gradient-start-color), var(--alert-notification-gradient-end-color));
+}
+
+.oj-messages-container .oj-message-category h1{
+  font-size:  var(--alert-notification-header-font-size);
+  font-weight:  var(--alert-notification-header-font-weight);
+  color: var(--alert-notification-header-foreground-color);
+}

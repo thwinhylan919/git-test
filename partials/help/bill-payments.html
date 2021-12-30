@@ -1,0 +1,21 @@
+<!-- ko if:$dashboard.helpComponent.params()-->
+
+<div class="oj-flex oj-flex-items-pad help-content">
+
+    <div class="oj-flex-item help-item">
+        <img alt="" data-bind="loadImage : 'info-icon/benefits.svg'">
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+        <h4 class="oj-sm-12 help-content-title help-item">What are the benefits?</h4>
+    </div>
+    <div class="oj-flex-item ">
+        <p>No more waiting in queues or having to deal with late payment hassles. Make all bill payments and recharges online. Get SMS alerts for bill presentments, payments, etc.</p>
+
+        <p>Now you can also pay multiple bills at once through the <a href="#" data-bind="attr:{alt:$dashboard.helpComponent.params().billPayments.multipleBillPaymentsText}, text:$dashboard.helpComponent.params().billPayments.multipleBillPayments,
+        click: $dashboard.helpComponent.params().billPayments.openMultipleBillPayments"> option</a> 
+        </p>
+    </div>
+
+</div>
+      <!-- /ko -->
+

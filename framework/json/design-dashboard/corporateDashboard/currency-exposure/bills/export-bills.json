@@ -1,0 +1,26 @@
+{
+    "billDTOs": [{
+        "determinantValue": "OBDX_BU",
+        "id": "AT3EUUD190811001",
+        "contractStatus": "ACTIVE",
+        "billType": "EXPORT",
+        "productId": "EUUD",
+        "transactionDate": "2020-05-30T00:00:00",
+        "amount": {
+            "currency": "GBP",
+            "amount": 13000.0
+        },
+        "counterPartyName": "new customer",
+        "maturityDate": "2020-04-30T00:00:00",
+        "tenor": 0,
+        "productName": "OUTGOING DOCUMENTARY USANCE BILLS UNDER LC ON DISCOUNT",
+        "userId": "adiCorp308",
+        "userName": "Aditya Ramnathkar",
+        "lcCustomer": {
+            "displayValue": null,
+            "value": null
+        },
+        "currentUser": false,
+        "authStatus": "AUTHORIZED"
+    }]
+}

@@ -1,0 +1,24 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.security.service.role.policy.ApplicationRolePolicyMap",
+           "components": [{
+                   "componentName": "application-role-create",
+                   "service": "create",
+                   "perform": "application-role-base#map-transaction#transaction-mapping#review-application-role-create",
+                   "approve": "review-application-role-create"
+               },
+               {
+                   "componentName": "application-role-read",
+                   "service": "read",
+                   "perform": "application-role-base#transaction-mapping-search#transaction-mapping-search-list#transaction-mapping"
+               },
+               {
+                   "componentName": "role-transaction-update",
+                   "service": "update",
+                   "perform": "review-role-transaction-update",
+				   "approve": "review-role-transaction-update"
+               }
+           ]
+       }
+   ]
+}

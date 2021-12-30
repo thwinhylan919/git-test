@@ -1,0 +1,106 @@
+<div class="oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-9">
+        <div class="form-main-container">
+            <!-- ko if : tasksLoaded() && productTypesLoaded() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <oj-validation-group id="productTracker">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2 label" for="userType">
+                            <span data-bind=" text:$component.resource.productMapping.userType"></span>
+                        </oj-label>
+                        <div class="oj-flex-item oj-lg-4 oj-md-8 oj-sm-12">
+                            <oj-select-one required id="userType" :placeholder="[[$component.resource.common.select]]" value="{{$component.selectedUserType}}" on-value-changed="[[$component.userRoleChanged]]">
+                                <!-- ko foreach: $component.userRolesList() -->
+                                <oj-option value="{{enterpriseRoleId}}"><span data-bind="text:enterpriseRoleName"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- ko if:isUserRoleSelected -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2 label" for="productMapping">
+                            <span data-bind=" text:$component.resource.productMapping.productModuleLabel"></span>
+                        </oj-label>
+                        <div class="oj-flex-item oj-lg-4 oj-md-8 oj-sm-12">
+                            <oj-select-one required id="productMapping" :placeholder="[[$component.resource.common.select]]" value="{{$component.selectedProductModule}}" on-value-changed="[[$component.productModuleChanged]]">
+                                <!-- ko foreach: $component.prodModules -->
+                                <oj-option value="{{id}}"><span data-bind="text:label"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:isProductSelected -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2 label" for="productType">
+                            <span data-bind=" text:$component.resource.productMapping.productType"></span>
+                        </oj-label>
+                        <div class="oj-flex-item oj-lg-4 oj-md-8 oj-sm-12">
+                            <oj-select-one required id="productType" :placeholder="[[$component.resource.common.select]]" value="{{$component.selectedProductType}}">
+                                <!-- ko foreach: $component.productTypesList() -->
+                                <oj-option value="{{code}}"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </oj-validation-group>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container ">
+                <oj-button id="button-search" class="action-button-primary" on-click="[[$component.search]]">
+                    <span data-bind="text:$component.resource.common.search"></span>
+                </oj-button>
+                <!-- ko ifnot : mappingLoaded() -->
+                <oj-button id="button-cancel" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+
+            <!-- ko if:$component.stageOne() -->
+            <!-- ko if : mappingLoaded() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <div class="oj-flex-item oj-lg-12 oj-md-8 oj-sm-12">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <oj-table id="table" :aria-label="[[$component.resource.productMapping.segmentTable]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('rowTemplate', true)]]" columns="[[[{headerText:$component.resource.tableHeader.userType,sortable:'disabled'},{headerText:$component.resource.tableHeader.userSegments,sortable:'disabled'},{headerText:$component.resource.tableHeader.products,sortable:'disabled'}]]]"
+                            data="[[$component.datasource]]">
+                            <caption class="hide-label" data-bind="text:$component.resource.productMapping.segmentTable"></caption>
+                        </oj-table>
+                    </div>
+                </div>
+                <script type="text/html" id="rowTemplate">
+                    <tr>
+                        <td data-bind="text:userType"></td>
+                        <td data-bind="text:userSegment"></td>
+                        <!-- ko if:maintenanceId !== "" -->
+                        <td>
+                            <a href="#" data-bind="text:$baseModel.format($component.resource.productMapping.noOfMapped, {
+                count: productCount}), click:$component.viewMappedProducts.bind(maintenanceId)"></a>
+                        </td>
+                        <!-- /ko -->
+                        <!-- ko if:maintenanceId === "" -->
+                        <td>
+                            <a href="#" data-bind="text:$component.resource.button.mapProducts, click:$component.createMap.bind($data,$context.row)"></a>
+                        </td>
+                        <!-- /ko -->
+                    </tr>
+                </script>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button id="button-cancel" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'product-mapping-maintenance'"></help>
+    </div>
+    <!-- /ko -->
+
+</div>

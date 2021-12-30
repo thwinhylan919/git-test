@@ -1,0 +1,53 @@
+.proceedButton {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.actionItems {
+    @include padding(1rem, 0, 1rem, 23rem);
+}
+
+.topPadding {
+    padding-top: 0.8rem;
+}
+
+.bottomPadding {
+    padding-bottom: 1.8rem;
+}
+
+.boldHeading {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.confirm-screen {
+    position: relative;
+    padding: 0;
+    @include mq(small) {
+        padding: 0.5rem 0;
+    }
+    &__list {
+        list-style-type: none;
+        @include single-padding(left, 0);
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            padding: 0.6rem;
+            @include float(left);
+            min-width: 8.1rem;
+            text-align: center;
+            justify-content: space-between;
+            img {
+                height: 3.8rem;
+            }
+        }
+    }
+    &-messageContainer {
+        &__message {
+            .row {
+                padding-bottom: 0.5rem;
+            }
+        }
+    }
+}

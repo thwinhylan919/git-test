@@ -1,0 +1,24 @@
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-sm-2">
+  <oj-avatar role="img" size="[['xs']]" initials='[[debitVPAId?$component.payeeMap()[debitVPAId].initials:userInitials]]' src='[[debitVPAId?$component.payeeMap()[debitVPAId].preview():""]]' data-bind="attr:{'aria-label':debitVPAId?debitVPAId:$baseModel.format($component.nls.PendingRequests.userName,{firstName:userFirstName,lastName:userLastName})}">
+  </oj-avatar>
+  </div>
+  <div class="oj-flex-item oj-sm-6">
+    <!-- ko if : payerName -->
+    <div>
+      <div data-bind="text:payerName"></div>
+      <div data-bind="attr:{'class':'payeeIdSize'},text:debitVPAId"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot : payerName -->
+    <div>
+      <div data-bind="text:debitVPAId?debitVPAId:$baseModel.format($component.nls.PendingRequests.userName,{firstName:userFirstName,lastName:userLastName})"></div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div class="oj-flex-item oj-sm-4 right">
+    <div data-bind="text:$formatter.formatCurrency(amount.amount,amount.currency)"></div>
+    <div class="details__status" data-bind="attr:{'class':status ==='Approved'?'details__approved':(status ==='Completed'?'details__completed' :(status ==='Pending'?'details__pending':'details__failed'))},
+    text:status"></div>
+  </div>
+</div>

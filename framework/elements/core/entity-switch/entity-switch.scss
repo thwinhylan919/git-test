@@ -1,0 +1,19 @@
+.entity-switch {
+    width: 100%;
+    height: var(--top-header-height);
+    @include mq(large) {
+        background: linear-gradient(to var(--top-header-gradient-direction), var(--top-header-gradient-start-color), var(--top-header-gradient-end-color));
+    }
+
+    .action-item {
+        .oj-button-button{
+            background-color: var(--top-header-gradient-direction);
+            border: none;
+            .oj-button-label {
+                .oj-button-text, .oj-button-icon {
+                    color: var(--top-header-foreground-color);
+                }
+            }
+        }
+    }
+}

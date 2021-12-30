@@ -1,0 +1,193 @@
+<div class="banner-design oj-flex oj-flex-items-pad oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <div data-bind="text:$component.partyName"></div>
+        <span data-bind="text:$baseModel.format($component.nls.partyLabel,{partyId: $component.partyId()})"></span>
+    </div>
+</div>
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <page-section
+            params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.Search, headerTemplate : 'supply-chain-finance/invoice-accept-reject/receipt-download'">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3 oj-md-12 oj-sm-12">
+                    <div>
+                        <div
+                            data-bind="component:{name: 'search-box', params:{searchFields : ['spokeName','spokeId'],rootModel:$component,data:dataSource26, searchBy: $component.nls.searchName}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-8 oj-md-7 oj-sm-6">
+                    <div data-bind="attr:{'class':'sub-heading'}"><span
+                            data-bind="text:$component.nls.Search.AssociatedPartyList"></span></div>
+                </div>
+                <div class="oj-flex-item oj-lg-2 oj-sm-6 oj-md-3">
+                    <oj-select-one :id="[['Choosecategory46']]" value="{{filterCriterion}}"
+                        :aria-label="[[$component.nls.Search.AssociatedPartyList]]"
+                        on-value-changed="[[onSelectionChange]]">
+                        <oj-option value="{{'BOTH'}}" :aria-label="[[$component.nls.Search.All]]"><span
+                                data-bind="text:$component.nls.Search.All"></span></oj-option>
+                        <oj-option value="{{'ANCHOR'}}" :aria-label="[[$component.nls.Search.Anchor]]"><span
+                                data-bind="text:$component.nls.Search.Anchor"></span></oj-option>
+                        <oj-option value="{{'COUNTER_PARTY'}}" :aria-label="[[$component.nls.Search.Counterparty]]">
+                            <span data-bind="text:$component.nls.Search.Counterparty"></span></oj-option>
+                    </oj-select-one>
+                </div><!--  ko if : !$baseModel.small()  -->
+                <div class="oj-flex-item oj-lg-2">
+                    <oj-buttonset-one display="[['icons']]" chroming="[['full']]" :class="[['button-style']]"
+                        :id="[['buttonview100']]" value="{{activeLayout}}">
+                        <!-- ko foreach : layoutViewRadios -->
+                        <oj-option value="[[id]]"><span data-bind="text:label"></span><span slot="startIcon"
+                                data-bind="attr: {class: icon}"></span></oj-option><!-- /ko -->
+                    </oj-buttonset-one>
+                </div><!--  /ko  -->
+            </div><!-- ko if : $component.showList() -->
+            <div data-bind="descendantsComplete : $component.formatLayout">
+                <oj-list-view :id="[['listview']]" :class="[['oj-listview-card-layout oj-flex-item oj-md-11 oj-sm-12']]"
+                    :drill-mode="[['none']]" data="[[dataSource26]]"
+                    item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('cp-row-template')]]"
+                    :aria-label="[[$component.nls.Search.AssociatedPartyList]]"></oj-list-view>
+                <oj-paging-control :id="[['cp_paging']]" data="[[dataSource26]]" page-size="9"></oj-paging-control>
+            </div><!-- /ko -->
+            <div id="scriptContainer">
+                <script type="text/html" id="cp-row-template">
+                    <!-- ko if : $component.activeLayout() === 'listView' && $context.data.spokeId -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-1 oj-sm-1 oj-md-1">
+                        <oj-avatar role="img" size="[['xs']]" initials="[[$context.data.spokeInitials]]"
+                            data-bind="attr:{'aria-label':$component.nls.Search.Counterparty}"></oj-avatar>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <!-- ko if : $context.data.statusCode === 'ACTIVE' -->
+                                <a href="#" class="form-button-link"
+                                    data-bind="attr:{'alt':$component.nls.Search.Counterpartyname,'title':$component.nls.Search.CounterpartyNameCardViewTitle,'id':$context.index+'party'},click:$component.onClickCounterparty"><span
+                                        data-bind="text:$context.data.spokeName"></span></a>
+                                <!-- /ko -->
+                                <!-- ko ifnot : $context.data.statusCode === 'ACTIVE' -->
+                                <span data-bind="text:$context.data.spokeName"></span>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item medium-text" data-bind="text:$context.data.spokeAddress"></div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3 oj-sm-3 oj-md-3">
+                        <div><span data-bind="attr:{'class':'medium-text'},text:$component.nls.Search.Id"></span><span
+                                data-bind="attr:{'class':'medium-text'},text:$context.data.spokeId"></span>
+                            <div>
+                                <label data-bind="text:$component.nls.Search.taxRegistrationNumber"></label><span
+                                    data-bind="text:$context.data.taxRegistrationNumber"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3"><label
+                            data-bind="text:$component.nls.Search.UserRole"></label><span
+                            data-bind="text:'-'+$context.data.roleRelation"></span></div>
+                    <div class="oj-flex-item oj-lg-1 center">
+                        <span
+                            data-bind="css: 'tags ' + $context.data.statusColor,text:$context.data.partyStatus"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if : $component.activeLayout() === 'thumbView' && $context.data.spokeId -->
+                <!-- ko ifnot : $context.data.statusCode === 'ACTIVE' -->
+                <div data-bind="attr:{'class':&quot;card-style&quot;}">
+                    <div class="oj-flex oj-flex-items-pad border-style">
+                        <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-3 avatar-margin">
+                            <oj-avatar role="img" size="[['xs']]" initials="[[$context.data.spokeInitials]]"
+                                data-bind="attr:{'aria-label':$component.nls.Search.Counterparty}"></oj-avatar>
+                        </div>
+                        <div class="oj-flex-item oj-lg-7 oj-md-7 oj-sm-7">
+                            <div>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-lg-12 spoke-name-wrapping">
+                                        <span data-bind="text:$context.data.spokeName"></span>
+                                    </div>
+                                </div>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12"><span
+                                            data-bind="attr:{'class':'medium-text'},text:$baseModel.format($component.nls.Search.IdspokeId,{spokeId: $context.data.spokeId})"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-2 oj-sm-2 oj-md-2 avatar-margin">
+                            <span
+                                data-bind="css: 'tags ' + $context.data.statusColor,text:$context.data.partyStatus"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item medium-text address-padding"
+                            data-bind="text:$context.data.spokeAddress">
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><label
+                                data-bind="text:$component.nls.Search.UserRole"></label></div>
+                        <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><span
+                                data-bind="text:$context.data.roleRelation"></span></div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><label
+                                data-bind="text:$component.nls.Search.taxRegistrationNumber"></label></div>
+                        <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><span
+                                data-bind="text:$context.data.taxRegistrationNumber"></span></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if : $context.data.statusCode === 'ACTIVE' -->
+                <a href="#" data-bind="attr:{'alt':$component.nls.Search.CounterpartyNameCardView,'title':$component.nls.Search.CounterpartyNameCardViewTitle,'id':$context.index+'party'},click:$component.onClickCounterparty">
+                    <div data-bind="attr:{'class':&quot;card-style&quot;, 'id': $context.index + '_hover'}, event: {mouseenter: $component.onHoverEvent($context.index, event), mouseleave: $component.onHoverEvent($context.index, event)}">
+                        <div class="oj-flex oj-flex-items-pad border-style">
+                            <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-3 avatar-margin">
+                                <oj-avatar role="img" size="[['xs']]" initials="[[$context.data.spokeInitials]]"
+                                    data-bind="attr:{'aria-label':$component.nls.Search.Counterparty}"></oj-avatar>
+                            </div>
+                            <div class="oj-flex-item oj-lg-7 oj-md-7 oj-sm-7">
+                                <div>
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-lg-12 spoke-name-wrapping">
+                                            <span class="text-color" data-bind="text:$context.data.spokeName"></span>
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12"><span
+                                                data-bind="attr:{'class':'medium-text text-color'},text:$baseModel.format($component.nls.Search.IdspokeId,{spokeId: $context.data.spokeId})"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-2 oj-sm-2 oj-md-2 avatar-margin">
+                                <span
+                                    data-bind="css: 'tags ' + $context.data.statusColor,text:$context.data.partyStatus"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item medium-text address-padding text-color"
+                                data-bind="text:$context.data.spokeAddress">
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><label
+                                    data-bind="text:$component.nls.Search.UserRole"></label></div>
+                            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><span class="text-color"
+                                    data-bind="text:$context.data.roleRelation"></span></div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><label
+                                    data-bind="text:$component.nls.Search.taxRegistrationNumber"></label></div>
+                            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6"><span class="text-color"
+                                    data-bind="text:$context.data.taxRegistrationNumber"></span></div>
+                        </div>
+                    </div>
+                </a><!-- /ko -->
+                <!-- /ko -->
+                </script>
+            </div>
+        </page-section>
+    </div>
+</oj-validation-group>

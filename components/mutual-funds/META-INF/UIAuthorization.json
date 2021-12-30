@@ -1,0 +1,71 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.wm.service.mf.AccountHolding",
+      "components": [{
+        "componentName": "purchase-mutual-fund",
+        "service": "create",
+        "perform": "purchase-mutual-fund-train#purchase-order-details#purchase-order-review#scheme-details-bar#fund-information#fund-info-bar#multiple-purchase-status"
+      }, {
+        "componentName": "redeem-funds-global",
+        "service": "redeem",
+        "perform": "redeem-fund-details#redeem-order-details#redeem-funds-review#redeem-scheme-details#fund-information#fund-info-bar#multiple-purchase-status"
+      }, {
+        "componentName": "switch-funds-global",
+        "service": "processSwitch",
+        "perform": "switch-fund-details#switch-order-details#switch-funds-review#fund-information#fund-info-bar#multiple-purchase-status"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.wm.service.mf.TransactionReports",
+      "components": [{
+        "componentName": "transaction-reports",
+        "service": "inquireTransactionReport",
+        "perform": ""
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.wm.service.mf.InvestmentAccount",
+      "components": [{
+        "componentName": "investment-details-dashboard",
+        "service": "list",
+        "perform": "accounts-overview#dividends-summary#holdings-summary#performance-summary#portfolio-summary#recommended-allocation-widget#recurring-summary#risk-profile-widget#asset-distribution-widget#fund-information#fund-info-bar"
+      },{
+        "componentName": "open-investment-account-landing",
+        "service": "create",
+        "perform": "open-investment-account-train#investment-account-personal-details#investment-account-contact-details#investment-account-nomination-details#investment-account-fatca#investment-account-additional-details#investment-account-primary-asset#investment-account-primary-liabilities#investment-account-relatives#investment-account-investments#investment-account-review"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.wm.service.mf.CapitalGainReports",
+      "components": [{
+        "componentName": "capital-gain-reports",
+        "service": "inquireCapitalGainReport",
+        "perform": ""
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.wm.service.mf.OrderInstruction",
+      "components": [{
+        "componentName": "order-status",
+        "service": "list",
+        "perform": "order-status-review#multiple-purchase-status"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.wm.service.mf.DividendReports",
+      "components": [{
+        "componentName": "dividend-reports",
+        "service": "inquireDividendReports",
+        "perform": ""
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.wm.service.mf.RiskProfile",
+      "components": [{
+        "componentName": "risk-profile-questionnaire",
+        "service": "create",
+        "perform": "risk-profile-account-selection#risk-profile-review#choose-risk-profile"
+      }]
+    }
+  ]
+}

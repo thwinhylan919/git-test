@@ -1,0 +1,11 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.common.tools.calculator.service.Calculator",
+        "components": [
+        {
+            "componentName": "rd-calculator",
+            "service": "calculateInstallments"
+        }]
+    }]
+}

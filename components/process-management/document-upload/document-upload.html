@@ -1,0 +1,65 @@
+<oj-validation-group class="oj-lg-12 oj-md-12 oj-sm-12" id="tracker">
+    <!-- ko if: !$component.review -->
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label pageDescription">
+        <oj-label for="uploadDocumentDescription">
+            <span data-bind="text:$component.nls.DocumentUpload.uploadDocumentDescription"></span>
+        </oj-label>
+    </div>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading :'', headerTemplate : ''">
+        <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 paddingRight">
+                <!-- ko if:$component.documentsLoaded() -->
+                <oj-list-view selection-mode="single" data="[[$component.datasource1]]"
+                    class="oj-lg-12 oj-md-12 oj-sm-12">
+                    <template slot="itemTemplate">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-5 oj-md-12 oj-sm-12 topPaddingInList">
+                                <span data-bind="text: $current.data.documentTypeDesc"></span>
+                            </div>
+                            <div id="filename" class="oj-flex-item oj-lg-2 oj-md-12 oj-sm-12 label topPaddingInList"
+                                data-bind="component:{name:'file-input',params:{rootModel: $component , id:$current.data.documentTypeName}}">
+                            </div>
+                            <!-- ko if : $current.data.uploadedFlag -->
+                            <div class="oj-flex-item oj-lg-1 oj-md-1 oj-sm-12 right tickMarkPadding">
+                                <span class="tickmarkBackground"><span class="icons icon-submit"></span></span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 center">
+                            <a href="#"
+                                data-bind="attr:{title:$component.nls.DocumentUpload.clickToUpload}, text:$component.nls.DocumentUpload.upload , click:$component.uploadAllDocument.bind($data)"></a>
+                                <!-- ko if: $current.data.isUpload -->
+                                <span class="icons icon-ok"></span>
+                                <!-- /ko -->
+                        </div>
+                    </template>
+                </oj-list-view>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 notePadding">
+                <oj-label for="uploadDocumentDescription">
+                    <span data-bind="text:$component.nls.DocumentUpload.information"></span>
+                </oj-label>
+            </div>
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- ko if:$component.review -->
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading :$component.nls.DocumentUpload.uploadedDocuments, headerTemplate : ''">
+        <oj-list-view selection-mode="single" data="[[$component.datasource2]]" class="oj-lg-6 oj-md-12 oj-sm-12">
+            <template slot="itemTemplate">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-9 oj-md-12 oj-sm-12">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <span
+                                data-bind="text:[[$component.getDocType($current.data.documentName)]]+' '+ $component.nls.DocumentUpload.documentUploaded"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </oj-list-view>
+    </page-section>
+    <div data-bind="attr:{id:'segment'+$index()}" class="oj-flex oj-panel oj-panel-alt2 childpanel panelInternal"></div>
+    <!-- /ko -->
+</oj-validation-group>

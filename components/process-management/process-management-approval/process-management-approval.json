@@ -1,0 +1,29 @@
+{
+    "segments": {
+        "fsgbu-ob-clmo-ds-real-estate": {
+            "id": "real-estate-details",
+            "name": "Real Estate",
+            "data": "realEstateDetails"
+        },
+        "fsgbu-ob-clmo-ds-businessactivity-details": {
+            "id": "business-details",
+            "name": "Business Details",
+            "data": "businessActivity"
+        },
+        "fsgbu-ob-clmo-ds-loan-details": {
+            "id": "loan-requirements",
+            "name": "Loan Requirements",
+            "data": "loanDetails"
+        },
+        "fsgbu-ob-clmo-ds-plant-machinery": {
+            "id": "equipment-details",
+            "name": "Equipment Details",
+            "data": "equipmentDetails"
+        },
+        "fsgbu-ob-clmo-ds-document-upload": {
+            "id": "document-upload",
+            "name": "Document Upload",
+            "data": "basicapplicationDetails"
+        }
+    }
+}

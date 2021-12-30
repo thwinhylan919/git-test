@@ -1,0 +1,25 @@
+<div data-bind="descendantsComplete : $component.showModal">
+    <modal-window
+        params="baseModel : $baseModel, rootModel : $data,id:'choicePopup',closeHandler:closeHandler, header : $component.nls.labels.userSelection">
+        <div class="form-main-container">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12" data-bind="text: $component.nls.labels.chooseUserType"></div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 vertical-ruler">
+                <oj-radioset id="ruleType" :aria-label="[[$component.nls.labels.ruleType]]"
+                    value="{{$component.reportType}}" on-value-changed="[[$component.reportTypeSelected]]"
+                    class="oj-choice-direction-row">
+                    <oj-option :id="[[$component.nls.labels.adminUser]]" value="{{'AdminUser'}}">
+                        <span data-bind="text:$component.nls.labels.adminUser"></span>
+                    </oj-option>
+                    <oj-option :id="[[$component.nls.labels.corporateUser]]" value="{{'CorporateUser'}}">
+                        <span data-bind="text:$component.nls.labels.corporateUser"></span>
+                    </oj-option>
+                </oj-radioset>
+            </div>
+        </div>
+
+    </modal-window>
+</div>

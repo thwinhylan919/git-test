@@ -1,0 +1,34 @@
+.otp-message{
+  &-icon{
+    line-height: var(--form-line-height) ;
+  }
+}
+.viewOTP{
+  @include single-margin(left,-35px);
+  margin-top: 10px;
+}
+.attemptLeft{
+  margin-top: 15px;
+}
+.OTPheader label{
+  font-size: var(--base-font-size-large);
+  color: var(--base-color-primary);
+  font-weight: var(--base-font-weight-regular);
+}
+  .success-container {
+    background-color: var(--base-color-success-light);
+    @include single-border(left, 0.4rem solid var(--base-color-success));
+    line-height: 1.25rem;
+    margin: 0 0.6rem 0.6rem;
+  
+    .warning-text {
+        padding: 0.6rem;
+    }
+  
+    .warning-icon {
+        color: var(--link-base);
+        @include float(right);
+        padding-top: 0.1rem;
+    }
+  
+}

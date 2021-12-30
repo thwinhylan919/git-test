@@ -1,0 +1,23 @@
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <h3 data-bind="text:$component.nls.heading.News">
+            </h3>
+        </div>
+    </div>
+    <!-- ko if: newsLoaded -->
+    <div class="marquee">
+        <oj-list-view :id="[['mf-news']]" :aria-label="[[$component.nls.News.News]]" data="[[dataSource]]"
+            item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('news_template')]]"></oj-list-view>
+    </div>
+    <!-- /ko -->
+    <script type="text/html" id="news_template">
+        <a href="#" class="form-button-link" data-bind="attr:{'href': url,'alt':$component.nls.News.MutualFundsNews,'title': $component.nls.News.MutualFundsNewsTitle}">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <span data-bind="text:heading"></span>
+                    </div>
+                </div>
+            </a>
+    </script>
+</div>

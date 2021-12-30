@@ -1,0 +1,170 @@
+<!-- ko if: $component.viewMode() -->
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+        <div data-bind="text: $component.realCustomerName"></div>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+</div>
+<div class="form-main-container">
+    <div class="oj-flex">
+        <!-- ko foreach: $component.componentsToLoad-->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+            <div class="oj-flex">
+                <div class="oj-lg-10 header-underline">
+                    <div class="oj-flex-item oj-lg-8 left">
+                        <h3 class="section-header-title" data-bind="attr:{id:'titleForReview'+$index()}, text: label">
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div data-bind="component: {name:id , params:{rootModel:$component, viewDTO:$component.viewModel }}"></div>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex button-container">
+            <!-- ko if: $component.recordStatus() === "O" -->
+            <oj-button class="action-button-primary" id="edit-button" on-click="[[$component.editViewDetails]]">
+                <span slot="startIcon" class="icons icon-remarks"></span>
+                <span data-bind="text:$component.resource.edit"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="delete-button" on-click="[[$component.deleteConfirm]]">
+                <span slot="startIcon" class="icons icon-delete"></span>
+                <span data-bind="text:$component.resource.delete"></span>
+            </oj-button>
+            <!-- /ko -->
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text: $component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text: $component.resource.back"></span>
+            </oj-button>
+        </div>
+        <modal-window
+            params="baseModel : $baseModel, rootModel : $component, id:'virtualEntityDelete', header: $component.resource.delete">
+            <div class="message-box">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <div class="dialog-text"><span data-bind="text:$component.resource.askForDelete"></span></div>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button id="yesButton" class="action-button-primary"
+                        on-click="[[$component.deleteVirtualEntity]]">
+                        <span slot="startIcon" class="icons icon-confirm"></span>
+                        <span data-bind="text:$component.resource.yes"></span>
+                    </oj-button>
+                    <oj-button id="noButton" class="action-button-secondary" on-click="[[doNotDelete]]">
+                        <span slot="startIcon" class="icons icon-cancel"></span>
+                        <span data-bind="text:$component.resource.no"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </modal-window>
+    </div>
+</div>
+<!-- /ko -->
+
+<!-- ko if: $component.reviewMode() -->
+<div class=" form-main-container">
+    <!-- ko if:feedbackReviewHeader -->
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.reviewHeader}}">
+    </div>
+    <!-- /ko -->
+    <!-- ko if:viewHeader -->
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.viewCaption,reviewHeader:$component.resource.viewHeader}}">
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex separator-for-banner oj-sm-12 oj-lg-12 oj-md-12">
+        <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-12 oj-md-12">
+            <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+                <div data-bind="text: $component.realCustomerName"></div>
+                <div data-bind="text: $dashboard.userData.userProfile.partyId.displayValue"></div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex">
+        <!-- ko foreach: $component.componentsToLoad -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+            <div class="oj-flex">
+                <div class="oj-lg-10 header-underline">
+                    <div class="oj-flex-item oj-lg-8 left">
+                        <h3 class="section-header-title" data-bind="attr:{id:'titleForReview'+$index()},
+               text: label"></h3>
+                    </div>
+                    <!-- ko ifnot:$component.fromApproval -->
+                    <div class="oj-flex-item oj-lg-4 label right icon-container">
+                        <a class="icon-remarks icon-property" href="#"
+                            data-bind="click:$component.edit,attr:{'aria-label':label}"></a>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div
+                data-bind="component: { name: id , params:{rootModel: $component, checkboxFlag: $component.checkboxFlag, mailingCheckboxFlag: $component.mailingCheckboxFlag }}">
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko ifnot: $component.fromApproval -->
+        <!-- ko ifnot:showViewFlag -->
+        <div class="oj-flex button-container">
+            <div class="oj-flex-items oj-lg-12">
+                <oj-button class="action-button-primary" id="confirm-button" on-click="[[$component.confirm]]">
+                    <span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.resource.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="CancelButton"
+                    on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" id="backButton" on-click="[[$component.loadCreate]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:showViewFlag -->
+        <div class="oj-flex button-container">
+            <div class="oj-flex-items oj-lg-12">
+                <oj-button class="action-button-secondary" id="CancelButton"
+                    on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" id="backButton" on-click="[[backToSearch]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+
+<!-- ko if: $component.fromApproval() -->
+<div class="form-main-container">
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <div class="oj-flex">
+        <!-- ko foreach: $component.componentsToLoad-->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : label">
+            </page-section>
+            <div data-bind="component: {name:id , params:{rootModel:$component, viewDTO:$component.viewModel }}">
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,141 @@
+<div class="form-main-container review-theme">
+    <!-- ko if: $component.parameters.mode === 'review' -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+    <!-- /ko -->
+    <!-- ko if:showReviewPage() -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div>
+            <!-- ko if:$component.parameters.mode ==='view'-->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resourceBundle.labels.themeId , value : $component.theme.brandId"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resourceBundle.labels.themeName , value : $component.theme.brandName"></row>
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resourceBundle.labels.themeDesc , value : $component.theme.brandDescription"></row>
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resourceBundle.labels.userAvailable, value : $component.theme.availableForSelection ?  $component.resourceBundle.isAvailableForSelection : $component.resourceBundle.isNotAvailableForSelection"></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="oj-flex oj-sm-12">
+            <div class="oj-flex-item oj-sm-4 scrollArea">
+                <oj-accordion id="accordionThemeReviewPage">
+                    <oj-collapsible id="assets">
+                        <h4 slot="header" data-bind="text:$component.resourceBundle.heading.logo"></h4>
+                        <div class="oj-flex oj-flex-items-pad ">
+                            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-8">
+                                <span data-bind="text:$component.resourceBundle.labels.brandLogo"></span>
+                            </div>
+                            <div class="oj-flex-item  oj-sm-4 oj-md-3 oj-lg-4">
+                                <a href="#" data-bind="text:$component.resourceBundle.labels.downloadImg,click: $component.downloadImageAssets.bind($data, $component.theme), attr:{'alt':$component.resourceBundle.labels.downloadImg,
+            'title':$baseModel.format($component.resourceBundle.generic.common.clickHere,{action:$component.resourceBundle.labels.downloadImg})}"></a>
+                            </div>
+                        </div>
+                    </oj-collapsible>
+                    <oj-collapsible id="typography">
+                        <h4 slot="header" data-bind="text:$component.resourceBundle.heading.typo"></h4>
+                        <div>
+                            <div class="oj-flex oj-flex-items-pad ">
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <span data-bind="text:$component.resourceBundle.fonturl"></span>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <span data-bind="text:$component.currentTokens['--base-font-url']"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad ">
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <span data-bind="text:$component.resourceBundle.fontfamily"></span>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <span data-bind="text:$component.currentTokens['--base-font-family']"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </oj-collapsible>
+                    <!-- ko foreach: $component.getTokens() -->
+                    <oj-collapsible :id=[[$data.headerName+$index()]]>
+                        <h4 slot="header" data-bind="text:$component.resourceBundle.heading[$data.headerName]"></h4>
+                        <div data-bind="template: {name: 'brand-collapsible-content', data: $data.headerName}"></div>
+                    </oj-collapsible>
+                    <!-- /ko -->
+                </oj-accordion>
+            </div>
+            <div class="oj-flex-item oj-sm-8 scrollArea">
+                <div data-bind="component:{name:'preview-theme', params: {mode: 'review', currentTokens : $component.currentTokens, sizeUnit: $component.sizeUnit, modelInit: $component.showReviewPage}}"></div>
+            </div>
+        </div>
+    </page-section>
+    <!-- /ko -->
+
+    <script type="text/html" id="brand-collapsible-content">
+        <!-- ko foreach:{data:Object.keys($component.skeletonStructure[$data])} -->
+        <!-- ko if:$component.themeProperties.indexOf($data)>=0 -->
+        <div class="firstContainer">
+            <div class="header" data-bind="text:$component.resourceBundle.heading['sub-headers'].headings[$data]"></div>
+            <div data-bind="component:{name:$data,params:{rootModel:$component.skeletonStructure[$parent][$data],obdxVariables:$component.currentTokens,readOnly:true}}"></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$component.themeProperties.indexOf($data)===-1 -->
+        <div class="controlContainer">
+            <h4 data-bind="text:$component.resourceBundle.heading['sub-headers'][$parent][$data]"></h4>
+            <!-- ko foreach:{data:Object.keys($component.skeletonStructure[$parent][$data])} -->
+            <!-- ko if:$component.themeProperties.indexOf($data)>=0 -->
+            <div class="controlHeader" data-bind="text:$component.resourceBundle.heading['sub-headers'].headings[$data]"></div>
+            <div data-bind="component:{name:$data,params:{rootModel:$component.skeletonStructure[$parents[1]][$parents[0]][$data],obdxVariables:$component.currentTokens,readOnly:true}}"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </script>
+    <div class="button-container">
+        <!-- ko if:$component.parameters.mode ==='view'-->
+        <oj-button class="action-button-primary " on-click="[[$component.editTheme.bind($data,$component.theme)]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.edit"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary " on-click="[[$component.deleteTheme.bind($data,$component.theme,false)]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.delete"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary " on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+        </oj-button>
+        <!-- /ko -->
+        <!-- ko if:$component.parameters.mode ==='review'-->
+        <oj-button class="action-button-primary" on-click="[[$component.saveTheme]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.save"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+        </oj-button>
+        <!-- /ko -->
+        <!-- ko if:$component.parameters.mode ==='edit'-->
+        <oj-button class="action-button-primary " on-click="[[$component.confirmUpdateTheme]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.save"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary " on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary " on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+        </oj-button>
+        <!-- /ko -->
+    </div>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $data, id:'confirmDelete', header: $component.resourceBundle.generic.common.delete">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading: ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item" data-bind="html:$component.resourceBundle.deleteConfirmationMessage"></div>
+            </div>
+        </page-section>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="confirm" class="action-button-primary" on-click="[[$component.deleteTheme.bind($data,$component.theme,true)]]">
+                <span data-bind="text:$component.resourceBundle.generic.common.delete"></span>
+            </oj-button>
+            <oj-button id="cancel" class="action-button-secondary" on-click="[[$component.cancelConfirmDialog]]">
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

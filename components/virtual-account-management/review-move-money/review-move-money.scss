@@ -1,0 +1,14 @@
+.move-money {
+
+  &__content {
+    padding-top: 1.3rem;
+  }
+}
+
+.virtual-account-bar {
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}

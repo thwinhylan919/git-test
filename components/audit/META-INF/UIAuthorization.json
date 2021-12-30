@@ -1,0 +1,12 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.audit.service.Audit",
+           "components": [{
+                   "componentName": "audit-log",
+                   "service": "read",
+                   "perform": "audit-log-search-results#audit-log-results"
+               }
+           ]
+       }
+   ]
+}

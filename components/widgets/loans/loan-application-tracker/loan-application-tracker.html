@@ -1,0 +1,31 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad oj-lg-12">
+    <div class="oj-flex-item">
+      <h3 class="heading" data-bind="text:$component.nls.heading.LoanApplicationTracker">
+      </h3>
+    </div>
+    <div class="oj-flex-item right view-details">
+      <a href="#" data-bind="attr:{alt:$component.nls.LoanApplicationTracker.viewDetailsAlt,title:$component.nls.LoanApplicationTracker.viewDetails},text:$component.nls.LoanApplicationTracker.viewDetails,click:$dashboard.loadComponent.bind($data,'loan-application-listing')"></a>
+    </div>
+    
+  </div>
+  <!-- ko if: $component.accountsListLoaded -->
+  <div class="oj-flex oj-flex-items-pad oj-lg-12">
+    <div class="oj-lg-2">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoanApplicationTracker.submitted, value : $component.submitted"></row>
+    </div>
+    <div class="oj-lg-2">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoanApplicationTracker.draft, value : $component.drafts"></row>
+    </div>
+    <div class="oj-lg-3">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoanApplicationTracker.inProgress, value : $component.inProgress"></row>
+    </div>
+    <div class="oj-lg-2">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoanApplicationTracker.approved, value : $component.approved"></row>
+    </div>
+    <div class="oj-lg-2">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoanApplicationTracker.rejected, value : $component.rejected"></row>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>

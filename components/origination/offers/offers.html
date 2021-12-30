@@ -1,0 +1,59 @@
+<!-- ko if:dataLoaded -->
+<page-section params="baseModel : $baseModel, rootModel : $data">
+  <div class="loan-offers offers-card">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item ">
+        <oj-label><span data-bind="text:$component.resource.offerHeading"></span></oj-label>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <!-- ko foreach: $component.offers-->
+      <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+        <div class="oj-panel loan-offers-panel loan-offers-images">
+          <a href="#" class="oj-flex oj-flex-items-pad offers-image" data-bind="click:$component.submitProductOffer.bind($data,$index(),offerCode), attr: {'id':'offer'+$index(),alt: $component.resource.click.submitProductOfferIdClick, title: $component.resource.click.submitProductOfferIdTitle}, style:{backgroundImage:'url('+'images'+'/origination/offers/loan'+ $index()%2 +'.jpg)'}">
+
+            <div class="oj-flex-item offers-name">
+              <div class="margin-auto" data-bind="text: $data.offerName ? $data.offerName : $data.offerCode"></div>
+            </div>
+            <!-- ko if:$data.selected() -->
+            <img :id="{{'tick-image'+$index()}}" :alt="{{$component.resource.altofferTickImageAlt}}" longdesc="" class="icon-success right"
+              data-bind="loadImage:'origination/offer-tick.png'" />
+            <!-- /ko -->
+          </a>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+              <div class="text" data-bind="html: $component.format($component.resource.interestRate, {interestRate: $data.interestRate})"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+</page-section>
+<!-- /ko -->
+<!-- ko if: noOffers -->
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-lg-offset-1 oj-md-offset-1 oj-lg-10 oj-md-10">
+    <oj-label><span data-bind="text:$component.resource.noOffers"></span></oj-label>
+  </div>
+</div>
+<!-- /ko -->
+<div class="oj-flex oj-flex-items-pad button-container">
+  <div class="oj-flex-item left oj-sm-12">
+    <oj-button id="submitOffer" class="help-button" :aria-label="[[$component.resource.submitOffers]]"
+      on-click="[[$component.continue]]">
+      <span data-bind="text:$component.resource.generic.common.continue"></span>
+    </oj-button>
+  </div>
+</div>
+<modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component,id:'offerSelect', header:$component.resource.generic.common.info">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 message-text scroll" data-bind="text:$component.resource.offerSelect"></div>
+    <div class="oj-flex-item oj-sm-12 message-btn button-container">
+      <oj-button id="hideWindow" class="action-button-primary" on-click="[[$baseModel.modalInteraction.bind($data, '#offerSelect', 'closeModal', null)]]">
+        <span data-bind="text:$component.resource.generic.common.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>

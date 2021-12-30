@@ -1,0 +1,646 @@
+<oj-validation-group :id="[['paymentsTracker' + ($component.referenceHandel ? $component.referenceHandel.id : '')]]">
+    <!-- ko if:requestPageLoad() -->
+    <!-- ko if:$component.moneyTransferheader() && !fromFavourites() && stageOne() && !$component.isMultiplePayment -->
+    <div class="oj-flex oj-flex-items-pad cust-details">
+        <div class="oj-flex-item oj-sm-12 label">
+            <oj-label class="oj-label" :for="[['transfer-type'+ $baseModel.incrementIdCount()]]"><span
+                    data-bind="text:$component.payments.moneytransfer.transfertype"></span></oj-label>
+        </div>
+         <!-- ko if:transferToArrayFlag() -->
+        <div class="oj-flex-item oj-sm-12">
+            <oj-radioset class="payments-money-transfer__radiosetSpacing oj-choice-direction-row"
+                :id="[['transfer-type'+ $baseModel.currentIdCount()]]"
+                :aria-label="[[$component.payments.moneytransfer.transfertype]]"
+                on-value-changed="[[$component.transferToChange]]" value="{{transferTo}}">
+                <!-- ko foreach: transferToArray -->
+                <oj-option name="transferto" value="{{id}}" :id="[[id]]" :data-id="[[id]]"><span class="label"
+                        data-bind="attr: {for: id},text: label"></span></oj-option>
+                <!-- /ko -->
+            </oj-radioset>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if: stageOne() && $component.showPaymentOverview -->
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <!-- ko template: { name: 'payments/payment-overview',data:$component.overviewDetails()} -->
+        <!-- /ko -->
+    </page-section>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot:$component.showPaymentOverview -->
+    <div
+        data-bind="css:$component.isMultiplePayment?'payments-money-transfer oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between':'form-main-container payments-money-transfer oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between'">
+        <div
+            data-bind="css:$component.isMultiplePayment?'oj-flex-item oj-sm-12 payments-money-transfer__section':'oj-flex-item oj-sm-12 oj-md-6 oj-lg-6'">
+            <!-- ko if:stageOne() -->
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <!-- ko if:!adhoc() && !removeFavouriteFlag() -->
+                <!-- ko if:transferTo()!=='self' -->
+                <!-- ko if:$component.txnFailed -->
+                <div class="oj-flex oj-flex-items-pad pfm">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 error-bar">
+                        <span class="error-icon action-icon icons icon-alert"></span>
+                        <span class="error-msg" id="confirm" data-bind="text:$component.failureReason"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: !betweenWalletAcc() -->
+                <!-- ko if:$dashboard.appData.segment !=='CORP' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label :for="[['transferto'+ $baseModel.incrementIdCount()]]"><span
+                                data-bind="text:$component.payments.moneytransfer.recipient"></span></oj-label>
+                    </div>
+                    <!-- ko if: $component.dropDownActive() || $component.dropdownLevelOne() -->
+                    <div class="oj-flex-item oj-sm-9">
+                        <!-- ko if:($component.dropdownLevelOne() && !$component.customPayeeName()) -->
+                        <!-- || ($component.payeeListExpandAll().length === 0  && isPayeeListEmpty()) -->
+                        <oj-select-one data-id="transferTo" required :id="[['transferto'+ $baseModel.currentIdCount()]]"
+                            :aria-label="[[$component.payments.moneytransfer.recipient]]"
+                            on-value-changed="[[payeeChanged]]"
+                            :invalidcomponenttracker="[[$component.validationTracker]]"
+                            :placeholder="[[$component.payments.common.pleaseSelect]]" value="{{selectedPayee}}">
+                            <!-- ko foreach:payeeListExpandAll() -->
+                            <oj-option value="{{payeeGroupName}}">
+                                <div class="oj-flex-item">
+                                    <!-- ko if:$component.imageUploadFlag() -->
+                                    <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[initials]]'
+                                        src='[[preview ? preview() : ""]]'
+                                        data-bind="attr:{'aria-label':payeeGroupName}">
+                                    </oj-avatar>
+                                    <!-- /ko -->
+                                    <span class="oj-collapsible-header-icon" data-bind="text: payeeGroupName"></span>
+                                </div>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                        <!-- ko if:dropDownActive() -->
+                        <div class="dualdropdown">
+                            <div class="payeeGroupHeader oj-flex-item">
+                                <!-- ko if:$component.imageUploadFlag() -->
+                                <oj-avatar class="oj-flex-item" role="img" size="xs"
+                                    initials='[[$component.payeeSubListExpandAll().initials]]'
+                                    src='[[ko.utils.unwrapObservable($component.payeeSubListExpandAll().preview)]]'
+                                    data-bind="attr:{'aria-label':$component.payeeSubListExpandAll().payeeGroupName}">
+                                </oj-avatar>
+                                <!-- /ko -->
+                                <span class="payeeGroupPadding" data-bind="text: selectedPayeeName"></span>
+                            </div>
+                            <!-- ko if:payeeSubList().length>0 -->
+                            <ul>
+                                <!-- ko foreach:payeeSubList() -->
+                                <a href="#" data-bind="click:$component.setPayee.bind($data)">
+                                    <div class="subPayee oj-flex">
+                                        <!-- ko if:$component.imageUploadFlag() -->
+                                        <oj-avatar role="img" size="xs" initials='[[initials]]'
+                                            src='[[ko.utils.unwrapObservable(preview)]]'
+                                            data-bind="attr:{'aria-label':nickName}">
+                                        </oj-avatar>
+                                        <!-- /ko -->
+                                        <div class="labelPadding oj-label-inline">
+                                            <li data-bind="text:nickName,value:payeeId"></li>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- /ko -->
+                            </ul>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: !$component.dropDownActive() && !$component.dropdownLevelOne() -->
+                    <div class="payee-name oj-flex-item"
+                        data-bind="css:$component.isMultiplePayment?'oj-sm-9':'oj-sm-12'">
+                        <!-- ko if:$component.customPayeeName() && $component.customPayeeName() !== null -->
+                        <span data-bind="text : $component.customPayeeName()"></span>
+                        <!-- ko if:!fromFavourites() -->
+                        <span class="payee-name__cancel-icon">
+                            <a href="#"
+                                data-bind="attr:{'alt':$component.payments.moneytransfer.refresh,'title':$component.payments.moneytransfer.refreshText},click:$component.refreshDropDown">
+                                <span class="icon icon-cancel"></span>
+                            </a>
+                        </span>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $component.isMultiplePayment && $component.masterBatchArray().length > 1 -->
+                    <div class="oj-flex-item oj-sm-3 right">
+                        <a class="action-icon" href="#"
+                            data-bind="attr:{'aria-label':$baseModel.format($component.payments.common.title,{reference:$component.payments.common.delete}), 'alt':$component.payments.generic.common.delete,'title':$baseModel.format($component.payments.common.title,{reference: $component.payments.common.delete})},click:$component.removePayment.bind($data, $component.referenceHandel.id)">
+                            <div class="icons icon-delete"></div>
+                        </a>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:$dashboard.appData.segment ==='CORP' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label :for="[['transferto'+ $baseModel.incrementIdCount()]]"><span
+                                data-bind="text:$component.payments.moneytransfer.recipient"></span></oj-label>
+                    </div>
+                    <div data-bind="css:$component.isMultiplePayment?'oj-flex-item oj-sm-9':'oj-flex-item oj-sm-12'">
+                        <!-- ko if:payeeListExpandAll().length>0 || ($component.payeeListExpandAll().length === 0 && isPayeeListEmpty()) -->
+                        <oj-select-one required :id="[['transferto'+ $baseModel.currentIdCount()]]"
+                            :aria-label="[[$component.payments.moneytransfer.recipient]]"
+                            on-value-changed="[[corporatePayeeChange]]" disabled="[[fromFavourites()]]"
+                            :invalidcomponenttracker="[[$component.validationTracker]]"
+                            :placeholder="[[$component.payments.common.pleaseSelect]]" value="{{selectedPayee}}">
+                            <!-- ko foreach:payeeListExpandAll() -->
+                            <oj-option value="{{payeeGroupName}}">
+                                <span slot="startIcon">
+                                    <!-- ko if:$component.imageUploadFlag() -->
+                                    <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[preview]]' data-bind="attr:{'aria-label':payeeGroupName}"></oj-avatar>
+                                    <!-- /ko -->
+                                </span>
+                                <span data-bind="text: payeeGroupName"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                    </div>
+                    <!-- ko if: $component.isMultiplePayment && $component.masterBatchArray().length > 1 -->
+                    <div class="oj-flex-item oj-sm-3 right">
+                        <a class="action-icon" href="#"
+                            data-bind="attr:{'alt':$component.payments.generic.common.delete ,'title':$component.payments.common.delete },click:$component.removePayment.bind($data, $component.referenceHandel.id)">
+                            <div class="icons icon-delete"></div>
+                        </a>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$component.payeeDetails() && $component.payeeDetails() !== "" -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <div class="cust-details" data-bind="with:$component.payeeDetails()">
+                            <!-- ko ifnot:$component.imageUploadFlag() -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12"
+                                    data-bind="text: $component.userSegment ==='CORP'?$component.customPayeeName(): $baseModel.format($component.payments.payee.displayName,{group : $component.selectedPayee(), payee : $component.customPayeeName()})">
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:$component.imageUploadFlag() -->
+                            <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                                <div class="oj-flex-item">
+                                    <oj-avatar role="img" size="xs" initials='[[initials]]'
+                                        src='[[ko.utils.unwrapObservable(preview)]]'
+                                        data-bind="attr:{'aria-label':$component.selectedPayee()}">
+                                    </oj-avatar>
+                                    <div class="oj-flex-item oj-label-inline payeeName"
+                                        data-bind="text: $dashboard.appData.segment ==='CORP'?$component.customPayeeName(): $baseModel.format($component.payments.payee.displayName,{group : $component.selectedPayee(), payee : $component.customPayeeName()})">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:accountType !== "PEERTOPEER" -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-8 oj-sm-12">
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <!-- ko if: accountType !== "INTERNAL" -->
+                                        <div class="oj-flex-item oj-lg-6">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="accountNumber"><span
+                                                            data-bind="text:$component.payments.payee.accountNumber"></span>
+                                                    </oj-label>
+                                                </div>
+                                                <div id="accountNumber" class="oj-flex-item oj-sm-12"
+                                                    data-bind="text:accountNumber"></div>
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->
+                                        <!-- ko if: accountType === "INTERNAL" -->
+                                        <internal-account-input class="oj-flex-item" params="{
+                                       baseModel:$baseModel,
+                                       account : ko.observable(accountNumber),
+                                       label:$component.payments.payee.accountNumber,
+                                       readOnly: true
+                                      }">
+                                        </internal-account-input>
+                                        <!-- /ko -->
+                                        <div class="oj-flex-item oj-lg-5">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="accountType"><span
+                                                            data-bind="text:$component.payments.payee.accountType"></span>
+                                                    </oj-label>
+                                                </div>
+                                                <div id="accountType" class="oj-flex-item oj-sm-12" data-bind="text: typeofAccount?$baseModel.format($component.payments.payee.typeOfAccount, {
+                 'payeeAccountType': $component.payments.payee.type[accountType],
+                 'accountType': typeofAccount}):$component.payments.payee.type[accountType]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item oj-lg-4 oj-sm-12">
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-12">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="accountName"><span
+                                                            data-bind="text:$component.payments.payee.accountName"></span>
+                                                    </oj-label>
+                                                </div>
+                                                <div id="accountName" class="oj-flex-item oj-sm-12"
+                                                    data-bind="text:accountName"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:accountType === "PEERTOPEER" -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-8 oj-sm-12">
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-6">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="transferMode"><span
+                                                            data-bind="text:$component.payments.peerToPeer.peertopeer.transferMode"></span>
+                                                    </oj-label>
+                                                </div>
+                                                <div id="transferMode" class="oj-flex-item oj-sm-12"
+                                                    data-bind="text:$component.payments.peerToPeer.transfermode[transferMode]">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="oj-flex-item oj-sm-6">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="transferValue"><span
+                                                            data-bind="text:$component.payments.peerToPeer.transferModeType[transferMode]"></span>
+                                                    </oj-label>
+                                                </div>
+                                                <div id="transferValue" class="oj-flex-item oj-sm-12"
+                                                    data-bind="text:transferValue"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:accountType === "INTERNATIONAL" && payeeAddress -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <div class="oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-12">
+                                            <label for="payeeDetails"
+                                                data-bind="text:$component.payments.moneytransfer.internationalPayee.payeeDetails"></label>
+                                        </div>
+                                        <div id="payeeDetails" class="oj-flex-item oj-sm-12"
+                                            data-bind="text:$component.filterPayeeAddressDetails($data.payeeAddress)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:accountType !== "INTERNAL" && typeof(accountBranch) === 'object'-->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <div class="oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-12">
+                                            <oj-label for="branchDetails"><span
+                                                    data-bind="text:$component.payments.payee.branchDetails"></span>
+                                            </oj-label>
+                                        </div>
+                                        <div id="branchDetails" class="oj-flex-item oj-sm-12"
+                                            data-bind="text:$component.filterBranchDetails($data.accountBranch)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:accountType !== "INTERNAL" && accountType !=="PEERTOPEER" && typeof(accountBranch) === 'string'-->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <div class="oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-12">
+                                            <oj-label for="branchDetails"><span
+                                                    data-bind="text:$component.payments.payee.branchDetails"></span>
+                                            </oj-label>
+                                        </div>
+                                        <div id="branchDetails" class="oj-flex-item oj-sm-12"
+                                            data-bind="text:accountBranch"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:$component.transferTo()==='self' -->
+                <!-- ko if:fromFavourites() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12  label ">
+                        <span data-bind="text:$component.payments.moneytransfer.transferTo"></span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 ">
+                        <span data-bind="text:$component.creditAccountDisplayValue()"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:!fromFavourites() && refreshAccountInputTF() -->
+                <div class="oj-sm-12 oj-lg-8">
+                    <account-input
+                        params="baseModel : $baseModel, rootModel: $data ,label : $component.payments.moneytransfer.transferTo,
+                            type : 'balance' , account : customPayeeId ,additionalDetails : additionalDetails,validator:$component.validationTracker,customURL : $component.combineRest, accountsParser : $component.accountsParser">
+                    </account-input>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: !betweenWalletAcc() -->
+                <div data-bind="template: { name: 'payments/payments-money-transfer' }"></div>
+                <!-- /ko -->
+                <!--placeholder to load custom transfer component on runtime-->
+                <!-- ko if: customTransferComponent() -->
+                <div data-bind="component:{name:customTransferComponent(),params:{
+                    rootModel: $component,
+                    confirmScreenDetails : $component.confirmScreenDetails}}"></div>
+                <!-- /ko -->
+                <!--end of placeholder-->
+
+                <!-- ko if:noteComponentLoaded() -->
+                <!-- ko if:$component.payeeDetails() && $component.payeeDetails() !== "" && $component.payeeDetails().accountType === "INTERNATIONAL" && remarkLoaded() -->
+                <div class="oj-flex oj-flex-items-pad oj-lg-8">
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-6 oj-sm-12">
+                        <oj-label class="oj-flex-item oj-sm-12"
+                            :for="[['payCommentInternational'+$baseModel.incrementIdCount()]]"><span
+                                data-bind="text: $component.payments.common.note"></span></oj-label>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-12">
+                            <oj-select-one :id="[['payCommentInternational'+$baseModel.currentIdCount()]]"
+                                value="{{internationalNote}}">
+                                <!-- ko foreach:remarksArray -->
+                                <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <oj-input-text class="oj-flex-item oj-sm-12 oj-lg-12"
+                            :id="[['payComment' + $baseModel.incrementIdCount()]]"
+                            :aria-label="[[$component.payments.common.note]]" :maxlength=30
+                            value="{{note}}"></oj-input-text>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:($component.payeeDetails() && $component.payeeDetails() !== "" && $component.payeeDetails().accountType !== "INTERNATIONAL") || $component.transferTo()==='self' -->
+                <div class="oj-lg-8" data-id="payComment" data-bind="component:{name: 'comment-box',
+                                  params:{
+                                  rootModel: $component,
+                                  label:$component.payments.common.note,
+                                  rootId:'payComment' + $baseModel.incrementIdCount(),
+                                  rootClass:'form-input',
+                                  validator:$component.validationTracker,
+                                  comment:note}}">
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:isStandingInstruction() -->
+                <oj-popup class="payments-money-transfer__popup" id="paynowwithsi-popup" modality="modeless"
+                    tail="simple" position.my.horizontal="[[$baseModel.small()?'center':'start']]"
+                    position.my.vertical="top" position.at.horizontal="[[$baseModel.small()?'center':'end']]"
+                    position.at.vertical="bottom">
+                    <div class="payments-money-transfer-container">
+                        <div class="oj-flex oj-flex-items-pad oj-sm-12 payments-money-transfer__popup">
+                            <div class="oj-flex-item oj-sm-12 no-pad-cols"
+                                data-bind="text:$component.payments.moneytransfer.paynowWithSIPopupMsg"></div>
+                        </div>
+                    </div>
+                </oj-popup>
+                <modal-window
+                    params="baseModel : $baseModel, rootModel : $component,id:'pay-now-with-si-msg', header: $component.payments.setstandinginstruction_header, closeHandler : $component.closePaynowWithSIMsgModal.bind($data,false)">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12"
+                            data-bind="text : $component.payments.moneytransfer.paynowWithSIMsg">
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <oj-button class="action-button-primary"
+                            on-click="[[$component.closePaynowWithSIMsgModal.bind($data,true)]]">
+                            <span class="icons icon-confirm" slot="startIcon"></span><span
+                                data-bind="text:$component.payments.generic.common.proceed"></span>
+                        </oj-button>
+                        <oj-button class="action-button-secondary"
+                            on-click="[[$component.closePaynowWithSIMsgModal.bind($data,false)]]">
+                            <span class="icons icon-cancel" slot="startIcon"></span><span
+                                data-bind="text:$component.payments.generic.common.cancel"></span>
+                        </oj-button>
+                    </div>
+                </modal-window>
+                <div class="oj-flex oj-flex-items-pad also-transfer-today">
+                    <div class="oj-flex-item">
+                        <oj-checkboxset id="pay-now" labelled-by="check-pay-now" value="{{$component.paynowWithSI}}"
+                            on-value-changed="[[$component.paynowWithSIChangeHandler]]">
+                            <oj-option class="checkbox-option-label" id="pay-now-option" value="{{true}}">
+                                <span data-bind="text:$component.payments.moneytransfer.transfertoday"></span>
+                            </oj-option>
+                        </oj-checkboxset>
+                        <a class="also-transfer-today__help-icon" id="pay-now-with-si-know-more" href="#" data-bind="attr:{alt:$baseModel.format($component.payments.common.alt, {reference: $component.payments.moneytransfer.knowmore}),title:$baseModel.format($component.payments.common.title, {reference: $component.payments.moneytransfer.knowmore})},
+                                        click:$component.togglePaynowWithSIPopup">
+                            <div class="icons icon-help"></div>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- /ko -->
+
+                <!-- /ko -->
+                <!-- ko if: betweenWalletAcc() -->
+                <!-- ko if: !noWalletAcc() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label :for="[['transferto'+ $baseModel.incrementIdCount()]]"><span
+                                data-bind="text:$component.payments.moneytransfer.transferfrom"></span></oj-label>
+                                <span class="oj-select-chosen" data-bind="text:$component.payments.peerToPeer.transferWallet.wallet" ></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                            <oj-label class="oj-flex-item oj-sm-12" :for="[['payCommentInternational'+$baseModel.incrementIdCount()]]"><span
+                                data-bind="text: $component.payments.peerToPeer.transferWallet.recipientMobileNumber"></span></oj-label>
+                        <oj-input-text class="oj-flex-item oj-sm-12 oj-lg-12"
+                        :id="[['recipientMobileNumber' + $baseModel.incrementIdCount()]]"
+                        :aria-label="[[$component.payments.peerToPeer.transferWallet.recipientMobileNumber]]" validators="[[$baseModel.getValidator('MOBILE_NO')]]"
+                        :required="[[$component.isCommentRequired]]"
+                        :placeholder="[[$component.payments.peerToPeer.transferWallet.enterMobileNumber]]" value="{{mobileNumber}}">
+						</oj-input-text>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                        <oj-label class="oj-flex-item oj-sm-12" :for="[['payCommentInternational'+$baseModel.incrementIdCount()]]"><span
+                            data-bind="text: $component.payments.moneytransfer.amount"></span></oj-label>
+                        <div class="oj-flex-item oj-sm-9 oj-md-9 oj-lg-9">
+	                    <oj-input-text class="oj-flex-item oj-sm-12 oj-lg-12"
+	                            :id="[['amount' + $baseModel.incrementIdCount()]]"
+                                :aria-label="[[$component.payments.moneytransfer.amount]]" 
+                                translations="[[{'required':{messageDetail:$component.payments.peerToPeer.transferWallet.amountValidation}}]]"
+                                converter="[[{type:'number',options:{
+                                    style:'currency',currency:typeof ko.utils.unwrapObservable($component.walletLocalCurrency()) ==='string'? ko.utils.unwrapObservable($component.walletLocalCurrency()):'',currencyDisplay:'symbol'}}]]"
+                                :placeholder="[[$component.payments.peerToPeer.transferWallet.amountPlaceholder]]"
+	                            value="{{amountToTransfer}}" required="[[isMandatory]]">
+                        </oj-input-text>
+                        <div class="account-input__info-text-small">
+                            <span data-bind="text:$baseModel.format($component.payments.peerToPeer.transferWallet.balanceNholding , {'balance' : $formatter.formatCurrency($component.walletAccBalance(),$component.walletLocalCurrency())})"></span>
+                        </div>
+                    </div>
+                
+                </div>               
+                
+				<div class="oj-flex oj-flex-items-pad">                
+                <div class="oj-flex-item oj-sm-12">
+                <oj-label class="oj-flex-item oj-sm-12" :for="[['payCommentInternational'+$baseModel.incrementIdCount()]]"><span
+                    data-bind="text: $component.payments.common.note"></span></oj-label>
+                    <oj-input-text class="oj-flex-item oj-sm-12 oj-lg-12"
+                            :id="[['payComment' + $baseModel.incrementIdCount()]]"
+                            :aria-label="[[$component.payments.common.note]]" :maxlength=30
+                            :required="[[$component.isCommentRequired]]"
+                            validators="[[$baseModel.getValidator('COMMENTS')]]" value="{{note}}"></oj-input-text>
+
+                </div>
+            </div>
+  			<div class="oj-flex oj-flex-items-pad button-container">
+	            <oj-button data-id="transferButton" class="action-button-primary " id="transfer"
+	            on-click="[[transferWallet]]"><span slot="startIcon" class="icons icon-transfer"></span>
+	            <span data-bind="text:$component.payments.common.transfer"></span>
+	        	</oj-button>
+	            <oj-button class="action-button-secondary " id="cancel" on-click="[[$component.cancel]]"><span
+	                slot="startIcon" class="icons icon-cancel"></span>
+	             <span data-bind="text:$component.payments.common.cancel"></span>
+	            </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        <!-- ko if:stageTwo() && betweenWalletAcc() -->
+           <div data-bind="component:{name:customTransferComponent(),params:{rootModel: $component}}"></div>
+        <!-- /ko -->
+            </page-section>
+            <!-- ko if: !betweenWalletAcc() -->
+            <!-- ko if:!adhoc() && !$component.isMultiplePayment -->
+            <div data-bind='component:{name:"warning-message-dialog", params:{rootModel: $component }}'></div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <!-- ko if:$component.isStandingInstruction() -->
+                <oj-button data-id="transferButton" class="action-button-primary " id="setupbutton"
+                    on-click="[[initiatePayment]]"><span slot="startIcon" class="icons icon-setting"></span>
+                    <span data-bind="text:$component.payments.common.setup"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko ifnot:$component.isStandingInstruction() -->
+                <!-- ko if:$dashboard.appData.segment!=='CORP' -->
+                <oj-button data-id="transferButton" class="action-button-primary " id="transfer"
+                    on-click="[[initiatePayment]]"><span slot="startIcon" class="icons icon-transfer"></span>
+                    <span data-bind="text:$component.payments.common.transfer"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if:$dashboard.appData.segment==='CORP' -->
+                <oj-button class="action-button-primary " id="initiate" on-click="[[initiatePayment]]"><span
+                        slot="startIcon" class="icons icon-pay"></span>
+                    <span data-bind="text:$component.payments.common.pay"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <oj-button class="action-button-secondary " id="cancel" on-click="[[$component.cancel]]"><span
+                        slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.payments.common.cancel"></span>
+                </oj-button>
+                <!-- ko if:fromFavourites() && $dashboard.appData.segment==='CORP' -->
+                <oj-button class="action-button-secondary " id="unfavourite-button"
+                    on-click="[[$component.removeFavourite]]"><span slot="startIcon"
+                        class="icons icon-unfavourite"></span>
+                    <span data-bind="text:$component.payments.unfavourite"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if:$component.isMultiplePayment && !$component.showPaymentOverview() -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary " :for="[['save-button'+ $baseModel.incrementIdCount()]]"
+                    on-click="[[$component.initiatePayment.bind($data,null)]]"><span slot="startIcon"
+                        class="icons icon-save"></span>
+                    <span data-bind="text:$component.payments.generic.common.save"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary " :for="[['copynsave-button'+ $baseModel.incrementIdCount()]]"
+                    on-click="[[$component.initiatePayment.bind($data,true)]]"><span slot="startIcon"
+                        class="icons icon-copy"></span>
+                    <span data-bind="text:$component.payments.common.copynsave"></span>
+                </oj-button>
+                <!-- <a class="form-button-link" href="#" data-bind="text: $component.payments.common.resetFields, click: $component.refreshDropDown"></a> -->
+                <oj-button class="action-button-tertiary " :for="[['reset-button'+ $baseModel.incrementIdCount()]]"
+                    on-click="[[$component.refreshDropDown]]"><span slot="startIcon" class="icons icon-refresh"></span>
+                    <span data-bind="text:$component.payments.common.resetFields"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if:adhoc() -->
+            <!-- ko if: !betweenWalletAcc() -->
+            <div
+                data-bind='component:{name:"payment-peer-to-peer",params:{rootModel: $component,header:$component.moneyTransferheader}}'>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if:removeFavouriteFlag() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <div class="oj-flex oj-flex-items-pad center margin-bottom-20">
+                    <div class="question-text"
+                        data-bind="text:$baseModel.format($component.payments.deleteFavouriteMsg,{name:$component.data().transferObject().nickName,amount:$component.data().transferObject().formattedAmount})">
+                    </div>
+                </div>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[confirmDeleteFavourite]]">
+                    <span slot="startIcon" class="icons icon-delete"></span>
+                    <span data-bind="text:$component.payments.common.remove"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancelDeletionbutton"
+                    on-click="[[$component.cancelDeletion]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.payments.common.cancel"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:stageTwo() && !betweenWalletAcc() -->
+                <div data-bind="component:{name:customTransferComponent(),params:{rootModel: $component}}"></div>
+           
+              <div class="oj-flex oj-flex-items-pad button-container">
+              <oj-button class="action-button-primary " id="verifyPaymentbutton" on-click="[[verifyPayment]]">
+                    <span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.payments.common.confirm"></span>
+                </oj-button>
+                <oj-button data-id="cancelPayment" class="action-button-secondary " id="cancelPaymentButton"
+                    on-click="[[$component.cancelPayment]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.payments.common.cancel"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $baseModel.large() && !$component.isStandingInstruction() && !$component.isMultiplePayment && !$component.betweenWalletAcc() -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'payments-money-transfer'">
+            </help>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $baseModel.large() && $component.isStandingInstruction() && !$component.isMultiplePayment && !$component.betweenWalletAcc() -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'setup-standing-instructions'">
+            </help>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $baseModel.large() && !$component.isStandingInstruction() && !$component.isMultiplePayment && $component.betweenWalletAcc() -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'transfer-between-wallet'">
+            </help>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</oj-validation-group>

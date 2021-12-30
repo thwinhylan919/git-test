@@ -1,0 +1,170 @@
+<div class="form-main-container pfm">
+    <div class="oj-flex oj-flex-items-pad oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+            <page-section params="baseModel : $baseModel, rootModel:$data">
+                <div class="goal-calculator">
+                    <div class="goal-calculator__details">
+                        <div data-bind="component: {
+                              name: 'amount-input', params: {
+                              amount :$component.goalAmount,
+                              label : $component.goal.calculator.goalAmount,
+                              isMandatory: false,
+                              currency: $component.transferData.productDetails.goalAmountParameters[0].currency,
+                              minimumAmount: $component.transferData.productDetails.goalAmountParameters[0].minAmount.amount,
+                              maximumAmount: $component.transferData.productDetails.goalAmountParameters[0].maxAmount.amount,
+                              converter:$formatter.formatCurrency,
+                              validator: $component.validationTracker,
+                              rootId:'goal-amount',
+                              rootClass:'form-input'
+                          }
+                        }">
+                            <oj-label class="amount-label"><span data-bind="text:$baseModel.format($data.goal.calculator.amountRange,{minAmount:$formatter.formatCurrency($data.transferData.productDetails.goalAmountParameters[0].minAmount.amount,$data.transferData.productDetails.goalAmountParameters[0].currency),maxAmount:$formatter.formatCurrency($data.transferData.productDetails.goalAmountParameters[0].maxAmount.amount,$data.transferData.productDetails.goalAmountParameters[0].currency)})"></span></oj-label>
+                        </div>
+                        <div data-bind="component: {
+                              name: 'amount-input', params: {
+                              amount :$component.initialAmount,
+                              label : $component.goal.calculator.initialAmount,
+                              isMandatory: false,
+                              currency: $component.transferData.productDetails.goalAmountParameters[0].currency,
+                              minimumAmount: $component.transferData.productDetails.goalAmountParameters[0].minAmount.amount,
+                              maximumAmount: $component.goalAmount()-1,
+                              converter:$formatter.formatCurrency,
+                              validator: $component.validationTracker,
+                              rootId:'ini-amount',
+                              rootClass:'form-input'
+                          }
+                        }">
+                            <oj-label class="amount-label"><span data-bind="text:$baseModel.format($data.goal.calculator.amountRange,{minAmount:$formatter.formatCurrency($data.transferData.productDetails.goalAmountParameters[0].minAmount.amount,$data.transferData.productDetails.goalAmountParameters[0].currency),maxAmount:$formatter.formatCurrency($data.goalAmount()-1,$data.transferData.productDetails.goalAmountParameters[0].currency)})"></span></oj-label>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label><span data-bind="text:$component.goal.calculator.remainingAmount"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-9 oj-md-12 oj-lg-12">
+                                <oj-input-text id="goalCode" required disabled="[[true]]" value="{{$formatter.formatCurrency($component.remainingAmount(),$component.transferData.productDetails.goalAmountParameters[0].currency)}}"></oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="timeAchieve"><span data-bind="text:$component.goal.calculator.timeAchieve"></span></oj-label>
+                            </div>
+                            <div id="timeAchieve" class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-3">
+                                        <oj-select-one required id="basicSelectYears" :aria-label="[[$component.goal.calculator.years]]" value="{{$component.yearValue}}" on-value-changed="[[$component.yearValueChanged]]" placeholder="[[$component.goal.calculator.years]]">
+                                            <!-- ko foreach:$component.productYears() -->
+                                            <oj-option :id="[[$data.value]]" value="[[$data.value]]"><span data-bind="text:year + ' ' + $component.goal.calculator.years"></span></oj-option>
+                                            <!-- /ko -->
+                                        </oj-select-one>
+                                    </div>
+                                    <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-3">
+                                        <oj-select-one required id="basicSelectMonths" :aria-label="[[$component.goal.calculator.months]]" value="{{$component.monthValue}}" on-value-changed="[[$component.monthValueChanged]]" placeholder="[[$component.goal.calculator.months]]">
+                                            <!-- ko foreach:$component.productMonths() -->
+                                            <oj-option :id="[[$data.value]]" value="[[$data.value]]"><span data-bind="text:month+ ' ' + $component.goal.calculator.months"></span></oj-option>
+                                            <!-- /ko -->
+                                        </oj-select-one>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label><span data-bind="text:$component.goal.calculator.paymentSchedule"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-buttonset-one id="scheduleType" value="{{paymentSchedule}}">
+                                    <!-- ko foreach: scheduleTypes -->
+                                    <oj-option name="scheduleType" value="{{id}}" :id="[[id]]"><span data-bind="attr: {for: id},text:label"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-buttonset-one>
+                            </div>
+                        </div>
+                        <div class="goal-calculator__calculations goal-calculator-calculations">
+                            <!-- ko if:isCalculated() -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                    <!-- ko if:paymentSchedule() === "Monthly" -->
+                                    <oj-label><span data-bind="text:$component.goal.calculator.monthlyInvestment"></span></oj-label>
+                                    <!-- /ko -->
+                                    <!-- ko if:paymentSchedule() === "Quarterly" -->
+                                    <oj-label><span data-bind="text:$component.goal.calculator.quarterlyInvestment"></span></oj-label>
+                                    <!-- /ko -->
+                                    <!-- ko if:paymentSchedule() === "Weekly" -->
+                                    <oj-label><span data-bind="text:$component.goal.calculator.weeklyInvestment"></span></oj-label>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="oj-flex-item oj-sm-9 oj-md-12 oj-lg-12">
+                                    <oj-input-text id="goalCode" required disabled="[[true]]" value="{{$formatter.formatCurrency($component.contributionAmount(),$component.transferData.productDetails.goalAmountParameters[0].currency)}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                    <oj-label><span data-bind="text:$component.goal.calculator.helpAchieve"></span></oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <!-- ko if:$baseModel.large() -->
+                                    <oj-status-meter-gauge id="rogauge" min="0" max="100" value="{{$component.youPay}}" plot-area.rendered="on" plot-area.border-radius="50%" class="goal-calculator-calculations__graph" color="goal-calculator-calculations__plotAreaColor" readonly>
+                                    </oj-status-meter-gauge>
+                                    <!-- /ko -->
+                                    <!-- ko if:$baseModel.small() -->
+                                    <oj-status-meter-gauge id="rogauge" min="0" max="100" value="{{$component.youPay}}" plot-area.rendered="on" plot-area.border-radius="50%" class="goal-calculator-calculations__graph" color="goal-calculator-calculations__plotAreaColor" readonly>
+                                    </oj-status-meter-gauge>
+                                    <!-- /ko -->
+                                    <!-- ko if:$baseModel.medium() -->
+                                    <oj-status-meter-gauge id="rogauge" min="0" max="100" value="{{$component.youPay}}" plot-area.rendered="on" plot-area.border-radius="50%" class="goal-calculator-calculations__graph" color="goal-calculator-calculations__plotAreaColor" readonly>
+                                    </oj-status-meter-gauge>
+                                    <!-- /ko -->
+                                    <div class="oj-flex oj-flex-items-pad goal-calculator__svg-labels goal-calculator-svg-labels">
+                                        <div class="oj-flex-item goal-calculator-svg-labels--left" data-bind="text:$baseModel.format($component.goal.calculator.graphtextyoupay,{yourContribution:$component.youPay()})"></div>
+                                        <div class="oj-flex-item goal-calculator-svg-labels--right right" data-bind="text:$baseModel.format($component.goal.calculator.graphtextwepay,{ourContribution:$component.wePay()})"></div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <span class="icons icon-ok amount-label__icon"></span>
+                                    <span class="amount-label__text" data-bind="text:$baseModel.format($component.goal.calculator.graphSideText, {ourContribution: $component.wePay()})"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 amount-label">
+                                    <span class="icons icon-information amount-label__icon"></span>
+                                    <span class="amount-label__text" data-bind="text:$component.goal.calculator.disclaimer"></span>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </page-section>
+        </div>
+        <!-- ko if: $baseModel.large() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'goal-calculator'"></help>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <!-- ko if:!$baseModel.small() -->
+        <!-- ko if:isCalculated() -->
+        <oj-button class="action-button-primary" id="button-setGoal" on-click="[[$component.setGoal]]"><span slot="startIcon" class="icons icon-forward-arrow"></span>
+            <span data-bind="text:$component.goal.calculator.setGoal"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-secondary" id="button-cancel" on-click="[[$component.cancel]]"><span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.goal.calculator.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <!-- ko if:$baseModel.small() -->
+        <!-- ko if:isCalculated() -->
+        <oj-button class="action-button-primary" id="setGoal" on-click="[[$component.setGoal]]"><span slot="startIcon" class="icons icon-forward-arrow"></span>
+            <span data-bind="text:$component.goal.calculator.setGoal"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-secondary" id="cancel" on-click="[[$component.cancel]]"><span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.goal.calculator.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- ko if: $baseModel.large() -->
+<a class="back-link" href="#" data-bind="text: $component.goal.calculator.backToDashboard, click: $dashboard.switchModule.bind($data, null)"></a>
+<!-- /ko -->

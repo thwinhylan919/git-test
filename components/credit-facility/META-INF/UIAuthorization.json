@@ -1,0 +1,58 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.facility.Facility",
+        "components": [
+        {
+            "componentName": "facility-overview",
+            "service": "read",
+            "perform": "facility-details#facility-covenants#collateral-groups#tree-view#details#choose-facility-option#choose-sub-facility-option#view-submitted-application#facility-hierarchy-panel#facility-application#corporate-details-facility-amend#amend-facility#upload-documents"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.collateralgroup.CollateralGroup",
+        "components": [
+        {
+            "componentName": "collateral-overview",
+            "service": "read",
+            "perform": "collateral-details#collateral-id-details#collateral-groups"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.collateral.Collateral",
+        "components": [
+        {
+            "componentName": "collateral-details",
+            "service": "read",
+            "perform": "collateral-id-details#collateral-groups"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.collateral.Collateral",
+        "components": [
+        {
+            "componentName": "collateral-evaluation-landing",
+            "service": "evaluate",
+            "perform": "collateral-evaluation-confirm#collateral-evaluation-details#collateral-evaluation-documents-upload#collateral-evaluation-ownership-details#collateral-evaluation-party-selector#collateral-evaluation-seniority-details#collateral-evaluation-approval",
+            "approve": "transaction-journey#collateral-evaluation-approval"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.facility.Facility",
+        "components": [
+        {
+            "componentName": "facility-application",
+            "service": "update",
+            "perform": "corporate-details-facility-amend#amend-facility#upload-documents#add-collateral#amend-facility-panel#facility-origination-confirm#apply-new-facility-panel"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.facility.Facility",
+        "components": [
+        {
+            "componentName": "apply-new-facility-landing",
+            "service": "create",
+            "perform": "corporate-details-facility#upload-documents#add-collateral#facility-origination-confirm#apply-new-facility#apply-new-facility-panel#amend-facility#amend-facility-panel"
+        }]
+    }]
+}

@@ -1,0 +1,37 @@
+<div class="form-main-container">
+  <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+    <div class="oj-flex-item oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12 center boldHeading">
+      <span data-bind="text:$component.nls.business"></span>
+    </div>
+    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12 center" data-bind="css:$baseModel.large() ? 'offerText' : 'smallOfferText', text:$component.nls.offer"></div>
+    <!-- ko if : $component.isProductLoaded() -->
+    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-film-strip class="oj-lg-12 oj-md-12 oj-sm-12" data-bind="attr:{id:'filmStrip', 'aria-label':$component.nls.filmstripText}"
+        max-items-per-page="4" arrow-visibility="visible" data-oj-context="">
+        <!-- ko foreach: $component.productData -->
+        <div class="oj-lg-12 oj-md-12 oj-sm-12 center">
+          <a href="#" data-bind="click:$component.selectProduct.bind($data, $context)">
+            <div class="center">
+              <img class="imgWidth" data-bind="loadImage: $data.imgPath" on-hover="[[$component.testPopUp]]"></img>
+              <!-- ko if : $data.isSelected() -->
+              <div class="oj-flex-item oj-md-12 oj-sm-12 right tickMarkPadding">
+                <span class="tickmarkBackground"><span class="icons icon-submit"></span></span>
+              </div>
+              <!-- /ko -->
+            </div>            
+          </a>
+          <div class="oj-lg-12 oj-md-12 oj-sm-12 center dataPadding" data-bind="text:$data.businessProductName"></div>
+          <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 left" data-bind="css:$baseModel.large() ? 'description' : 'smallScreenDiscription',text:$data.businessProductDescription "></div>
+        </div>
+
+        <!-- /ko -->
+      </oj-film-strip>
+    </div><!-- /ko -->
+  </div>
+  <div class="center oj-flex-item oj-flex-items-pad" data-bind="css:$baseModel.large() ? 'buttonCustomPad':''">
+    <oj-button class="action-button-primary" id="okButton" on-click="[[proceed]]" disabled="[[$component.selected]]">
+      <span slot="startIcon" class="icons icon-submit"></span>
+      <span data-bind="text: $component.nls.proceed"></span>
+    </oj-button>
+  </div>
+</div>

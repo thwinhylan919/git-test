@@ -1,0 +1,19 @@
+.initiate-lc {
+    .tnc-div {
+        @include mq(small) {
+            padding-bottom: 1.3rem !important;
+        }
+        .tnc-checkbox {
+            max-width: 1.3rem;
+            vertical-align: text-bottom;
+        }
+    }
+    .viewTnC {
+        @include padding(0.5rem, 0, 0, 2.8rem);
+    }
+    .tncContent {
+        div {
+            padding: 0.6rem;
+        }
+    }
+}

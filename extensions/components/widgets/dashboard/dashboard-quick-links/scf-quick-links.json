@@ -1,0 +1,34 @@
+{
+  "header": "supply-chain-finance",
+  "data": [{
+    "id": "view-programs",
+    "module": "select-role",
+    "parentModule": "supply-chain-finance",
+    "icon": "program-new"
+  }, {
+    "id": "view-invoices",
+    "module": "select-role-invoice",
+    "parentModule": "supply-chain-finance",
+    "icon": "invoices-new"
+  }, {
+    "id": "associated-parties",
+    "module": "counter-party-list",
+    "parentModule": "supply-chain-finance",
+    "icon": "associated-parties-1"
+  }, {
+    "id": "create-program",
+    "module": "program-management-global",
+    "parentModule": "supply-chain-finance",
+    "icon": "create-program-new"
+  }, {
+    "id": "create-invoice",
+    "module": "invoice-creation-home",
+    "parentModule": "supply-chain-finance",
+    "icon": "create-invoice-new"
+  }, {
+    "id": "onboard-counterparty",
+    "module": "onboard-counter-party-form",
+    "parentModule": "supply-chain-finance",
+    "icon": "onboard-counterparty-new"
+  } ]
+}

@@ -1,0 +1,40 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.tradefinance.service.bill.Bill",
+      "components": [{
+          "componentName": "view-discrepancies",
+          "service": "initiateCustomerAcceptance",
+          "perform": "customer-acceptance-bills-base#export-discrepancies#customer-acceptance-nav-bar#discrepancies#view-discrepancies"
+        },
+        {
+          "componentName": "discrepancies",
+          "service": "listDiscrepancy",
+          "perform": "customer-acceptance-bills-base#export-discrepancies#customer-acceptance-nav-bar#discrepancies"
+        },
+        {
+          "componentName": "view-discrepancies",
+          "service": "readDiscrepancy",
+          "perform": "customer-acceptance-bills-base#export-discrepancies#customer-acceptance-nav-bar#discrepancies#view-discrepancies"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.tradefinance.service.letterofcredit.amendment.LetterOfCreditAmendment",
+      "components": [{
+        "componentName": "export-amendment",
+        "service": "initiateCustomerAcceptance",
+        "perform": "customer-acceptance-lc-base#customer-acceptance-nav-bar#discrepancies#view-discrepancies#import-amendment",
+        "approve": "review-amend-lc"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.tradefinance.service.bankguarantee.amendment.BankGuaranteeAmendment",
+      "components": [{
+        "componentName": "inward-guarantee-amendment",
+        "service": "initiateCustomerAcceptance",
+        "perform": "customer-acceptance-guarantee-base#customer-acceptance-nav-bar#outward-guarantee-amendment",
+        "approve": "review-amendment"
+      }]
+    }
+  ]
+}

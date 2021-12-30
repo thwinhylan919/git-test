@@ -1,0 +1,485 @@
+[
+  {
+    "BillerCode": "MPTePin",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields":[
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "TelenorePin",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MyanmarNetPrepaid",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields":[
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MyanmarNetAWaThone",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields":[
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  }, 
+  {
+    "BillerCode": "MyanmarNetData",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields":[
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "LaLaKyi",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields":[
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "OoredooePin",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MyTelePin",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MecTelePin",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "Mahar",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+    {
+    "BillerCode": "Viu",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields":[
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "TelenorDataPackPin",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MMGCRGMM",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "PinId"
+      },
+      {
+        "name": "SerialNumber"
+      },
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MPTeLoad",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MyTeleLoad",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MecTeleLoad",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+{
+    "BillerCode": "ViberOut",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+{
+    "BillerCode": "AnandaeLoad",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Amount"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "Anawrahta",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Amount"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+   {
+    "BillerCode": "InfiniteNetwork",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Amount"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+    {
+    "BillerCode": "5BB",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Amount"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+   {
+    "BillerCode": "OoredooFTTH",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Amount"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "OoredooeLoad",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "TelenoreLoad",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": true,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MPTDataPack",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Price"
+    },
+    "planMapping": {
+      "name": "planId",
+      "value": "packageCode"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "TelenorDataPack",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+   {
+    "BillerCode": "TelenorFiber",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Amount"
+    },
+    "planMapping": {
+      "name": "planId",
+      "value": "CustomerID"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+
+  {
+    "BillerCode": "YESC",
+      "planMapping": {
+      "name": "planId",
+      "value": "MeterRefNo"
+    },
+
+    "enquiryRequired": true,
+   "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+
+  {
+    "BillerCode": "OoredooDataPack",
+    "planMapping": {
+      "name": "planId",
+      "value": "OfferId"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  },
+  {
+    "BillerCode": "MyTelDataPack",
+    "amountMapping": {
+      "name": "amount",
+      "value": "Deno"
+    },
+    "planMapping": {
+      "name": "planId",
+      "value": "Package"
+    },
+    "enquiryRequired": false,
+    "confirmScreenFields": [
+      {
+        "name": "partnerRefNo"
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.common.accesspoint.service.AccessPoint",
+    "components": [{
+        "componentName": "access-point-view",
+        "service": "read",
+        "perform": ""
+      },
+      {
+
+        "componentName": "access-point-create",
+        "service": "create",
+        "perform": "access-point-search#access-point-view",
+        "approve": "access-point-view",
+        "view": ""
+      }, {
+        "componentName": "access-point-create",
+        "service": "update",
+        "perform": "access-point-search#access-point-view",
+        "approve": "access-point-view",
+        "view": ""
+      }
+    ]
+  }, {
+    "moduleName": "com.ofss.digx.app.common.accesspointgroup.service.AccessPointGroup",
+    "components": [{
+        "componentName": "access-point-group-view",
+        "service": "read",
+        "perform": "access-point-group-search"
+      },
+      {
+
+        "componentName": "access-point-group-create",
+        "service": "create",
+        "perform": "access-point-group-search#access-point-group-view",
+        "approve": "access-point-group-view",
+        "view": ""
+      }, {
+        "componentName": "access-point-group-create",
+        "service": "update",
+        "perform": "access-point-group-view",
+        "approve": "access-point-group-view",
+        "view": ""
+      }
+    ]
+  }]
+}

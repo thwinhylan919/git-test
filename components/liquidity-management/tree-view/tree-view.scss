@@ -1,0 +1,46 @@
+$zoom-background-color: #6b6f85;
+$zoom-background-radius: 50%;
+$zoom-icon-color: #fff;
+.viewStructure {
+    &__svgHeight {
+        height: 37rem;
+        min-width: 50rem;
+    }
+}
+
+.tree {
+    border: 0.05rem solid var(--buttonset-border-color);
+    box-shadow: 0.05rem 0.05rem 0.1rem 0 var(--base-border-default);
+    height: 98%;
+}
+
+.moreNode {
+    font-size: 1.3rem;
+    fill: var(--base-color-secondary-text);
+}
+
+.zoom-control {
+    z-index: 1;
+    margin-top: 1rem;
+    @include float(right);
+    width: 3rem;
+    position: relative;
+    bottom: 16rem;
+
+    &__button {
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: 0.7rem;
+        @include single-margin(left, 0.5rem!important);
+        @include btn-variant($zoom-background-color, $zoom-background-color, $zoom-background-color, var(--button-primary-gradient-direction),$zoom-background-color,var(--button-primary-border-width), $zoom-background-radius,var(--button-primary-font-size),var(--button-primary-font-weight));
+    }
+
+    &__icon {
+        margin-top: 0.3rem;
+        @include single-margin(left, 0.7rem);
+        @include single-padding(right, 0.08rem);
+        font-size: 1rem;
+        color: $zoom-icon-color !important;
+    }
+}

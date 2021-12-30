@@ -1,0 +1,23 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payeecountlimit.PayeeCountLimit",
+        "components": [
+        {
+            "componentName": "segment-payee-restriction-mapping",
+            "service": "read",
+            "perform":"payee-restrictions-landing"
+        },
+        {
+            "componentName": "segment-payee-restriction-mapping",
+            "service": "update",
+            "perform": "payee-restrictions-landing#review-payee-restrictions"
+        },
+        {
+            "componentName": "segment-payee-restriction-mapping",
+            "service": "create",
+            "perform": "payee-restrictions-landing#review-payee-restrictions#create-payee-restrictions#review-create-payee-restrictions",
+            "approve": "transaction-journey#review-create-payee-restrictions"
+        }]
+    }]
+}

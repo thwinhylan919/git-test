@@ -1,0 +1,42 @@
+.group {
+    background: var(--base-color-warning);
+    color: var(--base-background-primary);
+}
+
+.box {
+    @include padding(1rem, 1rem, 0rem, 1rem);
+}
+
+.items {
+    border-bottom: none;
+}
+
+.description {
+    font-size: 13px;
+}
+
+.data1 {
+    @include padding(0rem, 0rem, 0rem, 4rem);
+}
+
+.data2 {
+    @include padding(0rem, 0rem, 0rem, 7rem);
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--oj-neutral-color11));
+    @include margin(0rem, 1rem, 0rem, 1rem);
+}
+
+.collat-desc {
+    @include single-margin(left, -1rem);
+}
+
+.collat-desc1 {
+    @include single-margin(left, -0.7rem);
+    @include single-margin(top, 0.5rem);
+}
+
+.collat-desc2 {
+    @include single-padding(left, 1.4rem);
+}

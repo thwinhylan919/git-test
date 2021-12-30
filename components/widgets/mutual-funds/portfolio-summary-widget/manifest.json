@@ -1,0 +1,14 @@
+{
+  "componentName": "portfolio-summary-widget",
+  "module": "mutual-funds",
+  "segment": ["retailuser"],
+  "width": {
+    "large": "8",
+    "medium": "12"
+  },
+  "height": "220",
+  "icon": "",
+  "template": "",
+  "isVisible": true,
+  "isWidget": true
+}

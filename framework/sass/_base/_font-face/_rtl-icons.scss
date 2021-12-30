@@ -1,0 +1,31 @@
+[dir='rtl'] {
+    & .icon {
+        &-login {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+[dir='rtl'] .icon-arrow-left:before {
+    content: "\f02c";
+}
+
+[dir='rtl'] .icon-arrow-right:before {
+    content: "\f02b";
+}
+
+[dir='rtl'] .icon-back-arrow:before {
+    content: "\e002";
+}
+
+[dir='rtl'] .icon-forward-arrow:before {
+    content: "\f012";
+}
+
+[dir='rtl'] .icon-drop-left:before {
+    content: "\f040";
+}
+
+[dir='rtl'] .icon-drop-right:before {
+    content: "\f05f";
+}

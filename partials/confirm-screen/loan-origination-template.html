@@ -1,0 +1,35 @@
+<div class="oj-flex-item">
+    <div class="oj-flex-item">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad ">
+            <ul class="confirm-screen__list">
+                <li>
+                    <a href="#" data-bind="click:$component.loadAppTracker">
+                        <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToAccountDetails},loadImage:'dashboard/quick-access/account-details.svg'">
+                        <!-- ko if: $component.params.confirmScreenExtensions.resource -->
+                        <div data-bind="text:$component.params.confirmScreenExtensions.resource.appTracker"></div>
+                        <!-- /ko -->
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click:$component.loadFilmStrip">
+                        <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToAccountDetails},loadImage:'dashboard/quick-access/account-details.svg'">
+                        <!-- ko if: $component.params.confirmScreenExtensions.resource -->
+                        <div data-bind="text:$component.params.confirmScreenExtensions.resource.newApplicationLink"></div>
+                        <!-- /ko -->
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click:$dashboard.switchModule.bind($data,true)">
+                        <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                        <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

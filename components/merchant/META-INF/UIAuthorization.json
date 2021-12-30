@@ -1,0 +1,27 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.payment.service.merchant.Merchant",
+			"components": [{
+					"componentName": "merchant-dashboard",
+					"service": "read",
+					"perform": "view-merchant#view-qr-code#internal-account-input"
+				}]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.payment.service.merchant.Merchant",
+			"components": [{
+					"componentName": "merchant-dashboard",
+					"service": "update",
+					"perform":"view-merchant#view-qr-code#create-merchant#internal-account-input"
+				}]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.payment.service.merchant.Merchant",
+			"components": [{
+					"componentName": "merchant-dashboard",
+					"service": "delete",
+					"perform":"view-merchant#view-qr-code"
+				}]
+		}
+	]
+}

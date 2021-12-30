@@ -1,0 +1,138 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading:$component.Nls.invoiceDetails">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.invoiceNumber"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('invoiceNumber' in $data.recordDetails())?$data.recordDetails().invoiceNumber:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.invoiceDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('invoiceDate' in $data.recordDetails())?$formatter.formatDate($data.recordDetails().invoiceDate):'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.invoiceDueDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('invoiceDueDate' in $data.recordDetails())?$formatter.formatDate($data.recordDetails().invoiceDueDate):'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.invoiceAmount"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('amount' in $data.recordDetails())?$formatter.formatCurrency($data.recordDetails().amount, $data.recordDetails().currency):'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.supplierName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('supplierName' in $data.recordDetails())?$data.recordDetails().supplierName:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.buyerName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('buyerName' in $data.recordDetails())?$data.recordDetails().buyerName:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.programId"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('programId' in $data.recordDetails())?$data.recordDetails().programId:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.programName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('programName' in $data.recordDetails())?$data.recordDetails().programName:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.taxPercentage"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('taxPercentage' in $data.recordDetails())?$data.recordDetails().taxPercentage:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.taxAmount"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('taxAmount' in $data.recordDetails())?$formatter.formatCurrency($data.recordDetails().taxAmount, $data.recordDetails().currency):'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.discountPercentage"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('discountPercentage' in $data.recordDetails())?$data.recordDetails().discountPercentage:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.discountAmount"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('discountAmount' in $data.recordDetails())?$formatter.formatCurrency($data.recordDetails().discountAmount, $data.recordDetails().currency):'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.totalInvoiceAmount"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('totalInvoiceAmount' in $data.recordDetails())?$formatter.formatCurrency($data.recordDetails().totalInvoiceAmount, $data.recordDetails().currency):'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.purchaseOrderNo"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('purchageOrderNo' in $data.recordDetails())?$data.recordDetails().purchageOrderNo:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.paymentTerms"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('paymentTerms' in $data.recordDetails())?$data.recordDetails().paymentTerms:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.purchaseOrderDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('purchaseOrderDate' in $data.recordDetails())?$formatter.formatDate($data.recordDetails().purchaseOrderDate):'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.shipmentDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span
+                data-bind="text : (('shipmentDate' in $data.recordDetails())?$formatter.formatDate($data.recordDetails().shipmentDate):'-')"></span>
+        </div>
+    </div>
+</page-section>

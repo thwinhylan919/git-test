@@ -1,0 +1,199 @@
+<!-- ko if:$component.domesticPayeeType() === 'INDIA' -->
+
+<div data-bind="with:$component.payeeDetails.indiaDomesticPayee">
+    <div class="">
+      <!-- ko if:!('adhocPaymentFlag' in $component) -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.india.recipientname , value :name"></row>
+        <!-- /ko -->
+    </div>
+    <!-- ko if:ko.utils.unwrapObservable($component.preview) && $component.imageUploadFlag() -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+            <span data-bind="text: $component.payments.payee.image"></span>
+        </oj-label>
+            <div class="oj-flex-item">
+                <oj-avatar  role="img" size="sm"
+                            data-bind="attr:{'id': $component.target(),'aria-label':$component.payments.payee.image}" src="[[$component.preview()]]">
+                </oj-avatar>
+            </div>
+    </div>
+    <!-- /ko -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accounttype , value :$component.payments.payee.domestic.accdomestic"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accountnumber , value :accountNumber,dataClass :'highlight-text'"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.accountname , value :accountName,dataClass :'highlight-text'"></row>
+        <!-- ko ifnot:$component.fromAdhocTransferUpi -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.typeOfAccount, value :$component.typeOfAccountDescription"></row>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.india.ifsc , value :[
+         bankDetails.code,
+         ('name' in bankDetails)?bankDetails.name:'',
+         ('address' in bankDetails)?bankDetails.address:'',
+         ('city' in bankDetails)?bankDetails.city:'',
+         ('country' in bankDetails)?bankDetails.country:''
+         ]"></row>
+    </div>
+    <div class="">
+      <!-- ko if:!('adhocPaymentFlag' in $component) -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accountnickname , value :nickName,dataClass :'highlight-text'"></row>
+        <!-- /ko -->
+    </div>
+
+    <!-- ko if:$dashboard.appData.segment === "CORP" && !('adhocPaymentFlag' in $component) -->
+    <div class="">
+         <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.payeeaccesstype , value :$component.payments.payee.isShared[shared]"></row>
+    </div>
+    <!-- /ko -->
+</div>
+
+<!-- /ko -->
+
+
+<!-- ko if:$component.domesticPayeeType() === 'UK' -->
+
+<div data-bind="with:$component.payeeDetails.ukDomesticPayee">
+
+    <!-- ko if:!('adhocPaymentFlag' in $component) -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.india.recipientname , value :name"></row>
+    </div> 
+    <!-- /ko -->
+     <!-- ko if:ko.utils.unwrapObservable($component.preview) && $component.imageUploadFlag() -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12 previewImage">
+            <oj-label class="oj-flex-item oj-lg-12 oj-sm-12" for="previewImage">
+                <span data-bind="text: $component.payments.payee.image"></span>
+            </oj-label>
+            <!-- ko if:$component.imageUploadFlag() -->
+            <div class="oj-flex-item">
+                <oj-avatar role="img" size="[[$component.avatarSize()]]"
+                                data-bind="attr:{'id': $component.target(),'aria-label':$component.payments.payee.image}" src="[[$component.preview()]]">
+                </oj-avatar>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accounttype , value :$component.payments.payee.domestic.accdomestic"></row>
+        <!-- ko if:$component.isPaymentTypesLoaded() -->
+        <!-- ko foreach:$component.paymentTypes -->
+        <!-- ko if: value === ko.utils.unwrapObservable($component.payeeDetails.ukDomesticPayee.paymentType) -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.paymenttype , value :$component.payments.payee.domestic.uk[value]"></row>
+        <!-- /ko -->
+      <!-- /ko -->
+<!-- /ko -->
+        <!--Account Number-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accountnumber , value :accountNumber,dataClass :'highlight-text'"></row>
+
+        <!--Account Name-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.accountname , value :accountName,dataClass :'highlight-text'"></row>
+
+        <!--payvia-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.payvia , value :$component.payments.payee.domestic.uk[network]"></row>
+
+        <!-- ko if:paymentType==="NOU" ||   paymentType==="FAS" -->
+
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.uk.sortcode , value :[
+            bankDetails.code,
+              ('name' in bankDetails)?bankDetails.name:'',
+              ('address' in bankDetails)?bankDetails.address:'',
+             ('city' in bankDetails)?bankDetails.city:'',
+             ('country' in bankDetails)?bankDetails.country:''
+        ]"></row>
+
+        <!-- /ko -->
+        <!-- ko if:paymentType==="URG" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.uk.swiftcode , value :[
+            bankDetails.code,
+              ('name' in bankDetails)?bankDetails.name:'',
+              ('address' in bankDetails)?bankDetails.address:'',
+             ('city' in bankDetails)?bankDetails.city:'',
+             ('country' in bankDetails)?bankDetails.country:''
+        ]"></row>
+        <!-- /ko -->
+
+
+    </div>
+
+    <div class="">
+        <!--Account Nick name-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accountnickname , value :nickName,dataClass :'highlight-text'"></row>
+
+    </div>
+
+    <!-- ko if:$dashboard.appData.segment === "CORP" && !('adhocPaymentFlag' in $component)-->
+    <div class="">
+         <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.payeeaccesstype , value :$component.payments.payee.isShared[shared]"></row>
+    </div>
+    <!-- /ko -->
+</div>
+
+<!-- /ko -->
+
+
+<!-- ko if:$component.domesticPayeeType() === 'SEPA' -->
+
+
+<div data-bind="with:$component.payeeDetails.sepaDomesticPayee">
+  <!-- ko if:!('adhocPaymentFlag' in $component) -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.india.recipientname , value :name"></row>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:ko.utils.unwrapObservable($component.preview) && $component.imageUploadFlag() -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12 previewImage">
+            <oj-label class="oj-flex-item oj-lg-12 oj-sm-12" for="previewImage">
+                <span data-bind="text: $component.payments.payee.image"></span>
+            </oj-label>
+            <!-- ko if:$component.imageUploadFlag() -->
+            <div class="oj-flex-item">
+                <oj-avatar role="img" size="[[$component.avatarSize()]]"
+                                data-bind="attr:{'id': $component.target(),'aria-label':$component.payments.payee.image}" src="[[$component.preview()]]">
+                </oj-avatar>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accounttype , value :$component.payments.payee.domestic.accdomestic"></row>
+
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.paymenttype , value :$component.payments.payee.domestic.sepa[sepaType]"></row>
+
+        <!--Recipient Account number (IBAN)-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.sepa.recipientaccnumber , value :iban,dataClass :'highlight-text'"></row>
+
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.accountname , value :accountName,dataClass :'highlight-text'"></row>
+
+        <!--Bank Code(BIC)-->
+        <!-- ko if:sepaType==="CRT" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.sepa.bankcodebic , value :[
+        bankDetails.code,
+          ('name' in bankDetails)?bankDetails.name:'',
+          ('address' in bankDetails)?bankDetails.address:'',
+        ('city' in bankDetails)?bankDetails.city:'',
+         ('country' in bankDetails)?bankDetails.country:''
+    ]"></row>
+        <!-- /ko -->
+        <!-- ko if:sepaType==="CAT" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.sepa.debtorbankcode , value :[
+        bankDetails.code,
+          ('name' in bankDetails)?bankDetails.name:'',
+          ('address' in bankDetails)?bankDetails.address:'',
+        ('city' in bankDetails)?bankDetails.city:'',
+         ('country' in bankDetails)?bankDetails.country:''
+    ]"></row>
+        <!-- /ko -->
+    </div>
+    <div class="">
+        <!--Account Nick name-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.accountnickname , value :nickName"></row>
+    </div>
+
+    <!-- ko if:$dashboard.appData.segment === "CORP" && !('adhocPaymentFlag' in $component) -->
+    <div class="">
+         <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.payeeaccesstype , value :$component.payments.payee.isShared[shared]"></row>
+    </div>
+    <!-- /ko -->
+
+</div>
+
+<!-- /ko -->

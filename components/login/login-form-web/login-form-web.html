@@ -1,0 +1,10 @@
+<div class="oj-flex  form-main-container">
+    <div class="oj-flex-item oj-lg-9">
+        <div data-bind="template: { name: 'login/login-form',afterRender: attachRegisterNowClick}"></div>
+    </div>
+    <!-- ko if:!$baseModel.small() -->
+    <div class="oj-flex-item oj-lg-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'login-form'"></help>
+    </div>
+    <!-- /ko -->
+</div>

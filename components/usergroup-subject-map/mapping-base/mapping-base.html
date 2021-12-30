@@ -1,0 +1,14 @@
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-9">
+    <div class="form-main-container">
+      <div data-bind='component:{name: "mapping-search", params:{rootModel: $data}}'>
+      </div>
+    </div>
+  </div>
+
+<!-- ko if: $baseModel.large() -->
+<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3 help-panel">
+  <help params="baseModel : $baseModel, rootModel : $component, transaction: 'user-group-subject-map'"></help>
+</div>
+<!-- /ko -->
+</div>

@@ -1,0 +1,155 @@
+<oj-validation-group id="accountTracker">
+    <div class="form-main-container oj-lg-12 overlay">
+        <div class="oj-flex oj-flex-items-pad oj-lg-12">
+            <div class="oj-flex-item oj-lg-12" data-bind="component: {
+            name: 'search-box',
+            params: {
+                searchFields : ['accountDetails.customerDesc','accountDetails.accountKey.branchCodeId', 'accountDetails.accountKey.accountNo.displayValue'],
+                rootModel:$component,
+                data:accountListDetailsDataSource(),
+                searchBy:$component.resource.labels.searchBy
+                }
+            }">
+            </div>
+            <!-- ko if : $component.structureType && $component.structureType === "Hybrid" -->
+            <div class="oj-flex-item oj-lg-12">
+                <div>
+                    <oj-label for="cashCCMethod" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.labels.cashCCMethod"></span>
+                    </oj-label>
+                    <oj-radioset id="cashCCMethod" class="oj-choice-direction-row" disabled="[[$component.defaultCashCCMethod]]" :aria-label="[[$component.resource.labels.cashCCMethod]]" value="{{cashCCMethod}}">
+                        <!-- ko foreach:$component.structureTypeList -->
+                        <!-- ko ifnot : value === "Hybrid" -->
+                        <oj-option :id=[[value]] value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </oj-radioset>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12">
+                <oj-table id="accountlisttable" :aria-label="[[$component.resource.labels.overlaytableheader]]" columns="[[$component.mode === 'header' || $component.mode === 'replace' ? [{
+        renderer: $oj.KnockoutTemplateUtils.getRenderer('radiobox_tmpl', true),
+        sortProperty:'none'
+        },{
+        headerText:$component.resource.structure.labels.partyName,
+        sortProperty:'none',
+        field:'accountDetails.customerDesc'
+        },{
+        headerText:$component.resource.structure.labels.accountType,
+        sortProperty:'none',
+        template:'accountType'
+        },{
+        headerText:$component.resource.structure.labels.accountNumber,
+        sortProperty:'accountNo',
+        field:'accountDetails.accountKey.accountNo.displayValue'
+        },{
+        headerText:$component.resource.structure.labels.branch,
+        sortProperty:'none',
+        field:'accountDetails.accountKey.branchCodeId'
+        },{
+        headerText:$component.resource.structure.labels.currentBalance,
+        sortProperty:'none',
+        headerClassName : 'right',
+        template:'currentBalance'
+        },{
+        headerText:$component.resource.structure.labels.availableBalance,
+        sortProperty:'none',
+        headerClassName : 'right',
+        template:'availableBalance'
+        }]:[{
+        renderer: $oj.KnockoutTemplateUtils.getRenderer('checkbox_tmpl', true),
+        headerRenderer: $oj.KnockoutTemplateUtils.getRenderer('checkbox_hdr_tmpl', true),
+        sortProperty:'none'
+        }].concat($component.setPriority && $component.cashCCMethod() === 'Sweep'?[{
+        headerText:$component.resource.structure.labels.priority,
+        sortProperty:'none',
+        template:'priority'
+        }]:[]).concat([{
+        headerText:$component.resource.structure.labels.partyName,
+        sortProperty:'none',
+        field:'accountDetails.customerDesc'
+        },{
+        headerText:$component.resource.structure.labels.accountType,
+        sortProperty:'none',
+        template:'accountType'
+        },{
+        headerText:$component.resource.structure.labels.accountNumber,
+        sortProperty:'accountNo',
+        field:'accountDetails.accountKey.accountNo.displayValue'
+        },{
+        headerText:$component.resource.structure.labels.branch,
+        sortProperty:'none',
+        field:'accountDetails.accountKey.branchCodeId'
+        },{
+        headerText:$component.resource.structure.labels.currentBalance,
+        sortProperty:'none',
+        headerClassName : 'right',
+        template:'currentBalance'
+        },{
+        headerText:$component.resource.structure.labels.availableBalance,
+        sortProperty:'none',
+        headerClassName : 'right',
+        template:'availableBalance'
+        }])]]" columns-default="[[{sortable:'disabled'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[accountListDetailsDataSource]]">
+                    <template slot="availableBalance">
+                        <div class="oj-flex-item right" data-bind="text:$formatter.formatCurrency($current.row.accountDetails.currentBalance, $current.row.accountDetails.limitCcy)"></div>
+                    </template>
+                    <template slot="currentBalance">
+                        <div class="oj-flex-item right" data-bind="text:$formatter.formatCurrency($current.row.accountDetails.currentBalance, $current.row.accountDetails.limitCcy)"></div>
+                    </template>
+                    <template slot="accountType">
+                        <span class="structure__accountType tags" data-bind="text : $component.resource.structure.labels.accountCheck[$current.row.accountDetails.isExtAccChk]">
+                        </span>
+                    </template>
+                    <template slot="priority">
+                        <oj-input-text required :aria-label="[[$component.resource.structure.labels.priorityAria]]" disabled=[[$component.priorityVisibilityMap[$current.row.accountDetails.accountKey.accountNo.value]]] value="{{$current.row.instructionPriority}}">
+                        </oj-input-text>
+                    </template>
+                </oj-table>
+                <script type="text/html" id="radiobox_tmpl">
+                    <td>
+                        <oj-radioset :id="[['headerAccount' + $baseModel.incrementIdCount()]]" value="{{$component.headerAccount}}" class="oj-radioset-no-chrome" :aria-label="[[$component.resource.labels.radioLabel]]" required>
+                            <oj-option name="headerAccountSelection" value="[[$context.row]]" data-bind="attr:{id: $context.row.accountDetails.accountKey.accountNo.value, 'aria-label':$context.row.accountDetails.accountKey.accountNo.displayValue}">
+                            </oj-option>
+                        </oj-radioset>
+                    </td>
+                </script>
+                <script type="text/html" id="checkbox_hdr_tmpl">
+                    <td>
+                        <oj-checkboxset :id="[['all' + $baseModel.incrementIdCount()]]" :aria-label="[[$component.resource.labels.allCheckboxLabel]]" on-value-changed="[[$component.selectAllListener]]" class="oj-checkboxset-no-chrome">
+                            <oj-option data-bind="attr:{'aria-label':$component.resource.labels.allCheckboxLabel, id:'table_checkbox_hdr'}" value="all">
+                            </oj-option>
+                        </oj-checkboxset>
+                    </td>
+                </script>
+                <script type="text/html" id="checkbox_tmpl">
+                    <td>
+                        <oj-checkboxset :id="[['rowIndex' + $baseModel.incrementIdCount()]]" :aria-label="[[$component.resource.labels.checkboxLabel]]" value="{{$context.row.selectedAccount}}" on-value-changed="[[$component.selectedAccountListener]]" class='oj-checkboxset-no-chrome'>
+                            <oj-option data-bind="attr:{
+                                id: 'table_checkbox' + $context.cellContext.status.rowIndex, 'aria-label':$context.cellContext.status.rowIndex}" value="[[$context.row.accountDetails.accountKey.accountNo.value]]"></oj-option>
+                        </oj-checkboxset>
+                    </td>
+                </script>
+                <oj-paging-control id="accountListDetailsPaging" data="[[accountListDetailsDataSource]]" page-size="5">
+                </oj-paging-control>
+            </div>
+        </div>
+        <div class="oj-flex-item button-container">
+            <!-- ko if : $component.mode === 'header' || $component.mode === 'link' || $component.mode === 'add' -->
+            <oj-button class="action-button-primary" id="add" on-click="[[addAccount]]" disabled="[[$component.mode === 'header' ? !$component.headerAccount() : !$component.selectedAccts().length]]">
+                <span slot="startIcon" class="icons icon-add"></span>
+                <span data-bind="text: $component.mode === 'link' ? $component.resource.labels.link : $component.resource.labels.add"></span>
+            </oj-button>
+            <!-- /ko -->
+            <!-- ko if : $component.mode === 'replace' -->
+            <oj-button class="action-button-primary" id="replace" on-click="[[addAccount]]" disabled="[[$component.mode === 'replace' ? !$component.headerAccount():!$component.selectedAccts().length]]">
+                <span slot="startIcon" class="icons icon-exchange"></span>
+                <span data-bind="text: $component.resource.labels.replace"></span>
+            </oj-button>
+            <!-- /ko -->
+        </div>
+    </div>
+</oj-validation-group>

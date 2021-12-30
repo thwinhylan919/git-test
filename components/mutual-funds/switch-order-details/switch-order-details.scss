@@ -1,0 +1,52 @@
+.switch-order-details {
+    &__info-text-small {
+        font-size: var(--base-font-size-default);
+        color: var(--base-text-secondary);
+        padding-bottom: 0.55rem;
+    }
+    .padding-bar {
+        padding-bottom: 1.5rem;
+    }
+    .save-button {
+        padding: 1.5rem 0.7rem;
+    }
+    .add-another {
+        padding: 1.9rem 0;
+    }
+    .button-padding {
+        @include single-padding(left, 0.7rem);
+    }
+    .back-margin {
+        @include single-margin(left, 0);
+    }
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+    .font-weight {
+        font-weight: var(--base-font-weight-light);
+    }
+    .tnctext {
+        font-size: var(--base-font-size-small);
+    }
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+    .estimate {
+        @include padding(0, 0, 0, 0.5rem);
+    }
+    .viewTnC {
+        @include padding(0, 0, 0, 2.2rem);
+    }
+    .amount-padding {
+        position: relative;
+    }
+    .when-padding {
+        padding-top: 1rem;
+    }
+}
+
+.popup-width {
+    max-width: 15rem;
+    padding-bottom: 0.625rem;
+    line-height: 1.43rem;
+}

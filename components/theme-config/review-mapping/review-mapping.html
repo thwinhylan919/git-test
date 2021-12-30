@@ -1,0 +1,25 @@
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel,rootModel:$data, heading : ''">
+        <!-- ko if: $component.mode === "review" -->
+        <div class="oj-sm-12">
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+        </div>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.labels.mappingType , value :$component.locale.mappingType[$component.payload.mappedType]"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.labels.mappingValue , value :$component.payload.mappedValue"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.labels.brand , value: $component.payload.brandId"></row>
+    </page-section>
+    <!-- ko if: $component.mode === "review" -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button id="dialogtopupButton" class="action-button-primary" on-click="[[$component.type === 'delete' ? $component.deleteMapping :  $component.saveMapping]]">
+            <span data-bind="text: $component.type === 'delete' ? $component.locale.generic.common.delete : $component.locale.generic.common.save"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span data-bind="text:$component.locale.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.locale.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>

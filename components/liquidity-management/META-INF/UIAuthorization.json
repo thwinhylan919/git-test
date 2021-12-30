@@ -1,0 +1,47 @@
+{
+    "modules": [
+    {
+        "moduleName": "viewSweepLog^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "view-sweep-log",
+            "service": "read",
+            "perform": null,
+            "approve": null,
+            "view": null
+        }]
+    },
+    {
+        "moduleName": "viewUpcomingSweepLog^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "view-sweep-log",
+            "service": "read",
+            "perform": null,
+            "approve": null,
+            "view": null
+        }]
+    },
+    {
+        "moduleName": "structureMaintenanceList^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "list-structure",
+            "service": "read",
+            "perform": "action-card-list#list-structure-table#view-structure#view-instruction-details#tree-view#view-structure-tabular#view-structure-details#edit-structure",
+            "approve": null,
+            "view": null
+        }]
+    },
+    {
+        "moduleName": "createStructure^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "create-structure",
+            "service": "create",
+            "perform": "assemble-structure#edit-structure-instructions#notional-account-details#select-structure-account#set-instruction-details#set-pool-instructions#set-structure-details#structure-account-mapping#tree-view#view-instruction-details#view-structure#view-structure-details#view-structure-tabular#edit-structure",
+            "approve": "transaction-journey#notional-account-details#tree-view#view-instruction-details#view-structure#view-structure-details#view-structure-tabular",
+            "view": "transaction-journey#notional-account-details#tree-view#view-instruction-details#view-structure#view-structure-details#view-structure-tabular"
+        }]
+    }]
+}

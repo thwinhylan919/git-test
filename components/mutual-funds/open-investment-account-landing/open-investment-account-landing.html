@@ -1,0 +1,67 @@
+<div class="form-main-container oj-flex open-investment-account-landing">
+    <div class="oj-flex-item">
+        <!-- ko if : $component.showPage() -->
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.pageHeader">
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko if : $component.showOpenInvestmentAccountScreen() -->
+                <div class="oj-flex-item oj-lg-8 oj-md-12 oj-sm-12">
+                    <div class="oj-flex">
+                        <img class="content-padding image-size" alt="" data-bind="loadImage : 'wealth-management/account-opening.svg',attr:{alt:$component.resource.headerText,title:$component.resource.buttonText}">
+                    </div>
+                    <div class="oj-flex center">
+                        <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                            <span data-bind="text:$component.resource.descriptionLine1"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                            <span data-bind="text:$component.resource.descriptionLine2"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="button-container content-padding">
+                            <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.showForm]]">
+                                <span data-bind="text:$component.resource.buttonText"></span>
+                            </oj-button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot : $component.showOpenInvestmentAccountScreen() -->
+                <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+                    <div class="oj-flex">
+                        <img class="content-padding image-size" data-bind="loadImage : 'wealth-management/account-opening.svg',attr:{alt:$component.resource.headerText,title:$component.resource.buttonText}">
+                    </div>
+                    <div class="oj-flex center">
+                        <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                            <span data-bind="text: $baseModel.format($component.resource.altDesc1,{account : $component.noOfAllowedInvestmentAccounts()})"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                            <span data-bind="text:$component.resource.altDesc2"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex center">
+                        <div class="button-container content-padding">
+                            <oj-button class="action-button-primary" id="next-button"  on-click="[[$dashboard.switchModule.bind($data,'mutual-funds')]]">
+                                <span data-bind="text:$component.resource.goToWealthOverview"></span>
+                            </oj-button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if : $baseModel.large()-->
+                <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-12">
+                    <help params="baseModel : $baseModel, rootModel : $component, transaction: 'open-investment-account-landing'"></help>
+                </div>
+                <!-- /ko -->
+            </div>
+        </page-section>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- ko ifnot : $component.showOpenInvestmentAccountScreen() -->
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data,null)"></a>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if : $component.showOpenInvestmentAccountScreen() && !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.goToWealthOverview, click: $dashboard.switchModule.bind($data,'mutual-funds')"></a>
+<!-- /ko -->

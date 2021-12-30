@@ -1,0 +1,98 @@
+$header-bg:#e6e5e7;
+$section-header:#00838f;
+.theme-config{
+  .controlContainer{
+    background-color: var(--color-white);
+    margin-bottom: 0.6rem;
+    padding: 0;    
+    h4{
+      font-weight: 400;
+      padding: 5px;
+      margin: 5px 0px;
+      color: $section-header;
+    }
+    .controlHeader{
+      padding: 5px;
+      margin: 5px 0px;
+      background-color: $header-bg;
+      font-size: 14px;
+    }
+  }
+  .firstContainer{
+    padding: 0rem;
+    margin-bottom: 0.6rem;
+    .header{
+      background-color: $header-bg;
+      padding: 5px;
+      font-size: 14px;
+    }
+  }
+  &__radio{
+    line-height: 2.3rem;
+  }
+  &__colorBox{
+    width:2.8rem;
+  }
+  &__selectedColor{
+    width:2.2rem;
+    height:2.2rem;
+    border:0.05rem solid var(--base-border-default);
+    display:inline-block;
+  }
+  &__notSelected{
+    border-color: var(--base-color-danger);
+  }
+  &__modal__container{
+    padding-top: 0.8rem;
+  }
+  &__modalSelectedColor{
+    margin:auto;
+    width:2.1rem;
+    height:2.1rem;
+    border:0.05rem solid var(--base-border-default);
+  }
+  &__colorPalette{
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  &__searchBox{
+    margin-top: 0.6rem;
+  }
+  .modal-body-content{
+    max-height: 29.1rem;
+  }
+  &__help{
+    @include single-padding(left,0.4rem);
+  }
+  &__fileLabel{
+    @include float(left);
+    cursor: pointer;
+    margin-top: 0.6rem;
+  }
+  &__help-box{
+    &__container{
+      @include single-padding(left,0.6rem);
+      @include single-border(left,0.05rem solid black);
+
+      &--divider{
+        width:100%;border-top:0.05rem solid black;margin-top:0.7rem;display:block;
+      }
+    }
+  }
+  .scrollArea{
+    height: 500px;
+    overflow-y: auto;
+  }
+  @keyframes shadowAnimate {
+    0% { box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.05); }
+    25% { box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.25); }
+    50% { box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.6); }
+    75% { box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.25); }
+    100% { box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.0); }
+  }
+  .highlightElement{
+    -webkit-animation: shadowAnimate 2.0s linear infinite;
+    animation: shadowAnimate 2.0s linear infinite;
+  }
+}

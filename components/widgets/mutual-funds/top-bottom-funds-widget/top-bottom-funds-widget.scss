@@ -1,0 +1,48 @@
+.fundreports {
+    .message-banner {
+        background: var(--banner-background);
+    }
+    .message-margin {
+        margin: 0.6rem 0;
+    }
+    .corner-border {
+        @include single-border(right, 0.05rem solid var(--banner-background));
+    }
+    .top-border {
+        @include single-border(top, 0.05rem solid var(--banner-background));
+    }
+    .legend-height {
+        height: 1.4rem;
+        width: 5.8rem;
+    }
+    .margin-box {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .big-text {
+        font-size: var(--base-font-size-larger);
+    }
+    .padding-message {
+        padding: 0.5rem;
+    }
+    .padding-panel {
+        padding: 0;
+    }
+    .medium-text {
+        font-size: var(--base-font-size-default);
+    }
+    .small-text {
+        font-size: var(--base-font-size-small);
+    }
+    .reports-padding {
+        @include padding(0, 0, 0, 0.3rem);
+    }
+    .positive-value {
+        background-color: var(--base-color-success);
+        color: var(--base-background-primary);
+    }
+    .negative-value {
+        background-color: var(--base-color-danger);
+        color: var(--base-background-primary);
+    }
+}

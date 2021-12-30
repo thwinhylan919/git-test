@@ -1,0 +1,39 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : $component.params.iseditable ? $component.resource.reviewAdhocVpa.reviewHeaderMsg:$component.resource.reviewAdhocVpa.reviewHeaderMsg}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : ''">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <!-- ko if: $component.transferMode -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.transferTo, value : $component.params.payeeName"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.payeeVpa, value : $component.adhocTransferVpaModel.creditVPAId"></row>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.transferMode -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.payeeAccountNo, value : $component.adhocTransferVpaModel.accountTransferDetails.accountNumber"></row>
+            <!-- ko if: $component.adhocTransferVpaModel.accountTransferDetails.bankDetails.name -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.bankName, value : $component.adhocTransferVpaModel.accountTransferDetails.bankDetails.name "></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.ifscCode, value : $component.adhocTransferVpaModel.accountTransferDetails.bankDetails.code "></row>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+                <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text: $component.resource.reviewAdhocVpa.transferFrom"></span>
+                </oj-label>
+                <div class="oj-flex-item oj-flex">
+                    <span class="oj-sm-12" data-bind="text: $component.adhocTransferVpaModel.debitVPAId"></span>
+                    <span class="oj-sm-12" data-bind="text: $component.adhocTransferVpaModel.sourceAccount.displayValue"></span>
+                </div>
+            </div>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.amount, value : $formatter.formatCurrency($component.adhocTransferVpaModel.amount.amount, $component.adhocTransferVpaModel.amount.currency)"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewAdhocVpa.note, value : $component.adhocTransferVpaModel.remarks"></row>
+        </div>
+    </page-section>
+    <div id="button-container" class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="confirmButton" on-click="[[confirmTransfer]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text: $component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text: $component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

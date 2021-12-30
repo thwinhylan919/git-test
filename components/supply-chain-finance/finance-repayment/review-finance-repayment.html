@@ -1,0 +1,109 @@
+<div class="form-main-container">
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewHeader,reviewHeader:$component.resource.reviewNote}}">
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.selectedFinanceList, headerTemplate : ''">
+                <oj-table :id="[['finance-table']]" data="[[dataSource]]"
+                    row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('financeRenderer')]]"
+                    columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns="[[[{'headerText':$component.resource.counterpartyName, sortable: false},
+                  {'headerText':$component.resource.programName, sortable: false},
+                  {'headerText':$component.resource.referenceNo, sortable: false},
+                  {'headerText':$component.resource.financedAmount, headerClassName:'right', sortable: false},
+                  {'headerText':$component.resource.dueDate, headerClassName:'right', sortable: false},
+                  {'headerText':$component.resource.outstandingAmount, headerClassName:'right', sortable: false},
+                  {'headerText':$component.resource.repaymentAmount, sortable: false},
+                  {'headerText':$component.resource.status, sortable: false}]]]">
+                </oj-table>
+                <oj-paging-control :id="[['FinancesListId43']]" data="[[dataSource]]" page-size="10">
+                </oj-paging-control>
+                <div id="scriptContainer">
+                    <script type="text/html" id="financeRenderer">
+                  <td>
+                      <span data-bind="text:$context.row.counterpartyName"></span>
+                  </td>
+                  <td>
+                      <span data-bind="text:$context.row.programName"></span>
+                  </td>
+                  <td>
+                        <span data-bind="text:$context.row.id"></span>
+                      
+                  </td>
+                 
+                  <td class="right">
+                      <span
+                          data-bind="text:$formatter.formatCurrency($context.row.totalAmount.amount,$context.row.totalAmount.currency)"></span>
+                  </td>
+                <td>
+                        <div class="due-date-style">
+                                <span data-bind="text: $formatter.formatDate($context.row.dueDate,'dateFormat')"></span>
+                                                      </div>
+                    </td>
+                      <td>
+                      <!-- ko if: $context.row.outstandingAmount !== "-" -->
+                      <div class="right">
+                          <span
+                              data-bind="text:$formatter.formatCurrency($context.row.totalAmount.amount,$context.row.totalAmount.currency)"></span>
+                      </div>
+                      <!-- /ko -->
+                      <!-- ko if: $context.row.outstandingAmount === "-" -->
+                      <div class="center-align">
+                          <span data-bind="text:$context.row.totalAmount.amount"></span>
+                      </div>
+                      <!-- /ko -->
+                  </td>
+                  <td>
+                    
+                      <div class="center-align">
+                          <span data-bind="text:$context.row.totalAmount.amount"></span>
+                      </div>
+                 
+                  </td>
+                  <td>
+                      <div class="center-align">
+                          <!-- ko if: $context.row.status === "DISBURSED" -->
+                          <span class="tags disbursed-Color"
+                              data-bind="text:$context.row.statusDescription"></span>
+                          <!-- /ko -->
+                          <!-- ko if: $context.row.status === "SETTLED" -->
+                          <span class="tags settled-Color" data-bind="text:$context.row.statusDescription"></span>
+                          <!-- /ko -->
+                          <!-- ko if: $context.row.status === "PARTIAL_SETTLED" -->
+                          <span class="tags partially-settled-Color"
+                              data-bind="text:$context.row.statusDescription"></span>
+                          <!-- /ko -->
+                          <!-- ko if: $context.row.status === "OTHERS" -->
+                          <span class="tags other-Color" data-bind="text:$context.row.statusDescription"></span>
+                          <!-- /ko -->
+                          <!-- ko ifnot: $context.row.status -->
+                          <span data-bind="text:$component.resource.noData"></span>
+                          <!-- /ko -->
+                      </div>
+                  </td>
+               
+              </script>
+                </div>
+            </page-section>
+        </div>
+
+    </div>
+
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item  button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resource.confirm"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span></oj-button>
+        </div>
+    </div>
+
+</div>

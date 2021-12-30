@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#171C28;}
+	.st3{fill:none;stroke:#4C5C68;stroke-width:0.9106;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#4C5C68;stroke-width:1.0828;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#4C5C68;stroke-width:1.1103;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st7{fill:#BC0110;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st8{fill:#BC0110;}
+	.st9{fill:#FFFFFF;stroke:#171C28;stroke-width:0.9273;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st10{fill:#4C5C68;}
+	.st11{fill:#FFFFFF;stroke:#171C28;stroke-width:0.9403;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st12{fill:#FFFFFF;stroke:#171C28;stroke-miterlimit:10;}
+	.st13{fill:#FFFFFF;stroke:#171C28;stroke-width:1.0268;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st14{fill:none;stroke:#171C28;stroke-width:1.0268;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st15{fill:#6B6B6B;}
+	.st16{fill:#FFFFFF;stroke:#4C5C68;stroke-width:1.2173;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st17{fill:#FFFFFF;stroke:#4C5C68;stroke-width:0.8881;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st18{fill:none;stroke:#FFFFFF;stroke-width:1.0985;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st19{fill:none;stroke:#4C5C68;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st20{fill:#FFFFFF;stroke:#171C28;stroke-width:1.0688;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st21{fill:none;stroke:#4C5C68;stroke-width:1.1073;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st22{fill:none;stroke:#4C5C68;stroke-width:1.0096;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st23{fill:#FFFFFF;stroke:#171C28;stroke-width:1.1331;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st24{fill:none;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:0,2;}
+	.st25{fill:none;stroke:#BC0110;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st26{fill:none;stroke:#333333;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st27{fill:#FFFFFF;stroke:#4C5C68;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st28{fill:#FFFFFF;stroke:#171C28;stroke-width:1.211;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st29{fill:#171C28;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st30{fill:#286090;}
+	.st31{fill:#FFFFFF;stroke:#4C5C68;stroke-width:0.9531;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st32{fill:#5FB0E5;}
+	.st33{fill:#D2E9F7;}
+	.st34{fill:#0686D8;}
+	.st35{fill:#9ECFEF;}
+	.st36{fill:#CEE8FA;}
+	.st37{fill:none;stroke:#4C5C68;stroke-miterlimit:10;}
+	.st38{fill:#4C5C68;stroke:#4C5C68;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st39{fill:#FED65C;}
+	.st40{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st41{fill:none;stroke:#4C5C68;stroke-width:1.3058;stroke-miterlimit:10;}
+	.st42{fill:#FFFFFF;stroke:#4C5C68;stroke-width:1.1677;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st43{fill:#FFFFFF;stroke:#4C5C68;stroke-width:1.1657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st44{fill:#FFFFFF;stroke:#171C28;stroke-width:0.9983;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st45{fill:#FFFFFF;stroke:#171C28;stroke-width:1.0727;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st46{fill:#BC0110;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st47{fill:#CEE8FA;stroke:#4C5C68;stroke-width:0.965;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st48{fill:#41464B;}
+	.st49{fill:#FFFFFF;stroke:#171C28;stroke-width:1.1013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st50{fill:none;stroke:#171C28;stroke-width:1.1013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st51{fill:#BC0110;stroke:#171C28;stroke-width:1.1013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st52{stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st53{fill:#FFFFFF;stroke:#171C28;stroke-width:0.9891;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st54{fill:none;stroke:#171C28;stroke-width:0.5274;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st55{fill:none;stroke:#4C5C68;stroke-width:1.0796;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st56{fill:none;stroke:#4C5C68;stroke-width:1.136;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st57{fill:#FFFFFF;stroke:#4C5C68;stroke-width:1.0796;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st58{fill:#FFFFFF;stroke:#171C28;stroke-width:0.8477;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st59{fill:#FFFFFF;stroke:#171C28;stroke-width:1.0138;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st60{fill:#FFFFFF;stroke:#171C28;stroke-width:0.9779;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st61{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st62{filter:url(#Adobe_OpacityMaskFilter);}
+	.st63{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st64{mask:url(#mask-2_4_);fill:none;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st65{filter:url(#Adobe_OpacityMaskFilter_1_);}
+	.st66{mask:url(#mask-2_3_);fill:none;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st67{filter:url(#Adobe_OpacityMaskFilter_2_);}
+	.st68{mask:url(#mask-2_2_);fill:none;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st69{filter:url(#Adobe_OpacityMaskFilter_3_);}
+	
+		.st70{mask:url(#mask-2_1_);fill-rule:evenodd;clip-rule:evenodd;fill:#BC0110;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st71{fill-rule:evenodd;clip-rule:evenodd;fill:#BC0110;stroke:#171C28;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g id="Page-1">
+	<g id="final" transform="translate(-94.000000, -1048.000000)">
+		<g id="Group-22" transform="translate(62.000000, 946.000000)">
+			<g id="Group-20" transform="translate(0.000000, 67.000000)">
+				<g id="Group-3">
+					<g id="savings" transform="translate(32.000000, 35.000000)">
+						<path id="Stroke-1" class="st61" d="M56.4,52.8H8c-1.3,0-2.3-1-2.3-2.3V11.3C5.7,10,6.7,9,8,9h48.4c1.3,0,2.3,1,2.3,2.3v39.2
+							C58.7,51.7,57.7,52.8,56.4,52.8z"/>
+						<defs>
+							<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="16.7" y="52.3" width="1" height="5.6">
+								<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+							</filter>
+						</defs>
+						<mask maskUnits="userSpaceOnUse" x="16.7" y="52.3" width="1" height="5.6" id="mask-2_4_">
+							<g class="st62">
+								<polygon id="path-1_4_" class="st63" points="4.6,58.5 59.9,58.5 59.9,7.8 4.6,7.8 								"/>
+							</g>
+						</mask>
+						<polygon id="Stroke-3" class="st64" points="17.2,57.4 17.2,57.4 17.2,52.8 17.2,52.8 						"/>
+						<defs>
+							<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="49" y="52.3" width="1" height="5.6">
+								<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+							</filter>
+						</defs>
+						<mask maskUnits="userSpaceOnUse" x="49" y="52.3" width="1" height="5.6" id="mask-2_3_">
+							<g class="st65">
+								<polygon id="path-1_3_" class="st63" points="4.6,58.5 59.9,58.5 59.9,7.8 4.6,7.8 								"/>
+							</g>
+						</mask>
+						<polygon id="Stroke-5" class="st66" points="49.5,57.4 49.5,57.4 49.5,52.8 49.5,52.8 						"/>
+						<defs>
+							<filter id="Adobe_OpacityMaskFilter_2_" filterUnits="userSpaceOnUse" x="14.4" y="20" width="1" height="24">
+								<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+							</filter>
+						</defs>
+						<mask maskUnits="userSpaceOnUse" x="14.4" y="20" width="1" height="24" id="mask-2_2_">
+							<g class="st67">
+								<polygon id="path-1_2_" class="st63" points="4.6,58.5 59.9,58.5 59.9,7.8 4.6,7.8 								"/>
+							</g>
+						</mask>
+						<path id="Stroke-6" class="st68" d="M14.9,20.5v23"/>
+						<defs>
+							<filter id="Adobe_OpacityMaskFilter_3_" filterUnits="userSpaceOnUse" x="28.4" y="20.6" width="22" height="22">
+								<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+							</filter>
+						</defs>
+						<mask maskUnits="userSpaceOnUse" x="28.4" y="20.6" width="22" height="22" id="mask-2_1_">
+							<g class="st69">
+								<polygon id="path-1_1_" class="st63" points="4.6,58.5 59.9,58.5 59.9,7.8 4.6,7.8 								"/>
+							</g>
+						</mask>
+						<path id="Stroke-7" class="st70" d="M49.9,31.6c0,5.8-4.7,10.5-10.5,10.5s-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5
+							S49.9,25.8,49.9,31.6z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,67 @@
+$disbursed-color:#FF9538;
+$partially-settled-color: #b71c1c;
+$settled-color:#2E7D32;
+$other-color:#FFE45C;
+$bgcolor:#FFFFFF;
+$in-process-color: #0a6c99;
+$bgcolor2:#2c3251;
+
+.other-Color {
+    background-color: $other-color;
+    color: $bgcolor2;
+}
+
+.in-process-Color {
+    background-color: $in-process-color;
+    color: $bgcolor;
+}
+
+.disbursed-Color {
+    background-color: $disbursed-color;
+    color: $bgcolor2;
+}
+
+.settled-Color {
+    background-color: $settled-color;
+    color: $bgcolor;
+}
+
+.partially-settled-Color {
+    background-color: $partially-settled-color;
+    color: $bgcolor;
+}
+
+.center-align {
+    text-align: center;
+}
+
+.due-date-style {
+    font-size: var(--base-font-size-small);
+}
+
+.amount-split-padding {
+    @include single-padding(left, 0.5rem);
+}
+
+.banner-design {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    color: var(--banner-foreground-color);
+    font-size: var(--banner-font-size);
+    font-weight: var(--banner-font-weight);
+    padding: var(--banner-padding);
+    align-items: center;
+}
+
+.more-search-options {
+    @include padding(2.5rem, 0, 0, 0);
+}
+
+.less-search-options {
+    @include padding(3.5rem, 0, 0, 0);
+}
+
+.table-header-style {
+    line-height: normal;
+    word-wrap: break-word;
+    white-space: normal;
+}

@@ -1,0 +1,115 @@
+<div class="oj-flex-item oj-sm-12">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.Nls.details">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                    <oj-label for="resourceServerName">
+                        <span data-bind="text:$component.Nls.name"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                    <oj-input-text autofocus required id="resourceServerName" validators="[[$baseModel.getValidator('APPLICATION_NAME')]]" value="{{resourceServerPayload.name}}" aria-labelledby="resourceServerName">
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                    <oj-label for="resourceServerDesc">
+                        <span data-bind="text:$component.Nls.description"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                    <oj-input-text required id="resourceServerDesc" validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION')]]" translations="[[{'required':{messageDetail:$component.Nls.provideValue}}]]" value="{{resourceServerPayload.description}}" aria-labelledby="resourceServerDesc">
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <oj-label :for="[['identityDomain'+$baseModel.currentIdCount()]]">
+                        <span data-bind="text:$component.Nls.domainName"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-9 label">
+                    <!-- ko if:$component.isIdentityDomainListLoaded() -->
+                    <oj-select-one :id="[['identityDomain'+$baseModel.currentIdCount()]]" value="{{resourceServerPayload.idDomain}}" :placeholder="[[$component.Nls.select]]" translations="[[{'required':{messageDetail:$component.Nls.selectIdentityDomain}}]]" required="[[true]]">
+                        <!-- ko foreach:$component.identityDomainList -->
+                        <oj-option value="{{name}}"><span data-bind="text:name"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </page-section>
+        <page-section id="scopesToAdd" params="baseModel : $baseModel, rootModel : $component, heading : $component.Nls.scopes">
+            <script type="text/html" id="scopes_template">
+                <div data-bind="attr:{'id': 'repeat'+ $index()}">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                            <oj-label data-bind="attr:{'for': 'scoName'+$index()}">
+                                <span data-bind="text:$component.Nls.scopeName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                            <oj-input-text required data-bind="attr:{'id': 'scoName'+$index()}" validators="[[$baseModel.getValidator('APPLICATION_NAME')]]" value="{{scopeName}}" aria-labelledby="scoName">
+                            </oj-input-text>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                            <a href="#" class="icon icon-delete pull-right" data-bind="click: $component.delete.bind($index())">
+                            <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label" data-bind="text:$component.Nls.deleteScope"></span>
+                    </a>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                            <oj-label data-bind="attr:{'for': 'scoDesc'+$index()}">
+                                <span data-bind="text:$component.Nls.scopeDesc"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                            <oj-input-text required data-bind="attr:{'id': 'scoDesc'+$index()}" validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION',$component.Nls.invalidScopeDesc)]]" translations="[[{'required':{messageDetail:$component.Nls.provideValue}}]]" value="{{description}}" aria-labelledby="scoDesc">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ' '">
+                    </page-section>
+                </div>
+            </script>
+            <div data-bind="template: { name: 'scopes_template', foreach: $component.scopesArray() }"></div>
+        </page-section>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2 ">
+                <oj-button class="help-button" on-click="[[duplicate]]">
+                    <span data-bind="text:$component.Nls.addScope"></span>
+                </oj-button>
+            </div>
+        </div>
+        <div class="oj-flex-item button-container">
+            <oj-button id="save" class="action-button-primary" on-click="[[save]]">
+                <span data-bind="text:$component.Nls.save"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.cancel]]">
+                <span data-bind="text:$component.Nls.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[back]]">
+                <span data-bind="text:$component.Nls.back"></span>
+            </oj-button>
+        </div>
+    </div>
+    <modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'reviewCancel',header:$component.Nls.reviewwarning">
+        <div class="message-box">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <div class="dialog-text"><span data-bind="text:$component.Nls.cancelMessage"></span></div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="yesBtn" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                    <span data-bind="text:$component.Nls.yes"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="noBtn" on-click="[[no]]">
+                    <span data-bind="text:$component.Nls.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+</div>

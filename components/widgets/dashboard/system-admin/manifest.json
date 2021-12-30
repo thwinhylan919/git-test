@@ -1,0 +1,14 @@
+{
+    "componentName": "system-admin",
+    "module": "dashboard",
+    "segment": ["administrator"],
+    "width": {
+      "large":"4",
+      "medium":"6"
+    },
+    "height": "118",
+    "icon": "",    
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+  }

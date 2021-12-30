@@ -1,0 +1,11 @@
+.bill-payments {
+    .download-label {
+        @include mq(small) {
+            @include padding(0, 0.7rem, 0, 0.7rem);
+        }
+    }
+    .date-label {
+        margin-top: 8px;
+    }
+    background: var(--base-background-primary);
+}

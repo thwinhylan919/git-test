@@ -1,0 +1,122 @@
+<!-- ko ifnot:$component.facilityPopup -->
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $data,headerTemplate : ''">
+
+        <div class="oj-flex oj-flex-items-pad cust-details">
+
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+                <div class="label" data-bind="text:$component.locale.facilityName">
+                </div>
+                <!-- ko if:$component.showFacilityModal -->
+                <oj-select-one id="select" value="{{$component.facilityValue}}" on-value-changed="[[facilityValueOnChange]]">
+                    <!-- ko foreach: $component.facilityIdOptions -->
+
+                    <oj-option value="{{id}}"><span data-bind="text: label"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+                <!-- /ko -->
+
+            </div>
+            <!-- ko if:$component.facilityDataLoaded -->
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+                <div class="label right" data-bind="text:$component.locale.sanctionedAmount">
+                </div>
+                <div class="cust-account right" data-bind="text: $formatter.formatCurrency($component.facilityData().facilityDTO.effectiveAmount.amount,$component.facilityData().facilityDTO.effectiveAmount.currency) ">
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+                <div class="label right" data-bind="text:$component.locale.utilizedAmount">
+                </div>
+                <div class="cust-account right" data-bind="text: $formatter.formatCurrency($component.facilityData().facilityDTO.utilizedAmount.amount,$component.facilityData().facilityDTO.utilizedAmount.currency)">
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+                <div class="label right" data-bind="text:$component.locale.availableAmount">
+                </div>
+                <div class="cust-account right" data-bind="text: $formatter.formatCurrency($component.facilityData().facilityDTO.availableAmount.amount,$component.facilityData().facilityDTO.availableAmount.currency) ">
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+                <div class="label right" data-bind="text:$component.locale.collateralAmount">
+                </div>
+                <div class="cust-account right" data-bind="text:$formatter.formatCurrency($component.facilityData().facilityDTO.collateralAmount.amount,$component.facilityData().facilityDTO.availableAmount.currency) ">
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+                <div class="label right" data-bind="text:$component.locale.reDate">
+                </div>
+                <!-- ko if: $component.facilityData().facilityDTO.renewalDate -->
+
+                <div class="cust-account right" data-bind="text:$formatter.formatDate($component.facilityData().facilityDTO.renewalDate)">
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.facilityData().facilityDTO.renewalDate -->
+
+                <div class="cust-account right" data-bind="text:$component.blank()">
+                </div>
+                <!-- /ko -->
+
+            </div>
+            <!-- /ko -->
+
+        </div>
+
+
+    </page-section>
+
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-12" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.locale.header}}'>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ko if:$component.facilityDataLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12">
+            <div data-bind="component:{name : compName, params:{rootModel:$component}}">
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+</div>
+<!-- /ko -->
+
+<!-- ko if :$component.facilityPopup -->
+    <div data-bind="descendantsComplete : $component.showModal">
+<modal-window params="baseModel : $baseModel, rootModel : $data,id:'choicePopup',closeHandler:closeHandler, header : $component.locale.chooseFacility">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12" data-bind="text: $component.locale.facilityName">
+            </div>
+            <!-- ko if:$component.showFacilityModal -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <oj-select-one id="select" value="{{$component.facilityValuepopup}}" on-value-changed="[[facilityValueOnChange]]">
+                    <!-- ko foreach: $component.facilityIdOptions -->
+                    <oj-option value="{{id}}"><span data-bind="text: label"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.proceed]]">
+                    <span slot="startIcon" class="icons icon-forward-arrow oj-button-icon oj-start"></span>
+                    <span data-bind="text:$component.locale.generic.common.proceed"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.closeHandler]]"><span slot="startIcon" class="icon-cancel"></span>
+                    <span data-bind="text:$component.locale.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+
+
+</modal-window>
+    </div>
+<!-- /ko -->

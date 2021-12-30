@@ -1,0 +1,106 @@
+$submitted-background-color: #0A8BE6;
+$draft-background-color: #ffd70b;
+$inProgress-background-color: var(--base-color-warning);
+$img-border-color: #0A8BE6;
+$box-background-color: #D3D3D3;
+.img-customization {
+    display: block;
+    height: 3rem;
+}
+
+.draft-Name-customizations {
+    font-size: 0.7rem;
+    @include margin(0.4rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.party-custimizations {
+    @include margin(0.4rem, 0.5rem, 0.5rem, 0.5rem);
+    @include mq(small) {
+        @include margin(0.4rem, 0.5rem, 0.5rem, 1rem);
+    }
+}
+
+.img-style {
+    height: 2rem;
+    @include margin(0.0rem, 0.0rem, 0.5rem, 0.8rem);
+    zoom: 200%;
+}
+
+.customer-details {
+    background-color: var(--banner-background);
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.status_bar {
+    @include single-padding(right, 0.5rem);
+    @include single-border(right, 0.05rem solid var(--base-text-secondary));
+}
+
+.panel-child-customizations {
+    color: rgba(44, 50, 81, 0.8);
+    font-size: 0.7rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.customer-header {
+    font-size: 1rem;
+    margin-top: 0.4rem;
+}
+
+.inProgress {
+    background-color: $inProgress-background-color;
+}
+
+.submit {
+    background-color: $submitted-background-color;
+}
+
+.draft {
+    background-color: $draft-background-color;
+}
+
+.completed {
+    background-color: var(--base-color-success);
+}
+
+.status_tag {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    @include margin(0.0rem, 0.0rem, 0.0rem, 0.5rem);
+}
+
+.panel-customizations {
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    border-radius: .3rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+    background-color: var(--base-background-primary);
+    border-radius: var(--widget-border-radius);
+    border-width: var(--widget-border-width);
+    border-style: solid;
+    border-color: var(--base-border-default);
+}
+
+.box-customizations {
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: 0.3rem;
+    height: 4rem;
+    width: 15rem;
+    @include margin(1rem, 1rem, 1rem, 0.0rem);
+}
+
+.Document-header {
+    @include mq(large) {
+        margin-top: 1%;
+    }
+    @include mq(medium) {
+        margin-top: 1%;
+    }
+    @include mq(small) {
+        margin-top: 3%;
+    }
+}

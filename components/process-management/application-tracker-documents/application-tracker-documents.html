@@ -1,0 +1,102 @@
+<oj-validation-group :id="[[appTrackerDocuments]]">
+    <div class="form-main-container">
+        <!-- ko if : $component.dataLoaded -->
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item  oj-lg-12 oj-md-12 oj-sm-12">
+                    <div data-bind="attr:{'class':'customer-details'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item ">
+                                <!--  ko if : previousData().applicationDetails.processManagementApplicationType === 'LETTER_OF_CREDIT'  -->
+                                <span slot="startIcon" class="img-customizations icons icon-account-summary"></span>
+                                <!--  /ko  -->
+                                <!--  ko if : previousData().applicationDetails.processManagementApplicationType === 'BANK_GUARANTEE'  -->
+                                <span slot="startIcon" class="img-customizations icons icon-interest-certificate"></span>
+                                <!--  /ko  -->
+
+                                <span data-bind="attr:{'class':'customer-header'},text:$component.nls.TradeFinance.TypeOfApplication[previousData().applicationDetails.processManagementApplicationType]"></span>
+                            </div>
+                            <div class="oj-flex-item right">
+                                <div data-bind="text:previousData().selectedCustomerName"></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+
+                            <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12">
+                                <!--  ko if : previousData().applicationDetails.beneficiaryName  -->
+                                <div data-bind="text:previousData().applicationDetails.beneficiaryName"></div>
+                                <!--  /ko  -->
+                                <div class="panel-child-customizations">
+                                    <span class="status_bar" data-bind="text:previousData().applicationDetails.applicationNumber"></span>
+                                    <span class="status_tag" data-bind="css:previousData().selectedItem==='IN_PROGRESS' ? 'inProgress':(previousData().selectedItem==='DRAFT'?'draft':(previousData().selectedItem==='SUBMITTED'?'submit':(previousData().selectedItem==='APPROVED'?'approved':'rejected')))"></span>
+                                    <span data-bind="text:$component.nls.TradeFinance.Status[previousData().selectedItem]"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4">
+                                <!--  ko if : previousData().applicationDetails.amount  -->
+                                <span data-bind="text:$formatter.formatCurrency(previousData().applicationDetails.amount.amount,$component.previousData().applicationDetails.amount.currency)"></span>
+                                <!--  /ko  -->
+                                <!--  ko if : previousData().applicationDetails.applicationDate  -->
+                                <div class="panel-child-customizations" data-bind="text:$baseModel.format($component.nls.TradeFinance.On,{date:$formatter.formatDate(previousData().applicationDetails.applicationDate,'dateTimeFormat')})"></div>
+                                <!--  /ko  -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad documents-header">
+                <div class="">
+                    <img class="img-customization" alt="$component.nls.TradeFinance.Documents" data-bind="loadImage:'process-management/documents.svg'" />
+                </div>
+                <div class="header-customizations">
+                    <span class="" data-bind="text:$component.nls.TradeFinance.Documents"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+
+                <div class="oj-flex-item oj-lg-12">
+                    <div>
+                        <!-- ko foreach : $component.documents().tradeApplicationDocuments -->
+                        <div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <!--  ko if : $data.documentType -->
+                                <div class="oj-flex-item oj-lg-12">
+                                    <span data-bind="text:documentType"></span>
+                                </div>
+                                <!-- /ko -->
+                                <!--  ko if : $data.documentDescription -->
+                                <div class="oj-flex-item oj-lg-12 ">
+                                    <a href="#" class="form-button-link document-link-text" id="DocumentName38" data-bind="attr:{'alt':$component.nls.TradeFinance.DocumentName,'title':$component.nls.TradeFinance.DocumentNameTitle},click:$component.onClickDocumentName66"><span data-bind="text:documentDescription"></span
+                      ></a>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- ko ifnot : $component.documents().tradeApplicationDocuments -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12">
+                    <span data-bind="text:$component.nls.TradeFinance.NoDocuments"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+
+        </page-section>
+        <!-- /ko -->
+        <div class="oj-flex-item button-container">
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.nls.TradeFinance.Cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.nls.TradeFinance.Back"></span>
+            </oj-button>
+        </div>
+    </div>
+</oj-validation-group>

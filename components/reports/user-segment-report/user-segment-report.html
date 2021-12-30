@@ -1,0 +1,33 @@
+<form>
+    <div class="oj-flex oj-flex-items-pad ">
+        <!-- ko if:isEnterpriseRolesLoaded() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2 label ">
+            <oj-label for="userType"> <span data-bind="text:$component.Nls.userType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4 ">
+            <oj-select-one id="userTypes" name="userType" :placeholder="[[$component.Nls.select]]" on-value-changed="[[userTypeSelected]]">
+                <!-- ko foreach:$component.enterpriseRoles -->
+                <oj-option value="{{enterpriseRoleId}}"><span data-bind="text:enterpriseRoleName"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <!-- ko if:isUserSegmentsLoaded() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2 label ">
+            <oj-label for="userType"> <span data-bind="text:$component.Nls.userSegments"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4 ">
+            <oj-select-many id="userSegmentsSelect" name="userSegments" :placeholder="[[$component.Nls.select]]" on-value-changed="[[userSegmentsSelected]]">
+                <!-- ko foreach:$component.segments -->
+                <oj-option value="{{code}}"><span data-bind="text:name"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-many>
+        </div>
+        <!-- /ko -->
+    </div>
+    <input type="hidden" id="userSegments" name="userSegments">
+    <input type="hidden" id="userType" name="userType">
+    <input type="hidden" id="reportType" name="reportType">
+</form>

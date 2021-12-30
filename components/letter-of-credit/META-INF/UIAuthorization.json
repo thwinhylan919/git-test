@@ -1,0 +1,35 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.tradefinance.service.letterofcredit.LetterOfCredit",
+			"components": [{
+					"componentName": "view-letter-of-credit",
+					"service": "read",
+					"perform": "lc-nav-bar#lc-details#draft-list#document-details#export-lc#import-lc#instructions-details#shipment-details#template-list#search-credit-line#view-line-limit#lc-lookup#trade-finance-tracker-details#trade-finance-application-tracker"
+				},
+				{
+					"componentName": "initiate-lc",
+					"service": "create",
+					"perform": "lc-details#document-details#draft-list#document-details#export-lc#import-lc#instructions-details#shipment-details#template-list#view-letter-of-credit#attach-documents#review-attach-documents",
+					"approve": "review-lc"
+				},
+				{
+					"componentName": "lc-nav-bar",
+					"service": "update",
+					"perform": "review-lc#lc-details#document-details",
+					"approve": "review-lc"
+				}
+			]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.tradefinance.service.letterofcredit.amendment.LetterOfCreditAmendment",
+			"components": [
+				{
+					"componentName": "amend-letter-of-credit",
+					"service": "create",
+					"perform": "lc-nav-bar#lc-details#document-details#draft-list#export-lc#import-lc#instructions-details#shipment-details#template-list#view-letter-of-credit",
+					"approve": "review-amend-lc"
+				}
+			]
+		}
+	]
+}

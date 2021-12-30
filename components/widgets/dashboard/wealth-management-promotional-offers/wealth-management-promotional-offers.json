@@ -1,0 +1,21 @@
+{
+  "image" : [{
+    "img": "advertisment1.jpg",
+    "title": "Promotion1",
+    "url":"",
+    "alt":"offerDeals"
+  },
+  {
+    "img": "advertisment2.jpg",
+    "title": "Promotion2",
+    "url":"",
+    "alt":"offerDeals"
+  },
+  {
+    "img": "advertisment3.jpg",
+    "title": "Promotion3",
+    "url":"",
+    "alt":"offerDeals"
+  }
+]
+}

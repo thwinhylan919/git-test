@@ -1,0 +1,897 @@
+<div class="fund-information form-main-container">
+    <!-- ko ifnot: $baseModel.small() -->
+    <div class="oj-flex-item oj-lg-12">
+  
+      <div data-bind="component:{name: $component.schemeBar(), params:{rootModel: $component}}" class="pad-bar"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $baseModel.small() -->
+    <div data-bind="component:{name: $component.schemeBar(), params:{rootModel: $component}}" class="pad-bar"></div>
+    <!-- /ko -->
+  
+    <div class="oj-flex oj-sm-12 nav-padding">
+      <div class="oj-flex-item oj-sm-12" id="nav-section-fundPopup">
+        <div class="oj-sm-12" data-bind='component:{name: "nav-bar",
+           params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.resource.navBarDescription}}'>
+        </div>
+      </div>
+    </div>
+    <!-- ko ifnot: $baseModel.small() -->
+  
+    <!-- ko if: $component.showSnapshotResults -->
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+      <div class="oj-flex-item oj-lg-4 oj-md-5">
+        <div class="oj-panel">
+          <div class="oj-flex oj-flex-items-pad pad-bar pad-bar-mobile">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-label for="fundCategory">
+                <span data-bind="text:$component.resource.fundCategoryName"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+  
+              <span data-bind="text:$component.fundCategory()"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad pad-bar">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-label for="weekHigh">
+                <span data-bind="text:$component.resource.weekHigh"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+  
+              <span data-bind="text:$formatter.formatCurrency($component.weekHigh().amount,$component.weekHigh().currency)"></span>
+            </div>
+          </div>
+  
+          <div class="oj-flex oj-flex-items-pad pad-bar">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-label for="weekHigh">
+                <span data-bind="text:$component.resource.weekLow"></span>
+              </oj-label>
+              <span data-bind="text:$formatter.formatCurrency($component.weekLow().amount,$component.weekLow().currency)"></span>
+            </div>
+          </div>
+  
+          <div class="oj-flex oj-flex-items-pad pad-bar">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-label for="weekHigh">
+                <span data-bind="text:$component.resource.returnSinceLaunch"></span>
+              </oj-label>
+              <span data-bind="text:$baseModel.format($component.resource.returnSinceLaunchValue,{returnSinceLaunch:$component.returnSinceLaunch()})"></span>
+  
+            </div>
+          </div>
+  
+          <div class="oj-flex oj-flex-items-pad pad-bar">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-label for="latestDividendandDate">
+                <span data-bind="text:$component.resource.latestDividendandDate"></span>
+              </oj-label>
+              <span data-bind="text:$baseModel.format($component.resource.latestDividendandDateValue,{date:$formatter.formatDate($component.date()),latestDividend:$component.latestDividend()})"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- ko if: $component.showchartdetails -->
+      <div class="oj-flex-item oj-lg-8 oj-md-7">
+        <div class="oj-panel">
+          <div id="sampleDemo" class="demo-padding demo-container pad-bar-mobile">
+            <div id="componentDemoContent">
+  
+              <div id='chart-container'>
+                <oj-chart id="lineChart" type="line" series="[[lineSeriesValue]]" groups="[[lineGroupsValue]]"
+                  x-axis.title="{{$baseModel.format($component.resource.fromToDate,{fromDate:$formatter.formatDate($component.fromDate()),toDate:$formatter.formatDate($component.toDate())})}}"
+                  y2-axis.tick-label.converter="[[yAxisConverter]]"
+                  animation-on-display="auto" animation-on-data-change="auto" orientation="[[orientationValue]]"
+                  hover-behavior="dim" legend.position="bottom">
+                </oj-chart>
+                <!-- vertical/horizontal toggle button -->
+                <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}"
+                  aria-controls="lineChart">
+                </demo-chart-orientation-control>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: $baseModel.small() -->
+    <!-- ko if: $component.showSnapshotResults -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fundCategoryName , value : $component.fundCategory()"></row>
+      </div>
+      <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.weekHigh , value : $formatter.formatCurrency($component.weekHigh().amount,$component.weekHigh().currency)"></row>
+      </div>
+      <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.weekLow , value : $formatter.formatCurrency($component.weekLow().amount,$component.weekLow().currency)"></row>
+      </div>
+      <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.returnSinceLaunch , value : $baseModel.format($component.resource.returnSinceLaunchValue,{returnSinceLaunch:$component.returnSinceLaunch()})"></row>
+      </div>
+      <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.latestDividendandDate , value : $baseModel.format($component.resource.latestDividendandDateValue,{date:$formatter.formatDate($component.date()),latestDividend:$component.latestDividend()})"></row>
+      </div>
+    </div>
+    <!-- ko if: $component.showchartdetails -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-items oj-sm-12">
+        <div id="sampleDemo">
+          <div id="componentDemoContent">
+            <div id='chart-container'>
+              <oj-chart id="lineChart" type="line" series="[[lineSeriesValue]]" groups="[[lineGroupsValue]]" x-axis.title="{{$baseModel.format($component.resource.fromToDate,{fromDate:$formatter.formatDate($component.fromDate()),toDate:$formatter.formatDate($component.toDate())})}}"
+               y2-axis.tick-label.converter="[[yAxisConverter]]"
+                animation-on-display="auto" animation-on-data-change="auto" orientation="[[orientationValue]]"
+                hover-behavior="dim" legend.position="bottom" class="oj-sm-12">
+              </oj-chart>
+              <!-- vertical/horizontal toggle button -->
+              <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}"
+                aria-controls="lineChart">
+              </demo-chart-orientation-control>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: $component.showInvestmentDetails -->
+    <!-- ko ifnot: $baseModel.small() -->
+  
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-6">
+        <div class="oj-panel">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+              <h3 data-bind="text: $component.resource.lumpsum"> </h3>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="minInitialInvestment">
+                <span data-bind="text:$component.resource.minInitialInvestment"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$formatter.formatCurrency($component.minInitialInvestment().amount,$component.minInitialInvestment().currency)"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="minSubsequentInvestment">
+                <span data-bind="text:$component.resource.minSubsequentInvestment"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$formatter.formatCurrency($component.minSubsequentInvestment().amount,$component.minSubsequentInvestment().currency)"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="minWithdrawl">
+                <span data-bind="text:$component.resource.minWithdrawl"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$formatter.formatCurrency($component.minWithdrawl().amount,$component.minWithdrawl().currency)"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="minBalance">
+                <span data-bind="text:$component.resource.minBalance"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$formatter.formatCurrency($component.minBalance().amount,$component.minBalance().currency)"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="repurchaseAllowed">
+                <span data-bind="text:$component.resource.repurchaseAllowed"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <!-- ko if: $component.repurchaseAllowed() -->
+              <span data-bind="text:$component.resource.yes"></span>
+              <!-- /ko -->
+              <!-- ko ifnot: $component.repurchaseAllowed() -->
+              <span data-bind="text:$component.resource.no"></span>
+              <!-- /ko -->
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="repurchaseAllowed">
+                <span data-bind="text:$component.resource.resellAllowed"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <!-- ko if: $component.resellAllowed() -->
+              <span data-bind="text:$component.resource.yes"></span>
+              <!-- /ko -->
+              <!-- ko ifnot: $component.resellAllowed() -->
+              <span data-bind="text:$component.resource.no"></span>
+              <!-- /ko -->
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="repurchaseStartDate">
+                <span data-bind="text:$component.resource.repurchaseStartDate"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$formatter.formatDate($component.repurchaseStartDate())"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="repurchaseEndDate">
+                <span data-bind="text:$component.resource.repurchaseEndDate"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$formatter.formatDate($component.repurchaseEndDate())"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="purchasePricingMethod">
+                <span data-bind="text:$component.resource.purchasePricingMethod"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$component.purchasePricingMethod()"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="purchaseCutOffTime">
+                <span data-bind="text:$component.resource.purchaseCutOffTime"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$component.purchaseCutOffTime()"></span>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-7 oj-sm-7">
+              <oj-label for="redemptionTime">
+                <span data-bind="text:$component.resource.redemptionTime"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-5 oj-sm-5">
+              <span data-bind="text:$component.redemptionTime()"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="oj-flex-item oj-lg-6">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item">
+            <div class="oj-panel">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item ">
+                  <h3 data-bind="text: $component.resource.sip"> </h3>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <oj-label for="minNoOfInstallment">
+                    <span data-bind="text:$component.resource.minNoOfInstallment"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <span data-bind="text:$component.minNoOfInstallment()"></span>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <oj-label for="minInvestment">
+                    <span data-bind="text:$component.resource.minInvestment"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <span data-bind="text:$component.minInvestment()"></span>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <oj-label for="dateAllowed">
+                    <span data-bind="text:$component.resource.dateAllowed"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <span data-bind="text:$component.dateAllowed()"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad other-details-padding">
+          <div class="oj-flex-item">
+            <div class="oj-panel">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item ">
+                  <h3 data-bind="text: $component.resource.otherDetails"> </h3>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <oj-label for="recurringWithdrawlAllowed">
+                    <span data-bind="text:$component.resource.recurringWithdrawlAllowed"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <!-- ko if: $component.recurringWithdrawlAllowed() -->
+                  <span data-bind="text:$component.resource.yes"></span>
+                  <!-- /ko -->
+                  <!-- ko ifnot: $component.recurringWithdrawlAllowed() -->
+                  <span data-bind="text:$component.resource.no"></span>
+                  <!-- /ko -->
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <oj-label for="recurringTransferAllowed">
+                    <span data-bind="text:$component.resource.recurringTransferAllowed"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-6">
+                  <!-- ko if: $component.recurringTransferAllowed() -->
+                  <span data-bind="text:$component.resource.yes"></span>
+                  <!-- /ko -->
+                  <!-- ko ifnot: $component.recurringTransferAllowed() -->
+                  <span data-bind="text:$component.resource.no"></span>
+                  <!-- /ko -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $baseModel.small() -->
+  
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-panel">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item">
+            <h3 data-bind="text: $component.resource.lumpsum"> </h3>
+          </div>
+        </div>
+        <div class="oj-flex oj-sm-12 list-view-header">
+  
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.minInitialInvestment , value :$formatter.formatCurrency($component.minInitialInvestment().amount,$component.minInitialInvestment().currency)"></row>
+          </div>
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.minSubsequentInvestment , value :$formatter.formatCurrency($component.minSubsequentInvestment().amount,$component.minSubsequentInvestment().currency)"></row>
+          </div>
+        </div>
+  
+        <div class="oj-flex oj-sm-12 list-view-header">
+  
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.minWithdrawl , value :$formatter.formatCurrency($component.minWithdrawl().amount,$component.minWithdrawl().currency)"></row>
+          </div>
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.minBalance , value :$formatter.formatCurrency($component.minBalance().amount,$component.minBalance().currency)"></row>
+          </div>
+        </div>
+        <div class="oj-flex oj-sm-12 list-view-header">
+  
+          <div class="oj-flex oj-sm-6">
+            <!-- ko if: $component.repurchaseAllowed() -->
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.repurchaseAllowed , value :$component.resource.yes"></row>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.repurchaseAllowed() -->
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.repurchaseAllowed , value :$component.resource.no"></row>
+            <!-- /ko -->
+          </div>
+          <div class="oj-flex oj-sm-6">
+            <!-- ko if: $component.resellAllowed() -->
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.resellAllowed , value :$component.resource.yes"></row>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.resellAllowed() -->
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.resellAllowed , value :$component.resource.no"></row>
+            <!-- /ko -->
+          </div>
+        </div>
+        <div class="oj-flex oj-sm-12 list-view-header">
+  
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.repurchaseStartDate , value :$formatter.formatDate($component.repurchaseStartDate())"></row>
+          </div>
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.repurchaseEndDate , value :$formatter.formatDate($component.repurchaseEndDate())"></row>
+          </div>
+        </div>
+        <div class="oj-flex oj-sm-12 list-view-header">
+  
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.purchasePricingMethod , value :$component.purchasePricingMethod()"></row>
+          </div>
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.purchaseCutOffTime , value :$component.purchaseCutOffTime()"></row>
+          </div>
+        </div>
+        <div class="oj-flex oj-sm-12 list-view-header">
+  
+          <div class="oj-flex oj-sm-6">
+  
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.redemptionTime , value :$component.redemptionTime()"></row>
+          </div>
+        </div>
+  
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-panel  oj-flex-item">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item ">
+                <h3 data-bind="text: $component.resource.sip"> </h3>
+              </div>
+            </div>
+            <div class="oj-flex oj-sm-12 list-view-header">
+  
+              <div class="oj-flex oj-sm-6">
+  
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.minNoOfInstallment , value :$component.minNoOfInstallment()"></row>
+              </div>
+              <div class="oj-flex oj-sm-6">
+  
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.minInvestment , value :$component.minInvestment()"></row>
+              </div>
+            </div>
+  
+            <div class="oj-flex oj-sm-12 list-view-header">
+              <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dateAllowed , value :$component.dateAllowed()"></row>
+            </div>
+  
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-item ">
+          <div class="oj-panel">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item ">
+                <h3 data-bind="text: $component.resource.otherDetails"> </h3>
+              </div>
+            </div>
+  
+            <div class="oj-flex oj-sm-12 list-view-header">
+  
+              <div class="oj-flex oj-sm-6">
+                <!-- ko if: $component.recurringWithdrawlAllowed() -->
+  
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.recurringWithdrawlAllowed , value :$component.resource.yes"></row>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.recurringWithdrawlAllowed() -->
+  
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.recurringWithdrawlAllowed , value :$component.resource.no"></row>
+                <!-- /ko -->
+  
+              </div>
+              <div class="oj-flex oj-sm-6">
+  
+                <!-- ko if: $component.recurringTransferAllowed() -->
+  
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.recurringTransferAllowed , value :$component.resource.yes"></row>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.recurringTransferAllowed() -->
+  
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.recurringTransferAllowed , value :$component.resource.no"></row>
+                <!-- /ko -->
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <!-- /ko -->
+    <!-- /ko -->
+  
+    <!-- ko if: $baseModel.large() -->
+    <!-- ko if: $component.showPortfolioDetails -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-4">
+        <div class="oj-panel">
+          <!-- ko if: topSectorsLoaded -->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item ">
+              <h3 data-bind="text: $component.resource.topSectors"> </h3>
+            </div>
+          </div>
+          <div class="oj-flex">
+            <div class="oj-flex-item">
+              <oj-table class="table-resize" id="searchResulTable" :aria-label="[[$component.resource.displayResults]]"
+                data="[[dataSource]]" columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+                columns="[[headerText]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('topSectors_template',true)]]">
+                <caption class="hide-label" data-bind="text:$component.resource.displayResults"></caption>
+              </oj-table>
+              <script type="text/html" id="topSectors_template">
+                <tr class="record">
+                <td>
+                  <span data-bind="text:sectorName"></span>
+                </td>
+                <td>
+                  <span data-bind="text:sectorAllocationValue"></span>
+                </td>
+              </tr>
+            </script>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+  
+      <div class="oj-flex-item oj-lg-8">
+        <div class="oj-panel">
+          <!-- ko if: topHoldingsLoaded -->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item ">
+              <h3 data-bind="text: $component.resource.schemeNameLabel"> </h3>
+            </div>
+          </div>
+          <div class="oj-flex">
+            <div class="oj-flex-item">
+              <oj-table class="table-resize" id="holdingsTable" :aria-label="[[$component.resource.displayResults]]" data="[[dataSource]]"
+                columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns="[[holdingsText]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('topHoldings_template',true)]]">
+                <caption class="hide-label" data-bind="text:$component.resource.displayResults"></caption>
+              </oj-table>
+              <script type="text/html" id="topHoldings_template">
+                <tr class="record">
+          <td>
+            <span data-bind="text:scripName"></span>
+          </td>
+          <td>
+            <span data-bind="text:sectorName"></span>
+          </td>
+          <td>
+            <span data-bind="text:allocation"></span>
+          </td>
+        </tr>
+      </script>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: $baseModel.large()-->
+    <!-- ko if: $component.showPortfolioDetails -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 center">
+            <oj-buttonset-one id="drinkset" on-value-changed="[[$component.toggleListener]]" value="{{$component.toggleValue}}">
+              <oj-option value="toggle-sectors">
+                <span data-bind="text: $component.resource.toggleSectors"></span>
+              </oj-option>
+              <oj-option value="toggle-holdings">
+                <span data-bind="text: $component.resource.toggleHoldings"></span>
+              </oj-option>
+            </oj-buttonset-one>
+          </div>
+        </div>
+      </div>
+      <!-- ko if: $component.showtopSectors()-->
+      <div class="oj-flex-item oj-sm-12">
+        <div class="oj-panel">
+          <!-- ko if: topSectorsLoaded -->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item ">
+              <h3 data-bind="text: $component.resource.topSectors"> </h3>
+            </div>
+          </div>
+          <div class="oj-flex">
+            <div class="oj-flex-item">
+              <oj-table class="table-resize" id="searchResulTable" :aria-label="[[$component.resource.displayResults]]"
+                data="[[dataSource]]" columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+                columns="[[headerText]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('topSectors_template',true)]]">
+                <caption class="hide-label" data-bind="text:$component.resource.displayResults"></caption>
+              </oj-table>
+              <script type="text/html" id="topSectors_template">
+                <tr class="record">
+                    <td>
+                      <span data-bind="text:sectorName"></span>
+                    </td>
+                    <td>
+                      <span data-bind="text:sectorAllocationValue"></span>
+                    </td>
+                  </tr>
+                </script>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: $component.showtopHoldings()-->
+      <div class="oj-flex-item oj-sm-12">
+        <div class="oj-panel">
+          <!-- ko if: topHoldingsLoaded -->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item ">
+              <h3 data-bind="text: $component.resource.schemeNameLabel"> </h3>
+            </div>
+          </div>
+          <div class="oj-flex">
+            <div class="oj-flex-item">
+              <oj-table class="table-resize" id="holdingsTable" :aria-label="[[$component.resource.displayResults]]" data="[[dataSource]]"
+                columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns="[[holdingsTextMobile]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('topHoldings_template',true)]]">
+                <caption class="hide-label" data-bind="text:$component.resource.displayResults"></caption>
+              </oj-table>
+              <script type="text/html" id="topHoldings_template">
+                <tr class="record">
+              <td>
+                <span data-bind="text:scripName"></span>
+              </td>
+              <td>
+                <span data-bind="text:allocation"></span>
+              </td>
+            </tr>
+          </script>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: $baseModel.large()-->
+    <!-- ko if: $component.showPerformanceDetails -->
+    <!-- ko if: performanceDetailsLoaded -->
+  
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <oj-table class="table-resize" id="searchResulTable" :aria-label="[[$component.resource.displayResults]]" data="[[dataSource]]"
+          columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns="[[performanceText]]"
+          row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('performance_template',true)]]">
+          <caption class="hide-label" data-bind="text:$component.resource.displayResults"></caption>
+        </oj-table>
+        <script type="text/html" id="performance_template">
+          <tr >
+  
+            <!-- ko if: id === "FUNDRETURN"  || id === "CATAVGRETURN" || id === "GRTH"-->
+                <td class="bold-text fund-background">
+                  <span data-bind="text:fundReturn"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:oneWeek"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:oneMonth"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:threeMonth"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:sixMonth"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:oneYear"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:threeYear"></span>
+                </td>
+                <td class="bold-text fund-background">
+                  <span data-bind="text:fiveYear"></span>
+                </td>
+              <!-- /ko -->
+              <!-- ko ifnot: id === "FUNDRETURN"  || id === "CATAVGRETURN" || id === "GRTH"-->
+  
+                  <td>
+                    <span data-bind="text:fundReturn"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:oneWeek"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:oneMonth"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:threeMonth"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:sixMonth"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:oneYear"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:threeYear"></span>
+                  </td>
+                  <td>
+                    <span data-bind="text:fiveYear"></span>
+                  </td>
+                <!-- /ko -->
+              </tr>
+  
+            </script>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad info-text-small info-text">
+      <span data-bind="text: $component.resource.footerInfo"> </span>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: $baseModel.large()-->
+    <!-- ko if: $component.showPerformanceDetails -->
+    <!-- ko if: performanceDetailsLoaded -->
+    <div params="rootModel : $data, heading : ''">
+      <oj-list-view id="performance-listview" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('performanceMobile_template',true)}]]"
+        data="[[dataSource]]">
+      </oj-list-view>
+    </div>
+    <script type="text/html" id="performanceMobile_template">
+      <li>
+        <!-- ko if: id === "FUNDRETURN"  || id === "CATAVGRETURN" || id === "GRTH"-->
+           <div class="oj-flex oj-flex-item list-view-header bold-text">
+             <div class="oj-flex-item oj-sm-12 fund-background fund-padding">
+               <span data-bind="text:$baseModel.format($component.resource.fundReturn,{fundReturn:fundReturn})"></span>
+             </div>
+           </div>
+           <div class="oj-flex list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.oneWeeks"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:oneWeek"></span>
+               </div>
+           </div>
+           <div class="oj-flex list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.oneMonths"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:oneMonth"></span>
+               </div>
+           </div>
+           <div class="oj-flex list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.threeMonths"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:threeMonth"></span>
+               </div>
+           </div>
+           <div class="oj-flex list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.sixMonths"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:sixMonth"></span>
+               </div>
+           </div>
+           <div class="oj-flex list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.oneYears"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:oneYear"></span>
+               </div>
+           </div>
+           <div class="oj-flex list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.threeYears"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right ">
+                   <span data-bind="text:threeYear"></span>
+               </div>
+           </div>
+           <div class="oj-flex">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.fiveYears"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:fiveYear"></span>
+               </div>
+           </div>
+           <!-- /ko -->
+           <!-- ko ifnot: id === "FUNDRETURN"  || id === "CATAVGRETURN" || id === "GRTH"-->
+           <div class="oj-flex oj-flex-item list-view-header">
+             <div class="oj-flex-item oj-sm-12">
+               <span data-bind="text:$baseModel.format($component.resource.fundReturn,{fundReturn:fundReturn})"></span>
+             </div>
+           </div>
+           <div class="oj-flex oj-flex-item list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.oneWeeks"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:oneWeek"></span>
+               </div>
+           </div>
+           <div class="oj-flex oj-flex-item list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.oneMonths"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:oneMonth"></span>
+               </div>
+           </div>
+           <div class="oj-flex oj-flex-item list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.threeMonths"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:threeMonth"></span>
+               </div>
+           </div>
+           <div class="oj-flex oj-flex-item list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.sixMonths"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:sixMonth"></span>
+               </div>
+           </div>
+           <div class="oj-flex oj-flex-items list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.oneYears"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:oneYear"></span>
+               </div>
+           </div>
+           <div class="oj-flex oj-flex-item list-view-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.threeYears"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right ">
+                   <span data-bind="text:threeYear"></span>
+               </div>
+           </div>
+           <div class="oj-flex oj-flex-item">
+               <div class="oj-flex-item oj-sm-6">
+                 <label data-bind="text:$component.resource.fiveYears"></label>
+               </div>
+               <div class="oj-flex-item oj-sm-6 right">
+                   <span data-bind="text:fiveYear"></span>
+               </div>
+           </div>
+           <!-- /ko -->
+  
+         </li>
+       </script>
+  
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad info-text-small info-text">
+      <span data-bind="text: $component.resource.footerInfo"> </span>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>

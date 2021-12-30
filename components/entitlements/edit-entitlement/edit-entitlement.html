@@ -1,0 +1,103 @@
+<div class="oj-flex">
+    <div class="oj-sm-9">
+        <div class="form-main-container">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6 left">
+                        <row params="baseModel : $baseModel, rootModel : $data, label :$component.nls.common.moduleName , value :$component.params.module"></row>
+                        <row params="baseModel : $baseModel, rootModel : $data, label :$component.nls.common.categoryName , value :$component.params.category"></row>
+                        <row params="baseModel : $baseModel, rootModel : $data, label :$component.nls.common.entName , value :$component.entitleName"></row>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: $component.menuOptions(), uiOptions:$component.uiOptions, navBarDescription:"ActionTypes"}}'>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <oj-buttonset-one id="" value="{{$component.selectedResourceType}}" on-value-changed="[[$component.buttonChange]]">
+                            <oj-option id="SVC" class="action-button-secondary" value="SVC"><span data-bind="text:$component.nls.headings.service"></span></oj-option>
+                            <oj-option id="UCN" class="action-button-secondary" value="UCN"><span data-bind="text:$component.nls.headings.uiComponent"></span></oj-option>
+                        </oj-buttonset-one>
+                    </div>
+                </div>
+                <!-- ko if: resourceLoaded -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-12">
+                        <oj-checkboxset id="selectedResources" :aria-label="[[$component.nls.common.resource]]" value="{{selectedResources}}">
+                            <!-- ko foreach: $component.resourceList() -->
+                            <oj-option value="[[$data]]">
+                                <span data-bind="text: text"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-checkboxset>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-12">
+
+                        <!-- ko if: $component.isResourcesFetched()-->
+                        <!-- ko if: $component.selectedResourceType()==="SVC"-->
+                        <oj-select-one id="resourceName" :aria-label="[[$component.nls.headings.select]]" value="{{addedResources}}" placeholder="{{nls.headings.select}}">
+                            <!-- ko foreach: $component.resourcesSVC -->
+                            <oj-option value="[[value]]"><span data-bind="text: text"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                        <!-- ko if:$component.selectedResourceType()==="UCN"-->
+                        <oj-select-one id="resourceName" :aria-label="[[$component.nls.headings.select]]" value="{{addedResources}}" placeholder="{{nls.headings.select}}">
+                            <!-- ko foreach: $component.resourcesUCN -->
+                            <oj-option value="[[value]]"><span data-bind="text: text"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <a href="#" class="" data-bind="text: $component.nls.common.addResources,click: $component.addResources"></a>
+                        <span data-bind="text:$component.nls.common.verticalSeperation"></span>
+                        <a href="#" class="" data-bind="text: $component.nls.common.deleteHeader,click: $component.deleteResourceClicked"></a>
+                    </div>
+                </div>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.save]]">
+                    <span data-bind="text:$component.nls.generic.common.save"></span>
+                </oj-button>
+
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span data-bind="text:$component.nls.generic.common.cancel"></span>
+                </oj-button>
+
+                <oj-button class="action-button-tertiary" on-click="[[$component.back]]">
+                    <span data-bind="text:$component.nls.generic.common.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'deleteConfirmationModal',header: $component.nls.common.deleteHeader">
+            <div class="form-main-container message-text">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <span data-bind="text:$component.nls.common.deleteResource"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button id="delbackYes" class="action-button-primary" on-click="[[$component.deleteResource]]">
+                        <span data-bind="text:$component.nls.generic.common.yes"></span>
+                    </oj-button>
+                    <oj-button id="delbackNo" class="action-button-secondary" on-click="[[$component.hideModal]]">
+                        <span data-bind="text:$component.nls.generic.common.no"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </modal-window>
+    </div>
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'entitlements-view'"></help>
+    </div>
+    <!-- /ko -->
+</div>

@@ -1,0 +1,16 @@
+.map {
+    width: 100%;
+
+    .country-name {
+        font-size: 0.8rem;
+    }
+}
+
+.selectedCountry {
+	font-weight: var(--base-font-weight-bold);
+}
+
+.accountType {
+	background-color: var(--banner-background);
+    color: var(--banner-text-secondary);
+}

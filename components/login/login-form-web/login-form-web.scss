@@ -1,0 +1,50 @@
+.loginContainer {
+    .loginFormContainer {
+        .login-logo {
+            background-color: var(--base-color-secondary);
+            text-align: center;
+            padding: 0.5rem 1rem;
+            img {
+                width: 12.5rem;
+                @include mq(small) {
+                    width: 9.4rem;
+                }
+            }
+            @include mq(small) {
+                display: none;
+            }
+        }
+        input[type="text"],
+        input[type="password"] {
+            @include padding(0, 0, 0, 1.9rem, !important);
+        }
+        .icons {
+            position: absolute;
+            margin: 0.3rem;
+            z-index: 2;
+        }
+        .row {
+            padding: .5rem .6rem;
+        }
+    }
+}
+
+.danger {
+    color: var(--base-color-danger);
+}
+
+.login-enclosure {
+    &__password {
+        padding: 0.6rem 0;
+    }
+    .loginButton {
+        width: 225px;
+        margin: 0.6rem 0;
+    }
+    &__seperator {
+        padding: 0 0.3rem;
+    }
+    .alternate-login-lbl {
+        margin-top: 0.5rem;
+    }
+}

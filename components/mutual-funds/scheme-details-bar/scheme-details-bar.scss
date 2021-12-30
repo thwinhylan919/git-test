@@ -1,0 +1,22 @@
+.scheme-details-bar {
+    background: var(--banner-background);
+    color: var(--banner-text-secondary);
+    align-items: flex-start;
+    align-items: center;
+    padding-top: 0.5rem;
+    .legend-height {
+        height: 1.4rem;
+    }
+    .legend-padding {
+        @include padding(0, 0, 0, 2rem);
+    }
+    .rating-icons {
+        width: 5rem;
+    }
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+    .banner-height {
+        height: 4rem;
+    }
+}

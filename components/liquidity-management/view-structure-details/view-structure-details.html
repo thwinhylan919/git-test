@@ -1,0 +1,31 @@
+<div class="form-main-container oj-lg-12" data-bind = "css:$component.mode() === 'approval' || $component.mode() === 'review' || $component.mode() === 'edit' || $component.mode() === 'Paused' || $component.mode() === 'Resumed' || $component.mode() === 'execute' ? 'overlay' : ''">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.mode() === 'approval'?$component.resource.labels.header:''">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.structureDescription , value :$component.data.desc">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.structureType, value :$component.resource.structureType[ko.utils.unwrapObservable($component.data.structureType)]">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.structureStatus, value :$component.resource.structureStatus[ko.utils.unwrapObservable($component.data.structureStatus)]">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.startDate, value :$formatter.formatDate($component.data.effDate)">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.endDate, value :$formatter.formatDate($component.data.endDate)">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.interestMethod, value :$component.resource.interestMethod[ko.utils.unwrapObservable($component.data.interestMethod)]">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.structurePriority, value :$component.data.priority">
+        </row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.reallocationMethod, value :ko.utils.unwrapObservable($component.data.reallocationMethod) || '-'">
+        </row>
+        <!-- ko if:ko.utils.unwrapObservable($component.data.reallocationMethod) === "Central Distribution" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.labels.centralAccountNumber, value :ko.utils.unwrapObservable($component.data.centralAcc.displayValue) || '-'">
+        </row>
+        <!-- /ko -->
+    </page-section>
+
+    <div class="oj-flex-item button-container">
+        <oj-button class="action-button-tertiary" id="button-back" on-click="[[closeHandler]]">
+            <span class="icons icon-back-arrow" slot="startIcon"></span>
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

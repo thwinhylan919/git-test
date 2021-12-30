@@ -1,0 +1,45 @@
+{
+  "modules": [{
+          "moduleName": "com.ofss.digx.app.ebpp.service.billerregistration.BillerRegistration",
+          "components": [{
+                  "componentName": "register-biller",
+                  "service": "create",
+                  "perform": "manage-bill-payments#register-biller#review-register-biller",
+                  "approve":"review-register-biller"
+              },
+              {
+                "componentName": "register-biller",
+                "service": "update",
+                "perform": "manage-bill-payments#modify-biller#review-register-biller",
+                "approve":"review-register-biller"
+              },
+              {
+                "componentName": "register-biller",
+                "service": "delete",
+                "perform": "manage-bill-payments#modify-biller#review-register-biller",
+                "approve":"review-register-biller"
+              },
+              {
+                "componentName": "register-biller",
+                "service": "read",
+                "perform": "manage-bill-payments"
+              }
+          ]
+      }, {
+          "moduleName": "com.ofss.digx.app.ebpp.service.billpayment.BillPayment",
+          "components": [
+              {
+                "componentName": "pay-bill",
+                "service": "read",
+                "perform": "payment-history#manage-bill-payments"
+              },
+              {
+                "componentName": "pay-bill",
+                "service": "create",
+                "perform": "quick-bill-payment#quick-recharge#review-bill-payment#review-payment#review-quick-bill-payment#review-quick-recharge#manage-bill-payments",
+                "approve":"review-bill-payment#review-payment#review-quick-bill-payment#review-quick-recharge"
+              }
+          ]
+      }
+  ]
+}

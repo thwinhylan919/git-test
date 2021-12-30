@@ -1,0 +1,106 @@
+<div class="design-dashboard-container oj-flex">
+    <div class="oj-flex-item oj-sm-2">
+
+        <div class="oj-flex oj-sm-12 widgetListContainer" data-bind="attr:{id:$component.listId}">
+            <div class="oj-flex oj-sm-12 searchComponentSection">
+                <input class="searchComponent" data-bind="value:$component.searchComponent,valueUpdate:'afterkeydown',
+                            attr: {'aria-label':$component.resourceBundle.compoSearch,placeholder:$component.resourceBundle.compoSearch}">
+                <span slot="end" class="icons icon-search"></span>
+            </div>
+            <div class="leftContainer">
+                <fieldset class="oj-sm-12 widgetListFieldset">
+                    <oj-list-view :id="[[listViewContainerId + 'container']]" class="componentListView" :aria-label="[[$component.resourceBundle.widgetlist]]" data="[[listviewDataProvider]]" selection-mode="single" selection="{{listviewSelection}}" dnd.drag.items.data-types='["application/ojlistviewitems+json"]'
+                        dnd.drag.items.drag-end="[[listviewHandleDragEnd]]">
+                        <template slot="itemTemplate">
+                            <div>
+                                <div>
+                                    <span>
+                                        <oj-bind-text
+                                            value="[[$component.componentNames.names[$current.data.module][$current.data.componentName]]]">
+                                        </oj-bind-text>
+                                    </span>
+                                </div>
+                            </div>
+                        </template>
+                    </oj-list-view>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-sm-10 designContainer">
+        <fieldset class="dashboardView">
+            <oj-list-view :translations.msg-no-data=[[$component.resourceBundle.dropWidgets]] :id="[[listViewContainerId]]" :aria-label="[[$component.resourceBundle.dashboardDesign]]" data="[[listviewDataProvider2]]" selection-mode="single" selection="{{listviewSelection2}}"
+                dnd.drop.items.data-types='["application/ojlistviewitems+json"]' dnd.drop.items.drop="[[listviewHandleDrop2]]" dnd.reorder.items="enabled" on-oj-reorder="[[handleReorder]]" class="listView oj-listview-card-layout design-dashboard-listview">
+                <template slot="itemTemplate">
+                    <div data-bind="childrenComplete: $component.designRenderer.bind($data,$current)">
+                    <div class="liContainer"
+                        :designAttribute="[[$component.newWidthSelector + $current.data.module + $current.data.componentName]]"
+                        :id=[[$baseModel.incrementIdCount()]]>
+                        <div class="widget-panel demo-griditem-content demo-icon">
+                            <div class="liwidgetContainer">
+                                <div class="newActions">
+                                    <a href="#" class="deleteIcon"
+                                        data-bind="click:$component.removeWidget.bind($data,$current)" alt="Remove"
+                                        title="Remove">
+                                        <span class="icons icon-close"></span>
+                                    </a>
+                                    <a href="#" class="compressIcon"
+                                        data-bind="click:$component.compressComponent.bind($data,$current)"
+                                        alt="Compress" title="Compress">
+                                        <span class="icons icon-compress"></span>
+                                    </a>
+                                    <a href="#" class="expandIcon"
+                                        data-bind="click:$component.expandComponent.bind($data,$current)" alt="Expand"
+                                        title="Expand">
+                                        <span class="icons icon-expand"></span>
+                                    </a>
+                                </div>
+                                <div class="liwidgetContainer2">
+                                    <div class="designWidgetContainer"
+                                        data-bind="component:{name:$current.data.componentName,params:{rootModel:$component,data:$current.data}}">
+                                    </div>
+                                    <div class="drag-control"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                </template>
+            </oj-list-view>
+        </fieldset>
+    </div>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $component,id:$component.modalId,header:$component.resourceBundle.componentInput,closeHandler:$component.closeComponentInput">
+    <div class="form-main-container message-text">
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko if:$component.renderComponentInputs() -->
+            <!-- ko foreach:$component.inputDetails().options -->
+            <div class="oj-flex oj-sm-12 oj-flex-items-pad">
+                <div class="oj-flex oj-sm-3 oj-flex-items-pad">
+                    <oj-label :for="[[$data+$index()]]">
+                        <span data-bind="text:$component.componentInputNLS[$component.componentInputSource().module][$component.componentInputSource().componentName][$data].name"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex oj-sm-8 oj-flex-items-pad">
+                    <oj-select-one :id="[[$data+$index()]]" class="oj-sm-12" value="{{$component.componentInputValues()[$index()]}}">
+                        <!-- ko foreach:$component.inputDetails().values[$data] -->
+                        <oj-option value="{{$data}}">
+                            <span data-bind="text:$component.componentInputNLS[$component.componentInputSource().module][$component.componentInputSource().componentName][$parent].values[$data]"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <div class="oj-flex-item">
+                <oj-button class="action-button-primary" on-click="[[$component.componentInputEntered]]">
+                    <span data-bind="text:$component.resourceBundle.generic.common.confirm"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</modal-window>

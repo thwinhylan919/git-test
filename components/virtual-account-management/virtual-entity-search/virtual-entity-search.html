@@ -1,0 +1,116 @@
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+        <oj-bind-text id="realCustomerName" value="[[$component.realCustomerName]]">
+        </oj-bind-text>
+        <div data-bind="text: $dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+</div>
+<div class="oj-flex form-main-container">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading: '' ">
+            <div class="search-entity-container">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="searchEntityID">
+                                    <oj-bind-text id="searchEntityIDText"
+                                        value="[[$component.resource.searchEntityID]]">
+                                    </oj-bind-text>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                                <oj-input-text id="searchEntityID" aria-labelledby="searchEntityID"
+                                    value="{{searchEntityID}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="searchEntityName" id="templateName">
+                                    <oj-bind-text id="searchEntityNameText"
+                                        value="[[$component.resource.searchEntityName]]">
+                                    </oj-bind-text>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-lg-8 oj-md-12 label">
+                                <oj-input-text id="searchEntityName" aria-labelledby="searchEntityName"
+                                    value="{{searchEntityName}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex button-container">
+                    <oj-button class="action-button-primary" id="saveButtonId" on-click="[[$component.searchResult]]">
+                        <span slot="startIcon" class="icons icon-search"></span>
+                        <oj-bind-text id="saveButtonId" value="[[$component.resource.search]]">
+                        </oj-bind-text>
+                    </oj-button>
+                    <oj-bind-if id="dataSourceNotCreated" test="[[$component.dataSourceCreated() === false]]">
+                        <oj-button class="action-button-secondary" id="cancelButtonId"
+                            on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span>
+                            <oj-bind-text id="cancelButtonIdtext" value="[[$component.resource.cancel]]">
+                            </oj-bind-text>
+                        </oj-button>
+                    </oj-bind-if>
+                    <oj-button class="action-button-tertiary" id="clearButtonId" on-click="[[$component.clearFields]]">
+                        <span slot="startIcon" class="icons icon-refresh"></span>
+                        <oj-bind-text id="clearButtonIdText" value="[[$component.resource.clear]]">
+                        </oj-bind-text>
+                    </oj-button>
+                </div>
+                <oj-bind-if id="viewTable" test="[[viewTable() === true]]">
+                    <div class="oj-flex spacing-table">
+                        <div class="oj-flex-item oj-sm-12">
+                            <div class="oj-flex header-underline oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-4 left">
+                                    <oj-bind-text id="listOfEntities" value="[[$component.resource.listOfEntities]]">
+                                    </oj-bind-text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-table id="table" :aria-label="[[$component.resource.cancel]]" data="[[dataSource]]"
+                                columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+                                columns="[[headerText]]">
+                                <caption class="hide-label" data-bind="text:$component.resource.cancel"></caption>
+                            </oj-table>
+                            <oj-paging-control id="paging" data='[[dataSource]]' page-size='10' slot="bottom">
+                            </oj-paging-control>
+                        </div>
+                    </div>
+                </oj-bind-if>
+                <oj-bind-if id="dataSourceCreated" test="[[$component.dataSourceCreated() === true]]">
+                    <div class="oj-flex button-container">
+                        <oj-button class="action-button-secondary" id="cancelButtonId"
+                            on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span>
+                            <oj-bind-text id="cancelButtonIdText" value="[[$component.resource.cancel]]">
+                            </oj-bind-text>
+                        </oj-button>
+                    </div>
+                </oj-bind-if>
+            </div>
+        </page-section>
+    </div>
+    <script type="text/html" id="searchIdentifier">
+        <td>
+            <a href="#"
+                data-bind="text:$context.row.entityId,click:$component.onSelectedInTable.bind($data,$context.row)"></a>
+            <div>
+                <oj-bind-text id="searchIdentifierText" value="[[$context.row.entityName]]"></oj-bind-text>
+            </div>
+        </td>
+    </script>
+    <script type="text/html" id="dateIdentifier">
+        <td>
+            <oj-bind-text id="dateIdentifierText"
+                value="[[$formatter.formatDate($context.row.creationDate,'dateFormat')]]">
+            </oj-bind-text>
+        </td>
+    </script>
+</div>

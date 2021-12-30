@@ -1,0 +1,118 @@
+$submitted-background-color: #0A8BE6;
+$draft-background-color: #ffd70b;
+$inProgress-background-color:var(--base-color-warning);
+$img-border-color: #0A8BE6;
+.img-customization {
+    display: block;
+    margin: 0.0rem auto 0.0rem auto;
+    height: 4.5rem;
+}
+
+.img-border-customization:hover {
+    border: 1px solid $img-border-color;
+}
+
+.draft-Name-customizations {
+    font-size: 0.7rem;
+    @include margin(0.4rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.party-custimizations {
+    @include margin(0.4rem, 0.5rem, 0.5rem, 0.5rem);
+    @include mq(small) {
+        @include margin(0.4rem, 0.5rem, 0.5rem, 1rem);
+    }
+}
+
+.img-style {
+    height: 2rem;
+    @include margin(0.0rem, 0.0rem, 0.5rem, 0.8rem);
+    zoom: 200%;
+}
+
+.customer-details {
+    background-color: var(--banner-background);
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.status_bar {
+    @include single-padding(right, 0.5rem);
+    @include single-border(right, 0.05rem solid var(--base-text-secondary));
+}
+
+.panel-child-customizations {
+    color: rgba(44, 50, 81, 0.8);
+    font-size: 0.7rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.confirm-strip {
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+    background-color: var(--confirm-screen-success-gradient-end-color);
+    padding-block-start: 0.8rem;
+    @include single-border(left, 0.5rem solid var(--confirm-screen-success-border-color));
+}
+
+.reject-strip {
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+    background-color: var(--base-color-danger-light);
+    padding-block-start: 0.8rem;
+    @include single-border(left, 0.5rem solid var(--confirm-screen-error-border-color));
+}
+
+.customer-header {
+    font-size: 1rem;
+    margin-top: 0.4rem;
+}
+
+.inProgress {
+    background-color: $inProgress-background-color;
+}
+
+.submit {
+    background-color: $submitted-background-color;
+}
+
+.draft {
+    background-color: $draft-background-color;
+}
+
+.completed {
+    background-color: var(--base-color-danger);
+}
+
+.dataPadding {
+    color: var(--base-text-primary);
+}
+
+.dataPadding_small {
+    font-size: 0.66rem;
+    color: var(--base-text-secondary);
+}
+
+.applicationPadding {
+    padding-top: 8%;
+}
+
+.documentPadding {
+    padding-top: 8%;
+}
+
+.cardPadding {
+    margin: 2rem;
+}
+
+.reject_banner_image {
+    height: 1.3rem;
+    padding: 0rem 0.5rem;
+}
+
+.status_tag {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    @include margin(0.0rem, 0.0rem, 0.0rem, 0.5rem);
+}

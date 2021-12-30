@@ -1,0 +1,55 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.alert.service.subscription.ActionSubscription",
+			"components": [{
+					"componentName": "alerts-list",
+					"service": "read",
+					"perform": "alerts-subscription#alerts-select-user#party-name-search#user-type#users-search#user-search-list#alerts-nav-bar#manage-alerts-subscription#alerts-subscription-casa#alerts-subscription-loans#alerts-subscription-payments#alerts-subscription-profile#alerts-subscription-td"
+				}, {
+					"componentName": "alerts-list",
+					"service": "update",
+					"perform": "alerts-subscription#alerts-select-user#party-name-search#user-type#users-search#user-search-list#alerts-nav-bar#manage-alerts-subscription#alerts-subscription-casa#alerts-subscription-loans#alerts-subscription-payments#alerts-subscription-profile#alerts-subscription-td"
+				},
+				{
+					"componentName": "alerts-list",
+					"service": "create",
+					"perform": "alerts-subscription#alerts-select-user#party-name-search#user-type#users-search#user-search-list#alerts-nav-bar#manage-alerts-subscription#alerts-subscription-casa#alerts-subscription-loans#alerts-subscription-payments#alerts-subscription-profile#alerts-subscription-td"
+				},
+				{
+					"componentName": "alerts-list",
+					"service": "delete",
+					"perform": "alerts-subscription#alerts-select-user#party-name-search#user-type#users-search#user-search-list#alerts-nav-bar#manage-alerts-subscription#alerts-subscription-casa#alerts-subscription-loans#alerts-subscription-payments#alerts-subscription-profile#alerts-subscription-td"
+				}
+			]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.alert.service.maintenance.ActivityEventAction",
+			"components": [{
+					"componentName": "alerts-maintenance-search",
+					"service": "create",
+					"perform": "alerts-maintenance#message-template-maintenance"
+				}, {
+					"componentName": "alerts-maintenance-search",
+					"service": "readByName",
+					"perform": "alerts-maintenance#message-template-maintenance"
+				}, {
+					"componentName": "alerts-maintenance-search",
+					"service": "delete",
+					"perform": "alerts-maintenance#message-template-maintenance"
+				},{
+					"componentName": "alerts-maintenance-search",
+					"service": "update",
+					"perform": "alerts-maintenance#message-template-maintenance"
+				}
+			]
+		},{
+			"moduleName": "com.ofss.digx.app.alert.service.actionable.ActionableAlertService",
+			"components": [{
+					"componentName": "alerts-action",
+					"service": "read",
+					"perform": "alerts-action"
+				}
+			]
+		}
+	]
+}

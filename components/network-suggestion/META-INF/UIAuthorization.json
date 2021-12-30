@@ -1,0 +1,12 @@
+{
+    "modules": [
+        {
+        "moduleName": "com.ofss.digx.app.pm.maintenance.service.payment.networkPreference.NetworkPreference",
+        "components": [
+        {
+            "componentName": "view-network-preference",
+            "service": "create",
+            "perform": "edit-network-preference"
+        }]
+    }]
+}

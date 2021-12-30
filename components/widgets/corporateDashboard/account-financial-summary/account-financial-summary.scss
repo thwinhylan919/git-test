@@ -1,0 +1,86 @@
+@import "utils";
+$casa-action-card-color: rgba(0, 0, 0, .7);
+$td-action-card-color: #C74634;
+$loan-action-card-color: rgb(51, 51, 51);
+.account-financial-summary {
+    justify-content: space-between;
+    @include mq(medium) {
+        height: 100%;
+    }
+    &__actionCard {
+        max-width: 33.33%;
+        margin-bottom: 0.1rem;
+        display: inline-block;
+        @include mq(medium) {}
+        @include mq(small) {
+            max-width: 100%;
+        }
+    }
+    &-actionCard {
+        &__link {
+            &:link,
+            &:visited {
+                color: var(--color-white);
+            }
+        }
+    }
+    .colorCasa {
+        background-color: $casa-action-card-color !important;
+    }
+    .colorTd {
+        background-color: $td-action-card-color !important;
+    }
+    .colorLoan {
+        background-color: $loan-action-card-color !important;
+    }
+    .colorLoader {
+        height: 0.2rem;
+        width: 100%;
+        position: relative;
+        &.animate {
+            animation: easeInTop 1.5s 1;
+        }
+    }
+    @keyframes easeInTop {
+        from {
+            width: 0%;
+            left: 50%;
+        }
+        to {
+            width: 100%;
+            left: 0%;
+        }
+    }
+    &-listView {
+        &__listItem {
+            height: 5rem;
+        }
+        &-listItem {
+            max-width: 33.33%;
+            border-width: 0 !important;
+            border-style: none !important;
+            &__content {
+                padding-bottom: 0.6rem !important;
+            }
+            &__icon {
+                font-size: 2.3rem;
+                color: var(--color-white);
+                position: relative;
+                top: 0.5rem;
+                text-align: center;
+                @include mq(small) {
+                    font-size: 1.8rem;
+                }
+            }
+            &__text {
+                color: var(--color-white);
+                @include mq(small) {
+                    font-size: var(--base-font-size-default);
+                }
+                padding-bottom: 1rem;
+                text-align: center;
+                height: 1.9rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,91 @@
+
+        <div class="oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                  <oj-label>
+                    <span data-bind="text:$component.resourceBundle.sampleTxt.font"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-4" data-bind="">
+                  <span data-bind="text:$component.resourceBundle.sampleTxt.sampleTxt"></span>
+                </div>
+              </div>
+              <div class="oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                  <oj-label>
+                    <span data-bind="text:$component.resourceBundle.sampleTxt.anchorTxt"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-4" data-bind="">
+                  <span class="anchroTxt" data-bind="text:$component.resourceBundle.sampleTxt.anchorTxt"></span>
+                </div>
+              </div>
+              <div class="oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                  <oj-label>
+                    <span data-bind="text:$component.resourceBundle.sampleTxt.label"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-4">
+                  <span data-bind="text:$component.resourceBundle.sampleTxt.label"></span>
+                </div>
+              </div>
+              <div class="oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                  <oj-label for="input_props">
+                    <span data-bind="text:$component.resourceBundle.sampleTxt.input"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-6">
+                  <oj-input-text :id="[['input_props']]" value="{{$component.resourceBundle.sampleTxt.sampleTxt}}"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-sm-12" id="button-section">
+                <div class="oj-flex oj-sm-12">
+                  <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                    <oj-label for="primary_btn">
+                      <span data-bind="text:$component.resourceBundle.sampleTxt.primaryBtn"></span>
+                    </oj-label>
+                  </div>
+                  <div class="oj-flex-item oj-sm-6">
+                    <oj-button class="action-button-primary" id="primary-button" data-bind="">
+                      <span data-bind="text:$component.resourceBundle.labels.primaryBtn"></span>
+                    </oj-button>
+                  </div>
+                </div>
+                <div class="oj-flex oj-sm-12">
+                  <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                    <oj-label for="secondary_btn">
+                      <span data-bind="text:$component.resourceBundle.sampleTxt.secondaryBtn"></span>
+                    </oj-label>
+                  </div>
+                  <div class="oj-flex-item oj-sm-6">
+                    <oj-button class="action-button-secondary" id="secondary-button" data-bind="">
+                      <span data-bind="text:$component.resourceBundle.labels.secondaryBtn"></span>
+                    </oj-button>
+                  </div>
+                </div>
+                <div class="oj-flex oj-sm-12">
+                  <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                    <oj-label for="tertiary_btn">
+                      <span data-bind="text:$component.resourceBundle.sampleTxt.tertiaryBtn"></span>
+                    </oj-label>
+                  </div>
+                  <div class="oj-flex-item oj-sm-6">
+                    <oj-button class="action-button-tertiary" id="tertiary-button" data-bind="">
+                      <span data-bind="text:$component.resourceBundle.labels.tertiaryBtn"></span>
+                    </oj-button>
+                  </div>
+                </div>
+                <div class="oj-flex oj-sm-12">
+                  <div class="oj-flex-item oj-sm-4 preview-theme__form__element">
+                    <oj-label for="tertiary_btn">
+                      <span data-bind="text:$component.resourceBundle.sampleTxt.helpBtn"></span>
+                    </oj-label>
+                  </div>
+                  <div class="oj-flex-item oj-sm-6">
+                    <oj-button class="help-button" id="help-button" data-bind="">
+                      <span data-bind="text:$component.resourceBundle.labels.helpBtn"></span>
+                    </oj-button>
+                  </div>
+                </div>
+              </div>

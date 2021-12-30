@@ -1,0 +1,72 @@
+$casa-action-card-color: #1F3D62;
+$td-action-card-color : #CC4537;
+$loan-action-card-color: #0A6C99;
+.accounts-overview {
+  &__content{
+    height:100%;
+  }
+  &-content{
+    &__section{
+      margin:auto;
+    }
+    &-section{
+      &__account-info {
+        text-align: center;
+        font-size: var(--base-font-size-larger);
+        color:var(--color-white);
+
+      }
+
+      &__account-value  {
+        text-align: center;
+        font-size: var(--base-font-size-default);
+        color:var(--color-white);
+
+      }
+
+      &__image  {
+        text-align: center;
+        font-size: var(--base-font-size-larger);
+        padding: 0.6rem 0;
+        img{
+          height:4rem;
+          @include mq(small){
+            height:3rem;
+          }
+        }
+      }
+    }
+    &__icon{
+      display:flex;
+      align-items: flex-end;
+    }
+    &-icon{
+      &__img{
+        height:4rem;
+
+        margin:1rem auto;
+      }
+
+      &__note{
+        font-weight: var(--base-font-weight-regular);
+        font-size:var(--base-font-size-default);
+        color: var(--color-white);
+        text-align: center;
+        margin: 0 auto;
+        width:90%;
+      }
+    }
+  }
+
+  &.CSA,&.demand-deposits {
+    background-color: $casa-action-card-color;
+  }
+
+  &.TRD,&.term-deposits {
+    background-color: $td-action-card-color;
+  }
+
+  &.LON,&.loans {
+    background-color: $loan-action-card-color;
+  }
+}

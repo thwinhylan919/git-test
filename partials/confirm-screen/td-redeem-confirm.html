@@ -1,0 +1,4 @@
+<!-- ko if:data.typeRedemption === 'P' -->
+<row params="baseModel : $baseModel, rootModel : $parent, label : resourceBundle.transactions.termDepositDetails.depositDetails.revisedMaturity, dataClass : 'highlight-text',value :$formatter.formatCurrency(data.revisedMaturityAmount.amount,data.revisedMaturityAmount.currency)"></row>
+<row params="baseModel : $baseModel, rootModel : $parent, label : data.module==='ISL'?resourceBundle.transactions.redeem.islamicRevisedInterestRate: resourceBundle.transactions.redeem.revisedInterestRate, dataClass : 'highlight-text',value :$formatter.formatNumber((data.revisedInterestRate)/100, 'percent')"></row>
+<!-- /ko -->

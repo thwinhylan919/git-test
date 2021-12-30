@@ -1,0 +1,47 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-9">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ApplicationMessageEdit.Code, value : $component.modelInstance.code">
+                    </row>
+
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ApplicationMessageEdit.Locale, value : $component.localeDescription">
+                    </row>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-3">
+                            <oj-label :for="[['Message74']]" class="label"><span
+                                    data-bind="text:$component.nls.ApplicationMessageEdit.Message"></span></oj-label>
+                        </div>
+
+                        <div class="oj-flex-item oj-lg-5">
+                            <oj-input-text :id="[['Message74']]" value="{{$component.modelInstance.message}}"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'message', [['#Message74']] )]]]">
+                            </oj-input-text>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickSave10]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageEdit.Save"></span></oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel8]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageEdit.Cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack68]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageEdit.Back"></span></oj-button>
+                    </div>
+                </page-section>
+            </div>
+
+            <div class="oj-flex-item oj-lg-3">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <help
+                        params="baseModel : $baseModel, rootModel : $component, transaction: 'application-message-help'">
+                    </help>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

@@ -1,0 +1,40 @@
+<!-- ko ifnot:$component.fromApproval() -->
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+  <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+      <div data-bind="text: $component.realCustomerName"></div>
+      <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+  </div>
+  <div class="form-main-container">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8 entity-create-container">
+        <div id="train-container">
+          <oj-train id="train" class="oj-train-stretch" on-oj-before-select="[[listener]]"
+            on-selected-step-changed="[[updateLabelText]]" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"
+            disabled="[[$component.disableTrain]]">
+          </oj-train>
+        </div>
+        <div class="oj-flex">
+          <div class="oj-flex-item">
+            <!-- ko if: $component.editFromViewScreen -->
+            <div
+              data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component, editFromViewScreen: true, checkboxFlag: $component.checkboxFlag, mailingCheckboxFlag: $component.mailingCheckboxFlag }}">
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.editFromViewScreen -->
+            <div
+              data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component, checkboxFlag: $component.checkboxFlag, mailingCheckboxFlag: $component.mailingCheckboxFlag }}">
+            </div>
+            <!-- /ko -->
+          </div>
+        </div>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'virtual-entity-create-template'">
+        </help>
+      </div>
+    </div>
+  </div>
+</oj-validation-group>
+<!-- /ko -->

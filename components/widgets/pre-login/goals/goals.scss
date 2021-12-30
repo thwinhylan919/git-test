@@ -1,0 +1,31 @@
+$goal-background-color: #d9efff;
+.goals {
+  .movingbox {
+        position: relative;
+        padding: 5rem 0.6rem;
+        margin: 0 auto;
+        max-width: 75rem;
+        
+        @include mq(small){
+          padding: 0.5rem;
+        }
+        @include mq(medium){
+          padding: 0.5rem 1.3rem;
+        }
+    }
+
+    .dreams-image {
+      width: 28.5rem;
+    }
+
+    .icon-title_desc {
+        padding-top: 1rem;
+        padding-bottom: 0.9375rem;
+        color: var(--base-text-primary);
+        letter-spacing: 0.025rem;
+        font-weight: var(--link-font-weight);
+        @include mq(small){
+          font-size: 0.8rem;
+        }
+    }
+}

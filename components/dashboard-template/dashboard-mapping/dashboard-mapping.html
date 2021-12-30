@@ -1,0 +1,163 @@
+<div class="oj-flex dashboard-mapping-container" id="create-mapping-container">
+    <div class="oj-sm-9">
+        <div class="form-main-container oj-flex oj-sm-12">
+            <page-section class="oj-sm-12" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <oj-validation-group id="tracker" valid="{{validationTracker}}">
+                    <div class="oj-flex oj-sm-12 oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-3 label">
+                            <oj-label for="mapping_template">
+                                <span data-bind="text:$component.resourceBundle.dashboardClassName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <!-- ko if: $component.enterpriseRolesLoaded() -->
+                            <oj-select-one id="mapping_template" value="{{$component.selectedClass}}" required :placeholder="[[$component.resourceBundle.selectDashboardType]]">
+                                <!-- ko foreach:classList -->
+                                <oj-option value="{{$data.id}}">
+                                    <span data-bind="text:$data.label"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-3 label">
+                            <oj-label for="mainlabelid">
+                                <span data-bind="text:resourceBundle.userType"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <!-- ko if: $component.enterpriseRolesLoaded() -->
+                            <oj-select-one id="mainlabelid" value="{{$component.selectSegment}}" :aria-label="[[$component.resourceBundle.userType]]" required :placeholder="[[$component.resourceBundle.selectUserType]]">
+                                <!-- ko foreach: $component.segmentList -->
+                                <oj-option value="[[$data.enterpriseRoleId]]">
+                                    <span data-bind="text:$data.enterpriseRoleName"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+
+                            <!-- /ko -->
+                        </div>
+                    </div>
+
+                    <!-- ko if: $component.dashboardListLoaded() -->
+                    <div class="oj-flex oj-sm-12 oj-flex-items-pad">
+                        <!-- ko if:$component.listOfDashboards().length -->
+                        <div class="oj-flex-item oj-sm-3 label">
+                            <oj-label for="listOfDashboards">
+                                <span data-bind="text:$component.resourceBundle.labels.template"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <oj-select-one id="listOfDashboards" value="{{$component.mappingData.dashboardId}}" required :placeholder="[[$component.resourceBundle.selectDashboard]]">
+                                <!-- ko foreach:$component.listOfDashboards -->
+                                <oj-option value="{{dashboardId+'_'+dashboardName}}">
+                                    <span data-bind="text:$baseModel.format($component.resourceBundle.dashboardList,{dashboardId:dashboardId,dashboardName:dashboardName})"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- ko if:$component.listOfDashboards().length -->
+                    <div class="oj-flex oj-sm-12 oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-3 label">
+                            <oj-label for="mappingTypeDashboardLevel">
+                                <span data-bind="text:$component.resourceBundle.labels.mappingType"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3">
+                            <oj-select-one id="mappingTypeDashboardLevel" value="{{$component.mappingData.mappedType}}" required :placeholder="[[$component.resourceBundle.selectDashboard]]">
+                                <!-- ko foreach:$component.getMappingList($component.selectedClass()) -->
+                                <oj-option value="{{$data}}">
+                                    <span data-bind="text: $component.resourceBundle.entities[$data]"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- ko if: $component.mappingData.mappedType() !== 'ROLE' -->
+                    <div class="oj-flex oj-sm-12 oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-3 label">
+                            <oj-label for="mapping_value">
+                                <span data-bind="text:$component.resourceBundle.labels.mappingValue"></span>
+                            </oj-label>
+                        </div>
+                        <!-- ko if:$component.mappingData.mappedType() ==='USER' -->
+                        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+                            <oj-input-text required id="mapping_value" :aria-label="[[$component.resourceBundle.labels.mappingValue]]" validators="[[$baseModel.getValidator('APPLICATION_NAME')]]" :invalidcomponenttracker="[[$component.validationTracker]]" async-validators="[[[userAsyncValidator]]]"
+                                value="{{$component.mappingData.mappedValue}}"></oj-input-text>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if:$component.mappingData.mappedType() ==='PARTY' -->
+                        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+                            <!-- ko if:$component.selectedPartyView() -->
+                            <span class="oj-sm-12" data-bind="text:$baseModel.format($component.resourceBundle.labels.selectedParty,{name:$component.selectedPartyName(),partyid:$component.mappingData.mappedValue()})"></span>
+                            <!-- /ko -->
+                            <!-- ko if:!showPartySearch() -->
+                            <oj-button class="action-button-tertiary" on-click="[[$component.showParty]]">
+                                <span data-bind="text:$component.resourceBundle.partySearch"></span>
+                            </oj-button>
+                            <!-- /ko -->
+                            <!-- ko if:showPartySearch() -->
+                            <div class="party-search" data-bind="component:{name:'party-validate',params:{rootModel:$data,partyDetails:$component.partyDetails,additionalDetails:$component.additionalDetails}}"></div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if:$component.mappingData.mappedType() ==='SEGMENT' -->
+                        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+                            <oj-select-one id="mapping_value" value="{{$component.mappingData.mappedValue}}" required :placeholder="[[$component.resourceBundle.selectSegment]]">
+                                <!-- ko foreach:$component.listOfSegments().segmentdtos -->
+                                <oj-option value="{{$data.code}}">
+                                    <span data-bind="text:$data.name"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </oj-validation-group>
+            </page-section>
+            <!-- ko if:$component.params.mode ==='create'-->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[saveMapping]]">
+                    <span data-bind="text:$component.resourceBundle.generic.common.save"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                    <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'dashboard-mapping-create'"></help>
+    </div>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $component,id:'noTemplate',header:$component.resourceBundle.heading.create">
+    <div class="message-text">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span data-bind="text:$component.resourceBundle.noTemplate"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+
+            <oj-button class="action-button-primary" on-click="[[$component.createDashboard]]">
+                <span data-bind="text:$component.resourceBundle.generic.common.yes"></span>
+            </oj-button>
+
+            <oj-button class="action-button-secondary" on-click="[[$component.closeModal]]">
+                <span data-bind="text:$component.resourceBundle.generic.common.no"></span>
+            </oj-button>
+
+        </div>
+    </div>
+</modal-window>

@@ -1,0 +1,42 @@
+<div class="menu-container">
+    <div class="oj-flex oj-flex-items-pad welcome-box">
+        <!-- ko if:!$baseModel.large() -->
+        <!-- ko if:$root.isUserDataSet() -->
+        <div class="oj-flex-item oj-sm-12 welcome-box-item">
+            <div>
+                <span class="welcome-box-item__name" data-bind="text : $baseModel.format($component.nls.welcome,{firstName : $dashboard.userData.userProfile.firstName, lastName : $dashboard.userData.userProfile.lastName})"></span>
+            </div>
+            <div class="welcome-box-item__info" data-bind="text : $baseModel.format($component.nls.lastLogin,{lastLoginDate : $formatter.formatDate($dashboard.userData.userProfile.preLastLoggedInDateTime, 'dateTimeFormat')})">
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: !$baseModel.large() -->
+        <!-- <div class="alternate-primary" data-bind="component: {name:'entity-switch', params:{rootModel : $root, changeMenuState : $component.changeMenuState}}">
+        </div> -->
+        <!-- /ko -->
+        <oj-button display='icons' chroming='half' on-click='[[$component.changeMenuState.bind(null,"toggle")]]' class="oj-panel-remove-button">
+            <span slot='endIcon' class='oj-panel-remove-icon'></span>
+        </oj-button>
+    </div>
+    <oj-navigation-list root-label=" " tabindex="-1" class="mobileMenu" selection="{{selectedItem}}" drill-mode="[[$component.menuDrillMode]]" on-selection-changed="[[optionChange]]" item.selectable=" {{$component.itemOnly}}">
+        <ul data-bind="template: {name: 'menuTemplate', foreach: $component.listItem, as: 'item'}">
+        </ul>
+        <script type="text/html" id="menuTemplate">
+            <li data-bind="attr: {id: $baseModel.incrementIdCount()}">
+                <a href="#" data-bind="attr:{'alt':$component.nls.menu.groups[name]}">
+                    <!-- ko if:$data.icon-->
+                    <span class="oj-navigationlist-item-icon icons" data-bind="css:$data.icon"></span>
+                    <!-- /ko -->
+                    <!-- ko text: $component.nls.menu.groups[name] -->
+                    <!-- /ko -->
+
+                </a>
+                <!-- ko if: item.submenus -->
+                <ul data-bind="template: {name: 'menuTemplate', foreach: item.submenus, as: 'item', data : {name1 : $data.name}}">
+                </ul>
+                <!-- /ko -->
+            </li>
+        </script>
+    </oj-navigation-list>
+</div>

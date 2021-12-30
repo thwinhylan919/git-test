@@ -1,0 +1,41 @@
+.sub-heading {
+    font-size: var(--base-font-size-small);
+    color: var(--form-label-foreground-color);
+}
+
+.align-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 17rem;
+    img {
+        height: 12rem;
+        width: 100%;
+    }
+}
+
+.img-specs {
+    height: 12.5rem;
+}
+
+.chart-width {
+    width: 100%;
+}
+
+.local-currency-text {
+    font-size: var(--base-font-size-small);
+    color: var(--form-label-foreground-color);
+}
+
+.align-link {
+    padding-top: 0.6rem;
+    border-top: 0.05rem solid var(--base-border-default);
+}
+
+.graph-style {
+    @include padding(1.8rem, 0, 1.9rem, 0);
+}
+
+.align-text {
+    @include padding(1rem, 0, 2.1rem, 0);
+}

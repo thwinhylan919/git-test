@@ -1,0 +1,60 @@
+{
+  "modules": [
+    {
+      "moduleName": "com.ofss.digx.app.ebpp.service.biller.Biller",
+      "components": [
+        {
+          "componentName": "biller-search",
+          "service": "read",
+		  "perform": "biller-create"
+        },
+        {
+          "componentName": "biller-create",
+          "service": "create",
+          "perform": "biller-search#review-biller",
+          "approve": "review-biller"
+        },
+        {
+          "componentName": "biller-create",
+          "service": "update",
+          "perform": "biller-search#review-biller",
+          "approve": "review-biller"
+        },
+        {
+          "componentName": "biller-create",
+          "service": "delete",
+          "perform": "biller-search#review-biller",
+          "approve": "review-biller"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.ebpp.service.category.Category",
+      "components": [
+        {
+          "componentName": "manage-category",
+          "service": "create",
+          "perform": "review-category",
+          "approve": "review-category"
+        },
+        {
+          "componentName": "manage-category",
+          "service": "update",
+          "perform": "review-category",
+          "approve": "review-category"
+        },
+        {
+          "componentName": "manage-category",
+          "service": "delete",
+          "perform": "review-category",
+          "approve": "review-category"
+        },
+        {
+          "componentName": "manage-category",
+          "service": "read",
+          "perform": "manage-category"
+        }
+      ]
+    }
+  ]
+}

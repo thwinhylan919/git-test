@@ -1,0 +1,199 @@
+$submitted-background-color: #0A8BE6;
+$draft-background-color: #5F2D61;
+$inProgress-background-color: #FD6A02;
+$box-background-color: #D3D3D3;
+.banner-content {
+    text-transform: inherit;
+    font-size: var(--confirm-screen-text-font-size);
+    color: var(--confirm-screen-text-foreground-color);
+    display: flex;
+    align-items: center;
+}
+
+.details-screen {
+    .cust-details {
+        background-color: $box-background-color;
+        color: var(--banner-text-secondary);
+        padding: var(--banner-padding);
+        justify-content: center;
+        align-items: center;
+    }
+    .module-panel-customizations {
+        @include float(left);
+        width: 16rem;
+        height: 14rem;
+        @include padding(0.4rem, 0.4rem, 0.4rem, 0.4rem);
+        @include single-margin(left, 0.2rem);
+        color: var(--base-text-primary);
+    }
+    .module-panel-customizations-small {
+        @include float(left);
+        width: 42%;
+        height: 40%;
+        @include padding(0.3rem, 0.3rem, 0.3rem, 0.3rem);
+        @include single-margin(left, 0.7rem);
+        color: var(--base-text-primary);
+    }
+    div.module-panel-customizations:hover {
+        border: 0.1rem solid var(--link-hover);
+    }
+    div.module-panel-customizations-small:hover {
+        border: 0.1rem solid var(--link-hover);
+    }
+    .img-customizations {
+        width: 100%;
+        height: 6rem;
+    }
+    .img-customizations1 {
+        width: 1.4rem;
+        height: 1.2rem;
+    }
+    .dataPadding {
+        padding-top: 2.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .description {
+        color: var(--form-label-foreground-color);
+        font-size: var(--form-label-font-size);
+        font-weight: var(--form-label-font-weight);
+    }
+    .process-status {
+        @include float(left);
+        width: 0.5rem;
+        height: 0.5rem;
+        @include single-margin(top, 0.4rem);
+        border-radius: 50%;
+    }
+    .submitted {
+        background-color: $submitted-background-color;
+    }
+    .draft {
+        background-color: $draft-background-color;
+    }
+    .inProgress {
+        background-color: $inProgress-background-color;
+    }
+    .fontStyle {
+        @include text-align(left);
+        @include single-margin(left, 0.6rem);
+        font-size: 0.7rem;
+    }
+    .countStatus {
+        @include float(left);
+        @include single-margin(left, 20%);
+    }
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--base-border-default));
+    @include single-padding(right, 0.3rem);
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot1 {
+    background-color: var(--base-color-success);
+}
+
+.dot2 {
+    background-color: var(--base-color-danger);
+}
+
+.fontDescription {
+    font-size: 0.8rem
+}
+
+.fontSmall {
+    font-size: 0.7rem
+}
+
+.paddingBottom {
+    @include padding(0rem, 0rem, 0.3rem, 0rem);
+}
+
+.confirm-screen {
+    position: relative;
+    padding: 0;
+    @include mq(small) {
+        padding: 0.5rem 0;
+    }
+    &__header {
+        border-bottom: var(--confirm-screen-border-bottom-width) solid var(--confirm-screen-border-bottom-color);
+        border-radius: var(--confirm-screen-border-radius);
+        margin: 0 0 0.8rem;
+        padding: 0.6rem;
+    }
+    .successHeader {
+        @include single-border(left, var(--confirm-screen-success-border-width) solid var(--confirm-screen-success-border-color));
+        border-radius: var(--confirm-screen-success-border-radius);
+        background-color: var(--base-color-success-light);
+        background: linear-gradient(to var(--confirm-screen-success-gradient-direction), var(--confirm-screen-success-gradient-start-color), var(--confirm-screen-success-gradient-end-color));
+    }
+    .errorHeader {
+        @include single-border(left, var(--confirm-screen-error-border-width) solid var(--confirm-screen-error-border-color));
+        border-radius: var(--confirm-screen-error-border-radius);
+        background: linear-gradient(to var(--confirm-screen-error-gradient-direction), var(--confirm-screen-error-gradient-start-color), var(--confirm-screen-error-gradient-end-color));
+    }
+    &-header {
+        &__text {
+            text-transform: uppercase;
+            font-size: var(--confirm-screen-text-font-size);
+            font-weight: var(--confirm-screen-text-font-weight);
+            color: var(--confirm-screen-text-foreground-color);
+            display: flex;
+            align-items: center;
+        }
+        &-text {
+            &__image {
+                height: 1.3rem;
+                width: 1.3rem;
+            }
+            &__message {
+                padding: 0.3rem;
+            }
+        }
+        &__successMessage {
+            @include single-padding(left, 1.6rem);
+            display: inline-block;
+        }
+    }
+    &__eReceipt-top {
+        cursor: pointer;
+        position: absolute;
+        @include right(1rem);
+        @include mq(small) {
+            top: 5.6rem;
+        }
+        &-text:hover {
+            text-decoration: underline;
+        }
+    }
+    &__list {
+        list-style-type: none;
+        @include single-padding(left, 0);
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            padding: 0.6rem;
+            @include float(left);
+            min-width: 8.1rem;
+            text-align: center;
+            justify-content: space-between;
+            img {
+                height: 3.8rem;
+            }
+        }
+    }
+    &-messageContainer {
+        &__message {
+            .row {
+                padding-bottom: 0.5rem;
+            }
+        }
+    }
+}

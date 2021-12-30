@@ -1,0 +1,274 @@
+        <div class="banner-design oj-flex oj-flex-items-pad oj-sm-flex-items-initial">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <div data-bind="text:$component.partyName"></div>
+                <span data-bind="text:$baseModel.format($component.nls.PartyID,{partyId: $component.partyId()})"></span>
+            </div>
+        </div>
+        <oj-validation-group :id="[['tracker']]">
+            <div class="form-main-container">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['PartyName80']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.PartyName"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['PartyName80']]" value="{{$component.modelInstance.name}}"
+                                        validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.nls.nameError,{
+                                    type:'length',options:{
+                                      min:1,max:105}})]]" required>
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['ShortName25']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.ShortName"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['ShortName25']]"
+                                        value="{{$component.modelInstance.shortName}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.nls.nameError,{
+                                    type:'length',options:{
+                                      min:1,max:50}})]]" required>
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <!--  ko if : $component.showCorporateCategory()  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['CategoryOfCorporate73']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.CategoryOfCorporate"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-select-one :id="[['CategoryOfCorporate73']]"
+                                        value="{{$component.modelInstance.category}}"
+                                        on-value-changed="[[$component.categoryChangedHandler]]" required>
+                                        <!-- ko foreach : $component.corporateCategoryData -->
+                                        <oj-option value="[[code]]"><span data-bind="text:description"></span>
+                                        </oj-option>
+                                        <!-- /ko -->
+                                    </oj-select-one>
+                                </div>
+                            </div>
+                            <!--  /ko  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['CorporateRegistrationNumber76']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.CorporateRegistrationNumber"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['CorporateRegistrationNumber76']]"
+                                        help.instruction="[[$component.nls.CorporateRegistrationNumberHint]]"
+                                        validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL', $component.nls.regError,{
+                                    type:'length', options:{
+                                      min:1,max:30}})]]"
+                                        value="{{$component.modelInstance.corporateRegistrationNumber}}"
+                                        required="[[true]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['TaxRegistrationNumber2']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.TaxRegistrationNumber"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['TaxRegistrationNumber2']]"
+                                        help.instruction="[[$component.nls.panHint]]" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL', $component.nls.regError,{
+                                    type:'length', options:{
+                                      min:1,max:50}})]]" value="{{$component.modelInstance.taxRegistrationNumber}}">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['MobileNumber78']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.MobileNumber"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-2">
+                                    <oj-input-text :id="[['Country-Code']]"
+                                        :aria-label="[[$component.nls.onboardcounterpartyform.countryCode]]"
+                                        value="{{$component.modelInstance.countryCode}}" required="[[true]]"
+                                        validators="[[$baseModel.getValidator('NUMBERS', $component.nls.countryCodeError,{type:'length', options:{min:1,max:6}})]]">
+                                    </oj-input-text>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['MobileNumber78']]"
+                                        value="{{$component.modelInstance.mobileNumber}}" required="[[true]]"
+                                        validators="[[$baseModel.getValidator('NUMBERS', $component.nls.mobileNoError,{type:'length', options:{min:1,max:80}})]]">
+                                    </oj-input-text>
+                                </div>
+                                <!--  ko if : $component.showAddLandline()  -->
+                                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                                    <a href="#"
+                                        data-bind="attr:{'alt':$component.nls.onboardcounterpartyform.AddLandLine,'title':$component.nls.onboardcounterpartyform.AddLandLineTitle},click:$component.addLandLine">
+                                        <span class="landline-text"
+                                            data-bind="text:$component.nls.onboardcounterpartyform.AddLandLine"></span></a>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <!--  ko ifnot : $component.showAddLandline()  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['landline64']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.LandLineNumber"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['landline64']]"
+                                        value="{{$component.modelInstance.phoneNumber}}"
+                                        validators="[[$baseModel.getValidator('NUMBERS', $component.nls.landlineNoError,{type:'length', options:{min:0,max:80}})]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['EmailID71']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.EmailID"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['EmailID71']]" value="{{$component.modelInstance.emailId}}"
+                                        maxlength="50" validators="[[$baseModel.getValidator('EMAIL')]]"
+                                        help.instruction="[[$component.nls.emailHint]]" required>
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['PreferredCommunicationMode6']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.PreferredCommunicationMode"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-radioset class="oj-choice-direction-row" :id="[['PreferredCommunicationMode6']]"
+                                        value="{{$component.modelInstance.preferredModeOfCommunication}}" required>
+                                        <oj-option value="{{'EMAIL'}}"><span
+                                                data-bind="text:$component.nls.onboardcounterpartyform.Email"></span>
+                                        </oj-option>
+                                        <oj-option value="{{'MOBILE'}}"><span
+                                                data-bind="text:$component.nls.onboardcounterpartyform.Mobile"></span>
+                                        </oj-option>
+                                    </oj-radioset>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['AddressLine74']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.AddressLine"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-6">
+                                    <oj-input-text :id="[['AddressLine74']]"
+                                        help.instruction="[[$component.nls.AddressHint]]"
+                                        value="{{$component.modelInstance.address.line1}}"
+                                        validators="[[$baseModel.getValidator('ADDRESS')]]" required="[[true]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['AddressLine72']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.AddressLine2"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-6">
+                                    <oj-input-text :id="[['AddressLine72']]"
+                                        help.instruction="[[$component.nls.AddressHint]]"
+                                        value="{{$component.modelInstance.address.line2}}"
+                                        validators="[[$baseModel.getValidator('ADDRESS')]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <!--  ko if : $component.showCountries()  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['Country13']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.Country"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-select-one :id="[['Country13']]"
+                                        value="{{$component.modelInstance.address.country}}"
+                                        on-value-changed="[[$component.getStates]]" required="[[true]]">
+                                        <!-- ko foreach : $component.countryData -->
+                                        <oj-option value="[[code]]"><span data-bind="text:description"></span>
+                                        </oj-option>
+                                        <!-- /ko -->
+                                    </oj-select-one>
+                                </div>
+                            </div>
+                            <!--  /ko  -->
+                            <!--  ko if : $component.showStates()  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['State41']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.State"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-select-one :id="[['State41']]"
+                                        value="{{$component.modelInstance.address.state}}"
+                                        on-value-changed="[[$component.stateChangedHandler]]">
+                                        <!-- ko foreach : $component.stateData -->
+                                        <oj-option value="[[code]]"><span data-bind="text:description"></span>
+                                        </oj-option>
+                                        <!-- /ko -->
+                                    </oj-select-one>
+                                </div>
+                            </div>
+                            <!--  /ko  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['City2']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.City"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['City2']]" value="{{$component.modelInstance.address.city}}"
+                                        validators="[[$baseModel.getValidator('ADDRESS')]]" required>
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['PINCode17']]"><span
+                                            data-bind="text:$component.nls.onboardcounterpartyform.PINCode"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-4">
+                                    <oj-input-text :id="[['PINCode17']]"
+                                        value="{{$component.modelInstance.address.zipCode}}"
+                                        validators="[[$baseModel.getValidator('POSTAL_CODE')]]" required>
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad button-container">
+                                <oj-button class="action-button-primary" on-click="[[$component.onClickSubmit]]">
+                                    <span slot="startIcon" class="icons icon-submit"></span><span
+                                        data-bind="text:$component.nls.onboardcounterpartyform.Submit"></span>
+                                </oj-button>
+                                <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]">
+                                    <span slot="startIcon" class="icons icon-cancel"></span><span
+                                        data-bind="text:$component.nls.onboardcounterpartyform.Cancel"></span>
+                                </oj-button>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-4">
+                            <help
+                                params="baseModel : $baseModel, rootModel : $component, transaction: 'onboard-counter-party-help'">
+                            </help>
+                        </div>
+                    </div>
+                </page-section>
+            </div>
+        </oj-validation-group>

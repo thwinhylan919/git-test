@@ -1,0 +1,30 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.finlimit.service.limit.Limit",
+		"components": [{
+				"componentName": "limit-view",
+				"service": "read",
+				"perform": "limit-search#limit-base"
+			},
+			{
+				"componentName": "create-limit",
+				"service": "create",
+				"perform": "review-create-limit",
+				"approve": "review-create-limit"
+			},
+			{
+				"componentName": "limit-view",
+				"service": "delete"
+			}
+		]
+	},
+	{
+		"moduleName": "com.ofss.digx.appx.user.service.availableLimits.AvailableLimits",
+		"components": [
+			{
+				"componentName": "available-limits",
+				"service": "read"
+			}
+		]
+	}]
+}

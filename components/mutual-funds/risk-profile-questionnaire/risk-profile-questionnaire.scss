@@ -1,0 +1,11 @@
+.question {
+    .questionSpace {
+        padding-bottom: 1rem;
+    }
+    .list-padding {
+        @include padding(0, 0, 0, 1.5rem);
+    }
+    .left-padding {
+        @include single-padding(left, 0.7rem);
+    }
+}

@@ -1,0 +1,108 @@
+{
+	"Categories": [{
+		"Description": "ePin & eLoad",
+		"billers": [{
+			"country": "MM",
+			"code": "MPTeLoad",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MPTeLoad/MPTeLoad_Logo_00-EB Resize logo-07.png",
+			"name": "MPTeLoad",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MPTeLoad/MPTeLoad_Banner_00-EB Resize logo-02.png"
+		}, {
+			"country": "MM",
+			"code": "OoredooFTTH",
+			"LogoURL": null,
+			"name": "OoredooFTTH",
+			"currency": "MMK",
+			"BannerURL": null
+		}, {
+			"country": "MM",
+			"code": "TelenorDataPack",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/TelenorDataPack/TelenorDataPack_Logo_00-EB Resize logo-10.png",
+			"name": "TelenorDataPack",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/TelenorDataPack/TelenorDataPack_Banner_00-EB Resize logo-05.png"
+		}, {
+			"country": "MM",
+			"code": "MyTelePin",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MyTelePin/MyTelePin_Logo_00-EB Resize logo-08.png",
+			"name": "MyTelePin",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MyTelePin/MyTelePin_Banner_00-EB Resize logo-03.png"
+		}, {
+			"country": "MM",
+			"code": "MecTelePin",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MecTelePin/MecTelePin_Logo_00-EB Resize logo-06.png",
+			"name": "MecTelePin",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MecTelePin/MecTelePin_Banner_00-EB Resize logo-01.png"
+		}, {
+			"country": "MM",
+			"code": "OoredooePin",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/OoredooePin/OoredooePin_Logo_00-EB Resize logo-09.png",
+			"name": "OoredooePin",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/OoredooePin/OoredooePin_Banner_00-EB Resize logo-04.png"
+		}, {
+			"country": "MM",
+			"code": "TelenorePin",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/TelenorePin/TelenorePin_Logo_00-EB Resize logo-10.png",
+			"name": "TelenorePin",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/TelenorePin/TelenorePin_Banner_00-EB Resize logo-05.png"
+		}, {
+			"country": "MM",
+			"code": "MPTePin",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MPTePin/MPTePin_Logo_00-EB Resize logo-07.png",
+			"name": "MPTePin",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MPTePin/MPTePin_Banner_00-EB Resize logo-02.png"
+		}, {
+			"country": "MM",
+			"code": "TelenorDataPackPin",
+			"LogoURL": null,
+			"name": "Telenor DataPack ePin",
+			"currency": "MMK",
+			"BannerURL": null
+		}, {
+			"country": "MM",
+			"code": "MyTeleLoad",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MyTeleLoad/MyTeleLoad_Logo_00-EB Resize logo-08.png",
+			"name": "MyTeleLoad",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MyTeleLoad/MyTeleLoad_Banner_00-EB Resize logo-03.png"
+		}, {
+			"country": "MM",
+			"code": "MecTeleLoad",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MecTeleLoad/MecTeleLoad_Logo_00-EB Resize logo-06.png",
+			"name": "MecTeleLoad",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MecTeleLoad/MecTeleLoad_Banner_00-EB Resize logo-01.png"
+		}, {
+			"country": "MM",
+			"code": "OoredooeLoad",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/OoredooeLoad/OoredooeLoad_Logo_00-EB Resize logo-09.png",
+			"name": "OoredooeLoad",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/OoredooeLoad/OoredooeLoad_Banner_00-EB Resize logo-04.png"
+		}, {
+			"country": "MM",
+			"code": "TelenoreLoad",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/TelenoreLoad/TelenoreLoad_Logo_00-EB Resize logo-10.png",
+			"name": "TelenoreLoad",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/TelenoreLoad/TelenoreLoad_Banner_00-EB Resize logo-05.png"
+		}, {
+			"country": "MM",
+			"code": "MyTelDataPack",
+			"LogoURL": "https://uatebaimages.2c2p.com/Biller/MyTelDataPack/MyTelDataPack_Logo_00-EB Resize logo-08.png",
+			"name": "MyTelDataPack",
+			"currency": "MMK",
+			"BannerURL": "https://uatebaimages.2c2p.com/Biller/MyTelDataPack/MyTelDataPack_Banner_00-EB Resize logo-03.png"
+		}],
+		"Code": "Telco",
+		"Name": "Telco"
+	}],
+	"ErrorCode": "00",
+	"ErrorMessage": "Success"
+}

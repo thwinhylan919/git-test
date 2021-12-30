@@ -1,0 +1,45 @@
+.correspondence-title,
+.mailing-address-title {
+  border-bottom: 0.0625rem solid var(--base-border-default);
+}
+
+.search-entity-container {
+  padding-top: 0.625rem;
+}
+
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+
+  .label,
+  label {
+    color: var(--banner-text-primary);
+    font-size: var(--base-font-size-medium);
+  }
+}
+
+.title-bold {
+  font-weight: var(--base-font-weight-bold);
+}
+
+.virtual-account {
+  &__info-text-small {
+    font-size: var(--base-font-size-default);
+    color: var(--base-text-secondary);
+    padding: 0.25rem;
+  }
+}
+
+.separator-for-banner {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+  @include single-margin(top, 1rem);
+}
+
+.extra-padding {
+  @include single-padding(left, 3.5rem);
+}

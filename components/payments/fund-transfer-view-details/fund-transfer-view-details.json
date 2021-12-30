@@ -1,0 +1,54 @@
+{
+  "SELFFT": {
+    "name": "review-payment-self",
+    "module": "payments",
+    "paymentType": "transfers",
+    "uri": "self",
+    "initComponent": "payments-money-transfer",
+    "initADhocComponent": "payments-money-transfer",
+    "reviewAdhocComponent":"review-payment-self"
+  },
+  "INTERNALFT": {
+    "name": "review-payment-internal",
+    "module": "payments",
+    "paymentType": "transfers",
+    "uri": "internal",
+    "initComponent": "payments-money-transfer",
+    "initADhocComponent": "adhoc-payments",
+    "payeeType":"internal",
+    "reviewAdhocComponent":"review-adhoc-payments"
+
+  },
+  "DOMESTICDRAFT": {
+    "name": "review-domestic-demand-draft",
+    "module": "payments",
+    "paymentType": "drafts",
+    "uri": "domestic",
+    "initComponent": "issue-demand-draft",
+    "initADhocComponent": "adhoc-draft",
+    "payeeType" : "demandDraft",
+    "reviewAdhocComponent":"review-adhoc-draft"
+
+  },
+  "INDIADOMESTICFT": {
+    "name": "review-payment-domestic",
+    "module": "payments",
+    "paymentType": "payouts",
+    "uri": "domestic",
+    "initComponent": "payments-money-transfer",
+    "initADhocComponent": "adhoc-payments",
+    "payeeType" : "domestic",
+    "reviewAdhocComponent":"review-adhoc-payments"
+
+  },
+  "PEER_TO_PEER": {
+    "name": "review-payment-peer-to-peer-existing",
+    "module": "payments",
+    "paymentType": "transfers",
+    "uri": "peerToPeer",
+    "initComponent": "payments-money-transfer",
+    "initADhocComponent": "payments-money-transfer",
+    "payeeType" : "peerToPeer",
+    "reviewAdhocComponent":"review-payment-peer-to-peer"
+  }
+}

@@ -1,0 +1,152 @@
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+            <h3 data-bind="text:$component.resource.header"></h3>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if : showMap -->
+        <div class="oj-flex-item oj-lg-7">
+            <oj-thematic-map class="map" id='position-by-region-map' areas='[[areaData]]' zooming='auto' panning='auto' animation-on-display='auto' markers='[[markers]]' renderer="[[rendererFunc]]" selection-mode="single" selection="{{selectedCountry}}" map-provider='[[mapProvider]]'>
+            </oj-thematic-map>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot : selectedCountryBusinessData -->
+        <div class="oj-flex-item oj-lg-5">
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko if : currenciesLoaded -->
+                <div class="oj-flex-item oj-lg-8 vertical-align-middle label">
+                    <oj-label :for="equivalent-currency"> <span data-bind="text:$component.resource.labels.equivalent"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                    <oj-select-one id="equivalent-currency" :aria-label="[[$component.resource.labels.equivalent]]" on-value-changed="[[equivalentCurrencyChangedHandler]]" value="{{$component.selectedEquivalentCurrency}}">
+                        <!-- ko foreach:$component.currencyList() -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+                <!-- ko if : showMap -->
+                <div class="oj-flex-item oj-lg-12 no-pad-cols">
+                    <oj-list-view id="position-by-region-list" :aria-label="[[$component.resource.labels.listAriaLabel]]" data="[[positionByRegionDataProvider]]" selection-mode="none" translations.msg-no-data="[[$component.exchangeRateNotMaintained()?$component.resource.messages.noExchangeRate:$component.resource.messages.noItems]]">
+                        <template slot="itemTemplate">
+                            <div class="oj-flex">
+                                <div class="oj-flex-item oj-lg-8" data-bind="text : $current.data.country"></div>
+                                <div class="oj-flex-item oj-lg-4 right" data-bind="text:$formatter.formatCurrency($current.data.amount.amount, $current.data.amount.currency)"></div>
+                            </div>
+                        </template>
+                    </oj-list-view>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : selectedCountryBusinessData -->
+        <div class="oj-flex-item oj-lg-5">
+            <div class="oj-flex oj-flex-items-pad" data-bind="with : selectedCountryBusinessData">
+                <div class="oj-flex-item oj-lg-6 vertical-align-middle label">
+                    <oj-label class="selectedCountry" for="selected-region-table"> <span data-bind="text:country"></span></oj-label>
+                </div>
+                <!-- ko if : $component.showMap -->
+                <div class="oj-flex-item oj-lg-12 no-pad-cols">
+                    <oj-table id='selected-region-table' :aria-label="[[$component.resource.labels.listAriaLabel]]" data='[[$data.dataProvider || new oj.PagingTableDataSource(new oj.ArrayTableDataSource([]))]]' columns="[[[{
+                        'headerText': $component.resource.labels.account,
+                        'template' : 'accountCount'
+                    },
+                    {
+                     'headerText': $component.resource.labels.balance,
+                     'template' : 'balance',
+                     'headerClassName':'right',
+                     'className' :'right'
+                    }]]]">
+                        <template slot="accountCount">
+                            <a href="#" class="" data-bind="attr:{'alt':$component.resource.alt.countAnchor,'title':$component.resource.title.countAnchor},click:$component.showSelectedRegionPosition.bind($data,$current.row.amount.currency)">
+                <span data-bind="text:$current.row.count"></span>
+            </a>
+                        </template>
+                        <template slot="balance">
+                            <div data-bind="text:$formatter.formatCurrency($current.row.amount.amount, $current.row.amount.currency)"></div>
+                        </template>
+                        <caption class="hide-label" data-bind="text:$component.resource.labels.listAriaLabel">
+                        </caption>
+                    </oj-table>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <script type="text/html" id="country_name">
+        <svg :width="[[(38*Math.log(country.length))]]" height="30">
+              <rect fill="#5F2D61" x="0" y="0" :rx="15" :ry="15" :width="[[(38*Math.log(country.length))]]" height="30"></rect>
+              <text :x="[[((38*Math.log(country.length)))/2]]" y="15" fill="#fff" text-anchor="middle" class="country-name" alignment-baseline="central"><oj-bind-text value="[[country]]"></oj-bind-text></text>
+            </svg>
+          </script>
+    <script type="text/html" id="country_name_amount">
+        <svg :width="[[(38*Math.log(country.length)) > (38*Math.log(($formatter.formatCurrency(amount.amount,amount.currency)).length)) ? (38*Math.log(country.length)): (38*Math.log(($formatter.formatCurrency(amount.amount,amount.currency)).length))]]" height="65">
+              <rect fill="#5F2D61" x="0" y="0" :rx="15" :ry="15" :width="[[(38*Math.log(country.length))]]" height="30"></rect>
+              <text :x="[[((38*Math.log(country.length)))/2]]" y="15" fill="#fff" text-anchor="middle" class="country-name" alignment-baseline="central"><oj-bind-text value="[[country]]"></oj-bind-text></text>
+
+              <rect fill="#F0F0F0" x="0" y="35" :width="[[(40*Math.log(($formatter.formatCurrency(amount.amount,amount.currency)).length))]]" height="30"></rect>
+              <text :x="[[((40*Math.log(($formatter.formatCurrency(amount.amount,amount.currency)).length)))/2]]" y="50" text-anchor="middle" class="country-name" alignment-baseline="central"><oj-bind-text value="[[$formatter.formatCurrency(amount.amount,amount.currency)]]"></oj-bind-text></text>
+
+            </svg>
+         </script>
+</div>
+<!-- ko if : selectedCountryBusinessData -->
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'selectedRegionAccounts', header: $component.resource.header">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-8 vertical-align-middle label">
+            <oj-label class="selectedCountry" for="selected-region-accounts-table"> <span data-bind="text:$component.selectedCountryBusinessData().country"></span></oj-label>
+        </div>
+        <!-- ko if : $component.selectedRegionAccountCurrencies().length -->
+        <div class="oj-flex-item oj-lg-4">
+            <oj-select-one id="equivalent-currency" value="{{$component.selectedRegionAccountCurrency}}" :aria-label="[[$component.resource.labels.equivalent]]" on-value-changed="[[selectedRegionEquivalentCurrencyChangedHandler]]">
+                <!-- ko foreach:$component.selectedRegionAccountCurrencies() -->
+                <oj-option value="{{value}}"><span data-bind="text:label"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : selectedRegionAccountsDataProvider -->
+        <div class="oj-flex-item oj-lg-12">
+            <oj-table id='selected-region-accounts-table' :aria-label="[[$component.resource.labels.accountsOfRegion]]" data="[[$component.selectedRegionAccountsDataProvider]]" columns="[[[{
+                        'headerText': $component.resource.labels.partyName,
+                        'field' : 'partyName'
+                    },{
+                        'headerText': $component.resource.labels.accountNumber,
+                        'field' : 'accountNo'
+                    },{
+                        headerText:$component.resource.labels.accountType,
+                        sortProperty:'none',
+                        template:'accountType'
+                    },
+                    {
+                     'headerText': $component.resource.labels.balance,
+                     'template' : 'balance',
+                     'headerClassName':'right',
+                     'className' :'right'
+                    }]]]">
+                <template slot="balance">
+                    <div data-bind="text:$formatter.formatCurrency($current.row.balance.amount, $current.row.balance.currency)"></div>
+                </template>
+                <template slot="accountType">
+                    <span class="accountType tags" data-bind="text : $component.resource.labels.accountCheck[$current.row.isExtAccChk]">
+                            </span>
+                </template>
+                <caption class="hide-label" data-bind="text:$component.resource.labels.accountsOfRegion">
+                </caption>
+            </oj-table>
+            <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" :page-size="[[10]]" data="[[$component.selectedRegionAccountsDataProvider]]">
+            </oj-paging-control>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="button-container">
+        <oj-button id="selected-region-accounts-button" class="action-button-primary" on-click="[[closeModal]]">
+            <span slot="startIcon" class="icons icon-ok"></span>
+            <span data-bind="text:$component.resource.generic.common.ok"></span>
+        </oj-button>
+    </div>
+</modal-window>
+<!-- /ko -->

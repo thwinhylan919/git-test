@@ -1,0 +1,14 @@
+{
+  "image": [{
+    "img": "SCF-bannerV2-1.png",
+    "title": "Promotion1",
+    "url": "",
+    "alt": "offerDeals"
+  },
+  {
+    "img": "SCF-bannerV2-2.png",
+    "title": "Promotion2",
+    "url": "",
+    "alt": "offerDeals"
+  }]
+}

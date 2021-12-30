@@ -1,0 +1,270 @@
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.orderDetails.switchInHeader">
+  <!-- ko if: fundHousesLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="fund-houses">
+        <span data-bind="text:$component.resource.fundDetails.fundHouse"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+      <oj-select-one id="fund-houses" :aria-label="[[$component.resource.fundDetails.fundHouse]]" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}"
+        value="{{$component.modelData.switchFund.switchInDetails.fundHouseCode}}" on-value-changed="[[switchInFundHouseListener]]"
+        disabled="{{$component.fundHouseDisabled}}" required>
+        <!-- ko foreach: $component.fundHouseDTOData -->
+        <oj-option value="[[code]]">
+          <span data-bind="text: label"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: switchInSchemesLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="schemeName">
+        <span data-bind="text: $component.resource.fundDetails.schemeName"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-select-one id="schemeName" :aria-label="[[$component.resource.fundDetails.schemeName]]" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}"
+        on-value-changed="[[schemeInListener]]" value="{{$component.modelData.switchFund.switchInDetails.scheme.schemeCode}}"
+        required>
+        <!-- ko foreach: $component.switchInSchemes -->
+        <oj-option value="[[code]]">
+          <span data-bind="text: label"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+    <!-- ko if: switchInSchemeShow -->
+    <div class="oj-flex-item">
+      <a href="#" data-bind="click:$component.switchInInfoFunction"><span class="medium-text" data-bind="text:$component.resource.fundDetails.viewNav"></span></a>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko if: switchInLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="suitability">
+        <span data-bind="text: $component.resource.fundDetails.schemeSuitability"></span>
+      </oj-label>
+      <!-- ko if: $component.isSuitableSwitchIn -->
+      <div data-bind="text: $component.resource.fundDetails.yes" id="suitability"></div>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.isSuitableSwitchIn -->
+      <div data-bind="text: $component.resource.fundDetails.no" id="suitability"></div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: switchInFolioLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="folio">
+        <span data-bind="text:$component.resource.fundDetails.folio"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-4 oj-sm-6">
+      <oj-select-one id="folio" placeholder="{{$component.resource.fundDetails.newFolio}}" value="{{$component.modelData.switchFund.switchInDetails.folioNumber}}">
+        <!-- ko foreach: $component.switchInFolios -->
+        <oj-option value="[[code]]">
+          <span data-bind="text: label"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="dividend">
+        <span data-bind="text:$component.resource.orderDetails.dividend"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-radioset id="dividend" value="{{$component.modelData.switchFund.switchInDetails.dividendActionCode}}" class="oj-choice-direction-row"
+        required="true">
+        <oj-option value="PAYOUT">
+          <span data-bind="text: $component.resource.orderDetails.payout"></span>
+        </oj-option>
+        <oj-option value="REINVEST">
+          <span data-bind="text: $component.resource.orderDetails.reinvest"></span>
+        </oj-option>
+      </oj-radioset>
+    </div>
+  </div>
+</page-section>
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.orderDetails.setInstructions">
+  <!-- ko if: switchInLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="frequency">
+        <span data-bind="text:$component.resource.orderDetails.frequency"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+      <oj-select-one id="frequency" :aria-label="[[$component.resource.orderDetails.frequency]]" on-value-changed="[[calculateDate]]"
+        placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}" value="{{$component.modelData.switchFund.switchInDetails.frequency}}"
+        translations="[[{'required':{messageDetail:$component.resource.orderDetails.frequencyRequired}}]]" required>
+        <!-- ko foreach: $component.frequencyList -->
+        <oj-option value="[[code]]">
+          <span data-bind="text: label"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="switch-onetime">
+        <span data-bind="text:$component.resource.orderDetails.switchBy"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-radioset id="switch-onetime" class="oj-choice-direction-row" :aria-label="[[$component.resource.orderDetails.switchBy]]"
+        value="{{$component.onetimeSwitchType}}">
+        <oj-option value="UN">
+          <span data-bind="text:$component.resource.orderDetails.units"></span>
+        </oj-option>
+        <oj-option value="AMT">
+          <span data-bind="text:$component.resource.orderDetails.amount"></span>
+        </oj-option>
+      </oj-radioset>
+    </div>
+  </div>
+  <!-- ko if: $component.onetimeSwitchType() === "UN" -->
+  <!-- ko if: switchInLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="enter-units">
+        <span data-bind="text:$component.resource.orderDetails.units"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+      <oj-input-text id="enter-units" value="{{$component.modelData.switchFund.switchInDetails.txnUnits}}" translations="[[{'required':{messageDetail:$component.resource.orderDetails.requiredUnits}}]]"
+        validators="[[[validateUnits]]]" required></oj-input-text>
+    </div>
+    <!-- ko ifnot: $component.switchType() === "PSTP" -->
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 switch-order-details__info-text-small">
+      <span data-bind="text: $component.resource.orderDetails.minUnits"></span>
+      <span data-bind="text: $component.modelData.navigationData.minimumUnits"></span>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if: $component.onetimeSwitchType() === "AMT" -->
+  <!-- ko if: holdingDataLoaded && switchInLoaded -->
+  <div class="oj-lg-3 oj-md-3 oj-sm-6">
+    <amount-input params="
+                               amount :$component.amount,
+                               label : $component.resource.orderDetails.amount,
+                               currency:$component.modelData.navigationData.maximumAmount.currency,
+                               converter:$formatter.formatCurrency,
+                               isMandatory:true,
+                               rootId:'amount-1'+$baseModel.incrementIdCount(),
+                               minimumAmount: $component.modelData.navigationData.minimumAmount.amount,
+                               maximumAmount: $component.modelData.navigationData.maximumAmount.amount,
+                               rootClass:'form-input'">
+    </amount-input>
+  </div>
+  <div class="oj-flex oj-flex-items-pad amount-padding switch-order-details__info-text-small">
+    <div class="oj-flex-item oj-lg-3 oj-md-5 oj-sm-6">
+      <span data-bind="text: $component.resource.orderDetails.minAmount"></span>
+      <span data-bind="text: $formatter.formatCurrency($component.modelData.navigationData.minimumAmount.amount,$component.modelData.navigationData.minimumAmount.currency)"></span>
+    </div>
+    <div class="oj-flex-item">
+      <span data-bind="text: $component.resource.orderDetails.maxAmount"></span>
+      <span data-bind="text: $formatter.formatCurrency($component.modelData.navigationData.maximumAmount.amount,$component.modelData.navigationData.maximumAmount.currency)"></span>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="start-date">
+        <span data-bind="text:$component.resource.orderDetails.startDate"></span>
+      </oj-label>
+    </div>
+    <!-- ko ifnot: orderStatusFlag -->
+    <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-4">
+      <oj-input-date id="start-date" value="{{$component.modelData.switchFund.switchInDetails.startDate}}"
+        on-value-changed="[[calculateDate]]" min="{{$component.startDate()}}" max="{{$component.modelData.navigationData.endDate}}"
+        converter="[[dateConverter]]" translations="[[{'required':{messageDetail:$component.resource.orderDetails.startDateRequired}}]]"
+        required>
+      </oj-input-date>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: orderStatusFlag -->
+    <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-4">
+      <oj-input-date id="start-date-update" value="{{$component.modelData.switchFund.switchInDetails.startDate}}"
+        on-value-changed="[[calculateDate]]" converter="[[dateConverter]]" translations="[[{'required':{messageDetail:$component.resource.orderDetails.startDateRequired}}]]"
+        required>
+      </oj-input-date>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: switchInLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label for="installments">
+        <span data-bind="text:$component.resource.orderDetails.installments"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+      <oj-select-one id="installments" :aria-label="[[$component.resource.orderDetails.installments]]" on-value-changed="[[calculateDate]]"
+        placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}" value="{{$component.modelData.switchFund.switchInDetails.installments}}"
+        translations="[[{'required':{messageDetail:$component.resource.orderDetails.installmentsRequired}}]]" required>
+        <!-- ko foreach: $component.installmentList -->
+        <oj-option value="[[code]]">
+          <span data-bind="text: label"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: viewEstimatedDate -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label>
+        <span data-bind="text:$component.resource.orderDetails.endDate"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-6">
+      <span data-bind="text: $formatter.formatDate($component.estimatedDate())"></span>
+      <a id="estimated-date-info" href="#" data-bind="attr:{alt: $component.resource.orderDetails.endDate,title: $component.resource.estimatedDateTitle}, click:$component.openPopup.bind($data,true)">
+        <span class="icons icon-information medium-text estimate"></span>
+      </a>
+    </div>
+  </div>
+  <oj-popup id="show-more-info" modality="modeless" tail="simple" position.my.horizontal="start" position.my.vertical="top"
+    position.at.horizontal="right" position.at.vertical="bottom">
+    <div class="switch-order-details-container">
+      <div class="oj-flex oj-flex-items-pad oj-sm-12 popup-width">
+        <div class="oj-flex-item oj-sm-12" data-bind="text:$component.resource.estimatedDate"></div>
+      </div>
+    </div>
+  </oj-popup>
+  <!-- /ko -->
+  <!-- ko if: switchInLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <oj-label>
+        <span data-bind="text:$component.resource.orderDetails.cutOffPeriod"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+      <span data-bind="text:$component.resource.orderDetails.time"></span>
+      <span data-bind="text: $formatter.formatDate($component.modelData.navigationData.cutOffDate, 'timeFormat')"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-6">
+      <span data-bind="text:$component.resource.orderDetails.date"></span>
+      <span data-bind="text: $formatter.formatDate($component.modelData.navigationData.cutOffDate)"></span>
+    </div>
+  </div>
+  <!-- /ko -->
+</page-section>

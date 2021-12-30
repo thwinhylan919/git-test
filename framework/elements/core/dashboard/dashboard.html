@@ -1,0 +1,96 @@
+<!-- ko let: {$dashboard : $component.getDashboardContext()}-->
+<div class="dashboard">
+    <a class="skip-main" href="#maincontent" tabindex="0" data-bind="text:$component.locale.skipToMainContent"></a>
+
+    <div class="oj-offcanvas-outer-wrapper oj-offcanvas-page">
+        <nav class="main-menu oj-offcanvas-start" id="innerDrawer">
+            <div data-bind="component:{name:'menu', params:{rootModel : $root, computeContext: $root.computeContext, menuOptionSelect: $component.menuOptionSelect, changeMenuState: $component.changeMenuState, filterMenu : filterMenu}}"></div>
+        </nav>
+        <div id="endDrawer" class="right-overlay-panel oj-offcanvas-end oj-offcanvas-overlay-shadow">
+            <!-- ko if : rightPanelData.isOpen() -->
+            <div class="oj-flex overlayHeader">
+                <h3 class="oj-flex-item oj-sm-10 headerTxt" data-bind="text: rightPanelData.header"></h3>
+                <a class="oj-flex-item oj-sm-2" href="#" data-bind="click: rightPanelData.closeHandler, attr:{alt: $component.locale.overlayDismiss, title: $component.locale.overlayDismissTitle }">
+                    <span class="icons icon-cross pull-right"></span>
+                </a>
+            </div>
+            <div class="oj-flex overlayBody">
+                <div data-bind="component: {name:rightPanelData.componentName , params:{rootModel:rightPanelData.data, closeHandler : rightPanelData.closeHandler }}"></div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="main-container">
+            <header>
+                <div data-bind="component: {name:'header', params:{rootModel : $root, computeContext: $root.computeContext, changeMenuState: $component.changeMenuState, menuOptionSelect: $component.menuOptionSelect, filterMenu : filterMenu}}">
+                </div>
+            </header>
+            <main class="container" id="maincontent" tabindex="-1">
+                <div data-bind="template: {name:'dashboard-heading'}"></div>
+                <!-- ko if: componentReset() && router.currentValue() && router.currentValue().isDashboard-->
+                <div data-bind="descendantsComplete: $component.targetLoaded, component: {name:'dashboard-container' , params:{rootModel : $root, dashboardName:router.currentValue().dashboard}}">
+                </div>
+                <!-- /ko -->
+                <div data-bind="css : {'main-content' : !isDashboard()}">
+                    <div class="oj-flex">
+                        <!-- ko if: componentReset() && router.currentValue() && router.currentValue().component-->
+                        <div class="oj-flex-item oj-sm-12" data-bind="childrenComplete: $component.targetLoaded, component: {name:router.currentValue().component, params:{rootModel:router.currentValue()}}"></div>
+                        <!-- /ko -->
+                        <!-- ko if:$baseModel.onTFAScreen() -->
+                        <div id="generic-authentication" class="oj-flex-item oj-sm-12" data-bind="component: {name : 'generic-authentication', params:{rootModel: $baseModel.authViewModel}}"></div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </main>
+
+            <div data-bind="component: {name : 'offline-notification', params:{rootModel: $data}}"></div>
+            <footer>
+                <!-- ko if: $component.fabRequired() && !$baseModel.large() && $root.isUserDataSet() && ($dashboard.appData.segment ==="RETAIL" || $dashboard.appData.segment ==="CORP") -->
+                <!-- ko if: $root.menuNavigationAvailable && isDashboard() -->
+                <div data-bind="component: {name:'docked-menu' , params:{rootModel:$data}}"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: $baseModel.cordovaDevice() -->
+                <!-- ko ifnot:!$baseModel.large() && $root.isUserDataSet() && ($dashboard.appData.segment ==="RETAIL" || $dashboard.appData.segment ==="CORP") -->
+                <div data-bind="component: {name:'footer' , params:{rootModel:$data}}"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </footer>
+        </div>
+        <!-- ko if:!isDashboard() && !$baseModel.small() -->
+        <div class="back-top">
+            <a href="#" data-bind="click: $component.backTop, attr:{'alt':$component.locale.backTop ,'aria-label':$component.locale.backTop, 'title':$component.locale.backTop}">
+                <span class="icons icon-arrow-up"></span>
+            </a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko if: $component.modalComponent() -->
+    <div data-bind="descendantsComplete: $component.targetLoaded, component: {name:modalComponent , params:{rootModel:$component}}"></div>
+    <!-- /ko -->
+    <!-- ko if: $component.oracleLiveComponent() && $baseModel.large() -->
+    <div data-bind="component: {name: $component.oracleLiveComponent(), params:{rootModel:$component}}"></div>
+    <!-- /ko -->
+</div>
+<modal-window class="oj-flex oj-flex-items-pad message" params="baseModel: $baseModel, rootModel: $component, id:'sessionExpired', header:$component.locale.sessionExpiredHeader, closeHandler: $component.sessionExpiredHandler">
+    <div class="oj-flex-item message-text label scroll" data-bind="text:$component.locale.sessionExpired"></div>
+    <div class="message-btn button-container">
+        <oj-button id="sessionExpiredButton" class="action-button-primary" on-click="[[$component.sessionExpiredHandler]]">
+            <span data-bind="text:$component.locale.generic.common.ok"></span>
+        </oj-button>
+    </div>
+</modal-window>
+
+<modal-window params="baseModel : $baseModel, rootModel : $data, id:'passwordDialog', header : $component.locale.passwordNotification">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <span data-bind="text: $component.locale.passCombination"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <span data-bind="text: $component.locale.passwordExample"></span>
+        </div>
+    </div>
+</modal-window>
+
+<!-- /ko -->

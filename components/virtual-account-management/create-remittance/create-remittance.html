@@ -1,0 +1,113 @@
+<!-- ko if: $component.view() === "create" -->
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+            <oj-label><span data-bind="text: $dashboard.userData.userProfile.accessibleEntityDTOs[0].partyName"></span></oj-label>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <div class="form-main-container">
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                    <!-- ko if: $component.remittanceListLoaded() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="remList">
+                                <span data-bind="text:$component.resource.listId"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                            <oj-select-one id="remList" :aria-label="[[$component.resource.listId]]" value="{{$component.remittanceObj}}" placeholder="{{$component.remIdPlaceholder}}" on-value-changed="[[setRemName]]">
+                                <!-- ko foreach : $component.remittanceList -->
+                                <oj-option value="[[remitterListId]]"><span data-bind="text:remitterListId"></span> </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item account-input__info-text-small">
+                            <span data-bind="text:$baseModel.format($component.resource.remListName,{ 'value' : $component.remListName()})"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad seperator">
+                        <div class="oj-flex-item oj-sm-12 oj-lg-8">
+                            <span class="title-bold" data-bind="text:$component.resource.sectionHeader"></span>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12  oj-lg-4 oj-md-4 right">
+                            <a href="#" data-bind="click:$component.addRow">
+                                <span class="icons icon-add" slot="startIcon"></span>
+                                <span data-bind="text:$component.resource.addRow"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-table id="table" :aria-label="[[$component.resource.pageHeader]]" columns="[[[
+        {headerText:$component.resource.remitterId,field:'remId',
+        },
+        {headerText:$component.resource.from,field:'fromDate'},
+        {headerText:$component.resource.to,field:'toDate'},
+        {headerText:$component.resource.reconcilationInformation,field:'reconcilationInformation',sortable:'none'},
+        {headerText:$component.resource.additionalInfo,field:'additionalInfo',sortable:'none'},
+        {headerText:$component.resource.actions,sortable:'none'}]]]" columns-default="[[{sortable:'enabled'}]]" selection-mode="[[{row:'single',column:'single'}]]" data="[[$component.dataSource]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('remittanceTemplate', true)]]">
+                                <caption class="hide-label" data-bind="text:$component.resource.pageHeader"></caption>
+                            </oj-table>
+                        </div>
+                    </div>
+                    <script type="text/html" id="remittanceTemplate">
+                        <tr>
+                            <td>
+                                <oj-input-text data-oj-context :id="[['remId'+$context.rowContext.status.rowIndex]]" :aria-label="[[$component.resource.listId]]" value="{{$context.row.remId}}" required>
+                                </oj-input-text>
+                            </td>
+                            <td>
+                                <oj-input-date data-oj-context :id="[['fromDate'+$context.rowContext.status.rowIndex]]" value="{{$context.row.fromDate}}" :aria-label="[[$component.resource.listId]]" converter="[[$formatter.dateConverter]]" on-value-changed="[[$component.fromDateChanged.bind($data,$context.row)]]"
+                                    required>
+                                </oj-input-date>
+                            </td>
+                            <td>
+                                <oj-input-date data-oj-context :id="[['toDate'+$context.rowContext.status.rowIndex]]" value="{{$context.row.toDate}}" :aria-label="[[$component.resource.listId]]" converter="[[$formatter.dateConverter]]" min="[[$component.minDate()[($context.row.id - 1)]]]"
+                                    required>
+                                </oj-input-date>
+                            </td>
+                            <td>
+                                <oj-input-text data-oj-context :id="[['reconcilationInformation'+$context.rowContext.status.rowIndex]]" placeholder="{{$component.resource.reconcilationInformationPlaceholder}}" :aria-label="[[$component.resource.listId]]" value="{{$context.row.reconcilationInformation}}">
+                                </oj-input-text>
+                            </td>
+                            <td>
+                                <oj-input-text data-oj-context :id="[['additionalInfo'+$context.rowContext.status.rowIndex]]" placeholder="{{$component.resource.reconcilationInformationPlaceholder}}" :aria-label="[[$component.resource.listId]]" value="{{$context.row.additionalInfo}}">
+                                </oj-input-text>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <a href="#" class="icon icon-delete icon-size" :aria-label="[[$component.resource.listId]]" data-bind="click:$component.deleteRow.bind($context.row.remId)"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </script>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item  button-container">
+                            <oj-button class="action-button-primary" on-click="[[$component.loadReview]]">
+                                <span slot="startIcon" class="icons icon-submit"></span>
+                                <span data-bind="text:$component.resource.submit"></span></oj-button>
+                            <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                                <span slot="startIcon" class="icons icon-cancel"></span>
+                                <span data-bind="text:$component.resource.cancel"></span></oj-button>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.remittanceListLoaded() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <span data-bind="text:$component.resource.noData"></span>
+                    </div>
+                    <!-- /ko -->
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>
+<!-- /ko -->
+<!-- ko if: $component.view() === "view" -->
+<div data-bind="template: { name: 'virtual-account-management/create-remittance-review'}"></div>
+<!-- /ko -->

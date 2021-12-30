@@ -1,0 +1,77 @@
+<div class="oj-flex">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <div class="form-main-container switch-fund-details">
+            <oj-validation-group id="fund-details">
+                <!-- ko if: refresh -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <!-- ko if:investmentAccountLoaded -->
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label for="investmentaccount">
+                                <span data-bind="text:$component.resource.fundDetails.investmentAccount"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+                            <oj-select-one id="investmentaccount" :aria-label="[[$component.resource.fundDetails.investmentAccount]]" on-value-changed="[[investmentAccountChange]]" value="{{$component.modelData.switchFund.switchOutDetails.investmentAccountNumber}}">
+                                <!-- ko foreach: $component.investmentAccountData -->
+                                <oj-option value="[[code]]">
+                                    <span data-bind="text: primaryHolderName+'-'+label+'-'+holdingPattern"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- ko if: riskProfileLoaded-->
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 switch-fund-details__info-text-small">
+                            <span data-bind="text:$component.resource.riskProfile"></span><span data-bind="text: $component.riskProfile()"></span>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: switchTypesLoaded -->
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label for="switchtype">
+                                <span data-bind="text:$component.resource.fundDetails.switchType"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-radioset class="oj-choice-direction-row" id="switchtype" :aria-label="[[$component.resource.fundDetails.switchType]]" value="{{$component.switchType}}" on-value-changed="[[switchTypeListener]]">
+                                <!-- ko foreach: $component.switchTypeData -->
+                                <oj-option value="[[code]]">
+                                    <span data-bind="text: label"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-radioset>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </page-section>
+                <!-- ko if: $component.switchType() === "ONE_TIME" || $component.switchType() === "STP" -->
+                <div data-bind="template:{name: 'wealth-management/switch-out-scheme', data: $component}"></div>
+                <!-- /ko -->
+                <!-- ko if: $component.switchType() === "PSTP" -->
+                <div data-bind="template:{name: 'wealth-management/switch-out-purchase', data: $component}"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <div class="oj-flex button-container">
+                    <!-- ko if: $component.switchType() === "ONE_TIME" || $component.switchType() === "STP" -->
+                    <oj-button class="action-button-primary" id="next-button"  on-click="[[next]]">
+                        <span slot="startIcon" class="icons icon-forward-arrow"></span>
+                        <span data-bind="text:$component.resource.fundDetails.next"></span>
+                    </oj-button>
+                    <!-- /ko -->
+                    <!-- ko if: $component.switchType() === "PSTP" -->
+                    <oj-button class="action-button-primary" id="purchase-button"  on-click="[[next]]">
+                        <span slot="startIcon" class="icons icon-pay"></span>
+                        <span data-bind="text:$component.resource.fundDetails.purchase"></span>
+                    </oj-button>
+                    <!-- /ko -->
+                    <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                        <span slot="startIcon" class="icons icon-cancel"></span>
+                        <span data-bind="text:$component.resource.cancel"></span>
+                    </oj-button>
+                </div>
+            </oj-validation-group>
+        </div>
+    </div>
+</div>

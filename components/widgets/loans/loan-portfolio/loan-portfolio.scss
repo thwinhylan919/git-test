@@ -1,0 +1,12 @@
+.loans-overview{
+  &-chart{
+    &__barChart{
+      height:100%;
+    }
+  }
+  .noData{
+    &__text {
+      margin: 3rem;
+    }
+  }
+}

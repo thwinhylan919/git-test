@@ -1,0 +1,71 @@
+<div class="oj-flex">
+    <!-- ko ifnot: $component.emailDispatched() -->
+  <div class="oj-flex-item oj-sm-12 oj-lg-9">
+    <div class="form-main-container">
+      <!-- ko if:userInformation -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading :'' ">
+        <div class="oj-flex oj-flex-items-pad  ">
+          <oj-label class="center highlight-text requestFund"><span data-bind="text:$component.nls.forgotPassword.messages.enterDetails"></span></oj-label>
+        </div>
+        <oj-validation-group id="tracker" valid="{{validationTracker}}">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2 label">
+              <oj-label for="uid"><span data-bind="text:$component.nls.forgotPassword.details.nameLabel"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+              <oj-input-text id="uid"  required :maxlength="[[50]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+                value="{{userId}}"></oj-input-text>
+            </div>
+          </div>
+
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2 label">
+              <oj-label for="dob"><span data-bind="text:$component.nls.forgotPassword.details.dobLabel"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+              <oj-input-date id="dob" required :invalidcomponenttracker="[[$component.validationTracker]]" value="{{dateOfBirth}}"
+                converter="[[$formatter.dateConverter]]"></oj-input-date>
+
+            </div>
+          </div>
+        </oj-validation-group>
+      </page-section>
+      <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary"  on-click="[[verify]]">
+          <span data-bind="text:$component.nls.forgotPassword.buttons.continueButton"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[cancelClicked]]">
+          <span data-bind="text:$component.nls.forgotPassword.buttons.cancelButton"></span>
+        </oj-button>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- ko if: $baseModel.large() -->
+
+  <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 help-panel">
+    <help params="baseModel : $baseModel, rootModel : $component, transaction: 'forgot-password'"></help>
+  </div>
+  <!-- /ko -->
+    <!-- /ko -->
+
+  <!-- ko if: $component.emailDispatched() -->
+  <div class="confirm-screen" data-bind="template: { name: 'confirm-screen/confirm-screen-banner', data: $component.headerMessages}"></div>
+  <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-1 oj-md-1 oj-lg-1">
+        <img class="login-icon" data-bind="loadImage:'forgot-user/login.svg'" alt=""></img>
+      </div>
+      <div class="oj-flex-item oj-sm-11 oj-md-11 oj-lg-11 username-link-container">
+        <a href="#" class=" " data-bind="text:$component.nls.forgotPassword.messages.clickHere,
+        click:$component.loginRedirect, attr:{title:$component.nls.forgotPassword.messages.clickHere
+           }">
+        </a>
+      </div>
+    </div>
+  </page-section>
+
+  <!-- /ko -->
+
+</div>

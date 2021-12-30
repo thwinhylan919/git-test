@@ -1,0 +1,42 @@
+<div class="form-main-container">
+  <page-section params="baseModel : $baseModel, rootModel : $data, rootParams: $component">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2 label">
+        <oj-label class="label" for="usertype"><span data-bind="text:$component.nls.fieldname.userType"></span></oj-label>
+      </div>
+
+      <!-- ko if: userTypeEnumsLoaded -->
+      <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-4 label">
+        <oj-select-one :aria-label="[[nls.fieldname.select]]" disabled="[[diableUserType]]" :placeholder="[[nls.fieldname.select]]"
+          value="{{selectedUserType}}">
+          <!-- ko foreach: userTypeEnums -->
+          <oj-option value="{{enterpriseRoleId}}"><span data-bind="text:enterpriseRoleName"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+      <!-- /ko -->
+    </div>
+  </page-section>
+
+  <!-- ko if: showMaintenanceData -->
+
+  <!-- ko if: showCreateScreen -->
+  <div class="oj-flex oj-flex-items-pad boxed">
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-12">
+      <span id="notMaintained" for="userSegment" data-bind="text:$component.nls.messages.notMaintained"></span>
+    </div>
+  </div>
+  <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6 button-container rowCenter">
+    <oj-button class="action-button-primary help-button" on-click="[[openCreateMode]]">
+      <span data-bind="text:$component.nls.buttons.create"></span>
+    </oj-button>
+  </div>
+  <!-- /ko -->
+
+  <!-- ko ifnot: showCreateScreen -->
+  <!-- <div data-bind="component: {name:'profile-maintenance' , params:{rootModel:$component}}"></div> -->
+  <!-- /ko -->
+
+  <!-- /ko -->
+
+</div>

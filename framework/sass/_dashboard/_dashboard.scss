@@ -1,0 +1,195 @@
+$field-value-size: 0.9rem !default;
+$container-margin: 3.8rem auto 0 !default;
+$small-container-margin: 2.9rem auto 0.6rem !default;
+$medium-container-margin: 3rem auto 0 !default;
+$comp-sub-title-font-size: var(--widget-header-font-size) !default;
+$comp-title-color: var(--base-text-primary) !default;
+$comp-sub-title-font-size: 1.3rem !default;
+$form-back-arrow: var(--base-text-primary) !important;
+:root {
+    --form-title-margin: 0.55rem 0;
+}
+
+.dashboard {
+    position: relative;
+    min-height: calc(100vh - 2.5rem);
+    &.banner {
+        background: none;
+        padding: 0;
+    }
+    .main-menu {
+        z-index: 6;
+        outline: 0;
+        background: linear-gradient(to var(--menu-gradient-direction), var(--menu-gradient-start-color), var(--menu-gradient-end-color));
+        box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.18);
+        width: var(--base-dimension-menu-width);
+        // @include mq(large) {
+        //     top: calc(var(--header-height) + var(--top-header-height));
+        // }
+        // top: var(--header-small-height);
+    }
+    .oj-offcanvas-shift-start {
+        .container {
+            @include mq(large) {
+                margin: 0;
+            }
+        }
+    }
+    .container {
+        width: 100%;
+        height: 100%;
+        font-size: $field-value-size;
+        margin: 0 auto;
+        outline: 0;
+        min-height: calc(100vh - var(--header-height) - var(--footer-height));
+        .page-header-container {
+            .comp-title {
+                letter-spacing: 0.03rem;
+                font-size: var(--form-page-title-font-size);
+                font-weight: var(--form-page-title-font-weight);
+                color: var(--form-page-title-foreground-color);
+                margin: var(--form-title-margin);
+                @include mq(medium) {
+                    display: none;
+                }
+                @include mq(small) {
+                    display: none;
+                }
+                &.sub-heading {
+                    font-size: $comp-sub-title-font-size;
+                    font-weight: var(--base-font-weight-light);
+                    margin: 0;
+                }
+            }
+            &.txn-page {
+                max-width: 80rem;
+                margin: 0 auto;
+            }
+        }
+        .warning-container {
+            background-color: var(--base-color-warning-light);
+            @include single-border(left, 0.4rem solid var(--base-color-warning));
+            line-height: 1.25rem;
+            margin: 0 0.6rem 0.6rem;
+            .warning-text {
+                padding: 0.6rem;
+            }
+            .warning-icon {
+                color: var(--link-base);
+                @include float(right);
+                padding-top: 0.1rem;
+            }
+            a {
+                .icons {
+                    font-size: calc(#{var(--base-font-size-default)} + 0.4rem);
+                }
+            }
+        }
+        .widget-container {
+            padding: 0.6rem 0;
+            @include mq(small) {
+                padding: 0;
+                margin-bottom: 4.5rem;
+            }
+            @include mq(medium) {
+                padding: 0;
+                margin-bottom: 4.5rem;
+            }
+        }
+        .main-content {
+            padding: 0 0rem 3rem;
+            width: 100%;
+            @include mq(small) {
+                padding: 0 0 5rem;
+            }
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+    }
+    a.skip-main {
+        @include left(-62.4rem);
+        position: absolute;
+        overflow: hidden;
+        z-index: -999;
+        &:active,
+         :focus {
+            color: var(--base-color-secondary-text);
+            @include left(0);
+            top: auto;
+            padding: 0.6rem;
+            margin: 0.6rem;
+            font-size: 0.8em;
+            z-index: 999;
+            height: auto;
+            width: auto;
+            outline: 0.1rem dotted;
+        }
+    }
+    section {
+        margin-bottom: 1.1rem;
+    }
+    .back-top {
+        position: fixed;
+        bottom: 2.5rem;
+        @include left(96%);
+        @include mq(small) {
+            @include left(auto);
+            @include right(0);
+        }
+        @include mq(medium) {
+            @include left(auto);
+            @include right(0);
+        }
+        a {
+            display: block;
+            text-align: center;
+            transition: 2s;
+        }
+        span {
+            width: 2.5rem;
+            height: 2.5rem;
+            line-height: 2.8rem;
+            display: block;
+            margin-bottom: 0.4rem;
+            background: var(--header-foreground-color);
+            color: var(--header-gradient-start-color);
+            border-radius: 50%;
+            transition: 1s;
+            box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+            @include mq(small) {
+                @include border-radius(0.3rem, 0, 0, 0.3rem);
+            }
+            @include mq(medium) {
+                @include border-radius(0.3rem, 0, 0, 0.3rem);
+            }
+        }
+    }
+    .right-overlay-panel {
+        max-width: 95%;
+        z-index: 5;
+        @include mq(small) {
+            max-width: 100%;
+        }
+        height: 100%;
+        padding: 0;
+        background: linear-gradient(to var(--overlay-gradient-direction), var(--overlay-gradient-start-color), var(--overlay-gradient-end-color));
+        .overlayHeader {
+            color: var(--overlay-header-foreground-color);
+            font-size: var(--overlay-header-font-size);
+            font-weight: var(--overlay-header-font-weight);
+            border-bottom: 1px solid var(--base-border-default);
+            background: linear-gradient(to var(--form-gradient-direction), var(--form-gradient-start-color), var(--form-gradient-end-color));
+            .headerTxt {
+                @include single-padding(left, 20px);
+            }
+            .icons {
+                padding-top: 24px;
+                @include single-padding(right, 20px);
+            }
+        }
+    }
+    .label,
+    label {
+        font-size: var(--base-font-size-large);
+    }
+}

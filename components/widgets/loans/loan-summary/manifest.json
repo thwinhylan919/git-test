@@ -1,0 +1,15 @@
+{
+  "componentName": "loan-summary",
+  "module": "loans",
+  "segment": ["corporateuser"],
+  "width": {
+    "large":"8",
+    "medium":"12"
+  },
+  "height": "251",
+  "icon": "",
+  "template": "",
+  "type": "",
+  "isVisible": true,
+  "isWidget": true
+}

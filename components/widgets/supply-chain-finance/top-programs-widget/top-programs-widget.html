@@ -1,0 +1,72 @@
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad align-div">
+        <div class="oj-flex-item oj-lg-12 align-sections">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-4">
+                    <div>
+                        <!-- ko if : $component.totalCount() >= 5 -->
+                        <h3 data-bind="html:$baseModel.format($component.nls.TopPrograms.TopPrograms,{count : $component.totalCount()})"></h3>
+                        <!-- /ko -->
+                        <!-- ko ifnot : $component.totalCount() >= 5 -->
+                        <h3 data-bind="html:$component.nls.TopPrograms.TopProgram"></h3>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-lg-8 right">
+                    <!-- ko if : $component.showGraph() -->
+                    <oj-buttonset-one class="[[&quot;align-buttonset&quot;]]" :id="[['roleButton98']]"
+                        value="{{$component.buttonRole}}" on-value-changed="[[roleChanger]]">
+                        <oj-option value="[['S']]"><span data-bind="text:$component.nls.TopPrograms.Receivables"></span>
+                        </oj-option>
+                        <oj-option value="[['B']]"><span data-bind="text:$component.nls.TopPrograms.Payables"></span>
+                        </oj-option>
+                    </oj-buttonset-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- ko if : $component.showGraph() -->
+            <div class="right local-currency-text">
+                <span data-bind="html:$component.nls.TopPrograms.currencyGuideline"></span>
+            </div>
+            <!-- ko if : $component.topPrograms().length > 0 -->
+            <oj-chart id="pieChart" class="donut_chart_pie" type="pie" series="[[$component.topPrograms]]"
+                groups="[[$component.topProgramGroup]]" style-defaults.pie-inner-radius="[[$component.innerRadius]]"
+                animation-on-data-change="auto" pie-center.label="[[$component.centerLabel]]"
+                style-defaults.data-label-position="[[$component.dataLabelPositionValue]]"
+                legend.rendered="[[$component.legendRendered]]" pie-center.label-style="[[labelStyle]]"
+                legend.position="[[$component.legendPosition]]" 
+                legend.scrolling="[[$component.legendScrolling]]" style-defaults.colors="[[donutColors]]"
+                value-formats.label.converter="[[numberformatter]]" value-formats.value.converter="[[numberformatter]]">
+            </oj-chart>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.topPrograms().length > 0 -->
+            <div class="oj-flex oj-flex-items-pad center">
+                <div class="oj-flex-item oj-sm-4 oj-md-3 oj-lg-12 align-img">
+                    <img data-bind="loadImage:'virtual-account-management/account-balance.svg'">
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <!-- ko if : $component.buttonRole() === "S" -->
+                    <div>
+                        <h3 data-bind="text:$component.nls.noSellerProgramsMessage"></h3>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if : $component.buttonRole() === "B" -->
+                    <div>
+                        <h3 data-bind="text:$component.nls.noBuyerProgramsMessage"></h3>
+                    </div>
+                    <!-- /ko -->
+
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if : $component.showGraph() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item center align-link"><a href="#" class="form-button-link" id="ViewAllPrograms84"
+                data-bind="attr:{'alt':$component.nls.ViewAllPrograms,'title':$component.nls.TopPrograms.ViewAllProgramsTitle},click:$component.onClickViewAllPrograms84,text:$component.nls.ViewAllPrograms"></a>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

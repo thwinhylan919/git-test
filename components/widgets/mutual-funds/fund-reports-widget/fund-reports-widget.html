@@ -1,0 +1,22 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 data-bind="text:$component.nls.heading.Reports">
+      </h3>
+    </div>
+  </div>
+  <oj-list-view :id="[['Reports46']]" :aria-label="[[$component.nls.Reports.Reports]]" data="[[dataSource]]"
+    item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('report_template')]]"></oj-list-view>
+  <script type="text/html" id="report_template">
+    <a href="#" class="form-button-link" data-bind="attr:{'alt':$component.nls.Reports.MutualFundsReports,'title': $baseModel.format($component.nls.Reports.MutualFundsReportsTitle, {reportLabel: label})},click:$component.onClickMutualFundsReports.bind($data)">
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-sm-2 oj-md-1 oj-lg-2">
+            <img alt="" data-bind="loadImage : 'info-icon/note.svg'" class="fundreports__icon-size">
+          </div>
+          <div class="oj-flex-item fundreports__report-text">
+            <span data-bind="text:label"></span>
+          </div>
+        </div>
+      </a>
+  </script>
+</div>

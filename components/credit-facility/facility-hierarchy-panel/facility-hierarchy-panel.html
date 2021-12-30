@@ -1,0 +1,64 @@
+    <!-- ko ifnot:$component.isIEBrowser() -->
+    <div class="oj-lg-12 overlay">
+        <div class="oj-flex oj-flex-items-pad">
+         <tree-view class="structure" id="tree1" data-bind="" params="
+         treeDetails :$component.facilityData,
+         id:'structureId',
+         maxChildNodesToRender : 8,
+         nodeIdjsonPath:'lineCodeNew',
+         nodeShortDescValue:'lineCodeNew',
+         treePanning:'auto',
+         treeZooming:'auto',
+         width:170,
+         height:90,
+         overViewRenderer:'on',
+         rootModel : $component,
+         baseModel:$baseModel,
+         showDiagram : loadTree
+         ">
+         <div class="oj-flex oj-flex-items-pad oj-panel" data-bind="css:($data.nodeData.selected ? 'treeSelected' : '')">
+            <div class="oj-flex-item oj-sm-12" data-bind="text:$data.nodeData.lineCodeNew"></div>
+            <!-- ko if: $data.nodeData.mainLineCode==='' -->
+            <div class="oj-sm-12 paddingTop">
+                  <span  data-bind="text:$component.nls.structure.labels.mainLine,css:'facilitybox'" class="tag"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $data.nodeData.mainLineCode==='' -->
+            <br>
+            <br>
+            <!-- /ko -->
+            <oj-label><div class="oj-flex-item oj-sm-12 text sanctionedAmount" data-bind="text:$component.nls.structure.labels.sanctionedAmount"></div></oj-label>
+            <div class="oj-flex-item oj-sm-12 text" data-bind="text:$formatter.formatCurrency($data.nodeData.limitAmount.amount, $data.nodeData.limitAmount.currency)"></div>
+         </div>
+      </tree-view>
+        </div>
+    </div>
+<!-- /ko -->
+    <!-- ko if:$component.isIEBrowser() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 ie-text__header" data-bind="text:$component.nls.browserMessages.browserNotSupported"></div>
+    <div class="oj-flex-item oj-lg-12 ie-text__detail-message" data-bind="text:$component.nls.browserMessages.browserMessageDetail"></div>
+    <div class="oj-flex-item oj-lg-12">
+        <div class="oj-flex oj-flex-items-pad ">
+            <ul class="confirm-screen__list">
+                <li>
+                    <img data-bind="attr:{'title':$component.nls.browserMessages.edgeTitle,'alt':$component.nls.browserMessages.edge},loadImage:'lm/edge.svg'">
+                    <div data-bind="text:$component.nls.browserMessages.edge"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.nls.browserMessages.firefoxTitle,'alt':$component.nls.browserMessages.firefox},loadImage:'lm/firefox.svg'">
+                    <div data-bind="text:$component.nls.browserMessages.firefox"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.nls.browserMessages.chromeTitle,'alt':$component.nls.browserMessages.chrome},loadImage:'lm/chrome.svg'">
+                    <div data-bind="text:$component.nls.browserMessages.chrome"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.nls.browserMessages.safariTitle,'alt':$component.nls.browserMessages.safari},loadImage:'lm/safari.svg'">
+                    <div data-bind="text:$component.nls.browserMessages.safari"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

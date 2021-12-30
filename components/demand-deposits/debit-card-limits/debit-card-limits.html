@@ -1,0 +1,250 @@
+<div class="debit-card-limits-container">
+  <div class="debit-card-limit" data-bind="css: $component.params.mode==='REVIEW' ? 'form-main-container' : ''">
+    <!-- ko if: $component.isDataLoaded() -->
+
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+      <div class="oj-flex-item oj-sm-12  oj-lg-4">
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 card-header">
+          <div class="oj-flex-item oj-md-11 oj-lg-11" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <h2 class="card-title" data-bind="text:$component.locale.debitCards.limits.domesticLimit"></h2>
+          </div>
+          <div class="oj-flex-item oj-md-1 oj-lg-1 edit">
+            <action-header params="baseModel : $baseModel, rootModel : $data">
+              <a href="#" data-bind="click:editLimit">
+  			              <span class="icons icon-remarks"></span>
+  			        </a>
+            </action-header>
+          </div>
+        </div>
+        <!-- ko foreach: dailyLimitsData -->
+        <div class="oj-flex oj-flex-items-pad oj-lg-10">
+          <div class="oj-flex-item oj-md-10 oj-lg-10" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <h2 class="card-title" data-bind="text:limitTypeLocal"></h2>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 ">
+          <div class="oj-flex-item oj-sm-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 limit-text">
+                <oj-label :for="[['NoOfTran'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.debitCards.limits.NoOfTran"></span></oj-label>
+              </div>
+              <!-- ko if: $component.editFlag -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 limit-text">
+                <span data-bind="text:count"></span>
+              </div>
+              <!-- /ko -->
+              <!-- ko ifnot: $component.editFlag -->
+              <div class="oj-flex-item oj-sm-4 oj-lg-4 limit-text">
+                <oj-input-text class="debit-card-limit__countInput"  maxlength="2" :id="[['NoOfTran'+ $baseModel.incrementIdCount()]]" value="{{count}}"></oj-input-text>
+              </div>
+              <!-- /ko -->
+            </div>
+          </div>
+          <div class="oj-flex-item oj-sm-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+            <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12">
+              <!-- ko if: $component.editFlag -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 right limit-text">
+                <oj-label :for="[['currentLimit'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.debitCards.limits.currentLimit"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 right limit-text">
+                <span data-bind="text:$formatter.formatCurrency(amountType().amount(),amountType().currency())"></span>
+              </div>
+              <!-- /ko -->
+              <!-- ko ifnot: $component.editFlag -->
+              <div class="oj-flex-item right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+                <oj-label :for="[['newLimit'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.debitCards.limits.newLimit"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="component: {
+                    name: 'amount-input', params: {
+                    amount :amountType().amount,
+                    label : $component.locale.debitCards.limits.Amount + $baseModel.incrementIdCount(),
+                    isLabelHidden: true,
+                    currency: amountType().currency,
+                    converter:$formatter.formatCurrency,
+                    currencyListRequired : false,
+                    validator:$component.validationTracker,
+                    isMandatory:true,
+                    disabled:$component.editFlag(),
+                    rootId:'card-amount'+$baseModel.incrementIdCount(),
+                    currencyURL : '',
+                    currencyParser :'',
+                    rootClass:'right',
+                    labelClasses: 'hide-label'
+                  }
+                }"></div>
+                <!-- ko if: $component.domesticMaxlimitPresent -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+                <span data-bind="text:$baseModel.format($component.locale.debitCards.limits.maxLimit , {maxAmount : $formatter.formatCurrency(maxLimitAmount().amount(),maxLimitAmount().currency())})"></span>
+              </div>
+                 <!-- /ko -->
+                 <!-- ko ifnot: $component.domesticMaxlimitPresent -->
+               <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+                 <span data-bind="text:$component.locale.debitCards.limits.notValue"></span>
+               </div>
+                  <!-- /ko -->
+              <!-- /ko -->
+            </div>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 card-header">
+          <div class="oj-flex-item" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+          </div>
+        </div>
+        <!-- /ko -->
+      </div>
+      <!-- ko if: $component.internationalTransactionsValue() -->
+      <div class="oj-flex-item oj-sm-12  oj-lg-4">
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 card-header">
+          <div class="oj-flex-item oj-md-11 oj-lg-11" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <h2 class="card-title" data-bind="text:$component.locale.debitCards.limits.internationalLimit"></h2>
+          </div>
+          <div class="oj-flex-item oj-md-1 oj-lg-1 edit">
+            <action-header params="baseModel : $baseModel, rootModel : $data">
+              <a href="#" data-bind="click:editIntnlLimit">
+  			              <span class="icons icon-remarks"></span>
+  			        </a>
+            </action-header>
+          </div>
+        </div>
+        <!-- ko foreach: internationLimitData -->
+        <div class="oj-flex oj-flex-items-pad oj-lg-10">
+          <div class="oj-flex-item oj-md-10 oj-lg-10" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <h2 class="card-title" data-bind="text:limitTypeLocal"></h2>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 ">
+          <div class="oj-flex-item oj-sm-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 limit-text">
+                <oj-label :for="[['NoOfTran'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.debitCards.limits.NoOfTran"></span></oj-label>
+              </div>
+              <!-- ko if: $component.editIntnlLimitFlag -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 limit-text">
+                <span data-bind="text:count"></span>
+              </div>
+              <!-- /ko -->
+              <!-- ko ifnot: $component.editIntnlLimitFlag -->
+              <div class="oj-flex-item oj-sm-4 oj-lg-4 limit-text">
+                <oj-input-text class="debit-card-limit__countInput"  maxlength="2" :id="[['NoOfTran'+ $baseModel.incrementIdCount()]]" value="{{count}}"></oj-input-text>
+              </div>
+              <!-- /ko -->
+            </div>
+          </div>
+          <div class="oj-flex-item oj-sm-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+            <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12">
+              <!-- ko if: $component.editIntnlLimitFlag -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 right limit-text">
+                <oj-label :for="[['currentLimit'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.debitCards.limits.currentLimit"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 right limit-text">
+                <span data-bind="text:$formatter.formatCurrency(amountType().amount(),amountType().currency())"></span>
+              </div>
+              <!-- /ko -->
+              <!-- ko ifnot: $component.editIntnlLimitFlag -->
+              <div class="oj-flex-item right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+                <oj-label :for="[['newLimit'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.debitCards.limits.newLimit"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="component: {
+                    name: 'amount-input', params: {
+                    amount :amountType().amount,
+                    label : $component.locale.debitCards.limits.Amount + $baseModel.incrementIdCount(),
+                    isLabelHidden: true,
+                    currency: amountType().currency,
+                    converter:$formatter.formatCurrency,
+                    currencyListRequired : false,
+                    validator:$component.validationTracker,
+                    isMandatory:true,
+                    disabled:$component.editFlag(),
+                    rootId:'card-amount'+$baseModel.incrementIdCount(),
+                    currencyURL : '',
+                    currencyParser :'',
+                    rootClass:'right',
+                    labelClasses: 'hide-label'
+                  }
+                }"></div>
+                <!-- ko if: $component.intMaxlimitPresent -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+                <span data-bind="text:$baseModel.format($component.locale.debitCards.limits.maxLimit , {maxAmount : $formatter.formatCurrency(maxLimitAmount().amount(),maxLimitAmount().currency())})"></span>
+              </div>
+                 <!-- /ko -->
+                 <!-- ko ifnot: $component.intMaxlimitPresent -->
+               <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+                 <span data-bind="text:$component.locale.debitCards.limits.notValue"></span>
+               </div>
+                  <!-- /ko -->
+              <!-- /ko -->
+            </div>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 card-header">
+          <div class="oj-flex-item" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+          </div>
+        </div>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+
+      <!-- ko if: $component.combinedLimit -->
+      <div class="oj-flex-item oj-sm-12 oj-lg-4">
+        <div class="oj-flex oj-flex-items-pad oj-lg-11 card-header">
+          <div class="oj-flex-item oj-md-10 oj-lg-11" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium()}">
+            <h2 class="card-title" data-bind="text:$component.locale.debitCards.limits.combinedLimit"></h2>
+          </div>
+          <div class="oj-flex-item oj-md-10 oj-lg-1 edit">
+            <action-header params="baseModel : $baseModel, rootModel : $data">
+              <a href="#" data-bind="click:editCombinedLimit">
+  					              <span class="icons icon-remarks"></span>
+  					        </a>
+            </action-header>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-11 combined-limit-section">
+          <!-- ko ifnot: $component.editcombinedLimitFlag -->
+          <div class="oj-flex-item" data-bind="component: {
+                name: 'amount-input', params: {
+                amount :combinedLimit().amount,
+                label : $component.locale.debitCards.limits.Amount + $baseModel.incrementIdCount(),
+                isLabelHidden: true,
+                currency: combinedLimit().currency,
+                converter:$formatter.formatCurrency,
+                currencyListRequired : false,
+                validator:$component.validationTracker,
+                isMandatory:true,
+                rootId:'card-amount'+$baseModel.incrementIdCount(),
+                currencyURL : '',
+                currencyParser :'',
+                rootClass:'form-input',
+                labelClasses: 'hide-label'
+              }
+            }"></div>
+          <!-- /ko -->
+          <!-- ko if: $component.editcombinedLimitFlag -->
+          <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <span data-bind="text:$formatter.formatCurrency($component.combinedLimit().amount(),$component.combinedLimit().currency())"></span>
+          </div>
+          <!-- /ko -->
+          <!-- ko if: $component.combinedMaxlimitPresent -->
+          <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.large() }">
+            <span data-bind="text:$baseModel.format($component.locale.debitCards.limits.maxLimit , {maxAmount : $formatter.formatCurrency(combinedMaxLimit().amount(),combinedMaxLimit().currency())})"></span>
+          </div>
+          <!-- /ko -->
+          <!-- ko ifnot: $component.combinedMaxlimitPresent -->
+        <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 right limit-text" data-bind="css: { 'no-pad-cols': $baseModel.large() || $baseModel.medium() }">
+          <span data-bind="text:$component.locale.debitCards.limits.notValue"></span>
+        </div>
+           <!-- /ko -->
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad buttons-padding">
+      <oj-button id="button" class="action-button-primary " on-click="[[editLimitConfirm]]"><span slot="startIcon" class="icons icon-submit"></span>
+        <span data-bind="text:$component.locale.generic.common.save"></span>
+      </oj-button>
+      <oj-button class="action-button-tertiary " on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text:$component.locale.generic.common.back"></span>
+      </oj-button>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>

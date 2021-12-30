@@ -1,0 +1,45 @@
+{
+    "modules": [{
+            "moduleName": "com.ofss.digx.app.location.service.locator.ATMLocator",
+            "components": [{
+                    "componentName": "location-read",
+                    "service": "read",
+                    "perform": "location-search-results"
+                },
+                {
+                    "componentName": "location-create",
+                    "service": "create",
+                    "perform": "location-search#location-add#review-location-add#atm-branch-file-upload#review-atm-branch-upload",
+                    "approve": "review-location-add#review-atm-branch-upload"
+                },
+                {
+                    "componentName": "location-update",
+                    "service": "update",
+                    "perform": "location-search#review-location-update#atm-branch-file-upload#review-atm-branch-upload",
+                    "approve": "review-location-update#review-atm-branch-upload"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.location.service.locator.BranchLocator",
+            "components": [{
+                    "componentName": "location-read",
+                    "service": "read",
+                    "perform": "location-search-results"
+                },
+                {
+                    "componentName": "location-create",
+                    "service": "create",
+                    "perform": "location-search#location-add#review-location-add#atm-branch-file-upload#review-atm-branch-upload",
+                    "approve": "review-location-add#review-atm-branch-upload"
+                },
+                {
+                    "componentName": "location-update",
+                    "service": "update",
+                    "perform": "location-search#review-location-update#atm-branch-file-upload#review-atm-branch-upload",
+                    "approve": "review-location-update#review-atm-branch-upload"
+                }
+            ]
+        }
+    ]
+}

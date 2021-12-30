@@ -1,0 +1,57 @@
+.terms-and-condition {
+    margin: 0;
+    bottom: 0;
+    background-color: var(--base-background-primary);
+    padding: 0.6rem;
+    border-top: .05rem solid var(--base-border-default);
+    &.termsAndConditionsButton {
+        @include single-padding(left, 45%);
+        @include single-margin(left, 14rem);
+    }
+    position: fixed;
+}
+
+.registration {
+    .emphasize {
+        font-weight: bold;
+    }
+    .submitted-application {
+        label {
+            @include single-margin(left, 1.3rem);
+            @include single-margin(right, 1.3rem);
+        }
+    }
+    .margin-bottom {
+        margin-bottom: 1.3rem;
+    }
+    .margin-left-right {
+        @include single-margin(left, 1.3rem);
+        @include single-margin(right, 1.3rem);
+    }
+    .display-inline-block {
+        display: inline-block;
+    }
+    .margin-bottom-80 {
+        margin-bottom: 5rem;
+    }
+    .header {
+        letter-spacing: 0.03rem;
+        font-size: var(--form-page-title-font-size);
+        font-weight: var(--form-page-title-font-weight);
+        color: var(--form-page-title-foreground-color);
+        margin: var(--form-title-margin);
+    }
+    .info-text {
+        font-size: 0.8rem;
+    }
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.homepage-link {
+    @include mq(large) {
+        padding-top: 0.5rem;
+    }
+}

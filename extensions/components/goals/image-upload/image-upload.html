@@ -1,0 +1,115 @@
+<!-- ko if:$dashboard.appData.segment ==='ADMIN' -->
+<div class="oj-flex oj-flex-items-pad image-upload uploadImage">
+    <!-- ko ifnot: $component.template -->
+    <div class="oj-flex-item">
+        <!-- ko if:$component.label -->
+        <oj-label><span data-bind="text:$component.label"></span></oj-label>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex-item">
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko if:$component.imageNotUploaded() -->
+            <div data-bind="descendantsComplete : $component.afterRender">
+            <div class="oj-flex-item">
+                <div class="oj-flex oj-flex-items-pad uploadImage__fileUpload uploadImage-fileUpload" data-bind="attr:{'id':'dropzone_'+($component.input())}">
+                    <div class="oj-flex-item oj-md-4 oj-lg-4 uploadImage-fileUpload__file" data-bind="text:$component.nls.drag"></div>
+                    <div class="oj-flex-item oj-md-1 oj-lg-1" data-bind="text:$component.nls.or"></div>
+                    <div class="oj-flex-item oj-md-7 oj-lg-7">
+                        <input type="file" name="files[]" data-bind="attr:{'id': $component.input(), 'aria-label':$component.nls.goalImage}" multiple>
+                    </div>
+                    <div class="oj-flex-item oj-md-12 oj-lg-12 uploadImage-fileUpload__note" data-bind="text:$baseModel.format($component.nls.maxFileSize,{fileSize:$component.maxFileSize()/1000})"></div>
+                </div>
+            </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot:$component.imageNotUploaded() -->
+            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 uploadImage-fileUpload__maxwidth">
+                <img alt="" data-bind="attr:{'id': $component.target(), 'alt':$component.nls.goalImage,'title':$component.nls.goalImageTitle, 'src': ko.utils.unwrapObservable($component.previewImage)}">
+                <a href="#" class="form-button-link" data-bind="attr:{'alt':$component.nls.removeImage,'title':$component.nls.removeImageTitle},click:removePreviewImage, text:$component.nls.remove"></a>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.template -->
+    <div data-bind="template:{name: $component.template() , data : $data}"></div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+
+<!-- ko if:$dashboard.appData.segment !=='ADMIN' -->
+<div class="oj-flex oj-flex-items-pad uploadImage">
+    <!-- ko if:$component.label -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+        <oj-label><span data-bind="text:$component.label"></span></oj-label>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.refreshAvatar() -->
+    <div>
+        <oj-avatar role="img" size="md" initials="[[initials]]" id="avatar-image-upload" data-bind="loadImage: $component.imageNotUploaded() && defaultImagePath!==null ? defaultImagePath : null,attr:{'aria-label':$component.nls.uploadPhoto}" id="{{$component.target()}}">
+        </oj-avatar>
+    </div>
+    <!-- /ko -->
+    <!-- ko descendantsComplete : $component.imageChangeHandler.bind($data,$component.previewImage()) -->
+    <!-- /ko -->
+    <!-- ko if:!$component.removeImageFlag() -->
+    <div class="oj-flex-item oj-sm-9">
+        <input type="file" class="hideInput" name="file" data-bind="attr:{'id': $component.input(), 'aria-label':$component.nls.uploadPhoto}">
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko if:$component.imageNotUploaded() -->
+            <div class="oj-flex-item ">
+                <div data-bind="descendantsComplete : $component.afterRender">
+                <a href="#" id="uploadPhoto" data-bind="attr:{alt:$component.nls.alt.uploadPhoto,title:$component.nls.uploadPhoto},click:uploadProfileImage">
+                    <span data-bind="text: $component.nls.uploadPhoto"></span></a>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot:$component.imageNotUploaded() -->
+            <div class="oj-flex-item oj-md-4 oj-lg-3 oj-sm-4 ">
+                <a href="#" class="" id="changePhoto" data-bind="attr:{alt:$component.nls.alt.change,title:$component.nls.change},click:uploadProfileImage">
+                    <span data-bind="text: $component.nls.change"></span></a>
+            </div>
+            <div class="oj-flex-item oj-md-4 oj-lg-3 oj-sm-4 remove right" data-bind="css : $component.isRemoveAllowed() ? '' : 'hide'">
+                <div data-bind="descendantsComplete : $component.afterRender">
+                <a href="#" class="" id="removePhoto" data-bind="attr:{alt:$component.nls.alt.remove,title:$component.nls.remove},click:removeImageCheck">
+                    <span data-bind="text: $component.nls.remove" class="removeLink"></span></a>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-sm-12 infoText oj-flex-item" data-bind="text:$baseModel.format($component.nls.maxFileSizeInfo,{fileSize:$component.maxFileSize()/1000})">
+            </div>
+            <div class="oj-sm-12 infoText oj-flex-item" data-bind="text:$component.nls.fileFormatInfo">
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.removeImageFlag() -->
+    <div class="oj-flex-item oj-sm-9">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item " data-bind="text: $component.nls.removePhoto"></div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-3 oj-lg-2">
+                <a class="" href="#" id="yes" data-bind="attr:{alt:$component.nls.generic.common.yes,title:$component.nls.generic.common.yes},text:$component.nls.generic.common.yes,click:removeImage.bind($data,$data)"></a>
+            </div>
+            <div class="oj-flex-item oj-sm-3 oj-lg-2 center remove">
+                <a class="" href="#" id="no" data-bind="attr:{alt:$component.nls.generic.common.no,title:$component.nls.generic.common.no},text:$component.nls.generic.common.no,click:closeRemove"></a>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<modal-window params="baseModel : $baseModel, rootModel : $component,id:'removeImage',header:$component.nls.warning">
+    <div class="oj-flex oj-flex-items-pad" data-bind="text: $component.nls.removePhoto"></div>
+    <div class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="yesButton" on-click="[[removeImage]]">
+            <span slot="startIcon" class="icons icon-yes"></span>
+            <span data-bind="text: $component.nls.generic.common.yes"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" id="noButton" on-click="[[removeImageModal.bind($data,'closeModal')]]">
+            <span slot="startIcon" class="icons icon-no"></span>
+            <span data-bind="text: $component.nls.generic.common.no"></span>
+        </oj-button>
+    </div>
+</modal-window>

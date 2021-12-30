@@ -1,0 +1,121 @@
+{
+    "modules": [
+            {
+                "moduleName": "com.ofss.digx.app.report.service.ReportRequest",
+                "components": [
+                    {
+                        "componentName": "report-generation",
+                        "service": "create",
+                        "perform": "report-generation#user-creation-report#api-consumption-report#party-param-report#external-payment-report#user-segment-report#fatca-compliance-declaration-report#fatca-compliance-declaration-status-report#biller-registration-report#bill-payment-report#biller-reconciliation-report#daily-balance-position-report#transaction-summary-report#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "createCorpAdminReport",
+                        "perform": "report-generation#user-creation-report#api-consumption-report#party-param-report#external-payment-report#user-segment-report#fatca-compliance-declaration-report#fatca-compliance-declaration-status-report#biller-registration-report#bill-payment-report#biller-reconciliation-report#daily-balance-position-report#transaction-summary-report#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "createUserReport",
+                        "perform": "report-generation#user-creation-report#api-consumption-report#party-param-report#external-payment-report#user-segment-report#fatca-compliance-declaration-report#fatca-compliance-declaration-status-report#biller-registration-report#bill-payment-report#biller-reconciliation-report#daily-balance-position-report#transaction-summary-report#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "createUserReport",
+                        "perform": "report-generation#user-creation-report#api-consumption-report#party-param-report#external-payment-report#user-segment-report#fatca-compliance-declaration-report#fatca-compliance-declaration-status-report#biller-registration-report#bill-payment-report#biller-reconciliation-report#daily-balance-position-report#transaction-summary-report#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "createUserReportAcct",
+                        "perform": "report-generation#user-creation-report#api-consumption-report#party-param-report#external-payment-report#user-segment-report#fatca-compliance-declaration-report#fatca-compliance-declaration-status-report#biller-registration-report#bill-payment-report#biller-reconciliation-report#daily-balance-position-report#transaction-summary-report#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "updateAdminReport",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#scheduled-reports-edit#review-scheduled-edit#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "updateUserReport",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#scheduled-reports-edit#review-scheduled-edit#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "updateCorpAdminReport",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#scheduled-reports-edit#review-scheduled-edit#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "listCorpAdminScheduled",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "listCorpAdminScheduled",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "listAdminScheduled",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "listUserScheduled",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "cancelAdminReport",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "cancelCorpAdminReport",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#confirmation",
+                        "approve": "review-report-generation"
+                    },
+                    {
+                        "componentName": "report-generation",
+                        "service": "cancelUserReport",
+                        "perform": "report-generation#scheduled-reports#scheduled-report-details#confirmation",
+                        "approve": "review-report-generation"
+                    }
+
+                ]
+            },
+            {
+                "moduleName": "com.ofss.digx.app.report.service.Report",
+                "components": [
+                {
+                    "componentName": "report-list",
+                    "service": "downloadReport",
+                    "perform": "report-list"
+                }
+            ]
+            },
+            {
+                "moduleName": "com.ofss.digx.app.report.service.ReportMapping",
+                "components": [
+                    {
+                        "componentName": "reports-type",
+                        "service": "updateUserMappings",
+                        "perform": "reports-type#report-user-search#report-user-map#review-report-user-map#confirmation"
+                    }
+
+                ]
+            }
+        ]
+}

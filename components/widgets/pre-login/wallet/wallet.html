@@ -1,0 +1,20 @@
+<div class="wallet">
+    <div class="movingbox">
+        <div class="oj-flex-items-pad oj-flex">
+            <div class="oj-flex-item center oj-sm-12 oj-lg-8">
+                <img class="wallet-img" data-bind="loadImage: 'home/wallet.png'">
+            </div>
+            <div class="oj-flex-item left oj-sm-12 oj-lg-4">
+                <div data-bind="component: {name: 'product-header-text',
+                    params:{rootModel:nls.header}}">
+                </div>
+                <div class="icon-title_desc">
+                    <div data-bind="text:nls.description"></div>
+                </div>
+                <oj-button class="action-button-primary" on-click="[[signuppage]]">
+                    <span data-bind="text:nls.proceed"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</div>

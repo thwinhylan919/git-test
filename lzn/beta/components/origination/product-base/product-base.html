@@ -1,0 +1,5 @@
+<!-- ko if : dataLoaded -->
+<div data-bind="descendantsComplete : $component.initQueryMap.bind($data, $root)">
+<div data-bind="component:{name: 'product', params :{rootModel : $component}}"></div>
+</div>
+<!-- /ko -->

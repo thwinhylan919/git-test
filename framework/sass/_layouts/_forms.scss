@@ -1,0 +1,119 @@
+.form-main-container {
+  h1 {
+    display: none;
+  }
+
+  background: linear-gradient(to var(--form-gradient-direction), var(--form-gradient-start-color), var(--form-gradient-end-color));
+  padding: var(--form-padding);
+  color: var(--form-foreground-color);
+  font-size: var(--form-font-size);
+  font-weight: var(--form-font-weight);
+  height: 100%;
+
+  @include mq(small) {
+    padding: var(--form-padding-small);
+  }
+
+  box-sizing: border-box;
+
+  .icons.icon-help {
+    font-size: calc(#{var(--base-font-size-default)} + 0.4rem);
+    color: var(--link-base);
+
+    &:hover {
+      color: var(--link-hover);
+    }
+  }
+
+  label {
+    color: var(--form-label-foreground-color);
+    font-size: var(--form-label-font-size);
+    font-weight: var(--form-label-font-weight);
+    float: none;
+  }
+
+  .hide-label {
+    font-size: 0 !important;
+
+    label {
+      font-size: 0 !important;
+    }
+  }
+
+  .info-text-small {
+    font-size: var(--form-info-txt-font-size);
+    color: var(--form-info-txt-foreground-color);
+    font-weight: var(--form-info-txt-font-weight);
+    line-height: calc(#{var(--form-line-height)} - 0.9rem);
+  }
+
+  .highlight-text {
+    font-size: var(--base-font-size-default);
+    color: var(--base-text-primary);
+  }
+
+  .row-group {
+    padding-bottom: 1.4rem;
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  .disclaimer {
+    font-size: var(--form-info-text-font-size) !important;
+    color: var(--form-info-txt-foreground-color) !important;
+    font-weight: var(--form-info-text-font-weight);
+  }
+
+  .delete img {
+    height: 2.8rem;
+    width: 2.8rem;
+  }
+
+  .unfavorite img {
+    height: 2.8rem;
+    width: 2.8rem;
+  }
+
+  .add-profile-icon {
+    height: 5.6rem;
+    width: 5.6rem;
+  }
+
+  .disclaimer-container {
+    background: var(--base-background-tertiary);
+    border: 0.05rem solid var(--base-border-default);
+    padding: 0 0.6rem;
+    margin-top: 0.6rem;
+
+    @include mq(small) {
+      height: auto;
+    }
+
+    .disclaimer-text {
+      font-size: var(--form-info-text-font-size);
+      color: var(--form-info-txt-foreground-color);
+      font-weight: var(--form-info-text-font-weight);
+
+      @include mq(small) {
+        font-size: var(--base-font-size-small);
+      }
+    }
+
+    a {
+      .icons {
+        font-size: calc(#{var(--base-font-size-default)} + 0.4rem);
+        color: var(--base-text-primary);
+        padding: 0.1rem 0 0;
+        line-height: 2.5rem;
+      }
+
+      &:hover {
+        .icons {
+          color: var(--link-base);
+        }
+      }
+    }
+  }
+}

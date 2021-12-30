@@ -1,0 +1,94 @@
+.wrapper {
+    height: 100%;
+    background: var(--banner-background);
+    font-family: var(--base-font-family);
+    font-size: var(--base-font-size-default);
+    border: .06rem solid var(--base-border-default);
+    padding: var(--form-padding);
+}
+
+.StepProgress {
+    position: relative;
+    @include single-padding(left, 2.3rem);
+    list-style: none;
+
+    &::before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        top: 0;
+        @include left(0.4rem);
+        width: 0.6rem;
+        height: 100%;
+        @include single-border(left, 0.12rem solid var(--base-border-default));
+    }
+
+    &-item {
+        position: relative;
+        counter-increment: list;
+
+        &:not(:last-child) {
+            padding-bottom: 2rem;
+        }
+
+        &::before {
+            display: inline-block;
+            content: '';
+            position: absolute;
+            @include left(-1.9rem);
+            height: 100%;
+            width: 0.6rem;
+        }
+
+        &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            @include left(-2.3rem);
+            width: 0.75rem;
+            height: 0.75rem;
+            border: 0.12rem solid var(--base-border-default);
+            border-radius: 50%;
+            background-color: var(--color-white);
+        }
+
+        &.is-done {
+            &::before {
+                @include single-border(left, 0.12rem solid var(--base-color-success));
+            }
+            &::after {
+                content: "\2713";
+                font-size: 0.6rem;
+                color: var(--color-white);
+                text-align: center;
+                border: 0.12rem solid var(--base-color-success);
+                background-color: var(--base-color-success);
+            }
+        }
+
+        &.current {
+            &::before {
+                @include single-border(left, 0.12rem solid var(--base-color-success));
+            }
+
+            &::after {
+                content: counter(list);
+                padding-top: 0.07rem;
+                width: 1.18rem;
+                height: 1.12rem;
+                top: -0.25rem;
+                @include left(-2.5rem);
+                font-size: var(--base-font-size-medium);
+                text-align: center;
+                color: var(--base-color-success);
+                border: 0.12rem solid var(--base-color-success);
+                background-color: var(--color-white);
+            }
+        }
+    }
+
+    strong {
+        display: block;
+    }
+}

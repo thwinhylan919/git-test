@@ -1,0 +1,229 @@
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.search">
+        <oj-validation-group id="tracker">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="addressType">
+                        <span data-bind="text:$component.resource.addressType"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <oj-radioset class="oj-choice-direction-row" id="addressType" aria-labelledby="addressTypeLabel" value="{{$component.openInvestmentAccountData().fatcaDetails.addressType}}" required>
+                        <oj-option id="permanent" value="[[$component.resource.addressType1]]">
+                            <span data-bind="text:$component.resource.addressType1"></span>
+                        </oj-option>
+                        <oj-option id="currentResidential" value="[[$component.resource.addressType2]]">
+                            <span data-bind="text:$component.resource.addressType2"></span>
+                        </oj-option>
+                        <oj-option id="other" value="[[$component.resource.addressTypeOther]]">
+                            <span data-bind="text:$component.resource.addressTypeOther"></span>
+                        </oj-option>
+                    </oj-radioset>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="nationality">
+                        <span data-bind="text:$component.resource.nationality"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <oj-radioset class="oj-choice-direction-row" id="nationality" labelled-by="accessTypeLabel" value="{{$component.openInvestmentAccountData().fatcaDetails.nationality}}" required>
+                        <oj-option :id="indian" value="[[$component.resource.indian]]"><span data-bind="text:  $component.resource.indian"></span></oj-option>
+                        <oj-option :id="otherNationality" value="[[$component.resource.other]]"><span data-bind="text:  $component.resource.other"></span></oj-option>
+                    </oj-radioset>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="countryOfBirth">
+                        <span data-bind="text:$component.resource.countryOfBirth"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <!-- ko if: $component.countriesLoaded() -->
+                    <oj-select-one id="countryOfBirth" :placeholder="[[$component.resource.select]]" value="{{$component.openInvestmentAccountData().fatcaDetails.countryOfBirth}}" required>
+                        <!-- ko foreach : $component.fetchedCountries -->
+                        <oj-option :id="[['countryOfBirth'+$index()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="placeOfBirth">
+                        <span data-bind="text:$component.resource.placeOfBirth"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-sm-8 oj-md-8">
+                    <oj-input-text id="placeOfBirth" value="{{$component.openInvestmentAccountData().fatcaDetails.cityOfBirth}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.messages.address.invalidCity,{
+                            type:'length',options:{
+                              min:1,max:50}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="pepStatus">
+                        <span data-bind="text:$component.resource.pepStatus"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-sm-8 oj-md-8">
+                    <span data-bind="text:$component.openInvestmentAccountData().fatcaDetails.pepStatus"></span>
+                </div>
+            </div>
+            <div data-bind="component: {
+                name: 'amount-input', params: {
+                  amount :$component.openInvestmentAccountData().fatcaDetails.grossAnnualIncome.amount,
+                  label : $component.resource.incomeSlab,
+                  currency:$component.openInvestmentAccountData().fatcaDetails.grossAnnualIncome.currency,
+                  converter:$formatter.formatCurrency,
+                  isMandatory:true,
+                  currencyListRequired : true,
+                  currencyURL : 'currency',
+                  currencyParser : $component.currencyParser,
+                  rootId:'amount-investment'+ $baseModel.incrementIdCount(),
+                  rootClass:'form-input',
+                  valueClasses : 'oj-lg-6 oj-sm-8 oj-md-8'
+            }
+          }"></div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="occupation">
+                        <span data-bind="text:$component.resource.occupation"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-sm-8 oj-md-8">
+                    <oj-input-text id="occupation" value="{{$component.openInvestmentAccountData().fatcaDetails.occupation}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.messages.occupationInfo.designation,{
+                          type:'length',options:{
+                            min:1,max:50}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label>
+                        <span data-bind="text:$component.resource.fatherName"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <span data-bind="text:$component.openInvestmentAccountData().fatcaDetails.spouseName"></span>
+                </div>
+            </div>
+            <!-- ko if: $component.showCountryDetails -->
+            <!-- ko foreach : $component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo -->
+            <div class="oj-flex oj-flex-items-pad align-header">
+                <div class="oj-flex-item oj-sm-8 oj-md-8 oj-lg-8 heading">
+                    <span data-bind="text: $baseModel.format($component.resource.sectionHeader,{index : $index()+1})"></span>
+                </div>
+                <!-- ko if: $index() > 0 -->
+                <div class="oj-flex-item oj-lg-4 oj-sm-4 oj-md-4">
+                    <a href="#" data-bind="attr:{id: 'delete_'+$index(),alt:$component.resource.clickToDelete,title:$component.resource.deleteDetails}, click:$component.deleteDetails.bind($data,$index())">
+                        <div class="icons icon-delete" aria-hidden="true"></div>
+                    </a>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="countryOfResidence">
+                        <span data-bind="text:$component.resource.countryOfTaxResidence"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <!-- ko if: $component.countriesLoaded() -->
+                    <oj-select-one id="countryOfResidence" :placeholder="[[$component.resource.select]]" value="{{$component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo[$index()].taxResidenceCountry}}" on-value-changed="[[$component.countryChangedHandler.bind($data,$index())]]"
+                        validators="[[nomineeValidator]]" required>
+                        <!-- ko foreach : $component.fetchedCountries -->
+                        <oj-option :id="[['countryOfResidence'+$baseModel.incrementIdCount()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="taxIdentificationDocuments">
+                        <span data-bind="text:$component.resource.taxIdentificationDocuments"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <!-- ko if: $component.documentListLoaded() -->
+                    <oj-select-one id="taxIdentificationDocuments" :placeholder="[[$component.resource.select]]" value="{{$component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo[$index()].taxIdentifierType}}" required>
+                        <!-- ko foreach : $component.taxIdentificationDocumentsList -->
+                        <oj-option :id="[['taxIdentificationDocuments'+$baseModel.incrementIdCount()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="taxIdentificationNo">
+                        <span data-bind="text:$component.resource.taxIdentificationNo"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-6">
+                    <oj-input-text id="taxIdentificationNo" value="{{$component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo[$index()].taxIdentifier}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.messages.number,{
+                          type:'length',options:{
+                            min:1,max:10}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <a href="#" data-bind="click:$component.addDetails">
+                        <span class="icons icon-add" slot="startIcon"></span>
+                        <span data-bind="text:$component.resource.addAnother"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="oj-flex button-container">
+                <!-- ko if: $component.showAdditionalDetailsSection() -->
+                <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.nextStep]]">
+                    <span slot="startIcon" class="icons icon-forward-arrow"></span>
+                    <span data-bind="text:$component.resource.generic.common.next"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.showAdditionalDetailsSection() -->
+                <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.showPopUp]]">
+                    <span slot="startIcon" class="icons icon-forward-arrow"></span>
+                    <span data-bind="text:$component.resource.generic.common.next"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" id="back"  on-click="[[$component.previousStep]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.generic.common.back"></span>
+                </oj-button>
+            </div>
+        </oj-validation-group>
+    </page-section>
+</div>
+<modal-window class="message form-main-container" params="baseModel : $baseModel, rootModel : $component,id:'additionalInfo', header: $component.resource.additionalInformation">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="message-text label scroll oj-flex-item" data-bind="html:$component.resource.modelWindowText"></div>
+    </div>
+    <div class="message-btn button-container">
+        <oj-button class="action-button-primary" :id="[['yesButton']]" on-click="[[$component.loadAdditionalInfo]]">
+            <span slot="startIcon" class="icons icon-yes"></span>
+            <span data-bind="text:$component.resource.generic.common.yes"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" :id="[['noButton']]" on-click="[[$component.loadReview]]">
+            <span slot="startIcon" class="icons icon-yes"></span>
+            <span data-bind="text:$component.resource.noButtonText"></span>
+        </oj-button>
+    </div>
+</modal-window>
+<modal-window class="message form-main-container" params="baseModel : $baseModel, rootModel : $component,id:'countryError', header: $component.resource.countryPopUpError">
+    <div class="message-text label scroll" data-bind="html:$component.resource.countryPopUpErrorMsg"></div>
+    <div class="message-btn button-container">
+        <oj-button class="action-button-primary" :id="[['okButton']]" on-click="[[$component.closePopUp]]">
+            <span data-bind="text:$component.resource.generic.common.ok"></span>
+        </oj-button>
+    </div>
+</modal-window>

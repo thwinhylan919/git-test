@@ -1,0 +1,55 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-lg-9">
+        <div class="form-main-container">
+            <!-- ko if:dataLoaded() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading :''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex oj-flex-item oj-sm-12" data-bind="text:resource.networkPreference.networkInfo"></div>
+                    <div class="oj-flex-item oj-sm-8">
+                        <oj-table id="networkPreferenceTable" :aria-label="[[resource.networkPreferenceDefinition]]" columns='[[[
+            {
+                "headerText":resource.networkPreference.resolvedNetwork,
+                "renderer":$oj.KnockoutTemplateUtils.getRenderer("network")
+            },
+            {
+                "headerText":resource.networkPreference.priority,
+                "renderer":$oj.KnockoutTemplateUtils.getRenderer("priority")
+            }
+        ]]]' columns-default="[[{sortable:'none'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[preferenceDataSource]]">
+                        </oj-table>
+                        <script type="text/html" id="priority">
+                            <oj-select-one :id="[[$context.row.networkType]]" :aria-label="[[$component.resource.networkPreference.priority]]" class="oj-flex oj-lg-3" value="{{$context.row.priority}}">
+                                <!-- ko foreach:$component.priorityArray -->
+                                <oj-option value="[[key]]"><span data-bind="text:value"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </script>
+                        <script type="text/html" id="network">
+                            <div data-bind="text:$context.row.networkType">
+                            </div>
+                        </script>
+                    </div>
+                </div>
+            </page-section>
+            <div class="button-container">
+                <oj-button id="createButton" class="action-button-primary " on-click="[[save]]">
+                    <span data-bind="text:resource.networkPreference.generic.common.save"></span>
+                </oj-button>
+                <!-- ko if: $baseModel.large() -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:resource.networkPreference.generic.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                    <span data-bind="text:resource.networkPreference.generic.common.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-lg-3 oj-sm-only-hide oj-md-only-hide help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'edit-network-preference'"></help>
+    </div>
+    <!-- /ko -->
+</div>

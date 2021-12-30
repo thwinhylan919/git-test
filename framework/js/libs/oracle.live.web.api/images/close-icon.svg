@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>close-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="D---verifying" transform="translate(-48.000000, -16.000000)" fill="#1E3948">
+            <g id="header">
+                <g id="close-icon" transform="translate(48.000000, 16.000000)">
+                    <path d="M10.1211,8 L15.5601,2.561 C16.1461,1.975 16.1461,1.025 15.5601,0.439 C14.9751,-0.146 14.0251,-0.146 13.4391,0.439 L8.0001,5.879 L2.5601,0.439 C1.9751,-0.146 1.0251,-0.146 0.4391,0.439 C-0.1469,1.025 -0.1469,1.975 0.4391,2.561 L5.8791,8 L0.4391,13.439 C-0.1469,14.025 -0.1469,14.975 0.4391,15.561 C0.7321,15.854 1.1161,16 1.5001,16 C1.8841,16 2.2671,15.854 2.5601,15.561 L8.0001,10.121 L13.4391,15.561 C13.7321,15.854 14.1161,16 14.5001,16 C14.8841,16 15.2671,15.854 15.5601,15.561 C16.1461,14.975 16.1461,14.025 15.5601,13.439 L10.1211,8 Z" id="Fill-1"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

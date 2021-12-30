@@ -1,0 +1,35 @@
+<div class="oj-flex-item">
+    <!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails && $component.params.confirmScreenExtensions.confirmScreenDetails.length>0 -->
+    <page-section params="baseModel : $baseModel, rootModel : $component,heading :''">
+        <div class="oj-lg-6">
+            <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko foreach: $data -->
+                <row class="oj-sm-12" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $data.value"></row>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,true)">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'transfer-payee-upi',{})">
+                    <img alt="" data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.transferMoney}),'title':$component.confirmScreenResources.confirm.actions.transferMoney},loadImage:'dashboard/quick-access/transfer-money.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.transferMoney"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

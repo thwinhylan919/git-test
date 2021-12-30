@@ -1,0 +1,296 @@
+<!-- ko if: $component.investmentAccountYes()-->
+<!-- ko ifnot:$baseModel.small()-->
+<!-- ko if:$component.globalLoaded -->
+<!-- ko if:$component.selectedStepValue() === "purchase-mutual-fund" -->
+<div class="form-main-container purchase-fund-container">
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-8 oj-md-8">
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-6 oj-md-10">
+                    <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"></oj-train>
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12">
+                    <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+                </div>
+            </div>
+        </div>
+        <!-- ko if:$component.orderWidget -->
+        <div class="oj-sm-4 oj-md-4 oj-lg-4 upper-margin">
+            <div data-bind="template:{name:'wealth-management/purchase-mutual-fund',data:$component}"></div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko ifnot:$component.orderStatusFlag -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-11 oj-md-11">
+            <oj-label for="search-results">
+                <span data-bind="text:$component.resource.recommendedHeader"></span>
+            </oj-label>
+        </div>
+    </div>
+    <div class="oj-flex tab-bottom-pad">
+        <div class="oj-flex-item">
+            <div class="oj-sm-12" data-bind='component:{name: "nav-bar",
+               params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.resource.navBarDescription}}'>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.showSearchResults -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-5">
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-5 center table-border">
+                    <span data-bind="text:$component.resource.returns"></span>
+                </div>
+            </div>
+            <oj-table class="table-resize" id="search-results" :aria-label="[[$component.resource.purchase]]" data="[[dataSource]]"
+                columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns="[[headerText]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('rf_template',true)]]">
+                <caption class="hide-label" data-bind="text: $component.resource.purchase"></caption>
+                <oj-paging-control id="paging" data='[[dataSource]]' page-size='10' slot='bottom'>
+                </oj-paging-control>
+            </oj-table>
+            <script type="text/html" id="rf_template">
+                <tr class="record">
+                    <td class="scheme-color oj-lg-3 oj-md-3 oj-sm-3">
+                        <span data-bind="text: schemeName"></span>
+                        <oj-rating-gauge data-bind="attr: {id : 'gauge'+$context.rowContext.status.rowIndex}" value="{{ratingValue}}" max="{{$component.maxRating()}}" class="rating-icons" readonly></oj-rating-gauge>
+                    </td>
+                    <td class="right">
+                        <span data-bind="text:$formatter.formatCurrency(latestPrice,currency)"></span>
+                    </td>
+                    <td>
+                        <div class="date-style">
+                            <span data-bind="text: $formatter.formatDate(date)"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <span data-bind="text: oneMonth"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: threeMonths"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: oneYear"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: threeYears"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: fiveYears"></span>
+                    </td>
+                    <td>
+                        <div class="oj-flex oj-lg-12 oj-md-12">
+                            <div class="oj-flex-item oj-md-4 oj-lg-4 action-border action-style">
+                                <a href="#" data-bind="text: $component.resource.buy, click:$component.buy.bind($data,$context.row,'ONE_TIME')"></a>
+                            </div>
+                            <div class="oj-flex-item oj-md-4 oj-lg-4 center action-border action-style">
+                                <a href="#" data-bind="text: $component.resource.systematicInvestment, click:$component.buy.bind($data,$context.row, 'SIP')"></a>
+                            </div>
+                            <div class="oj-flex-item oj-md-4 oj-lg-4 center">
+                                <a href="#" data-bind="text: $component.resource.standingInstruction, click:$component.buy.bind($data,$context.row, 'SI')"></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </script>
+        </div>
+    </div>
+    <!-- /ko -->
+
+</div>
+<!-- /ko -->
+<!-- ko ifnot:$component.selectedStepValue() === "purchase-mutual-fund" -->
+<div class="form-main-container purchase-fund-container">
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-8 oj-md-8">
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-6 oj-md-10">
+                    <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"></oj-train>
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12">
+                    <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+                </div>
+            </div>
+        </div>
+        <!-- ko if:$component.orderWidget -->
+        <div class="oj-sm-4 oj-lg-4 oj-md-4 upper-margin">
+            <div data-bind="template:{name:'wealth-management/purchase-mutual-fund',data:$component}"></div>
+            <!-- <help params="baseModel : $baseModel, rootModel : $component, transaction: 'purchase-mutual-fund'"></help> -->
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if:$baseModel.small()-->
+<!-- ko if:$component.globalLoaded -->
+<!-- ko if:$component.selectedStepValue() === "purchase-mutual-fund" -->
+<div class="form-main-container purchase-fund-container">
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12">
+            <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"></oj-train>
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+            <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+        </div>
+    </div>
+    <!-- ko ifnot:$component.orderStatusFlag -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item sm-12">
+            <oj-label for="search-results">
+                <span data-bind="text:$component.resource.recommendedHeader"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12" id="nav-section-purchase">
+            <div class="oj-sm-12" data-bind='component:{name: "nav-bar",
+             params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.resource.navBarDescription}}'>
+            </div>
+        </div>
+        <div params="rootModel : $data, heading : ''" class="oj-sm-12">
+            <oj-list-view id="listview-mobile" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('rflist_template',true)}]]"
+                data="[[dataSource]]">
+            </oj-list-view>
+            <oj-paging-control class="oj-flex-item center" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]"
+                :page-size="[[10]]" data="[[dataSource]]">
+            </oj-paging-control>
+        </div>
+        <script type="text/html" id="rflist_template">
+            <li>
+                <div class="oj-flex heading-pad scheme-color">
+                    <div class="oj-flex-item oj-sm-10">
+                        <span data-bind="text: schemeName"></span>
+                        <oj-rating-gauge data-bind="attr: {id : 'gauge'+$context.index}" value="{{ratingValue}}" max="{{$component.maxRating()}}" class="rating-icons" readonly></oj-rating-gauge>
+                    </div>
+                    <div class="oj-flex-item oj-sm-2 right margin-box">
+                        <a href="#" data-bind="attr: {id : 'menu'+$context.index,'title':''}, click: $component.openMenu">
+                            <div class="icons icon-more-vertical"></div>
+                        </a>
+                        <oj-menu class="hide" :id="[['menu'+$context.index+'container']]" open-options="[[{display:'dropDown',launcher: 'menu'+$context.index, position:{'my': 'center right', 'at': 'center right'}}]]" on-oj-action="[[$component.menuItemSelect]]">
+                            <!-- ko foreach: $component.menuSelectOptions() -->
+                            <oj-option data-bind="attr: {id:code},value:module">
+                                <span data-bind="text: value"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-menu>
+                    </div>
+                </div>
+                <div class="oj-flex top-border oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-6 margin-box">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.latestPrice"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:$formatter.formatCurrency(latestPrice,currency)"></span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 margin-box right">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.tableDate"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:$formatter.formatDate(date)"></span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 margin-box">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.returns"></span>
+                        </oj-label>
+                    </div>
+                </div>
+                <div class="oj-flex top-border oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-4 margin-box margin-box-bottom">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.oneMonth"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:oneMonth"></span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-4 margin-box margin-box-bottom">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.threeMonths"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:threeMonths"></span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-4 margin-box margin-box-bottom right">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.oneYear"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:oneYear"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-4 margin-box">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.threeYears"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:threeYears"></span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-4 margin-box">
+                        <oj-label class="oj-sm-12">
+                            <span data-bind="text:$component.resource.fiveYears"></span>
+                        </oj-label>
+                        <span class="oj-sm-12" data-bind="text:fiveYears"></span>
+                    </div>
+                </div>
+            </li>
+        </script>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko ifnot:$component.selectedStepValue() === "purchase-mutual-fund" -->
+<div class="form-main-container purchase-fund-container">
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12">
+            <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"></oj-train>
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+            <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.orderWidget -->
+<div class="oj-flex purchase-fund-container">
+    <modal-window class="message oj-sm-12" params="baseModel : $baseModel, rootModel : $component, id:'purchase-fund-cart',  header:$component.resource.headerText ">
+        <div data-bind="template:{name:'wealth-management/purchase-mutual-fund',data:$component}"></div>
+    </modal-window>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.showFloatingButton -->
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12">
+        <a href="#" data-bind="click: $component.openpartials">
+            <div class="floating-button"><span class="icons icon-plus"></span></div>
+        </a>
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->
+<!-- /ko -->
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'delete-order-confirm', header: $component.deletePurchaseOrders.deleteOrderHeader">
+    <div class="confirm-dialog">
+        <div class="confirm-dialog__container confirm-dialog-container">
+            <div class="oj-flex oj-flex-items-pad confirm-dialog-container__message">
+                <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 left" data-bind="text: $component.deletePurchaseOrders.deleteOrderText"></div>
+            </div>
+            <div class="oj-flex-item confirm-dialog-container__buttons button-container">
+                <oj-button class="action-button-primary" id="yesButtonConfirm" on-click="[[yesDeleteOrder]]">
+                    <span slot="startIcon" class="icons icon-yes"></span>
+                    <span data-bind="text: $component.deletePurchaseOrders.yes"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="noButtonConfirm" on-click="[[noDeleteOrder]]">
+                    <span slot="startIcon" class="icons icon-no"></span>
+                    <span data-bind="text: $component.deletePurchaseOrders.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</modal-window>
+<!-- /ko -->

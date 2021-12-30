@@ -1,0 +1,511 @@
+<oj-validation-group :id="[[$component.validationTracker]]">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+        <div class="oj-panel panel-padding">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label :for="[['invoice_no_' + $component.formId]]"><span
+                                    data-bind="text:$component.nls.CreateInvoice.CustomerInvoiceNo"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <oj-input-text :id="[['invoice_no_' + $component.formId]]"
+                                value="{{$component.modelInstance.invoiceList.invoiceNumber}}"
+                                validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.nls.CreateInvoice.CustomerInvoiceNoError,{type: 'length',options: {min: 1, max: 25}})]]"
+                                required="[[true]]"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                    <!--  ko if : $component.showBuyers()  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label :for="[['buyer_' + $component.formId]]"><span
+                                    data-bind="text:$component.nls.CreateInvoice.BuyerName"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-8">
+                            <oj-select-one :id="[['buyer_' + $component.formId]]"
+                                placeholder="[[$component.nls.buyerNamePlaceholder]]"
+                                value="{{$component.modelInstance.invoiceList.associatedParty.id}}" required="[[true]]">
+                                <!-- ko foreach : buyerNameList -->
+                                <oj-option value="[[id.value]]"><span data-bind="text:name"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div><!--  /ko  -->
+                </div>
+                <div class="oj-flex-item oj-lg-2">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-10"><a href="#" class="form-button-link"
+                                data-bind="css: $component.iconClass(), attr:{'id':'edit_' + $component.formId,'alt':$component.nls.CreateInvoice.EditIcon,'title':$component.nls.CreateInvoice.EditIconTitle},click:$component.onClickEditIcon9">
+                                <div class="icons icon-remarks"></div>
+                            </a></div>
+                        <div class="oj-flex-item oj-lg-2"><a href="#" class="form-button-link"
+                                data-bind="attr:{'id':'delete_' + $component.formId,'alt':$component.nls.CreateInvoice.DeleteIcon,'title':$component.nls.CreateInvoice.DeleteIconTitle},click:$component.showDeletePopup">
+                                <div class="icons icon-delete"></div>
+                            </a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <!--  ko if : $component.showPrograms()  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label :for="[['program_name_' + $component.formId]]"><span
+                                    data-bind="text:$component.nls.CreateInvoice.NameofProgram"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <oj-select-one :id="[['program_name_' + $component.formId]]"
+                                placeholder="[[$component.nls.programNamePlaceholder]]"
+                                value="{{$component.modelInstance.invoiceList.program.programCode}}"
+                                required="[[true]]">
+                                <!-- ko foreach : programNameList -->
+                                <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div><!--  /ko  -->
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label :for="[['pay_terms_' + $component.formId]]"><span
+                                    data-bind="text:$component.nls.CreateInvoice.PaymentTerms"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <oj-input-text :id="[['pay_terms_' + $component.formId]]"
+                                value="{{$component.modelInstance.invoiceList.paymentTerms}}"
+                                validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.nls.CreateInvoice.PaymentTermsError,{type: 'length',options: {min: 1, max: 50}})]]"
+                                required="[[true]]"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-bind="css: $component.showExpanded(), attr:{'id':'child_comp_' + $component.formId}">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['po_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.PurchaseOrderNo"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['po_' + $component.formId]]"
+                                    value="{{$component.modelInstance.invoiceList.poNumber}}"
+                                    validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.nls.CreateInvoice.PurchaseOrderNoError,{type: 'length',options: {min: 0, max: 25}})]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['po_date_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.PurchaseOrderDate"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-date converter="[[$formatter.dateConverter]]"
+                                    :id="[['po_date_' + $component.formId]]" required="[[$component.poDateRequired]]"
+                                    value="{{$component.modelInstance.invoiceList.purchaseOrderDate}}">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['invoice_date_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.InvoiceDate"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-date converter="[[$formatter.dateConverter]]"
+                                    :id="[['invoice_date_' + $component.formId]]" min="[[$component.startDate]]"
+                                    validators="[[[validateInvoiceDate]]]"
+                                    value="{{$component.modelInstance.invoiceList.invoiceDate}}" required="[[true]]">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['invoice_due_date_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.InvoiceDueDate"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-date converter="[[$formatter.dateConverter]]"
+                                    :id="[['invoice_due_date_' + $component.formId]]"
+                                    min="[[$component.minInvoiceDueDate]]" validators="[[[validateInvoiceDueDate]]]"
+                                    value="{{$component.modelInstance.invoiceList.invoiceDueDate}}" required="[[true]]">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['ship_date_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.ShipmentDate"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-date converter="[[$formatter.dateConverter]]"
+                                    :id="[['ship_date_' + $component.formId]]" min="[[$component.minInvoiceDueDate]]"
+                                    validators="[[[validateShipmenteDate]]]"
+                                    value="{{$component.modelInstance.invoiceList.shipmentDate}}">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['add_comm_choice_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.AddCommodityDetails"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-radioset class="oj-choice-direction-row"
+                                    :id="[['add_comm_choice_' + $component.formId]]" value="{{isCommodityAdded}}">
+                                    <oj-option value="{{'Y'}}"><span
+                                            data-bind="text:$component.nls.CreateInvoice.Yes"></span>
+                                    </oj-option>
+                                    <oj-option value="{{'N'}}"><span
+                                            data-bind="text:$component.nls.CreateInvoice.No"></span></oj-option>
+                                </oj-radioset>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- ko if : isCommodityAdded() === "N" -->
+                <!--  ko if : $component.modelInstance.invoiceList.amount.currency()  -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-lg-6">
+                        <div class="oj-lg-6">
+                            <amount-input
+                                params="amount :invoiceAmount,currency : $component.modelInstance.invoiceList.amount.currency, label :$component.nls.CreateInvoice.InvoiceAmount,validator:$component.validation,isMandatory:true,currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'amount_' + $component.formId,rootClass:''">
+                            </amount-input>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad calculation-padding">
+                            <div class="oj-lg-3 label-padding"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.InvoiceAmount"></span>
+                            </div>
+                            <div class="oj-lg-3 right"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['discount_no_comm_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.DiscountPercentage"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['discount_no_comm_' + $component.formId]]"
+                                    value="{{$component.modelInstance.invoiceList.discountPercentage}}"
+                                    validators="[[[$component.validateDiscountPercent]]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 calculation-padding">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-lg-3 label-padding"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.DiscountValue"></span>
+                            </div>
+                            <div class="oj-lg-3 right"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.discountAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['tax_no_comm_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.TaxPercentage"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['tax_no_comm_' + $component.formId]]"
+                                    value="{{$component.modelInstance.invoiceList.taxPercentage}}"
+                                    validators="[[[$component.validateTaxPercent]]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad calculation-padding discount-padding">
+                            <div class="oj-lg-3 label-padding"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.TaxValue"></span>
+                            </div>
+                            <div class="oj-lg-3 right"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.taxAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad button-container">
+                            <oj-button :id="[['save_no_comm_' + $component.formId]]" class="action-button-primary"
+                                on-click="[[$component.saveData]]"><span slot="startIcon"
+                                    class="icons icon-save"></span><span
+                                    data-bind="text:$component.nls.CreateInvoice.Save"></span></oj-button><a href="#"
+                                class="form-button-link"
+                                data-bind="attr:{'class':'duplicate-invoice-style','id':'copy_inv_no_comm_' + $component.formId,'alt':$component.nls.CreateInvoice.DuplicateInvoice,'title':$component.nls.CreateInvoice.DuplicateInvoiceTitle},click:$component.onClickDuplicateInvoice55,text:$component.nls.CreateInvoice.DuplicateInvoice"></a>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad total-padding">
+                            <div class="oj-lg-3 total-label"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.NetInvoiceAmount"></span>
+                            </div>
+                            <div class="oj-lg-3 right total-value"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.totalAmount.amount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if : isCommodityAdded() === "Y" -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-9 commodity-style"><span
+                            data-bind="text:$component.nls.CreateInvoice.CommodityDetails"></span></div>
+                    <div class="oj-flex-item oj-lg-2 currency-style right">
+                        <!--  ko if : $component.currencyList().length > 0  -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-6 currency-label">
+                                <oj-label :for="[['currency_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.Currency"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6 text-style">
+                                <oj-select-one class="[['right']]" :id="[['currency_' + $component.formId]]"
+                                    value="{{$component.modelInstance.invoiceList.amount.currency}}">
+                                    <!-- ko foreach : currencyList -->
+                                    <oj-option value="[[code]]"><span data-bind="text:description"></span>
+                                    </oj-option><!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                        </div><!--  /ko  -->
+                    </div>
+                </div>
+                <oj-table :class="[['oj-lg-11']]" :id="[['CommodityDetailsTable' + $component.formId]]"
+                    data="[[dataSource23]]"
+                    row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('commodity_template' + $component.formId)]]"
+                    columns="[[[{'headerText':$component.nls.CreateInvoice.Name, field:'name', sortable: false},{'headerText':$component.nls.CreateInvoice.Description, field:'description', sortable: false},{'headerText':$component.nls.CreateInvoice.Quantity, field:'quantity', sortable: false},{'headerText':$component.nls.CreateInvoice.Costperunit, field:'costPerUnit', headerClassName: 'right', sortable: false},{'headerText':$component.nls.CreateInvoice.Amount, field:'amount', headerClassName: 'right', sortable: false},{'headerText':$component.nls.CreateInvoice.Actions, field:'actions', sortable: false}]]]">
+                </oj-table>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-7 add-row-style">
+                        <a href="#" class="form-button-link"
+                            data-bind="attr:{'id':'add_comm_' + $component.formId,'alt':$component.nls.CreateInvoice.AddRow,'title':$component.nls.CreateInvoice.AddRowTitle},click:$component.onClickAddRow14,text:$component.nls.CreateInvoice.AddRow"></a>
+                    </div>
+                    <div class="oj-flex-item oj-lg-5 add-row-style">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-lg-3"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.TotalAmount"></span>
+                            </div>
+                            <!--  ko if : $component.modelInstance.invoiceList.amount.currency()  -->
+                            <div class="oj-lg-5 right"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(totalAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                            <!--  /ko  -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ko if : $component.modelInstance.invoiceList.amount.currency() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-7">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['discount_comm_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.DiscountPercentage"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['discount_comm_' + $component.formId]]"
+                                    value="{{$component.modelInstance.invoiceList.discountPercentage}}"
+                                    validators="[[[$component.validateDiscountPercent]]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-5 calculation-padding">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-lg-3"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.DiscountValue"></span>
+                            </div>
+                            <div class="oj-lg-5 right"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.discountAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-7">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['tax_comm_' + $component.formId]]"><span
+                                        data-bind="text:$component.nls.CreateInvoice.TaxPercentage"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['tax_comm_' + $component.formId]]"
+                                    value="{{$component.modelInstance.invoiceList.taxPercentage}}"
+                                    validators="[[[$component.validateTaxPercent]]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-5">
+                        <div class="oj-flex oj-flex-items-pad calculation-padding discount-padding">
+                            <div class="oj-lg-3"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.TaxValue"></span>
+                            </div>
+                            <div class="oj-lg-5 right"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.taxAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-7">
+                        <div class="oj-flex oj-flex-items-pad button-container">
+                            <oj-button :id="[['save_comm_' + $component.formId]]" class="action-button-primary"
+                                on-click="[[$component.saveData]]"><span slot="startIcon"
+                                    class="icons icon-save"></span><span
+                                    data-bind="text:$component.nls.CreateInvoice.Save"></span></oj-button><a href="#"
+                                class="form-button-link"
+                                data-bind="attr:{'class':'duplicate-invoice-style','id':'copy_inv_comm_' + $component.formId,'alt':$component.nls.CreateInvoice.DuplicateInvoice,'title':$component.nls.CreateInvoice.DuplicateInvoiceTitle},click:$component.onClickDuplicateInvoice55,text:$component.nls.CreateInvoice.DuplicateInvoice"></a>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-5">
+                        <div class="oj-flex oj-flex-items-pad total-padding">
+                            <div class="oj-lg-3 total-label"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.NetInvoiceAmount"></span>
+                            </div>
+                            <div class="oj-lg-5 right total-value"><span
+                                    data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.totalAmount.amount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+        <script type="text/html" :id="[['commodity_template' + $component.formId]]">
+            <td class="oj-lg-2">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-input-text placeholder="[[$component.nls.typeNamePlaceholder]]"
+                            :id="[['type_name_' + $context.row.id]]"
+                            :aria-label="[[$component.nls.typeNamePlaceholder]]" value="{{$context.row.name}}"
+                            validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.nls.CreateInvoice.TypeNameError,{type: 'length',options: {min: 1, max: 15}})]]"
+                            required="[[true]]"></oj-input-text>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="oj-flex">
+                    <div class="oj-flex-item ">
+                        <oj-input-text placeholder="[[$component.nls.descriptionPlaceholder]]"
+                            :id="[['desc_' + $context.row.id]]" :aria-label="[[$component.nls.descriptionPlaceholder]]"
+                            value="{{$context.row.description}}"
+                            validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.nls.CreateInvoice.DescriptionAreaError,{type: 'length',options: {min: 1, max: 40}})]]"
+                            required="[[true]]"></oj-input-text>
+                    </div>
+                </div>
+            </td>
+            <td class="oj-lg-2">
+                <div class="oj-flex">
+                    <div class="oj-flex-item ">
+                        <oj-input-text :id="[['quantity_' + $context.row.id]]"
+                            :aria-label="[[$component.nls.quantityLabel]]"
+                            on-value-changed="[[$component.computeCommodityAmount]]" value="{{$context.row.quantity}}"
+                            validators="[[[$component.validateQuantity]]]" required="[[true]]"></oj-input-text>
+                    </div>
+                </div>
+            </td>
+            <td class="oj-lg-2">
+                <div class="oj-flex">
+                    <div class="oj-flex-item ">
+                        <oj-input-text :id="[['cost_' + $context.row.id]]" :aria-label="[[$component.nls.costLabel]]"
+                            :class="right" on-value-changed="[[$component.computeCommodityAmount]]"
+                            value="{{$context.row.costPerUnit}}" validators="[[[$component.validateCost]]]"
+                            required="[[true]]"></oj-input-text>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="oj-flex">
+                    <div class="oj-flex-item right"><span data-bind="text:$context.row.totalCost"></span></div>
+                </div>
+            </td>
+            <td class="oj-lg-1">
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-5 icon-border"><a href="#" class="form-button-link"
+                            data-bind="attr:{'id':'copy_comm_' + $context.row.id,'alt':$component.nls.CreateInvoice.CopyCommodity,'title':$component.nls.CreateInvoice.CopyCommodityTitle},click:$component.onClickCopyCommodity97">
+                            <div class="icon-size icon-copy"></div>
+                        </a></div>
+                    <div class="oj-flex-item oj-lg-6 center"><a href="#" class="form-button-link"
+                            data-bind="attr:{'id':'delete_comm_' + $context.row.id,'alt':$component.nls.CreateInvoice.DeleteCommodity,'title':$component.nls.CreateInvoice.DeleteCommodityTitle},click:$component.onClickDeleteCommodity92">
+                            <div class="icon-size icon-cancel"></div>
+                        </a></div>
+                </div>
+            </td>
+        </script>
+    </page-section>
+</oj-validation-group>
+
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'no-programs' + $component.formId, header : $component.nls.componentHeader">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="html:$component.nls.noProgramsMessage"></div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.closeHandler]]"><span
+                data-bind="text:$component.nls.ok"></span></oj-button>
+    </div>
+</modal-window>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandlerPopUp,id:'delete-confirm' + $component.formId, header : $component.nls.CreateInvoice.deleteInvoice">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="html:$component.nls.CreateInvoice.deleteInvoiceMessage"></div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickDeleteIcon17]]"><span slot="startIcon"
+                class="icons icon-confirm"></span><span data-bind="text:$component.nls.confirm"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.closeHandlerPopUp]]"><span slot="startIcon"
+                class="icons icon-cancel"></span><span data-bind="text:$component.nls.cancel"></span></oj-button>
+    </div>
+</modal-window>

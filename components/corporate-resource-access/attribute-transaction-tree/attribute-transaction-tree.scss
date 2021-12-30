@@ -1,0 +1,10 @@
+.attribute-treeview-checkbox {
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+    margin: 0.6rem;
+}
+
+.checkboxtree-container {
+    @include padding(0, 0, 0, 2.5rem);
+}

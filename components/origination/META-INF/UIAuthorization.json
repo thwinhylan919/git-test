@@ -1,0 +1,23 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.origination.service.submission.core.Submission",
+      "components": [{
+        "componentName": "product-base",
+        "service": "submit",
+        "perform": "cc-delivery-preferences#apply-online#offers-panel#basic-primary-info#primary-registration#application-form#product#identity-info#contact-info#customize-card#financial-template-base#user-creation#orientation#review#submission-confirmation#account-funding#account-holder#assets-info#income-info#expense-info#liabilities-info#occupation-info#offers#requirements#vehicle-info#property-info#card-account#card-addon#card-balance-transfer#loan-account-configuration#loan-account-summary#dealer-details#maintenance-base#financial-type-maintenance#product-details#tooltip#cancel-application#funding-table#vehicle-funding-table#document-upload#card-preferences#product-groups#product-groups-card#search-vehicle#personal-details#financial-details#facebook#facebook-mobile#linkedin#linkedin-mobile#social-media#loan-tenure"
+      }, {
+        "componentName": "application-tracking-base",
+        "service": "list",
+        "perform": "application-list#app-tracker-dashboard#product-tracking-base#app-tracker-dashboard-view#application-dashboard#application-dashboard-view#application-dashboard-actions#app-tracker-summary#application-summary#application-fees-view#app-tracker-documents#application-documents#account-summary#application-additional-details#application-details-view#application-insurance-view#application-loan-statement-input#application-offer#application-offer-container#application-repayment-input#application-status-history#card-additional-preferences#card-balance-transfer-input#card-delivery-preferences#card-holder-preferences#card-membership#mortgage-additional-details"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.origination.service.workflow.OriginationWorkflow",
+      "components": [{
+        "componentName": "workflow-base",
+        "service": "createWorkflow",
+        "perform": "workflow-configuration"
+      }]
+    }
+  ]
+}

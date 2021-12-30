@@ -1,0 +1,131 @@
+{
+  "modules": [
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.program.Program",
+      "components": [
+        {
+          "componentName": "program-management-global",
+          "service": "create",
+          "perform": "create-program-link#create-program-parameters#create-program-review",
+          "approve": "create-program-review",
+          "view": null
+        },
+        {
+          "componentName": "program-management-global",
+          "service": "update",
+          "perform": "create-program-link#create-program-parameters#create-program-review",
+          "approve": "create-program-review",
+          "view": null
+        },
+        {
+          "componentName": "view-program-search",
+          "service": "list",
+          "perform": "select-role#view-program-search",
+          "view": null
+        },
+        {
+          "componentName": "program-details-view",
+          "service": "read",
+          "perform": "program-details-view#view-associated-party-details#view-invoice#invoice-update-form#review-invoice-form#view-invoice-details#invoice-update-details#invoice-create-details#preview-invoice-details",
+          "approve": "review-invoice-form",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.invoice.Invoice",
+      "components": [
+        {
+          "componentName": "invoice-accept-reject",
+          "service": "accept",
+          "perform": "invoice-approval-review#invoice-update-details#preview-invoice-details#view-invoice-details",
+          "approve": "invoice-update-status-review",
+          "view": null
+        },
+        {
+          "componentName": "invoice-accept-reject",
+          "service": "reject",
+          "perform": "invoice-approval-review#invoice-update-details#preview-invoice-details#view-invoice-details",
+          "approve": "invoice-update-status-review",
+          "view": null
+        },
+        {
+          "componentName": "view-invoice-details",
+          "service": "cancel",
+          "perform": "invoice-update-status-review#invoice-update-details#preview-invoice-details",
+          "approve": "invoice-update-status-review",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.invoice.Invoice",
+      "components": [
+        {
+          "componentName": "invoice-creation-home",
+          "service": "create",
+          "perform": "invoice-creation-form#multiple-invoice-creation#create-invoice-template#preview-invoice-details#review-multiple-invoices#review-invoice-creation-form#invoice-create-details",
+          "approve": "review-invoice-form",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.associatedparty.AssociatedParty",
+      "components": [
+        {
+          "componentName": "onboard-counter-party-form",
+          "service": "create",
+          "perform": "onboard-counter-party-form#onboard-counter-party-review#counter-party-list",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.associatedparty.AssociatedParty",
+      "components": [
+        {
+          "componentName": "counter-party-list",
+          "service": "list",
+          "perform": "counter-party-list#view-associated-party-details#program-details-view#view-invoice#invoice-update-form#review-invoice-form#view-invoice-details#invoice-update-details#invoice-create-details#preview-invoice-details",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.invoice.Invoice",
+      "components": [
+        {
+          "componentName": "view-invoice",
+          "service": "list",
+          "perform": "select-role-invoice#view-invoice#invoice-update-form#review-invoice-form#view-invoice-details#invoice-update-details#invoice-create-details#preview-invoice-details#supply-chain-finance-invoice-list",
+          "approve": "review-invoice-form",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.finance.Finance",
+      "components": [
+        {
+          "componentName": "request-finance-global",
+          "service": "create",
+          "perform": "request-finance-basic-details#request-finance-invoice-list#request-finance-review",
+          "approve": "request-finance-review",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.scf.service.finance.Finance",
+      "components": [
+        {
+          "componentName": "view-finances",
+          "service": "list",
+          "perform": "view-finances#view-finance-details#view-finance-linked-invoices",
+          "view": null
+        }
+      ]
+    }
+  ]
+}

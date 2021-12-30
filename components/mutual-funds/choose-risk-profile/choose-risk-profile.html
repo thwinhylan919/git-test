@@ -1,0 +1,175 @@
+<!-- ko ifnot : $baseModel.small() -->
+<div class="form-main-container">
+    <oj-validation-group id="fbtracker">
+
+        <div class="oj-flex oj-lg-12">
+            <div class="oj-flex-item oj-lg-9">
+                <!-- ko if : $component.riskProfilesLoaded() -->
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12">
+                        <oj-label for="riskProfiles">
+                            <span
+                                data-bind="attr:{id:'templateId'}, text: $component.resource.selectRiskProfile"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item  oj-lg-12 oj-md-12">
+                        <oj-select-one id="riskProfiles" :aria-label="[[$component.resource.selectRiskProfile]]"
+                            required="true"
+                            translations="[[{'required':{messageDetail:$component.resource.validatorMessage}}]]"
+                            value="{{$component.selectedRiskProfile}}"
+                            on-value-changed="[[riskProfileValueChangedHandler]]"
+                            placeholder="{{$component.resource.modalWindowHeader}}">
+                            <!-- ko foreach: $component.riskProfiles -->
+                            <oj-option value="[[riskProfileCategory]]"><span
+                                    data-bind="text:riskProfileCategory"></span> </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <!-- ko if : $component.showSection() -->
+                <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+                    <div class="oj-flex-item oj-lg-8 oj-md-10">
+                        <page-section
+                            params="baseModel : $baseModel, rootModel : $data,heading : $component.resource.assetAllocation">
+
+                            <div class="oj-flex">
+                                <!-- ko if : $component.loadPie() -->
+                                <div class="oj-flex-item oj-lg-6 oj-md-6">
+                                    <div class="oj-flex-item oj-lg-12 oj-md-12">
+                                        <oj-chart id="pieChart" type="pie" series="[[$component.pieSeriesValue]]"
+                                            animation-on-display="auto"
+                                            style-defaults.pie-inner-radius="[[$component.innerRadius]]"
+                                            animation-on-data-change="auto" hover-behavior="dim"
+                                            legend.position="bottom">
+                                        </oj-chart>
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <div class="oj-flex-item oj-lg-6 oj-md-6">
+                                    <div class="oj-flex">
+                                        <div class="oj-flex-item oj-lg-12 oj-md-12">
+                                            <h3 data-bind="html: $component.selectedRiskProfile"></h3>
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex">
+                                        <div class="oj-flex-item oj-lg-12 oj-md-12">
+                                            <span
+                                                data-bind="attr:{id:'templateId9'}, html: $baseModel.format($component.resource.investor,{investor : $component.selectedRiskProfile()})"></span>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <!-- ko foreach : $component.investorDescription -->
+                                        <li>
+                                            <div class="oj-flex-item oj-lg-12 oj-md-12 list-item">
+                                                <span data-bind="attr:{id:'templateId'+$index()}, text: $data"></span>
+                                            </div>
+                                        </li>
+                                        <!-- /ko -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </page-section>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="button-container">
+                    <div class="oj-flex-items oj-lg-8 oj-md-8">
+                        <oj-button class="action-button-primary" id="confirm-button" 
+                            on-click="[[$component.save]]">
+                            <span slot="startIcon" class="icons icon-submit"></span>
+                            <span data-bind="text:$component.resource.save"></span>
+                        </oj-button>
+                        <oj-button class="action-button-secondary" id="CancelButton" 
+                            on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span>
+                            <span data-bind="text:$component.resource.button3"></span>
+                        </oj-button>
+                        <oj-button class="action-button-tertiary" id="backButton" >
+                            <span slot="startIcon" class="icons icon-back-arrow"></span>
+                            <span data-bind="text:$component.resource.back" on-click="[[$component.back]]"></span>
+                        </oj-button>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-lg-3">
+                <help params="baseModel : $baseModel, rootModel : $component, transaction: 'choose-profile-help'">
+                </help>
+            </div>
+        </div>
+    </oj-validation-group>
+</div>
+
+<!-- /ko -->
+<!-- ko if : $baseModel.small() -->
+<div class=" form-main-container">
+    <oj-validation-group id="fbtracker">
+        <!-- ko if : $component.riskProfilesLoaded() -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+                <oj-label for="riskProfiles">
+                    <span data-bind="attr:{id:'templateId'}, text: $component.resource.selectRiskProfile"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item  oj-sm-12">
+                <oj-select-one id="riskProfiles" :aria-label="[[$component.resource.selectRiskProfile]]"
+                    value="{{$component.selectedRiskProfile}}" on-value-changed="[[riskProfileValueChangedHandler]]"
+                    placeholder="{{$component.resource.modalWindowHeader}}">
+                    <!-- ko foreach : $component.riskProfiles -->
+                    <oj-option value="[[riskProfileCategory]]"><span data-bind="text:riskProfileCategory"></span>
+                    </oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+        </div>
+        <!-- ko if : $component.showSection() -->
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-sm-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data,heading : $component.resource.assetAllocation">
+                    <!-- ko if : $component.loadPie() -->
+                    <oj-chart id="pieChart" class="oj-sm-12" type="pie" series="[[$component.pieSeriesValue]]"
+                        animation-on-display="auto" style-defaults.pie-inner-radius="[[$component.innerRadius]]"
+                        animation-on-data-change="auto" hover-behavior="dim" legend.position="bottom">
+                    </oj-chart>
+                    <!-- /ko -->
+                </page-section>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+                <h3 class="oj-sm-12" data-bind="html: $component.selectedRiskProfile"></h3>
+                <span class="oj-sm-12"
+                    data-bind="attr:{id:'templateId9'}, html: $baseModel.format($component.resource.investor,{investor : $component.selectedRiskProfile()})"></span>
+                <ul>
+                    <!-- ko foreach : $component.investorDescription -->
+                    <li class="list-item">
+                        <span class="oj-sm-12" data-bind="attr:{id:'templateId'+$index()}, text: $data"></span>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="button-container">
+            <div class="oj-flex-items oj-lg-8 oj-md-8">
+                <oj-button class="action-button-primary" id="confirm-button" 
+                    on-click="[[$component.save]]">
+                    <span slot="startIcon" class="icons icon-submit"></span>
+                    <span data-bind="text:$component.resource.save"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="CancelButton" 
+                    on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.button3"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" id="backButton" >
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back" on-click="[[$component.back]]"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </oj-validation-group>
+</div>
+<!-- /ko -->

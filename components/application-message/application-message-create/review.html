@@ -1,0 +1,15 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header:$component.nls.header, reviewHeader:$component.nls.reviewHeader}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageCreate.Code, value : $component.reviewData.data.code"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageCreate.Message, value : $component.reviewData.data.message"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageCreate.SummaryText, value : $component.reviewData.data.summaryText"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageCreate.Locale, value : $component.reviewData.data.locale"></row>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''"></page-section>
+    <div class="button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.confirm]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.generic.common.confirm"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span><span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+    </div>
+</div>

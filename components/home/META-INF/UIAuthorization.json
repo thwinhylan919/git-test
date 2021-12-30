@@ -1,0 +1,14 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.origination.service.producttype.ProductType",
+    "components": [{
+      "componentName": "bank-products",
+      "service": "list",
+      "perform": ""
+    }, {
+      "componentName": "product-details",
+      "service": "list",
+      "perform": ""
+    }]
+  }]
+}

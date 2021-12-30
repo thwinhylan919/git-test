@@ -1,0 +1,112 @@
+$sweep-background-color: #1E7C9F;
+$pool-background-color: #1E7C9F;
+$icon-visited-color: #0B0080;
+
+.link-color {
+    color: var(--color-white);
+}
+
+.icon-size {
+    font-size: 1.5625rem;
+}
+
+.icon-color {
+    color: $icon-visited-color;
+}
+
+.flex-override {
+    flex: inherit;
+    @include single-margin(left,0.5rem);
+  }
+
+.structure {
+    &__nodeHeader {
+        font-size: var(--base-font-size-large);
+    }
+
+    &__more-icon {
+        padding: 0.5rem 0;
+    }
+
+    &__parentNodeHeader {
+        padding: 0.3rem 0 0.6rem;
+        font-size: var(--base-font-size-large);
+    }
+
+    &__tree-width {
+        width: 65rem;
+    }
+
+    &__node {
+        height: 100%;
+    }
+
+    &__structureFillParent {
+        height: 100%;
+        padding: 0.6rem 0;
+        width: 100%;
+
+        &__structureFillSweep {
+            background-color: $sweep-background-color;
+            color: var(--color-white);
+        }
+
+        &__structureFillPool {
+            background-color: $pool-background-color;
+            color: var(--color-white);
+            padding-top: 1rem;
+        }
+    }
+
+    &__structureFill {
+        padding-bottom: 0.5rem;
+        width: 100%;
+
+        &__structureFillPool {
+            border-top: 0.6rem solid $pool-background-color;
+            width: 100%;
+            padding-top: 1rem;
+        }
+    }
+}
+
+.structure-details-banner {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    color: var(--banner-foreground-color);
+    font-size: var(--banner-font-size);
+    font-weight: var(--banner-font-weight);
+    padding: var(--banner-padding);
+    align-items: center;
+
+    .description {
+        @include single-margin(right, 0.8rem);
+        @include single-padding(right, 0.8rem);
+        @include single-border(right, 0.05rem solid);
+    }
+
+    .label,
+    label {
+        color: var(--banner-text-primary);
+        font-size: var(--base-font-size-medium);
+    }
+
+    .extra-padding {
+        @include single-padding(left, 7.8125rem);
+    }
+}
+
+.structureFillPool {
+    fill: $pool-background-color;
+}
+
+.node-bold {
+    font-size: 1rem;
+}
+
+.node-text {
+    font-size: 0.8rem;
+}
+
+.hide {
+    display: none;
+}

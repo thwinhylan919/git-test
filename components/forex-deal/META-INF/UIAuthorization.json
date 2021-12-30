@@ -1,0 +1,18 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.forexdeal.service.core.ForexDeal",
+        "components": [
+        {
+            "componentName": "view-forex-deal",
+            "service": "confirm",
+            "perform": "forex-deal-create#review-forex-deal-create#forex-deal-timer",
+            "approve": "review-forex-deal-create#forex-deal-timer#transaction-journey"
+        },
+        {
+            "componentName": "view-forex-deal",
+            "service": "read",
+            "perform": "view-forex-deal-details"
+        }]
+    }]
+}

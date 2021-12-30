@@ -1,0 +1,74 @@
+{
+  "components": ["demand-deposits/demand-deposit-details",
+    "demand-deposits/cheque-details",
+    "term-deposits/view-interest-rate",
+    "term-deposits/account",
+    "term-deposits/deposit-type",
+    "term-deposits/product-list",
+    "term-deposits/td-details",
+    "term-deposits/nominee",
+    "collection/bill-details",
+    "collection/initiate-collection",
+    "collection/review-collection",
+    "customer-acceptance/view-discrepancies",
+    "guarantee/initiate-guarantee",
+    "guarantee/review-guarantee",
+    "guarantee/view-bank-guarantee",
+    "guarantee/bank-guarantee-commitment",
+    "letter-of-credit/initiate-lc",
+    "letter-of-credit/shipment-details",
+    "letter-of-credit/review-lc",
+    "letter-of-credit/lc-details",
+    "letter-of-credit/view-letter-of-credit"
+  ],
+  "partials": ["term-deposit/review-td-redeem",
+    "confirm-screen/sweep-in-link",
+    "confirm-screen/td-redeem-confirm",
+    "help/td-open",
+    "demand-deposits/cheque-details-input",
+    "trade-finance/shipment-details",
+    "trade-finance/view-collections/bill-details",
+    "trade-finance/view-guarantees/bank-guarantee-commitment",
+    "trade-finance/view-guarantees/amend-commitment-details",
+    "trade-finance/lc-details"
+  ],
+
+  "validations": {
+    "ADDRESS": [{
+      "type": "length",
+      "options": {
+        "min": 1,
+        "max": 35
+      }
+    }],
+    "CITY": [{
+      "type": "length",
+      "options": {
+        "min": 1,
+        "max": 35
+      }
+    }],
+    "POSTAL_CODE": [{
+      "type": "length",
+      "options": {
+        "min": 1,
+        "max": 10
+      }
+    }],
+    "COMMENTS": [{
+      "type": "length",
+      "options": {
+        "min": 1,
+        "max": 35
+      }
+    }],
+    "NAME": [{
+      "type": "length",
+      "options": {
+        "min": 1,
+        "max": 35
+
+      }
+    }]
+  }
+}

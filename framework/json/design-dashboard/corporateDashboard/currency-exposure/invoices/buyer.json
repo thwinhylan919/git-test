@@ -1,0 +1,88 @@
+{
+
+    "invoices": [{
+        "version": 1,
+        "generatedPackageId": false,
+        "auditSequence": 1,
+        "invoiceId": "INV128914",
+        "shipmentDate": "2020-03-30T00:00:00",
+        "amount": {
+            "currency": "GBP",
+            "amount": 12000.00
+        },
+        "supplierName": "TURBO TEXTILES",
+        "discountPercentage": 0.00,
+        "invoiceStatus": "ACCEPTED",
+        "invoiceDueDate": "2020-04-30T00:00:00",
+        "invoiceDate": "2019-10-18T00:00:00",
+        "poNumber": "PonoDevInvaccept0976541",
+        "paymentTerms": "testterms",
+        "taxPercentage": 0.00,
+        "purchaseOrderDate": "2019-10-02T00:00:00",
+        "totalAmount": {
+            "currency": "GBP",
+            "amount": 12.00
+        },
+        "invoiceNumber": "DevInvaccept0976541",
+        "paymentStatus": "UNPAID",
+        "acceptanceDate": "2019-03-22T00:00:00",
+        "supplierId": {
+            "displayValue": "***728",
+            "value": "9731C52EC6062E736817E8573DA1BF4AE307C96BB5F9"
+        },
+        "taxAmount": 0.00,
+        "discountAmount": 0.00,
+        "outstandingAmount": {
+            "currency": "GBP",
+            "amount": 12000.00
+        },
+        "acceptanceAmount": {
+            "currency": "GBP",
+            "amount": 12000.00
+        },
+        "supplierAddress": {
+            "line1": "MANAGED DATA SYSTEM 905,",
+            "line2": "5th Block, 80ft Road, Koramangala,Near Sony Signal.",
+            "city": "Katrnataka",
+            "country": "IN",
+            "zipCode": "560095"
+        },
+        "associatedParty": {
+            "version": 1,
+            "generatedPackageId": false,
+            "auditSequence": 1,
+            "id": {
+                "displayValue": "***227",
+                "value": "9731C72BC60988FD351DBB81ACEF530168970F2F84EF"
+            },
+            "name": "HP INDUSTRIES"
+        },
+        "program": {
+            "version": 1,
+            "generatedPackageId": false,
+            "auditSequence": 1,
+            "programCode": "HP Payable Finance",
+            "programName": "HP Payable Finance",
+            "anchorId": {
+                "displayValue": "***227",
+                "value": "9731C72BC60988FD351DBB81ACEF530168970F2F84EF"
+            },
+            "programProduct": {
+                "version": 1,
+                "generatedPackageId": false,
+                "auditSequence": 1,
+                "productCode": "PAYF",
+                "productType": "B"
+            },
+            "associatedParties": [],
+            "role": "B",
+            "relation": "A"
+        },
+        "financeAmount": {
+            "currency": "GBP",
+            "amount": 0.00
+        },
+        "financePercentage": 0.00,
+        "maxFinancePercentage": 90.00
+    }]
+}

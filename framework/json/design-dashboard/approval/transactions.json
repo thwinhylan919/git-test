@@ -1,0 +1,4139 @@
+{
+	"status": {
+		"result": "SUCCESSFUL",
+		"contextID": "005coyG^3CrFw0H6yvnZ6G0004Rm0000rN,0:1",
+		"message": {
+			"type": "INFO"
+		}
+	},
+	"transactionDTOs": [{
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-14T04:51:08.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-14T04:51:08.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "3",
+			"type": "CUSTOMER",
+			"description": "desc3",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "14046216BD09",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-13T06:31:20.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-13T06:31:20.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "2",
+			"type": "CUSTOMER",
+			"description": "desc2",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "130477891EAA",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-12T09:40:48.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-12T09:40:48.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "2",
+			"type": "CUSTOMER",
+			"description": "desc2",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "1204479FDD2D",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-10T13:00:39.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-10T13:00:39.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "3",
+			"type": "CUSTOMER",
+			"description": "desc3",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "100467CBE6FC",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-09T04:58:23.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-09T04:58:23.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "SWATICORPTD",
+			"title": "Mrs",
+			"firstName": "SWATI",
+			"middleName": "T",
+			"lastName": "THITE",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "2000-01-01T05:30:00",
+			"address": {
+				"line1": "sds",
+				"line2": "dsf",
+				"line3": "dsf",
+				"line4": "dsf",
+				"city": "MUMBAI",
+				"state": "",
+				"country": "IN",
+				"zipCode": "400333"
+			},
+			"mobileNumber": "9933009900",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "swati.thite@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "SWATICORPTD",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "SWATICORPTD",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0904D93DA001",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["d8b20e945043342b19fec39e37c97c3116a82bbb538509c2369d5318589cc813ced1d4f827fd9f8b00ac3647ec082917ce1e9560a14a56ee8985cfba6110c603"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-09T04:46:54.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-09T04:46:54.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "3",
+			"type": "CUSTOMER",
+			"description": "desc3",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "090482959732",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-08T04:38:41.000+05:30",
+		"lastUpdatedBy": "trchecker4308",
+		"lastUpdatedDate": "2020-04-11T04:16:01.000+05:30",
+		"version": 5,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 3,
+			"status": "PENDING_APPROVAL",
+			"action": "APPROVE",
+			"approvalType": "SE",
+			"countOfApprovals": 2
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "3",
+			"type": "CUSTOMER",
+			"description": "desc11",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "0804F91E0EE8",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"transactionHistoryDTOs": [{
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-08T04:38:41",
+			"lastUpdatedBy": "DtechChecker",
+			"lastUpdatedDate": "2020-04-08T07:07:26",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 2,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Checker",
+				"emailId": "dipesh.rane@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "2541398576"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-08T04:38:41",
+			"lastUpdatedBy": "DtechMaker",
+			"lastUpdatedDate": "2020-04-08T04:38:41",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 1,
+				"status": "PENDING_APPROVAL",
+				"action": "CREATE",
+				"approvalType": "SE",
+				"countOfApprovals": 0
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Maker",
+				"emailId": "amit.p.jadhav@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "9875632541"
+			}
+		}],
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "TRChecker",
+			"lastName": "Jadhav",
+			"emailId": "dhaval.l.shah@oracle.com",
+			"mobileNumber": "9773298719"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T14:32:49.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T15:11:34.000+05:30",
+		"version": 9,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 3,
+			"status": "REJECTED",
+			"action": "REJECT",
+			"approvalType": "SE",
+			"countOfApprovals": 2
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "F"
+		},
+		"transactionSnapshot": {
+			"version": 5,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "swecfpmmaker",
+			"title": "Miss",
+			"firstName": "swecfpm",
+			"middleName": "",
+			"lastName": "maker",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "2000-01-01T00:00:00",
+			"address": {
+				"line1": "Address Line 1",
+				"line2": "Address Line 2",
+				"line3": "Address Line 3",
+				"line4": "Address Line 4",
+				"city": "London",
+				"state": "",
+				"country": "GB",
+				"zipCode": "400063"
+			},
+			"mobileNumber": "9123456780",
+			"phoneNumber": "9123456780",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "sweta.thakur@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "swecfpmmaker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "swecfpmmaker",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [{
+					"limitPackage": {
+						"key": {
+							"id": "swe2"
+						},
+						"accessPointValue": "GLOBAL",
+						"accessPointGroupType": "SINGLE"
+					}
+				}],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Maker"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0704608DF046",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"transactionHistoryDTOs": [{
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-07T14:32:49",
+			"lastUpdatedBy": "adicorp4308",
+			"lastUpdatedDate": "2020-04-07T14:54:10",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "update the details, sending for modification.",
+				"stepNo": 3,
+				"status": "MODIFICATION_REQUESTED",
+				"action": "REQUEST_MODIFICATION",
+				"approvalType": "SE",
+				"countOfApprovals": 2
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Aditya",
+				"lastName": "R",
+				"emailId": "dhaval.l.shah@oracle.com",
+				"mobileNumber": "1111111111",
+				"phoneNumber": "1111111111"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-07T14:32:49",
+			"lastUpdatedBy": "trchecker4308",
+			"lastUpdatedDate": "2020-04-07T14:48:30",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Done from my side too.",
+				"stepNo": 3,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 2
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "TRChecker",
+				"lastName": "Jadhav",
+				"emailId": "dhaval.l.shah@oracle.com",
+				"mobileNumber": "9773298719"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-07T14:32:49",
+			"lastUpdatedBy": "DtechChecker",
+			"lastUpdatedDate": "2020-04-07T14:38:07",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Done from my side",
+				"stepNo": 2,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Checker",
+				"emailId": "dipesh.rane@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "2541398576"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-07T14:32:49",
+			"lastUpdatedBy": "DtechMaker",
+			"lastUpdatedDate": "2020-04-07T14:32:49",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 1,
+				"status": "PENDING_APPROVAL",
+				"action": "CREATE",
+				"approvalType": "SE",
+				"countOfApprovals": 0
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Maker",
+				"emailId": "amit.p.jadhav@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "9875632541"
+			}
+		}],
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["80b2978dae7864dc4dd57de58b76628c1165b264d8c35044755673914990d37cd9ab24298df612e33a46f1fc7325bb0cb2687bd1580ae1a762b1c75fbbacdb92"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T12:22:35.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T12:22:35.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "2",
+			"type": "CUSTOMER",
+			"description": "dess",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "070444DBE300",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T07:01:25.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T07:01:25.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "dip143OD",
+			"title": "Mr",
+			"firstName": "keshav",
+			"middleName": "k ",
+			"lastName": "kulkarni",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1990-01-01T05:30:00",
+			"address": {
+				"line1": "jogheshwari",
+				"line2": "",
+				"line3": "",
+				"line4": "",
+				"city": "mumbai",
+				"state": "",
+				"country": "IN",
+				"zipCode": "9098989"
+			},
+			"mobileNumber": "8989898989",
+			"phoneNumber": "8989898989",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "dipen.v.shah@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "dip143OD",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "dip143OD",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0704957AED01",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["203b2491a48493e3868bcfdcee196e72f3d674dcb210d84bd96785145af9b9b34d81f1299087b8d3afdf10a64dd46c71c3c795cb07718adc5ac0421af404d27c"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T06:44:48.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T06:44:48.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 2,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "LeyCorp2",
+			"title": "Mr",
+			"firstName": "Sun",
+			"middleName": "",
+			"lastName": "Coffee",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1990-10-10T05:30:00",
+			"address": {
+				"line1": "asdas",
+				"line2": "dsad",
+				"line3": "asdas",
+				"line4": "dsada",
+				"city": "City",
+				"state": "",
+				"country": "GB",
+				"zipCode": "33333"
+			},
+			"mobileNumber": "2131232133",
+			"phoneNumber": "2131232133",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "prabhjot.singh@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "LeyCorp2",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "LeyCorp2",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [{
+					"limitPackage": {
+						"key": {
+							"id": "UBS143GlobalLP"
+						},
+						"accessPointValue": "GLOBAL",
+						"accessPointGroupType": "SINGLE"
+					}
+				}],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "07043D09A899",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["e6a0c0944430cb87ad70f0c380776c1ce3fe9c8dd794a8b51f930309c6a3833d3d6b55f52271f2377fd1eb36f0e528b943420ffb7a5b950d16e1fb27c9621e75"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T06:40:45.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T06:40:45.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "tanmaybh",
+			"title": "Mr",
+			"firstName": "tanmay",
+			"middleName": "",
+			"lastName": "bhatt",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "2000-04-13T05:30:00",
+			"address": {
+				"line1": "jog",
+				"line2": "east",
+				"line3": "",
+				"line4": "",
+				"city": "mumbai",
+				"state": "",
+				"country": "IN",
+				"zipCode": "400060"
+			},
+			"mobileNumber": "8879373947",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "tanmaybhatt@gmail.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "tanmaybh",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "tanmaybh",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [{
+					"limitPackage": {
+						"key": {
+							"id": "swe1"
+						},
+						"accessPointValue": "001",
+						"accessPointGroupType": "GROUP"
+					}
+				}, {
+					"limitPackage": {
+						"key": {
+							"id": "LC01"
+						},
+						"accessPointValue": "GLOBAL",
+						"accessPointGroupType": "SINGLE"
+					}
+				}],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0704F823E670",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["67b9ae248b86027f32ed1e260567ecb64b0dafbfd219e44f3e2a5b6176e6928e166c75d97ed80b951e0924c09befcc861a33d2581e4bf633449268165e4867bd"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T05:48:46.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T05:48:46.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "2",
+			"type": "CUSTOMER",
+			"description": "desc2",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132426",
+					"name": "DtechMaker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechMaker",
+						"id": "132427",
+						"userGroupId": "132426"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:38:51"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "0704B209DF78",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-07T05:45:25.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-07T05:45:25.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "3",
+			"type": "CUSTOMER",
+			"description": "desc3",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132426",
+					"name": "DtechMaker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechMaker",
+						"id": "132427",
+						"userGroupId": "132426"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:38:51"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "0704C3D868C9",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-06T09:14:30.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-06T09:14:30.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "njcorp1",
+			"title": "Ms",
+			"firstName": "Jane",
+			"middleName": "",
+			"lastName": "Doe",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1990-01-01T05:30:00",
+			"address": {
+				"line1": "Oxford University",
+				"line2": "London",
+				"line3": "",
+				"line4": "",
+				"city": "London",
+				"state": "",
+				"country": "EU",
+				"zipCode": "000023"
+			},
+			"mobileNumber": "9876543210",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "apoorva.gosavi@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "njcorp1",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "njcorp1",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "06047A6C63D9",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["01aa36c5928e13a2a8c63dd73a54cd4d8b379b6529ad0d59b66a9a04c6b98e932333a9decac1a52c2902ecd09269957ae215df53745692ba16d1a0cb194fb61c"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-06T09:03:11.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-06T09:03:11.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 2,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "njcorp",
+			"title": "Ms",
+			"firstName": "Jane",
+			"middleName": "",
+			"lastName": "Doe",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1990-01-01T05:30:00",
+			"address": {
+				"line1": "Oxford University",
+				"line2": "London",
+				"line3": "",
+				"line4": "",
+				"city": "London",
+				"state": "",
+				"country": "EU",
+				"zipCode": "000023"
+			},
+			"mobileNumber": "9876543210",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "apoorva.gosavi@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "njcorp",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "njcorp",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "06046272B08E",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["ba59536bd2602902ce97f898a40a599b7d028b8b7488884fb118c289698bfe76d6bdc0c7edb2dc0870f3880dbdcc9dd3ed3f6dad5c853e1906bb26b9c0efd445"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-05T04:21:30.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-06T11:38:49.000+05:30",
+		"version": 9,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 3,
+			"status": "REJECTED",
+			"action": "REJECT",
+			"approvalType": "SE",
+			"countOfApprovals": 2
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "F"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "njcorp1",
+			"title": "Ms",
+			"firstName": "Jane",
+			"middleName": "",
+			"lastName": "Doe",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1990-01-01T05:30:00",
+			"address": {
+				"line1": "Oxford University",
+				"line2": "London",
+				"line3": "",
+				"line4": "",
+				"city": "London",
+				"state": "",
+				"country": "EU",
+				"zipCode": "000023"
+			},
+			"mobileNumber": "9876543210",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "apoorva.gosavi@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "njcorp1",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "njcorp1",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0504F452EA76",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"transactionHistoryDTOs": [{
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-05T04:21:30",
+			"lastUpdatedBy": "adicorp4308",
+			"lastUpdatedDate": "2020-04-06T10:57:46",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Sending for modification",
+				"stepNo": 3,
+				"status": "MODIFICATION_REQUESTED",
+				"action": "REQUEST_MODIFICATION",
+				"approvalType": "SE",
+				"countOfApprovals": 2
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Aditya",
+				"lastName": "R",
+				"emailId": "dhaval.l.shah@oracle.com",
+				"mobileNumber": "1111111111",
+				"phoneNumber": "1111111111"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-05T04:21:30",
+			"lastUpdatedBy": "trchecker4308",
+			"lastUpdatedDate": "2020-04-05T04:56:32",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Done testing from my side",
+				"stepNo": 3,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 2
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "TRChecker",
+				"lastName": "Jadhav",
+				"emailId": "dhaval.l.shah@oracle.com",
+				"mobileNumber": "9773298719"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-05T04:21:30",
+			"lastUpdatedBy": "DtechChecker",
+			"lastUpdatedDate": "2020-04-05T04:55:48",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Done from my side",
+				"stepNo": 2,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Checker",
+				"emailId": "dipesh.rane@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "2541398576"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-05T04:21:30",
+			"lastUpdatedBy": "DtechMaker",
+			"lastUpdatedDate": "2020-04-05T04:21:30",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 1,
+				"status": "PENDING_APPROVAL",
+				"action": "CREATE",
+				"approvalType": "SE",
+				"countOfApprovals": 0
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Maker",
+				"emailId": "amit.p.jadhav@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "9875632541"
+			}
+		}],
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["01aa36c5928e13a2a8c63dd73a54cd4d8b379b6529ad0d59b66a9a04c6b98e932333a9decac1a52c2902ecd09269957ae215df53745692ba16d1a0cb194fb61c"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-04T20:35:11.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-04T20:35:11.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "cfpm_maker",
+			"title": "Miss",
+			"firstName": "cfpmmaker",
+			"middleName": "",
+			"lastName": "14.3",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "2000-01-01T00:00:00",
+			"address": {
+				"line1": "Address 1",
+				"line2": "Address 2",
+				"line3": "Address 3",
+				"line4": "Address 4",
+				"city": "London",
+				"state": "",
+				"country": "GB",
+				"zipCode": "400063"
+			},
+			"mobileNumber": "9123450876",
+			"phoneNumber": "9123450876",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "sweta.thakur@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "cfpm_maker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "cfpm_maker",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [{
+					"limitPackage": {
+						"key": {
+							"id": "swe2"
+						},
+						"accessPointValue": "GLOBAL",
+						"accessPointGroupType": "SINGLE"
+					}
+				}],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "04048F908441",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["4d9664de301c9761f708ed4c1508a90c1ef8d7dd28ba6c813872a5bfc4b83b0903e0416a78c1b8ed4a84f0b46ea14c1a929a5b72fd376ea542bcfc33f57d9a7a"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-04T20:13:24.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-04T20:13:24.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "highlander",
+			"title": "Mr",
+			"firstName": "dipesh",
+			"middleName": "",
+			"lastName": "rane",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "2000-12-07T00:00:00",
+			"address": {
+				"line1": "jgeshwri",
+				"line2": "east",
+				"line3": "",
+				"line4": "",
+				"city": "mumbai",
+				"state": "",
+				"country": "IN",
+				"zipCode": "400060"
+			},
+			"mobileNumber": "8879373947",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "dipeshrane1130637@gmail.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "highlander",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "highlander",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [{
+					"limitPackage": {
+						"key": {
+							"id": "swe1"
+						},
+						"accessPointValue": "001",
+						"accessPointGroupType": "GROUP"
+					}
+				}, {
+					"limitPackage": {
+						"key": {
+							"id": "LC01"
+						},
+						"accessPointValue": "GLOBAL",
+						"accessPointGroupType": "SINGLE"
+					}
+				}],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [{
+				"accessPointId": "APMOBAPP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMOBRESP",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APINTERNET",
+				"status": true,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSIRICHATBOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSMSBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APWEARABLE",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSNAPSHOT",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APMISCALBANKING",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APAPIACCESS",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}, {
+				"accessPointId": "APSOFTTOKEN",
+				"status": false,
+				"determinantValue": "OBDX_BU"
+			}],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Viewer"],
+			"userGroupDTOs": [{
+				"createdBy": "pmgadmin",
+				"version": 15,
+				"generatedPackageId": false,
+				"auditSequence": 1,
+				"id": "33709",
+				"name": "Grp001",
+				"description": "GrpSun",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"users": [{
+					"userId": "ronaldo",
+					"id": "142607",
+					"userGroupId": "33709"
+				}, {
+					"userId": "rugvedst",
+					"id": "142310",
+					"userGroupId": "33709"
+				}, {
+					"userId": "rohanerin",
+					"id": "142308",
+					"userGroupId": "33709"
+				}, {
+					"userId": "pmgmaker",
+					"id": "142307",
+					"userGroupId": "33709"
+				}, {
+					"userId": "romanreigns",
+					"id": "142309",
+					"userGroupId": "33709"
+				}, {
+					"userId": "adiRCorp308",
+					"id": "142306",
+					"userGroupId": "33709"
+				}, {
+					"userId": "ewinlewis",
+					"id": "142610",
+					"userGroupId": "33709"
+				}, {
+					"userId": "highlander",
+					"id": "142613",
+					"userGroupId": "33709"
+				}],
+				"unary": false,
+				"type": "CUSTOMER",
+				"creationTime": "2019-11-18T11:29:24"
+			}, {
+				"createdBy": "pmgadmin",
+				"version": 11,
+				"generatedPackageId": false,
+				"auditSequence": 1,
+				"id": "33715",
+				"name": "Grp002",
+				"description": "GrpSun",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"users": [{
+					"userId": "rohanerin",
+					"id": "141610",
+					"userGroupId": "33715"
+				}, {
+					"userId": "pmgmaker",
+					"id": "33718",
+					"userGroupId": "33715"
+				}, {
+					"userId": "sonalcfpmcorp",
+					"id": "33717",
+					"userGroupId": "33715"
+				}, {
+					"userId": "adiRCorp308",
+					"id": "33716",
+					"userGroupId": "33715"
+				}, {
+					"userId": "romanreigns",
+					"id": "140965",
+					"userGroupId": "33715"
+				}, {
+					"userId": "rugvedst",
+					"id": "140970",
+					"userGroupId": "33715"
+				}, {
+					"userId": "ronaldo",
+					"id": "142608",
+					"userGroupId": "33715"
+				}, {
+					"userId": "tusharag",
+					"id": "141324",
+					"userGroupId": "33715"
+				}, {
+					"userId": "ewinlewis",
+					"id": "142611",
+					"userGroupId": "33715"
+				}, {
+					"userId": "highlander",
+					"id": "142614",
+					"userGroupId": "33715"
+				}],
+				"unary": false,
+				"type": "CUSTOMER",
+				"creationTime": "2019-11-18T11:30:45"
+			}],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0404D15189FA",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["dccb10a9a0f0041a105caaf5a9d01dc9e756080c65aee073a365e0e9a8d4141d0051ef8604b0c490d98b77ebe87677b543f140580ff2cffe36e74ffc06b1f4c6"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-04T12:43:32.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-04T12:43:32.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "translucent",
+			"title": "Mr",
+			"firstName": "dipesh",
+			"middleName": "",
+			"lastName": "rane",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "2000-03-16T05:30:00",
+			"address": {
+				"line1": "jogeshwari",
+				"line2": "east",
+				"line3": "",
+				"line4": "",
+				"city": "mumbai",
+				"state": "",
+				"country": "AE",
+				"zipCode": "400060"
+			},
+			"mobileNumber": "8879373947",
+			"phoneNumber": "",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "dipeshrane@gmail.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "translucent",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "translucent",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [{
+					"limitPackage": {
+						"key": {
+							"id": "swe1"
+						},
+						"accessPointValue": "001",
+						"accessPointGroupType": "GROUP"
+					}
+				}, {
+					"limitPackage": {
+						"key": {
+							"id": "swe2"
+						},
+						"accessPointValue": "GLOBAL",
+						"accessPointGroupType": "SINGLE"
+					}
+				}],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "04041177D439",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["6d17f96588cc4b9338713083a9ad539f5b47169bb641931f2becc482f13dbb5624e7bd7737d7fe86e9fb34d7b61083ee20567df23e46b94257c3f2a13517f6c2"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-04T12:22:55.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-04T12:22:55.000+05:30",
+		"version": 1,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 1,
+			"status": "PENDING_APPROVAL",
+			"action": "CREATE",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "P"
+		},
+		"transactionSnapshot": {
+			"version": 2,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "bhavns_",
+			"title": "Miss",
+			"firstName": "xsasf",
+			"middleName": "dasf",
+			"lastName": "da",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1994-12-07T05:30:00",
+			"address": {
+				"line1": "xcvg",
+				"line2": "fdg",
+				"line3": "fsdzg",
+				"line4": "sf",
+				"city": "dscf",
+				"state": "",
+				"country": "IN",
+				"zipCode": "34325"
+			},
+			"mobileNumber": "8449084263",
+			"phoneNumber": "8404847384",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "bhavna.s@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "bhavns_",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "bhavns_",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0404A6E0D382",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["35eb79c94409cd63553690da945ad460d116b6ef39cc3b85c3b598ddd3a2141d2fd7c77e4753a21c32827b8f89f343aa9f2356004cd9fd8070c15d032265adab"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-04T09:49:20.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-04T10:29:44.000+05:30",
+		"version": 7,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 2,
+			"status": "REJECTED",
+			"action": "REJECT",
+			"approvalType": "SE",
+			"countOfApprovals": 1
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "F"
+		},
+		"transactionSnapshot": {
+			"version": 2,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "bhavns_",
+			"title": "Miss",
+			"firstName": "xsasf",
+			"middleName": "dasf",
+			"lastName": "da",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1994-12-07T05:30:00",
+			"address": {
+				"line1": "xcvg",
+				"line2": "fdg",
+				"line3": "fsdzg",
+				"line4": "sf",
+				"city": "dscf",
+				"state": "",
+				"country": "IN",
+				"zipCode": "34325"
+			},
+			"mobileNumber": "8449084263",
+			"phoneNumber": "8404847384",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "bhavna.s@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "bhavns_",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "bhavns_",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "0404640BF4D7",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"transactionHistoryDTOs": [{
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-04T09:49:20",
+			"lastUpdatedBy": "trchecker4308",
+			"lastUpdatedDate": "2020-04-04T10:19:41",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Testing for Email to be sent to all the approve.",
+				"stepNo": 2,
+				"status": "MODIFICATION_REQUESTED",
+				"action": "REQUEST_MODIFICATION",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "TRChecker",
+				"lastName": "Jadhav",
+				"emailId": "dhaval.l.shah@oracle.com",
+				"mobileNumber": "9773298719"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-04T09:49:20",
+			"lastUpdatedBy": "DtechChecker",
+			"lastUpdatedDate": "2020-04-04T09:53:37",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Done testing from my side.",
+				"stepNo": 2,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Checker",
+				"emailId": "dipesh.rane@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "2541398576"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-04T09:49:20",
+			"lastUpdatedBy": "DtechMaker",
+			"lastUpdatedDate": "2020-04-04T09:49:20",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 1,
+				"status": "PENDING_APPROVAL",
+				"action": "CREATE",
+				"approvalType": "SE",
+				"countOfApprovals": 0
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Maker",
+				"emailId": "amit.p.jadhav@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "9875632541"
+			}
+		}],
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["35eb79c94409cd63553690da945ad460d116b6ef39cc3b85c3b598ddd3a2141d2fd7c77e4753a21c32827b8f89f343aa9f2356004cd9fd8070c15d032265adab"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-04T04:27:28.000+05:30",
+		"lastUpdatedBy": "DtechMaker",
+		"lastUpdatedDate": "2020-04-04T07:15:38.000+05:30",
+		"version": 7,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"stepNo": 2,
+			"status": "REJECTED",
+			"action": "REJECT",
+			"approvalType": "SE",
+			"countOfApprovals": 1
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "F"
+		},
+		"transactionSnapshot": {
+			"version": 2,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"username": "bhavns_",
+			"title": "Miss",
+			"firstName": "xsasf",
+			"middleName": "dasf",
+			"lastName": "da",
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			},
+			"dateOfBirth": "1994-12-07T05:30:00",
+			"address": {
+				"line1": "xcvg",
+				"line2": "fdg",
+				"line3": "fsdzg",
+				"line4": "sf",
+				"city": "dscf",
+				"state": "",
+				"country": "IN",
+				"zipCode": "34325"
+			},
+			"mobileNumber": "8449084263",
+			"phoneNumber": "8404847384",
+			"manager": "",
+			"employeeNumber": "",
+			"userGroups": ["corporateuser"],
+			"emailId": "bhavna.s@oracle.com",
+			"homeEntity": "OBDX_BU",
+			"accessibleEntity": ["OBDX_BU"],
+			"accessibleEntities": [{
+				"entityId": "OBDX_BU",
+				"userPartyRelationship": {
+					"userId": "bhavns_",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"relationshipType": "O",
+					"determinantValue": "OBDX_BU"
+				},
+				"partyName": "Sunrise Coffee"
+			}],
+			"userPartyRelationshipDTOs": [{
+				"userId": "bhavns_",
+				"partyId": {
+					"displayValue": "***308",
+					"value": "004308"
+				},
+				"relationshipType": "O",
+				"determinantValue": "OBDX_BU"
+			}],
+			"limitPackages": [{
+				"entityLimitPackageMappingDTO": [],
+				"targetUnit": "OBDX_BU"
+			}],
+			"userAccessPointRelationshipList": [],
+			"userType": "corporateuser",
+			"customer": true,
+			"prospect": false,
+			"partyName": "Sunrise Coffee",
+			"organization": "",
+			"employeeType": "",
+			"deviceDeregistrationListOS": [],
+			"pushTokenDegistrationListOS": [],
+			"applicationRoles": ["Checker", "Maker", "Viewer"],
+			"userGroupDTOs": [],
+			"enrolledfor2fa": false
+		},
+		"transactionId": "040402867EC4",
+		"transactionName": "UM_N_UMD",
+		"limitTaskCode": "UM_N_UMD",
+		"serviceId": "com.ofss.digx.app.sms.service.user.User.update",
+		"transactionHistoryDTOs": [{
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-04T04:27:28",
+			"lastUpdatedBy": "trchecker4308",
+			"lastUpdatedDate": "2020-04-04T06:51:54",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Second checker has sent it for modification",
+				"stepNo": 2,
+				"status": "MODIFICATION_REQUESTED",
+				"action": "REQUEST_MODIFICATION",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "TRChecker",
+				"lastName": "Jadhav",
+				"emailId": "dhaval.l.shah@oracle.com",
+				"mobileNumber": "9773298719"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-04T04:27:28",
+			"lastUpdatedBy": "DtechChecker",
+			"lastUpdatedDate": "2020-04-04T05:33:11",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"remarks": "Done testing from my side,",
+				"stepNo": 2,
+				"status": "PENDING_APPROVAL",
+				"action": "APPROVE",
+				"approvalType": "SE",
+				"countOfApprovals": 1
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Checker",
+				"emailId": "dipesh.rane@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "2541398576"
+			}
+		}, {
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-04T04:27:28",
+			"lastUpdatedBy": "DtechMaker",
+			"lastUpdatedDate": "2020-04-04T04:27:28",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 1,
+				"status": "PENDING_APPROVAL",
+				"action": "CREATE",
+				"approvalType": "SE",
+				"countOfApprovals": 0
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Maker",
+				"emailId": "amit.p.jadhav@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "9875632541"
+			}
+		}],
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "UM_N_UMD",
+			"name": "Modify User",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "send-to-modify"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": ["35eb79c94409cd63553690da945ad460d116b6ef39cc3b85c3b598ddd3a2141d2fd7c77e4753a21c32827b8f89f343aa9f2356004cd9fd8070c15d032265adab"],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}, {
+		"createdBy": "DtechMaker",
+		"creationDate": "2020-04-03T06:36:31.000+05:30",
+		"lastUpdatedBy": "DtechChecker",
+		"lastUpdatedDate": "2020-04-03T06:45:48.000+05:30",
+		"version": 3,
+		"generatedPackageId": false,
+		"auditSequence": 1,
+		"approvalDetails": {
+			"remarks": "reject comment",
+			"stepNo": 1,
+			"status": "REJECTED",
+			"action": "REJECT",
+			"approvalType": "SE",
+			"countOfApprovals": 0
+		},
+		"processingDetails": {
+			"currentStep": "approval",
+			"status": "F"
+		},
+		"transactionSnapshot": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"name": "3",
+			"type": "CUSTOMER",
+			"description": "descript3",
+			"steps": [{
+				"sequenceNo": 1,
+				"userGroup": {
+					"createdBy": "masteradmin",
+					"version": 1,
+					"generatedPackageId": false,
+					"auditSequence": 1,
+					"id": "132423",
+					"name": "DtechChecker",
+					"partyId": {
+						"displayValue": "***308",
+						"value": "004308"
+					},
+					"users": [{
+						"userId": "DtechChecker",
+						"id": "132424",
+						"userGroupId": "132423"
+					}],
+					"unary": true,
+					"type": "CUSTOMER",
+					"creationTime": "2020-02-18T14:32:44"
+				}
+			}],
+			"partyId": {
+				"displayValue": "***308",
+				"value": "004308"
+			}
+		},
+		"transactionId": "0304A6602182",
+		"transactionName": "AP_N_CWF",
+		"limitTaskCode": "AP_N_CWF",
+		"serviceId": "com.ofss.digx.app.approval.service.workflow.Workflow.create",
+		"transactionHistoryDTOs": [{
+			"createdBy": "DtechMaker",
+			"creationDate": "2020-04-03T06:36:31",
+			"lastUpdatedBy": "DtechMaker",
+			"lastUpdatedDate": "2020-04-03T06:36:31",
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"approvalDetails": {
+				"stepNo": 1,
+				"status": "PENDING_APPROVAL",
+				"action": "CREATE",
+				"approvalType": "SE",
+				"countOfApprovals": 0
+			},
+			"processingDetailDTO": {
+				"currentStep": "approval",
+				"status": "P"
+			},
+			"updatedByDetails": {
+				"title": "Mr",
+				"firstName": "Jack",
+				"lastName": "Maker",
+				"emailId": "amit.p.jadhav@oracle.com",
+				"mobileNumber": "9172777005",
+				"phoneNumber": "9875632541"
+			}
+		}],
+		"taskDTO": {
+			"version": 1,
+			"generatedPackageId": false,
+			"auditSequence": 1,
+			"id": "AP_N_CWF",
+			"name": "Create Workflow",
+			"supportedAccountTypes": [],
+			"supportedAccessModules": [],
+			"executable": true,
+			"moduleType": "BO",
+			"aspects": [{
+				"enabled": true,
+				"taskAspect": "blackout"
+			}, {
+				"enabled": true,
+				"taskAspect": "audit"
+			}, {
+				"enabled": true,
+				"taskAspect": "approval"
+			}],
+			"type": "ADMINISTRATION"
+		},
+		"createdByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Maker",
+			"emailId": "amit.p.jadhav@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "9875632541"
+		},
+		"updatedByDetails": {
+			"title": "Mr",
+			"firstName": "Jack",
+			"lastName": "Checker",
+			"emailId": "dipesh.rane@oracle.com",
+			"mobileNumber": "9172777005",
+			"phoneNumber": "2541398576"
+		},
+		"discriminator": "PARTY_MAINTENANCE",
+		"errors": [],
+		"entityIdentifiers": [],
+		"partyId": {
+			"displayValue": "***308",
+			"value": "004308"
+		},
+		"partyName": {
+			"fullName": "Sunrise Coffee"
+		}
+	}]
+}

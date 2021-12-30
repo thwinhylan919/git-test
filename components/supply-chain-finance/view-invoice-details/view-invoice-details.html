@@ -1,0 +1,347 @@
+<div class="oj-flex oj-flex-items-pad banner-design">
+    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+        <div class="oj-flex-item party-name-style">
+            <span data-bind="text: $component.partyName()"></span>
+        </div>
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $baseModel.format($component.nls.partyid,{partyId : $component.partyId()})"></span>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.invoiceCreationDate"></span>
+        </div>
+        <div class="oj-flex-item">
+            <!-- ko if : $component.invoiceCreationDate -->
+            <span data-bind="text: $formatter.formatDate($component.invoiceCreationDate)"></span>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.invoiceCreationDate -->
+            <span data-bind="text: $component.nls.noData"></span>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.paymentStatus"></span>
+        </div>
+        <div class="oj-flex-item">
+            <!-- ko if : $component.invoiceSearchgetpaymentStatus -->
+            <span data-bind="text: $component.invoiceSearchgetpaymentStatus"></span>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.invoiceSearchgetpaymentStatus -->
+            <span data-bind="text: $component.nls.noData"></span>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.invoiceStatus"></span>
+        </div>
+        <div class="oj-flex-item">
+            <!-- ko if : $component.invoiceSearchgetinvoiceStatus -->
+            <span data-bind="text: $component.invoiceSearchgetinvoiceStatus"></span>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.invoiceSearchgetinvoiceStatus -->
+            <span data-bind="text: $component.nls.noData"></span>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!--  ko if : $component.showPage()  -->
+    <div class="oj-flex-item oj-lg-3 oj-md-12 oj-sm-12">
+        <!-- ko if : $baseModel.large() -->
+        <div class="oj-flex-item pull-right">
+            <a href="#" class="form-button-link" id="ViewAttributes90"
+                data-bind="attr:{'alt':$component.nls.previewDownload,'title':$component.nls.previewDownloadTitle},click:$component.preview,text:$component.nls.previewDownload"></a>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot : $baseModel.large() -->
+        <div class="oj-flex-item pull-right">
+            <a href="#" class="form-button-link" id="ViewAttributes90"
+                data-bind="attr:{'alt':$component.nls.Download,'title':$component.nls.DownloadTitle},click:$component.downloadInvoice,text:$component.nls.Download"></a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</div>
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <!--  ko if : $component.showPage()  -->
+            <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.InvoiceDetails, headerTemplate : ''">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.InvoiceRefNo, value : $component.invoicegetVar().invoiceId">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.CustomerInvoiceNo, value : $component.invoicegetVar().invoiceNumber">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.NameofProgram, value : $component.invoicegetVar().program.programName">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PaymentTerms, value : $component.invoicegetVar().paymentTerms">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.InvoiceDueDate, value : $formatter.formatDate($component.invoicegetVar().invoiceDueDate)">
+                    </row>
+                    <!-- ko if : $component.invoicegetVar().poNumber -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PurchaseOrderNo, value : $component.invoicegetVar().poNumber">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.invoicegetVar().poNumber -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PurchaseOrderNo, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if : $component.invoicegetVar().purchaseOrderDate -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PurchaseOrderDate, value : $formatter.formatDate($component.invoicegetVar().purchaseOrderDate)">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.invoicegetVar().purchaseOrderDate -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PurchaseOrderDate, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.ProductCode, value : $component.invoicegetVar().program.programProduct.productCode">
+                    </row>
+                    <!-- ko if : $component.invoicegetVar().shipmentDate -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.ShipmentDate, value : $formatter.formatDate($component.invoicegetVar().shipmentDate)">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.invoicegetVar().shipmentDate -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.ShipmentDate, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if : $component.invoicegetVar().acceptanceDate -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.AcceptanceDate, value : $formatter.formatDate($component.invoicegetVar().acceptanceDate)">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.invoicegetVar().acceptanceDate -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.AcceptanceDate, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if : $component.invoicegetVar().preAccepted -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PreAccepted, value : $component.invoicegetVar().preAccepted">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.invoicegetVar().preAccepted -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.PreAccepted, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceDetails.Comments, value : $component.commentsValue()">
+                    </row>
+                </page-section>
+            </div><!--  /ko  -->
+            <!--  ko if : $component.showPage()  -->
+            <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.AmountDetails, headerTemplate : ''">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.InvoiceAmount, value : $formatter.formatCurrency($component.invoicegetVar().amount.amount,$component.invoicegetVar().amount.currency)">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.DiscountPercentage, value : $baseModel.format($component.nls.AmountDetails.DiscountValue,{discountPercent : $component.invoicegetVar().discountPercentage})">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.DiscountAmount, value : $formatter.formatCurrency($component.invoicegetVar().discountAmount,$component.invoicegetVar().amount.currency)">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.TaxPercentage, value : $baseModel.format($component.nls.AmountDetails.TaxValue,{taxPercent : $component.invoicegetVar().taxPercentage})">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.TaxAmount, value : $formatter.formatCurrency($component.invoicegetVar().taxAmount,$component.invoicegetVar().amount.currency)">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.FinalInvoiceAmount, value : $formatter.formatCurrency($component.invoicegetVar().totalAmount.amount,$component.invoicegetVar().totalAmount.currency)">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.AcceptanceAmount, value : $formatter.formatCurrency($component.invoicegetVar().acceptanceAmount.amount,$component.invoicegetVar().acceptanceAmount.currency)">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmountDetails.OutstandingAmount, value : $formatter.formatCurrency($component.invoicegetVar().outstandingAmount.amount,$component.invoicegetVar().outstandingAmount.currency)">
+                    </row>
+                </page-section>
+            </div><!--  /ko  -->
+            <!-- ko if:$component.showPage() -->
+            <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.PartyDetails, headerTemplate : ''">
+                    <!--  ko if : $component.selectedRole() === 'S'  -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.BuyerName, value : $component.invoicegetVar().associatedParty.name">
+                    </row>
+                    <!-- ko if : $component.finalAddress() -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.BuyerAddress, value : $component.finalAddress()">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.finalAddress() -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.BuyerAddress, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.BuyerId, value : $component.invoicegetVar().associatedParty.id.displayValue">
+                    </row>
+                    <!--  /ko  -->
+                    <!--  ko if : $component.selectedRole() === 'B'  -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.SupplierName, value : $component.invoicegetVar().supplierName">
+                    </row>
+                    <!-- ko if : $component.finalAddress() -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.SupplierAddress, value : $component.finalAddress()">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.finalAddress() -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.SupplierAddress, value : $component.nls.noData">
+                    </row>
+                    <!-- /ko -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PartyDetails.SupplierId, value : $component.invoicegetVar().supplierId.displayValue">
+                    </row>
+                    <!--  /ko  -->
+                </page-section>
+            </div><!-- /ko -->
+            <!--  ko if : $component.showPage() && $component.commodityDetails()  -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.CommodityDetails, headerTemplate : ''">
+                    <oj-table :id="[['CommodityDetails34']]" data="[[dataSource28]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('commodityRenderer')]]"
+                        columns="[[[{'headerText':$component.nls.CommodityDetails.Name, field:'name', sortable: false},{'headerText':$component.nls.CommodityDetails.Description, field:'description', sortable: false},{'headerText':$component.nls.CommodityDetails.Quantity, field:'quantity', sortable: false},{'headerText':$component.nls.CommodityDetails.Costperunit, field:'costPerUnit', headerClassName:'right', sortable: false},{'headerText':$component.nls.CommodityDetails.Amount, field:'totalCost', headerClassName:'right', sortable: false}]]]">
+                    </oj-table>
+                    <div id="scriptContainer">
+                        <script type="text/html" id="commodityRenderer">
+                            <td><span data-bind="text:$context.row.name"></span></td>
+                            <td><span data-bind="text:$context.row.description"></span></td>
+                            <td class="oj-lg-2"><span data-bind="text:$context.row.quantity"></span></td>
+                            <td class="right oj-lg-2"><span
+                                    data-bind="text:$formatter.formatCurrency($context.row.costPerUnit,$component.invoicegetVar().amount.currency)"></span>
+                            </td>
+                            <td class="right oj-lg-2"><span
+                                    data-bind="text:$formatter.formatCurrency($context.row.totalCost,$component.invoicegetVar().amount.currency)"></span>
+                            </td>
+                        </script>
+                    </div>
+                </page-section>
+            </div><!--  /ko  -->
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <!--  ko if : $component.showPage()  -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <!-- ko if : $component.selectedRole() === 'B' && $component.invoicegetVar().invoiceStatus === 'RAISED' && $component.invoicegetVar().paymentStatus === 'UNPAID' -->
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickAccept71]]"><span
+                                slot="startIcon" class="icons icon-ok"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.Accept"></span></oj-button><!-- /ko -->
+                        <!-- ko if : $component.selectedRole() === 'B' && $component.invoicegetVar().invoiceStatus === 'RAISED' && $component.invoicegetVar().paymentStatus === 'UNPAID' -->
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickReject52]]"><span
+                                slot="startIcon" class="icons icon-reject"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.Reject"></span></oj-button><!-- /ko -->
+                        <!-- ko if : ($component.selectedRole() === 'S' && (($component.invoicegetVar().invoiceStatus === 'RAISED' && $component.invoicegetVar().paymentStatus === 'UNPAID') || ($component.invoicegetVar().invoiceStatus === 'DISPUTED' && $component.invoicegetVar().paymentStatus === 'UNPAID') || ($component.invoicegetVar().invoiceStatus === 'REJECTED' && $component.invoicegetVar().paymentStatus === 'UNPAID'))) -->
+                        <!-- ko if : $baseModel.large() === true -->
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickEdit17]]"><span
+                                slot="startIcon" class="icons icon-remarks"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.Edit"></span></oj-button><!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if : $component.selectedRole() === 'S' && (($component.invoicegetVar().invoiceStatus === 'RAISED' && $component.invoicegetVar().paymentStatus === 'UNPAID') || ($component.invoicegetVar().invoiceStatus === 'DISPUTED' && $component.invoicegetVar().paymentStatus === 'UNPAID') || ($component.invoicegetVar().invoiceStatus === 'REJECTED' && $component.invoicegetVar().paymentStatus === 'UNPAID')) -->
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancelInvoice62]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.CancelInvoice"></span></oj-button>
+                        <!-- /ko -->
+                        <!-- ko if : (($component.selectedRole() === 'B' || $component.selectedRole() === 'S') && $component.invoicegetVar().invoiceStatus === 'ACCEPTED' && ($component.invoicegetVar().paymentStatus === 'PART_PAID' || $component.invoicegetVar().paymentStatus === 'UNPAID')) -->
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickRequestFinance]]"><span
+                                slot="startIcon" class="icons icon-request-chequebook"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.RequestFinance"></span></oj-button>
+                        <!-- /ko -->
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel16]]"><span
+                                slot="startIcon" class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.Cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack99]]"><span
+                                slot="startIcon" class="icons icon-back-arrow"></span><span
+                                data-bind="text:$component.nls.ButtonMatrix.Back"></span></oj-button>
+                    </div>
+                </page-section>
+            </div><!--  /ko  -->
+        </div>
+    </div>
+</oj-validation-group>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'invoice-cancellation', header : $component.nls.heading.CancelInvoice">
+    <div class="oj-flex oj-flex-items-pad modal-text">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <div data-bind="text:$component.nls.CancelInvoice.Areyousureyouwanttocancelthisinvoice"></div>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickYes87]]"><span slot="startIcon"
+                class="icons icon-yes"></span><span data-bind="text:$component.nls.CancelInvoice.Yes"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickNo36]]"><span slot="startIcon"
+                class="icons icon-no"></span><span data-bind="text:$component.nls.CancelInvoice.No"></span>
+        </oj-button>
+    </div>
+</modal-window>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'invoice-rejection', header : $component.nls.heading.RejectInvoice">
+    <oj-validation-group :id="[['reject_tracker']]">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <oj-label :for="[['Comment100']]"><span data-bind="text:$component.nls.RejectInvoice.Reason"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-8">
+                <oj-input-text :id="[['Comment100']]" value="{{$component.comments}}"
+                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'invoice.remarks','#Comment100')]]]">
+                </oj-input-text>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 modal-text modal-padding">
+                <div data-bind="text:$component.nls.RejectInvoice.Areyousureyouwanttorejectthisinvoice"></div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.onClickYesReject]]"><span slot="startIcon"
+                    class="icons icon-yes"></span><span data-bind="text:$component.nls.CancelInvoice.Yes"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.onClickNoReject]]"><span slot="startIcon"
+                    class="icons icon-no"></span><span data-bind="text:$component.nls.CancelInvoice.No"></span>
+            </oj-button>
+        </div>
+    </oj-validation-group>
+</modal-window>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, id:'passwordDialog', header : $component.nls.passwordNotification">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span data-bind="text: $component.nls.passCombination"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span data-bind="text: $component.nls.passwordExample"></span>
+            </div>
+        </div>
+        <div class="oj-flex button-container">
+            <oj-button id="ok" class="action-button-primary" on-click="[[$component.ok]]">
+                <span data-bind="text:$component.nls.ok"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

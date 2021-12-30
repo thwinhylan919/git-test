@@ -1,0 +1,87 @@
+<div class="form-main-container">
+    <!-- ko if : $component.invoiceDataLoaded()-->
+    <div>
+        <oj-table :id="[['buyer-table']]" data="[[dataSource14]]"
+            row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('invoicesTable')]]"
+            selection-mode='{"row":"single","column":"single"}'
+            columns="[[[{'headerText':$component.nls.InvoiceList.invoiceRefNo, field:'invoiceId', sortable: false},
+                            {'headerText':$component.nls.InvoiceList.invoiceNumber, field:'invoiceNumber', sortable: false},
+                            {'headerText':$component.nls.InvoiceList.dueDate, field:'dueDate', sortable: false},
+                            {'headerText':$component.nls.InvoiceList.invoiceAmount, field:'invoiceAmount', headerClassName:'right', sortable: false},
+                            {'headerText':$component.nls.InvoiceList.financedAmount, field:'financeAmount', headerClassName:'right', sortable: false},
+                            {'headerText':$component.nls.InvoiceList.outstandingAmount, field:'outstandingAmount', headerClassName:'right', sortable: false},
+                            {'headerText':$component.nls.InvoiceList.invoiceStatus, field:'invoiceStatus', sortable: false}]]]">
+        </oj-table>
+        <oj-paging-control :id="[['invoice-paging']]" data="[[dataSource14]]" page-size="10">
+        </oj-paging-control>
+    </div>
+    <div id="scriptContainer">
+        <script type="text/html" id="invoicesTable">
+            <td>
+                <span data-bind="text:$context.row.invoiceId"></span>
+            </td>
+            <td>
+                <span data-bind="text:$context.row.invoiceNumber"></span>
+            </td>
+            <td>
+                <span data-bind="text:$formatter.formatDate($context.row.invoiceDueDate)"></span>
+            </td>
+            <td class="right">
+                <span
+                    data-bind="text:$formatter.formatCurrency($context.row.totalAmount.amount,$context.data.totalAmount.currency)"></span>
+            </td>
+            <td class="right">
+                <!-- ko if: $context.row.financeAmount && $context.row.financeAmount.amount -->
+                <span
+                    data-bind="text:$formatter.formatCurrency($context.row.financeAmount.amount,$context.data.financeAmount.currency)"></span>
+                <!-- /ko -->
+                <!-- ko ifnot: $context.row.financeAmount && $context.row.financeAmount.amount -->
+                <span data-bind="text:$component.noData"></span>
+                <!-- /ko -->
+            </td>
+            <td class="right">
+                <!-- ko if: $context.row.outstandingAmount.amount -->
+                <span
+                    data-bind="text:$formatter.formatCurrency($context.row.outstandingAmount.amount,$context.row.outstandingAmount.currency)"></span>
+                <!-- /ko -->
+                <!-- ko ifnot: $context.row.outstandingAmount.amount -->
+                <span data-bind="text:$component.noData"></span>
+                <!-- /ko -->
+            </td>
+            <td>
+                <div class="center-align">
+                    <!-- ko if: invoiceStatus === "RAISED" -->
+                    <span class="tags raised-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "FINANCED" -->
+                    <span class="tags financed-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "PARTIAL_FINANCED" -->
+                    <span class="tags partiallyFinanced-Color"
+                        data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "ACCEPTED" -->
+                    <span class="tags accepted-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "PARTIAL_ACCEPTED" -->
+                    <span class="tags partiallyAccepted-Color"
+                        data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "CANCELLED" -->
+                    <span class="tags cancelled-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "DISPUTED" -->
+                    <span class="tags disputed-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "REJECTED" -->
+                    <span class="tags rejected-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                    <!-- ko if: invoiceStatus === "OTHERS" -->
+                    <span class="tags other-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+                    <!-- /ko -->
+                </div>
+            </td>
+        </script>
+    </div>
+    <!-- /ko -->
+</div>

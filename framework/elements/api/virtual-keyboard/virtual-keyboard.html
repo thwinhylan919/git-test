@@ -1,0 +1,47 @@
+<!-- ko if: showVirtualKeypad -->
+<a href="#" class="trigger" data-bind="click:openVirtualKeyPad, attr : {id : 'button' + id, 'aria-label' : $component.resource.openKeyboard}"><span class="icon-keyboard"></span></a>
+<oj-popup class="hide" :id="[['popup' + id]]" position.my.horizontal="left" position.my.vertical="top" position.at.horizontal="start" position.at.vertical="bottom">
+    <div class="virtual-keyboard-container">
+        <div class="keyboard-container">
+            <ul class="keyboard" :id="[['keyboard' + id]]">
+                <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[1]"></span><span class="on">!</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[2]"></span><span class="on">@</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[3]"></span><span class="on">#</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[4]"></span><span class="on">$</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[5]"></span><span class="on">%</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[6]"></span><span class="on">^</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[7]"></span><span class="on">&amp;</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[8]"></span><span class="on">*</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[9]"></span><span class="on">(</span></li>
+                <li class="symbol"><span class="off" data-bind="text: $component.numbers[0]"></span><span class="on">)</span></li>
+                <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+                <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+                <li class="delete lastitem" data-bind="text : $component.resource.delete"></li>
+                <li class="tab" data-bind="text : $component.resource.tab"></li>
+                <!-- ko foreach: $component.firstRowAlphabets -->
+                <li class="letter" data-bind="text: $data"></li>
+                <!-- /ko -->
+                <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+                <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+                <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+                <li class="capslock" data-bind="text : $component.resource.capsLock"></li>
+                <!-- ko foreach: $component.secondRowAlphabets -->
+                <li class="letter" data-bind="text: $data"></li>
+                <!-- /ko -->
+                <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+                <li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+                <li class="left-shift" data-bind="text : $component.resource.shift"></li>
+                <!-- ko foreach: $component.thirdRowAlphabets -->
+                <li class="letter" data-bind="text: $data"></li>
+                <!-- /ko -->
+                <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+                <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+                <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+                <li class="right-shift lastitem" data-bind="text : $component.resource.shift"></li>
+                <li class="space lastitem" data-bind="text : $component.resource.space"></li>
+            </ul>
+        </div>
+    </div>
+</oj-popup>
+<!-- /ko -->

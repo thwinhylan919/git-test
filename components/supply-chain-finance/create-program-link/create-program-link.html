@@ -1,0 +1,155 @@
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+        <div data-bind="attr:{'class':'heading'},text:$component.nls.CreateProgram.SelectCounterparties"></div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-10 oj-md-10">
+                <div data-bind="attr:{'class':'sub-heading'}"><span
+                        data-bind="text:$component.nls.CreateProgram.LinkCounterpartiesonthegotothenewlycreatedprogram">
+                    </span>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-lg-2">
+                <oj-buttonset-one display="[['icons']]" chroming="[['full']]" :class="[['button-style']]"
+                    :id="[['buttonview']]" value="{{activeLayout}}">
+                    <!-- ko foreach : layoutViewRadios -->
+                    <oj-option value="[[id]]"><span data-bind="text:label"></span><span slot="startIcon"
+                            data-bind="attr: {class: icon}"></span></oj-option><!-- /ko -->
+                </oj-buttonset-one>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <!--  ko if : $component.showSearch()  -->
+            <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-8">
+                <oj-combobox-one :id="[['Search']]" value="{{searchCounterparty}}">
+                    <!-- ko foreach : fetchedCounterparties -->
+                    <oj-option value="[[associatedPartyId.value]]"><span data-bind="text:associatedPartyName"></span>
+                    </oj-option><!-- /ko -->
+                </oj-combobox-one>
+            </div><!--  /ko  -->
+            <!--  ko if : $component.showSelected()  -->
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-2 right border-right"><a href="#" class="form-button-link"
+                    data-bind="attr:{'id':'show-selected','alt':$component.nls.CreateProgram.ShowSelected,'title':$component.nls.CreateProgram.ShowSelectedTitle},click:$component.onClickShowSelected,text:$component.nls.CreateProgram.ShowSelected"></a>
+            </div><!--  /ko  -->
+            <!--  ko if : $component.showSelected()  -->
+            <div class="oj-flex-item oj-flex-item oj-lg-2 oj-md-2 oj-sm-2 right border-right"><a href="#"
+                    class="form-button-link"
+                    data-bind="attr:{'id':'ShowAll','alt':$component.nls.CreateProgram.ShowAll,'title':$component.nls.CreateProgram.ShowAllTitle},click:$component.onClickShowAll44,text:$component.nls.CreateProgram.ShowAll"></a>
+            </div><!--  /ko  -->
+        </div>
+        <!-- ko if : $component.showList() -->
+        <!-- ko if : $component.showAll() -->
+        <div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item "><a href="#" class="form-button-link"
+                        data-bind="attr:{'id':'select-all','alt':$component.nls.CreateProgram.SelectAll,'title':$component.nls.CreateProgram.SelectAllTitle},click:$component.onClickSelectAll,text:$component.nls.CreateProgram.SelectAll"></a>
+                </div>
+            </div>
+        </div><!-- /ko -->
+        <!-- ko if : !$component.showAll() -->
+        <div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item "><a href="#" class="form-button-link"
+                        data-bind="attr:{'id':'reset-option','alt':$component.nls.CreateProgram.DeselectAll,'title':$component.nls.CreateProgram.DeselectAllTitle},click:$component.onClickDeselectAll,text:$component.nls.CreateProgram.DeselectAll"></a>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex">
+            <oj-list-view :id="[['listview']]" :aria-label="[[$component.nls.CreateProgram.SelectCounterparties]]"
+                :class="[['oj-listview-card-layout oj-flex-item list-scroll oj-md-11 oj-sm-11']]"
+                :drill-mode="[['none']]" data="[[dataSource26]]"
+                item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('cp-row-template')]]"></oj-list-view>
+            <oj-indexer :aria-label="[[$component.nls.CreateProgram.SelectCounterparties]]"
+                :id="[['ListofCounterpartiestobelinkedwithprogramIndexer']]" data="[[dataSource26]]">
+            </oj-indexer>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot : $component.showList() -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item" data-bind="text: $component.nls.CreateProgram.noDataToDisplay">
+            </div>
+        </div>
+        <!-- /ko -->
+        <div id="scriptContainer">
+            <script type="text/html" id="cp-row-template">
+                <!-- ko if : $component.activeLayout() === 'listView' -->
+            <div>
+                <!-- ko if : $context.data.associatedPartyId && $context.data.associatedPartyId.value -->
+                <div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-1">
+                            <oj-checkboxset class="oj-choice-direction-row"
+                                :id="[['SelectOption' + $context.data.associatedPartyId.value]]"
+                                value="{{$context.data.selected}}" on-value-changed="[[$component.onSpokeSelect]]"
+                                disabled="[[isDisabled]]">
+                                <oj-option :aria-label="[[$component.nls.checkBoxLabel]]" value="{{'checked'}}">
+                                </oj-option>
+                            </oj-checkboxset>
+                        </div>
+                        <div class="oj-flex-item oj-lg-1">
+                            <oj-avatar role="img" size="[['xs']]" initials="[[$context.data.associatedPartyInitials]]"
+                                data-bind="attr:{'aria-label':$component.nls.avatarLabel}"></oj-avatar>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4">
+                            <div>
+                                <div class="word-style" data-bind="text:$context.data.associatedPartyName"></div><span
+                                    data-bind="attr:{'class':'medium-text'},text:$baseModel.format($component.nls.CreateProgram.IdspokeId,{spokeId: $context.data.associatedPartyId.displayValue})"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6 medium-text word-style"><span
+                                data-bind="text:$context.data.associatedPartyAddress"></span></div>
+                    </div>
+                </div><!-- /ko -->
+                <!-- ko if : !($context.data.associatedPartyId && $context.data.associatedPartyId.value) --><span
+                    data-bind="text:$context.data"></span><!-- /ko -->
+            </div><!-- /ko -->
+            <!-- ko if : $component.activeLayout() === 'thumbView' -->
+            <div>
+                <!-- ko if : $context.data.associatedPartyId && $context.data.associatedPartyId.value -->
+                <div data-bind="css: borderColor">
+                    <div data-bind="attr:{'class':'cp-border'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-3 oj-sm-3 oj-md-3">
+                                <oj-avatar role="img" size="[['xs']]"
+                                    initials="[[$context.data.associatedPartyInitials]]"
+                                    data-bind="attr:{'aria-label':$component.nls.avatarLabel}"></oj-avatar>
+                            </div>
+                            <div class="oj-flex-item oj-lg-7 oj-sm-7 oj-md-7">
+                                <div>
+                                    <div class="word-style" data-bind="text:$context.data.associatedPartyName"></div><span
+                                        data-bind="attr:{'class':'medium-text'},text:$baseModel.format($component.nls.CreateProgram.IdspokeId,{spokeId: $context.data.associatedPartyId.displayValue})"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-1 oj-sm-1 oj-md-1 right">
+                                <oj-checkboxset class="oj-choice-direction-row"
+                                    :id="[['SelectOptionCardView'+ $context.data.associatedPartyId.value]]"
+                                    value="{{$context.data.selected}}" on-value-changed="[[$component.onSpokeSelect]]"
+                                    disabled="[[isDisabled]]">
+                                    <oj-option :aria-label="[[$component.nls.checkBoxLabel]]" value="{{'checked'}}">
+                                    </oj-option>
+                                </oj-checkboxset>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        data-bind="attr:{'class':'medium-text cp-address word-style'},text:$context.data.associatedPartyAddress">
+                    </div>
+                </div><!-- /ko -->
+                <!-- ko if : !($context.data.associatedPartyId && $context.data.associatedPartyId.value) --><span
+                    data-bind="text:$context.data"></span><!-- /ko -->
+            </div><!-- /ko -->
+            </script>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.onClickSubmit]]"><span slot="startIcon"
+                    class="icons icon-submit"></span><span data-bind="text:$component.nls.CreateProgram.Submit"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span slot="startIcon"
+                    class="icons icon-cancel"></span><span data-bind="text:$component.nls.CreateProgram.Cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span slot="startIcon"
+                    class="icons icon-back-arrow"></span><span
+                    data-bind="text:$component.nls.CreateProgram.Back"></span></oj-button>
+        </div>
+    </page-section>
+</div>

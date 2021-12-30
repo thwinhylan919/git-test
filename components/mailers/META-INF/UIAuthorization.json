@@ -1,0 +1,23 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.collaboration.service.mailer.Mailer",
+        "components": [{
+                "componentName": "view",
+                "service": "read",
+                "perform": "mailers-base#search-list"
+            },
+            {
+                "componentName": "mailers-create",
+                "service": "create",
+                "perform": "mailers-base#review-mailer-create",
+                "approve": "review-mailer-create"
+            },
+            {
+                "componentName": "edit",
+                "service": "update",
+                "perform": "review-mailer-edit",
+                "approve": "review-mailer-edit"
+            }
+        ]
+    }]
+}

@@ -1,0 +1,332 @@
+<!-- ko if:$component.dataFetched() && $component.userSegement ==="RETAIL" -->
+<div data-bind="component:{name: 'account-nickname', params:{rootModel:$data,params:$component.params,editable:true,module:'loans'}}">
+</div>
+<!-- /ko -->
+<div>
+    <div class="form-main-container">
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+                <!-- ko if: $baseModel.small() || $component.userSegement ==="CORP" -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <account-input params="baseModel : $baseModel, rootModel: $data ,label : $component.locale.loanDetails.selectAccount,
+                                                             account : $component.selectedAccount,
+                                                             additionalDetails : $component.additionalLoanDetails,
+                                                             customURL : 'loan',
+                                                             readOnly: $component.showAccoundDropDown(),
+                                                             taskCode:'LN_I_DD',
+                                                             type:'nodeValue'">
+                    </account-input>
+                    <!-- ko if: $component.additionalLoanDetails() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-label>
+                                <span data-bind="text:$component.locale.loanDetails.productName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <span data-bind="text:$component.additionalLoanDetails().productDTO.name"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+
+                </page-section>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- ko if: $component.dataFetched() && $component.userSegement ==="CORP" -->
+
+        <div data-bind="component:{name: 'account-nickname', params:{rootModel:$data,params:$component.loanViewDetails(),editable:true,module:'loans'}}">
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex oj-lg-justify-content-space-around oj-md-justify-space-around oj-sm-justify-content-center oj-md-justify-justify-initial">
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-12">
+
+                <!-- ko if:$component.dataFetched() -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.loanDetails.account">
+                    <div class="row-group">
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.customerId , value :$component.loanViewDetails().partyId.displayValue">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.openingDate , value :$formatter.formatDate($component.loanViewDetails().openingDate)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.maturityDate , value :$formatter.formatDate($component.loanViewDetails().maturityDate)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.status , value :$component.locale.loanDetails.statusLevel[$component.loanViewDetails().status]">
+                        </row>
+                        <!-- ko if: loanViewDetails().module === "CON" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.interestRate , value :$formatter.formatNumber(($component.loanViewDetails().interestRate)/100,'percent'), dataClass:'highlight-text'">
+                        </row>
+                        <!-- /ko -->
+                        <!-- ko if: loanViewDetails().module === "ISL" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.profitRate , value :$formatter.formatNumber(($component.loanViewDetails().interestRate)/100,'percent'), dataClass:'highlight-text'">
+                        </row>
+                        <!-- /ko -->
+                        <!-- ko if: loanViewDetails().noOfLinkage -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.facilityId , value :$component.loanViewDetails().noOfLinkage ? $component.loanViewDetails().noOfLinkage : '-' ">
+                        </row>
+                        <!-- /ko -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.branch , value :$baseModel.format($component.locale.loanDetails.bankDetails,{branchName:$component.loanViewDetails().branchAddressDTO.branchName, branchCode: $component.loanViewDetails().branchCode})">
+                        </row>
+                    </div>
+                </page-section>
+                <!-- /ko -->
+            </div>
+            <!-- ko if:$component.dataFetched() -->
+            <!-- ko if: loanViewDetails().module === "CON" -->
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.loanDetails.loanAmountHeading">
+                    <div class="row-group">
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.sanctionedAmount , value :$formatter.formatCurrency($component.loanViewDetails().approvedAmount.amount,$component.loanViewDetails().approvedAmount.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.totalAmountDisbursed , value :$formatter.formatCurrency($component.loanViewDetails().disbursedAmount.amount,$component.loanViewDetails().disbursedAmount.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.amountRepaidTillDate , value :$formatter.formatCurrency($component.loanViewDetails().loanScheduleDTO.amountPaid.amount,$component.loanViewDetails().loanScheduleDTO.amountPaid.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.outstandingAmt , value :$formatter.formatCurrency($component.loanViewDetails().outstandingAmount.amount,$component.loanViewDetails().outstandingAmount.currency), dataClass:'highlight-text'">
+                        </row>
+                    </div>
+                </page-section>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.dataFetched() -->
+            <!-- ko if: loanViewDetails().module === "ISL" -->
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.loanDetails.financeHeading">
+                    <div class="row-group">
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.finAmount , value :$formatter.formatCurrency($component.loanViewDetails().approvedAmount.amount,$component.loanViewDetails().approvedAmount.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.finAmountDisbursed , value :$formatter.formatCurrency($component.loanViewDetails().disbursedAmount.amount,$component.loanViewDetails().disbursedAmount.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.financePurpose">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.amountRepaidTillDate , value :$formatter.formatCurrency($component.loanViewDetails().loanScheduleDTO.amountPaid.amount,$component.loanViewDetails().loanScheduleDTO.amountPaid.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.outstandingFin , value :$formatter.formatCurrency($component.loanViewDetails().outstandingAmount.amount,$component.loanViewDetails().outstandingAmount.currency), dataClass:'highlight-text'">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.custGracePeriod , value :$component.loanViewDetails().customerGracePeriod">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.suplGracePeriod , value :$component.loanViewDetails().supplierGracePeriod">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.linkedMurabhaBill ">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.bnkProfitShare , value :$component.loanViewDetails().bankProfitShare">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.custProfitShare , value :$component.loanViewDetails().customerProfitShare">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.leaseType ">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.leasePaymntMode ">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.bankShare , value :$component.loanViewDetails().bankShare">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.custShare , value :$component.loanViewDetails().customerShare">
+                        </row>
+                    </div>
+                </page-section>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.loanDetails.repaymentHeading">
+                    <div class="row-group">
+
+                        <!-- ko if: loanViewDetails().module === "CON" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.interestRepaymentFreq , value :$component.loanViewDetails().loanScheduleDTO.interestRepaymentFrequency">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.principalRepFreq , value :$component.loanViewDetails().loanScheduleDTO.principalRepaymentFrequency">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.repaymentModeLabel , value :$component.locale.loanDetails.repaymentMode[$component.loanViewDetails().repaymentMode]">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.latePaymentPenalty , value :$formatter.formatNumber(($component.loanViewDetails().penaltyRate)/100,'percent')">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.prepaymentPenalty , value :$formatter.formatNumber(($component.loanViewDetails().prepaymentPenaltyRate)/100,'percent')">
+                        </row>
+                        <!-- /ko -->
+
+                        <!-- ko if: loanViewDetails().module === "ISL" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.financeRepaymentFreq , value :$component.loanViewDetails().loanScheduleDTO.interestRepaymentFrequency">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.repaymentModeLabel , value :$component.locale.loanDetails.repaymentMode[$component.loanViewDetails().repaymentMode]">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.advPayAmt , value :$formatter.formatCurrency($component.outstandingData().prepaymentAmount.amount,$component.outstandingData().prepaymentAmount.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.prepaymentProfit , value :$formatter.formatNumber(($component.loanViewDetails().prepaymentPenaltyRate)/100,'percent')">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.latePaymentProfit , value :$formatter.formatNumber(($component.loanViewDetails().penaltyRate)/100,'percent')">
+                        </row>
+                        <!-- /ko -->
+                    </div>
+                </page-section>
+            </div>
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.loanDetails.installments">
+                    <div class="row-group">
+                        <!-- ko if: loanViewDetails().module === "CON" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.loanTenure , value :$baseModel.format($component.locale.loanDetails.tenureText,{months:$component.loanViewDetails().tenure.months,days:$component.loanViewDetails().tenure.days})">
+                        </row>
+                        <!-- /ko -->
+                        <!-- ko if: loanViewDetails().module === "ISL" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.finTenure , value :$baseModel.format($component.locale.loanDetails.tenureText,{months:$component.loanViewDetails().tenure.months,days:$component.loanViewDetails().tenure.days})">
+                        </row>
+                        <!-- /ko -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.noOfInst , value :$component.scheduleData().loanScheduleItemDTO.length">
+                        </row>
+                        <!-- ko if: loanViewDetails().module === "ISL" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.paidInst , value :$component.loanViewDetails().loanScheduleDTO.installementPaidCount">
+                        </row>
+                        <!-- /ko -->
+                        <!-- ko if: $component.loanViewDetails().loanScheduleDTO.installementDueCount -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.remInst , value :$component.loanViewDetails().loanScheduleDTO.installementDueCount">
+                        </row>
+                        <!-- /ko -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.nextInstDate , value :$formatter.formatDate($component.loanViewDetails().loanScheduleDTO.nextDueDate)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.nextInstAmt , value :$formatter.formatCurrency($component.loanViewDetails().loanScheduleDTO.nextInstallmentAmount.amount,$component.loanViewDetails().loanScheduleDTO.nextInstallmentAmount.currency)">
+                        </row>
+                    </div>
+                </page-section>
+            </div>
+            <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.loanDetails.arrears">
+                    <div class="row-group">
+                        <!--  ko if: $component.outstandingData().principalArrears -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.principalArrears , value :$formatter.formatCurrency($component.outstandingData().principalArrears.amount,$component.outstandingData().principalArrears.currency)">
+                        </row>
+                        <!-- /ko -->
+
+                        <!--  ko ifnot: $component.outstandingData().principalArrears -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.principalArrears , value :$formatter.formatCurrency($component.outstandingData().principalBalance.amount,$component.outstandingData().principalBalance.currency)">
+                        </row>
+                        <!-- /ko -->
+
+                        <!-- ko if: $component.loanViewDetails().module === "CON" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.interestArrears , value :$formatter.formatCurrency($component.outstandingData().interestArrears.amount,$component.outstandingData().interestArrears.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.latePaymentCharges , value :$formatter.formatCurrency($component.outstandingData().lateRepaymentCharges.amount,$component.outstandingData().lateRepaymentCharges.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.otherCharges , value :$formatter.formatCurrency($component.outstandingData().serviceCharges.amount,$component.outstandingData().serviceCharges.currency)">
+                        </row>
+                        <!-- /ko -->
+
+                        <!-- ko if: $component.loanViewDetails().module === "ISL" -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.installArrears , value :$formatter.formatCurrency($component.outstandingData().interestArrears.amount,$component.outstandingData().interestArrears.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.backProfitDue , value :$formatter.formatCurrency($component.outstandingData().lateRepaymentCharges.amount,$component.outstandingData().lateRepaymentCharges.currency)">
+                        </row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.loanDetails.otherCharges , value :$formatter.formatCurrency($component.outstandingData().serviceCharges.amount,$component.outstandingData().serviceCharges.currency)">
+                        </row>
+                        <!-- /ko -->
+
+                    </div>
+                </page-section>
+            </div>
+            <!-- /ko -->
+        </div>
+
+        <!-- ko if: $component.userSegement ==="CORP" && $component.linkageDetailsFetched() -->
+          <div class="padding_bottom">
+            <div class="oj-panel">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-8">
+                  <h3 class="heading" data-bind="text:$component.locale.loanDetails.linkageDetails">
+                  </h3>
+                </div>
+              </div>
+
+            <div>
+            <oj-table id="table" :aria-label="[[$component.locale.loanDetails.heading]]" columns="[[[{
+                   headerText:$component.locale.loanDetails.linkageType,field:'linkageType'} ,{
+                   headerText:$component.locale.loanDetails.linkedReferenceNumber,field:'linkedReferenceNumber'},{
+                   headerText:$component.locale.loanDetails.branch,field:'branchCode'},{
+                   headerText:$component.locale.loanDetails.linkedAmount,field:'amount', template:'linkedAmount'},{
+                   headerText:$component.locale.loanDetails.linkedPercent,field:'linkedPercent',template:'linkedPercent'}]]]"
+              selection-mode="[[{row:'single',column:'single'}]]" translations="[[{msgNoData:$component.locale.loanDetails.noData}]]"
+              data="[[$component.linkageDataSource()]]">
+              <template slot="linkedPercent">
+                <div>
+                  <span data-bind="text:$baseModel.format($component.locale.loanDetails.percentFormat , {'percent' : $current.row.linkedPercent})"></span>
+                </div>
+              </template>
+              <template slot="linkedAmount">
+                <span data-bind="text:$formatter.formatCurrency($current.row.amount.linkageAmount,$current.row.amount.linkageCurrency)"></span>
+              </template>
+            </oj-table>
+                <oj-paging-control :id="[['table']]" data="[[$component.linkageDataSource]]" page-size="3"></oj-paging-control>
+            </div>
+
+            </div>
+          </div>
+        <!-- /ko -->
+
+        <!-- ko if: $component.dataFetched() && $component.userSegement ==="CORP" -->
+        <div class="padding_bottom">
+        <div class="oj-panel quickLinks">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-8">
+              <h3 class="heading" data-bind="text:$component.locale.loanDetails.quickLinks">
+              </h3>
+            </div>
+          </div>
+          <div class="product-quick-links padding_bottom">
+            <ul class="oj-flex oj-flex-items-pad product-quick-links-flex-container oj-sm-flex-wrap-nowrap">
+              <!-- ko foreach: quickLinks -->
+              <li class="oj-flex-item oj-lg-4 product-quick-links-flex-container__listItems">
+                <a class="product-quick-links-flex-item" href="#" data-bind="click:$component.onSelectClick.bind($data)">
+                  <img class="icons" data-bind="loadImage:$data.icon">
+                  <div class="icon-title" data-bind="text:$data.txt"></div>
+                </a>
+              </li>
+              <!-- /ko -->
+            </ul>
+          </div>
+        </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if:$component.dataFetched() -->
+        <!-- ko if: $baseModel.small() && $component.loanViewDetails().status === "ACTIVE" -->
+        <a href="#" data-bind="click: $component.showFloatingPanel">
+            <div class="floating-button"><span class="icons icon-more-vertical"></span></div>
+        </a>
+        <floating-panel params="baseModel : $baseModel, panelId: 'panelLoans', rootModel: $component">
+            <ul>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'loan-schedule',loanViewDetails())">
+                        <span class="icons icon-view-statement"></span>
+                        <span data-bind="text:$component.locale.loanDetails.loanSchButton"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'loan-disbursement',loanViewDetails())">
+                        <span class="icons icon-request-chequebook"></span>
+                        <span data-bind="text:$component.locale.loanDetails.loanDis"></span></a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'loan-repayment',loanViewDetails())">
+                        <span class="icons icon-stop-unblock-cheque"></span>
+                        <span data-bind="text:$component.locale.loanDetails.loanRepayButton"></span></a>
+                </li>
+            </ul>
+        </floating-panel>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- ko if: $component.dataFetched() && $component.loanViewDetails() -->
+    <div data-bind="template : $component.getTemplate(), data:$data"></div>
+    <!-- /ko -->
+
+    <script type="text/html" id="corpTemplate">
+        <div class="loan-details__transactionWidget">
+            <div data-bind="component:{name:'account-transactions',
+              params:{rootModel: {params : {
+              id : $component.loanViewDetails().id,
+                  module : $component.loanViewDetails().module,
+                  type : $component.loanViewDetails().type
+            }}}}">
+        </div>
+        </div>
+    </script>
+
+</div>
+<!-- ko if: $component.dataFetched() && $component.loanViewDetails().status === "CLOSED" -->
+<a class="back-link" href="#" data-bind="text: $component.locale.generic.common.backToDashboard, click: $dashboard.switchModule.bind($data, null)"></a>
+<!-- /ko -->

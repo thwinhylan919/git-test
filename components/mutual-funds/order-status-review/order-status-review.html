@@ -1,0 +1,295 @@
+<div class="oj-flex purchase-order-details">
+    <div class=" oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <div class="form-main-container">
+
+            <oj-validation-group id="fbtracker">
+                <!-- ko if: $component.action()==="delete-purchase" -->
+                <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$baseModel.format($component.resource.reviewHeader,{fundname:$component.deleteOrderArray().accountHoldingDTO
+    .scheme.schemeName})}}">
+                </div>
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : details().scheme.schemeName">
+                    <!-- <div data-bind="component:{name: $component.schemeBar(),params:{rootModel: $component}}" class="padding-bar"></div> -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.investmentAccount , value :details().investmentAccountNumber.displayValue"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.payFrom , value :details().partyId.displayValue"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.folio , value :details().folioNumber"></row>
+                    <!-- ko if:details().dividendActionCode==="payout" -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.dividend , value :details().dividendActionCode"></row>
+                    <!-- /ko -->
+                    <!-- ko if:details().dividendActionCode==="reinvest" -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.dividend , value :details().reinvest"></row>
+                    <!-- /ko -->
+                </page-section>
+                <!-- ko if:details().instructionTypeCode==="ONE-TIME" -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading :$component.resource.transaction">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderAmount , value :$formatter.formatCurrency(details().txnAmount.amount,details().txnAmount.currency)"></row>
+                    <!-- ko if:extraData.nowLater==="NOW" -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.when , value :$component.resource.now"></row>
+                    <!-- /ko -->
+                    <!-- ko if:extraData.nowLater==="LATER" -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.when , value :$component.resource.later"></row>
+                    <!-- /ko -->
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.cutOff"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3">
+                            <span data-bind="text:$component.resource.cutOffTime"></span>
+                            <span data-bind="text:details().sceheme.cutOff"></span>
+
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <span data-bind="text:$component.resource.cutOffDate"></span>
+                            <span data-bind="text:$formatter.formatDate(details().sceheme.cutOff)"></span>
+                        </div>
+                    </div>
+                    <!-- ko if:extraData.nowLater==="LATER" -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label for="payLater">
+                                <span data-bind="text:$component.resource.purchaseDate"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-8 right">
+                            <span data-bind="text:$formatter.formatDate(details().scheduledDate)"></span>
+                        </div>
+
+                    </div>
+                    <!-- /ko -->
+
+                </page-section>
+                <!-- /ko -->
+                <!-- ko ifnot:details().scheme.instructionTypeCode==="ONE-TIME" -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.transactionInstallments">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderAmount , value :$formatter.formatCurrency(details().txnAmount.amount,details().txnAmount.currency)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.startDateSIP , value :$formatter.formatDate(details().scheme.startDate)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.frequency , value :details().frequency"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.installments , value :details().installments"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.endDate , value :$formatter.formatDate(details().scheme.endDate)"></row>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.cutOff"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3">
+                            <span data-bind="text:$component.resource.cutOffTime"></span>
+                            <span data-bind="text:$formatter.formatDate(details().scheme.cutOff,'timeFormat')"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <span data-bind="text:$component.resource.cutOffDate"></span>
+                            <span data-bind="text:$formatter.formatDate(details().scheme.cutOff)"></span>
+                        </div>
+                    </div>
+                </page-section>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $component.action()==="delete-redeem" -->
+                <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$baseModel.format($component.resource.reviewHeader,{fundname:$component.deleteOrderArray().accountHoldingDTO
+    .scheme.schemeName})}}">
+                </div>
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : details().scheme.schemeName">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.unitsHeld , value : details().investmentSummary.availableUnits"></row>
+                    <!-- ko if: details().txnUnits -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.enterUnits , value : details().txnUnits"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().txnAmount-->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.enterAmount , value : $formatter.formatCurrency(details().txnAmount.amount, details().txnAmount.currency)"></row>
+                    <!-- /ko -->
+                    <!-- ko if: $component.details().scheme.recurring-->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.swpAmountLabel , value : $formatter.formatCurrency(details().txnAmount.amount, details().txnAmount.currency)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.frequency , value : details().frequency"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.startDate , value :$formatter.formatDate(details().startDate)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.noOfRedemptions , value :  details().installments"></row>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.cutOff"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3">
+                            <span data-bind="text:$parentContext.$component.resource.cutOffTime"></span>
+                            <span data-bind="text:$formatter.formatDate(details().scheme.cutOff,'timeFormat')"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <span data-bind="text:$parentContext.$component.resource.cutOffDate"></span>
+                            <span data-bind="text: $formatter.formatDate(details().scheme.cutOff)"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.details().scheme.recurring-->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label for="when">
+                                <span data-bind="text:$parentContext.$component.resource.when"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 right">
+                            <!-- ko if: details().scheduledDate === null -->
+                            <span data-bind="text: $parentContext.$component.resource.now"></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: details().scheduledDate === null -->
+                            <span data-bind="text: $parentContext.$component.resource.later"></span>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- ko if: details().scheduledDate === null -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.cutOff"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3">
+                            <span data-bind="text:$component.resource.cutOffTime"></span>
+                            <span data-bind="text:$formatter.formatDate(details().scheme.cutOff,'timeFormat')"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <span data-bind="text:$component.resource.cutOffDate"></span>
+                            <span data-bind="text: $formatter.formatDate(details().scheme.cutOff)"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: details().scheduledDate === null -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label for="when-later">
+                                <span data-bind="text:$parentContext.$component.resource.orderDetails.purchaseDate"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-8 right">
+                            <span data-bind="text:$formatter.formatDate(details().scheduledDate)"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </page-section>
+                <!-- /ko -->
+                <!-- ko if: $component.action()==="delete-switch" -->
+                <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$baseModel.format($component.resource.reviewHeader,{fundname:$component.deleteOrderArray().switchInDetails
+    .scheme.schemeName})}}">
+                </div>
+                <!-- ko if: details().switchInDetails.scheme.instructionType === "ONE-TIME" -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.investmentAccount , value : details().switchInDetails.investmentAccountNumber.displayValue"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.reviewScreen.switchOutScheme , value : details().switchOutDetails.scheme.schemeName"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.reviewScreen.switchInScheme , value :  details().switchInDetails.scheme.schemeName"></row>
+                    <!-- ko if: details().switchInDetails.scheme.suitable -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.fundDetails.schemeSuitability , value : $parentContext.$component.resource.fundDetails.yes"></row>
+                    <!-- /ko -->
+                    <!-- ko ifnot: details().switchInDetails.scheme.suitable -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.fundDetails.schemeSuitability , value : $parentContext.$component.resource.fundDetails.no"></row>
+                    <!-- /ko -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.folio , value : details().switchInDetails.folioNumber"></row>
+                    <!-- ko if: details().switchInDetails.dividendActionCode === "payout" -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.dividend , value : $parentContext.$component.resource.switchOrderDetails.payout"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().switchInDetails.dividendActionCode === "reinvest" -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.dividend , value : $parentContext.$component.resource.switchOrderDetails.reinvest"></row>
+                    <!-- /ko -->
+                </page-section>
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $parentContext.$component.resource.switchOrderDetails.transactionHeader">
+                    <!-- ko if: details().switchInDetails.txnUnits -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.switchBy , value : $component.resource.switchOrderDetails.units"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().switchInDetails.txnAmount -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.switchBy , value : $component.resource.switchOrderDetails.amount"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().switchInDetails.txnUnits -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.units , value : details().switchInDetails.txnUnits"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().switchInDetails.txnAmount -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.enterAmount , value : $formatter.formatCurrency(details().switchInDetails.txnAmount.amount, details().switchInDetails.txnAmount.currency)"></row>
+                    <!-- /ko -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.when , value : details().switchInDetails.when"></row>
+                    <!-- ko if: $component.details().switchInDetails.scheme.recurring -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.cutOff"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3">
+                            <span data-bind="text:$component.resource.cutOffTime"></span>
+                            <span data-bind="text:$formatter.formatDate(details().switchInDetails.scheme.cutOff,'timeFormat')"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <span data-bind="text:$component.resource.cutOffDate"></span>
+                            <span data-bind="text:$formatter.formatDate(details().switchInDetails.scheme.cutOff)"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.details().switchInDetails.scheme.recurring -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.purchaseDate, value : $formatter.formatDate(details().switchInDetails.scheduledDate)"></row>
+                    <!-- /ko -->
+                </page-section>
+                <!-- /ko -->
+                <!-- ko ifnot: details().switchInDetails.scheme.instructionType === "ONE-TIME" -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.reviewScreen.switchInScheme">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.investmentAccount , value : details().switchInDetails.investmentAccountNumber.displayValue"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.reviewScreen.switchOutScheme , value : details().switchOutDetails.scheme.schemeName"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.reviewScreen.switchInScheme , value : details().switchInDetails.scheme.schemeName"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.folio , value : details().switchInDetails.folioNumber"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.dividend , value : details().switchInDetails.dividendActionCode"></row>
+
+                </page-section>
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.switchOrderDetails.setInstructions">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.frequency , value : details().switchInDetails.frequency"></row>
+
+                    <!-- ko if: details().switchInDetails.txnUnits -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.switchBy , value : $component.resource.switchOrderDetails.units"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().switchInDetails.txnAmount -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.switchBy , value : $component.resource.switchOrderDetails.amount"></row>
+                    <!-- /ko -->
+
+                    <!-- ko if: details().switchInDetails.txnUnits -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.units , value : details().switchInDetails.txnUnits"></row>
+                    <!-- /ko -->
+                    <!-- ko if: details().switchInDetails.txnAmount -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.enterAmount , value : $formatter.formatCurrency(details().switchInDetails.txnAmount.amount, details().switchInDetails.txnAmount.currency)"></row>
+                    <!-- /ko -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.startDate , value : $formatter.formatDate(details().switchInDetails.startDate)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.switchOrderDetails.installments , value : details().switchInDetails.installments"></row>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.cutOff"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3">
+                            <span data-bind="text:$component.resource.cutOffTime"></span>
+                            <span data-bind="text:$formatter.formatDate(details().switchInDetails.scheme.cutOff,'timeFormat')"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <span data-bind="text:$component.resource.cutOffDate"></span>
+                            <span data-bind="text:$formatter.formatDate(details().switchInDetails.scheme.cutOff)"></span>
+                        </div>
+                    </div>
+                </page-section>
+                <!-- /ko -->
+                <!-- /ko -->
+            </oj-validation-group>
+            <div class="oj-flex button-container">
+                <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.deleteOrder]]" disabled="[[$component.disabled()]]">
+                    <span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.resource.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" id="back"  on-click="[[$component.backToOrderStatus]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->

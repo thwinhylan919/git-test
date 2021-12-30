@@ -1,0 +1,12 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.user.service.User",
+           "components": [{
+                   "componentName": "change-password",
+                   "service": "changeCredentials",
+                   "perform": "security-menu#set-pin#set-pattern#confirm-pin#confirm-pattern"
+               }
+           ]
+       }
+   ]
+}

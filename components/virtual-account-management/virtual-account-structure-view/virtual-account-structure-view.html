@@ -1,0 +1,43 @@
+<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+  <page-section params="baseModel : $baseModel, rootModel : $component, heading : '' ">
+    <!-- ko if:$component.structureDetailsLoaded() && $component.mode() === "tree" -->
+    <div class="oj-flex virtualAccountStructure__tree-container">
+      <tree-view params="
+               treeDetails :$component.structureDetails(),
+               nodeIdjsonPath:'childAccountId.value',
+               baseModel : $baseModel,
+               nodeShortDescValue : 'childAccountId.value',
+               treePanning:'auto',
+               treeZooming:'auto',
+               maxChildNodesToRender:Infinity,
+               wrapTree: 'false',
+               rootModel : $component" class="structure__tree-width">
+        <div class="oj-flex oj-flex-items-pad structure__node">
+          <!-- ko if:$data.nodeData.mainAccountId -->
+          <div class="oj-flex-item oj-lg-12 structure__structureFill" data-bind="css : ($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep':'structure__structureFill__structureFillPool'">
+            <div class="oj-flex-item">
+              <div class="oj-flex-item structure__nodeData">
+                <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.childAccountName"></div>
+                <div class="oj-flex-item oj-lg-6" data-bind="text:$formatter.formatCurrency($data.nodeData.balance.amount,$data.nodeData.balance.currency)"></div>
+              </div>
+            </div>
+          </div>
+          <!-- /ko -->
+          <!-- ko if:!$data.nodeData.mainAccountId -->
+          <div class="oj-flex-item oj-lg-12 structure__structureFillParent" data-bind="css :'structure__structureFillParent__structureFillPool'">
+            <div class="oj-flex-item">
+              <div class="oj-flex-item structure__nodeData">
+                <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                <div class="oj-flex-item oj-lg-12 node-text" data-bind="text:$data.nodeData.childAccountName"></div>
+                <div class="oj-flex-item oj-lg-12" data-bind="text:$formatter.formatCurrency($data.nodeData.balance.amount,$data.nodeData.balance.currency)"></div>
+              </div>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </tree-view>
+    </div>
+    <!-- /ko -->
+  </page-section>
+</div>

@@ -1,0 +1,43 @@
+<div class="oj-panel postionByCurrency">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+            <h3 data-bind="text: $component.resource.title"></h3>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-8">
+            <!-- ko if:$component.entityDetailsLoaded() -->
+            <oj-select-one :aria-label="[[$component.resource.selectEntity]]" :id="SelectEntityPositionByCurrency" placeholder="[[$component.resource.selectEntity]]"
+                value="{{$component.selectedEntity}}" on-value-changed="{{$component.selectDifferentEntity}}" required>
+                <!-- ko foreach:$component.entityDetails -->
+                <oj-option value="[[virtualEntityId]]"><span data-bind="text: virtualEntityId"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if:$component.selectedEntity() && $component.showVirtualEntityInfo() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item entityNameText">
+            <span data-bind="text:$component.virtualEnitiyName"></span>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.viewTable() -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 postionByCurrency__table">
+            <oj-table id="tablePositionByCurrency" :aria-label="[[$component.resource.caption]]" data="[[dataSource]]" columns-default.sortable="enabled"
+                selection-mode='{"row":"single","column":"single"}' columns="[[headerText]]">
+                <caption class="hide-label" data-bind="text:$component.resource.caption"></caption>
+            </oj-table>
+            <oj-paging-control class="paddingClass" id="pagingPositionByCurrency" data="[[dataSource]]" page-size="6" slot="bottom">
+            </oj-paging-control>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<script type="text/html" id="currencyRowTemplate">
+    <td>
+        <div data-bind="text:$formatter.formatCurrency($context.row.totalAvailableBalance,$context.row.currency)"></div>
+    </td>
+</script>

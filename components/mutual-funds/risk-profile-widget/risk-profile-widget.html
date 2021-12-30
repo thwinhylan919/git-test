@@ -1,0 +1,68 @@
+<!-- ko ifnot: $baseModel.small() -->
+<div class="oj-panel height-panel">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <h3 class="heading oj-lg-12" data-bind="text: $component.resource.riskProfile.header">
+            </h3>
+        </div>
+    </div>
+    <!-- ko if: profileLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 profile-padding">
+            <label data-bind="text: $component.resource.riskProfile.profileLabel"></label>
+            <span data-bind="text: $component.riskProfile"></span>
+        </div>
+        <oj-status-meter-gauge id="gauge-risk-profile" tooltip.renderer="[[$component.temp.getRenderer('tooltip')]]"
+            min="0" max="100" thresholds="[[thresholdValues]]" value="{{currentValue}}" metric-label.rendered="off"
+            plot-area.rendered="on" indicator-size="0.1" threshold-display="all" class="oj-flex-item" readOnly>
+        </oj-status-meter-gauge>
+    </div>
+    <!-- /ko -->
+    <script type="text/html" id="tooltip">
+        <div>
+            <div>
+                <span data-bind="text:'Risk Profile: ' + $component.riskProfile"/>
+             </div>
+            <div id='legend-container'>
+                <oj-legend id="legend1"
+                    orientation='vertical'
+                    sections="[[$component.legendSections]]">
+                </oj-legend>
+            </div>
+        </div>
+    </script>
+</div>
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+        <h3 class="heading oj-lg-12" data-bind="text: $component.resource.riskProfile.header">
+        </h3>
+    </div>
+</div>
+<!-- ko if: profileLoaded -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 profile-padding">
+        <label data-bind="text: $component.resource.riskProfile.profileLabel"></label>
+        <span data-bind="text: $component.riskProfile"></span>
+    </div>
+    <oj-status-meter-gauge id="gauge-risk-profile" tooltip.renderer="[[$component.temp.getRenderer('tooltip')]]" min="0"
+        max="100" thresholds="[[thresholdValues]]" value="{{currentValue}}" metric-label.rendered="off"
+        plot-area.rendered="on" indicator-size="0.1" threshold-display="all" class="oj-flex-item" readOnly>
+    </oj-status-meter-gauge>
+</div>
+<!-- /ko -->
+<script type="text/html" id="tooltip">
+    <div>
+                <div>
+                    <span data-bind="text:'Risk Profile: ' + $component.riskProfile"/>
+                 </div>
+                <div id='legend-container'>
+                    <oj-legend id="legend1"
+                        orientation='vertical'
+                        sections="[[$component.legendSections]]">
+                    </oj-legend>
+                </div>
+            </div>
+        </script>
+<!-- /ko -->

@@ -1,0 +1,169 @@
+<div data-bind="descendantsComplete : $component.fetchQueryParams.bind($data,$root) ">
+    <!-- ko ifnot:$component.isError() -->
+
+    <!-- ko if:$component.verificationModel.aliasType() === 'FACEBOOK' && !$component.isDynamicUrl() -->
+    <social-media class="hide" params="baseModel : $baseModel, rootModel: $data ,
+                                    social_media_type:'facebook',
+                                    api:'USER_PROFILE',
+                                    callback:$component.loadUserProfile,
+                                    autoLogin: true,
+                                    id:'social' "></social-media>
+
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-item oj-flex-items-pad security-code-verification">
+        <div class="oj-flex-item oj-lg-8 oj-sm-12 oj-md-12 oj-flex-items-pad ">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <!-- ko if:$component.showAliasValueAndAliasMode() && !$component.isDynamicUrl()-->
+                <div class="oj-flex oj-flex-items-pad">
+                    <oj-label for="selectmode" class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 oj-flex-items-pad"><span
+                            data-bind="text:$component.resource.payments.peertopeer.selectmode"></span></oj-label>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8 radio-padding">
+                        <oj-radioset class="oj-choice-direction-row"
+                            :aria-label="[[$component.verificationModel.aliasType]]"
+                            value="{{$component.verificationModel.aliasType}}"
+                            on-value-changed="[[$component.changeValue]]">
+                            <!-- ko foreach: transferToArray -->
+                            <oj-option name="security" value="{{value}}" :id="[[id]]" :data-id="[[id]]">
+                                <span class="label" data-bind="attr: {for: id},text: label"></span>
+
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-radioset>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <oj-validation-group id="claimMoneyTracker">
+                    <div data-bind="with:verificationModel">
+                        <!-- ko if:$component.showAliasValueAndAliasMode() -->
+                        <!-- ko if:$component.verificationModel.aliasType() !== 'FACEBOOK' && !$component.isDynamicUrl() -->
+                        <!-- ko if:$component.verificationModel.aliasType() !== 'TWITTER' && !$component.isDynamicUrl() -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label for="aliasValue" class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"><span
+                                    data-bind="text:$component.resource.payments.peertopeer[$component.verificationModel.aliasType()]"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6">
+                                <oj-input-text id="aliasValue" maxlength="80" required
+                                    :invalidcomponenttracker="[[$component.validationTracker]]" value="{{aliasValue}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label for="paymentId" class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"><span
+                                    data-bind="text:$component.resource.payments.peertopeer.paymentId"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6">
+                                <oj-input-text id="paymentId" required
+                                    :invalidcomponenttracker="[[$component.validationTracker]]" value="{{paymentId}}"
+                                    validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.payments.peertopeer.paymentIdErrorMessage,{type: 'length',options: {min: 1, max: 16}})]]"
+                                    on-focusout="[[$component.paymentFocusOut]]"></oj-input-text>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+
+                        <!-- ko if:$component.isDynamicUrl() -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label for="mode" class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <span data-bind="text:$component.resource.payments.peertopeer.mode"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 line_spacing"
+                                data-bind="text:$component.resource.payments.peertopeer.aliasType[$component.verificationModel.aliasType()].mode">
+                            </div>
+                        </div>
+                        <!-- ko if:$component.verificationModel.aliasType() === 'TWITTER'|| $component.verificationModel.aliasType() === 'FACEBOOK' -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <span
+                                    data-bind="text:$component.resource.payments.peertopeer.aliasType[$component.verificationModel.aliasType()].valueLabel"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 line_spacing"
+                                data-bind="text:$component.socialHandle()"></div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if:$component.verificationModel.aliasType() !== 'TWITTER' -->
+                        <!-- ko if:$component.verificationModel.aliasType() !== 'FACEBOOK' -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <span
+                                    data-bind="text:$component.resource.payments.peertopeer.aliasType[$component.verificationModel.aliasType()].valueLabel"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 line_spacing"
+                                data-bind="text:$component.verificationModel.aliasValue()"></div>
+                        </div>
+
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label for="paymentId" class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"><span
+                                    data-bind="text:$component.resource.payments.peertopeer.paymentId"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 line_spacing"
+                                data-bind="text:$component.verificationModel.paymentId()"></div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <span data-bind="text:$component.resource.payments.peertopeer.transferAmount"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 line_spacing"
+                                data-bind="text:$formatter.formatCurrency($component.verificationModel.transferAmount.amount(), $component.verificationModel.transferAmount.currency())">
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" for="securityCode"><span
+                                    data-bind="text:$component.resource.payments.peertopeer.enterSecurityCode"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6 line_spacing">
+                                <oj-input-text id="securityCode" maxlength="10" required
+                                    :invalidcomponenttracker="[[$component.validationTracker]]"
+                                    value="{{securityCode}}"></oj-input-text>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </oj-validation-group>
+
+
+                <div class="button-container button-left">
+                    <oj-button class="action-button-primary" id="newuser" on-click="[[newUser]]">
+                        <span data-bind="text:$component.resource.payments.peertopeer.newUser"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" id="existingUser" on-click="[[existingUser]]">
+                        <span data-bind="text:$component.resource.payments.peertopeer.existing"></span>
+                    </oj-button>
+                    <!-- ko if: !$component.isDynamicUrl()-->
+                    <oj-button class="action-button-tertiary" id="back" on-click="[[back]]">
+                        <span data-bind="text:$component.resource.common.back"></span>
+                    </oj-button>
+                    <!-- /ko -->
+                </div>
+
+            </page-section>
+        </div>
+        <!-- ko if: !$component.isDynamicUrl() &&  $baseModel.large() -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'claim-money'"></help>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $component.isDynamicUrl() &&  $baseModel.large() -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'claim-payment-existing-user'"></help>
+        </div>
+        <!-- /ko -->
+
+    </div>
+    <!-- /ko -->
+    <modal-window
+        params="baseModel : $baseModel, rootModel : $component,id:'errormessagewindow',header:$component.resource.common.error,closeHandler:$component.back">
+        <!-- ko foreach: errorMessages -->
+        <div class="oj-flex oj-flex-items-pad" data-bind="text: $data"></div>
+        <!-- /ko -->
+        <div class="oj-flex-item button-container">
+            <oj-button class="action-button-primary" id="okButton" on-click="[[back1]]">
+                <span slot="startIcon" class="icons icon-ok"></span>
+                <span data-bind="text: $component.resource.common.ok"></span>
+            </oj-button>
+        </div>
+    </modal-window>
+</div>

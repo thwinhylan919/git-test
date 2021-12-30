@@ -1,0 +1,176 @@
+<div class="banner-design oj-flex oj-flex-items-pad oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+        <div class="oj-flex-item party-name-style">
+            <span data-bind="text: $component.partyName()"></span>
+        </div>
+        <div class="oj-flex-item party-id-style">
+            <span
+                data-bind="text: $baseModel.format($component.nls.ViewFinance.PartyId,{partyId : $component.partyId()})"></span>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+        <!-- ko if : $component.financeDataLoaded() && $component.financeStatus -->
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.ViewFinance.FinanceDate"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot : $component.financeDataLoaded() && $component.financeStatus -->
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.ViewFinance.transactionDate"></span>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex-item">
+            <!-- ko if : $component.financeDataLoaded() && $component.financeSearchResult().startDate -->
+            <span data-bind="text: $formatter.formatDate($component.financeSearchResult().startDate)"></span>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.financeDataLoaded() && $component.financeSearchResult().startDate -->
+            <span data-bind="text: $component.nls.ViewFinance.NoData"></span>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+        <!-- ko if : $component.financeDataLoaded() && $component.financeStatus -->
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.ViewFinance.Status"></span>
+        </div>
+        <div class="oj-flex-item">
+            <span data-bind="text: $component.financeStatus"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot : $component.financeDataLoaded() && $component.financeStatus -->
+        <div class="oj-flex-item party-id-style">
+            <span data-bind="text: $component.nls.ViewFinance.transactionStatus"></span>
+        </div>
+        <div class="oj-flex-item">
+            <span data-bind="text: $component.nls.ViewFinance.inProcess"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+        <a href="#" id="view-linked"
+            data-bind="attr:{'alt':$component.nls.ViewFinance.LinkedInvoice,'title':$component.nls.ViewFinance.LinkedInvoiceTitle},click:$component.showLinkedInvoices">
+            <span slot="startIcon" class="icons icon-eye oj-button-icon oj-start"></span>
+            <span data-bind="text:$component.nls.ViewFinance.LinkedInvoice"></span></a>
+    </div>
+</div>
+<div class="form-main-container">
+    <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if : $component.financeDataLoaded() -->
+        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-12">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.FinanceDetails, headerTemplate : ''">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OrderDetails.ReferenceNo, value : $component.financeSearchResult().id">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OrderDetails.ProgramName, value : $component.financeSearchResult().programName">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OrderDetails.CounterPartyName, value : $component.financeSearchResult().counterpartyName">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OrderDetails.productName, value : $component.financeSearchResult().productDescription">
+                </row>
+                <!-- ko if : $component.financeSearchResult().remarks-->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OrderDetails.Comments, value : $component.financeSearchResult().remarks">
+                </row>
+                <!-- /ko -->
+                <!-- ko ifnot : $component.financeSearchResult().remarks-->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OrderDetails.Comments, value : $component.nls.OrderDetails.NotApplicable">
+                </row>
+                <!-- /ko -->
+            </page-section>
+        </div>
+        <!-- ko if: $component.financeStatus !== null && $component.financeStatus !== "" -->
+        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-12">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.disbursementDetails, headerTemplate : ''">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.FinanceDetails.FinanceAmount, value : $formatter.formatCurrency($component.financeSearchResult().totalAmount.amount,$component.financeSearchResult().totalAmount.currency)">
+                </row>
+                <!-- ko if: $component.financeSearchResult().interestRate -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.FinanceDetails.InterestRate, value : $baseModel.format($component.nls.FinanceDetails.Interest,{InterestPercent : $component.financeSearchResult().interestRate})">
+                </row>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.financeSearchResult().interestRate -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.FinanceDetails.InterestRate, value : $component.nls.ViewFinance.NoData">
+                </row>
+                <!-- /ko -->
+                <!-- ko if: $component.financeSearchResult().interestAmount -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.FinanceDetails.interestAmount, value : $formatter.formatCurrency($component.financeSearchResult().interestAmount.amount,$component.financeSearchResult().interestAmount.currency)">
+                </row>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.financeSearchResult().interestAmount -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.FinanceDetails.interestAmount, value : $component.nls.ViewFinance.NoData">
+                </row>
+                <!-- /ko -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.FinanceDetails.MaturityDate, value : $formatter.formatDate($component.financeSearchResult().dueDate)">
+                </row>
+            </page-section>
+        </div>
+        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-12">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.OutstandingDetails, headerTemplate : ''">
+                <!-- ko if : $component.financeSearchResult().principalOutstandingAmount !== "-" -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OutstandingDetails.PrincipalAmount, value : $formatter.formatCurrency($component.financeSearchResult().principalOutstandingAmount.amount,$component.financeSearchResult().principalOutstandingAmount.currency)">
+                </row>
+                <!-- /ko -->
+                <!-- ko if : $component.financeSearchResult().principalOutstandingAmount === "-" -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OutstandingDetails.PrincipalAmount, value : $component.nls.ViewFinance.NoData">
+                </row>
+                <!-- /ko -->
+                <!-- ko if : $component.financeSearchResult().interestOutstandingAmount !== "-" -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OutstandingDetails.InterestCharged, value : $formatter.formatCurrency($component.financeSearchResult().interestOutstandingAmount.amount,$component.financeSearchResult().interestOutstandingAmount.currency)">
+                </row>
+                <!-- /ko -->
+                <!-- ko if : $component.financeSearchResult().interestOutstandingAmount === "-" -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OutstandingDetails.InterestCharged, value : $component.nls.ViewFinance.NoData">
+                </row>
+                <!-- /ko -->
+                <!-- ko if : $component.financeSearchResult().overdueOutstandingAmount !== "-" -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OutstandingDetails.OverdueInterest, value : $formatter.formatCurrency($component.financeSearchResult().overdueOutstandingAmount.amount,$component.financeSearchResult().overdueOutstandingAmount.currency)">
+                </row>
+                <!-- /ko -->
+                <!-- ko if : $component.financeSearchResult().overdueOutstandingAmount === "-" -->
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.OutstandingDetails.OverdueInterest, value : $component.nls.ViewFinance.NoData">
+                </row>
+                <!-- /ko -->
+            </page-section>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.financeStatus === null || $component.financeStatus === "" -->
+        <div class="oj-flex-item oj-lg-4 oj-md-4">
+        </div>
+        <div class="oj-flex-item oj-lg-4 oj-md-4">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'view-finance-help'">
+            </help>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <!-- ko if : $component.financeDataLoaded() -->
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]"> <span
+                slot="startIcon" class="icons icon-cancel"></span><span
+                data-bind="text:$component.nls.ViewFinance.cancel"></span>
+        </oj-button>
+
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span slot="startIcon"
+                class="icons icon-back-arrow"></span><span data-bind="text:$component.nls.ViewFinance.Back"></span>
+        </oj-button>
+        <!-- /ko -->
+    </div>
+</div>

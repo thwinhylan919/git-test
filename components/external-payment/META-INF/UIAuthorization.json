@@ -1,0 +1,12 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.payment.service.transfer.ExternalTransfer",
+        "components": [{
+            "componentName": "external-payment-dashboard",
+            "service": "create"
+        },{
+            "componentName": "external-payment-dashboard",
+            "service": "update"
+        }]
+    }]
+}

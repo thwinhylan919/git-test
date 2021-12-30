@@ -1,0 +1,13 @@
+.report-list{
+    &__search{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-top:1.5rem;
+    }
+    &-search{
+    &__icon{
+    font-size:1.0rem;
+    }
+    }
+}

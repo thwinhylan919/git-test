@@ -1,0 +1,29 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.forexdeal.service.core.ForexDealMaintenance",
+        "components": [
+        {
+            "componentName": "view-forex-deal-settings",
+            "service": "create",
+            "perform": "review-forex-deal-settings",
+            "approve": "transaction-journey#review-forex-deal-settings"
+        },
+        {
+            "componentName": "view-forex-deal-settings",
+            "service": "list"
+        },
+        {
+            "componentName": "view-forex-deal-settings",
+            "service": "delete",
+            "perform": "review-forex-deal-delete-settings",
+            "approve": "transaction-journey#review-forex-deal-delete-settings"
+        },
+        {
+            "componentName": "view-forex-deal-settings",
+            "service": "update",
+            "perform": "edit-forex-deal-settings",
+            "approve": "transaction-journey#edit-forex-deal-settings"
+        }]
+    }]
+}

@@ -1,0 +1,178 @@
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+  <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+      <div data-bind="text: $component.realCustomerName"></div>
+      <div data-bind="html:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+
+  </div>
+  <div class="form-main-container finance-search">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+
+      <page-section params="baseModel : $baseModel, rootModel : $component, heading ">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-sm-12 oj-lg-9">
+            <account-input params="baseModel : $baseModel, rootModel: $data ,
+                  label : $component.resource.repayFrom,
+                  taskCode : $component.taskCode,
+          validator:$component.validationTracker,
+          type : 'balance' ,
+          additionalDetails : additionalDetails"></account-input>
+          </div>
+        </div>
+
+        <div class="oj-flex">
+          <!-- ko if : $component.financeDataLoaded() -->
+
+          <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+            <div class="oj-flex-item oj-sm-11">
+              <div class="oj-flex header-underline oj-flex-items-pad">
+                <div class="oj-flex">
+                  <div class="oj-flex-item oj-lg-4 left">
+                    <span class="title-bold oj-lg-4" data-bind="text: $component.resource.financeList"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="oj-flex-item oj-sm-11">
+              <oj-table id="table" data="[[dataSource]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('financeRenderer')]]"
+                headerRenderer="[[oj.KnockoutTemplateUtils.getRenderer('checkbox_hdr_tmpl', true)]]"
+                columns-default.sortable="enabled" selection-mode="[[{row:'multiple',column:'none'}]]" columns="[[[{ headerRenderer: $oj.KnockoutTemplateUtils.getRenderer('checkbox_hdr_tmpl', true), sortProperty:'none'}].concat([{'headerText':$component.resource.counterpartyName, sortable: false},
+                              {'headerText':$component.resource.programName,field:'programName', sortable: false},
+                              {'headerText':$component.resource.referenceNo,field:'referenceNo', sortable: false},
+                              {'headerText':$component.resource.dueDate,field:'dueDate', sortable: false},
+                              {'headerText':$component.resource.financedAmount, field:'financedAmount',headerClassName:'right', sortable: false},
+                              {'headerText':$component.resource.outstandingAmount,field:'outstandingAmount', headerClassName:'right', sortable: false},
+                              {'headerText':$component.resource.repaymentAmount,field:'repaymentAmount', headerClassName:'right', sortable: false},
+                              {'headerText':$component.resource.status,field:'status', sortable: false}])]]">
+              </oj-table>
+              <oj-paging-control id="paging" data="[[dataSource]]" page-size="10">
+              </oj-paging-control>
+            </div>
+          </div>
+
+          <script type="text/html" id="checkbox_hdr_tmpl">
+                      <td>
+                            <oj-checkboxset :id="[['all' + $baseModel.incrementIdCount()]]" on-value-changed="[[$component.selectAllListener]]" :aria-label="[[$component.resource.cancel]]" class="oj-checkboxset-no-chrome" value="{{$component.allCheck}}">
+                              <oj-option data-bind="attr:{'aria-label':$component.resource.cancel, id:'table_checkbox_hdr'}" value="all"></oj-option>
+                            </oj-checkboxset>
+                          </td>
+                          
+                        </script>
+
+          <div id="scriptContainer">
+
+            <script type="text/html" id="financeRenderer">
+                    <td>
+                        <oj-checkboxset class='oj-checkboxset-no-chrome':aria-label="[[$component.resource.checkbox]]"  value="{{$context.row.repaymentAmount}}" on-value-changed="[[$component.selectFinanceListner]]">
+                          <oj-option value=[[id]] data-bind="attr:{
+                                            id: 'table_checkbox' + $context.rowContext.status.rowIndex,'aria-label':$component.resource.cancel}">
+                                   
+                                  </oj-option>
+                                          </oj-checkboxset>
+                      </td>
+                    <td>
+                    <span data-bind="text:$context.row.counterpartyName"></span>
+                  </td>   
+                   <td>
+                                  <span data-bind="text:$context.row.programName"></span>
+                              </td>
+                              <td>
+                                  <a href="#" class="form-button-link"
+                                      data-bind="attr:{'id':$context.row.id,'alt':$component.resource.referenceNo,'title':$component.resource.financeNoTitle}"><span
+                                          data-bind="text:$context.row.id"></span></a>
+                                  
+                              </td>
+                              <td>
+                                  <div class="due-date-style">
+            <span data-bind="text: $formatter.formatDate($context.row.dueDate,'dateFormat')"></span>
+                                  </div>
+                        </td>
+
+                              <td class="right">
+                                  <span
+                                      data-bind="text:$formatter.formatCurrency($context.row.totalAmount.amount,$context.row.totalAmount.currency)"></span>
+                              </td>
+                              <td>
+                                  <!-- ko if: $context.row.outstandingAmount !== "-" -->
+                                  <div class="right">
+                                      <span
+                                          data-bind="text:$formatter.formatCurrency($context.row.outstandingAmount.amount,$context.row.outstandingAmount.currency)"></span>
+                                  </div>
+                                  <!-- /ko -->
+                                  <!-- ko if: $context.row.outstandingAmount === "-" -->
+                                  <div class="center-align">
+                                      <span data-bind="text:$context.row.outstandingAmount"></span>
+                                  </div>
+                                  <!-- /ko -->
+                              </td>
+                              <td>
+                                  <!-- ko if: $context.row.repaidAmount !== "-" -->
+                                  <div class="right">
+                                      <span
+                                          data-bind="text:$formatter.formatCurrency($context.row.repaidAmount.amount,$context.row.repaidAmount.currency)"></span>
+                                      <a href="#" openprofile="true" data-bind="attr : {'id':'repaid-amount-' + $context.row.id,'alt':$component.resource.repaidAmount,
+                                          'title':$component.resource.moreInfoTitle}"
+                                          class="amount-split-padding icons icon-more pull-right">
+                                      </a>
+                                  </div>
+                                  <!-- /ko -->
+                                  <!-- ko if: $context.row.repaidAmount === "-" -->
+                                  <div class="center-align">
+                                      <span data-bind="text:$context.row.repaidAmount"></span>
+                                  </div>
+                                  <!-- /ko -->
+                              </td>
+                              <td>
+                                  <div class="center-align">
+                                      <!-- ko if: $context.row.status === "DISBURSED" -->
+                                      <span class="tags disbursed-Color"
+                                          data-bind="text:$context.row.statusDescription"></span>
+                                      <!-- /ko -->
+                                      <!-- ko if: $context.row.status === "SETTLED" -->
+                                      <span class="tags settled-Color" data-bind="text:$context.row.statusDescription"></span>
+                                      <!-- /ko -->
+                                      <!-- ko if: $context.row.status === "PARTIAL_SETTLED" -->
+                                      <span class="tags partially-settled-Color"
+                                          data-bind="text:$context.row.statusDescription"></span>
+                                      <!-- /ko -->
+                                      <!-- ko if: $context.row.status === "OTHERS" -->
+                                      <span class="tags other-Color" data-bind="text:$context.row.statusDescription"></span>
+                                      <!-- /ko -->
+                                      <!-- ko ifnot: $context.row.status -->
+                                      <span data-bind="text:$component.resource.noData"></span>
+                                      <!-- /ko -->
+                                  </div>
+                              </td>
+                              
+                          </script>
+          </div>
+
+
+
+          <!-- /ko -->
+
+        </div>
+      </page-section>
+
+
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item  button-container">
+          <oj-button class="action-button-primary" on-click="[[$component.submit]]">
+            <span slot="startIcon" class="icons icon-submit"></span>
+            <span data-bind="text:$component.resource.repay"></span></oj-button>
+          <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.cancel"></span></oj-button>
+          <oj-button class="action-button-tertiary">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.back"></span>
+          </oj-button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</oj-validation-group>

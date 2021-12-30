@@ -1,0 +1,28 @@
+<!-- ko if: $component.transactionDetailsLoaded() -->
+<div class="form-main-container transactionDetail">
+    <div class="oj-flex oj-flex-items-pad" data-bind='component:{name: "batch-process-approvals", params:{rootModel: $data}}'></div>
+    <!-- ko if:hideOnSuccess() -->
+    <!-- ko if:transactionDetails().processingDetails.currentStep === 'exec' && transactionDetails().processingDetails.status === 'S' && enableEReceipt() -->
+
+    <a href="#" class="transactionDetail__eReceipt form-button-link" data-bind="attr:{'alt':$component.Nls.labels.eReceiptDownloadAlt ,'title':$component.Nls.labels.eReceiptDownload, 'aria-label':$component.Nls.labels.eReceiptDownload },click: downloadEreceipt ">
+        <span class="icons transactionDetail__eReceipt-icon icon-claim-money"></span>
+        <span class="transactionDetail__eReceipt-text" data-bind="text:Nls.labels.downloadEreceipt"></span>
+    </a>
+
+    <!-- /ko -->
+    <!-- ko ifnot: $component.isFlow() -->
+    <div data-bind="component: { name: $component.loadComponentName(), params:{rootModel:{params : params}}}"></div>
+    <!-- /ko -->
+    <!-- ko if: $component.isFlow() -->
+    <flow params="{ rootModel: { params: { flowName: $component.loadComponentName(), flowStageRootModel: params, flowMode: 'readonly' } }, baseModel: $baseModel, dashboard: $dashboard }"></flow>
+    <!-- /ko -->
+    <div data-bind='component:{name: "transaction-journey", params:{rootModel: transactionDetails}}'></div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button id="deleteYes" class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:Nls.labels.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

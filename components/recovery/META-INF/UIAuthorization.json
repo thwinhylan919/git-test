@@ -1,0 +1,17 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.sms.service.user.credentials.Credentials",
+           "components": [{
+                   "componentName": "user-information",
+                   "service": "forgotCredentials",
+                   "perform": "login-form-web#reset-password#password-validation"
+               },
+			   {
+                   "componentName": "user-recovery-info",
+                   "service": "forgotUserId",
+                   "perform": "login-form-web"
+               }
+           ]
+       }
+   ]
+}

@@ -1,0 +1,93 @@
+.multiple-payments {
+    .payment-element {
+        .action-icon {
+            font-size: 1.3rem;
+        }
+        .payment-overview {
+            padding-top: 0.6rem;
+            &__delete {
+                @include single-border(left, 0.05rem solid var(--base-border-default));
+                max-height: 1.3rem;
+            }
+
+            &__element {
+                padding-bottom: 0.6rem;
+            }
+            .details {
+                @include mq(small) {
+                    padding-bottom: 0.6rem;
+                }
+            }
+        }
+    }
+    .heading {
+        @include single-padding(left, 0.6rem);
+        color: var(--base-text-secondary);
+    }
+    .expand-collapse {
+        @include padding(0.6rem, 0.6rem, 1.3rem, 0.6rem);
+    }
+    .payment-accordian {
+        &-container {
+            position: relative;
+            background: var(--base-background-primary);
+            padding-bottom: 1.3rem;
+            @include mq(medium) {
+                top: 0;
+                margin-bottom: 1.1rem;
+            }
+            &-heading {
+                font-size: var(--base-font-size-default);
+            }
+        }
+    }
+
+    .expand-all {
+        @include single-border(right, 0.05rem solid var(--base-border-default));
+    }
+    .warning-bar {
+        background: var(--base-color-warning-light);
+        @include single-border(left, 0.4rem solid var(--base-color-warning));
+        display: table;
+        @include single-margin(left, 0.3rem);
+        padding: 0.35rem 0.3rem;
+        @include mq(small) {
+            padding: 0.6rem 0;
+        }
+        .warning-msg {
+            font-size: var(--base-font-size-default);
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .warning-icon {
+            color: var(--base-color-warning);
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            @include single-padding(right, 0.5rem);
+            width: 1.2rem;
+        }
+    }
+    .error-bar {
+        background: var(--base-color-danger-light);
+        @include single-border(left, 0.4rem solid var(--base-color-danger));
+        padding: 0.35rem 0.3rem;
+        display: table;
+        @include mq(small) {
+            padding: 0.6rem 0;
+        }
+        .error-msg {
+            font-size: var(--base-font-size-default);
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .error-icon {
+            color: var(--base-color-danger);
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            @include single-padding(right, 0.5rem);
+            width: 1.2rem;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.alerts-accordionPage {
+    width: 95%;
+    display: inline-block;
+    .acc-recipient {
+        @include padding(0.5rem, 0rem, 0rem, 0.5rem);
+        font-size: 1rem;
+    }
+}
+
+.addButton {
+    @include padding(0.5rem, 0rem, 0rem, 1rem, !important);
+}
+
+.deleteTemplate {
+    font-size: 1.2rem;
+    padding-top: 1.5rem;
+}

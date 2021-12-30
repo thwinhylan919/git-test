@@ -1,0 +1,13 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 data-bind="text:$component.nls.heading.InvestmentAllocation">
+            </h3>
+    </div>
+  </div>
+  <!-- ko if: distributionLoaded-->
+  <oj-chart id="per-line-chart" type="line" series="[[lineSeriesValue]]" style-defaults.marker-displayed="on" groups="[[lineGroupsValue]]" animation-on-display="auto" animation-on-data-change="auto" hover-behavior="dim" class="oj-sm-12 oj-md-12 oj-lg-12"
+    x-axis.title="{{$component.nls.InvestmentAllocation.xAxisTitle}}" y-axis.title="{{$component.nls.InvestmentAllocation.yAxisTitle}}" legend.position="bottom">
+  </oj-chart>
+  <!-- /ko -->
+</div>

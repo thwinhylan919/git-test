@@ -1,0 +1,44 @@
+<div class="entity-switch">
+    <oj-toolbar id="defaultActions" class="pull-right">
+        <!-- ko if:$component.availableViews().length > 0 -->
+        <!-- ko if: $component.resetView() -->
+        <oj-menu-button class="action-item" id="view-switcher" :aria-label="[[$component.nls.roles.currentView]]">
+            <oj-bind-text value="[[currentView]]"></oj-bind-text>
+            <oj-menu id="viewMenu" slot="menu" class="hide" on-oj-action="[[$component.changeView]]">
+                <!-- ko foreach : $component.availableViews  -->
+                <oj-option value="{{$data.dashboardClassValue}}"><span
+                        data-bind="text:$component.nls.roles[$data.dashboardClassValue] || $data.dashboardClassValue"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-menu>
+        </oj-menu-button>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <oj-button class="action-item" id='ATMBRANCH' on-click="[[openATMBranch]]">
+            <span data-bind="text:$component.nls.atmBranch"></span>
+        </oj-button>
+
+        <!-- ko if:$component.languageOptions().length > 0 -->
+        <oj-menu-button class="action-item" id="language-switcher" :aria-label="[[$component.nls.changeLanguage]]">
+            <oj-bind-text value="{{currentLanguage}}"></oj-bind-text>
+            <oj-menu id="languageMenu" slot="menu" class="hide" on-oj-action="[[$component.switchLanguage]]">
+                <!-- ko foreach : $component.languageOptions  -->
+                <oj-option value="{{$data.code}}"><span data-bind="text:$data.description"></span></oj-option>
+                <!-- /ko -->
+            </oj-menu>
+        </oj-menu-button>
+        <!-- /ko -->
+        <!-- ko if: $root.isDashboardSet() && $component.entityListLoaded() -->
+        <oj-menu-button class="action-item" id="entity-switcher" :aria-label="[[$component.nls.entity.currentView]]">
+            <oj-bind-text value="[[currentEntity]]"></oj-bind-text>
+            <!-- To handle menu item selection, use an action listener as shown, not a click listener. -->
+            <oj-menu id="myMenu" slot="menu" class="hide" on-oj-action="[[menuItemAction]]">
+                <!-- ko foreach : $component.entityList  -->
+                <oj-option value="{{$data.value}}"><span data-bind="text:$data.text"></span></oj-option>
+                <!-- /ko -->
+            </oj-menu>
+        </oj-menu-button>
+        <!-- /ko -->
+    </oj-toolbar>
+</div>

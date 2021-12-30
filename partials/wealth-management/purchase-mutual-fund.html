@@ -1,0 +1,78 @@
+<!-- ko ifnot: $baseModel.small() -->
+<!-- ko ifnot : $component.payLoadArray().length === 0 -->
+<div class="oj-flex oj-flex-items-pad">
+  <div class="header-text oj-flex-item oj-lg-12 oj-md-12 purchase-info-color">
+    <span data-bind="text: $component.resource.headerText"></span>
+  </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-lg-12 oj-md-12 purchase-info-color medium-text">
+    <span data-bind="text:$component.resource.numberOfFunds"></span>
+  </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-lg-6 oj-md-6 purchase-info-color">
+    <span data-bind="text:$component.resource.selectedFunds"></span>
+  </div>
+  <div class="oj-flex-item oj-lg-6 oj-md-6 right purchase-info-color">
+    <span data-bind="text:$component.resource.orderAmountReview"></span>
+  </div>
+  <div class="oj-flex-item oj-lg-6 oj-md-6 header-text purchase-info-color">
+    <span data-bind="text:$component.payLoadArray().length"></span>
+  </div>
+  <div class="oj-flex-item oj-lg-6 oj-md-6 header-text right purchase-info-color">
+    <span data-bind="text:$formatter.formatCurrency($component.totalAmount(),$component.payLoadArray()[0].purchaseFund.txnAmount.currency)"></span>
+  </div>
+</div>
+<!-- ko foreach : $component.payLoadArray() -->
+<div class="border-color-custom oj-flex oj-flex-items-pad purchase-up">
+  <div class="oj-flex-item oj-lg-6 oj-md-8 purchase-info">
+    <span data-bind="text:$component.resource.folioNumber"></span>
+    <span data-bind="text:valueData.folioValue"></span>
+  </div>
+  <div class="oj-flex-item oj-lg-6 oj-md-4 right purchase-info">
+    <a href="#" data-bind="click: $component.deleteOrderConfirmModal.bind($data, $index())" :aria-label=[[$component.resource.deleteLabel]]>
+      <span class="icons icon-delete"></span>
+    </a>
+  </div>
+  <div class="oj-flex-item oj-lg-6 oj-md-8 purchase-info">
+    <span data-bind="text: purchaseFund.scheme.schemeName"></span>
+  </div>
+  <div class="oj-flex-item oj-lg-6 oj-md-4 right purchase-info">
+    <span data-bind="text:$formatter.formatCurrency(purchaseFund.txnAmount.amount,purchaseFund.txnAmount.currency)"></span>
+  </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if:$baseModel.small() -->
+<!-- ko ifnot : $component.payLoadArray().length === 0 -->
+<div class="oj-flex purchase-info-color">
+  <div class="oj-flex-item oj-sm-6">
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.selectedFunds , value : $component.payLoadArray().length"></row>
+  </div>
+  <div class="oj-flex-item oj-sm-6 right">
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.orderAmountReview , value : $formatter.formatCurrency($component.totalAmount(),$component.payLoadArray()[0].purchaseFund.txnAmount.currency)"></row>
+  </div>
+</div>
+<!-- ko foreach : $component.payLoadArray() -->
+<div class="border-color-custom oj-flex oj-flex-items-pad purchase-up purchase-info">
+  <div class="oj-flex-item oj-sm-10">
+    <span data-bind="text:$component.resource.folioNumber"></span>
+    <span data-bind="text:valueData.folioValue"></span>
+  </div>
+  <div class="oj-flex-item oj-sm-2 right">
+    <a href="#" data-bind="click: $component.deleteOrderConfirmModal.bind($data, $index())" :aria-label=[[$component.resource.deleteLabel]]>
+      <span class="icons icon-delete"></span>
+    </a>
+  </div>
+  <div class="oj-flex-item oj-sm-8">
+    <span data-bind="text: purchaseFund.scheme.schemeName"></span>
+  </div>
+  <div class="oj-flex-item oj-sm-4 right">
+    <span data-bind="text:$formatter.formatCurrency(purchaseFund.txnAmount.amount,purchaseFund.txnAmount.currency)"></span>
+  </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->

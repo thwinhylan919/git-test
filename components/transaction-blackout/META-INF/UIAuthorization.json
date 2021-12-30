@@ -1,0 +1,30 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.sms.service.blackout.TransactionBlackout",
+			"components": [{
+					"componentName": "transaction-blackout",
+					"service": "read",
+					"perform": "search-transaction-blackout#transaction-blackout-view"
+				},
+				{
+					"componentName": "transaction-blackout",
+					"service": "create",
+					"perform": "creating-transaction-blackout#search-transaction-blackout#transaction-blackout-view#transaction-blackout-review",
+					"approve": "transaction-blackout-review"
+				},
+				{
+					"componentName": "transaction-blackout",
+					"service": "update",
+					"perform": "transaction-blackout-review",
+					"approve": "transaction-blackout-review"
+				},
+				{
+					"componentName": "transaction-blackout",
+					"service": "update",
+					"perform": "transaction-blackout-review",
+					"approve": "transaction-blackout-review"
+				}
+			]
+		}
+	]
+}

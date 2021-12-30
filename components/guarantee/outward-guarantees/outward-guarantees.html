@@ -1,0 +1,637 @@
+<div class="form-main-container trade-finance">
+    <oj-validation-group id="outwardGuaranteeTracker" valid="{{outwardGuaranteeValidGroup}}">
+        <!-- ko ifnot:$baseModel.small() -->
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+                    data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <label for="applicantName"
+                                data-bind="text: $component.resourceBundle.guaranteeDetails.labels.applicantName"></label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-10">
+                            <oj-select-one id="applicantName"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                options="[[$component.beneNameArray]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.pleaseSelect]]"
+                                value="{{$component.model.applicantName}}">
+                            </oj-select-one>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+                    data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label for="beneName"><span
+                                    data-bind="text:$component.resourceBundle.labels.beneName"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-input-text id="beneName" minlength="0" maxlength="40" validators="[[$baseModel.getValidator('ALPHABETS_WITH_SPACE',$component.resourceBundle.tradeFinanceErrors.lcDetails.invalidBeneficiaryName,{type:'length',options:{
+                                      min:0,max:40}})]]" value="{{$component.model.beneName}}"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+                    data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label for="outwardGuaranteeNo"><span
+                                    data-bind="text:$component.resourceBundle.labels.outwardGuaranteeNo"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-input-text id="outwardGuaranteeNo" maxlength="40" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resourceBundle.tradeFinanceErrors.lcDetails.invalidLCNumber,{type:'length',options:{
+                                      min:0,max:40}})]]" value="{{$component.model.bgNumber}}"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+                    data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <label for="guaranteeStatus"
+                                data-bind="text: $component.resourceBundle.labels.outwardGuaranteeStatus"></label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-select-one id="guaranteeStatus"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.pleaseSelect]]"
+                                options="[[$component.statusArray]]" value="{{$component.model.bgStatus}}">
+                            </oj-select-one>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label for="fromAmount"><span
+                                    data-bind="text:$component.resourceBundle.labels.guaranteeAmount"></span></oj-label>
+                        </div>
+                        <!-- ko if: $component.currencyListOptions().length > 0 -->
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2">
+                            <oj-select-one :aria-label="[[$component.resourceBundle.labels.currency]]" id="currency"
+                                required="[[true]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+                                options="[[$component.currencyListOptions]]" value="{{$component.model.currency}}">
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                        <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                            <oj-input-text id="fromAmount" maxlength="15"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                validators="[[[validateFromAmount]]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.from]]"
+                                value="{{$component.model.fromAmount}}">
+                            </oj-input-text>
+                        </div>
+                        <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                            <oj-input-text id="toAmount"
+                                :aria-label="[[$component.resourceBundle.labels.guaranteeAmount]]" maxlength="15"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                validators="[[[validateToAmount]]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.to]]"
+                                value="{{$component.model.toAmount}}"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+                    data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label for="fromDate"><span
+                                    data-bind="text:$component.resourceBundle.labels.issueDate"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                            <oj-input-date id="fromDate" converter="[[$formatter.dateConverter]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.from]]"
+                                max="[[$component.maxFromIssueDate()]]" value="{{$component.model.issueDatefrom}}">
+                            </oj-input-date>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 hide-label">
+                            <oj-label for="toDate"><span
+                                    data-bind="text:$component.resourceBundle.labels.issueDate"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                            <oj-input-date id="toDate" converter="[[$formatter.dateConverter]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.to]]"
+                                max="[[$component.maxToIssueDate()]]" min="[[$component.model.issueDatefrom]]"
+                                value="{{$component.model.issueDateto}}"></oj-input-date>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad ">
+                <!-- ko ifnot:moreSearchOptions() -->
+                <div class="oj-flex-item oj-flex-items-pad">
+                    <a href="#" data-bind="click:showMoreSearchOptions" class="pull-right search-options">
+                        <span class="linktext"
+                            data-bind="text:$component.resourceBundle.common.labels.moreOptions"></span>
+                        <span class="icon icon-arrow-down arrow"></span>
+                    </a>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- ko if : moreSearchOptions() -->
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+                    data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label for="expiryDateFrom"><span
+                                    data-bind="text:$component.resourceBundle.labels.expiryDate"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                            <oj-input-date id="expiryDateFrom" converter="[[$formatter.dateConverter]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.from]]"
+                                max="[[$component.model.expiryDateto]]" value="{{$component.model.expiryDatefrom}}">
+                            </oj-input-date>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 hide-label">
+                            <oj-label for="expiryDateTo"><span
+                                    data-bind="text:$component.resourceBundle.labels.expiryDate"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                            <oj-input-date id="expiryDateTo"
+                                :aria-label="[[$component.resourceBundle.labels.expiryDate]]"
+                                converter="[[$formatter.dateConverter]]"
+                                :placeholder="[[$component.resourceBundle.common.labels.to]]"
+                                min="[[$component.model.expiryDatefrom]]" value="{{$component.model.expiryDateto}}">
+                            </oj-input-date>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-flex-items-pad">
+                <a href="#" data-bind="click:showMoreSearchOptions" class="pull-right search-options">
+                    <span class="linktext" data-bind="text:$component.resourceBundle.common.labels.lessOptions"></span>
+                    <span class="icon icon-arrow-up arrow"></span>
+                </a>
+            </div>
+            <!-- /ko -->
+
+            <div class="button-container search-buttons">
+                <oj-button id="dialogtopupButton3" class="action-button-primary" on-click="[[searchBankGuarantee]]">
+                    <span class="icons icon-search" slot="startIcon"></span>
+                    <span data-bind="text:$component.resourceBundle.generic.common.search"></span>
+                </oj-button>
+                <!-- ko ifnot: dataSourceCreated -->
+                <oj-button id="dialogtopupButton1" class="action-button-secondary"
+                    on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button id="dialogtopupButton2" class="action-button-tertiary" on-click="[[reset]]">
+                    <span slot="startIcon" class="icons icon-refresh"></span>
+                    <span data-bind="text:$component.resourceBundle.generic.common.reset"></span>
+                </oj-button>
+            </div>
+        </page-section>
+        <!-- /ko -->
+    </oj-validation-group>
+
+    <!-- ko if: dataSourceCreated -->
+
+    <!-- ko if: listBankGuarantees().length > 0 -->
+
+    <div class="oj-flex oj-flex-items-pad grid-row-group flex-right">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <a href="#" class="padding-tb pull-right" data-bind="click:$component.download">
+                <span class="icons icon-download icon-2x icon-padding-right"></span>
+                <span data-bind="text:$component.resourceBundle.common.labels.downloadPdf"></span>
+            </a>
+        </div>
+    </div>
+    <!-- ko if:$baseModel.small() -->
+    <div class="oj-flex grid-main-container">
+        <div class="oj-flex-item oj-sm-12">
+            <oj-list-view id="listview-txn-card" class="cards"
+                item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('guarantee_list_card',true)}]]"
+                selection-mode="[['single']]" data="[[$component.dataSource]]">
+            </oj-list-view>
+            <oj-paging-control class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-12" id="paging" slot="bottom"
+                page-options="[[{layout:['nav']}]]" :page-size="[[10]]" data="[[$component.dataSource]]">
+            </oj-paging-control>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if:$baseModel.large() -->
+    <div class="oj-flex oj-flex-items-pad grid-row-group">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-table id="guaranteeTable" class="import-lc-list"
+                :aria-label="[[$component.resourceBundle.labels.guaranteeTable]]"
+                columns="[[[{headerText:$component.resourceBundle.labels.guaranteeNumber, field: 'bg_number'},
+                {headerText:$component.resourceBundle.labels.beneName, field: 'beneficiary_field'},
+                {headerText:$component.resourceBundle.labels.issueDate, field: 'issue_date_field'},
+                {headerText:$component.resourceBundle.labels.expiryDate, field: 'expiry_date_field'},
+                {headerText:$component.resourceBundle.labels.guaranteeStatus, field: 'bg_status'},{headerText:$component.resourceBundle.labels.guaranteeAmount, field: 'amount_field', headerClassName:'right', className:'right'},{headerText:$component.resourceBundle.labels.outstandingAmount, field: 'outstanding_amount_field', headerClassName:'right', className:'right'},{headerText:$component.resourceBundle.labels.claims, field: 'totalAvailment_field', headerClassName:'right', className:'right'}]]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('list_template', true)]]"
+                columns-default="[[{sortable:'enabled'}]]" data="[[$component.dataSource]]">
+                <caption class="hide-label" data-bind="text:$component.resourceBundle.heading.outwardGuarantee">
+                </caption>
+            </oj-table>
+            <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" :page-size="[[10]]"
+                data="[[$component.dataSource]]">
+            </oj-paging-control>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko ifnot: listBankGuarantees().length > 0 -->
+    <div class="oj-flex oj-flex-items-pad padding-tb">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+            data-bind="text: $component.resourceBundle.tradeFinanceErrors.messages.noRecordFound">
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <div class="oj-flex oj-flex-items-pad padding-tb info-text-small">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <div class="icons icon-information icon-2x icon-padding-right pull-left"
+                data-bind="css: { 'oj-flex-item oj-sm-1': $baseModel.small()}"></div>
+            <div
+                data-bind="text: $component.resourceBundle.tradeFinanceErrors.diclaimers.authDisclaimer, css: { 'oj-flex-item oj-sm-11 disclaimer': $baseModel.small()}">
+            </div>
+        </div>
+    </div>
+
+    <!-- ko  ifnot: $baseModel.small() -->
+    <div class="button-container">
+        <oj-button id="cancelButton" class="action-button-secondary"
+            on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+
+    <!-- /ko -->
+
+    <modal-window class="full-width-modal"
+        params="baseModel:$baseModel, rootModel:$data, id:'searchModal', header:$component.resourceBundle.labels.searchBG">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <label for="modalApplicantName"
+                            data-bind="text: $component.resourceBundle.guaranteeDetails.labels.applicantName"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                        <oj-select-one id="modalApplicantName" required="[[true]]"
+                            :invalidcomponenttracker="[[$component.validationTracker]]"
+                            options="[[$component.beneNameArray]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.pleaseSelect]]"
+                            value="{{$component.model.applicantName}}">
+                        </oj-select-one>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label for="modalBeneName"><span
+                                data-bind="text:$component.resourceBundle.labels.beneName"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                        <oj-input-text id="modalBeneName" minlength="0" maxlength="40" validators="[[$baseModel.getValidator('ALPHABETS_WITH_SPACE',$component.resourceBundle.tradeFinanceErrors.lcDetails.invalidBeneficiaryName,{type:'length',options:{
+                                min:0,max:40}})]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+                            value="{{$component.model.beneName}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label for="modalOutwardGuaranteeNo"><span
+                                data-bind="text:$component.resourceBundle.labels.outwardGuaranteeNo"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                        <oj-input-text id="modalOutwardGuaranteeNo" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resourceBundle.tradeFinanceErrors.lcDetails.invalidLCNumber,{type:'length',options:{
+                                min:0,max:40}})]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+                            value="{{$component.model.bgNumber}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <label for="modalGuaranteeStatus"
+                            data-bind="text: $component.resourceBundle.labels.outwardGuaranteeStatus"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                        <oj-select-one id="modalGuaranteeStatus"
+                            :invalidcomponenttracker="[[$component.validationTracker]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.pleaseSelect]]"
+                            options="[[$component.statusArray]]" value="{{$component.model.bgStatus}}">
+                        </oj-select-one>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label for="modalFromAmount"><span
+                                data-bind="text:$component.resourceBundle.labels.guaranteeAmount"></span></oj-label>
+                    </div>
+                    <!-- ko if: $component.currencyListOptions().length > 0 -->
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2">
+                        <oj-select-one id="modalCurrency"
+                            :aria-label="[[$component.resourceBundle.commitmentDetails.labels.currency]]"
+                            required="[[true]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+                            options="[[$component.currencyListOptions]]" value="{{$component.model.currency}}">
+                        </oj-select-one>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                        <oj-input-text id="modalFromAmount" maxlength="15"
+                            :invalidcomponenttracker="[[$component.validationTracker]]"
+                            validators="[[[validateFromAmount]]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.from]]"></oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                        <oj-input-text id="modalToAmount"
+                            :aria-label="[[$component.resourceBundle.labels.guaranteeAmount]]" maxlength="15"
+                            :invalidcomponenttracker="[[$component.validationTracker]]"
+                            validators="[[[validateToAmount]]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.to]]"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label for="modalFromDate"><span
+                                data-bind="text:$component.resourceBundle.labels.issueDate"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                        <oj-input-date id="modalFromDate" converter="[[$formatter.dateConverter]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.from]]"
+                            max="[[$component.maxFromIssueDate()]]" value="{{$component.model.issueDatefrom}}">
+                        </oj-input-date>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                        <oj-input-date id="modalToDate" :aria-label="[[$component.resourceBundle.labels.issueDate]]"
+                            converter="[[$formatter.dateConverter]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.to]]"
+                            max="[[$component.maxToIssueDate()]]" min="[[$component.model.issueDatefrom]]"
+                            value="{{$component.model.issueDateto}}"></oj-input-date>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label for="modalExpiryDateFrom"><span
+                                data-bind="text:$component.resourceBundle.labels.expiryDate"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                        <oj-input-date id="modalExpiryDateFrom" converter="[[$formatter.dateConverter]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.from]]"
+                            max="[[$component.model.expiryDateto]]" value="{{$component.model.expiryDatefrom}}">
+                        </oj-input-date>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-4">
+                        <oj-input-date id="modalExpiryDateTo"
+                            :aria-label="[[$component.resourceBundle.labels.expiryDate]]"
+                            converter="[[$formatter.dateConverter]]"
+                            :placeholder="[[$component.resourceBundle.common.labels.to]]"
+                            min="[[$component.model.expiryDatefrom]]" value="{{$component.model.expiryDateto}}">
+                        </oj-input-date>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.filterList]]">
+                <span class="icons icon-search" slot="startIcon"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.search"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.hideSearchModal]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.resetFilterModel]]">
+                <span slot="startIcon" class="icons icon-refresh"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.reset"></span>
+            </oj-button>
+        </div>
+    </modal-window>
+
+    <modal-window
+        params="baseModel:$baseModel, rootModel:$data, id:'bgDetailsDialog', header:$component.resourceBundle.labels.availments">
+        <div class="oj-flex grid-main-container">
+            <div class="oj-flex-item oj-sm-12">
+                <oj-list-view id="listview-txn-card" class="cards"
+                    item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('bgAvailments',true)}]]"
+                    selection-mode="[['single']]" data="[[$component.showSmallScreenAvailmentsData]]">
+                </oj-list-view>
+            </div>
+        </div>
+    </modal-window>
+
+    <!-- ko if: $baseModel.small() -->
+    <a href="#" data-bind="click: $component.openFilterModal">
+        <div class="floating-button"><span class="icons icon-filter"></span></div>
+    </a>
+    <!-- /ko -->
+
+</div>
+
+<script type="text/html" id="list_template">
+    <tr>
+        <td>
+            <a href="#" data-bind="text:$data.bg_number,click:$component.onBGSelected.bind($data)"></a>
+        </td>
+        <td>
+            <span data-bind="text:beneficiary"></span>
+        </td>
+        <td>
+            <span data-bind="text:$formatter.formatDate(issue_date)"></span>
+        </td>
+        <td>
+            <span data-bind="text:$formatter.formatDate(expiry_date)"></span>
+        </td>
+        <td>
+            <span data-bind="text:bg_status"></span>
+        </td>
+        <td>
+            <span data-bind="text:amount"></span>
+        </td>
+        <td>
+            <span data-bind="text:outstanding_amount"></span>
+        </td>
+        <td>
+            <!-- ko if: totalAvailment.amount > 0 -->
+            <a href="#" data-bind="text:$formatter.formatCurrency(totalAvailment.amount, totalAvailment.currency),click:$component.showAvailmentDetails"></a>
+            <!-- /ko -->
+            <!-- ko ifnot: totalAvailment.amount > 0 -->
+            <span data-bind="text: $formatter.formatCurrency(totalAvailment.amount, totalAvailment.currency)"></span>
+            <!-- /ko -->
+        </td>
+    </tr>
+</script>
+
+
+<oj-popup id="claim-details" tail="[['simple']]" modality="[['modeless']]" position.my.horizontal="[['start']]"
+    position.my.vertical="[['center']]" position.at.horizontal="[['right']]" position.at.vertical="[['center']]">
+    <oj-table :id="[['Claim52']]" data="[[dataSourceclaims]]"
+        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('bgList_availments')]]"
+        columns="[[[{'headerText':$component.resourceBundle.labels.claimNumber, field:'availmentId'},{'headerText':$component.resourceBundle.common.labels.date, field:'claimDate'},{'headerText':$component.resourceBundle.common.labels.description, field:'description'},{'headerText':$component.resourceBundle.common.labels.amount, field:'claimAmount'}]]]">
+    </oj-table>
+    <div data-bind="class:'pull-right'">
+        <label data-bind="text:$component.resourceBundle.labels.TotalAmount"></label>
+        <div data-bind="text:totalClaimsAmount"></div>
+    </div>
+</oj-popup>
+<div id="scriptContainer">
+    <script type="text/html" id="bgList_availments">
+<td><span data-bind="text:$context.row.availmentId"></span></td><td><span data-bind="text:$formatter.formatDate($context.row.claimDate)"></span></td><td><span data-bind="text:$context.row.description"></span></td><td><span data-bind="text:$context.row.claimAmount"></span></td></script>
+</div>
+
+<script type="text/html" id="guarantee_list_card">
+    <li data-bind="attr: {id: $data.templateId}">
+        <div class="oj-flex oj-flex-items-pad">
+
+            <div class="oj-flex-item oj-md-12 oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-9 description">
+                        <a href="#" data-bind="text: $data.bg_number,click:$component.onBGSelected.bind($data)"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <label data-bind="text: $component.resourceBundle.labels.beneName"></label>
+                        <div data-bind="text: $data.beneficiary"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <label data-bind="text: $component.resourceBundle.labels.issueDate"></label>
+                        <div data-bind="text: $data.issue_date"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <label data-bind="text: $component.resourceBundle.labels.expiryDate"></label>
+                        <div data-bind="text: $data.expiry_date"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <label data-bind="text: $component.resourceBundle.labels.guaranteeStatus"></label>
+                        <div data-bind="text: $data.bg_status"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-6 oj-md-12">
+                        <label data-bind="text: $component.resourceBundle.labels.guaranteeAmount"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-12" data-bind="css: { 'right': $baseModel.small() }">
+                        <span data-bind="text: $data.amount"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-6 oj-md-12">
+                        <label data-bind="text: $component.resourceBundle.labels.outstandingAmount"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-12" data-bind="css: { 'right': $baseModel.small() }">
+                        <span class="right" data-bind="text: $data.outstanding_amount"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-6" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-6 oj-md-12">
+                        <label data-bind="text: $component.resourceBundle.labels.claims"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6 oj-md-12" data-bind="css: { 'right': $baseModel.small() }">
+                        <!-- ko if: totalAvailment.amount > 0 -->
+                        <a href="#" data-bind="text:$formatter.formatCurrency(totalAvailment.amount, totalAvailment.currency),click:$component.showSmallScreenAvailments.bind($data)"></a>
+                        <!-- /ko -->
+                        <!-- ko ifnot: totalAvailment.amount > 0 -->
+                        <span data-bind="text: $formatter.formatCurrency(totalAvailment.amount, totalAvailment.currency)"></span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </li>
+</script>
+
+<script type="text/html" id="bgAvailments">
+    <li data-bind="attr: {id: $data.availmentId}">
+        <div class="oj-flex oj-flex-items-pad">
+
+            <div class="oj-flex-item oj-sm-12">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 description" data-bind="text: $baseModel.format($component.resourceBundle.labels.claimWithNumber,{claimNumber:$data.availmentId})">
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <label data-bind="text: $component.resourceBundle.common.labels.date"></label>
+                        <div data-bind="text: $formatter.formatDate($data.availmentDate)"></div>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <label data-bind="text: $component.resourceBundle.common.labels.description"></label>
+                        <div class="content" data-bind="text: $data.description"></div>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-6">
+                        <label data-bind="text: $component.resourceBundle.common.labels.amount"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-6">
+                        <div class="right" data-bind="text:$formatter.formatCurrency($data.availmentAmount.amount, $data.availmentAmount.currency)"></div>
+                    </div>
+                </div>
+      </div>
+    </div>
+  </li>
+</script>

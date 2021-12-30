@@ -1,0 +1,118 @@
+<oj-validation-group :id="[['tracker']]">
+
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12">
+                <div class="cust-details oj-lg-12">
+                    <div class="paddingBottom">
+                        <div class="oj-lg-6">
+                            <span>
+                                <img class="img-customizations1" src="/images/process-management/new-facility.svg">
+    
+                            </span>
+                            <span data-bind="text:$component.payload.facilityDetailsModel ? $component.payload.facilityDetailsModel.facilityCategory : $component.payload.collateralCategory">
+                            </span>
+                        </div>
+                        <div class=" oj-lg-6">
+                            <div data-bind="text:$component.partyName">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <div class="paddingBottom oj-lg-12">
+                            <div data-bind="text:$component.payload.facilityDetailsModel ? $component.payload.facilityDetailsModel.facilityDescription : $component.payload.collateralDesc" class="fontDescription">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <div class="oj-lg-12 paddingBottom">
+                            <span data-bind="text:$component.midOfficeRefNo" class="fontSmall"></span>
+                            <span class="pipe"></span>
+                            <!-- ko if: $component.status==="SUBMITTED"-->
+                            <span class="dot dot1"></span>
+                            <!-- /ko -->
+                            <!-- ko if: $component.status==="IN_PROGRESS"-->
+                            <span class="dot dot2"></span>
+                            <!-- /ko -->
+                            <span data-bind="text:$component.status" class="fontSmall"></span>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <!-- ko if: $component.type === "New Facility Application" -->
+                        <div class=" oj-lg-12">
+                            <div data-bind="text:$baseModel.format($component.nls.ApplicationTracker.facilityApplied,{facilityAmount : $formatter.formatCurrency($component.payload.facilityDetailsModel ? $component.payload.facilityDetailsModel.facilityAmount : $component.payload.utilizationAmount, $component.payload.facilityDetailsModel ? $component.payload.facilityDetailsModel.facilityCurrency : $component.payload.currencyCode)})"
+                                class="fontSmall">
+                            </div>
+                        </div>
+                        <div class=" oj-lg-12">
+                            <span class="fontSmall" data-bind="text:$baseModel.format($component.nls.ApplicationTracker.appliedOn,{ondate:$formatter.formatDate($data.creationDate,'dateMonthFormat')})"></span>
+                            <span class="fontSmall" data-bind="text:$formatter.formatDate($data.creationDate,'timeFormat')"></span>                            
+                        </div>
+                        <!-- /ko -->
+
+                        <!-- ko if: $component.type === "Collateral Evaluation" -->
+                        <div class=" oj-lg-12">
+                            <div data-bind="text:$baseModel.format($component.locale.DocumentUpload.collateralApplied,{collateralAmount : $formatter.formatCurrency($component.payload.collateralValue ? $component.payload.collateralValue.amount : $component.payload.utilizationAmount, $component.payload.collateralValue ? $component.payload.collateralValue.currency : $component.payload.currencyCode)})"
+                                class="fontSmall">
+                            </div>
+                        </div>
+                        <div class=" oj-lg-12">
+                            <span class="fontSmall" data-bind="text:$baseModel.format($component.locale.DocumentUpload.appliedOn,{ondate:$formatter.formatDate($data.creationDate,'dateMonthFormat')})"></span>
+                            <span class="fontSmall" data-bind="text:$formatter.formatDate($data.creationDate,'timeFormat')"></span>                            
+                        </div>
+                        <!-- /ko -->
+
+                    </div>
+                </div>
+    
+                <br>
+
+                <div class="oj-flex oj-flex-items-pad paddingTop">
+                    <div class="oj-flex-item oj-lg-8 oj-panel">
+                        <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                            <div class="oj-flex-item oj-lg-1 ">
+                                <div>
+                                    <img class="img-customizations img-style"
+                                        src="/images/credit-facility/documents.svg">
+                                    </img>
+                                </div>
+                            </div>
+
+
+                            <div class="oj-flex-item oj-lg-3 text-style"
+                                data-bind="text:$component.locale.DocumentUpload.Documents">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- ko foreach:$component.documentListDetails() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <!-- ko if:contentId -->
+                    <div class="oj-flex-item oj-lg-8 oj-panel">
+                        <div class="oj-flex-item oj-panel box oj-lg-3 side-documents">
+                            <a href="#" class="form-button-link title-size" data-bind="attr:{ title: $component.locale.link.alt, alt :$component.locale.link.title}, text : fileName, click : $component.downloadDocumentDetails.bind($data, contentId)"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+
+            </div>
+            
+        </div>
+    <div class="button-container">
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span
+                data-bind="text:$component.locale.generic.common.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]"><span
+                data-bind="text:$component.locale.generic.common.back"></span></oj-button>
+    </div>
+</div>
+
+</oj-validation-group>

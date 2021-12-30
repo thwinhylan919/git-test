@@ -1,0 +1,52 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.servicerequest.service.ServiceRequest",
+        "components": [{
+                "componentName": "service-requests-train",
+                "service": "create",
+                "perform": "service-request-create#service-requests-form-builder#service-requests-form-preview#service-request-view#account-number-control#account-number-debit-card-control#account-number-debit-card-view#account-number-view#check-box-control#check-box-view#country-states-control#country-states-view#date-picker-control#date-picker-view#drop-list-control#drop-list-view#file-upload-control#file-upload-view#gender-control#gender-view#header-view#info-view#multi-select-control#multi-select-view#radio-button-control#radio-button-view#salutation-control#salutation-view#section-header-control#section-header-view#sub-header-control#sub-header-view#text-box-control#text-box-view",
+                "approve": "service-request-approval-view"
+            },
+            {
+                "componentName": "service-request-approval-view",
+                "service": "read",
+                "perform": "account-number-control#account-number-debit-card-control#account-number-debit-card-view#account-number-view#check-box-control#check-box-view#country-states-control#country-states-view#date-picker-control#date-picker-view#drop-list-control#drop-list-view#file-upload-control#file-upload-view#gender-control#gender-view#header-view#info-view#multi-select-control#multi-select-view#radio-button-control#radio-button-view#salutation-control#salutation-view#section-header-control#section-header-view#sub-header-control#sub-header-view#text-box-control#text-box-view"
+            },
+            {
+                "componentName": "service-requests-train",
+                "service": "update",
+                "perform": "service-request-create#service-requests-form-builder#service-requests-form-preview#service-request-view#account-number-control#account-number-debit-card-control#account-number-debit-card-view#account-number-view#check-box-control#check-box-view#country-states-control#country-states-view#date-picker-control#date-picker-view#drop-list-control#drop-list-view#file-upload-control#file-upload-view#gender-control#gender-view#header-view#info-view#multi-select-control#multi-select-view#radio-button-control#radio-button-view#salutation-control#salutation-view#section-header-control#section-header-view#sub-header-control#sub-header-view#text-box-control#text-box-view",
+                "approve": "service-request-approval-view"
+            },
+            {
+                "componentName": "service-requests-search",
+                "service": "list",
+                "perform": "",
+                "approve": ""
+            }
+        ]
+    }, {
+        "moduleName": "com.ofss.digx.app.sr.service.ServiceRequest",
+        "components": [{
+                "componentName": "service-requests-base-main",
+                "service": "create",
+                "perform": "service-requests-confirmation#service-requests-raise-request#service-requests-base-form#service-requests-verify#account-number-debit-card-view#account-number-view#check-box-view#country-states-view#date-picker-view#drop-list-view#file-upload-view#gender-view#header-view#info-view#multi-select-view#radio-button-view#salutation-view#section-header-view#sub-header-view#text-box-view"
+            },
+            {
+                "componentName": "service-requests-track-details",
+                "service": "read",
+                "perform": "service-requests-detail"
+            },
+            {
+                "componentName": "service-requests-base",
+                "service": "updateStatus",
+                "perform": "service-requests-admin-track#service-requests-batch-approval#service-requests-main#service-requests-list#service-requests-detail"
+            },
+            {
+                "componentName": "service-requests-track",
+                "service": "list",
+                "perform": ""
+            }
+        ]
+    }]
+}

@@ -1,0 +1,90 @@
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+        <div class="address">
+            <oj-label :for="[['deliveryLocation' + $baseModel.incrementIdCount()]]">
+                <span data-bind="text:$component.label"></span>
+            </oj-label>
+            <oj-radioset class="oj-choice-direction-row" :id="[['deliveryLocation' + $baseModel.currentIdCount()]]"
+                value="{{$component.address.deliveryOption}}">
+                <!-- ko foreach: $component.deliverAt -->
+                <oj-option :value="[[id]]" :name="[[label]]">
+                    <span data-bind="text:label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-radioset>
+            <!-- ko if:$component.showBranchSelection() === false  -->
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-sm-12 label ">
+                    <oj-label class="hide-label" :for="[['addressType'+($baseModel.incrementIdCount())]]">
+                        <span data-bind="text:$component.locale.address.addressType"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <!-- ko if: $component.localAddressList().length -->
+                    <oj-select-one data-id="addressTypeDropdown" required :id="[['addressType'+($baseModel.currentIdCount())]]"
+                        translations="[[{'required':{messageDetail:$component.locale.messages.address.addressType}}]]"
+                        :placeholder="[[$component.locale.messages.address.selectAddress]]" value="{{$component.address.addressType}}"
+                        on-value-changed=[[$component.myAddressChangeHandler]]>
+                        <!-- ko foreach: $component.localAddressList -->
+                        <oj-option value="[[$data.value]]">
+                            <span data-bind="text:description"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.showBranchSelection() -->
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-sm-12 label ">
+                    <oj-label :for="[['citylist'+($baseModel.incrementIdCount())]]">
+                        <span data-bind="text:$component.locale.city"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <!-- ko if: $component.listOfCities().length -->
+                    <oj-select-one required :id="[['citylist'+($baseModel.currentIdCount())]]" translations="[[{'required':{messageDetail:$component.locale.messages.city}}]]"
+                        :placeholder="[[$component.locale.messages.address.selectCity]]" value="{{$component.selectedCity}}"
+                        on-value-changed=[[$component.cityChangeHandler]]>
+                        <!-- ko foreach:$component.listOfCities -->
+                        <oj-option value="{{$data}}">
+                            <span data-bind="text:$data"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-sm-12 label">
+                    <oj-label :for="[['branchlist'+($baseModel.incrementIdCount())]]">
+                        <span data-bind="text:$component.locale.address.branch"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <!-- ko if:$component.listOfBranches().length -->
+                    <oj-select-one data-id="branchList" required :id="[['branchlist'+($baseModel.currentIdCount())]]"
+                        translations="[[{'required':{messageDetail:$component.locale.messages.address.branch}}]]"
+                        :placeholder="[[$component.locale.messages.address.selectBranch]]" value="{{$component.address.branchCode}}"
+                        on-value-changed=[[$component.branchChangeHandler]]>
+                        <!-- ko foreach:$component.listOfBranches -->
+                        <oj-option value="{{$data.id}}">
+                            <span data-bind="text:$data.branchName"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="addressfields">
+                <!-- ko foreach: $component.addressToDisplay -->
+                <div>
+                    <span data-bind="text:$data"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

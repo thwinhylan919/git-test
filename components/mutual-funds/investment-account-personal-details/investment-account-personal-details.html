@@ -1,0 +1,120 @@
+<!-- ko if: $component.loadPersonalDetailsSection -->
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <oj-validation-group id="tracker">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="all-units">
+                        <span data-bind="text:$component.resource.fullName"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <oj-input-text id="all-units" value="{{$component.openInvestmentAccountData().personalDetails.fullName}}" validators="[[$baseModel.getValidator('ALPHABETS_WITH_SPACE',$component.resource.nameError,{
+                                type:'length',options:{
+                                  min:1,max:100}})]]" required readonly="[[$component.fetchedInfo.fullName]]"></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="dateOfBirth">
+                        <span data-bind="text:$component.resource.dateOfBirth"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-6">
+                    <oj-input-date id="dateOfBirth" value="{{$component.openInvestmentAccountData().personalDetails.birthDate}}" max="[[$oj.IntlConverterUtils.dateToLocalIso($component.today())]]" required readonly="[[$component.fetchedInfo.birthDate]]"></oj-input-date>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="accessType">
+                        <span data-bind="text:$component.resource.gender"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <!-- ko if: $component.gendersLoaded -->
+                    <oj-select-one id="accessType" labelled-by="accessTypeLabel" value="{{$component.openInvestmentAccountData().personalDetails.gender}}" required disabled="[[$component.fetchedInfo.gender]]">
+                        <!-- ko foreach : $component.fetchedGenders -->
+                        <oj-option :id="[['accessType'+$index()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="taxId">
+                        <span data-bind="text:$component.resource.taxId"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-6">
+                    <oj-input-text id="taxId" value="{{$component.openInvestmentAccountData().identityInfo[0].taxId}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.messages.number,{
+                          type:'length',options:{
+                            min:1,max:10}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="personalId">
+                        <span data-bind="text:$component.resource.personalId"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+                    <!-- ko if: $component.identificationTypesLoaded() -->
+                    <oj-select-one id="personalId" :aria-label="[[$component.resource.personalId]]" :placeholder="[[$component.resource.select]]" value="{{$component.openInvestmentAccountData().identityInfo[0].identificationType}}" required>
+                        <!-- ko foreach : $component.identificationTypes-->
+                        <oj-option :id="[['personalId'+$index()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="personalIdNo">
+                        <span data-bind="text:$component.resource.personalIdNo"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-6">
+                    <oj-input-text id="personalIdNo" :aria-label="[[$component.resource.personalIdNo]]" value="{{$component.openInvestmentAccountData().identityInfo[0].value}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.messages.number,{
+                          type:'length',options:{
+                            min:1,max:20}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="spouseName">
+                        <span data-bind="text:$component.resource.fatherName"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-8">
+                    <oj-input-text id="spouseName" :aria-label="[[$component.resource.fatherName]]" value="{{$component.openInvestmentAccountData().personalDetails.spouseName}}" validators="[[$baseModel.getValidator('ALPHABETS_WITH_SPACE',$component.resource.spouseNameError,{
+                                type:'length',options:{
+                                  min:1,max:100}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="motherName">
+                        <span data-bind="text:$component.resource.motherName"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-8">
+                    <oj-input-text id="motherName" :aria-label="[[$component.resource.motherName]]" value="{{$component.openInvestmentAccountData().personalDetails.motherName}}" validators="[[$baseModel.getValidator('ALPHABETS_WITH_SPACE',$component.resource.nameError,{
+                                type:'length',options:{
+                                  min:1,max:101}})]]" required></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex button-container">
+                <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.nextStep]]">
+                    <span slot="startIcon" class="icons icon-forward-arrow"></span>
+                    <span data-bind="text:$component.resource.generic.common.next"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </oj-validation-group>
+    </page-section>
+</div>
+<!-- /ko -->

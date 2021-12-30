@@ -1,0 +1,375 @@
+[{
+        "name": "CONFIGURATION",
+        "icon": "icon-setting",
+        "submenus": [{
+            "name": "system-configuration-home",
+            "module": "system-configuration"
+        }, {
+            "name": "system-rules-map",
+            "module": "system-rules"
+        }, {
+            "name": "task-aspects",
+            "module": "transaction-aspects"
+        }, {
+            "name": "location-search",
+            "module": "location-maintenance"
+        }, {
+            "name": "user-segments-product-list",
+            "module": "user-segments-product"
+        }, {
+            "name": "profile-maintenance-search",
+            "module": "user-profile-maintenance"
+        }]
+    }, {
+        "name": "ACCESS_POLICIES",
+        "icon": "icon-liquidity-management",
+        "submenus": [{
+            "name": "access-point-search",
+            "module": "access-point"
+        }, {
+            "name": "access-point-group-search",
+            "module": "access-point"
+        }, {
+            "name": "application-role-base",
+            "module": "role-transaction-mapping"
+        }, {
+            "name": "entitlements-base",
+            "module": "entitlements"
+        }, {
+            "name": "search-segments",
+            "module": "segments"
+        }]
+    }, {
+        "name": "SECURITY",
+        "icon": "icon-insurance",
+        "submenus": [{
+            "name": "segment-authentication-mapping",
+            "module": "authentication"
+        }, {
+            "name": "view-security-question-maintenance",
+            "module": "security-question"
+        }, {
+            "name": "policy-search",
+            "module": "password-policy"
+        }, {
+            "name": "security-keys",
+            "module": "security"
+        }]
+    }, {
+        "name": "LIMITS",
+        "icon": "icon-limit",
+        "submenus": [{
+                "module": "financial-limits",
+                "name": "limit-search"
+            }, {
+                "module": "financial-limit-package",
+                "name": "limit-package-search"
+            },
+            {
+                "module": "transaction-group",
+                "name": "transaction-group-search"
+            },
+            {
+                "module": "limits-enquiry",
+                "name": "list-user"
+            }
+        ]
+    }, {
+        "name": "ON_BOARDING",
+        "icon": "icon-employment",
+        "submenus": [{
+            "name": "users",
+            "module": "user-management",
+            "targetComponent": "users"
+        }, {
+            "name": "merchant-dashboard",
+            "module": "merchant",
+            "targetComponent": "merchant-dashboard"
+        }, {
+            "name": "preference-base",
+            "module": "customer-preference",
+            "targetComponent": "preference-base"
+        }, {
+            "name": "linkage-base",
+            "module": "party-linkage",
+            "targetComponent": "linkage-base"
+        }, {
+            "name": "biller-search",
+            "module": "biller-maintenance",
+            "targetComponent": "biller-search"
+        }]
+    }, {
+        "name": "ACCESS_MANAGEMENT",
+        "icon": "icon-password",
+        "submenus": [{
+            "name": "ACCOUNT_ACCESS",
+            "submenus": [{
+                "name": "access-management-base",
+                "module": "account-access-management"
+            }, {
+                "name": "user-access-management-base",
+                "module": "account-access-management"
+            }]
+        }, {
+            "name": "RESOURCE_ACCESS",
+            "submenus": [{
+                "name": "party-base",
+                "module": "corporate-resource-access",
+                "class": "transaction"
+            }, {
+                "name": "user-base",
+                "module": "corporate-resource-access",
+                "class": "transaction"
+            }]
+        }]
+    }, {
+        "name": "APPROVALS",
+        "icon": "icon-confirm",
+        "submenus": [{
+            "module": "approvals",
+            "name": "workflow-type"
+        }, {
+            "module": "approvals",
+            "name": "rule-type"
+        }]
+    }, {
+        "name": "PAYMENTS_TITLE",
+        "icon": "icon-payments",
+        "submenus": [{
+            "name": "task-purpose-landing",
+            "module": "tasks"
+        }, {
+            "name": "segment-payee-restriction-mapping",
+            "module": "payee-restrictions"
+        }, {
+            "name": "manage-category",
+            "module": "biller-maintenance"
+        }, {
+            "name": "view-forex-deal-settings",
+            "module": "forex-deal-settings"
+        }, {
+            "name": "biller-category-landing",
+            "module": "biller"
+        }, {
+            "name": "view-network-preference",
+            "module": "network-suggestion"
+        }]
+    }, {
+        "name": "PERSONAL_FINANCE_MANAGEMENT",
+        "icon": "icon-pfm",
+        "submenus": [{
+            "name": "spend-category-landing",
+            "module": "spend-analysis"
+        }, {
+            "name": "goal-category-list",
+            "module": "goals"
+        }, {
+            "name": "add-ext-bank",
+            "module": "account-aggregation"
+        }]
+    }, {
+        "name": "REPORTS",
+        "icon": "icon-review",
+        "submenus": [{
+            "name": "report-generation",
+            "module": "reports",
+            "targetComponent": "report-generation"
+        }, {
+            "name": "report-list",
+            "module": "reports",
+            "targetComponent": "report-list"
+        }, {
+            "name": "reports-type",
+            "module": "reports",
+            "targetComponent": "reports-type"
+        }]
+    }, {
+        "name": "FILE_UPLOAD",
+        "icon": "icon-file-upload",
+        "submenus": [{
+            "name": "file-create",
+            "module": "file-upload"
+        }, {
+            "name": "user-search-type",
+            "module": "file-upload"
+
+        }, {
+            "name": "file-upload",
+            "module": "file-upload"
+
+        }, {
+            "name": "file-view",
+            "module": "file-upload"
+        }]
+
+    }, {
+        "name": "COMMUNICATION",
+        "icon": "icon-mailbox-view",
+        "submenus": [{
+            "name": "mapping-base",
+            "module": "usergroup-subject-map"
+        }, {
+            "name": "alerts-maintenance-search",
+            "module": "alerts"
+        }, {
+            "name": "mailers-base",
+            "module": "mailers"
+        }]
+    }, {
+        "name": "CONTROLS_AND_MONITORING",
+        "icon": "icon-request-parameters",
+        "submenus": [{
+            "name": "transaction-blackout",
+            "module": "transaction-blackout"
+        }, {
+            "name": "transaction-cutoff",
+            "module": "cutoff"
+        }, {
+            "name": "audit-log",
+            "module": "audit",
+            "targetComponent": "audit-log"
+        }, {
+            "name": "feedback-analysis",
+            "module": "feedback",
+            "targetComponent": "feedback-analysis"
+        }, {
+            "name": "relationship-mapping-base",
+            "module": "relationship-mapping"
+        }, {
+            "name": "relationship-matrix-base",
+            "module": "relationship-matrix"
+        }]
+    }, {
+        "name": "USER_EXPERIENCE",
+        "icon": "icon-virtual-account",
+        "submenus": [{
+            "name": "template-list",
+            "module": "dashboard-template"
+        }, {
+            "name": "theme-list",
+            "module": "theme-config"
+        }]
+    }, {
+        "name": "TEMPLATES",
+        "icon": "icon-view-statement",
+        "submenus": [{
+            "name": "service-requests-search",
+            "module": "service-requests"
+        }, {
+            "name": "feedback-template-search",
+            "module": "feedback"
+        }, {
+            "name": "sms-banking-search",
+            "module": "sms-banking"
+        }]
+    }, {
+        "name": "OAUTH",
+        "icon": "icon-maintenance",
+        "submenus": [{
+            "name": "identity-domain-search",
+            "module": "oauth"
+        }, {
+            "name": "resource-server-search",
+            "module": "oauth"
+        }, {
+            "name": "client-search",
+            "module": "oauth"
+        }]
+    }, {
+        "name": "API_BUILDER",
+        "icon": "icon-maintenance",
+        "submenus": [{
+            "name": "api-group-search",
+            "module": "api-builder"
+        }, {
+            "name": "api-builder-search",
+            "module": "api-builder"
+        }]
+    }, {
+        "name": "OTHERS",
+        "icon": "icon-more",
+        "submenus": [{
+            "module": "origination",
+            "name": "workflow-base"
+        }, {
+            "module": "approvals",
+            "name": "user-group-type"
+        }, {
+            "name": "print-user-search",
+            "module": "user-print-information",
+            "targetComponent": "print-user-search"
+        }, {
+            "name": "alerts-select-user",
+            "module": "alerts"
+        }, {
+            "name": "service-requests-base",
+            "module": "service-requests"
+        }, {
+            "name": "help-desk-user-search",
+            "module": "help-desk-user"
+
+        }, {
+            "name": "application-message-list",
+            "module": "application-message"
+        }]
+    },
+    {
+        "name": "MAILBOX_TITLE",
+        "icon": "icon-debit-card",
+        "submenus": [{
+                "name": "mailbox-base",
+                "module": "mailbox"
+            },
+            {
+                "name": "alert-list",
+                "module": "mailbox"
+            },
+            {
+                "name": "notification-list",
+                "module": "mailbox"
+            }
+        ]
+    },
+    {
+        "name": "VIRTUAL_ACCOUNT_MANAGEMENT_TITLE",
+        "icon": "icon-reports",
+        "submenus": [{
+            "name": "virtual-entity-landing",
+            "module": "virtual-account-management"
+        }, {
+            "name": "virtual-account-landing",
+            "module": "virtual-account-management"
+
+        }]
+
+    }, {
+        "name": "ACCOUNT_SETTING",
+        "icon": "icon-setting",
+        "submenus": [{
+            "name": "profile",
+            "module": "base-components"
+        }, {
+            "name": "session-summary",
+            "module": "base-components"
+        }]
+    }, {
+        "name": "locator",
+        "icon": "icon-location-arrow",
+        "module": "locator"
+    }, {
+        "name": "security-menu",
+        "icon": " icon-security-question",
+        "module": "security"
+    }, {
+        "name": "help",
+        "icon": "icon-help",
+        "default": true,
+        "type": "FUNCTION",
+        "functionName": "openWebHelpWindow"
+    }, {
+        "name": "about",
+        "icon": "icon-information",
+        "default": true,
+        "type": "MODAL"
+    }
+]

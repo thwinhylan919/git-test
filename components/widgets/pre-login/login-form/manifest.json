@@ -1,0 +1,14 @@
+{
+    "componentName": "login-form",
+    "module": "pre-login",
+    "segment": [],
+    "width": {
+        "large": "12",
+        "medium": "12",
+        "small": "12"
+    },
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+}

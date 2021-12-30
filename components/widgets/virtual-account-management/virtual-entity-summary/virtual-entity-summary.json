@@ -1,0 +1,9 @@
+{
+    "virtual-account-management": [{
+        "name": "virtual-entity-create",
+        "module": "virtual-account-management"
+    }, {
+        "name": "virtual-account",
+        "module": "virtual-account-management"
+    }]
+}

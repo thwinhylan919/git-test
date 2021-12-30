@@ -1,0 +1,50 @@
+<div class="oj-flex oj-flex-items-pad amount-input">
+    <!-- ko ifnot: $component.isLabelHidden -->
+    <div class="oj-flex-item oj-sm-12 label"
+        data-bind="css: ($component.inline === 'origination') ? 'oj-lg-2 oj-md-3' :($component.inline ? 'oj-lg-3 oj-md-4': '')">
+        <oj-label :for="[[rootId]]"><span data-bind="text:label"></span></oj-label>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex-item oj-sm-12" data-bind="css: $component.inline ? 'oj-lg-4 oj-md-5': ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko if: ($data.currencyListFecthed() &&  $data.currencyListRequired )  -->
+
+            <div class="oj-flex-item oj-sm-4 amountInput-currency">
+                <oj-label class="hide-label" :for="[[rootId +'_currency']]"><span
+                        data-bind="text:$component.locale.currency"></span></oj-label>
+                <oj-select-one :id="[[rootId +'_currency']]" required="[[true]]" value="{{currency}}" :placeholder="">
+                    <!-- ko foreach: currencyList -->
+                    <oj-option value="{{code}}"><span data-bind="text:description"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+            <!-- /ko -->
+            <div
+                data-bind="css: 'oj-flex-item amountInput' + ' ' + $data.rootClass + ' ' + ($component.currencyListRequired ? 'oj-sm-8' : 'oj-sm-12')">
+                <!-- ko if: showInput -->
+                <oj-input-text :aria-label="{{label}}" :id="[[rootId]]" :data-id="[['amount']]"
+                    translations="[[{'required':{messageDetail:$component.locale.amountValidation}}]]" validators="[[[validateAmount, {
+                        type: 'numberRange',
+                        options: {
+                            min: ko.utils.unwrapObservable($component.minimumAmount) || 0,
+                            max: ko.utils.unwrapObservable($component.maximumAmount) || 9999999999999.99,
+                            hint: {
+                                inRange: $component.locale.inRange
+                            },
+                            messageDetail: {
+                                rangeUnderflow: $component.locale.underflow,
+                                rangeOverflow: $component.locale.overflow
+                            }
+                        }
+                    }]]]"
+                    converter="[[{type:'number',options:{
+                        style:'currency',currency:typeof ko.utils.unwrapObservable(currency) ==='string'? ko.utils.unwrapObservable(currency):'',currencyDisplay:'symbol'}}]]"
+                    value="{{amount}}" :placeholder="[[$component.placeholderText]]" required="[[isMandatory]]"
+                    readonly="{{readOnly}}"></oj-input-text>
+                <!-- /ko -->
+                <!-- ko template: { nodes: $componentTemplateNodes, data: $parent}-->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

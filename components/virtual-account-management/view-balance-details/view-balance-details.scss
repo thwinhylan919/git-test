@@ -1,0 +1,50 @@
+$add-color-code: #228B22;
+$substract-color-code: #FF0000;
+
+.extra-margin {
+  @include single-margin(left, 1.6875rem);
+}
+
+.title-bold {
+  font-weight: var(--base-font-weight-bold);
+}
+
+.border-bottom {
+  @include single-border(bottom, 0.0625rem solid var(--base-border-default));
+}
+
+.extra-padding {
+  padding-top: 1rem;
+}
+
+.add-color {
+  color: $add-color-code;
+}
+
+.substract-color {
+  color: $substract-color-code;
+}
+
+.child-contributions-font {
+  font-size: var(--form-font-size);
+}
+
+.no-border {
+  border: none;
+}
+
+.child-contributions {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color)) !important;
+}
+
+.pop-up-width {
+  width: 22rem;
+}
+
+.no-padding {
+  padding: 0 0 !important;
+  color: var(--link-base);
+  font-size: var(--link-font-size);
+  font-weight: var(--link-font-weight);
+  display: inline-block;
+}

@@ -1,0 +1,79 @@
+@import "utils";
+.networth {
+    background: linear-gradient(to var(--widget1-gradient-direction), var(--widget1-gradient-start-color), var(--widget1-gradient-end-color));
+    color: var(--widget1-foreground-color);
+    &__heading {
+        margin: 0.6rem 0 0;
+    }
+    &__date {
+        font-weight: var(--base-font-weight-light);
+        font-size: var(--base-font-size-medium);
+    }
+    &__switchButtons {}
+    &__pie {
+        width: 100%;
+        @include mq(large) {
+            height: 13rem;
+        }
+        @include mq(small) {
+            height: 13rem;
+        }
+    }
+    &-legend {
+        &__info {
+            padding-bottom: 0.5rem;
+        }
+        &-info {
+            &__content {
+                &:first-child {
+                    padding-bottom: 0.3rem;
+                }
+            }
+        }
+        &__color {
+            width: 0.6rem;
+            display: inline-block;
+            height: 0.6rem;
+        }
+        &__text {
+            display: inline-block;
+            font-size: var(--base-font-size-medium);
+            font-weight: var(--base-font-weight-light);
+            @include single-padding(left, 0.2rem);
+        }
+        &__amount {
+            font-size: var(--base-font-size-default);
+            @include single-padding(left, 1rem);
+        }
+    }
+    &__text {
+        margin: auto;
+    }
+    &>* {
+        // color: var(--color-white);
+    }
+    &__text {
+        text-align: center;
+        margin: auto 0;
+    }
+    &__placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.6rem;
+    }
+    &-placeholder {
+        &__image {
+            @include mq(small) {
+                height: 5.3rem;
+            }
+            height: 6.3rem;
+        }
+    }
+}
+
+.chartContent {
+    font-size: 1rem;
+    text-align: center;
+    position: absolute;
+}

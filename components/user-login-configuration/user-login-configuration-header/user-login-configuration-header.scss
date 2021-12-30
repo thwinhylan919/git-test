@@ -1,0 +1,27 @@
+.user-login-configuration {
+    &__header {
+        background-image: url("{images}/common/banner_image.jpg");
+        @include mq(large) {
+            height: 200px;
+        }
+        @include mq(small) {
+            height: 175px;
+        }
+        width: 100%;
+    }
+    &__content {
+        padding: 2rem;
+        color: var(--color-white);
+        &--large {
+            font-size: 1.3rem;
+        }
+        &--larger {
+            font-size: 1.9rem;
+        }
+    }
+    &__terms-conds-scroll {
+        height: 21.9rem;
+        overflow-y: auto;
+        @include text-align(justify);
+    }
+}

@@ -1,0 +1,36 @@
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+    <row
+        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.Module.PartyID, value : $component.partyId">
+    </row>
+    <row
+        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.Module.PartyName, value : $component.partyName">
+    </row>
+    <!-- ko if: isUserSelected() -->
+    <row
+        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.Module.UserId, value : $component.userData().userid">
+    </row>
+    <row
+        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.Module.UserName, value : $component.userData().username">
+    </row>
+    <!-- /ko -->
+
+    <!-- ko if: $component.isModuleFetched() && $component.isPartyFetched() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+            <oj-label :for="[['ModuleName']]"><span data-bind="text:$component.nls.Module.ModuleName"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+            <oj-select-one placeholder="[[$component.nls.moduleTypePlaceholder]]"
+                on-value-changed="[[$component.ModuleName9ValueChange]]" :id="[['ModuleName']]"
+                value="{{selectedModule}}">
+                <!-- ko foreach: $component.moduleList -->
+                <oj-option value="[[$data]]">
+                    <div data-bind="text:description"></div>
+                </oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+    </div>
+    <!-- /ko -->
+</page-section>

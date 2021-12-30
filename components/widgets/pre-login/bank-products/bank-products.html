@@ -1,0 +1,39 @@
+<!-- ko if: renderModuleData() -->
+<div class="product-quick-links">
+    <p class="title" data-bind="text:$component.nls.quickLinks.labels.quickHeading"></p>
+    <div id="" class="oj-flex oj-flex-items-pad product-quick-links-flex-container oj-sm-flex-wrap-nowrap">
+        <div id="filmStripDiv" class="oj-flex-item product-quick-links-flex-container__listItems">
+            <oj-film-strip id="filmStrip" :aria-label="{{$component.nls.quickLinks.desc.knowMore}}" arrow-placement="[[$component.currentNavArrowPlacement]]"
+                arrow-visibility="[[$component.currentNavArrowVisibility]]" max-items-per-page="5">
+                <oj-bind-for-each data="[[productTiles]]" as="productTile">
+                    <template>
+                        <div class="oj-flex-items-pad oj-flex filmstrip-item product-quick-links_card oj-flex-item">
+                            <a class="oj-flex-item product-quick-links-flex-item" href="#" data-bind="click : $component.actionCardClick.bind($data, productTile.data) ,attr:{alt: $baseModel.format($component.resource.alt.productName,{productName:$component.nls.quickLinks.labels[productTile.data.id]}), title: $component.nls.quickLinks.labels[productTile.data.id]}">
+                                <div class="oj-flex-items-pad oj-flex">
+                                    <div class="oj-flex-item left oj-sm-12">
+                                        <img class="icons" data-bind="loadImage: 'origination/'+ productTile.data.id +'.svg',attr:{alt:$baseModel.format($component.resource.alt.productImage,{productName:$component.nls.quickLinks.labels[productTile.data.id]})} ">
+                                    </div>
+                                    <div class="icon-title left oj-flex-item oj-sm-12">
+                                        <div class="icon-title_title" data-bind="text: $component.nls.quickLinks.title[productTile.data.id]"></div>
+                                        <div class="icon-title_desc " data-bind="text: $component.nls.quickLinks.desc[productTile.data.id]"></div>
+                                        <div class="icon-title_knowMore" data-bind="text: $component.nls.quickLinks.desc.knowMore"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
+                </oj-bind-for-each>
+            </oj-film-strip>
+        </div>
+    </div>
+    <!-- ko if : $baseModel.large() -->
+    <!-- ko if: !$dashboard.isDashboard() -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.nls.quickLinks.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->    
+</div>
+<!-- /ko -->

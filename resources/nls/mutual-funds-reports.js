@@ -1,0 +1,73 @@
+define([], function() {
+    "use strict";
+
+    const detailedTxnReport = function() {
+        return {
+            root: {
+                reportDetails: "Report Details",
+                transactionType: "Transaction Type",
+                transactionHeader: "Transaction Reports",
+                capitalGainHeader: "Capital Gain Reports",
+                dividendHeader: "Dividend History Reports",
+                trackHeader: "Track Request",
+                requestDetailsHeader: "Request Status",
+                investmentAccountPlaceHolder: "Investment Account",
+                fundHousePlaceHolder: "Fund House",
+                txnTypePlaceHolder: "Transaction Type",
+                schemesPlaceHolder: "Scheme Name",
+                datePlaceHolder: "Date",
+                schemeName: "Scheme Name",
+                transactionAmount: "Transaction Amount",
+                searchResult: "Search Results",
+                units: "Units",
+                unitPrice: "Dividend Per Unit",
+                formHeader: "Request Details",
+                back: "Back",
+                all: "Select",
+                backToDashboard: "Back to Wealth Overview",
+                fromDate: "From Date",
+                toDate: "To Date",
+                cancel: "Cancel",
+                search: "Search",
+                clear: "Clear",
+                download: "Download",
+                year: "{fromYear}-{toYear}",
+                dividendAmount: "Dividend Amount",
+                redeemDate: "Redeem Date",
+                totalUnitsST: "Short Term Units",
+                totalUnitsLT: "Long Term Units",
+                financialYearLabel: "Financial Year",
+                capitalGainLossTypeLabel: "Capital Gain/Loss Type",
+                redemptionPrice: "Redemption Value",
+                purchasePrice: "Purchase Value",
+                purchaseDate: "Purchase Date",
+                shortTermGainLoss: "Short Term Capital Gain/Loss",
+                longTermGainLoss: "Long Term Capital Gain/Loss",
+                orderStatusHeader: "Order Status",
+                orderType: "Order Type",
+                orderAmount: "Order Amount",
+                orderStatus: "Order Status",
+                referenceNumber: "Reference Number",
+                deleteOrder: "Do you wish to delete the order?",
+                delete: "Delete",
+                editOrder: "Click To Edit",
+                yes: "Yes",
+                no: "No",
+                passCombination: "For security reasons the report is password protected. Your password is the first four letters of your Name in uppercase followed by date and month of your birth in DDMM format.",
+                passwordExample: "For example, if the name is ROOPA LAL and Date of birth is 23rd Dec, 1980 then the password will be ROOP2312",
+                ok: "Ok",
+                passwordNotification: "Password Combination"
+            },
+            ar: true,
+            fr: true,
+            cs: true,
+            sv: true,
+            en: false,
+es :true,
+            "en-us": false,
+            el: true
+        };
+    };
+
+    return new detailedTxnReport();
+});

@@ -1,0 +1,49 @@
+$offers-name-gold-color: rgb(229, 205, 0);
+$offers-name-text-color: rgb(47, 50, 53);
+$details-header-color: rgba(47, 50, 3, 1);
+$details-text-color: #3B3E40;
+$features-header-color: rgb(87, 107, 136);
+$loan-offers-border-color: rgba(179, 200, 222, 1);
+$loan-offers-name-color: rgba(87, 107, 136, 1);
+$loan-offers-border-color-active: rgba(0, 138, 255, 1);
+$letter-spacing-25: 0;
+$savings-color: rgb(90, 164, 49);
+$checking-color: rgb(0, 136, 174);
+$td-color: rgb(82, 73, 136);
+$credit-card-color: rgb(230, 122, 94);
+.offer-container {
+    .offer-panel {
+        @include padding(0, 0, 1rem, 0);
+        @include mq(small) {
+            padding: 0 0;
+            margin: 0 0rem 0em;
+        }
+        &__link {
+            font-size: var(--base-font-size-medium);
+            margin-bottom: 1rem;
+        }
+        img {
+            height: 15rem;
+            width: 15rem;
+            position: relative;
+            @include left(1rem);
+            @include mq(small) {
+                height: 90%;
+                width: 100%;
+                @include left(0rem);
+            }
+        }
+        .offers-button {
+            @include mq(small) {
+                padding-bottom: 1.5rem;
+            }
+        }
+        .card-title {
+            font-size: var(--widget-header-font-size);
+            margin-top: calc(2 * (var(--widget-header-font-size) / 3));
+            font-weight: var(--widget-header-font-weight);
+            color: var(--form-foreground-color);
+            margin-bottom: 0.5rem;
+        }
+    }
+}

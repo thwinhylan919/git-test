@@ -1,0 +1,56 @@
+<oj-validation-group id="accountTracker">
+  <div class="form-main-container">
+    <!-- ko if: viewTable && $component.virtualAccountData -->
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-12">
+        <oj-table id="table" :aria-label="[[$component.resource.virtualAccountNo]]" data="[[dataSource]]"
+          columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+          columns="[[headerText]]">
+          <caption class="hide-label" data-bind="text:$component.resource.virtualAccountNo"></caption>
+        </oj-table>
+        <script type="text/html" id="virtualAccountNumber">
+          <td :id="[['virtualAccountNo' + $context.row.virtualAccountNo.value]]">
+            <span data-bind="text:$context.row.virtualAccountNo.displayValue"></span>
+          </td>
+        </script>
+        <script type="text/html" id="childAccountName">
+          <td :id="[['accountName' + $context.row.virtualAccountNo.value]]">
+            <span data-bind="text:$context.row.childAccountName"></span>
+          </td>
+        </script>
+        <script type="text/html" id="dateIdentifier">
+          <td :id="[['creationDate' + $context.row.virtualAccountNo.value]]">
+            <span data-bind="text: $formatter.formatDate($context.row.accOpenDate,'dateFormat')"></span>
+          </td>
+        </script>
+        <script type="text/html" id="checkbox_hdr_tmpl">
+          <td>
+            <oj-checkboxset id="[['all' + $baseModel.incrementIdCount()]]" on-value-changed="[[$component.selectAllListener]]" :aria-label="[[$component.resource.overlaytableheader]]" class="oj-checkboxset-no-chrome" value="{{$component.allCheck}}">
+              <oj-option data-bind="attr:{'aria-label':$component.resource.overlaytableheader, id:'table_checkbox_hdr'}" value="all"></oj-option>
+            </oj-checkboxset>
+          </td>
+        </script>
+        <script type="text/html" id="checkbox_tmpl">
+          <td :id="[['datacheckbox' + $context.row.virtualAccountNo.value]]">
+            <oj-checkboxset :id="[['checkbox' + $context.row.virtualAccountNo.value]]" class='oj-checkboxset-no-chrome':aria-label="[[$component.resource.overlaytableheader]]"  value="{{$context.row.selectedAccount}}" on-value-changed="[[$component.selectedAccountListener]]">
+              <oj-option value=[[$context.row.virtualAccountNo]] data-bind="attr:{
+                                id: 'table_checkbox' + $context.row.virtualAccountNo.value,'aria-label':$context.cellContext.status.rowIndex}"></oj-option>
+            </oj-checkboxset>
+          </td>
+        </script>
+        <oj-paging-control id="paging" slot='bottom' page-size='10' data='[[dataSource]]'></oj-paging-control>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex-item button-container">
+      <oj-button class="action-button-primary" id="add" on-click="[[addAccount]]">
+        <span slot="startIcon" class="icons icon-add"></span>
+        <span data-bind="text:$component.resource.link"></span>
+      </oj-button>
+      <oj-button class="action-button-secondary" id="clear" on-click="[[$component.clearAllAccounts]]">
+        <span data-bind="text:$component.resource.clear"></span>
+      </oj-button>
+    </div>
+
+  </div>
+</oj-validation-group>

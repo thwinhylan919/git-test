@@ -1,0 +1,24 @@
+{
+        "products": {
+                "EQLN": {
+                        "name": "Equipment Loan",
+                        "img": "process-management/equipment-finance.jpg",
+                        "businessProductDescription": "Grab the opportunity to grow your enterprise with our wide range of equipment financing solution."
+                },
+                "TRLN": {
+                        "name": "Term Loan",
+                        "img": "process-management/term-loan.jpg",
+                        "businessProductDescription": "Grow your business with our Term Loan scheme designed especially for professionals and Small business Enterprise."
+                },
+                "WCLN": {
+                        "name": "Working Capital",
+                        "img": "process-management/working-capital.jpg",
+                        "businessProductDescription": "Innovative financing designed to fuel your immediate business needs."
+                },
+                "RELN": {
+                        "name": "Real Estate Loan",
+                        "img": "process-management/real-estate.jpg",
+                        "businessProductDescription": "A tailored business lending schemes to accomplish every business goal."
+                }
+        }
+}

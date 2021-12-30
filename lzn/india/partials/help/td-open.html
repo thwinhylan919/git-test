@@ -1,0 +1,24 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+    <div class="oj-sm-12 help-item center">
+        <img alt="" data-bind="loadImage : 'info-icon/term-deposit.svg'">
+    </div>
+    <h4 class="oj-sm-12 help-content-title help-item">Note</h4>
+	<!-- ko if: $dashboard.helpComponent.params().td.productType === "CON" --> 
+    <span class="oj-sm-12 help-item">PAN is mandatory for creation of deposit which is above a set threshold amount. Please use the link below to update it.</span>
+    <!-- /ko -->
+    <!-- ko if: $dashboard.helpComponent.params().td.productType === "FCNR" --> 
+    <span class="oj-sm-12 help-item">Using your NRE account, you can open deposits in foreign currency as well. PAN is mandatory for creation of deposit which is above a threshold limit. Please use the link below to update it.</span>
+    <!-- /ko -->
+    <!-- ko if: $dashboard.helpComponent.params().td.productType === "NRE" --> 
+    <span class="oj-sm-12 help-item">Using your NRE account, you can open NRE deposits and earn higher interests without worrying about taxes. PAN is mandatory for creation of deposit which is above a threshold limit. Please use the link below to update it.</span>
+    <!-- /ko -->
+    <!-- ko if: $dashboard.helpComponent.params().td.productType === "NRO" --> 
+    <span class="oj-sm-12 help-item">Using your NRO account, you can open NRO deposits. PAN is mandatory for creation of deposit which is above a threshold limit. Please use the link below to update it.</span>
+    <!-- /ko -->
+    <!-- ko if: $dashboard.helpComponent.params().td.productType === "RFC" --> 
+    <span class="oj-sm-12 help-item">Using your RFC account, you can open deposits in the same foreign currency. PAN is mandatory for creation of deposit which is above a threshold limit. Please use the link below to update it.</span>
+    <!-- /ko -->
+    <div class="oj-flex-item oj-sm-12 help-item center">
+        <a href="#" data-bind="click: $component.loadProfilePage, attr:{alt:$component.locale.openTermDeposit.updatePanNo}, text:$component.locale.openTermDeposit.updatePanNo"></a>
+    </div>
+</div>

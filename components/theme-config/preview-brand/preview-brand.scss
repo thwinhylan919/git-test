@@ -1,0 +1,58 @@
+$box-color: #fff;
+
+.preview-container {
+    box-sizing: border-box;
+    border: 0.1rem solid var(--base-border-default);
+}
+
+.header {
+    padding: 0 10px;
+    color: var(--header-foreground-color);
+    background: linear-gradient(to var(--header-gradient-direction), var(--header-gradient-start-color), var(--header-gradient-end-color))
+}
+
+.menu {
+    background: linear-gradient(to var(--menu-gradient-direction), var(--menu-gradient-start-color), var(--menu-gradient-end-color));
+    padding: 5px;
+    min-height: 150px;
+}
+
+.logo {
+    background-color: $box-color;
+    height: 1rem;
+    width: 3rem;
+    @include left(0.7rem);
+    position: relative;
+    margin: 0.4rem 0;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.myButtons {
+    text-align: center;
+
+    .btn {
+        margin: 0;
+        width: 50px;
+        height: 25px;
+    }
+}
+
+.bodyText {
+    color: invert($box-color);
+    @include padding(0.5rem, 0, 0, 0.5rem);
+}
+
+.form-foreground {
+    @include margin(0, 0.8rem, 0.8rem, 0);
+}
+
+.pageTitle {
+    color: invert($box-color);
+    line-height: 1.8rem;
+    @include single-padding("left", 0.5rem);
+}
+
+.menu {
+    z-index: 1;
+    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.1);
+}

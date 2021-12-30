@@ -1,0 +1,23 @@
+.structure {
+    &__accountType{
+        background-color: var(--banner-background);
+            color: var(--banner-text-secondary);
+    }
+}
+
+.nodata {
+    img {
+        height: 25rem;
+    }
+
+    &__message {
+        font-size: var(--base-font-size-larger);
+        font-weight: var(--base-font-weight-bold);
+    }
+}
+
+.add-accounts-button {
+    @include float(right);
+    margin-top: -0.5rem;
+
+}

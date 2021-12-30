@@ -1,0 +1,96 @@
+$initiated-status-color: #0a6c99;
+$other-color:#FFE45C;
+$bgcolor:#2c3251;
+$bgcolor2:#FFFFFF;
+
+.party-details {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.party-name-style {
+  color: var(--banner-foreground-color);
+  font-size: var(--base-font-size-large);
+  font-weight: var(--banner-font-weight);
+}
+
+.banner-label {
+  color: var(--banner-text-secondary);
+  font-size: var(--base-font-size-medium);
+  font-weight: var(--base-font-weight-light);
+}
+
+.card-width {
+  width: 22rem;
+
+  @include mq(small) {
+    width: auto;
+  }
+
+  @include mq(medium) {
+    width: 19rem;
+
+  }
+
+  border: 0.05rem solid var(--base-border-default);
+  padding: 0.5rem;
+  border-radius: 3%;
+}
+
+.card-border-bottom {
+  border-bottom: 0.05rem solid var(--base-border-default);
+}
+
+.initiated {
+  background-color: $initiated-status-color;
+  color: $bgcolor2;
+}
+
+.active {
+  background-color: var(--base-color-success);
+  color: $bgcolor2;
+}
+
+.modified {
+  background-color: $initiated-status-color;
+  color: $bgcolor2;
+}
+
+.closed {
+  background-color: rgba(44, 50, 81, 0.7);
+  color: $bgcolor2;
+}
+
+.others {
+  background-color: $other-color;
+  color: $bgcolor;
+}
+
+.heading {
+  font-weight: var(--base-font-weight-regular);
+  font-size: var(--base-font-size-larger);
+}
+
+.heading-border {
+  padding-top: 1.5rem;
+  border-bottom: 0.05rem solid var(--base-border-default);
+}
+
+.align-card {
+  padding-top: 1rem;
+}
+
+.link-text {
+  color: var(--form-foreground-color);
+  font-size: var(--form-font-size);
+  font-weight: var(--form-font-weight);
+}
+
+.text-color {
+  color: var(--form-foreground-color);
+}
+
+.hover-color {
+  border: 0.1rem solid var(--link-hover);
+}

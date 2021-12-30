@@ -1,0 +1,131 @@
+<div class="oj-panel virtualAccountStructure">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-4">
+      <h3 data-bind="text:$component.resource.virtualAccountStructure">
+      </h3>
+    </div>
+    <!-- ko if:$component.structureDetailsLoaded() && $component.mode() === "tree" -->
+    <div class="oj-flex oj-sm-8 virtualAccountStructure__heading right icon-style">
+      <div class="oj-flex-item oj-sm-11 widgetSummary">
+        <span data-bind="text:$component.resource.displayText"></span>
+      </div>
+      <div class="oj-flex-item oj-sm-1">
+        <a href="#" class="icon icon-expand icon-size" data-bind="click:$component.openStructure,
+          attr : {id:'createAccounts',
+          'aria-label': $component.resource.clickToExpand,
+          title:$component.resource.clickToExpand}">
+        </a>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.virtualStructureDataLoaded && !$component.structureDetailsLoaded() -->
+    <span class="oj-flex-item oj-sm-12 widgetSummary" data-bind="text:$component.resource.selectText"></span>
+    <!-- /ko -->
+  </div>
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 virtualAccountStructure__wrapper">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : '' ">
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9">
+          <!-- ko if:$component.virtualStructureDataLoaded -->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-lg-5">
+              <oj-select-one id="virtualStructure" :aria-label="[[$component.resource.selectVirtualStructure]]"
+                value="{{$component.selectedVirtualStructure}}"
+                on-value-changed="{{$component.selectedVirtualStructureChangeHandler}}"
+                placeholder="[[$component.resource.selectVirtualStructure]]" required>
+                <!-- ko foreach: $component.virtualStructureData -->
+                <oj-option value=[[code]]><span data-bind="text:code"></span></oj-option>
+                <!-- /ko -->
+              </oj-select-one>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+      <!-- ko if:$component.structureDetailsLoaded() && $component.mode() === "tree" -->
+      <div class="oj-flex virtualAccountStructure__tree-container">
+        <tree-view params="
+               treeDetails :$component.structureDetails(),
+               nodeIdjsonPath:'childAccountId.value',
+               treePanning:'none',
+               treeZooming:'none',
+               baseModel : $baseModel,
+               nodeShortDescValue : 'childAccountId.value',
+               maxChildNodesToRender : 4,
+               overViewRenderer:'off',
+               height:100,
+               width:220,
+               overriteTreeCss: 'treeHeight',
+               wrapTree: 'false',
+               moreNodeSvgColor : {
+                defaultValue : 'structureFillSweep'
+            },
+               rootModel : $component" class="structure__tree-width">
+          <div class="oj-flex oj-flex-items-pad structure__node">
+            <!-- ko if:$data.nodeData.mainAccountId -->
+            <div class="oj-flex-item oj-lg-12 structure__structureFill"
+              data-bind="css : ($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep':'structure__structureFill__structureFillPool'">
+              <div class="oj-flex-item">
+                <div class="oj-flex-item structure__nodeData">
+                  <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                  <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.childAccountName"></div>
+                  <div class="oj-flex-item oj-lg-6"
+                    data-bind="text:$formatter.formatCurrency($data.nodeData.balance.amount,$data.nodeData.balance.currency)">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:!$data.nodeData.mainAccountId -->
+            <div class="oj-flex-item oj-lg-12 structure__structureFillParent"
+              data-bind="css :'structure__structureFillParent__structureFillPool'">
+              <div class="oj-flex-item">
+                <div class="oj-flex-item structure__nodeData">
+                  <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                  <div class="oj-flex-item oj-lg-12 node-text" data-bind="text:$data.nodeData.childAccountName"></div>
+                  <div class="oj-flex-item oj-lg-12"
+                    data-bind="text:$formatter.formatCurrency($data.nodeData.balance.amount,$data.nodeData.balance.currency)">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /ko -->
+          </div>
+        </tree-view>
+      </div>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.structureDetailsLoaded() && $component.mode() === "tree" -->
+      <div class="oj-flex oj-flex-items-pad noData">
+        <div class="oj-flex-item oj-sm-12 noData__image">
+          <img
+            data-bind="attr:{'alt': $component.resource.notifications,'title':$component.resource.noData},loadImage:'virtual-account-management/account-balance.svg'">
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+        </div>
+      </div>
+      <!-- /ko -->
+    </page-section>
+  </div>
+  <!-- ko if:$component.virtualStructureDataLoaded && !$component.structureDetailsLoaded() -->
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- ko foreach:$component.authorizedLinks -->
+    <div class="oj-flex-item virtualAccountStructure__links-with-nostructure center" data-bind="css: $data.cssClass">
+      <a href="#" attr="{'id': $data.id}" data-bind="click: $component.onClickLink.bind($data, name)">
+        <span data-bind="text: $data.label"></span>
+      </a>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko if:$component.virtualStructureDataLoaded && $component.structureDetailsLoaded() -->
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- ko foreach:$component.authorizedLinks -->
+    <div class="oj-flex-item virtualAccountStructure__links center" data-bind="css: $data.cssClass">
+        <a href="#" attr="{'id': $data.id}" data-bind="click: $component.onClickLink.bind($data, name)">
+          <span data-bind="text: $data.label"></span>
+        </a>
+      </div>
+      <!-- /ko -->
+  </div>
+  <!-- /ko -->
+</div>

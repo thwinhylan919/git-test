@@ -1,0 +1,93 @@
+$disabled-color: #808080b0;
+.party-details {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    padding: var(--banner-padding);
+    align-items: center;
+}
+
+.party-name-style {
+    color: var(--banner-foreground-color);
+    font-size: var(--base-font-size-large);
+    font-weight: var(--banner-font-weight);
+}
+
+.banner-label {
+    color: var(--banner-text-secondary);
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-light);
+}
+
+.banner-value {
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--banner-font-weight);
+}
+
+.banner-padding {
+    @include mq(medium) {
+        padding-top: 0.5rem;
+    }
+}
+
+.icon-border {
+    @include single-border(right, 0.1rem solid var(--banner-gradient-start-color));
+}
+
+.medium-font {
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-bold);
+}
+
+.text-style {
+    padding-top: 1rem;
+}
+
+.add-row-style {
+    padding-top: 0.5rem;
+    padding-bottom: 0.2rem;
+    border-top: 0.08rem solid var(--banner-gradient-start-color);
+    border-bottom: 0.08rem solid var(--base-background-tertiary);
+}
+
+.commodity-style {
+    padding-top: 2rem;
+    font-weight: var(--base-font-weight-bold);
+    @include single-border(bottom, 0.08rem solid var(--banner-gradient-start-color));
+}
+
+.currency-style {
+    @include single-border(bottom, 0.08rem solid var(--banner-gradient-start-color));
+}
+
+.currency-label {
+    padding-top: 2rem;
+}
+
+.icon-size {
+    font-size: var(--button-font-size-icon);
+}
+
+.icon-disabled {
+    color: $disabled-color;
+}
+
+.calculation-padding {
+    padding-top: 2.8rem;
+}
+
+.label-padding {
+    @include padding(0, 0, 0, 0.7rem);
+}
+
+.discount-padding {
+    padding-bottom: 1.5rem;
+}
+
+.total-label {
+    @include padding(0.7rem, 0, 0.7rem, 0.7rem);
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.total-value {
+    @include padding(0.7rem, 0.7rem, 0.7rem, 0);
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}

@@ -1,0 +1,7 @@
+@import "utils";
+
+.account-aggregation-payment {
+  .suggested-network {
+    @include single-margin(left, 0.4rem);
+  }
+}

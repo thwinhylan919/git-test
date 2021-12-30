@@ -1,0 +1,67 @@
+<!-- ko if:$component.stageOne() -->
+    <!-- Account nick name -->
+    <oj-validation-group id="dd-payee-tracker">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label for="nickName"><span data-bind="text:$component.payments.payee.international.draftfavouring"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 ">
+            <oj-input-text id="nickName" value="{{international.nickName}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'demandDraftPayeeDTO.nickName', [['#nickName']] )]]]"></oj-input-text>
+        </div>
+    </div>
+    <!-- draft payable at -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label :for="[['country'+$baseModel.incrementIdCount()]]"> <span data-bind="text:$component.payments.payee.international.draftpayableatcountry"></span></oj-label>
+        </div>      
+                <div class="oj-flex-item oj-sm-12">
+                    <!-- ko if:isCountriesLoaded() -->
+                    <oj-select-one required :id="[['country'+$baseModel.currentIdCount()]]" on-value-changed="[[$component.getSelectedCountry]]" value="{{international.payAtCountry}}" :placeholder="[[$component.payments.common.select]]">
+                        <!-- ko foreach:countries -->
+                        <oj-option value="{{value}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'demandDraftPayeeDTO.payAtCountry', [['#country'+$baseModel.currentIdCount()]] )]]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+
+                    <!-- /ko -->
+                </div>
+
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                <!-- ko if:ko.utils.unwrapObservable($component.international.payAtCountry) -->
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label for="draftcity"> <span data-bind="text:$component.payments.payee.international.draftcity"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12">
+
+                    <oj-input-text id="draftcity" value="{{international.payAtCity}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'demandDraftPayeeDTO.payAtCity', [['#draftcity']] )]]]"></oj-input-text>
+                    
+                </div>
+                <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="required oj-flex-item oj-sm-12 label">
+            <oj-label for="DeliveryLocation"><span data-bind="text:$component.payments.common.DeliveryLocation"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 ">
+            <div id="DeliveryLocation" data-bind="component: {name: 'demand-draft-address',
+                    params:{rootModel: $parent,
+                      data:$data,validator:$component.validationTracker,
+                      typeOfDraft:'international',
+                      address:$component.addressDetails}}">
+            </div>
+        </div>
+    </div>
+
+</oj-validation-group>
+<!-- /ko -->
+
+
+
+<!-- ko if:$component.stageTwo() -->
+
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.payments.payee.review">
+    <div data-bind="template: { name: 'payee/review-international-demand-draft' }"></div>
+</page-section>
+
+<!-- /ko -->

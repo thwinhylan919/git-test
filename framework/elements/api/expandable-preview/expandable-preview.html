@@ -1,0 +1,29 @@
+<div :id="[[$component.panelId]]" class="panel" data-bind="childrenComplete: $component.componentReady">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item expandable-preview-header">
+            <h3 data-bind="text: $component.header"></h3>
+        </div>
+        <!-- ko if: $component.editActionAvailable -->
+        <div class="oj-flex-item">
+            <a href="#"
+                data-bind="attr:{'alt': $component.locale.buttons.edit.alt, 'title': $component.locale.buttons.edit.title }, click: $component.editAction"
+                class="icon icon-remarks pull-right edit-button"></a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad content">
+        <div class="oj-flex-item">
+            <!-- ko template: { nodes: $componentTemplateNodes }-->
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if: $component.childPanelExists -->
+    <div class="oj-flex expand-button button-center">
+        <oj-button class="help-button" on-oj-action='[[$component.buttonClick.bind(null, $component.panelId)]]'>
+            <!-- <span slot="endIcon" :class="[['icons ' + ($component.isExpanded() ? 'icon-upward-arrow' : 'icon-downward-arrow')]]"></span> -->
+            <span
+                data-bind="text: $component.locale.buttons[$component.isExpanded() ? 'showLess' : 'showMore' ]"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>

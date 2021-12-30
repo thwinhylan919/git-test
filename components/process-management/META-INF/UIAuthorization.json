@@ -1,0 +1,36 @@
+{
+    "modules": [{
+            "moduleName": "listBusinessProducts^com.ofss.digx.app.generic.rest.service.GenericRestService",
+            "components": [{
+                "componentName": "loan-film-strip",
+                "service": "read",
+                "perform": "loan-film-strip"
+            }]
+        },
+        {
+            "moduleName": "listDataSegments^com.ofss.digx.app.generic.rest.service.GenericRestService",
+            "components": [{
+                "componentName": "loan-film-strip",
+                "service": "read",
+                "perform": "loan-film-strip#corporate-details#business-details#loan-requirements#document-upload#equipment-details#real-estate-details"
+            }]
+        },
+        {
+            "moduleName": "initiateLoanApplication^com.ofss.digx.app.generic.rest.service.GenericRestService",
+            "components": [{
+                "componentName": "loan-film-strip",
+                "service": "create",
+                "perform": "loan-film-strip#corporate-details#business-details#loan-requirements#document-upload#equipment-details#real-estate-details#loan-origination-confirm",
+                "approve": "process-management-approval"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.processmanagement.service.ProcessManagement",
+            "components": [{
+                "componentName": "application-tracker-film-strip",
+                "service": "read",
+                "perform": "application-tracker-film-strip#loan-application-listing#facility-application-listing#loan-application-listing-details#loan-application-listing-document-details#loan-application-listing-details-review#details-screen#documents-application-tracker"
+            }]
+        }
+    ]
+}

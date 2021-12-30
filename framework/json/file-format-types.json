@@ -1,0 +1,29 @@
+{
+	"status": {
+		"result": "SUCCESSFUL",
+		"contextID": "00j5giucLpnFKAc6pj2jMI0005sW00003v,0:1",
+		"message": {
+			"type": "INFO"
+		}
+	},
+	"enumRepresentations": [{
+		"type": "FormatType",
+		"data": [{
+			"code": "CSV",
+			"description": "CSV",
+			"ordinal": 0
+		}, {
+			"code": "TXT",
+			"description": "TXT",
+			"ordinal": 1
+		}, {
+			"code": "XLS",
+			"description": "XLS",
+			"ordinal": 2
+		}, {
+			"code": "XLSX",
+			"description": "XLSX",
+			"ordinal": 3
+		}]
+	}]
+}

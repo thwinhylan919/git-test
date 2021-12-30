@@ -1,0 +1,35 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <!-- ko if: listLoaded() -->
+    <div class="oj-flex-item oj-lg-9">
+        <div class="form-main-container">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading :resource.networkRule.networkRuleDefinition">
+                <div class="oj-flex oj-flex-items-pad oj-lg-12" data-bind="text : resource.networkRule.actionDescription"></div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <oj-checkboxset :id="propertyList" value="{{selectedProperties}}">
+                        <!-- ko foreach : $component.allPropertyList() -->
+                        <oj-option :id="[['purpose_'+ $index()]]" value="{{propertyId}}" name="purposeListCheckbox">
+                            <span data-bind="text:$component.resource.networkRule.propertyList[propertyId]"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-checkboxset>
+                </div>
+            </page-section>
+            <div class="button-container">
+                <oj-button id="createButton" class="action-button-primary " on-click="[[save]]"><span slot="startIcon" class="icons icon-save"></span>
+                    <span data-bind="text:resource.networkRule.generic.common.save"></span>
+                </oj-button>
+                <!-- ko if: $baseModel.large() -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:resource.networkRule.generic.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:resource.networkRule.generic.common.back"></span>
+                </oj-button>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /ko -->
+</div>

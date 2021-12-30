@@ -1,0 +1,24 @@
+{
+  "modules": [{
+          "moduleName": "com.ofss.digx.app.tradefinance.service.beneficiary.Beneficiary",
+          "components": [{
+                  "componentName": "create-beneficiary-maintenance",
+                  "service": "create",
+                  "perform": "search-beneficiary-maintenance#create-beneficiary-maintenance#review-beneficiary-maintenance",
+                  "approve":"review-beneficiary-maintenance"
+              },
+              {
+                "componentName": "search-beneficiary-maintenance",
+                "service": "list",
+                "perform": "search-beneficiary-maintenance"
+              },
+              {
+                "componentName": "create-beneficiary-maintenance",
+                "service": "update",
+                "perform": "search-beneficiary-maintenance#review-beneficiary-maintenance#create-beneficiary-maintenance#review-beneficiary-maintenance",
+                "approve":"review-beneficiary-maintenance"
+              }
+          ]
+      }
+  ]
+}

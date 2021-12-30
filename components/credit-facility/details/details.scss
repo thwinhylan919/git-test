@@ -1,0 +1,178 @@
+.scheduleHeading{
+    @include padding( 0, 0,0.5rem ,0);
+    text-align: center;
+    font-size: var(--help-panel-header-font-weight)
+}
+.dateClass{
+   @include padding(0, 0, 0, 1rem);
+ }
+.group2{
+    border-radius: 1rem;
+     background:var(--banner-background);
+     color:var(--base-text-secondary);
+     @include padding(0.5rem, 2rem, 0.5rem, 2rem);
+     @include single-margin(left, 25%);
+  }
+  .group1{
+    border-radius: 1rem;
+     background:var(--base-color-success);
+     color:var(--base-background-primary);
+     @include padding(0.5rem, 2rem, 0.5rem, 2rem);
+     @include single-margin(left, 25%);
+
+  }
+.wrapper {
+    font-family: var(--base-font-family);
+    font-size: var(--base-font-size-default);
+    border: .06rem solid var(--base-border-default);
+    padding: var(--form-padding);
+    overflow-y: auto;
+    height: 350px;
+}
+
+.StepProgress {
+    position: relative;
+    @include single-padding(left, 2.3rem);
+    list-style: none;
+
+    &::before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        top: 0;
+        @include left(0.8rem);
+        width: 0.6rem;
+        height: 100%;
+        @include single-border(left, 0.12rem solid var(--base-border-default));
+    }
+
+    &-item {
+        position: relative;
+
+        &:not(:last-child) {
+            padding-bottom: 3rem;
+        }
+
+        &::before {
+            display: inline-block;
+            content: '';
+            position: absolute;
+            @include left(-1.9rem);
+            height: 100%;
+            width: 0.6rem;
+        }
+
+        &::after {
+            content: url("/images/dashboard/confirmation.svg");
+            display: inline-block;
+            position: absolute;
+            top: -0.3rem;
+            @include left(-2.3rem);
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 0.12rem solid var(--base-border-default);
+            border-radius: 50%;
+            background-color: var(--color-white);
+        }
+
+        &.is-done {
+            &::before {
+                @include single-border(left, 0.12rem solid var(--base-color-success));
+            }
+            &::after {
+                content: "\2713";
+                font-size: 0.6rem;
+                color: var(--color-white);
+                text-align: center;
+                border: 0.12rem solid var(--base-color-success);
+                background-color: var(--base-color-success);
+            }
+        }
+
+        &.current {
+            &::before {
+                @include single-border(left, 0.12rem solid var(--base-color-success));
+            }
+
+            &::after {
+                padding-top: 0.07rem;
+                width: 1.18rem;
+                height: 1.12rem;
+                top: -0.25rem;
+                @include left(-2.5rem);
+                font-size: var(--base-font-size-medium);
+                text-align: center;
+                color: var(--base-color-success);
+                border: 0.12rem solid var(--base-color-success);
+                background-color: var(--color-white);
+            }
+        }
+    }
+
+    &-itemOne {
+        position: relative;
+
+        &:not(:last-child) {
+            padding-bottom: 3rem;
+        }
+
+        &::before {
+            display: inline-block;
+            content: '';
+            position: absolute;
+            @include left(-1.9rem);
+            height: 100%;
+            width: 0.6rem;
+        }
+
+        &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: -0.3rem;
+            @include left(-2.3rem);
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 0.12rem solid var(--base-border-default);
+            border-radius: 50%;
+            background-color: var(--color-white);
+        }
+
+        &.is-done {
+            &::before {
+                @include single-border(left, 0.12rem solid var(--base-color-success));
+            }
+            &::after {
+                content: "\2713";
+                font-size: 0.6rem;
+                color: var(--color-white);
+                text-align: center;
+                border: 0.12rem solid var(--base-color-success);
+                background-color: var(--base-color-success);
+            }
+        }
+
+        &.current {
+            &::before {
+                @include single-border(left, 0.12rem solid var(--base-color-success));
+            }
+
+            &::after {
+                padding-top: 0.07rem;
+                width: 1.18rem;
+                height: 1.12rem;
+                top: -0.25rem;
+                @include left(-2.5rem);
+                font-size: var(--base-font-size-medium);
+                text-align: center;
+                color: var(--base-color-success);
+                border: 0.12rem solid var(--base-color-success);
+                background-color: var(--color-white);
+            }
+        }
+    }
+
+    strong {
+        display: block;
+    }
+}

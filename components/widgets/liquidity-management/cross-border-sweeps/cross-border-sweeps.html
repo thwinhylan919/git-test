@@ -1,0 +1,62 @@
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-8">
+            <h3 data-bind="text:$component.resource.header.crossBorderCurrencyHeader">
+            </h3>
+        </div>
+        <div class="oj-flex-item oj-lg-4">
+            <!-- ko if:iscurrencyLoaded() -->
+            <oj-select-one id="currency" :aria-label="[[$component.resource.labels.currencyList]]" class="oj-flex-item oj-sm-12" value="{{$component.selectedEquivalentCurrency}}" on-value-changed="[[currencyChangedHandler]]">
+                <!-- ko foreach:currencyList -->
+                <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if:$component.crossBorderCurrencyDetailsArray.length -->
+    <div data-bind="css:$component.crossBorderCurrencyDetailsDataSource ?'oj-flex oj-flex-items-pad crossBorderCurrency__table':'oj-flex oj-flex-items-pad'">
+        <div class="oj-flex-item crossBorderCurrency">
+        <oj-table id="crossCurrency" :aria-label="[[$component.resource.labels.crossBorderSweepTable]]"
+        columns='[[[{
+                "headerText":$component.resource.labels.structure,
+                "field":"structure"
+            },{
+                "headerText":$component.resource.labels.sweepOut,
+                "template":"sweepOutAmount",
+                "headerClassName":"right",
+                "className" :"right"
+            },{
+                "headerText":$component.resource.labels.sweepIn,
+                "template":"sweepInAmount",
+                "headerClassName":"right",
+                "className" :"right"
+            },{
+                "headerText":$component.resource.labels.exchangeRate,
+                "field":"exchangeRate",
+                "headerClassName":"right",
+                "className" :"right"
+            }]]]' columns-default="[[{sortable:'disabled'}]]" selection-mode="[[{row:'none',column:'none'}]]"
+            data="[[crossBorderCurrencyDetailsDataSource]]" on-value-changed="[[]]">
+            <caption class="hide-label" data-bind="text:$component.resource.labels.crossBorderSweepTable">
+            </caption>
+            <template slot="sweepOutAmount">
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$formatter.formatCurrency($current.row.sweepOutAmount, $current.row.sweepOutCurrency)"></div>
+            </template>
+            <template slot="sweepInAmount">
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$formatter.formatCurrency($current.row.sweepInAmount, $current.row.sweepInCurrency)"></div>
+            </template>
+        </oj-table>
+        </div>
+    </div>
+    <!-- /ko -->
+<!-- ko ifnot:$component.crossBorderCurrencyDetailsArray.length -->
+<div class="oj-flex oj-flex-items-pad notification__noData">
+    <div class="oj-flex-item oj-sm-12 notification__noData__image">
+        <img data-bind="attr:{'alt': $component.resource.labels.details,'title':$component.resource.labels.noData},loadImage:'dashboard/cross-currency-sweeps.svg'">
+    </div>
+    <div class="oj-flex-item oj-sm-12 notification__text" data-bind="text:$component.resource.labels.noData"></div>
+    <div class="oj-flex-item oj-sm-12 notification__subText info-text-small" data-bind="text:$component.resource.labels.subData"></div>
+</div>
+<!-- /ko -->
+</div>

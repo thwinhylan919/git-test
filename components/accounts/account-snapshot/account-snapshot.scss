@@ -1,0 +1,69 @@
+@import "utils";
+$casa: #63AEEE;
+$casa-bg: rgba($casa, .3);
+$credit-cards: #F7BE52;
+$credit-cards-bg: rgba($credit-cards, .25);
+$loans: #86C175;
+$loans-bg: rgba($loans, .3);
+$td: #FF8181;
+$td-bg: rgba($td, .35);
+$goals: #3caf85;
+$goals-bg: rgba($goals, .1);
+$budget: #ca589d;
+$budget-bg: rgba($budget, .2);
+$spends: #13b6cf;
+.account-snapshot{
+  padding-bottom: 3.8rem;
+  .button-container{
+      justify-content: center;
+      margin-top:1.9rem;
+  }
+}
+
+.account-snapshot-accordian {
+  &-container {
+    position: relative;
+
+    background: var(--base-background-primary);
+    @include mq(medium) {
+      top: 0;
+      border: 0.05rem solid var(--base-border-default);
+      margin-bottom: 1.1rem;
+    }
+
+    &-sub-heading {
+      font-size: var(--base-font-size-large);
+    }
+    .account {
+      &-name {
+        font-size: var(--base-font-size-default);
+        font-weight: var(--base-font-weight-bold);
+      }
+
+      &-no {
+        font-size: var(--base-font-size-default);
+        font-weight: var(--base-font-weight-regular);
+      }
+    }
+
+    .CSA:before {
+      height: 5rem;
+      position: absolute;
+      z-index: 1;
+      content: "";
+      @include single-border(left, 0.4rem solid $casa);
+    }
+  }
+
+  &-list {
+    ul li {
+      padding: 0.6rem 0 0;
+
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+  }
+}

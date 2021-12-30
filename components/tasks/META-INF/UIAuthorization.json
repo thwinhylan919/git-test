@@ -1,0 +1,18 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.common.purpose.service.linkage.PurposeTaskLinkage",
+    "components": [{
+      "componentName": "task-purpose-landing",
+      "service": "read",
+      "perform": "task-purpose-add#task-purpose-inquire"
+    },{
+    	"componentName": "task-purpose-landing",
+	    "service": "create",
+	    "perform": "task-purpose-add#task-purpose-inquire"
+    },{
+    	"componentName": "task-purpose-landing",
+	    "service": "update",
+	    "perform": "task-purpose-add#task-purpose-inquire"
+    }]
+  }]
+}

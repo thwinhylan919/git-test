@@ -1,0 +1,6 @@
+.reports {
+    .right-padding{
+        @include single-padding(right, 0.8rem);
+  }
+}
+  

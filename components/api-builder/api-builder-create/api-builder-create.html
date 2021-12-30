@@ -1,0 +1,441 @@
+<oj-validation-group id="tracker">
+  <div class="oj-flex form-main-container">
+    <div class="oj-flex-item oj-sm-9">
+      <div data-bind='component:{name: "nav-bar",
+    params:{rootModel: $data,menuOptions: listItem, uiOptions:uiOptions,navBarDescription:$component.resource.navBarDescription}}'>
+      </div>
+      <div class="serviceDetails">
+        <!-- ko if: $component.selectedItem() === "Service Details" -->
+        <!-- ko if: $component.apiGroupsLoaded() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label :for="[['groupName'+$baseModel.currentIdCount()]]">
+              <span data-bind="text:$component.resource.groupName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-select-one :id="[['groupName'+$baseModel.currentIdCount()]]" :aria-label="[[resource.groupName]]" value="{{selectedGroup}}"
+              placeholder="{{resource.select}}" required>
+              <!-- ko foreach: $component.groupName() -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: value"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="serviceURL">
+              <span data-bind="text:$component.resource.serviceURL"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="serviceURL" value="{{$component.serviceURL}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidURL,{type: 'length',options: {min: 1, max: 100}})]]"
+              aria-labelledby="serviceURL" required></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="serviceID">
+              <span data-bind="text:$component.resource.serviceID"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="serviceID" value="{{$component.serviceID}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.invalidServiceID,{type: 'length',options: {min: 1, max: 40}})]]"
+              aria-labelledby="serviceID"></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="serviceName">
+              <span data-bind="text:$component.resource.serviceName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="serviceName" value="{{$component.serviceName}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.resource.invalidServiceName,{type: 'length',options: {min: 1, max: 100}})]]"
+              aria-labelledby="serviceName" required></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <oj-label for="headerKey" class="oj-flex-item oj-lg-3 oj-md-2 oj-sm-12 label">
+            <span data-bind="text:$component.resource.header"></span>
+          </oj-label>
+          <div class="oj-flex-item oj-lg-6 oj-md-4 oj-sm-12">
+            <ul class="no-pad-cols no-margin headerList" data-bind="attr:{'aria-label':$component.resource.header}" id="headerValues">
+              <!-- ko foreach: $component.header -->
+              <li data-bind="attr: {id: 'apiBuilder' + $baseModel.currentIdCount()}">
+                <div class="oj-flex oj-flex-items-pad">
+                  <div class="oj-flex-item oj-lg-4">
+                    <oj-input-text id="headerKey" value="{{$data.key}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidHeaderKey,{type: 'length',options: {min: 1, max: 40}})]]"
+                      aria-labelledby="headerKey" placeholder="{{$component.resource.key}}" required></oj-input-text>
+                  </div>
+                  <div class="oj-flex-item oj-lg-4">
+                    <oj-label for="headerValue" class="oj-flex-item oj-lg-3 oj-md-2 oj-sm-12 label hide-label">
+                      <span data-bind="text:$component.resource.header"></span>
+                    </oj-label>
+                    <oj-input-text id="headerValue" value="{{$data.value}}" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.invalidHeaderValue,{type: 'length',options: {min: 1, max: 40}})]]"
+                      aria-labelledby="headerValue" placeholder="{{$component.resource.val}}" required></oj-input-text>
+                  </div>
+                  <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                    <a href="#" class="icon icon-delete pull-right" data-bind="click: $component.delete.bind($index())">
+                      <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label" data-bind="text:$component.resource.deleteHeader"></span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <!-- /ko -->
+            </ul>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-lg-4 right">
+            <a href="#" data-bind="text:$component.resource.addMore,click:$component.addMoreHeaders"></a>
+          </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="methodType">
+              <span data-bind="text:$component.resource.methodType"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-select-one id="methodType" :aria-label="[[resource.methodType]]" value="{{selectedMethod}}" placeholder="{{resource.select}}"
+              required>
+              <!-- ko foreach: $component.methodType() -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="transactionType">
+              <span data-bind="text:$component.resource.transactionType"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <!-- ko if: $component.isTransactionFetched() -->
+            <oj-select-one id="transactionType" :aria-label="[[resource.transactionType]]" value="{{selectedTransaction}}"
+              placeholder="{{resource.select}}" required>
+              <!-- ko foreach: $component.transactionType -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="taskCode">
+              <span data-bind="text:$component.resource.taskCode"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="taskCode" value="{{$component.taskCode}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidTaskCode,{type: 'length',options: {min: 1, max: 40}})]]"
+              aria-labelledby="taskCode" required></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="redactionType">
+              <span data-bind="text:$component.resource.redactionType"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <!-- ko if: $component.isRedactionTypeFetched() -->
+            <oj-select-one id="redactionType" :aria-label="[[resource.redactionType]]" value="{{selectedRedaction}}"
+              on-value-changed="[[$component.isRedactionGroovy]]" required>
+              <!-- ko foreach: $component.redactionType() -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+          </div>
+        </div>
+        <!-- ko if: $component.uploadGroovyFile() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label id="filenamelabel"> <span data-bind="text:$component.resource.filename"></span></oj-label>
+          </div>
+          <div id="filename" class="oj-flex-item oj-lg-4 label" data-bind="component:{name:'file-input',params:{rootModel: $component , id:'inputRedaction'}}">
+          </div>
+          <div class="oj-flex-item oj-lg-4 label">
+            <oj-button class="help-button" on-click="[[$component.upload]]">
+              <span data-bind="text:$component.resource.upload"></span>
+            </oj-button>
+          </div>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="dynamicBussPolicy">
+              <span data-bind="text:$component.resource.dynamicBussPolicy"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-select-one id="dynamicBussPolicy" :aria-label="[[resource.dynamicBussPolicy]]" value="{{dynamicBussPolicy}}"
+              on-value-changed="[[$component.isdynamicBussPolicy]]" placeholder="{{resource.select}}" required>
+              <!-- ko foreach: $component.bussPolicy() -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+          </div>
+        </div>
+        <!-- ko if: $component.uploadGroovyClass() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label ">
+            <oj-label id="filenamelabelb"> <span data-bind="text:$component.resource.filename"></span></oj-label>
+          </div>
+          <div id="filenameb" class="oj-flex-item oj-lg-4 label" data-bind="component:{name:'file-input',params:{rootModel: $component , id:'inputBussPolicy'}}">
+          </div>
+          <div class="oj-flex-item oj-lg-4 label">
+            <oj-button class="help-button" on-click="[[$component.upload]]">
+              <span data-bind="text:$component.resource.upload"></span>
+            </oj-button>
+          </div>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="taskAspect">
+              <span data-bind="text:$component.resource.taskAspect"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <!-- ko if: $component.isTaskAspectFetched() -->
+            <oj-select-many :aria-label="[[resource.taskAspect]]" id="taskAspect" value="{{selectedTaskAspect}}"
+              placeholder="{{resource.select}}" required>
+              <!-- ko foreach: $component.taskAspect  -->
+              <oj-option value="{{value}}">
+                <span data-bind="text:text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-many>
+            <!-- /ko -->
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $component.selectedItem() === "Entitlement Details" -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="moduleName">
+              <span data-bind="text:$component.resource.moduleName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <!-- ko if: $component.isModuleFetched() -->
+            <oj-select-one id="moduleName" :aria-label="[[resource.moduleName]]" value="{{selectedModule}}" placeholder="{{resource.select}}"
+              on-value-changed="[[moduleChangeHandler]]" required>
+              <!-- ko foreach: $component.moduleName -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+          </div>
+        </div>
+        <!-- ko if: $component.isCategoryFetched() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="categoryName">
+              <span data-bind="text:$component.resource.categoryName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-select-one id="categoryName" :aria-label="[[resource.categoryName]]" value="{{selectedCategory}}"
+              placeholder="{{resource.select}}" required>
+              <!-- ko foreach: $component.categoryName -->
+              <oj-option value="[[value]]">
+                <span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.isActionFetched() -->
+        <div class="oj-flex oj-flex-items-pad ">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="actionType">
+              <span data-bind="text:$component.resource.actionType"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-select-many id="actionType" value="{{selectedActionTypes}}" placeholder="{{resource.select}}" required>
+              <!-- ko foreach: $component.actionType()  -->
+              <oj-option value="{{value}}">
+                <span data-bind="text:text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-many>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $component.selectedItem() === "JSON Path" -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-8">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.attrValidation">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3 label">
+                  <oj-label for="partyId">
+                    <span data-bind="text:$component.resource.partyId"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                  <oj-input-text id="partyId" value="{{$component.partyId}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidPartyIdPath,{type: 'length',options: {min: 1, max: 40}})]]"
+                    aria-labelledby="partyId"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3 label">
+                  <oj-label for="accNo">
+                    <span data-bind="text:$component.resource.accNo"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                  <oj-input-text id="accNo" value="{{$component.accNo}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidAccNum,{type: 'length',options: {min: 1, max: 40}})]]"
+                    aria-labelledby="accNo"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3 label">
+                  <oj-label for="currency">
+                    <span data-bind="text:$component.resource.currency"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                  <oj-input-text id="currency" value="{{$component.currency}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidCurrency,{type: 'length',options: {min: 1, max: 40}})]]"
+                    aria-labelledby="currency"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3 label">
+                  <oj-label for="amount">
+                    <span data-bind="text:$component.resource.amount"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                  <oj-input-text id="amount" value="{{$component.amount}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidAmmount,{type: 'length',options: {min: 1, max: 40}})]]"
+                    aria-labelledby="amount"></oj-input-text>
+                </div>
+              </div>
+            </page-section>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.jsonResult">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-8">
+                  <oj-input-text id="resultPartyId" value="{{$component.resultPartyId}}" aria-labelledby="resultPartyId"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-8">
+                  <oj-input-text id="resultAccNo" value="{{$component.resultAccNo}}" aria-labelledby="resultAccNo"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-8">
+                  <oj-input-text id="resultCurrency" value="{{$component.resultCurrency}}" aria-labelledby="resultCurrency"></oj-input-text>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-8">
+                  <oj-input-text id="resultAmount" value="{{$component.resultAmount}}" aria-labelledby="resultAmount"></oj-input-text>
+                </div>
+              </div>
+            </page-section>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-12">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.errorCode">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-2 label">
+                  <oj-label for="errorCode">
+                    <span data-bind="text:$component.resource.errCode"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                  <oj-input-text id="errorCode" class="errorCode" value="{{$component.errorCode}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.resource.invalidErrorCode,{type: 'length',options: {min: 1, max: 40}})]]"
+                    aria-labelledby="errorCode"></oj-input-text>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                  <oj-input-text id="errorDesc" class="errorDesc" value="{{$component.errorDesc}}" aria-labelledby="errorCode"></oj-input-text>
+                </div>
+              </div>
+            </page-section>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.selectedItem() === "Alerts" -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="alertsRequired">
+              <span data-bind="text:$component.resource.alertsRequired"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-radioset id="alertsRequired" :aria-label="[[resource.alertsRequired]]" class="oj-choice-direction-row"
+              labelled-by="alertsRequired" value="{{alertsRequired}}" on-value-changed="[[areAlertsRequired]]" required>
+              <!-- ko foreach: alertsRequiredArray -->
+              <oj-option value="{{code}}">
+                <span data-bind="text:  description"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-radioset>
+          </div>
+        </div>
+        <!-- /ko -->
+        <div class="oj-row button-container">
+          <!-- ko ifnot: $component.selectedItem() === "Alerts" -->
+          <oj-button class="action-button-primary" on-click="[[$component.next]]">
+            <span data-bind="text:$component.resource.next"></span>
+          </oj-button>
+          <!-- /ko -->
+          <!-- ko if: $component.selectedItem() === "Alerts" -->
+          <oj-button class="action-button-primary" on-click="[[$component.save]]">
+            <span data-bind="text:$component.resource.save"></span>
+          </oj-button>
+          <!-- /ko -->
+          <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]">
+            <span data-bind="text:$component.resource.cancel"></span>
+          </oj-button>
+          <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]">
+            <span data-bind="text:$component.resource.back"></span>
+          </oj-button>
+        </div>
+      </div>
+    </div>
+    <!-- ko if: $component.selectedItem() === "JSON Path" -->
+    <div class="oj-flex-item oj-sm-3 jsonEvaluator">
+      <div class="oj-flex darkColor">
+        <div class="oj-lg-6 label evaluateText" data-bind="text:$component.resource.jsonEvaluate"></div>
+        <div class="oj-lg-3 label right">
+          <oj-button class="help-button" on-click="[[$component.evaluate]]">
+            <span data-bind="text:$component.resource.evaluate"></span>
+          </oj-button>
+        </div>
+        <div class="oj-lg-3 label center">
+          <a href="#" data-bind="text:$component.resource.clear,click:$component.clearArea"></a>
+        </div>
+      </div>
+      <div class="oj-flex evaluateSpacing darkColor">
+        <oj-text-area id="inputJson" maxlength="500" rows="10" value="{{inputJson}}"></oj-text-area>
+      </div>
+    </div>
+    <!-- /ko -->
+  </div>
+</oj-validation-group>

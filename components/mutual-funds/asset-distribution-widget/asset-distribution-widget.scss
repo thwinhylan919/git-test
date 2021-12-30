@@ -1,0 +1,25 @@
+.donut-size {
+    height: 13rem;
+}
+
+.legendSection {
+    @include margin(2rem, 0, 0, 0);
+}
+
+.legend-mobile {
+    height: 7rem;
+}
+
+.legend-height {
+    height: 15rem;
+}
+
+.panel-height {
+    height: 20rem;
+}
+
+.heading {
+    margin: 0.6rem 0;
+    font-weight: var(--base-font-weight-regular);
+    font-size: var(--base-font-size-larger);
+}

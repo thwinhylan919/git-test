@@ -1,0 +1,47 @@
+.accounts-overview-container {
+  &__heading {
+    margin: 0.6rem 0;
+    font-weight: var(--base-font-weight-regular);
+    font-size: var(--base-font-size-larger);
+  }
+
+  .panel-height {
+    height: 20rem;
+  }
+
+  .big-text {
+    font-size: var(--base-font-size-larger);
+  }
+
+  .medium-text {
+    font-size: var(--base-font-size-default);
+  }
+
+  .small-text {
+    font-size: var(--base-font-size-small);
+  }
+
+  .corner-border {
+    @include single-border(right, 0.05rem solid var(--banner-background));
+  }
+
+  .top-border {
+    @include single-border(top, 0.05rem solid var(--banner-background));
+  }
+
+  .legend-height {
+    height: 1.4rem;
+    width: 5.8rem;
+  }
+
+  .margin-box {
+    margin-top: 0.5rem;
+  }
+
+  .label-style {
+    display: block;
+    color: var(--base-text-secondary);
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-light);
+  }
+}

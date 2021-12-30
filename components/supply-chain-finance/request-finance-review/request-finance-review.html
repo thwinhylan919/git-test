@@ -1,0 +1,77 @@
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <div>
+                        <div
+                            data-bind="template:{name: 'review-screen/review-banner-template', data:{header:$component.nls.reviewCaption, reviewHeader:$component.nls.reviewHeader}}">
+                        </div>
+                    </div>
+
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ReviewPage.financeFor , value : $component.nls.financeFor">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ReviewPage.programLabel , value : $component.data.invoices()[0].program.programName">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ReviewPage.counterPartyLabel , value : $component.data.invoices()[0].associatedParty.name">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ReviewPage.currencyLabel , value : $component.data.totalAmount.currency()">
+                    </row>
+                </page-section>
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.selectedInvoices, headerTemplate : ''">
+
+                    <oj-table :id="[['InvoiceList44']]" data="[[dataSource58]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('listViewRender')]]"
+                        columns="[[columnsArray]]"></oj-table>
+                    <oj-paging-control :id="[['invoice-paging']]" data="[[dataSource58]]" page-size="10">
+                    </oj-paging-control>
+                    <div id="scriptContainertable">
+                        <script type="text/html" id="listViewRender">
+                            <td><span data-bind="text:$context.data.invoiceNumber"></span>
+                                <div data-bind="text:$baseModel.format($component.nls.ReviewPage.invoiceDueDate,{dueDate: $formatter.formatDate($context.data.invoiceDueDate)})"
+                                    class="small-font"></div>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.totalAmount.amount(),$context.data.totalAmount.currency())"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.acceptanceAmount.amount(),$context.data.acceptanceAmount.currency())"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.acceptanceAmount.amount()*$context.data.maxFinancePercentage()/100,$context.data.acceptanceAmount.currency())"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.outstandingAmount.amount(),$context.data.outstandingAmount.currency())"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency(Math.min($context.data.outstandingAmount.amount(), $context.data.acceptanceAmount.amount()*$context.data.maxFinancePercentage()/100),$context.data.acceptanceAmount.currency())"></span>
+                            </td>
+                        </script>
+                    </div>
+
+                </page-section>
+
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ReviewPage.amountRequested , value : $formatter.formatCurrency($component.data.totalAmount.amount(),$component.data.totalAmount.currency())">
+                </row>
+
+                <!-- ko ifnot: $component.hideButtons() -->
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm]]"><span
+                            slot="startIcon" class="icons icon-confirm"></span><span
+                            data-bind="text:$component.nls.ReviewPage.Confirm"></span></oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span
+                            slot="startIcon" class="icons icon-cancel"></span><span
+                            data-bind="text:$component.nls.ReviewPage.Cancel"></span></oj-button>
+                    <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span
+                            slot="startIcon" class="icons icon-back-arrow"></span><span
+                            data-bind="text:$component.nls.ReviewPage.Back"></span></oj-button>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>

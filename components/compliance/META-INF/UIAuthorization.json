@@ -1,0 +1,10 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.party.service.fatca.FATCACompliance",
+        "components": [{
+            "componentName": "compliance-base",
+            "service": "create",
+            "perform": "fatca-compliance#entity-fatca-compliance#review-entity-fatca-compliance#customer-identification-info#entity-identification-info#additional-kyc-info#tax-residency-info#entity-tax-residency-info#entity-certification#fatca-declaration#review-fatca-compliance"
+        }]
+    }]
+}

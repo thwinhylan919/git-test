@@ -1,0 +1,119 @@
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+        <!-- ko if : $component.showHeaderStrip() -->
+        <!-- ko if : $component.cardData().status === "COMPLETED" -->
+        <div class="oj-flex oj-flex-items-pad confirm-strip">
+            <div class="oj-flex-item oj-lg-10 oj-sm-10">
+                <div data-bind="">
+                    <span class="icons icon-confirm"></span>
+                    <span
+                        data-bind="text:$baseModel.format($component.nls.YourLCidhasbeenaccepted,{id:$component.cardData().refId})"></span>
+                </div>
+            </div>
+            <div class="oj-flex-item  right oj-lg-2 oj-sm-2">
+                <a href="#" data-bind="click: $component.onClickCancelStrip , attr: {
+                    'title':$component.nls.Close,'aria-label':$component.nls.ClickOnCancel }">
+                    <span class="icons icon-cancel"></span>
+                </a>
+            </div>
+
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <div class="oj-flex oj-lg-12 oj-sm-12 oj-md-12 ">
+            <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-sm-12 oj-md-12">
+                <div class="oj-flex-item customer-details">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <!-- ko if : $component.cardData().type === $component.nls.requestType.TermLoan -->
+                        <span class="icon-tds img-style "></span>
+                        <!-- /ko -->
+                        <!-- ko if : $component.cardData().type === $component.nls.requestType.EquipmentFinancingLoan -->
+                        <span class="icon-vehicle-info img-style "></span>
+                        <!-- /ko -->
+                        <!-- ko if : $component.cardData().type === $component.nls.requestType.RealEstateLoan -->
+                        <span class="icon-branch-details img-style "></span>
+                        <!-- /ko -->
+                        <!-- ko if : $component.cardData().type === $component.nls.requestType.WorkingCapitalLoan -->
+                        <span class="icon-request-money img-style "></span>
+                        <!-- /ko -->
+                        <span class="customer-header oj-flex-item" data-bind="text:$component.cardData().type"></span>
+                        <span class="oj-lg-2 oj-md-2 oj-sm-12 party-custimizations pull-right"
+                            data-bind="text:$component.selectedParty()"></span>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <!--  ko if : $component.cardData().draftName  || $component.cardData().midOfficeRefNo-->
+                            <div class="draft-Name-customizations" data-bind="">
+                            </div>
+                            <!--  /ko  -->
+                            <div class="oj-flex-item panel-child-customizations">
+                                <span class="status_bar" data-bind="text:$component.cardData().draftName?$component.cardData().draftName:$component.cardData().midOfficeRefNo"></span>
+                                <span class="status_tag" data-bind=" css:$component.cardData().status==='IN_PROGRESS' ? 'inProgress'
+                                    :($component.cardData().status==='DRAFT' ?'draft':
+                                    ($component.cardData().status==='SUBMITTED'
+                                    ?'submit':'completed'))"></span>
+                                <span class="panel-child-customizations"
+                                    data-bind="text:$component.nls.processStatus[$component.cardData().status]"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 panel-child-customizations">
+                            <!--  ko if : $component.cardData().amount  -->
+                            <span data-bind="text:$component.nls.loanAppliedFor"></span>
+                            <span
+                                data-bind="text:$formatter.formatCurrency($component.cardData().amount,$component.cardData().currency)"></span>
+                            <!--  /ko  -->
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 panel-child-customizations">
+                            <!--  ko if : $component.cardData().appDate  -->
+                            <div
+                                data-bind="text:$baseModel.format($component.nls.On,{date:$formatter.formatDate($component.cardData().appDate,'dateTimehhmmFormat')})">
+                            </div>
+                            <!--  /ko  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad cardPadding oj-lg-12 oj-md-12 oj-sm-12">
+                <div class="img-border-customization oj-flex-item oj-lg-2 oj-md-4 oj-sm-12">
+                    <a href="#"
+                        data-bind="click: $component.onClickApplicationsDetails , attr: { alt: $component.nls.ApplicationsDetails }">
+                        <!-- ko if : $baseModel.small() -->
+                        <div class="oj-flex oj-sm-12">
+                            <div class="oj-flex-item oj-sm-4 pull-left"><img class="img-customization" alt=""
+                                    data-bind="loadImage:'process-management/application-details.svg'" /></div>
+                            <div class="oj-flex-item oj-sm-8 applicationPadding">
+                                <span class="oj-flex dataPadding oj-sm-12"
+                                    data-bind="text:$component.nls.ApplicationsDetails "></span>
+                                <span class="oj-flex dataPadding_small oj-sm-12"
+                                    data-bind="text:$component.nls.ViewApplicationsDetails "></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot : $baseModel.small() -->
+                        <div class="oj-flex ">
+                            <img class="img-customization" alt=""
+                                data-bind="loadImage:'process-management/application-details.svg'" />
+                        </div>
+                        <div class="center dataPadding" data-bind="text:$component.nls.ApplicationsDetails">
+                        </div>
+                        <div class="center dataPadding_small" data-bind="text:$component.nls.ViewApplicationsDetails">
+                        </div>
+                        <!-- /ko -->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </page-section>
+    <div class="oj-row button-container">
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span slot="startIcon" class="icon-cancel"></span>
+            <span data-bind="text:$component.nls.Cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.goBack]]">
+            <span slot="startIcon" class="icon-back-arrow"></span>
+            <span data-bind="text:$component.nls.Back"></span>
+        </oj-button>
+    </div>
+</div>

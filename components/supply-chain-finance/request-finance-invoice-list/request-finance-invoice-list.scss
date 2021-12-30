@@ -1,0 +1,35 @@
+.large-text {
+  font-weight: var(--base-font-weight-regular);
+  font-size: var(--base-font-size-larger);
+}
+
+.check-box-margin {
+  @include single-margin(top, -0.4rem);
+}
+
+.padding-check-box {
+  @include single-padding(left, 1.5rem);
+}
+
+.bottom-border {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+  @include single-padding(bottom, 1rem);
+}
+
+.medium-text {
+  font-size: var(--base-font-size-small);
+}
+
+.invoices-details {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  padding: var(--banner-padding);
+}
+
+.currency-rate {
+  font-size: var(--base-font-size-default);
+  color: var(--base-text-secondary);
+}
+
+.amount-padding {
+  @include single-padding(top, 1rem);
+}

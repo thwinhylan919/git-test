@@ -1,0 +1,66 @@
+.icons {
+    font-size: 2rem;
+}
+
+.image {
+    max-width: 12%;
+}
+
+.container {
+    min-height: 0;
+    height: 2.5rem;
+}
+
+.text {
+    margin-top: 0.4rem;
+    @include text-align(right);
+}
+
+.text1 {
+    @include text-align(left);
+    margin-top: 0.4rem;
+    font-weight: 500;
+}
+
+.text2 {
+    @include text-align(right);
+    margin-top: 0.4rem;
+    color:  var(--base-color-danger);
+}
+
+.view-limits__knowmore {
+    padding-top: 1.0rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.view-limits__knowmore__iconStylingKnowMore {
+    margin-top: 0.15rem;
+    @include single-padding(left, 0.25rem);
+}
+
+.msg {
+    font-weight: 500;
+}
+.title {
+    font-size: 0.9rem;
+}
+.center {
+    padding: 0 30% 2% 30%;
+    @include mq(small) {
+      padding: 0;
+  
+    }
+    @include mq(medium) {
+      padding: 0;
+    }
+  }
+  
+  .center-note {
+    padding: 0 15% 0 15%;
+  }
+  
+  .no-limit-image {
+    height: 10rem;
+    width: 10rem;
+  }

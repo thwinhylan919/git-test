@@ -1,0 +1,99 @@
+<!-- ko if: parentAccessLevel()==="PARTY" -->
+
+
+<page-section params="baseModel : $baseModel, rootModel : $data, heading :nls.headers.newAccounts">
+
+
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3">
+        <label class="pull-left" data-bind="text: nls.fieldname.mapAccts"></label>
+        <span class="icons icon-help tool-tip">
+            <div class="tooltip-content "
+            data-bind=" html:$baseModel.format($component.nls.messages.tooltip.autoManualMessage,
+            {accountType:$component.transactionNames.td,accountType1:$component.transactionNames.td})"></div>
+        </span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9">
+        <oj-buttonset-one disabled="[[showEditableForm]]"
+        value="{{$component.selectedVamEnabledRealAccPolicy}}">
+        <oj-option name="tdPolicy" value="{{'verAuto'}}" :id="[['verAuto']]">
+          <span data-bind="attr: {for: 'verAuto'},text:$component.nls.common.auto">
+          </span></oj-option><oj-option name="verPolicy" value="{{'verManual'}}" :id="[['verManual']]">
+            <span data-bind="attr: {for: 'verManual'},text:$component.nls.common.manual"></span>
+          </oj-option></oj-buttonset-one>
+    </div>
+</div>
+</page-section>
+<h4  data-bind=" text: $component.nls.headers.existingAccounts"></h4>
+
+<!-- /ko -->
+
+<!-- ko if: $component.parentAccessLevel()==="USER" -->
+
+
+<oj-checkboxset class=" oj-flex oj-flex-items-pad " disabled="[[$parent.showEditableForm]]"
+value="{{$component.selectedVERPolicyChecked}}">
+<oj-option value="verAuto" id="ver_review"><span for="ver_review" data-bind="text:$component.nls.common.ApplyChanges">
+                        </span></oj-option></oj-checkboxset>
+
+
+<!-- /ko -->
+
+
+<oj-checkboxset class=" oj-flex oj-flex-items-pad " disabled="[[showEditableForm]]" value="{{$component.mapAllTransactionsVERFlag}}"><oj-option id="ver_review_map_all" value="{{'MAP_ALL'}}"><span for="ver_review_map_all" data-bind="text:nls.headings.mapAllTransactionToAllAccnts"></span></oj-option></oj-checkboxset>
+
+<!-- ko if: reloadVERTable() -->
+<oj-table id="verReviewtable" :aria-label="[[$component.nls.headers.verAccounts]]"
+columns="[[[{headerText:$component.nls.headers.AccountNumber,field:'accountID'},
+{headerText:$component.nls.headers.currency,field:'currency'},
+{headerText:$component.nls.headers.displayName,field:'displayName'},
+{headerText:$component.nls.headers.accountStatus,field:'accountStatus'}]]]"
+ row-renderer='[[$oj.KnockoutTemplateUtils.getRenderer("ver_template", true)]]' data="[[$parent.verReviewDatasource]]">
+    <caption class="hide-label" data-bind="text:$component.nls.headers.verAccounts"></caption>
+</oj-table>
+
+<!-- /ko -->
+<script type="text/html" id="ver_template">
+    <tr>
+        <!-- ko if: $context.rowContext.depth===1 -->
+        <td>
+            <!-- ko if: ($component.selectedVAMEnabledRealAccounts).indexOf(accountNumber.value) > -1 -->
+              <oj-row-expander context="[[$context.rowContext]]"></oj-row-expander>
+            <!-- /ko -->
+            <input type="checkbox" name="verTransaction"
+            data-bind="attr:{'aria-label':'vercheckbox'+id,
+            id: 'vercheckbox'+id },
+            checked: $parent.selectedVAMEnabledRealAccounts,
+            disable:($parent.showEditableForm && $parent.disableAccountSelection),
+            value : accountNumber.value ">
+           <span data-bind="attr:{ 'for':'vercheckbox'+id},text: $context.row.accountNumber.displayValue"></span>
+         </td>
+        <td>
+            <span data-bind="text:$context.row.currency"></span>
+        </td>
+        <td>
+            <span data-bind="text: $context.row.displayName"></span>
+        </td>
+        <td>
+            <span data-bind="text: $context.row.accountStatus"></span>
+        </td>
+
+        <!-- /ko -->
+
+        <!-- ko if: $context.rowContext.depth===2 -->
+        <!-- ko if: ($component.selectedVAMEnabledRealAccounts).indexOf(accountNumber.value) > -1 -->
+        <td colspan="4">
+            <div data-bind="component:{name: 'transaction-selection',
+            params:{rootModel: $parent, key:'VER', data: $data,
+            resoureTaskList : $data.resoureTaskList,
+            showReviewComponent: $component.showReviewComponent,
+            selectedResourceTaskList : $data.selectedTask,
+            mapAllTransactionsToAllAccounts:$component.mapAllTransactionsToAllAccountVER,
+            indicatorArray:$component.VERMapAllTransactionIndicatorArray,
+            tempTaskArray:$component.tmpTransactionCodeVERArray}}">
+            </div>
+        </td>
+        <!-- /ko -->
+        <!-- /ko -->
+    </tr>
+</script>

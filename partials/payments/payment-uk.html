@@ -1,0 +1,82 @@
+<!-- ko if:paymentTypeLoaded() && !AdhocFlag()-->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12  label">
+        <oj-label for="paymenttype"><span data-bind="text:$component.payments.moneytransfer.typeoftransfer"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 ">
+        <div data-bind="text:paymentTypeMap[paymentType()]"></div>
+    </div>
+</div>
+<!-- /ko -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12  label">
+        <oj-label for="charges"><span data-bind="text:$component.payments.moneytransfer.correspondencecharges"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-lg-8">
+        <!-- ko if:isChargesLoaded() -->
+        <oj-select-one id="charges" required value="{{charges}}" :placeholder="[[$component.payments.common.select]]">
+                <!-- ko foreach: correspondenceCharges() -->
+                <oj-option value="{{value+'_'+text}}"><span data-bind="text:text"></span></oj-option>
+                <!-- /ko -->
+        </oj-select-one>
+        <!-- /ko   -->
+    </div>
+</div>
+<!-- ko if:transactionPurposeList().length>0 -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12  label">
+        <oj-label for="purpose">
+
+        <span data-bind="text:$component.payments.moneytransfer.purpose"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-lg-8">
+
+        <oj-select-one id="purpose" required on-value-changed="[[purposeChanged]]" value="{{purpose}}" :placeholder="[[$component.payments.common.select]]">
+            <!-- ko foreach:transactionPurposeList() -->
+            <oj-option value="{{value+'_'+text}}"><span data-bind="text:text"></span></oj-option>
+            <!-- /ko -->
+        </oj-select-one>
+
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:otherPurpose() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12  label">
+       
+      <oj-label class="hide-label" :for="[['comment'+($baseModel.incrementIdCount())]]"><span data-bind="text:$component.payments.common.comment"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-8">
+        <oj-input-text required :id="[['comment'+($baseModel.currentIdCount())]]" :invalidcomponenttracker="[[$component.validationTracker]]" value="{{otherPurposeValue}}"></oj-input-text>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.paymentType()==="URG" -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+        <oj-label for="paymentdetails">
+            <span data-bind="text:$component.payments.moneytransfer.paymentdetails"></span>
+        </oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-lg-8">
+        <oj-input-text id="paymentdetails" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[$baseModel.getValidator('PAYMENT_DETAILS')]]" value="{{otherDetails}}" required></oj-input-text>
+    </div>
+    <!-- ko foreach : $component.paymentDetailsArray() -->
+    <div class="oj-flex-item oj-sm-8 oj-lg-8">
+        <oj-input-text :id="[['paymentdetails' + $baseModel.incrementIdCount()]]" :aria-label="[[$component.payments.moneytransfer.paymentdetails]]" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[$baseModel.getValidator('PAYMENT_DETAILS')]]" value="{{$component.paymentDetailsArray()[$index()]}}" required></oj-input-text>
+    </div>
+    <div class="paymentDetailDeleteIcon oj-sm-4 oj-lg-2">
+        <a href="#" class="iconSize" data-bind="attr:{alt:$component.payments.moneytransfer.internationalPayee.deletePaymentDetails,title:$component.payments.moneytransfer.internationalPayee.deletePaymentTitle},click:$component.deletePaymentDetails.bind($data,$index())">
+            <div class="icon icon-delete" aria-hidden="true"></div>
+        </a>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.paymentDetailsArray().length<=2 -->
+    <div class="oj-flex-item oj-sm-12 oj-lg-12">
+        <a href="#" data-bind="attr:{alt:$component.payments.moneytransfer.internationalPayee.addPaymentDetails,title:$component.payments.moneytransfer.internationalPayee.paymentdetails},click:$component.addPaymentDetails">
+            <div data-bind="text:$component.payments.moneytransfer.internationalPayee.addPaymentDetails"></div>
+        </a>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

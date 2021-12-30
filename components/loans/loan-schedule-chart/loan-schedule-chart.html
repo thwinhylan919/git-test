@@ -1,0 +1,14 @@
+<div id="chart-container" class="loan-schedule-chart-height" data-id="loanScheduleChart">
+  <br>
+  <div class="loan-schedule-chart">
+    <oj-chart id="barChart" class="bardesign" type="bar" stack="off" series="[[lineSeriesValue]]"
+      groups="[[lineGroupsValue]]" timeaxistype="[[skipGaps]]" zoomandscroll="[[zoomAndScrollValue]]"
+      hideandshowbehavior="withRescale" overview="[[{rendered: ko.toJS(overviewValue)}]]"
+      xaxis="[[{viewportStartGroup: viewportStartGroup, viewportEndGroup:viewportEndGroup, tickLabel:{style: ko.toJS('font-size: 11px')}}]]"
+      ,="" legend="[[{rendered: 'on',position: ko.toJS('top'), textStyle: ko.toJS('font-size:14px')}]]" datacursor="on"
+      yaxis="[[yAxisData]]" y-axis.title="Installment Amount" x-axis.title="Installment Date"
+      styledefaults="[[{lineType: 'curved',dataLabelStyle: ko.toJS('color:#a6a6a6')}]]"
+      valueformats="[{type: 'series', tooltipLabel: $component.locale.schedule.loanSchName}, {type: 'group', tooltipLabel: $component.locale.schedule.date}]">
+    </oj-chart>
+  </div>
+</div>

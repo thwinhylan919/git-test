@@ -1,0 +1,20 @@
+.accountCard {
+    &__cardLayout {
+        border: .06rem solid var(--base-border-default) !important;
+        margin: 0 0.5rem 1rem;
+        padding: 0 5px;
+        &>div {
+            width: 100%;
+        }
+    }
+    &__header {
+        font-size: var(--widget-header-font-size);
+        margin-bottom: calc(var(--widget-header-font-size)/3);
+        margin-top: calc(2 * (var(--widget-header-font-size)/3));
+        font-weight: var(--widget-header-font-weight);
+        color : var(--form-foreground-color);
+    }
+    &__body {
+        color : var(--form-foreground-color);
+    }
+}

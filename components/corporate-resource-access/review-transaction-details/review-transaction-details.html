@@ -1,0 +1,62 @@
+<!-- ko if : $component.loadApprovalData() -->
+<div class="form-main-container">
+    <!-- ko ifnot : $component.isApproval -->
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.nls.review,reviewHeader:$baseModel.format($component.nls.reviewMessage,{attributeName:$component.attributeName.toLowerCase()})}}">
+    </div>
+    <!-- /ko -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '' , headerTemplate : ''">
+        <div data-bind="component:{name: 'entity-details', params:{partyId :
+                        $component.partyId,partyName:$component.partyName,
+                        moduleName:$component.moduleName,
+                        userData:$component.userData,
+                        isUserSelected: $component.isUserSelected}}">
+        </div>
+    </page-section>
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading :  $baseModel.format($component.nls.heading.ResourceMappingSummary,{attributeName:$component.attributeName}), headerTemplate : ''">
+        <!-- ko if : $component.isUserSelected -->
+        <!-- ko template: { nodes: $parentContext.$componentTemplateNodes}-->
+        <!-- /ko -->
+        <!-- /ko -->
+        <div data-bind="component:{name:
+                'attribute-transaction-mapping',
+                params:{dataSource:
+                $component.dataSource,attributeData:$component.attributeData,attributeName:
+                $component.attributeName,disableTree:ko.observable(true),expanded:'all'}}">
+        </div>
+        <!-- ko if : !$component.isUserSelected-->
+        <!-- ko template: { nodes: $parentContext.$componentTemplateNodes}-->
+        <!-- /ko -->
+        <!-- /ko -->
+    </page-section>
+    <!-- ko ifnot : $component.isApproval -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm]]"><span
+                data-bind="text:$component.nls.TransactionDetails.Confirm"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel20]]"><span
+                data-bind="text:$component.nls.TransactionDetails.Cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span
+                data-bind="text:$component.nls.TransactionDetails.Back"></span></oj-button>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'cancelConfirmationModal',header:
+$component.nls.TransactionDetails.warning">
+    <div class="form-main-container message-text">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span data-bind="text:$component.nls.TransactionDetails.cancelMessage"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="Yes" class="action-button-primary" on-click="[[$component.cancel]]">
+                <span data-bind="text:$component.nls.TransactionDetails.yes"></span>
+            </oj-button>
+            <oj-button id="No" class="action-button-secondary" on-click="[[$component.hideModal]]">
+                <span data-bind="text:$component.nls.TransactionDetails.no"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

@@ -1,0 +1,33 @@
+<div class="oj-flex-item">
+    <!-- ko if: $component.params.confirmScreenExtensions -->
+    <page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.params.resource.headers.creditVPAId, value : [($component.params.confirmScreenExtensions.creditVPAId),($component.params.confirmScreenExtensions.accountNumber)]"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.params.resource.headers.accountTransferDetails, value : [($component.params.confirmScreenExtensions.receiverName),($component.params.confirmScreenExtensions.debitVPAId)]"></row>
+
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.params.resource.headers.amount, value : $formatter.formatCurrency($component.params.confirmScreenExtensions.amount.amount,$component.params.confirmScreenExtensions.amount.currency)"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.params.resource.headers.expiryDate, value : $component.params.confirmScreenExtensions.expiryDate"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.params.resource.headers.remarks, value : $component.params.confirmScreenExtensions.remarks"></row>
+
+    </page-section>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,null)">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'upi-request-money','upi')">
+                    <img alt="" data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.makeAnotherTransfer}),'title':$component.confirmScreenResources.confirm.actions.makeAnotherTransfer},loadImage:'dashboard/quick-access/payment-options.svg'">
+                    <div data-bind="text: $component.params.resource.upiRequestMoney.makeAnotherTransfer"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

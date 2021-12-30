@@ -1,0 +1,45 @@
+<!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+    <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-6">
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.confirmScreenExtensions.resource.headerAccountNumber , value :headerAccountNumber.displayValue"></row>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.confirmScreenExtensions.resource.structureCode , value :structureCode"></row>
+        </div>
+    </div>
+    <div class="oj-flex">
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.confirmScreenExtensions.resource.structureName , value :structureName"></row>
+    </div>
+    <!-- /ko -->
+</page-section>
+<!-- /ko -->
+<div class="oj-flex-item">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,$root.currentRole())">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,'virtual-account-management')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resource.goToOverview},loadImage:'dashboard/quick-access/account-details.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resource.goToOverview"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'virtual-account-structure-create','virtual-account-management')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resource.createMoreStructure},loadImage:'lm/new-structure.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resource.createMoreStructure"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

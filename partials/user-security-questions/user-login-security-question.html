@@ -1,0 +1,30 @@
+<div data-bind="component:{name: 'user-login-configuration-header',
+  params:{rootModel: $component,data: $data}}">
+</div>
+
+<div class="form-main-container">
+  <div class="oj-flex oj-flex-items-pad  oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4">
+      <h3 data-bind="text: $component.nls.userSecurityQuestion.fieldname.securityHeading"></h3>
+      <div data-bind="text: $component.nls.userSecurityQuestion.fieldname.securityText"></div>
+      <div data-bind="text: $component.nls.userSecurityQuestion.fieldname.securityTextLine3"></div>
+      <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary " on-click="[[$component.openCreateMode]]"><span slot="startIcon" class="icons icon-ok"></span>
+          <span data-bind="text:$component.nls.userSecurityQuestion.labels.setUpNow"></span>
+        </oj-button>
+        <!-- ko ifnot : $component.params.componentMandatory -->
+        <oj-button class="action-button-secondary " on-click="[[$component.loadNextComponent]]"><span slot="startIcon"
+            class="icons icon-forward-arrow"></span>
+          <span data-bind="text:$component.nls.userSecurityQuestion.labels.skip"></span>
+        </oj-button>
+        <!-- /ko -->
+      </div>
+    </div>
+
+    <!-- ko if:  $baseModel.large() -->
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4">
+      <help params="baseModel : $baseModel, rootModel : $component, transaction: 'security-notes'"></help>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>

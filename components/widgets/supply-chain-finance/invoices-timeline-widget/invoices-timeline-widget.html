@@ -1,0 +1,187 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-10">
+      <div>
+        <h3
+          data-bind="html:$baseModel.format($component.nls.heading.Timeline,{date: $formatter.formatDate($oj.IntlConverterUtils.dateToLocalIso($baseModel.getDate()))})">
+        </h3>
+      </div>
+    </div>
+
+    <div class="oj-flex-item oj-lg-2 right">
+      <oj-label class="hide-label" :for="[['CurrencySelection80']]"><span
+          data-bind="text:$component.nls.currency"></span></oj-label>
+      <!--  ko if : $component.currencyLoaded()  -->
+      <oj-select-one :id="[['CurrencySelection80']]" value="{{$component.currency}}">
+        <!-- ko foreach : currencies -->
+        <oj-option value="[[code]]"><span data-bind="text:code"></span></oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+      <!--  /ko  -->
+    </div>
+  </div>
+
+  <!-- ko if : $component.showTimeline() -->
+  <nav-bar
+    params="baseModel : $baseModel,dashboard:$dashboard,rootModel: $data,menuOptions: navBarTabs,uiOptions:uiOptions,   navBarDescription:$component.nls.Timeline.InvoiceTimeline">
+  </nav-bar>
+  <!-- ko if : !$component.showEmptyImage() -->
+  <div class="oj-flex oj-flex-items-pad timeline-padding">
+    <oj-status-meter-gauge id="gauge-time-line" min="0" max="100" thresholds="[[thresholdValues]]" value="{{0}}"
+      metric-label.rendered="off" plot-area.rendered="on" indicator-size="0.1" threshold-display="all"
+      class="oj-flex-item timeline-height" tooltip.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('tooltip')]]"
+      readOnly>
+    </oj-status-meter-gauge>
+  </div>
+
+  <div class="data-padding">
+    <div class="oj-flex oj-flex-items-pad timeline-border-top">
+      <div class="oj-flex-item oj-lg-2 timeline-border text-alignment">
+        <a href="#" class="form-button-link" id="duration-1-data"
+          data-bind="attr:{'alt':$component.nls.duration1,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration1})}, click: $component.viewInvoices.bind($component, $component.timelineData[0])">
+          <div class="tags duration1-color" data-bind="text: $component.nls.duration1"></div>
+        </a>
+        <div class="amount-style"
+          data-bind="text:$formatter.formatCurrency($component.timelineData[0].dueAmount,$component.currency())"></div>
+        <!-- ko if: $component.timelineData[0].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-1-invoices"
+          data-bind="attr:{'alt':$component.nls.duration1,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration1})}, click: $component.viewInvoices.bind($component, $component.timelineData[0])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoicesCount,{count: $component.timelineData[0].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.timelineData[0].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-1-invoice"
+          data-bind="attr:{'alt':$component.nls.duration1,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration1})}, click: $component.viewInvoices.bind($component, $component.timelineData[0])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoiceCount,{count: $component.timelineData[0].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+      </div>
+      <div class="oj-flex-item oj-lg-3 timeline-border text-alignment">
+        <span class="text-font" data-bind="text: $component.nls.dueIn"></span>
+        <a href="#" class="form-button-link" id="duration-2-data"
+          data-bind="attr:{'alt':$component.nls.duration2,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration2})}, click: $component.viewInvoices.bind($component, $component.timelineData[1])"><span
+            class="tags duration2-color" data-bind="text: $component.nls.duration2"></span></a>
+        <div class="amount-style"
+          data-bind="text:$formatter.formatCurrency($component.timelineData[1].dueAmount,$component.currency())"></div>
+        <!-- ko if: $component.timelineData[1].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-2-invoices"
+          data-bind="attr:{'alt':$component.nls.duration2,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration2})}, click: $component.viewInvoices.bind($component, $component.timelineData[1])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoicesCount,{count: $component.timelineData[1].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.timelineData[1].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-2-invoice"
+          data-bind="attr:{'alt':$component.nls.duration2,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration2})}, click: $component.viewInvoices.bind($component, $component.timelineData[1])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoiceCount,{count: $component.timelineData[1].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+      </div>
+      <div class="oj-flex-item oj-lg-2 timeline-border text-alignment">
+        <a href="#" class="form-button-link" id="duration-3-data"
+          data-bind="attr:{'alt':$component.nls.duration3,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration3})}, click: $component.viewInvoices.bind($component, $component.timelineData[2])">
+          <div class="tags duration3-color" data-bind="text: $component.nls.duration3"></div>
+        </a>
+        <div class="amount-style"
+          data-bind="text:$formatter.formatCurrency($component.timelineData[2].dueAmount,$component.currency())"></div>
+        <!-- ko if: $component.timelineData[2].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-3-invoices"
+          data-bind="attr:{'alt':$component.nls.duration3,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration3})}, click: $component.viewInvoices.bind($component, $component.timelineData[2])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoicesCount,{count: $component.timelineData[2].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.timelineData[2].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-3-invoice"
+          data-bind="attr:{'alt':$component.nls.duration3,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration3})}, click: $component.viewInvoices.bind($component, $component.timelineData[2])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoiceCount,{count: $component.timelineData[2].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+      </div>
+      <div class="oj-flex-item oj-lg-3 timeline-border text-alignment">
+        <a href="#" class="form-button-link" id="duration-4-data"
+          data-bind="attr:{'alt':$component.nls.duration4,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration4})}, click: $component.viewInvoices.bind($component, $component.timelineData[3])">
+          <div class="tags duration4-color" data-bind="text: $component.nls.duration4"></div>
+        </a>
+        <div class="amount-style"
+          data-bind="text:$formatter.formatCurrency($component.timelineData[3].dueAmount,$component.currency())"></div>
+        <!-- ko if: $component.timelineData[3].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-4-invoices"
+          data-bind="attr:{'alt':$component.nls.duration4,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration4})}, click: $component.viewInvoices.bind($component, $component.timelineData[3])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoicesCount,{count: $component.timelineData[3].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.timelineData[3].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-4-invoice"
+          data-bind="attr:{'alt':$component.nls.duration4,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration4})}, click: $component.viewInvoices.bind($component, $component.timelineData[3])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoiceCount,{count: $component.timelineData[3].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+      </div>
+      <div class="oj-flex-item oj-lg-2 text-alignment">
+        <a href="#" class="form-button-link" id="duration-5-data"
+          data-bind="attr:{'alt':$component.nls.duration5,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration5})}, click: $component.viewInvoices.bind($component, $component.timelineData[4])">
+          <div class="tags duration5-color" data-bind="text: $component.nls.duration5"></div>
+        </a>
+        <div class="amount-style"
+          data-bind="text:$formatter.formatCurrency($component.timelineData[4].dueAmount,$component.currency())"></div>
+        <!-- ko if: $component.timelineData[4].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-5-invoices"
+          data-bind="attr:{'alt':$component.nls.duration5,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration5})}, click: $component.viewInvoices.bind($component, $component.timelineData[4])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoicesCount,{count: $component.timelineData[4].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.timelineData[4].invoiceCount > 1 -->
+        <a href="#" class="form-button-link" id="duration-5-invoice"
+          data-bind="attr:{'alt':$component.nls.duration5,'title': $baseModel.format($component.nls.linkText,{duration: $component.nls.duration5})}, click: $component.viewInvoices.bind($component, $component.timelineData[4])">
+          <div class="sub-heading"
+            data-bind="text: $baseModel.format($component.nls.invoiceCount,{count: $component.timelineData[4].invoiceCount})">
+          </div>
+        </a>
+        <!-- /ko -->
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if : $component.showEmptyImage() -->
+  <div class="oj-flex oj-flex-items-pad center">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 align-img">
+      <img class="img-specs" data-bind="loadImage:'dashboard/scf-timeline.svg'">
+    </div>
+    <div class="oj-flex-item oj-lg-12">
+      <div>
+        <h3 data-bind="text:$component.nls.noInvoicesText"></h3>
+      </div>
+    </div>
+
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+
+  <script type="text/html" id="tooltip">
+    <div>
+      <div data-bind="text: $component.nls.dueIn">
+      </div>
+      <div id='legend-container'>
+        <oj-legend id="legend-invoice" orientation='vertical' sections="[[$component.legendSections]]">
+        </oj-legend>
+      </div>
+    </div>
+  </script>
+</div>

@@ -1,0 +1,34 @@
+<div class="oj-flex-item">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li>
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'open-investment-account-train','mutual-funds')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resourceBundle.mutualFunds.openAnotherAccount},loadImage:'wealth-management/account-details.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resourceBundle.mutualFunds.openAnotherAccount"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'purchase-mutual-fund-train','mutual-funds')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resourceBundle.mutualFunds.purchaseAnotherFund},loadImage:'wealth-management/purchase.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resourceBundle.mutualFunds.purchaseAnotherFund"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data, null)">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resourceBundle.mutualFunds.wealthDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resourceBundle.mutualFunds.wealthDashboard"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click: $dashboard.switchModule.bind($data, null)">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

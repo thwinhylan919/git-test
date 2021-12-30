@@ -1,0 +1,15 @@
+{
+     "componentName": "work-box-maker",
+     "module": "corporateDashboard",
+     "segment":["corporateuser"],
+     "width": {
+        "large":"8",
+        "medium":"12"
+      },
+     "height": "305",
+     "icon": "",
+     "template": "",
+     "type":"",
+     "isVisible":true,
+     "isWidget":true
+ }

@@ -1,0 +1,84 @@
+{
+    "modules": [
+    {
+        "moduleName": "fetchIdentityDomain^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "identity-domain-search",
+            "service": "read",
+            "perform": "identity-domain-view"
+        }]
+    },
+    {
+        "moduleName": "createIdentityDomain^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "identity-domain-search",
+            "service": "create",
+            "perform": "identity-domain-create#identity-domain-review"
+        }]
+    },
+    {
+        "moduleName": "updateIdentityDomain^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "identity-domain-search",
+            "service": "update",
+            "perform": "identity-domain-view#identity-domain-create#identity-domain-review"
+        }]
+    },
+    {
+        "moduleName": "listResourceServer^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "resource-server-search",
+            "service": "read",
+            "perform": "resource-server-view"
+        }]
+    },
+    {
+        "moduleName": "createResourceServer^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "resource-server-search",
+            "service": "create",
+            "perform": "resource-server-create#resource-server-review"
+        }]
+    },
+    {
+        "moduleName": "updateResourceServer^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "resource-server-search",
+            "service": "update",
+            "perform": "resource-server-view#resource-server-edit#resource-server-review"
+        }]
+    },
+    {
+        "moduleName": "listClient^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "client-search",
+            "service": "read",
+            "perform": ""
+        }]
+    },
+    {
+        "moduleName": "createClient^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "client-search",
+            "service": "create",
+            "perform": "client-create#client-review"
+        }]
+    },
+    {
+        "moduleName": "updateClient^com.ofss.digx.app.generic.rest.service.GenericRestService",
+        "components": [
+        {
+            "componentName": "client-search",
+            "service": "update",
+            "perform": "client-view#client-edit#client-review"
+        }]
+    }]
+}

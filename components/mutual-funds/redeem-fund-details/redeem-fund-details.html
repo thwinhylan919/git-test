@@ -1,0 +1,170 @@
+<div class="oj-flex redeem-fund-container">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <div class="form-main-container">
+            <oj-validation-group id="redeemfund">
+                <!-- ko if: refresh -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.fundDetails.searchHeader">
+                    <!-- ko if:investmentAccountLoaded -->
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label for="investmentaccount">
+                                <span data-bind="text:$component.resource.fundDetails.investmentAccount"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+                            <oj-select-one id="investmentaccount" :aria-label="[[$component.resource.fundDetails.investmentAccount]]" value="{{$component.modelData.redeemFund.investmentAccountNumber}}" on-value-changed="[[$component.investmentAccountChange]]">
+                                <!-- ko foreach: $component.investmentAccountData -->
+                                <oj-option value="[[code]]">
+                                    <span data-bind="text: primaryHolderName+'-'+label+'-'+holdingPattern"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: fundHousesLoaded -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label for="fund-houses">
+                                <span data-bind="text:$component.resource.fundDetails.fundHouse"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+                            <oj-select-one id="fund-houses" :aria-label="[[$component.resource.fundDetails.fundHouse]]" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}" value="{{$component.modelData.redeemFund.fundHouseCode}}" on-value-changed="[[$component.fundHouseChange]]">
+                                <!-- ko foreach: $component.fundHouseData -->
+                                <oj-option value="[[code]]">
+                                    <span data-bind="text: label"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: schemesLoaded -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label for="schemeName">
+                                <span data-bind="text: $component.resource.fundDetails.schemeName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-select-one id="schemeName" :aria-label="[[$component.resource.fundDetails.schemeName]]" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}" value="{{$component.modelData.redeemFund.scheme.schemeCode}}" on-value-changed="[[$component.schemePopUp]]"
+                                required>
+                                <!-- ko foreach: $component.schemeData -->
+                                <oj-option value="[[code]]">
+                                    <span data-bind="text: label"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- ko if: showInfoPopUp -->
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <a href="#" data-bind="click: $component.showInfoPanel"><span class="medium-text" data-bind="text:$component.resource.fundDetails.viewNav"></span></a>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex button-container">
+                        <oj-button class="action-button-primary" id="search-button"  on-click="[[$component.fetchResults]]">
+                            <span slot="startIcon" class="icons icon-search"></span>
+                            <span data-bind="text:$component.resource.fundDetails.search"></span>
+                        </oj-button>
+                        <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span>
+                            <span data-bind="text:$component.resource.cancel"></span>
+                        </oj-button>
+                        <oj-button class="action-button-tertiary" id="clear-button"  on-click="[[$component.clearResults]]">
+                            <span slot="startIcon" class="icons icon-refresh"></span>
+                            <span data-bind="text:$component.resource.fundDetails.clear"></span>
+                        </oj-button>
+                    </div>
+                </page-section>
+                <!-- ko if: $baseModel.small()-->
+                <!-- ko if: showSearchResults -->
+                <div class="oj-flex oj-flex-items-pad table-header">
+                    <h3 class="redeem-fund-container__heading" data-bind="text: $component.resource.fundDetails.tableHeader">
+                    </h3>
+                    <h4 class="note-mobile" data-bind="text: $baseModel.format($component.resource.fundDetails.tableNote, {fundCount: $component.fundCount()})">
+                    </h4>
+                </div>
+                <div params="rootModel : $data, heading : ''">
+                    <oj-list-view id="listview-mobile" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('rflist_template',true)}]]" data="[[dataSource]]">
+                    </oj-list-view>
+                    <oj-paging-control class="oj-flex-item center" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[10]]" data="[[dataSource]]">
+                    </oj-paging-control>
+                </div>
+                <script type="text/html" id="rflist_template">
+                    <li>
+                        <div class="oj-flex heading-pad scheme-color">
+                            <div class="oj-flex-item oj-sm-10">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item oj-sm-12">
+                                        <span data-bind="text: schemeName"></span>
+                                    </div>
+                                    <div class="oj-flex-item oj-sm-12 margin-box">
+                                        <span data-bind="text: folio"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-sm-2 right margin-box">
+                                <a href="#" data-bind="attr: {id : 'menu'+$context.index,'title':''}, click: $component.openMenu">
+                                    <div class="icons icon-more-vertical"></div>
+                                </a>
+                                <oj-menu class="hide" :id="[['menu'+$context.index+'container']]" open-options="[[{display:'dropDown',launcher: 'menu'+$context.index, position:{'my': 'center right', 'at': 'center right'}}]]" on-oj-action="[[$component.menuItemSelect]]">
+                                    <!-- ko foreach: $component.menuSelectOptions() -->
+                                    <oj-option data-bind="attr: {id:code},value:module">
+                                        <span data-bind="text: value"></span>
+                                    </oj-option>
+                                    <!-- /ko -->
+                                </oj-menu>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-6">
+                                <oj-label>
+                                    <span data-bind="text:$component.resource.fundDetails.purchaseNav"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-6 right">
+                                <span data-bind="text:purchaseNav"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-6">
+                                <oj-label>
+                                    <span data-bind="text:$component.resource.fundDetails.totalUnits"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-6 right">
+                                <span data-bind="text:totalUnits"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-6">
+                                <oj-label>
+                                    <span data-bind="text:$component.resource.fundDetails.redeemableUnits"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-6 right">
+                                <span data-bind="text:redeemableUnits"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-6">
+                                <oj-label>
+                                    <span data-bind="text:$component.resource.fundDetails.marketValue"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-6 right">
+                                <span data-bind="text:$formatter.formatCurrency(marketValue, currency)"></span>
+                            </div>
+                        </div>
+                    </li>
+                </script>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </oj-validation-group>
+        </div>
+    </div>
+</div>

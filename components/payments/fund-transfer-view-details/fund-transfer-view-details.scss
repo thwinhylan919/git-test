@@ -1,0 +1,12 @@
+.transactionDetail {
+  max-height: fit-content;
+}
+.successStatus {
+  color: var(--base-color-success);
+}
+.failedStatus {
+  color: var(--base-color-danger);
+}
+.inProgressStatus {
+  color: var(--base-color-warning);
+}

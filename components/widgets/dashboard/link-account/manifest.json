@@ -1,0 +1,14 @@
+{
+    "componentName": "link-account",
+    "module": "dashboard",
+    "segment":["retailuser"],
+    "width": {
+       "large":"4",
+       "medium":"6"
+     },
+    "height": "224",
+    "icon": "",
+    "template": "",
+    "isVisible":true,
+    "isWidget":true
+}

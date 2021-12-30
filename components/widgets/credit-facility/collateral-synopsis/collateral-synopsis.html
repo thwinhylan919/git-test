@@ -1,0 +1,48 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad oj-sm-12">
+    <div class="oj-flex-item">
+      <h3 data-bind="text: $component.nls.collateralHeading"></h3>
+    </div>
+    <div class="oj-flex-item vertical-align-middle right">
+    <a href="#"  data-bind="text: $component.nls.viewDetails" on-click=[[viewDetails]]></a>
+    </div>
+  </div>
+  <br>
+  <!-- ko if:$component.showCollateral() -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+      <oj-label><span data-bind="text: $component.nls.collateralAmount" class="label"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+    <span class="amount" data-bind="text:$formatter.formatCurrency($component.collateralAmountInBaseCurr(), $component.baseCurrency())"></span>
+  </div>
+  </div>
+  <br>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-md-6 oj-sm-6 oj-lg-6">
+      <oj-label><span data-bind="text: $component.nls.utilizedAmount" class="label"></span></oj-label>
+      <span class="amount utilizedAmount" data-bind="text:$formatter.formatCurrency($component.utilizedAmountInBaseCurr(), $component.baseCurrency())"></span>
+    </div>
+    <div class="oj-flex-item oj-md-6 oj-sm-6 oj-lg-6">
+      <span class="right">
+      <oj-label><span data-bind="text: $component.nls.availableAmount" class="label"></span></oj-label>
+      </span>
+      <div class="amount availableAmount pull-right" data-bind="text:$formatter.formatCurrency($component.availableAmountInBaseCurr(), $component.baseCurrency())"></div>
+    </div>
+  </div>
+  <br>
+
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-md-12 oj-sm-12">
+     <div>
+       <span data-bind="text: $component.utilizedPercentage()"></span>
+       <span data-bind="text: $component.availablePercentage()" class="pull-right"></span>
+     </div>
+     <div>
+       <span data-bind="style:{width: $component.utilizedPercentage()}" class="amount1 pull-left"></span>
+       <span data-bind="style:{width: $component.availablePercentage()}" class="amount2 pull-right"></span>
+     </div>
+   </div>
+    </div>
+  <!-- /ko -->
+</div>

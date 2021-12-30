@@ -1,0 +1,36 @@
+<div data-bind="childrenComplete : $component.getGenericViewModelInstance.bind(null, $root)">
+    <div class="oj-flex oj-flex-items-pad">
+        <h3 class="oj-flex-item oj-sm-12 informationHeader" data-bind="text: $component.nls.informationHeaderText"></h3>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <!-- ko foreach: $component.brandList -->
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3">
+            <a href="#" data-bind="click: $component.brandSelected">
+                <div data-bind="css: {'selectedBrand': $component.getCurrentAppliedBrand($data.brandId)}, attr: {'selectedBrandDiv' : $data.brandId}, component:{name:'preview-brand', params:{rootModel:$component, brandData: $data}}">
+                </div>
+            </a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko if: $component.brandList().length -->
+    <!-- ko if: $component.currentAppliedBrandId -->
+    <div class="oj-flex">
+        <a href="#" on-click="[[revertToDefault]]" class="revertToDefault">
+            <!-- ko text: $component.nls.revertToDefault -->
+            <!-- /ko -->
+        </a>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button disabled="[[applyDisabled]]" class="action-button-primary" on-click="[[applyBrand]]">
+            <span data-bind="text:$component.nls.generic.common.apply"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.nls.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !$component.brandList().length -->
+    <img data-bind="loadImage: 'lm/liquidity-management_banner.svg'" />
+    <!-- /ko -->
+</div>

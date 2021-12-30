@@ -1,0 +1,46 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.accountaggregation.service.externalbank.ExternalBank",
+      "components": [{
+          "componentName": "add-ext-bank",
+          "service": "read",
+          "perform": "add-ext-bank#aggregate-accounts-list#aggregate-register-accounts#dashboard-new-registered"
+        },
+        {
+          "componentName": "add-ext-bank-create",
+          "service": "create",
+          "perform": "add-ext-bank#add-ext-bank-review#image-upload",
+          "approve": "add-ext-bank#add-ext-bank-review"
+        },
+        {
+          "componentName": "access-management-base",
+          "service": "update",
+          "perform": "add-ext-bank-review#image-upload",
+          "approve": "add-ext-bank-review"
+        },
+        {
+          "componentName": "add-ext-bank",
+          "service": "delete",
+          "perform": "add-ext-bank-review",
+          "approve": "add-ext-bank-review"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.accountaggregation.service.externalbankaccount.ExternalBankAccount",
+      "components": [{
+        "componentName": "aggregate-accounts-list",
+        "service": "read",
+        "perform": "aggregate-register-accounts#dashboard-new-registered"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.accountaggregation.service.payment.AccountAggregationPayment",
+      "components": [{
+        "componentName": "account-aggregation-payment",
+        "service": "create",
+        "perform": "review-account-aggregation-payment"
+      }]
+    }
+  ]
+}

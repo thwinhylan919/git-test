@@ -1,0 +1,113 @@
+$sweep-background-color: #2C446E;
+$hybrid-background-color: #1E7C9F;
+$pool-background-color: #90722C;
+$structure-status-paused: #C35409;
+$structure-status-resumed: #D9BC00;
+
+.popup {
+        width: 17rem;
+    }
+    
+.listStructure {
+    .nodata {
+        img {
+            height: 25rem;
+        }
+
+        &__message {
+            font-size: var(--base-font-size-larger);
+            font-weight: var(--base-font-weight-bold);
+        }
+    }
+
+    .content {
+        border-top: 0.05rem solid var(--buttonset-border-color);
+        padding-top: 15px;
+        margin-top: 0.5rem;
+    }
+
+    &-content {
+        &__contentList {
+            padding: 0.3rem;
+        }
+
+        &-contentList {
+            &__text {
+                display: inline-block;
+                @include float(left);
+            }
+
+            &__value {}
+        }
+    }
+
+    &__structureType {
+        padding: 0.6rem 0;
+    }
+
+    .structureTypeSweep {
+        background-color: $sweep-background-color;
+        color: var(--color-white);
+    }
+
+    .structureTypeHybrid {
+        background-color: $hybrid-background-color;
+        color: var(--color-white);
+    }
+
+    .structureTypePool {
+        background-color: $pool-background-color;
+        color: var(--color-white);
+    }
+
+    &-status {
+        &__checkbox {
+            @include single-margin(left, 0.625rem);
+            @include single-margin(right, 0.625rem);
+            @include float(left);
+        }
+
+        &__card {
+            display: inline-block;
+        }
+
+        &__structureStatus {
+            border-radius: 50%;
+            width: 0.7rem;
+            height: 0.7rem;
+            position: relative;
+            top: 0.2rem;
+            @include single-margin(right, 0.3rem);
+        }
+
+        &__structureStatusActive {
+            background-color: var(--base-color-success);
+        }
+
+        &__structureStatusPaused {
+            background-color: $structure-status-paused;
+        }
+
+        &__structureStatusExpired {
+            background-color: var(--base-color-danger);
+        }
+
+        &__structureStatusResumed {
+            background-color: $structure-status-resumed;
+        }
+
+        &__statusType {
+            display: inline-block;
+            position: relative;
+            top: 0.2rem;
+        }
+    }
+
+    .link {
+        margin: auto;
+    }
+
+    &__view {
+        padding: 0.6rem 0;
+    }
+}

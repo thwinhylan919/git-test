@@ -1,0 +1,37 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+        </page-section>
+    </div>
+</oj-validation-group>
+<div data-bind="descendantsComplete : $component.loadModal">
+    <modal-window
+        params="baseModel : $baseModel, rootModel : $data, closeHandler:$dashboard.switchModule,id:'selectRoleContainer', header : $component.nls.heading.SelectRole">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12">
+                <oj-label :for="[['SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables65']]">
+                    <span
+                        data-bind="text:$component.nls.SelectRole.SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item">
+                <oj-radioset class="oj-choice-direction-row"
+                    :id="[['SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables65']]"
+                    value="{{role}}">
+                    <oj-option value="{{'B'}}"><span data-bind="text:$component.nls.SelectRole.Buyer"></span>
+                    </oj-option>
+                    <oj-option value="{{'S'}}"><span data-bind="text:$component.nls.SelectRole.Supplier"></span>
+                    </oj-option>
+                </oj-radioset>
+            </div>
+        </div>
+        <oj-button class="action-button-primary" on-click="[[$component.onClickProceed14]]"><span slot="startIcon"
+                class="icons icon-forward-arrow"></span><span data-bind="text:$component.nls.SelectRole.Proceed"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary"
+            on-click="[[$dashboard.switchModule.bind($data,$root.currentRole())]]"><span slot="startIcon"
+                class="icons icon-cancel"></span><span data-bind="text:$component.nls.SelectRole.Cancel"></span>
+        </oj-button>
+
+    </modal-window>
+</div>

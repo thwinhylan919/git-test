@@ -1,0 +1,92 @@
+<!-- ko if: $component.modelInit() -->
+<div class="oj-flex preview-theme">
+
+    <header class="oj-flex-item oj-sm-12 header" id="preview-header" data-bind="style: $component.computedBindings.header">
+        <div class="header-container">
+            <ul class="preview-theme__menu">
+                <li class="preview-theme__list" data-bind="text:$component.resourceBundle.sampleTxt.home"></li>
+                <li class="preview-theme__list" data-bind="text:$component.resourceBundle.sampleTxt.aboutUs"></li>
+            </ul>
+            <ul class="preview-theme__menuRight">
+                <li class="preview-theme__list"><span brand="header-icon" class="header-icon icons icon-search"></span></li>
+                <li class="preview-theme__list"><span brand="header-icon" class="header-icon icons icon-user"></span></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="oj-flex-item oj-sm-12 preview-theme__body">
+        <page-section
+            params="baseModel : $baseModel, rootModel : $data, heading : $component.resourceBundle.sampleTxt.form">
+            <div class="oj-flex preview-theme__form">
+
+                <div brand="form-background" data-bind="template : {name : 'theme-config/preview-theme-form-section'}"></div>
+                <div class="oj-flex-item oj-sm-12" id="nav-section">
+                    <div data-bind='component:{name: "nav-bar",
+       params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.resourceBundle.sampleTxt.navBarDescription}}'>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12" id="table-section">
+                    <!-- ko if: $component.isCSSCustomPropAvailable() -->
+                    <oj-table id="table" :aria-label="[[$component.resourceBundle.data.table.arialabel]]" data='[[dataprovider]]' columns-default='{"sortable": "enabled"}' columns='[[[
+                    {"headerText":$component.resourceBundle.data.table.header1,"field": "DepartmentId"},
+                    {"headerText": $component.resourceBundle.data.table.header2,"field": "DepartmentName"}]]]'>
+                    </oj-table>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-buttonset-one id="buttonset-section" class="networth__switchButtons" value="{{$component.selectedValue}}" :aria-label="[[$component.resourceBundle.sampleTxt.btnSetLabel]]">
+                        <!-- ko foreach: $component.menuOptions() -->
+                        <oj-option value='[[id]]'>
+                            <span data-bind="text: label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-buttonset-one>
+                </div>
+                <div>
+                    <oj-button class="action-button-secondary" id="modalwindow-section" on-oj-action="[[showModalWindow]]">
+                            <span data-bind="text:$component.resourceBundle.sampleTxt.showmodalWindow"></span>
+                        </oj-button>
+
+                    <oj-button class="action-button-secondary" id="overlay-section" on-oj-action="[[showOverlay]]">
+                            <span data-bind="text:$component.resourceBundle.sampleTxt.showOverlay"></span>
+                        </oj-button>
+
+                    <oj-button class="action-button-secondary" id="alertbox-section" on-oj-action="[[showAlertBox]]">
+                            <span data-bind="text:$component.resourceBundle.sampleTxt.showAlertBox"></span>
+                        </oj-button>
+                    </div>
+
+
+                <div class="oj-flex-item oj-sm-4" id="helppanel-section">
+                    <div class="alignHelpPanel">
+                        <help brand="help-panel" params="baseModel : $baseModel, rootModel : $component, transaction: 'brand-list'"></help>
+                    </div>
+                </div>
+                <div class="oj-flex-item" id="banner-section">
+                    <div data-bind="template: { name: 'help/theme-configuration-banner'}"></div>
+                </div>
+                <div class="oj-flex-item" id="review-section">
+                    <div class="" data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+                    </div>
+                <div class="oj-flex-item oj-sm-12" id="confirmscreen-section">
+                    <div class=" confirm-screen" data-bind="template: { name: 'confirm-screen/confirm-screen-banner', data: $component.headerMessages}"></div>
+                    </div>
+                </div>
+        </page-section>
+    </div>
+
+    <footer class="oj-sm-12 center footer" id="preview-footer" data-bind="style: $component.computedBindings.footer">
+        <span data-bind="text:$component.resourceBundle.sampleTxt.footer"></span>
+    </footer>
+</div>
+
+<modal-window params="baseModel : $baseModel, rootModel : $data, id:$component.previewId, header:$component.resourceBundle.sampleTxt.modalWindow">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading: ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div data-bind="text:$component.resourceBundle.sampleTxt.demoModalTxt" class="oj-flex-item oj-sm-12"></div>
+            </div>
+        </page-section>
+    </div>
+</modal-window>
+<!-- /ko -->

@@ -1,0 +1,44 @@
+<div class="form-main-container full-width">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.Nls.review,reviewHeader: $component.Nls.reviewText}}">
+    </div>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.definition">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.name, value : $component.resourceServerPayload.name"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.description, value : $component.resourceServerPayload.description"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.domainName, value : $component.resourceServerPayload.idDomain"></row>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.scopes">
+        <!-- ko foreach:$component.resourceServerPayload.scopes -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.scopeName, value : scopeName"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.scopeDesc, value : description"></row>
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading:' '">
+        </page-section>
+        <!-- /ko -->
+    </page-section>
+    <div class="oj-row button-container">
+        <!-- ko ifnot:$component.sendResServerId() -->
+        <oj-button class="action-button-primary" on-click="[[$component.confirmCreate]]"><span data-bind="text:$component.Nls.confirm"></span></oj-button>
+        <!-- /ko -->
+        <!-- ko if:$component.sendResServerId() -->
+        <oj-button class="action-button-primary" on-click="[[$component.confirmUpdate]]"><span data-bind="text:$component.Nls.confirm"></span></oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-secondary" on-click="[[$component.cancel]]"><span data-bind="text:$component.Nls.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.back]]"><span data-bind="text:$component.Nls.back"></span></oj-button>
+    </div>
+    <modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'reviewCancel',header:$component.Nls.reviewwarning">
+        <div class="message-box">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <div class="dialog-text"><span data-bind="text:$component.Nls.cancelMessage"></span></div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="yesBtn" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                    <span data-bind="text:$component.Nls.yes"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="noBtn" on-click="[[no]]">
+                    <span data-bind="text:$component.Nls.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+</div>

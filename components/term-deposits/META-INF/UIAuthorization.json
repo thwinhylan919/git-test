@@ -1,0 +1,51 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.td.service.account.core.TermDeposit",
+    "components": [{
+      "componentName": "td-open",
+      "service": "create",
+      "perform": "rd-calculator#create-rd#review-create-rd#review-td-open",
+      "approve": "review-td-open#review-create-rd"
+    }, {
+      "componentName": "td-redeem",
+      "service": "redeem",
+      "perform": "rd-redeem#review-rd-redeem#review-td-redeem",
+      "approve": "review-rd-redeem#review-td-redeem"
+    }, {
+      "componentName": "td-topup",
+      "service": "topUp",
+      "perform": "review-td-topup",
+      "approve": "review-td-topup"
+    }, {
+      "componentName": "td-amend",
+      "service": "amend",
+      "perform": "rd-amend#review-rd-amend#review-td-amend#td-payout",
+      "approve": "review-rd-amend#review-td-amend"
+    }, {
+      "componentName": "td-details",
+      "service": "read",
+      "perform": "rd-details"
+    }, {
+      "componentName": "term-deposit-transactions",
+      "service": "fetchTransactions",
+      "perform": "recurring-deposit-transactions#account-transactions"
+    }, {
+      "componentName": "term-deposit-statement-request",
+      "service": "requestAdhocStatement",
+      "perform": "recurring-deposit-statement-request#review-physical-statement#statement-request#review-statement-request#physical-statement",
+      "approve": "review-physical-statement#statement-request#review-statement-request"
+    }]
+  },{
+        "moduleName": "com.ofss.digx.app.td.service.account.product.core.TermDepositProduct",
+        "components": [
+        {
+            "componentName": "rd-calculator",
+            "service": "listInterestRates",
+            "perform": "create-rd#view-rd-interest-rate#view-interest-rate"
+        },{
+            "componentName": "product-list",
+            "service": "read",
+            "perform": "deposit-type"
+        }]
+    }]
+}

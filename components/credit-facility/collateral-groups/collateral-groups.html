@@ -1,0 +1,146 @@
+<!-- ko if: $component.displayCollaterals() -->
+
+<!-- ko if: $component.treeDataLoaded2() -->
+
+
+<div class="pfm-listView__items listView-items">
+    <div class="oj-panel">
+
+        <div class="oj-flex oj-flex-items-pad oj-lg-12">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9 covanent-title">
+                <oj-label><span data-bind="text: poolId" class="titleField"></span></oj-label>
+                <span class="structure1 tags marginTop" data-bind="text:$component.resources.group"></span>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3 covanent-title">
+                <div class="oj-flex oj-flex-items-pad flex-right">
+                    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-6 listContent__view-details view-details">
+                        <a class="view-details__link view-details-link" href="#" data-bind="attr:{alt:$component.resources.linkedCollateral}, click:$component.showCollaterals.bind($data)">
+                            <div class="view-details-link__linkText" data-bind="text: $component.resources.linkedCollateral">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-9 contriPercent">
+                    
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                        <oj-label><span data-bind="text: $component.resources.collateralGroupAmount" class="label"></span></oj-label>
+                        <span data-bind="text: $formatter.formatCurrency(collateralData().collateralGroupDTO.groupAmount.amount,collateralData().collateralGroupDTO.groupAmount.currency)"></span>
+                    </div>
+
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                        <oj-label><span data-bind="text: $component.resources.utilizedAmount" class="label"></span></oj-label>
+                         <span data-bind="text: $formatter.formatCurrency(collateralData().collateralGroupDTO.groupUtilizedAmount.amount+
+                        collateralData().collateralGroupDTO.groupBlockAmount.amount,collateralData().collateralGroupDTO.groupUtilizedAmount.currency)"></span>
+                    </div>
+
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                        <oj-label><span data-bind="text: $component.resources.blockAmount" class="label"></span></oj-label>
+                        <span data-bind="text: $formatter.formatCurrency(collateralData().collateralGroupDTO.groupAmount.amount-(collateralData().collateralGroupDTO.groupUtilizedAmount.amount+collateralData().collateralGroupDTO.groupBlockAmount.amount+collateralData().collateralGroupDTO.availableAmount.amount), collateralData().collateralGroupDTO.groupBlockAmount.currency)"></span>
+                    </div>
+                    
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                        <oj-label><span data-bind="text: $component.resources.availableAmount" class="label"></span></oj-label>
+                        <span data-bind="text: $formatter.formatCurrency(collateralData().collateralGroupDTO.availableAmount.amount, collateralData().collateralGroupDTO.availableAmount.currency)"></span>
+                    </div>
+
+                </div>
+         
+<div class="oj-flex oj-flex-items-pad oj-lg-3">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 utilized">
+               <oj-label><span data-bind="text: $component.resources.contributionToFacility" class="label"></span> </oj-label>
+            <span data-bind="text: $formatter.formatCurrency($component.progressValue($data),collateralData().collateralGroupDTO.groupAmount.currency)"></span>
+           <br>
+          </div>
+</div>
+            
+            </div>
+        </div>
+    </div>
+    <!-- ko if: $component.treeDataLoaded2() -->
+    <!-- ko if: $component.selected() === poolId && $component.treeDataLoaded2() -->
+    <oj-list-view id="treeview2" selection-mode="multiple" data="[[$component.datasource]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template2', true)]]">
+    </oj-list-view>
+    <!-- /ko -->
+    <!-- /ko -->
+
+
+</div>
+
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot: $component.displayCollaterals() -->
+<div class="paddingTop" data-bind="text:$component.resources.noCollateralGroup"></div>
+<!-- /ko -->
+
+<script type="text/html" id="item_template2">
+
+    <li class="pfm-listView__items listView-items">
+        <div class="oj-panel ">
+
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1 covanent-title">
+                    <a class="view-details__link view-details-link" href="#" data-bind="attr:{alt:$component.resources.linkedCollateral ,title:$component.resources.linkedCollateral}">
+                        <div class="view-details-link__linkText" class="titleField2" data-bind="text: collateralDetails.collateralCode"></div>
+                    </a>
+                </div>
+                <!-- ko if:collateralDetails.collateralDesc -->
+                <span class="oj-flex pipe"></span>
+                <!-- /ko -->
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9 covanent-title">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-12 listContent__view-details view-details">
+                            <oj-label><span data-bind="text: collateralDetails.collateralDesc" class="titleField2"></span></oj-label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad oj-lg-12 contriPercent">
+                    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-9">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3 ">
+                            <oj-label><span data-bind="text: $component.resources.collateralAmount" class="label"></span></oj-label>
+                            <span data-bind="text: $formatter.formatCurrency(collateralDetails.childCollateralValue.amount, collateralDetails.childCollateralValue.currency)"></span>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3 ">
+                            <oj-label><span data-bind="text: $component.resources.limitContribution" class="label"></span></oj-label>
+                            <span data-bind="text : $formatter.formatCurrency(collateralDetails.childLimitContribution, collateralDetails.childCollateralValue.currency)"></span>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                            <oj-label><span data-bind="text: $component.resources.endDate" class="label"></span></oj-label>
+                            <!-- ko if:collateralDetails.endDate -->
+                            <span data-bind="text: $formatter.formatDate(collateralDetails.endDate)"></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot:collateralDetails.endDate -->
+                            <span class="center" data-bind="text:$component.blank()"></span>
+                            <!-- /ko -->
+                        </div>
+
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                            <oj-label><span data-bind="text: $component.resources.lendableMargin" class="label"></span></oj-label>
+                            <span data-bind="text : $baseModel.format($component.resources.optionPercentage2,{number : collateralDetails.lendableMargin})"></span>
+                        </div>
+
+                    </div>
+                    <div class="oj-flex-items-pad oj-lg-3">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label><span data-bind="text: $component.resources.contributionToGroup" class="label"></span></oj-label>
+                            <div class="oj-flex oj-flex-items-pad oj-lg-6 structure tags groupAlign">
+                                <span  class="titleField3" data-bind="text: $formatter.formatCurrency(collateralDetails.utilizationAmount.amount, collateralDetails.utilizationAmount.currency)"></span>
+                                <span class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 group2" data-bind="text:$baseModel.format($component.resources.optionPercentage2,{number : allocatedGroupContributionInPercentage})"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>
+
+<div class="oj-flex oj-flex-items-pad button-container">
+    <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]"><span slot="startIcon" class="icon-cancel"></span><span data-bind="text:$component.locale.generic.common.cancel"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" on-click="[[back]]"><span slot="startIcon" class="icon-back-arrow"></span><span data-bind="text:$component.locale.generic.common.back"></span>
+    </oj-button>
+</div>

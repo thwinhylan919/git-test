@@ -1,0 +1,58 @@
+.popup-width {
+  width: 15rem;
+  padding-bottom: 0.625rem;
+  line-height: 1.43rem;
+}
+
+.header-underline {
+  border-bottom: 0.0625rem solid var(--base-border-default);
+  display: inherit;
+}
+
+.title-bold {
+  font-weight: var(--base-font-weight-bold);
+}
+
+.spacing-table {
+  padding-top: 2.5rem;
+}
+
+.search-account-container {
+  padding-top: 0.625rem;
+}
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.virtual-account-search {
+  .search-options {
+    padding: 1.3rem;
+  }
+
+  .padding-tb {
+    @include single-padding(top, 0.6rem !important);
+    @include single-padding(bottom, 0.6rem !important);
+  }
+
+  .icon-2x {
+    font-size: 1.3rem;
+  }
+
+  .icon-padding-right {
+    @include single-padding(right, 0.6rem);
+  }
+
+  .content {
+    word-wrap: break-word;
+  }
+}
+
+.disclaimer-note {
+  color: var(--base-text-secondary);
+}

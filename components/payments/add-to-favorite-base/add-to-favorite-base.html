@@ -1,0 +1,34 @@
+    <!-- ko if: $component.stageFavoriteAdd && $component.stageFavoriteAdd() --> 
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item dialog-text"
+                data-bind="text:$component.nls.payments.common.favourite.favoriteComfirmMsg">
+            </div>
+        </div>
+    </page-section>
+    <div class="button-container">
+        <oj-button class="action-button-primary" id="button-okk" disabled = [[disableOk]] on-click="[[$component.persistFavorites]]"><span
+                slot="startIcon" class="icons icon-ok"></span>
+            <span data-bind="text:$component.nls.payments.common.ok"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" id="button-cancel" on-click="[[$component.closeFavoriteModal]]"><span
+                slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.nls.payments.common.cancel"></span>
+        </oj-button>
+    </div>
+     <!-- /ko -->
+    <!-- ko if: $component.stageFavoriteSuccess && $component.stageFavoriteSuccess() -->
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item dialog-text">
+                <span class="confirm-text" data-bind="text:$component.nls.payments.common.favourite.favoriteSuccess"></span>
+            </div>
+        </div>
+    </page-section>
+    <div class="button-container">
+        <oj-button class="action-button-primary" id="button-done" on-click="[[$component.closeFavoriteModal]]"><span
+                slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.nls.payments.common.done"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->

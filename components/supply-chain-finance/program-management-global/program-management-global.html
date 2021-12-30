@@ -1,0 +1,109 @@
+<!--  ko if : $component.isGlobalLoaded()  -->
+<oj-validation-group :id="[['tracker']]">
+    <div class="oj-flex oj-flex-items-pad party-details oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-lg-3 oj-md-12">
+            <div class="party-name-style"><span data-bind="text:$component.partyName()"></span></div>
+            <div class="banner-label"><span
+                    data-bind="text:$baseModel.format($component.nls.CreateProgram.PartyIDpartyId,{partyId : $component.partyId()})"></span>
+            </div>
+        </div>
+        <!-- ko if : $component.modelInstance.programProduct.productDescription -->
+        <div class="oj-flex-item oj-lg-2 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text:$component.nls.CreateProgram.ProgramType"></span></div>
+            <div class="banner-value">
+                <span data-bind="text:$component.modelInstance.programProduct.productDescription"></span>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : $component.modelInstance.programName -->
+        <div class="oj-flex-item oj-lg-2 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text:$component.nls.CreateProgram.ProgramName"></span></div>
+            <div class="banner-value"><span data-bind="text:$component.modelInstance.programName"></span></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : $component.modelInstance.programCode -->
+        <div class="oj-flex-item oj-lg-2 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text:$component.nls.CreateProgram.ProgramId"></span></div>
+            <div class="banner-value"><span data-bind="text:$component.modelInstance.programCode"></span></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : $component.modelInstance.status -->
+        <div class="oj-flex-item oj-lg-1 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text:$component.nls.CreateProgram.Status"></span></div>
+            <div class="banner-value"><span data-bind="text:$component.modelInstance.status"></span></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : $component.isEditMode -->
+        <div class="oj-flex-item oj-lg-2 oj-md-4 banner-padding">
+            <div><a href="#" class="form-button-link" id="viewAttributes"
+                    data-bind="attr:{'alt':$component.nls.CreateProgram.ViewAttributes,'title':$component.nls.CreateProgram.ViewAttributesTitle},click:$component.onClickViewAttributes">
+                    <span data-bind="text:$component.nls.CreateProgram.ViewAttributes"></span></a>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5">
+                    <oj-train :class="[['oj-train-stretch train-style']]" :id="[['train']]"
+                        on-oj-before-select="[[$component.trainListener]]" selected-step="{{selectedStepValue}}"
+                        steps="[[stepArray]]"></oj-train>
+                </div>
+            </div>
+            <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+        </page-section>
+    </div>
+</oj-validation-group>
+<!--  /ko  -->
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'bannerContainer', header : $component.nls.heading.CreateProgramModal">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.MinTenorAllowed, value : '-'">
+            </row>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.MinFinance, value : '-'">
+            </row>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.MaxTenorAllowed, value : '-'">
+            </row>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.MaxFinance, value : '-'">
+            </row>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.ProgramTenor, value : '-'">
+            </row>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.NoofCounterparties, value : '-'">
+            </row>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.WithRecourse, value : '-'">
+            </row>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateProgramModal.GraceDays, value : '-'">
+            </row>
+        </div>
+    </div>
+</modal-window>

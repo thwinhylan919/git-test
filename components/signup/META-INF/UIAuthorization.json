@@ -1,0 +1,16 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.wallet.service.Registration",
+        "components": [{
+                "componentName": "wallet-signup",
+                "service": "register",
+                "perform": "wallet-address-details#wallet-document-details#wallet-profile-detail#wallet-setup-credentials#wallet-success"
+            },
+            {
+                "componentName": "wallet-signup",
+                "service": "initiate",
+                "perform": "wallet-address-details#wallet-document-details#wallet-profile-detail#wallet-setup-credentials#wallet-success"
+            }
+        ]
+    }]
+}

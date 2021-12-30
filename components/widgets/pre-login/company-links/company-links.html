@@ -1,0 +1,22 @@
+<div class="company-links">
+    <div class="oj-flex oj-flex-items-pad container-block">
+        <div class="oj-sm-12 social-icons center">
+            <div class="icons icon-facebook"></div>
+            <div class="icons icon-twitter"></div>
+        </div>
+        <!-- ko foreach:companyLinks -->
+        <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+            <div class="im-heading" data-bind="text:header"></div>
+            <!-- ko foreach:links -->
+            <div class="link-box">
+                <!-- ko if:icon -->
+                <img class="icons" data-bind="loadImage:icon">
+                <!-- /ko -->
+                <a class="anc-links" href="#" data-bind="text:txt"></a>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+       
+    </div>
+</div>

@@ -1,0 +1,188 @@
+<div class="form-main-container theme-config">
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading : $component.resourceBundle.heading.create">
+        <oj-validation-group :id="[[validationTrackerID]]" valid="{{validationTracker}}">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 label">
+                    <oj-label for="theme_name">
+                        <span data-bind="text:$component.resourceBundle.labels.themeName"></span>
+                    </oj-label>
+                </div>
+                <!-- ko if: $component.modelInit() -->
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+                    <oj-input-text :aria-label="[[$component.resourceBundle.labels.themeName]]" required
+                        :id="theme_name" validators="[[$baseModel.getValidator('APPLICATION_NAME')]]"
+                        value="{{$component.themeData.brandName}}"></oj-input-text>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 label">
+                    <oj-label for="theme_desc">
+                        <span data-bind="text:$component.resourceBundle.labels.themeDesc"></span>
+                    </oj-label>
+                </div>
+                <!-- ko if: $component.modelInit() -->
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+                    <oj-input-text required :aria-label="[[$component.resourceBundle.labels.themeDesc]]"
+                        :id="theme_desc" validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION')]]"
+                        value="{{$component.themeData.brandDescription}}"></oj-input-text>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 label">
+                    <oj-label for="userAvailable">
+                        <span data-bind="text:$component.resourceBundle.labels.userAvailable"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+                    <oj-switch required :aria-label="[[$component.resourceBundle.labels.userAvailable]]"
+                        id="userAvailable" value="{{$component.themeData.availableForSelection}}"></oj-switch>
+                </div>
+            </div>
+        </oj-validation-group>
+    </page-section>
+
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data,heading:$component.resourceBundle.heading.customizeBrand">
+        <div class="oj-flex oj-sm-12">
+            <div class="oj-flex-item oj-sm-4 scrollArea" id="leftSection">
+                <!-- ko if:$component.modelInit() -->
+                <oj-accordion id="accordionThemePage" on-oj-expand='[[listener]]'>
+                    <oj-collapsible id="assets">
+                        <h4 slot="header" data-bind="text:$component.resourceBundle.heading.logo"></h4>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12">
+                                <oj-label class="pull-left" :for="[['zipFileInput']]">
+                                    <span data-bind="text:$component.resourceBundle.labels.brandLogo"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12">
+                                <oj-file-picker accept='[".zip"]' selection-mode="single"
+                                    on-oj-select="[[$component.zipFileUploadListener]]">
+                                </oj-file-picker>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12" id="selectedFileNotification"></div>
+                        </div>
+                    </oj-collapsible>
+                    <oj-collapsible id="typography">
+                        <h4 slot="header" data-bind="text:$component.resourceBundle.labels.fontSection"></h4>
+                        <div>
+                            <div class="oj-flex oj-flex-items-pad ">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['baseFontUrl']]">
+                                        <span data-bind="text:$component.resourceBundle.labels.baseFontUrl"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-input-text validators="[[$baseModel.getValidator('URL')]]" :id="[['baseFontUrl']]"
+                                        value="{{$component.currentTokens['--base-font-url']}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad ">
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-label :for="[['baseFontFamily']]">
+                                        <span data-bind="text:$component.resourceBundle.labels.baseFontFamily"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12">
+                                    <oj-input-text :id="[['baseFontFamily']]"
+                                        value="{{$component.currentTokens['--base-font-family']}}"></oj-input-text>
+                                </div>
+                            </div>
+                        </div>
+                    </oj-collapsible>
+                    <!-- ko foreach: $component.getTokens() -->
+                    <oj-collapsible :id=[[$data.headerName]]
+                        on-oj-before-expand='[[$component.brandCollapsibleExpand]]'>
+                        <h4 slot="header" data-bind="text:$parent.resourceBundle.heading[$data.headerName]"></h4>
+                        <div data-bind="template: {name: 'brand-collapsible-content', data: $data.headerName}"></div>
+                    </oj-collapsible>
+                    <!-- /ko -->
+                </oj-accordion>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex-item oj-sm-8 scrollArea" id="previewTheme">
+                <!-- ko if: $component.showPreviewTheme() -->
+                <div
+                    data-bind="component:{name:'preview-theme', params: {currentTokens : $component.currentTokens, sizeUnit: $component.sizeUnit, modelInit: $component.modelInit}}">
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </page-section>
+
+    <script type="text/html" id="brand-collapsible-content">
+        <!-- ko foreach:{data:Object.keys($component.skeletonStructure[$data])} -->
+        <!-- ko if:$component.themeProperties.indexOf($data)>=0 -->
+        <div class="firstContainer">
+            <div class="header" data-bind="text:$component.resourceBundle.heading['sub-headers'].headings[$data]"></div>
+            <div
+                data-bind="component:{name:$data,params:{rootModel:$component.skeletonStructure[$parent][$data],obdxVariables:$component.currentTokens,selectedColors:$component.selectedColors}}">
+            </div>
+        </div>
+        <!-- /ko  -->
+        <!-- ko if:$component.themeProperties.indexOf($data)===-1 -->
+        <div class="controlContainer">
+            <h4 data-bind="text:$component.resourceBundle.heading['sub-headers'][$parent][$data]"></h4>
+            <!-- ko foreach:{data:Object.keys($component.skeletonStructure[$parent][$data])} -->
+            <!-- ko if:$component.themeProperties.indexOf($data)>=0 -->
+            <!-- ko if:$data!=="size" -->
+            <div class="controlHeader" data-bind="text:$component.resourceBundle.heading['sub-headers'].headings[$data]"></div>
+            <!-- /ko -->
+            <div
+                data-bind="component:{name:$data,params:{rootModel:$component.skeletonStructure[$parents[1]][$parents[0]][$data],obdxVariables:$component.currentTokens,selectedColors:$component.selectedColors}}">
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </script>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <!-- ko if:$component.parameters.mode ==='create'-->
+        <oj-button class="action-button-primary" on-click="[[reviewTheme]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.save"></span>
+        </oj-button>
+        <!-- /ko -->
+        <!-- ko if:$component.parameters.mode ==='edit'-->
+        <oj-button class="action-button-primary" on-click="[[updateTheme]]">
+            <span data-bind="text:$component.resourceBundle.update"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[resetColors]]">
+            <span data-bind="text:$component.resourceBundle.reset"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+        </oj-button>
+    </div>
+
+    <modal-window class="message"
+        params="baseModel : $baseModel, rootModel : $component,id:'zipFileHelp',header:$component.resourceBundle.labels.help">
+        <div class="form-main-container message-text">
+            <div data-bind="component:{name:'help-box',params:{}}"></div>
+        </div>
+    </modal-window>
+
+    <modal-window
+        params="baseModel : $baseModel, rootModel : $data, id:'confirmZipMissing', header: $component.resourceBundle.update">
+        <div class="form-main-container">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading: ''">
+                <div data-bind="html:$component.resourceBundle.zipMissing"></div>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button id="confirm" class="action-button-primary" on-click="[[$component.confirmUpdateTheme]]">
+                    <span data-bind="text:$component.resourceBundle.generic.common.yes"></span>
+                </oj-button>
+                <oj-button id="cancel" class="action-button-secondary" on-click="[[$component.cancelConfirmZipDialog]]">
+                    <span data-bind="text:$component.resourceBundle.generic.common.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+</div>

@@ -1,0 +1,161 @@
+$sweep-background-color: #1E7C9F;
+$pool-background-color: #1E7C9F;
+
+.virtualAccountStructure {
+  max-height: 27rem;
+
+  .icon-size {
+    font-size: 1.2rem;
+  }
+
+  &__links-with-nostructure {
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--form-line-height) + .5rem);
+    line-height: calc(var(--form-line-height) + .5rem);
+    border-top: 0.05rem solid var(--base-border-default);
+    position: relative;
+    top: 0.4rem;
+
+    &:not(:last-child) {
+      @include single-border(right, 0.05rem solid var(--base-border-default));
+      @include single-padding(bottom, .5rem);
+    }
+  }
+  &__links {
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--form-line-height) + .5rem);
+    line-height: calc(var(--form-line-height) + .5rem);
+    border-top: 0.05rem solid var(--base-border-default);
+    position: relative;
+    top: 1.4rem;
+
+    &:not(:last-child) {
+      @include single-border(right, 0.05rem solid var(--base-border-default));
+      @include single-padding(bottom, .5rem);
+    }
+  }
+
+  &__wrapper {
+    height: 20.7rem;
+  }
+
+  &__tree-container {
+    max-height: 17rem;
+    overflow: auto;
+
+    .fullWrap {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.virtual-structure-bar {
+  background: var(--banner-background);
+  color: var(--banner-text-secondary);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.icon-size {
+  font-size: 1.6875rem;
+}
+
+.icon-style {
+  padding-top: 0.5rem;
+}
+
+.structure {
+  &__nodeHeader {
+    padding: 0.6rem 0;
+    font-size: var(--base-font-size-large);
+  }
+
+  &__parentNodeHeader {
+    padding: 0.3rem 0 0.6rem;
+    font-size: var(--base-font-size-large);
+  }
+
+  &__tree-width {
+    width: 100%;
+  }
+
+  &__node {
+    height: 100%;
+  }
+
+  &__structureFillParent {
+    height: 100%;
+    padding: 0.6rem 0;
+
+    &__structureFillSweep {
+      background-color: $sweep-background-color;
+      color: var(--color-white);
+    }
+
+    &__structureFillPool {
+      background-color: $pool-background-color;
+      color: var(--color-white);
+    }
+  }
+
+  &__structureFill {
+    padding-bottom: 0.5rem;
+
+    &__structureFillSweep {
+      border-top: 0.6rem solid $sweep-background-color;
+    }
+
+    &__structureFillPool {
+      border-top: 0.6rem solid $pool-background-color;
+    }
+  }
+}
+
+.noData {
+  padding-bottom: 0.5rem;
+  max-height: 18rem;
+  height: -webkit-fill-available;
+  height: -moz-fill-available;
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 10rem;
+      width: 100%;
+    }
+  }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--base-font-size-larger);
+}
+
+.subText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.structureFillSweep {
+  fill: $sweep-background-color;
+}
+
+.treeHeight {
+  height: 16.4rem;
+}
+
+.widgetSummary {
+  font-size: var(--base-font-size-default);
+  color: var(--base-text-secondary);
+}

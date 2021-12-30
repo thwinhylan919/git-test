@@ -1,0 +1,99 @@
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-9">
+    <div class="form-main-container">
+      <!-- ko if: $component.apiGroupsloaded -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item label oj-lg-3">
+            <oj-label :for="[['groupName'+$baseModel.currentIdCount()]]">
+              <span data-bind="text:$component.Nls.groupName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+            <oj-select-one :id="[['groupName'+$baseModel.currentIdCount()]]" placeholder="{{Nls.select}}" value="{{selectedGroup}}">
+              <!-- ko foreach: $component.groupName() -->
+              <oj-option value="[[groupCode]]">
+                <span data-bind="text: groupCode"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="serviceID">
+              <span data-bind="text:$component.Nls.serviceID"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="serviceID" value="{{$component.serviceID}}" aria-labelledby="serviceID"></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="serviceName">
+              <span data-bind="text:$component.Nls.serviceName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="serviceName" value="{{$component.serviceName}}" aria-labelledby="serviceName"></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="serviceURL">
+              <span data-bind="text:$component.Nls.serviceURL"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="serviceURL" value="{{$component.serviceURL}}" aria-labelledby="serviceURL"></oj-input-text>
+          </div>
+        </div>
+      </page-section>
+      <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.search]]">
+          <span data-bind="text:$component.Nls.search"></span>
+        </oj-button>
+        <!-- ko if: $component.cancelButtonFlag -->
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]">
+          <span data-bind="text:$component.Nls.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]">
+          <span data-bind="text:$component.Nls.clear"></span>
+        </oj-button>
+      </div>
+      <!-- ko if: $component.showList -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.serviceDetails">
+        <div class="oj-flex oj-flex-items-pad">
+          <oj-table :id="[['serviceTable'+$baseModel.incrementIdCount()]]" :aria-label="[[$component.Nls.serviceDetails]]"
+            columns="[[[{headerText:$component.Nls.methodType,field:'methodType',template:'method-details'},{headerText:$component.Nls.serviceName,field:'serviceName'},{headerText:$component.Nls.serviceID,field:'serviceId'},{headerText:$component.Nls.serviceURL,field:'serviceURL', template:'view-details'}]]]"
+            selection-mode="[[{row:'single',column:'single'}]]" translations="[[{msgNoData:$component.Nls.noData}]]"
+            data="[[$component.dataSource()]]">
+            <caption data-bind="text:$component.Nls.serviceDetails"></caption>
+            <template slot="method-details">
+              <div class="oj-flex-items-pad center" data-bind="css:$current.row.methodType==='Get' ? 'methodTypeGet':($current.row.methodType==='Put' ? 'methodTypePut': ($current.row.methodType==='Post' ? 'methodTypePost': ($current.row.methodType==='Delete' ? 'methodTypeDelete': 'methodTypePatch')))">
+                <span data-bind="text:$current.row.methodType"></span>
+              </div>
+            </template>
+            <template slot="view-details">
+              <a href="#" data-bind="text:$current.row.serviceURL,click:$component.viewDetails.bind($data,$current)"></a>
+            </template>
+          </oj-table>
+        </div>
+      </page-section>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.cancelButtonFlag -->
+      <div class="oj-row button-container">
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]">
+          <span data-bind="text:$component.Nls.cancel"></span>
+        </oj-button>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="oj-flex-item oj-sm-3 help-panel">
+    <help params="baseModel : $baseModel, rootModel : $component, transaction: 'api-builder-search'"></help>
+  </div>
+</div>

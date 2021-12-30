@@ -1,0 +1,33 @@
+<div id="terms-and-conditions">
+
+  <div data-bind="component:{name: 'user-login-configuration-header',
+  params:{rootModel: $component,data: $data}}">
+  </div>
+
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 data-bind="text:$component.nls.pageTitle.termsAndConditions">
+      </h3>
+    </div>
+  </div>
+
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item user-login-configuration__terms-conds-scroll information-wrapper">
+      <div data-bind="template: {name: $component.transactionName()}"></div>
+    </div>
+  </div>
+
+
+  <div class="oj-flex oj-flex-items-pad button-container">
+    <oj-button class="action-button-primary " on-click="[[$component.loadNextComponent]]"><span slot="startIcon"
+        class="icons icon-ok"></span>
+      <span data-bind="text:$component.nls.buttons.acceptButton"></span>
+    </oj-button>
+    <!-- ko ifnot : $component.componentMandatory -->
+    <oj-button class="action-button-secondary " on-click="[[$component.loadNextComponent]]"><span slot="startIcon"
+        class="icons icon-forward-arrow"></span>
+      <span data-bind="text:$component.nls.buttons.skip"></span>
+    </oj-button>
+    <!-- /ko -->
+  </div>
+</div>

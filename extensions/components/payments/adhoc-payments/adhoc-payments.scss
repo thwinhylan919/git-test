@@ -1,0 +1,16 @@
+.iconStyling {
+    font-size: 1.1rem;
+    position: relative;
+    top: 0.1rem;
+    color: var(--link-base);
+}
+.suggested-network {
+    @include single-margin(left, 0.4rem);
+}
+.paymentDetailDeleteIcon {
+       .iconSize {
+           font-size: 1.3rem;
+       }
+
+       padding-top:1rem;
+   }

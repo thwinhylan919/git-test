@@ -1,0 +1,94 @@
+.main-menu {
+    .menu-container {
+        .welcome-box {
+            background: linear-gradient(to var(--welcome-box-gradient-direction), var(--welcome-box-gradient-start-color), var(--welcome-box-gradient-end-color));
+            color: var(--welcome-box-foreground-color);
+            line-height: 1.3rem;
+            &-text {
+                margin-bottom: 1.2rem;
+            }
+            &-item {
+                padding-top: .3rem;
+                &__name {
+                    font-weight: var(--base-font-weight-light);
+                }
+                &__info {
+                    font-size: var(--base-font-size-medium);
+                }
+                .alternate-primary .oj-label-group {
+                    font-size: var(--welcome-box-font-size);
+                    font-weight: var(--welcome-box-font-weight);
+                    color: var(--welcome-box-foreground-color);
+                }
+            }
+            .alternate-primary .oj-select .oj-select-choice .oj-select-chosen {
+                color: var(--welcome-box-foreground-color);
+            }
+        }
+        .navlist {
+            .seperator {
+                height: 0.1rem;
+            }
+            .oj-navigationlist-item {
+                color: var(--base-text-secondary);
+                font-size: var(--base-font-size-default);
+                &.oj-hover:not(.oj-selected) {
+                    color: var(--link-base);
+                }
+                .oj-navigationlist-item-icon {
+                    font-size: var(--base-font-size-larger);
+                }
+                &-label {
+                    color: var(--menu-foreground-color);
+                    .icons {
+                        position: relative;
+                        color: var(--link-base);
+                    }
+                }
+            }
+            .oj-navigationlist-collapsible ul.oj-navigationlist-has-icons>.oj-navigationlist-item-element>ul {
+                @include single-padding(left, 1.5rem);
+            }
+        }
+    }
+    a.oj-navigationlist-item-content .oj-navigationlist-item-label,
+    a.oj-navigationlist-item-content .oj-navigationlist-item-icon {
+        font-size: var(--menu-font-size);
+        font-weight: var(--menu-font-weight);
+        color: var(--menu-foreground-color);
+    }
+    .oj-navigationlist-toolbar .oj-navigationlist-previous-button {
+        .oj-navigationlist-previous-button {
+            color: var(--menu-foreground-color);
+        }
+        &.oj-hover {
+            background: var(--menu-hover-background);
+        }
+    }
+    a.oj-navigationlist-item-content .oj-navigationlist-item-icon {
+        font-size: var(--menu-icon-font-size);
+        display: flex;
+    }
+    .oj-navigationlist-group-item a.oj-navigationlist-collapse-icon {
+        color: var(--menu-foreground-color);
+    }
+    li.oj-hover a.oj-navigationlist-item-content .oj-navigationlist-item-label {
+        color: var(--menu-hover-color);
+    }
+    li.oj-hover a.oj-navigationlist-item-content .oj-navigationlist-item-icon {
+        color: var(--menu-hover-color);
+    }
+    li div.oj-navigationlist-group-item.oj-hover .oj-navigationlist-item-icon {
+        color: var(--menu-hover-color);
+    }
+    li div.oj-navigationlist-group-item.oj-hover .oj-navigationlist-item-label {
+        color: var(--menu-hover-color);
+    }
+    .oj-navigationlist-item.oj-hover:not(.oj-selected) {
+        border-color: var(--base-color-secondary);
+        background: var(--menu-hover-background);
+    }
+    .oj-navigationlist-current-header {
+        color: var(--menu-foreground-color);
+    }
+}

@@ -1,0 +1,145 @@
+<oj-validation-group :id="[['tracker']]">
+  <div class="form-main-container">
+    <!-- ko if : !$baseModel.large() -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+      <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if : $component.showDeleteMsg() -->
+        <div data-bind="attr:{'class':'success-bar oj-sm-12','id':'deleteBox'}">
+          <span class="undefined" data-bind="attr:{'class':'icons icon-success','id':'deleteBox'}">
+          </span>
+          <span data-bind="attr:{'class':'success-msg'},text:$component.nls.PendingRequests.RequestdeletedSuccessfully"></span>
+        </div>
+        <!-- /ko -->
+      </div>
+      <div>
+        <!-- ko if : $component.dataloaded()  -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12">
+            <oj-label :for="[['SearchbyVPA51']]"><span data-bind="text:$component.nls.PendingRequests.SearchbyVPA"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12">
+            <oj-select-one on-value-changed="[[vpaChangeHandler]]" :id="[['SearchbyVPA51']]" value="{{$component.paymentstransfersupiFundRequestgetvpaId}}">
+              <!-- ko foreach : vpaIdArray -->
+              <oj-option value="[[id]]"><span data-bind="text:value"></span></oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+          </div>
+          <!-- ko if : $component.accountNumber()  -->
+          <div class="oj-flex-item oj-label accountNumber oj-sm-12">
+            <div data-bind="text:$baseModel.format($component.nls.PendingRequests.AccountNumberaccountNumber,{accountNumber:$component.accountNumber()})"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
+      </div>
+      <!-- ko if : $component.navBarLoad() -->
+      <nav-bar params="baseModel : $baseModel,dashboard:$dashboard,rootModel: $data,menuOptions: menuCountOptions,uiOptions:uiOptions,   navBarDescription:$component.nls.PendingRequests.ListView"></nav-bar>
+      <!-- /ko -->
+      <!-- ko if : $component.listLoaded() && $component.paymentstransfersupiFundRequestgetVar().length-->
+      <oj-accordion id="listAccordian">
+        <!-- ko foreach : $component.paymentstransfersupiFundRequestgetVar() -->
+        <oj-collapsible :id="[['listCollapsible'+$index()]]" class="[['detailsData']]">
+          <div data-bind="attr:{'slot':'header','class':'detailsData'}">
+            <div class="oj-flex oj-label-inline">
+              <div class="oj-flex-item oj-sm-2">
+                <!-- ko if : $component.tabSelected()==="ME" -->
+                <oj-avatar role="img" size="[['xs']]" initials='[[$component.payeeMap()[creditVPAId].initials]]' src='[[$component.payeeMap()[creditVPAId].preview()]]' data-bind="attr:{'aria-label':creditVPAId}">
+                </oj-avatar>
+                <!-- /ko -->
+                <!-- ko if : $component.tabSelected()==="PAYER" && requestType==="Request Money"-->
+                <oj-avatar role="img" size="[['xs']]" initials='[[$component.payeeMap()[payerDetails[0].debitVPAId].initials]]' src='[[$component.payeeMap()[payerDetails[0].debitVPAId].preview()]]' data-bind="attr:{'aria-label':payerDetails[0].debitVPAId}">
+                </oj-avatar>
+                <!-- /ko -->
+                <!-- ko if : $component.tabSelected()==="PAYER" && requestType!=="Request Money" -->
+                <oj-avatar role="img" size="xs" data-bind="loadImage: $component.defaultImagePath,
+                attr:{'aria-label':$component.nls.PendingRequests.defaultImage}">
+                </oj-avatar>
+                <!-- /ko -->
+
+              </div>
+              <div class="oj-flex-item oj-sm-6">
+                <div>
+                  <!-- ko if : $component.tabSelected()==="ME" -->
+                  <div data-bind="text:receiverName"></div>
+                  <div class="payeeIdSize" data-bind="text:creditVPAId"></div>
+                  <!-- /ko -->
+                  <!-- ko if : $component.tabSelected()==="PAYER" && requestType==="Request Money"-->
+                  <div data-bind="text:payerDetails[0].payerName"></div>
+                  <div class="payeeIdSize" data-bind="text:payerDetails[0].debitVPAId"></div>
+                  <!-- /ko -->
+                  <!-- ko if : $component.tabSelected()==="PAYER" && requestType!=="Request Money" && payerDetails.length<=3-->
+                  <div data-bind="text:payerDetails.length===2?$baseModel.format($component.nls.PendingRequests.splitBillForOne,{contributor1:payerDetails[1].payerName}):
+                  $baseModel.format($component.nls.PendingRequests.splitBillForTwo,{contributor1:payerDetails[1].payerName,contributor2:payerDetails[2].payerName})"></div>
+                  <!-- /ko -->
+                  <!-- ko if : $component.tabSelected()==="PAYER" && requestType!=="Request Money" && payerDetails.length>3-->
+                  <div data-bind="text:$baseModel.format($component.nls.PendingRequests.splitBillMultiple,{contributor1:payerDetails[1].payerName,contributor2:payerDetails[2].payerName,remaining:payerDetails.length-3})"></div>
+                  <!-- /ko -->
+                </div>
+              </div>
+              <div class="oj-flex-item oj-sm-4">
+                <div data-bind="attr:{'class':'right'}">
+                  <div data-bind="attr:{'class':'details'}">
+                    <div data-bind="attr:{'class':($component.tabSelected()==='ME')?'details__debitAmount':'details__creditAmount'},text:$formatter.formatCurrency(amount.amount,amount.currency)"></div>
+                    <!-- ko if : $component.tabSelected()==="PAYER" && requestType!=="Request Money" -->
+                    <span data-bind="attr:{'class':'structure__splitType tags'},text:$component.nls.PendingRequests.SplitBill"></span>
+                    <!-- /ko -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="oj-flex">
+              <div class="oj-flex-item oj-sm-6">
+                <row params="baseModel : $baseModel,rootModel : $component, label : $component.nls.PendingRequests.RequestDate, value : $formatter.formatDate(requestDate)"></row>
+              </div>
+              <div class="oj-flex-item right oj-sm-6">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.ExpiryDate, value : $formatter.formatDate(expiryDate)"></row>
+              </div>
+            </div>
+
+
+          </div>
+          <div data-bind="attr:{'class':'detailsData'}">
+            <div class="oj-flex">
+              <div class="oj-sm-6">
+                <row params="baseModel : $baseModel, rootModel : $component, label :$component.tabSelected()==='ME'?$component.nls.PendingRequests.RequestTo:$component.nls.PendingRequests.ReceiveFundsin, value :$component.tabSelected()==='ME'? debitVPAId:creditVPAId"></row>
+              </div>
+              <div class="oj-sm-6 right">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.TransactionID, value : transferId"></row>
+              </div>
+            </div>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.Note, value : remarks"></row>
+          </div>
+          <!-- ko if : $component.tabSelected()==="PAYER" && requestType!=="Request Money" -->
+          <div data-bind="attr:{'class':'detailsData'}">
+            <!-- ko foreach : payerDetails -->
+            <div data-bind="template: { name: 'upi/split-bill-list-view'}"></div>
+            <!-- /ko -->
+          </div>
+          <!-- /ko -->
+          <!-- ko if : $component.tabSelected()==="ME" -->
+          <div>
+            <oj-button class="action-button-primary" on-click="[[$component.onClickApprove78]]"><span slot="startIcon" class="icon-confirm "></span><span data-bind="text:$component.nls.PendingRequests.Approve"></span></oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.onClickReject68]]"><span slot="startIcon" class="icon-cancel"></span><span data-bind="text:$component.nls.PendingRequests.Reject"></span></oj-button>
+          </div>
+          <!-- /ko -->
+
+        </oj-collapsible>
+        <!-- /ko -->
+      </oj-accordion>
+      <!-- /ko -->
+      <!-- ko if : $component.listLoaded() && !$component.paymentstransfersupiFundRequestgetVar().length-->
+      <div class="noRequests" data-bind="text:$component.nls.PendingRequests.noRequests"></div>
+      <!-- /ko -->
+    </page-section>
+    <!-- /ko -->
+  </div>
+</oj-validation-group>
+<modal-window params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'reject-request', header : $component.nls.heading.Warning">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item ">
+      <div data-bind="text:$component.nls.Warning.Areyousureyouwanttorejectthisrequest"></div>
+    </div>
+  </div>
+  <oj-button class="action-button-primary" on-click="[[$component.onClickYes27]]"><span slot="startIcon" class="icon-confirm"></span><span data-bind="text:$component.nls.Warning.Yes"></span></oj-button>
+  <oj-button class="action-button-tertiary" on-click="[[$component.onClickNo36]]"><span slot="startIcon" class="icon-cancel"></span><span data-bind="text:$component.nls.Warning.No"></span></oj-button>
+</modal-window>

@@ -1,0 +1,254 @@
+<!-- ko ifnot: $baseModel.small() -->
+<div class="dividends-container">
+  <div class="oj-sm-12 oj-md-12 oj-lg-12 oj-flex oj-flex-items-pad search-scheme">
+    <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-6">
+      <oj-checkboxset id="check-box-filter" class="oj-choice-direction-row" on-value-changed="[[includeRedeemed]]" value="{{redeemCheckBox}}">
+        <oj-option :aria-label=[[$component.resource.includeRedeemed]] value="REDEEMED"></oj-option>
+      </oj-checkboxset>
+      <span data-bind="text: $component.resource.includeRedeemed"></span>
+    </div>
+    <!-- ko if: $component.redeemedRefresh -->
+    <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-6 right">
+      <oj-combobox-one id="search-scheme" :aria-label="[[$component.resource.searchScheme]]" on-value-changed="[[searchScheme]]" placeholder="{{$component.resource.searchScheme}}" value="{{$component.schemeToSearch}}">
+        <span slot="end" class="icons icon-search"></span>
+        <!-- ko foreach: $component.schemesList -->
+        <oj-option value="[[schemeCode]]">
+          <span data-bind="text: schemeName"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-combobox-one>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: $component.redeemedRefresh -->
+  <oj-table class="table-resize" id="search-dividends" :aria-label="[[$component.resource.pageHeader]]" data="[[dataSource]]" columns-default.sortable="disabled" columns="[[headerText]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('rf_template',true)]]">
+    <caption class="hide-label" data-bind="text: $component.resource.pageHeader"></caption>
+  </oj-table>
+  <script type="text/html" id="rf_template">
+    <tr>
+      <!-- ko if: schemeCode === "HEADINGTEXT" -->
+      <td class="row-color">
+        <span class="big-text" data-bind="text: schemeName"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: recommendation"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: currentPrice"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: amountInvested"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: dividendsPaid"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: dividendsReinvested"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: marketValue"></span>
+      </td>
+      <!-- /ko -->
+      <!-- ko if: schemeCode === "TOTAL" -->
+      <td class="row-color right">
+        <span class="font-total" data-bind="text: schemeName"></span>
+      </td>
+      <td class="row-color">
+        <span class="font-total" data-bind="text: recommendation"></span>
+      </td>
+      <td class="row-color right">
+        <span class="font-total" data-bind="text: $formatter.formatCurrency(currentPrice,currency)"></span>
+      </td>
+      <td class="row-color right">
+        <span class="font-total" data-bind="text: $formatter.formatCurrency(amountInvested,currency)"></span>
+      </td>
+      <td class="row-color right">
+        <span class="font-total" data-bind="text: $formatter.formatCurrency(dividendsPaid,currency)"></span>
+      </td>
+      <td class="row-color right">
+        <span class="font-total" data-bind="text: $formatter.formatCurrency(dividendsReinvested,currency)"></span>
+      </td>
+      <td class="row-color right">
+        <span class="font-total" data-bind="text: $formatter.formatCurrency(marketValue,currency)"></span>
+      </td>
+      <!-- /ko -->
+      <!-- ko ifnot: schemeCode === "TOTAL" -->
+      <!-- ko ifnot: schemeCode === "HEADINGTEXT" -->
+      <!-- ko if: schemeCode === "SUBTOTAL" -->
+      <td class="column-color right">
+        <span data-bind="text: schemeName"></span>
+      </td>
+      <td class="center">
+        <span data-bind="text: recommendation"></span>
+      </td>
+      <!-- /ko -->
+      <!-- ko ifnot: schemeCode === "SUBTOTAL" -->
+      <td class="column-color">
+        <a href="#" data-bind="click:$component.showInfoPanel.bind($data,$context.row)"> <span data-bind="text: schemeName"></span></a>
+        <oj-rating-gauge :id="[['gauge'+ $context.rowContext.status.rowIndex]]" value="{{rating}}" max="{{$component.maxRating()}}" class="rating-icons" readonly></oj-rating-gauge>
+      </td>
+      <td>
+        <!-- ko if: recommendation() === "BUY" -->
+        <div class="buy-value tags">
+          <span data-bind="text: recommendation"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: recommendation() === "SELL" -->
+        <div class="sell-value tags">
+          <span data-bind="text: recommendation"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: recommendation() === "HOLD" -->
+        <div class="hold-value tags">
+          <span data-bind="text: recommendation"></span>
+        </div>
+        <!-- /ko -->
+      </td>
+      <!-- /ko -->
+      <td class="right">
+        <span data-bind="text: $formatter.formatCurrency(currentPrice,currency)"></span>
+      </td>
+      <td class="right">
+        <span data-bind="text: $formatter.formatCurrency(amountInvested,currency)"></span>
+      </td>
+      <td class="right">
+        <span data-bind="text: $formatter.formatCurrency(dividendsPaid,currency)"></span>
+      </td>
+      <td class="right">
+        <span data-bind="text: $formatter.formatCurrency(dividendsReinvested,currency)"></span>
+      </td>
+      <!-- ko ifnot: schemeCode === "SUBTOTAL" -->
+      <td class="right">
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-lg-10 right" data-bind="text: $formatter.formatCurrency(marketValue,currency)"></div>
+          <div class="oj-flex-item oj-lg-2 right">
+            <a class="menu-icon" href="#" data-bind="attr: {id : 'menu'+$context.rowContext.status.rowIndex,'title': $component.resource.moreOptionsTitle, 'aria-label': $component.resource.moreOptionsLabel}, click: $component.openMenu">
+              <div class="icons icon-more-vertical"></div>
+            </a>
+            <oj-menu class="hide" :id="[['menu'+$context.rowContext.status.rowIndex+'container']]" open-options="[[{display:'dropDown',launcher: 'menu'+$context.rowContext.status.rowIndex, position:{'my': 'right right', 'at': 'right right'}}]]" on-oj-action="[[$component.menuItemSelect]]">
+              <!-- ko foreach: $component.menuSelectOptions() -->
+              <oj-option data-bind="attr: {id:code + '_' + $context.rowContext.status.rowIndex},value:module">
+                <span data-bind="text: value"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-menu>
+          </div>
+        </div>
+      </td>
+      <!-- /ko -->
+      <!-- ko if: schemeCode === "SUBTOTAL" -->
+      <td class="right">
+        <span data-bind="text: $formatter.formatCurrency(marketValue,currency)"></span>
+      </td>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- /ko -->
+    </tr>
+  </script>
+  <!-- /ko -->
+</div>
+<!-- /ko -->
+
+<!-- ko if: $baseModel.small() -->
+<!-- ko if: $component.redeemedRefresh -->
+<div class="dividends-container">
+  <div class="card-layout">
+    <div class="oj-flex oj-flex-items-pad card-heading">
+      <div class="oj-flex-item oj-sm-12">
+        <span data-bind="text: $component.resource.totalInvestment"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-6">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.amountInvested, value : $formatter.formatCurrency($component.holdingsData()[$component.length - 1].investmentSummary.amountInvested.amount,$component.holdingsData()[$component.length - 1].investmentSummary.amountInvested.currency)"></row>
+      </div>
+      <div class="oj-flex-item oj-sm-6">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.dividendsPaid, value : $formatter.formatCurrency($component.holdingsData()[$component.length - 1].investmentSummary.dividendsPaid.amount,$component.holdingsData()[$component.length - 1].investmentSummary.amountInvested.currency)"></row>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-6">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.dividendsReinvested, value : $formatter.formatCurrency($component.holdingsData()[$component.length - 1].investmentSummary.dividendsReInvested.amount,$component.holdingsData()[$component.length - 1].investmentSummary.amountInvested.currency)"></row>
+      </div>
+      <div class="oj-flex-item oj-sm-6">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.marketValue, value : $formatter.formatCurrency($component.holdingsData()[$component.length - 1].investmentSummary.marketValue.amount,$component.holdingsData()[$component.length - 1].investmentSummary.amountInvested.currency)"></row>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad oj-sm-12 category-padding">
+    <div class="oj-flex-item">
+      <label data-bind="text: $component.resource.schemeCategory"></label>
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+      <oj-select-one id="holdings-category" :aria-label="[[$component.resource.investmentAccount]]" on-value-changed="[[categorySelect]]">
+        <!-- ko foreach : $component.holdingsCategory -->
+        <oj-option value="[[code]]"><span data-bind="text:value"></span> </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- ko if: $component.mobileViewTable -->
+  <oj-list-view id="listview-mobile" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('data-template',true)}]]" data="[[mobileDataSource]]">
+  </oj-list-view>
+  <script type="text/html" id="data-template">
+    <li>
+      <div class="oj-flex row-color heading-pad">
+        <div class="oj-flex-item oj-sm-8">
+          <a href="#" data-bind="click:$component.showInfoPanel.bind($data,$context.data)"> <span data-bind="text: schemeName"></span></a>
+          <oj-rating-gauge :id="[['gauge'+$context.index]]" value="{{rating}}" max="{{$component.maxRating()}}" class="rating-icons" readonly></oj-rating-gauge>
+        </div>
+        <!-- ko if: recommendation() === "BUY" -->
+        <div class="buy-value tags oj-sm-2">
+          <span data-bind="text: recommendation"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: recommendation() === "SELL" -->
+        <div class="sell-value tags oj-sm-2">
+          <span data-bind="text: recommendation"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: recommendation() === "HOLD" -->
+        <div class="hold-value tags oj-sm-2">
+          <span data-bind="text: recommendation"></span>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex-item oj-lg-2 right">
+          <a href="#" data-bind="attr: {id : 'menu'+$context.index,'title': $component.resource.moreOptionsTitle, 'aria-label': $component.resource.moreOptionsLabel}, click: $component.openMenu">
+            <div class="icons icon-more-vertical"></div>
+          </a>
+          <oj-menu class="hide" :id="[['menu'+$context.index+'container']]" open-options="[[{display:'dropDown',launcher: 'menu'+$context.index, position:{'my': 'right right', 'at': 'right right'}}]]" on-oj-action="[[$component.menuItemSelect]]">
+            <!-- ko foreach: $component.menuSelectOptions() -->
+            <oj-option data-bind="attr: {id:code + '_' + $context.index},value:module">
+              <span data-bind="text: value"></span>
+            </oj-option>
+            <!-- /ko -->
+          </oj-menu>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.currentPrice , value : $formatter.formatCurrency(currentPrice,currency)"></row>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.amountInvested , value : $formatter.formatCurrency(amountInvested,currency)"></row>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.dividendsPaid , value : $formatter.formatCurrency(dividendsPaid,currency)"></row>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.dividendsReinvested , value : $formatter.formatCurrency(dividendsReinvested,currency)"></row>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dividendsTab.marketValue , value : $formatter.formatCurrency(marketValue,currency)"></row>
+        </div>
+      </div>
+    </li>
+  </script>
+  <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- /ko -->

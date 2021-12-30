@@ -1,0 +1,21 @@
+<!-- ko if : data -->
+<oj-table id="entitlement-status" :aria-label="[[resourceBundle.entitlement.caption]]" columns="[[[{headerText:resourceBundle.header.transaction,template:'transactionName',style:'width:35%;'},{headerText:resourceBundle.header.status,template:'status',style:'width:10%;'},{headerText:resourceBundle.header.reason,template:'reason'}]]]"
+  columns-default="[[{sortable:'disabled'}]]" data="[[data]]" selection-mode="[[{row:'none',column:'none'}]]">
+  <caption class="hide-label" data-bind="text:resourceBundle.entitlement.caption"></caption>
+  <template slot="transactionName">
+      <td>
+        <div data-bind="text : $current.row.name"></div>
+      </td>
+  </template>
+  <template slot="status">
+      <td>
+        <img class="confirm-screen-header-text__image" data-bind="loadImage : $current.row.status"></img>
+      </td>
+  </template>
+  <template slot="reason">
+      <td>
+        <div data-bind="text : $current.row.reason"></div>
+      </td>
+  </template>
+</oj-table>
+<!-- /ko -->

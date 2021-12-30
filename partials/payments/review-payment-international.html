@@ -1,0 +1,75 @@
+<div class="row-group" data-bind="with:paymentData">
+    <!-- ko if:!('adhocPaymentFlag' in $component) -->
+    <!-- ko ifnot: $component.isMultiplePayment -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+            <span data-bind="text: $component.payments.moneytransfer.transferTo"></span>
+        </oj-label>
+        <div class="oj-flex oj-flex-item">
+            <!-- ko if:$component.imageUploadFlag() -->
+            <oj-avatar class="" role="img" size="xs" initials='[[$component.initials]]' src='[[$component.preview()]]' data-bind="attr:{'aria-label':payoutDetails.instructionDetails?payoutDetails.payeeDetails.nickName:payeeDetails.nickName}">
+            </oj-avatar>
+            <!-- /ko -->
+            <div data-bind="css: $component.imageUploadFlag() ? 'oj-label-inline oj-flex-item' : ''">
+                <span data-bind="text:payoutDetails.instructionDetails?payoutDetails.payeeDetails.nickName:payeeDetails.nickName"></span>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div data-bind="with:$component.payeeDetails()">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments?$component.payments.payee.accountType:$component.payments.moneytransfer.accountType ,value : $component.payments.payee.type[accountType]"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments?$component.payments.payee.accountNumber:$component.payments.moneytransfer.accountNumber ,value : accountNumber"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments?$component.payments.payee.accountName:$component.payments.moneytransfer.accountName ,value : accountName"></row>
+        <!-- ko if:typeof(accountBranch) === 'object'-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.branchDetails,
+            value :[accountBranch.code,accountBranch.name,accountBranch.branch,accountBranch.address,accountBranch.city,accountBranch.country]"></row>
+        <!-- /ko -->
+        <!-- ko if:typeof(accountBranch) === 'string'-->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.branchDetails, value :accountBranch"></row>
+        <!-- /ko -->
+         <!-- ko if:payeeAddress -->
+         <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.internationalPayee.payeeDetails,
+            value :[payeeAddress.line1,payeeAddress.line2,payeeAddress.city,payeeAddress.country]"></row>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: $component.isMultiplePayment -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.transferfrom ,
+                     value :payoutDetails.instructionDetails?payoutDetails.instructionDetails.debitAccountId.displayValue:
+                     payoutDetails.debitAccountId.displayValue">
+    </row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.transferon ,
+                     value :payoutDetails.instructionDetails?$formatter.formatDate(payoutDetails.instructionDetails.startDate):$formatter.formatDate(payoutDetails.valueDate)"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.amount ,
+                     value :payoutDetails.instructionDetails?
+                            $formatter.formatCurrency(payoutDetails.instructionDetails.amount.amount,payoutDetails.instructionDetails.amount.currency):$formatter.formatCurrency(payoutDetails.amount.amount,payoutDetails.amount.currency),
+                            dataClass :'highlight-text'"></row>
+    <!-- /ko -->
+    <!-- ko if: $component.serviceChargesLoaded() -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.serviceCharge ,
+     value :$formatter.formatCurrency($component.chargesSum(),$component.chargesData()[0].serviceCharge.currency)"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.totalDebitAmount ,
+                    value :$formatter.formatCurrency(($component.chargesSum() + (payoutDetails.instructionDetails?
+                    payoutDetails.instructionDetails.amount.amount : payoutDetails.amount.amount)),$component.chargesData()[0].serviceCharge.currency)"></row>
+    <!-- /ko -->
+    <!-- ko if: $component.paymentData().payoutDetails && $component.paymentData().payoutDetails.dealId -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.dealNumber ,value : $component.paymentData().payoutDetails.dealId"></row>
+    <!-- /ko -->
+    <!-- ko if: $component.paymentData().payoutDetails.instructionDetails && $component.paymentData().payoutDetails.instructionDetails.dealId -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.dealNumber ,value : $component.paymentData().payoutDetails.instructionDetails.dealId"></row>
+    <!-- /ko -->
+    <!-- ko if:$component.dealDetails && $component.dealDetails() -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.dealType ,value : $component.dealType"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.exchangeRate ,value : $component.exchangeRate() ? $formatter.formatCurrency($component.exchangeRate().amount, $component.exchangeRate().currency) : ''"></row>
+    <!-- /ko -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.correspondencecharges ,
+                    value :$component.chargesDescription()"></row>
+     <!-- ko if:ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails  -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.internationalPayee.intermediatoryBankDetails, value :[ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails.code,ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails.name,ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails.branch,ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails.address,ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails.city,ko.utils.unwrapObservable($component.payeeDetails).intermediaryBankDetails.country]"></row>
+    <!-- /ko -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.paymentdetails ,
+                    value :payoutDetails.instructionDetails?[payoutDetails.instructionDetails.otherDetails.line1,payoutDetails.instructionDetails.otherDetails.line2,payoutDetails.instructionDetails.otherDetails.line3,payoutDetails.instructionDetails.otherDetails.line4]:
+                     [payoutDetails.otherDetails.line1,payoutDetails.otherDetails.line2,payoutDetails.otherDetails.line3,payoutDetails.otherDetails.line4]"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.note ,
+                    value :$component.noteInternational"></row>
+</div>

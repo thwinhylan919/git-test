@@ -1,0 +1,14 @@
+$footer-background-color: #e7e7e9;
+.currencyPosition{
+	padding:0;
+	&__table {
+		height: 21.2rem;
+		.table {
+			min-width : 0;
+		}
+	}
+}
+.accountType {
+	background-color: var(--banner-background);
+    color: var(--banner-text-secondary);
+}

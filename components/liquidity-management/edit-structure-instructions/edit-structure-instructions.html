@@ -1,0 +1,164 @@
+<div class="oj-flex oj-flex-items-pad structure-details-banner oj-lg-12 top-data">
+    <div class="oj-flex-item oj-lg-11">
+        <div class="oj-flex oj-flex-items-pad" data-bind="with : $component.structureDetails()">
+            <div class="oj-flex-item oj-lg-12 label" data-bind="text:structureKey.structureId">
+            </div>
+            <div class="oj-flex-item oj-lg-12">
+                <span class="description" data-bind="text:desc"></span>
+                <span data-bind="text:$component.resources.structureType[structureType()]"></span>
+            </div>
+        </div>
+    </div>
+    <!-- ko if:$component.viewas() === "tree" && !($component.isIEBrowser()) -->
+    <div class="oj-flex-item vertical-align-middle no-pad-cols right">
+        <a href="#" data-bind="attr:{id:'instructionInfo', alt:$component.resources.structure.instructionInfo,
+                    title:$component.resources.structure.instructionInfoTitlemsg},click:$component.openPopup">
+            <span class="icons icon-information"></span>
+        </a>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex-item vertical-align-middle no-pad-cols right">
+        <a href="#" data-bind="attr:{id:'treeView',alt:$component.resources.structure.treeView,
+                    title:$component.resources.structure.treeViewTitlemsg},click:$component.setTreeView">
+            <span class="icons icon-tree"></span>
+        </a>
+    </div>
+    <div class="oj-flex-item vertical-align-middle no-pad-cols right">
+        <a href="#" data-bind="attr:{id:'tableView', alt:$component.resources.structure.tabularView,
+                    title:$component.resources.structure.tableViewTitlemsg},click:$component.setTabularView">
+            <span class="icons icon-tabular-view"></span>
+        </a>
+    </div>
+</div>
+<!-- oj pop up -->
+<oj-popup id="popup" auto-dismiss="none" class="hide" modality="modeless" tail="simple" position.at.horizontal="end" position.at.vertical="bottom" position.my.horizontal="[[$baseModel.small()?'right':'start']]" position.my.vertical="top">
+    <div class="edit-structure-instructions-container">
+        <div class="oj-flex oj-flex-items-pad popup-width">
+            <div class="oj-flex-item no-pad-cols oj-lg-11" data-bind="text:$component.resources.structure.instructionInfoMessage"></div>
+            <div class="oj-flex-item no-pad-cols oj-lg-1 right">
+                <a href="#" data-bind="attr:{id:'closePopup', alt:$component.resources.structure.closePopupAlt,
+                    title:$component.resources.structure.closePopupTitle},click:$component.closePopup">
+                    <span class="icons icon-close"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</oj-popup>
+<!-- ko if:$component.viewas() === "tree" && $component.isIEBrowser() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 ie-text__header" data-bind="text:$component.resources.browserMessages.browserNotSupported"></div>
+    <div class="oj-flex-item oj-lg-12 ie-text__detail-message" data-bind="text:$component.resources.browserMessages.browserMessageDetail"></div>
+    <div class="oj-flex-item oj-lg-12">
+        <div class="oj-flex oj-flex-items-pad ">
+            <ul class="confirm-screen__list">
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.edgeTitle,'alt':$component.resources.browserMessages.edge},loadImage:'lm/edge.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.edge"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.firefoxTitle,'alt':$component.resources.browserMessages.firefox},loadImage:'lm/firefox.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.firefox"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.chromeTitle,'alt':$component.resources.browserMessages.chrome},loadImage:'lm/chrome.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.chrome"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.safariTitle,'alt':$component.resources.browserMessages.safari},loadImage:'lm/safari.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.safari"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="oj-flex-item help-item center">
+        <a href="#" data-bind="attr:{id:'tableView1', alt:$component.resources.tabularView,
+                    title:$component.resources.tableViewTitlemsg},click:$component.setTabularView">
+            <span data-bind="text:$component.resources.browserMessages.switchTabularView"></span>
+        </a>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.viewas() === "tree" && !($component.isIEBrowser()) -->
+<tree-view class="structure" params="
+         treeDetails :$component.accountList,
+         id:'structureId',
+         maxChildNodesToRender : 8,
+         nodeClickHandler:$component.nodeClicked,
+         linkClickHandler:$component.linkClicked,
+         moreClickHandler:$component.setTabularView,
+         linkShortDescValue:'cashCCMethod',
+         nodeShortDescValue:'accountDetails.accountKey.accountNo.displayValue',
+         nodeIdjsonPath:'accountDetails.accountKey.accountNo.value',
+         moreNodeSvgColor : {
+             lhsKey : 'cashCCMethod',
+             conditions : [{
+                rhs : 'Sweep',
+                value :'structureFillSweep'
+            },{
+                rhs : 'Pool',
+                value :'structureFillPool'
+            }]
+         },
+         treePanning:'auto',
+         treeZooming:'auto',
+         width:240,
+         height:140,
+         overViewRenderer:'on',
+         rootModel : $component,
+         baseModel : $baseModel">
+    <div class="oj-flex oj-flex-items-pad structure__node" data-bind="css : $data.nodeData.level ? (($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep structure__structureFill':'structure__structureFill__structureFillPool structure__structureFill') :  (($component.structureType === 'Sweep') ? 'structure__structureFillParent__structureFillSweep structure__structureFillParent': 'structure__structureFillParent__structureFillPool structure__structureFillParent') ">
+        <!-- ko ifnot:$data.nodeData.level -->
+        <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData">
+            <span data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+            <!-- ko if:$component.structureType==="Sweep" || $component.structureDetails().structureKey.versionNo() > 1 -->
+            <span class="structure__accountType tags" data-bind="text : $component.resources.structureDetail.labels.accountCheck[$data.nodeData.accountDetails.isExtAccChk]">
+            </span>
+            <!-- /ko -->
+        </div>
+        <!-- ko if:$component.structureType==="Sweep" || $component.structureDetails().structureKey.versionNo() > 1 -->
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance, $data.nodeData.accountDetails.accountKey.ccyId)"></div>
+        <!-- /ko -->
+        <!-- ko if:$component.structureType!=="Sweep" && $component.structureDetails().structureKey.versionNo() === 1 -->
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.structure.currency,{currencyCode : ko.utils.unwrapObservable($data.nodeData.accountDetails.accountKey.ccyId)})"></div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.structure.branch,{branchCode : ko.utils.unwrapObservable($data.nodeData.accountDetails.accountKey.branchCode)})"></div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if:$data.nodeData.level -->
+        <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+        <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+        <div class="oj-flex-item oj-lg-12">
+            <span data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+            <span class="structure__accountType tags" data-bind="text : $component.resources.structureDetail.labels.accountCheck[$data.nodeData.accountDetails.isExtAccChk],css:$data.nodeData.accountDetails.isExtAccChk===true ? 'structure__structureFill__structureTypeHybrid':'structure__structureFill__structureTypePool'">
+            </span>
+        </div>
+        <div class="oj-flex-item oj-lg-8" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance,$data.nodeData.accountDetails.accountKey.ccyId)"></div>
+        <!-- ko if:$data.nodeData.instructionPriority -->
+        <div class="oj-flex-item oj-lg-4 right priority" data-bind="text:$baseModel.format($component.resources.structure.priority,{
+        number :$data.nodeData.instructionPriority})"></div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</tree-view>
+<!-- /ko -->
+<!-- ko if:$component.viewas() === "table" -->
+<view-structure-tabular params="structureDetails :$component.structureDetails(), tabularData : $component.accountList , mode:$component.mode, instructionStatusMap: $component.instructionStatusMap, rootModel : $component, dashboard : $dashboard, baseModel:$baseModel">
+</view-structure-tabular>
+<!-- /ko -->
+<div class="oj-flex-item button-container">
+    <oj-button class="action-button-primary" id="saveButton" on-click="[[$component.next]]">
+        <span slot="startIcon" class="icons icon-drop-right"></span>
+        <span data-bind="text: $component.resources.generic.common.next"></span>
+    </oj-button>
+    <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text: $component.resources.generic.common.cancel"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" id="backButton" on-click="[[$component.back]]">
+        <span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text: $component.resources.generic.common.back"></span>
+    </oj-button>
+</div>
+<!-- ko descendantsComplete : $component.afterRender  -->
+<!-- /ko -->

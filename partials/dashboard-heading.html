@@ -1,0 +1,16 @@
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <div class="oj-flex oj-flex-items-pad page-header-container" data-bind="css: !$dashboard.isDashboard() ? 'txn-page' : ''">
+        <!-- ko if: $baseModel.large() -->
+        <div class="oj-flex-item oj-sm-12">
+          <!-- ko if : $dashboard.headerName() -->
+          <h1 class="comp-title" data-bind="text:$dashboard.headerName"></h1>
+          <!-- /ko -->
+          <!-- ko if : $dashboard.headerCaption() -->
+          <span class="comp-title sub-heading" data-bind="html:$dashboard.headerCaption"></span>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
+      </div>
+    </div>
+  </div>

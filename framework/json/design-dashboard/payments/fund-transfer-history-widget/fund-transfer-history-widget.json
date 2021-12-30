@@ -1,0 +1,65 @@
+{
+  "status": {
+    "result": "SUCCESSFUL",
+    "contextID": "005aebNWgdQFw0H6yvbe6G0002mO0000Jc,0:1",
+    "message": {
+      "type": "INFO"
+    }
+  },
+  "paymentDetailsDTOs": [
+    {
+      "fromDate": "2019-01-30T00:00:00",
+      "status": "COMS",
+      "debitAccountId": {
+        "displayValue": "xxxxxxxxxxxx0564",
+        "value": "CF138381ABD99DDF767B4E4A5F49DA73297FC07F46676A7A9B793B814A"
+      },
+      "payeeNickName": "EMAIL",
+      "externalReferenceNumber": "31631",
+      "paymentType": "PEER_TO_PEER",
+      "amount": {
+        "currency": "EUR",
+        "amount": 12
+      },
+      "maxRecords": 0,
+      "paymentId": "1GEGZ9YLPJ",
+      "transferValue": "parag.kinikar@oracle.com"
+    },
+    {
+      "fromDate": "2019-01-30T00:00:00",
+      "status": "COMS",
+      "debitAccountId": {
+        "displayValue": "xxxxxxxxxxxx0524",
+        "value": "CF138381ABD99DDF767B4E4E5F311469BA59F3130CBBE9E79CFA6AFE3A"
+      },
+      "payeeNickName": "MOBILE",
+      "externalReferenceNumber": "31621",
+      "paymentType": "PEER_TO_PEER",
+      "amount": {
+        "currency": "EUR",
+        "amount": 668
+      },
+      "maxRecords": 0,
+      "paymentId": "CDPFD5RATF",
+      "transferValue": "2776520960"
+    },
+    {
+      "fromDate": "2019-01-30T00:00:00",
+      "status": "COMS",
+      "debitAccountId": {
+        "displayValue": "xxxxxxxxxxxx0564",
+        "value": "CF138381ABD99DDF767B4E4A5F49DA73297FC07F46676A7A9B793B814A"
+      },
+      "payeeNickName": "EMAIL",
+      "externalReferenceNumber": "31580",
+      "paymentType": "PEER_TO_PEER",
+      "amount": {
+        "currency": "EUR",
+        "amount": 6798
+      },
+      "maxRecords": 0,
+      "paymentId": "3EQVJI5ZBF",
+      "transferValue": "sukhesunydgagoo@gmail.com"
+    }
+  ]
+}

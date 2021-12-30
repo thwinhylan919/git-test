@@ -1,0 +1,42 @@
+$bgcolor:#FFFFFF;
+$raised-color:#006ab5;
+
+.icon-padding {
+  @include single-padding(right, 0.5rem);
+}
+
+.raised-color {
+  color: $bgcolor;
+  background-color: $raised-color;
+}
+
+.check-box-margin {
+  @include single-margin(top, -0.4rem);
+}
+
+.padding-check-box {
+  @include single-padding(left, 1.5rem);
+}
+
+.bottom-border {
+  @include single-border(bottom, 0.05rem solid var(--banner-background));
+  @include single-margin(bottom, 1rem);
+}
+
+.party-details {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.party-name-style {
+  color: var(--banner-foreground-color);
+  font-size: var(--base-font-size-large);
+  font-weight: var(--banner-font-weight);
+}
+
+.banner-label {
+  color: var(--banner-text-secondary);
+  font-size: var(--base-font-size-medium);
+  font-weight: var(--base-font-weight-light);
+}

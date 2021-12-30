@@ -1,0 +1,72 @@
+<div class="oj-panel currencyPosition">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+            <h3 data-bind="text:$component.resource.header.currencyPosition">
+	        </h3>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 currencyPosition__table">
+            <oj-table id="currencyPositionTableData" class="table" :aria-label="[[$component.resource.labels.currencyPositionDetailsTable]]" columns='[[[{
+	            "headerText":$component.resource.labels.currency,
+	            "field":"currency"
+	        },{
+	            "headerText":$component.resource.labels.balance,
+	            "template":"balance",
+	            "headerClassName":"right",
+            	"className" :"right"
+	        }]]]' columns-default="[[{sortable:'disabled'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[currencyPositionDetailsDataSource]]">
+                <caption class="hide-label" data-bind="text:$component.resource.labels.currencyPositionDetailsTable">
+                </caption>
+                <template slot="balance">
+                    <a href="#" class="oj-flex-item oj-sm-12 oj-lg-12"  data-bind="attr:{'alt':$component.resource.alt.amount,'title':$component.resource.title.amount},click:$component.showAccounts.bind($data,$current.row)">
+                <span data-bind="text:$formatter.formatCurrency($current.row.balance, $current.row.currency)"></span>
+            </a>
+                </template>
+            </oj-table>
+        </div>
+    </div>
+</div>
+<!-- ko if : accountsDataProvider -->
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'currency-accounts', header: $baseModel.format($component.resource.header.currencyPopUpHeader, {currency : $component.selectedCurrency()})">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12">
+            <oj-table id='selected-region-accounts-table' :aria-label="[[$component.resource.labels.currencyPositionDetailsTable]]" data='[[$component.accountsDataProvider]]' selection-mode="[[{row:'none',column:'none'}]]" columns="[[[{
+                        'headerText': $component.resource.tableLabels.partyName,
+                        'field' : 'partyName'
+                    },{
+                        'headerText': $component.resource.tableLabels.accountNumber,
+                        'field' : 'accountNo'
+                    },{
+                        headerText:$component.resource.tableLabels.accountType,
+                        sortProperty:'none',
+                        template:'accountType'
+                    },
+                    {
+                     'headerText': $component.resource.tableLabels.netBalance,
+                     'template' : 'balance',
+                     'headerClassName':'right',
+                     'className' :'right'
+                    }]]]">
+                <template slot="balance">
+                    <div data-bind="text:$formatter.formatCurrency($current.row.balance.amount, $current.row.balance.currency)"></div>
+                </template>
+                <template slot="accountType">
+                            <span class="accountType tags" data-bind="text : $component.resource.labels.accountCheck[$current.row.isExtAccChk]">
+                            </span>
+                        </template>
+                <caption class="hide-label" data-bind="text:$component.resource.labels.currencyPositionDetailsTable">
+                </caption>
+            </oj-table>
+            <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" :page-size="[[10]]" data="[[$component.accountsDataProvider]]">
+            </oj-paging-control>
+        </div>
+    </div>
+    <div class="button-container">
+        <oj-button id="selected-region-accounts-button" class="action-button-primary" on-click="[[closeModal]]">
+            <span slot="startIcon" class="icons icon-ok"></span>
+            <span data-bind="text:$component.resource.generic.common.ok"></span>
+        </oj-button>
+    </div>
+</modal-window>
+<!-- /ko -->

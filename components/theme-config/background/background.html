@@ -1,0 +1,94 @@
+<div class="oj-flex background">
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex oj-sm-12 color">
+            
+            <div class="oj-flex-item oj-sm-1 label">
+                <oj-label>
+                    <span data-bind="text:$component.resourceBundle.backgroundType"></span>
+                </oj-label>
+            </div>
+            <oj-radioset disabled="[[$component.readOnly]]" class="oj-choice-direction-row oj-flex-item oj-sm-11 label" value="{{colorType}}" :aria-label=[[$component.resourceBundle.color]]>
+                <oj-option :id="[['flat'+$baseModel.incrementIdCount()]]" value="flat">
+                    <span data-bind="text:$component.resourceBundle.solidcolor"></span>
+                </oj-option>
+                <oj-option :id="[['gradient'+$baseModel.incrementIdCount()]]" value="gradient">
+                    <span data-bind="text:$component.resourceBundle.gradient"></span>
+                </oj-option>
+                <oj-option :id="[['gradient'+$baseModel.incrementIdCount()]]" value="transparent">
+                    <span data-bind="text:$component.resourceBundle.transparent"></span>
+                </oj-option>
+            </oj-radioset>
+          
+        </div>
+    </div>
+    <!-- ko if:colorType()==='flat' -->
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-9">
+            <oj-label>
+                <span data-bind="text:$component.resourceBundle.solidcolor"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-3">
+            <a href="#" class="colorBox" data-bind="click:$component.showPaleteBox.bind($data,'gradient-start-color'),style:{'background-color':$component.bindvariable[$component.parameters['gradient-start-color']]}"></a>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:colorType()==='gradient' -->
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-9">
+            <oj-label>
+                <span data-bind="text:$component.resourceBundle.topcolor"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-3">
+            <a href="#" class="colorBox" data-bind="click:$component.showPaleteBox.bind($data,'gradient-start-color'),style:{'background-color':$component.bindvariable[$component.parameters['gradient-start-color']]}"></a>
+        </div>
+    </div>
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-9">
+            <oj-label>
+                <span data-bind="text:$component.resourceBundle.bottomcolor"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-3">
+            <a href="#" class="colorBox" data-bind="click:$component.showPaleteBox.bind($data,'gradient-end-color'),style:{'background-color':$component.bindvariable[$component.parameters['gradient-end-color']]}"></a>
+        </div>
+    </div>
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-6">
+            <oj-label>
+                <span data-bind="text:$component.resourceBundle.gradientDirection"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+            <oj-select-one disabled="[[$component.readOnly]]" value="{{$component.bindvariable[$component.parameters['gradient-direction']]}}" :placeholder="[[$component.resourceBundle.gradientDir]]">
+                <oj-option value="right">
+                    <span data-bind="text:$component.resourceBundle.right"></span>
+                </oj-option>
+                <oj-option value="right bottom">
+                    <span data-bind="text:$component.resourceBundle.rightBottom"></span>
+                </oj-option>
+                <oj-option value="bottom">
+                    <span data-bind="text:$component.resourceBundle.bottom"></span>
+                </oj-option>
+                <oj-option value="left bottom">
+                    <span data-bind="text:$component.resourceBundle.leftBottom"></span>
+                </oj-option>
+            </oj-select-one>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<div class="message" data-bind="component:{name:'modal-window',params:{baseModel : $baseModel, rootModel : $component,id:$component.modalWindowId(),header:$component.resourceBundle.labels.pickColor}}">
+    <div class="form-main-container message-text">
+        <div data-bind="component:{name:'color-picker',params:{color:$component.colorValue,selectedColors:$component.selectedColors}}"></div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.saveSelectedColor.bind($data)]]">
+                <span data-bind="text:resourceBundle.generic.common.done"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.hideColorPalete]]">
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+            </oj-button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+.purchase-order-details {
+    .small-text {
+        font-size: var(--base-font-size-default);
+        color: var(--base-text-secondary);
+        padding-bottom: 0.55rem;
+    }
+    .padding-bar {
+        padding-bottom: 1.5rem;
+    }
+    .more-funds-pad {
+        padding-top: 0.5rem;
+    }
+    .back-margin {
+        @include single-margin(left, 0);
+    }
+    .save-button {
+        padding: 1.5rem 0.1rem;
+    }
+    .tnctext {
+        font-size: var(--base-font-size-small);
+    }
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+    .estimate {
+        @include padding(0, 0, 0, 0.5rem);
+    }
+    .viewTnC {
+        @include padding(0, 0, 0, 2.2rem);
+    }
+    .amount-padding {
+        position: relative;
+    }
+    .font-weight {
+        font-weight: var(--base-font-weight-light);
+    }
+}
+
+.popup-width {
+    max-width: 15rem;
+    padding-bottom: 0.625rem;
+    line-height: 1.43rem;
+}

@@ -1,0 +1,536 @@
+[{
+        "name": "ACCOUNTS_TITLE",
+        "icon": "icon-accounts",
+        "submenus": [{
+            "name": "CASA_ACCOUNT",
+
+            "submenus": [{
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit",
+                    "type": "CSA",
+                    "name": "demand-deposit-details",
+                    "module": "demand-deposits"
+                }, {
+                    "name": "demand-deposit-transactions",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?taskCode=CH_I_AA",
+                    "type": "CSA"
+                }, {
+                    "name": "cheque-status-inquiry",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?accountType=CURRENT,SAVING&taskCode=CH_I_CSE"
+                }, {
+                    "name": "cheque-book-request",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?accountType=CURRENT,SAVING&taskCode=CH_N_CBR",
+                    "class": "transaction"
+                }, {
+                    "name": "cheque-stop-unblock",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?accountType=CURRENT,SAVING&taskCode=CH_N_CIN"
+
+                },
+                {
+                    "name": "debit-card-list",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?accountType=CURRENT,SAVING",
+                    "type": "CSA"
+                }, {
+                    "name": "demand-deposit-statement-request",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?taskCode=CH_N_RAS",
+                    "type": "CSA"
+                }, {
+                    "name": "sweep-in-instruction",
+                    "module": "demand-deposits",
+                    "applicationType": "demand-deposits",
+                    "moduleURL": "demandDeposit?accountType=CURRENT,SAVING"
+                }
+            ]
+        }, {
+            "name": "TERM_DEPOSIT_ACCOUNT",
+
+            "submenus": [{
+                "name": "td-details",
+                "module": "term-deposits",
+                "applicationType": "term-deposits",
+                "moduleURL": "deposit?module=CON&module=ISL&taskCode=TD_I_AD",
+                "type": "TRD"
+            }, {
+                "name": "td-open",
+                "module": "term-deposits"
+            }, {
+                "name": "term-deposit-transactions",
+                "module": "term-deposits",
+                "applicationType": "term-deposits",
+                "moduleURL": "deposit?module=CON&module=ISL&taskCode=TD_I_AA",
+                "type": "TRD"
+            }, {
+                "name": "td-topup",
+                "module": "term-deposits",
+                "applicationType": "term-deposits",
+                "moduleURL": "deposit?module=CON&module=ISL&taskCode=TD_F_TTD",
+                "type": "TRD"
+            }, {
+                "name": "td-redeem",
+                "module": "term-deposits",
+                "applicationType": "term-deposits",
+                "moduleURL": "deposit?module=CON&module=ISL&taskCode=TD_F_RTD",
+                "type": "TRD"
+
+            }, {
+                "name": "td-amend",
+                "module": "term-deposits",
+                "applicationType": "term-deposits",
+                "moduleURL": "deposit?module=CON&module=ISL&taskCode=TD_N_ATD",
+                "type": "TRD"
+
+            }, {
+                "name": "term-deposit-statement-request",
+                "module": "term-deposits",
+                "applicationType": "term-deposits",
+                "moduleURL": "deposit?module=CON&module=ISL&taskCode=TD_N_RAS",
+                "type": "TRD"
+            }]
+        }, {
+            "name": "LOAN",
+
+            "submenus": [{
+                "applicationType": "loans",
+                "moduleURL": "loan",
+                "name": "loan-details",
+                "module": "loans"
+            }, {
+                "name": "loan-transactions",
+                "module": "loans",
+                "applicationType": "loans",
+                "moduleURL": "loan?taskCode=LN_I_LA",
+                "type": "LON"
+            }, {
+                "name": "loan-repayment",
+                "module": "loans",
+                "applicationType": "loans",
+                "moduleURL": "loan?taskCode=LN_F_LRP"
+
+            }, {
+                "name": "loan-disbursement",
+                "module": "loans",
+                "applicationType": "loans",
+                "moduleURL": "loan?taskCode=LN_I_DD"
+
+            }, {
+                "name": "loan-schedule",
+                "module": "loans",
+                "applicationType": "loans",
+                "moduleURL": "loan?taskCode=LN_I_SI"
+
+            }]
+        }, {
+            "name": "NOMINATIONS_TITLE",
+            "submenus": [{
+                "name": "casa-nominee-list",
+                "module": "nominee",
+                "applicationType": "nominee"
+            }, {
+                "name": "td-nominee-list",
+                "module": "nominee",
+                "applicationType": "nominee"
+            }, {
+                "name": "rd-nominee-list",
+                "module": "nominee",
+                "applicationType": "nominee"
+            }]
+        }]
+    }, {
+        "name": "CREDIT_CARD_TITLE",
+        "icon": "icon-debit-card",
+        "submenus": [{
+            "name": "card-details",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "card-statement",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "card-pay",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "request-pin",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "block-card",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "auto-pay",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "creditcard-reset-pin",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }, {
+            "name": "add-on-card",
+            "module": "creditcard",
+            "applicationType": "creditcard",
+            "moduleURL": "cards/credit?expand=ALL"
+        }]
+    }, {
+        "name": "PAYMENTS_TITLE",
+        "icon": "icon-payments",
+        "submenus": [{
+                "name": "favorites",
+                "module": "payments",
+                "applicationType": "payments"
+
+            }, {
+                "name": "SETUP",
+                "submenus": [{
+                        "name": "manage-payees-billers",
+                        "module": "payee",
+                        "applicationType": "payments"
+
+                    },
+                    {
+                        "name": "debtor-group-list",
+                        "module": "debtor",
+                        "applicationType": "debtor"
+
+                    },
+                    {
+                        "name": "standing-instructions-landing",
+                        "module": "payments",
+                        "applicationType": "standing-instructions"
+
+                    }
+                ]
+            }, {
+                "name": "payments-transfers",
+                "submenus": [{
+                    "name": "payments-money-transfer",
+                    "module": "payments",
+                    "applicationType": "payments"
+
+                }, {
+                    "name": "adhoc-draft",
+                    "module": "payments",
+                    "applicationType": "payments"
+                }, {
+                    "name": "adhoc-payments",
+                    "module": "payments",
+                    "applicationType": "payments"
+
+                }, {
+                    "name": "multiple-payments",
+                    "module": "payments",
+                    "applicationType": "payments"
+
+                }, {
+                    "name": "debtor-money-request",
+                    "module": "debtor",
+                    "applicationType": "debtor"
+
+                }, {
+                    "name": "requested-funds-summary",
+                    "module": "payments",
+                    "applicationType": "payments"
+
+                }, {
+                    "name": "add-money-to-wallet",
+                    "class": "flow",
+                    "applicationType": "payments"
+                }]
+            }, {
+                "name": "INQUIRES",
+                "submenus": [{
+                    "name": "fund-transfer-history",
+                    "module": "payments",
+                    "applicationType": "payments"
+
+                }, {
+                    "name": "scheduled-payments",
+                    "module": "payments",
+                    "applicationType": "payments"
+
+                }]
+
+            }
+
+        ]
+    }, {
+        "name": "BILL_PAYMENTS_TITLE",
+        "icon": "icon-pay",
+        "submenus": [{
+                "name": "bill-payments-favorites",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            }, {
+                "name": "manage-bill-payments",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            }, {
+                "name": "register-biller",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            }, {
+                "name": "modify-biller",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "quick-bill-payment",
+                "module": "quick-bill-payment",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "quick-recharge",
+                "module": "quick-recharge",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "payment-history",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            }
+        ]
+    }, {
+        "name": "UPI",
+        "icon": "icon-upi",
+        "module": "upi",
+        "submenus": [{
+                "name": "manage-vpa",
+                "module": "upi",
+                "applicationType": "upi"
+            }, {
+                "name": "adhoc-transfer-vpa",
+                "module": "upi"
+            }, {
+                "name": "transfer-payee-upi",
+                "module": "upi"
+            }, {
+                "name": "upi-request-money",
+                "module": "upi",
+                "applicationType": "upi",
+                "class": "transaction"
+            }, {
+                "name": "upi-pending-request",
+                "module": "upi",
+                "applicationType": "upi"
+            },
+            {
+                "name": "transaction-history",
+                "module": "upi"
+
+            },
+            {
+                "name": "split-money-list",
+                "module": "upi"
+
+            }
+        ]
+    }, {
+        "name": "PERSONAL_FINANCE_MANAGEMENT",
+        "icon": "icon-pfm",
+        "submenus": [{
+                "name": "trends",
+                "type": "MODULE"
+            }, {
+                "name": "link-account-dashboard",
+                "type": "MODULE"
+            }, {
+                "name": "GOAL",
+                "submenus": [{
+                    "name": "list-goal",
+                    "module": "goals"
+
+                }, {
+                    "name": "goal-category-selection",
+                    "module": "goals"
+                }]
+            }, {
+                "name": "SPEND",
+                "submenus": [{
+                    "name": "transaction-list",
+                    "module": "personal-finance-management"
+                }, {
+                    "name": "manage-spend-categories",
+                    "module": "personal-finance-management"
+                }]
+            }, {
+                "name": "list-budget",
+                "module": "personal-finance-management"
+
+            }
+
+        ]
+    }, {
+        "name": "WEALTH_MANAGEMENT",
+        "icon": "icon-request-money",
+        "submenus": [{
+                "name": "mutual-funds",
+                "type": "MODULE"
+            }, {
+                "name": "START_INVESTING",
+                "submenus": [{
+                    "name": "open-investment-account-landing",
+                    "module": "mutual-funds"
+                }, {
+                    "name": "risk-profile-account-selection",
+                    "module": "mutual-funds"
+                }]
+            }, {
+                "name": "PLACE_ORDERS",
+                "submenus": [{
+                    "name": "purchase-mutual-fund-train",
+                    "module": "mutual-funds"
+                }, {
+                    "name": "redeem-funds-global",
+                    "module": "mutual-funds"
+                }, {
+                    "name": "switch-funds-global",
+                    "module": "mutual-funds"
+                }, {
+                    "name": "order-status",
+                    "module": "mutual-funds"
+                }]
+            }, {
+                "name": "investment-details-dashboard",
+                "module": "mutual-funds"
+            },
+            {
+                "name": "REPORTS",
+                "submenus": [{
+                    "name": "transaction-reports",
+                    "module": "mutual-funds"
+                }, {
+                    "name": "dividend-reports",
+                    "module": "mutual-funds"
+                }, {
+                    "name": "capital-gain-reports",
+                    "module": "mutual-funds"
+                }]
+            }
+        ]
+    },{
+        "name": "certificates",
+        "icon": "icon-interest-certificate",
+        "submenus": [{
+                "name": "interest-certificates",
+                "submenus": [{
+                    "name": "interest-certificate-casa",
+                    "module": "interest-certificates",
+                    "applicationType": "interest-certificates",
+                    "moduleURL": "demandDeposit?taskCode=CH_I_IC"
+                }, {
+                    "name": "interest-certificate-td",
+                    "module": "interest-certificates",
+                    "applicationType": "interest-certificates",
+                    "moduleURL": "deposit?taskCode=TD_I_IC"
+                }, {
+                    "name": "interest-certificate-loans",
+                    "module": "interest-certificates",
+                    "applicationType": "interest-certificates",
+                    "moduleURL": "loan?taskCode=LN_I_IC"
+                }]
+            },
+            {
+                "name": "tax-deduction-at-source",
+                "module": "tax-deduction-at-source"
+            }
+        ]
+    },
+    {
+        "name": "service-requests-menu",
+        "icon": "icon-sms",
+        "submenus": [{
+            "name": "service-requests-track",
+            "module": "service-requests"
+        }, {
+            "name": "service-requests-base-main",
+            "module": "service-requests"
+        }]
+    },
+    {
+        "name": "ACCOUNT_SETTINGS",
+        "icon": "icon-setting",
+        "submenus": [{
+                "name": "side-menu",
+                "icon": "icon-setting",
+                "module": "security"
+            }, {
+                "name": "change-password",
+                "icon": " icon-password",
+                "module": "change-password"
+            },
+            {
+                "name": "my-limits",
+                "icon": "icon-limit",
+                "module": "limits-enquiry"
+            },
+            {
+                "name": "session-summary",
+                "icon": "icon-received",
+                "module": "base-components"
+            },
+            {
+                "name": "dashboard-create",
+                "icon": "icon-debit-card",
+                "module": "dashboard-template"
+            }
+        ]
+    },
+    {
+        "name": "MAILBOX_TITLE",
+        "icon": "icon-debit-card",
+        "submenus": [{
+                "name": "mailbox-base",
+                "module": "mailbox"
+            },
+            {
+                "name": "alert-list",
+                "module": "mailbox"
+            },
+            {
+                "name": "notification-list",
+                "module": "mailbox"
+            }
+        ]
+    },
+    {
+        "name": "feedback-capture",
+        "icon": "icon-request",
+        "module": "feedback"
+    }, {
+        "name": "locator",
+        "icon": "icon-location-arrow",
+        "module": "locator"
+    },
+    {
+        "name": "help",
+        "icon": "icon-help",
+        "default": true,
+        "type": "FUNCTION",
+        "functionName": "openWebHelpWindow"
+    }, {
+        "name": "about",
+        "default": true,
+        "icon": "icon-information",
+        "type": "MODAL"
+    }
+]

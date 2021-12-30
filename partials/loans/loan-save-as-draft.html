@@ -1,0 +1,16 @@
+ <oj-validation-group :id="[['draftTracker']]">
+     <page-section params="baseModel : $baseModel, rootModel : $component, heading :''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item "><label :for="draftName" data-bind="text:$component.nls.draftName"></label></div>
+        
+        <oj-input-text class = "oj-flex-item" :id="draftName" placeholder="[[$component.nls.enterDraftName]]"  value="{{$component.draftName}}" required></oj-input-text>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item "><label data-bind="text:$component.nls.Savedrequest"></label></div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.saveDraftData]]"><span slot="startIcon" class="icons icon-save"></span><span data-bind="text:$component.nls.save"></span></oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.closeHandler]]"><span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.nls.cancel"></span></oj-button>
+        </div>
+    </page-section>
+</oj-validation-group>

@@ -1,0 +1,34 @@
+<div class="form-main-container">
+  <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+    <!-- ko if:$component.categoryHandle -->
+    <!-- ko if:$component.refreshSRList -->
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <oj-accordion id="sr-group-accordian" multiple="true">
+          <!-- ko foreach:$component.SRCategoryList-->
+          <oj-collapsible :id="[['c1'+$index()]]">
+            <span slot="header">
+              <span data-bind="text:categoryName"></span>
+            </span>
+            <div>
+              <oj-navigation-list aria-label=[[SRAriaLabel]]>
+                <ul>
+                  <!-- ko foreach:srList-->
+                  <li data-bind="id:reqName">
+                    <div class="sr-request-list">
+                      <a href="#" data-bind="text:reqName, click: $component.callView"></a>
+                    </div>
+                  </li>
+                  <!-- /ko -->
+                </ul>
+              </oj-navigation-list>
+            </div>
+          </oj-collapsible>
+          <!-- /ko -->
+        </oj-accordion>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+  </page-section>
+</div>

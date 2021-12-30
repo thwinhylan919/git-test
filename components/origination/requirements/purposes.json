@@ -1,0 +1,47 @@
+{
+	"purposeTypeList": [{
+		"name": "PERSONAL",
+		"type": "PERSONAL",
+		"purposeList": [{
+			"name": "education",
+			"description": "education",
+			"code": "EDU"
+		}, {
+			"name": "debitConsolidation",
+			"description": "debitConsolidation",
+			"code": "DC"
+		}, {
+			"name": "homeRenovations",
+			"description": "homeRenovations",
+			"code": "HR"
+		}, {
+			"name": "householdGoods",
+			"description": "householdGoods",
+			"code": "HG"
+		}, {
+			"name": "travelAndHoliday",
+			"description": "travelAndHoliday",
+			"code": "TAH"
+		}, {
+			"name": "wedding",
+			"description": "wedding",
+			"code": "WED"
+		}, {
+			"name": "funeral",
+			"description": "funeral",
+			"code": "FUR"
+		}, {
+			"name": "medicalExpenses",
+			"description": "medicalExpenses",
+			"code": "ME"
+		}, {
+			"name": "utilityBill",
+			"description": "utilityBill",
+			"code": "UB"
+		}, {
+			"name": "other",
+			"description": "other",
+			"code": "OTHER"
+		}]
+	}]
+}

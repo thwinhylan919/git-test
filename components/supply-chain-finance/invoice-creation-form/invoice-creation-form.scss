@@ -1,0 +1,79 @@
+.icon-border {
+    @include single-border(right, 0.1rem solid var(--banner-gradient-start-color));
+}
+
+.icon-display {
+    display: none;
+}
+
+.show-icon {
+    display: block;
+}
+
+.medium-font {
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-bold);
+}
+
+.duplicate-invoice-style {
+    padding: 0.5rem;
+}
+
+.text-style {
+    padding-top: 1rem;
+}
+
+.add-row-style {
+    padding-top: 0.5rem;
+    padding-bottom: 0.2rem;
+    border-top: 0.08rem solid var(--banner-gradient-start-color);
+    border-bottom: 0.08rem solid var(--base-background-tertiary);
+}
+
+.commodity-style {
+    padding-top: 2rem;
+    font-weight: var(--base-font-weight-bold);
+    @include single-border(bottom, 0.08rem solid var(--banner-gradient-start-color));
+}
+
+.currency-style {
+    @include single-border(bottom, 0.08rem solid var(--banner-gradient-start-color));
+}
+
+.currency-label {
+    padding-top: 1.5rem;
+}
+
+.icon-size {
+    font-size: var(--button-font-size-icon);
+}
+
+.calculation-padding {
+    padding-top: 2.8rem;
+}
+
+.label-padding {
+    @include padding(0, 0, 0, 0.7rem);
+}
+
+.discount-padding {
+    padding-bottom: 1.5rem;
+}
+
+.total-label {
+    @include padding(0.7rem, 0, 0.7rem, 0.7rem);
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.total-value {
+    @include padding(0.7rem, 0.7rem, 0.7rem, 0);
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.total-padding {
+    padding-top: 1.3rem;
+}
+
+.panel-padding {
+    padding: 0.9rem
+}

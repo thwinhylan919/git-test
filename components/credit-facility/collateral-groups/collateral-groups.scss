@@ -1,0 +1,66 @@
+.progress-bar-property {
+  width: 50%;
+  height: 0.625rem;
+  margin: 0.625rem;
+  opacity: .3;
+  background-color: var(--oj-neutral-color13);
+  }
+  .covanent-title{
+    @include padding(1rem, 1rem, 1rem, 1rem);
+ 
+  }
+  .collateralbox{
+    @include single-border(left,var(--review-banner-border-width) solid var(--base-color-warning));
+  }
+  .label{
+      font-weight:500;
+      font-size: 0.8rem;
+  }
+  .titleField{
+      font-size: 20px;
+      font-weight:500;
+  }
+  .titleField2{
+    font-size: 18px;
+ }
+ .titleField3{
+  font-size: 0.8rem;
+}
+ .group2{
+  border-radius: 6px;
+   background:var(--graph-color2);
+   color:var(--base-background-primary);
+   @include padding(0rem, 1rem, 0rem, 1rem);
+}
+.paddingTop{
+  @include padding(0.5rem, 0rem, 0rem, 0rem);
+}
+ .percentage{
+  @include single-margin(left,0.6rem);
+ }
+ .utilized{
+  @include single-margin(top,-0.7rem);
+ }
+ .structure1{
+  color: var(--banner-text-primary);
+  background:var(--base-color-warning);
+ }
+ .structure{
+  color: var(--banner-text-primary);
+ }
+ .contriPercent{
+  @include single-margin(left,-0.6rem);
+  @include single-margin(top,-0.8rem);
+ }
+ .contriPercent2{
+  @include single-margin(left,-0.6rem);
+ }
+ .pipe{
+  @include single-border(left, 0.05rem solid var(--base-border-default));
+  @include single-padding(right, 0.3rem);
+  height: 2rem;
+  @include single-margin(top,0.8rem);
+  }
+  .groupAlign{
+    @include single-margin(left,-1rem);
+  }

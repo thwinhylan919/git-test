@@ -1,0 +1,15 @@
+{
+  "componentName": "loan-portfolio",
+  "module": "loans",
+  "segment": ["corporateuser"],
+  "width": {
+    "large":"4",
+    "medium":"6"
+  },
+  "height": "251",
+  "icon": "",
+  "template": "",
+  "type": "",
+  "isVisible": true,
+  "isWidget": true
+}

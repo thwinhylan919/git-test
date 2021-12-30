@@ -1,0 +1,60 @@
+<!-- ko ifnot:$baseModel.small() -->
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+    <label data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.navigationText"></label>
+  </div>
+  <ul class="confirm-screen__list">
+    <li class="">
+      <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'counter-party-list',{})">
+        <img
+          data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.params.customFields.resourceBundle.confirmScreen.viewCounterparties},loadImage:'dashboard/quick-access/account-details.svg'">
+        <div data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.viewCounterparties"></div>
+      </a>
+    </li>
+    <li class="">
+      <a href="#" data-bind="click:$dashboard.switchModule.bind($data, 'supply-chain-finance')">
+        <img
+          data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.params.customFields.resourceBundle.confirmScreen.scfDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+        <div data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.scfDashboard"></div>
+      </a>
+    </li>
+    <li class="">
+      <a href="#" data-bind="click: $dashboard.switchModule.bind($data,$root.currentRole())">
+        <img
+          data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.params.customFields.resourceBundle.confirmScreen.dashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+        <div data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.dashboard"></div>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- /ko -->
+<!-- ko if:$baseModel.small() -->
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+    <label data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.navigationText"></label>
+  </div>
+  <ul class="confirm-screen__list">
+    <li class="oj-sm-5">
+      <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'counter-party-list',{})">
+        <img
+          data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.params.customFields.resourceBundle.confirmScreen.viewCounterparties},loadImage:'dashboard/quick-access/account-details.svg'">
+        <div data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.viewCounterparties"></div>
+      </a>
+    </li>
+    <li class="oj-sm-5">
+      <a href="#" data-bind="click:$dashboard.switchModule.bind($data, 'supply-chain-finance')">
+        <img
+          data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.params.customFields.resourceBundle.confirmScreen.scfDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+        <div data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.scfDashboard"></div>
+      </a>
+    </li>
+    <li class="oj-sm-5">
+      <a href="#" data-bind="click: $dashboard.switchModule.bind($data,$root.currentRole())">
+        <img
+          data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.params.customFields.resourceBundle.confirmScreen.dashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+        <div data-bind="text:$component.params.customFields.resourceBundle.confirmScreen.dashboard"></div>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- /ko -->

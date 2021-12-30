@@ -1,0 +1,14 @@
+.headerText {
+    color: var(--base-text-secondary);
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-light);
+    line-height: var(--form-line-height);
+}
+
+.headerValue {
+    @include single-padding(right, 0.6rem);
+}
+
+.headerData {
+    line-height: var(--form-line-height);
+}

@@ -1,0 +1,58 @@
+<div class="form-main-container">
+    <div
+        data-bind="component:{name: 'entity-details', params:{ partyId : $component.partyId,partyName:$component.partyName,moduleName:$component.moduleName,userData:$component.userData,isUserSelected:$component.isUserSelected}}">
+    </div>
+    <!-- ko if : !$component.editPressed() -->
+    <div
+        data-bind="component:{name: 'mapping-train', params:{stepArray: $component.stepArray, nextPressed: $component.nextPressed,selectedStepLabel: $component.selectedStepLabel,selectedStepValue: $component.selectedStepValue,attributeName: $component.attributeName,editPressed: $component.editPressed}}">
+    </div>
+    <!-- /ko -->
+    <!-- ko if : $component.editPressed() -->
+    <div
+        data-bind="component:{name: 'mapping-train', params:{stepArray: $component.stepArray, nextPressed: $component.nextPressed,selectedStepLabel: $component.selectedStepLabel,selectedStepValue: $component.selectedStepValue,attributeName: $component.attributeName,editPressed: $component.editPressed}}">
+    </div>
+    <!-- /ko -->
+    <div
+        data-bind="component:{name: 'attribute-list', params:{selectedItem: $component.selectedItem,disabled: $component.disabled,nextPressed: $component.nextPressed, editPressed: $component.editPressed, attributeData: $component.attributeData,attributeName: $component.attributeName,isUserSelected: $component.isUserSelected,partyLevelChangesAuto: $component.accessData.partyLevelAccess}}">
+    </div>
+    <!-- ko if : !$component.isUserSelected-->
+    <div
+        data-bind="component:{name: 'access-type', params:{ disabled: $component.disabled,futureAttributeAccess: $component.accessData.futureAttributeAccess,attributeName: $component.attributeName}}">
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <!-- ko if : !$component.editPressed() -->
+        <oj-button class="action-button-primary" on-click="[[$component.onClickEdit70]]"><span
+                data-bind="text:$component.nls.AttributeDetails.Edit"></span></oj-button><!-- /ko -->
+        <!-- ko if : !$component.nextPressed() -->
+        <oj-button class="action-button-primary" on-click="[[$component.onClickNext88]]"><span
+                data-bind="text:$component.nls.AttributeDetails.Next"></span></oj-button><!-- /ko -->
+        <!-- ko if : !$component.editPressed() -->
+        <oj-button class="action-button-secondary" on-click="[[$component.deleteClicked]]"><span
+                data-bind="text:$component.nls.AttributeDetails.Delete"></span>
+        </oj-button><!-- /ko -->
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel85]]"><span
+                data-bind="text:$component.nls.AttributeDetails.Cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span
+                data-bind="text:$component.nls.AttributeDetails.Back"></span>
+        </oj-button>
+    </div>
+</div>
+<modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'deleteConfirmationModal',header:
+$component.nls.AttributeDetails.Delete">
+    <div class="form-main-container message-text">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span data-bind="text: $component.deleteMessage"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="delbackYes" class="action-button-primary" on-click="[[$component.deleteAttributeAccess]]">
+                <span data-bind="text:$component.nls.AttributeDetails.yes"></span>
+            </oj-button>
+            <oj-button id="delbackNo" class="action-button-secondary" on-click="[[$component.hideModal]]">
+                <span data-bind="text:$component.nls.AttributeDetails.no"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

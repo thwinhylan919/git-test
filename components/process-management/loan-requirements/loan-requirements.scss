@@ -1,0 +1,35 @@
+.paddingBottom {
+    padding-bottom: 0.5rem;
+}
+
+.cardwidth {
+    width: 20rem !important;
+}
+
+.linkFontSize {
+    font-size: 0.9rem;
+    @include padding(0, 0.5rem, 0, 0);
+}
+
+.allLinkPadding {
+    @include padding(0, 0.5rem, 0, 0);
+}
+
+.linkFaciltyDivPadding {
+    @include padding(0, 0, 0, 0.85rem);
+}
+
+.underLineText {
+    text-decoration: underline;
+}
+
+.pageDescription {
+    @include padding(0, 0, 0, 0.6rem);
+}
+
+.cardFormating {
+    width: 60rem;
+    border-radius: 0.5rem;
+    @include padding(1rem, 1rem, 1rem, 1rem);
+    border: gray solid;
+}

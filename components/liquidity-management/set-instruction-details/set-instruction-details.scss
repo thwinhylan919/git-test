@@ -1,0 +1,90 @@
+$sweep-background-color: #2C446E;
+$pool-background-color: #90722C;
+
+.overlay {
+    width: 40rem;
+}
+
+.structure {
+    &__top-padding {
+        padding-top: 2rem;
+    }
+
+    &__cashccmethod {
+        padding-top: 3rem;
+        @include single-padding(left, 8rem);
+    }
+
+    &__openInIE {
+        padding: .5rem;
+        border: 0.1rem solid var(--base-border-default);
+        height: 120px;
+    }
+
+    &__heightBtwnNodeInIE {
+        height: 120px;
+        @include single-border(right, 0.1rem solid var(--base-border-default));
+    }
+
+    &__accountType {
+        background-color: var(--banner-background);
+        color: var(--banner-text-secondary);
+    }
+
+    &__nodeHeader {
+        padding: 0.6rem 0;
+        font-size: var(--base-font-size-large);
+    }
+
+    &__parentNodeHeader {
+        padding: 0.3rem 0 0.6rem;
+        font-size: var(--base-font-size-large);
+    }
+
+    &__tree-width {
+        width: 65rem;
+    }
+
+    &__node {
+        height: 100%;
+
+        .priority {
+            font-size: var(--base-font-size-small);
+        }
+    }
+
+    &__structureFillParent {
+        height: 100%;
+        padding: 0.6rem 0;
+
+        &__structureFillSweep {
+            background-color: $sweep-background-color;
+            color: var(--color-white);
+        }
+
+        &__structureFillPool {
+            background-color: $pool-background-color;
+            color: var(--color-white);
+        }
+    }
+
+    &__structureFill {
+        padding-bottom: 0.5rem;
+
+        &__structureFillSweep {
+            border-top: 0.6rem solid $sweep-background-color;
+        }
+
+        &__structureFillPool {
+            border-top: 0.6rem solid $pool-background-color;
+        }
+    }
+}
+
+.structureFillSweep {
+    fill: $sweep-background-color;
+}
+
+.structureFillPool {
+    fill: $pool-background-color;
+}

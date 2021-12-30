@@ -1,0 +1,54 @@
+<!-- ko ifnot: $baseModel.small() -->
+<div class="oj-panel height-panel">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <h3 class="heading oj-lg-12" data-bind="text: $component.resource.recommendedAllocation.header">
+            </h3>
+        </div>
+    </div>
+    <!-- ko if: viewAllocation -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-chart id="barChart" type="bar" series="[[barSeriesValue]]" groups="[[barGroupsValue]]"
+                animation-on-display="auto" animation-on-data-change="auto" orientation="[[orientationValue]]"
+                style-defaults.data-label-position="[[labelPosition]]" stack="[[stackValue]]" stack-label="[[stackLabelValue]]"
+                tooltip.renderer="[[getTooltip]]" y-axis.tick-label.rendered="off" class="chart-size oj-flex-item oj-lg-12 oj-md-12"
+                legend.rendered="off">
+            </oj-chart>
+        </div>
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 legendSection">
+            <!-- ko if: legendView -->
+            <oj-legend class="legend-height" orientation='horizontal' sections="[[$component.legendArray]]">
+            </oj-legend>
+            <!-- /ko -->
+        </div>
+
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+        <h3 class="heading oj-lg-12" data-bind="text: $component.resource.recommendedAllocation.header">
+        </h3>
+    </div>
+</div>
+<!-- ko if: viewAllocation -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+        <oj-chart id="barChart" type="bar" series="[[barSeriesValue]]" groups="[[barGroupsValue]]" animation-on-display="auto"
+            animation-on-data-change="auto" orientation="[[orientationValue]]" style-defaults.data-label-position="[[labelPosition]]"
+            stack="[[stackValue]]" stack-label="[[stackLabelValue]]" tooltip.renderer="[[getTooltip]]"
+            y-axis.tick-label.rendered="off" class="chart-size oj-flex-item oj-sm-12" legend.rendered="off">
+        </oj-chart>
+    </div>
+    <div class="oj-flex-item oj-sm-12 legendSection">
+        <!-- ko if: legendView -->
+        <oj-legend class="legend-height" orientation='horizontal' sections="[[$component.legendArray]]">
+        </oj-legend>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->

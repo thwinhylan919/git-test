@@ -1,0 +1,125 @@
+<!-- ko ifnot: $component.isPushoobAllowed() -->
+<div class="bgchanges">
+    <div data-bind="template: { name: 'login/login-form'}"></div>
+    <div class="extra-links">
+        <!-- ko ifnot:$component.landingModule -->
+        <!-- ko if:$baseModel.cordovaDevice()  && $component.showAlternativeSwitch() -->
+        <div class="oj-flex alternateLoginPad">
+            <div class="row oj-flex-item alternateLogin">
+                <oj-label for="switch"><span data-bind="text:nls.loginForm.labels.enableAlternateLogin"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item">
+                <oj-switch id="switch" value="{{optForAlternateLogin}}"></oj-switch>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko ifnot:$component.landingModule -->
+        <!-- ko if:$baseModel.cordovaDevice()  && $component.alternateLogin() -->
+        <div class="oj-flex-item alternateLoginLink">
+            <a href="#" data-bind="click:$component.openAlternateLogin">
+                <span class="oj-flex-items-pad"
+                    data-bind="text:$baseModel.format(nls.loginForm.labels.loginVia,{type:nls.loginForm.labels[$component.alternateLogin().split('-')[0]]})"></span>
+            </a>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: $baseModel.cordovaDevice()&&$component.showAccountSnapshot() -->
+        <div class="oj-flex-item quickSnapshotLink">
+            <oj-button href="#" on-click="[[$component.onSnapshotClick]]" class="help-button">
+                <span class="quickSnapshotLinkFont" data-bind="text:nls.loginForm.labels.quicksnapshot"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <!-- ko if:$component.showAlternateLogin() -->
+    <alternate-login params="baseModel : $baseModel, rootModel:$data,type:$component.alternateLogin()">
+    </alternate-login>
+    <!-- /ko -->
+
+
+    <!-- ko if:$component.showLoginOptions() -->
+    <login-options
+        params="baseModel : $baseModel, rootModel:$data,root:$root,dashboard:$dashboard,password:$component.password">
+    </login-options>
+    <!-- /ko -->
+
+    <!-- ko if: $baseModel.cordovaDevice() -->
+    <div class="oj-flex-item oj-lg-6-oj-md-6 oj-sm-12 oj-xl-6 popUpWindow">
+        <div data-bind="descendantsComplete : $component.showDialog">
+            <modal-window class="message form-main-container"
+                params="baseModel : $baseModel, rootModel : $component,id:'customPopupforPushNotification',header:nls.loginForm.labels.push_window_title,closeHandler:$component.closeHandler">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12"><span
+                            data-bind="text:nls.loginForm.labels.push_window_message"></span>
+                    </div>
+                    <div class="message-btn button-container">
+                        <div class="oj-flex-item center oj-lg-10 oj-md-10">
+                            <oj-button class="form-button-primary" on-click="[[$component.enablePush]]">
+                                <span data-bind="text:nls.loginForm.labels.allow"></span>
+                            </oj-button>
+                            <oj-button class="form-button-secondary" on-click="[[$component.disablePush]]">
+                                <span data-bind="text:nls.loginForm.labels.disallow"></span>
+                            </oj-button>
+                        </div>
+                    </div>
+                </div>
+
+            </modal-window>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <modal-window class="favorite-container"
+        params="baseModel : $baseModel,dashboard:$dashboard, rootModel : $component,id:'exitModal',header:nls.loginForm.labels.exitApplication,closeHandler:$component.closeModal">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12" data-bind="text:nls.loginForm.labels.exitModal"></div>
+        </div>
+        <div class="button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.exitApplication]]">
+                <span data-bind="text:nls.loginForm.labels.yes"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.closeModal]]">
+                <span data-bind="text:nls.loginForm.labels.no"></span>
+            </oj-button>
+        </div>
+    </modal-window>
+    <modal-window class="favorite-container"
+        params="baseModel : $baseModel,dashboard:$dashboard, rootModel : $component,id:'firstTimeLoginNotCompleted',header:$parent.nls.loginForm.labels.sinceYouAreNewUser,closeHandler:$component.goToLogin">
+        <div class="oj-flex-items-pad">
+            <div data-bind="text:$parent.nls.loginForm.labels.sinceYouAreNewUser"></div>
+        </div>
+        <div class="button-container">
+            <oj-button class="action-button-secondary" on-click="[[$parent.goToLogin]]">
+                <span data-bind="text:$parent.nls.loginForm.labels.ok"></span>
+            </oj-button>
+        </div>
+    </modal-window>
+</div>
+<!-- /ko -->
+<!-- ko if: $component.isPushoobAllowed() && $component.notificationDataFetched() -->
+<h4 class=" center" data-bind="text: $component.nls.loginForm.labels.authenticate"></h4>
+<img class="authenticationImage" data-bind="loadImage : 'authentication/authentication.svg'"></img>
+<div class="oj-flex-item authenticate">
+    <div class="oj-flex-items-pad quickSnapshotLinkFont" data-bind="text:nls.loginForm.labels.authenticateText">
+    </div>
+</div>
+<div class="oj-flex-items-pad">
+    <!-- ko foreach: $component.displayData() -->
+    <row
+        params="baseModel : $baseModel, rootModel : $parent, label :$data.key , value :$data.key === 'Amount' ? $formatter.formatCurrency($data.value.amount, $data.value.currency) : $data.value">
+    </row>
+    <!-- /ko -->
+</div>
+<div class="oj-flex oj-flex-items-pad button-container">
+    <oj-button class="action-button-primary" display='icons' on-click="[[$component.accept]]">
+        <span class="icons icon-submit"></span><span data-bind="text:$component.nls.loginForm.labels.confirm"></span>
+    </oj-button>
+    <oj-button class="action-button-secondary" display='icons' on-click="[[$component.reject]]">
+        <span class="icons icon-cancel"></span><span data-bind="text:$component.nls.loginForm.labels.cancel"></span>
+    </oj-button>
+</div>
+<!-- /ko -->

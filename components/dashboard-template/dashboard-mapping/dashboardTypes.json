@@ -1,0 +1,4 @@
+{
+    "types": ["SEGMENT", "APPLICATION_ROLE", "MODULE", "USER_TYPE"],
+    "levels": ["USER", "PARTY", "SEGMENT", "ROLE"]
+}

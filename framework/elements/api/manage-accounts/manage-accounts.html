@@ -1,0 +1,49 @@
+<div data-bind="descendantsComplete : $component.afterRender">
+    <modal-window params="baseModel : $baseModel, rootModel : $data, id:'manageAccountsAccountNumberDropdown', closeHandler: $component.modalCloseHandler, header: $component.locale.chooseAccount">
+        <div class="form-main-container">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading: ''">
+                <!-- ko if: $component.parameters.moduleURL -->
+                <account-input params="baseModel : $baseModel, rootModel: $data,
+                    account : $component.accountNumberSelected,
+                    type: 'nodeValue',
+                    additionalDetails : $component.additionalDetails,
+                    accountsParser: $component.accountParser,
+                    customURL : $component.parameters.moduleURL,
+                    validator: $component.validationTracker">
+                </account-input>
+                <!-- /ko -->
+
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <!-- ko if: $component.accountNumberSelected() -->
+                <oj-button class="action-button-primary " on-click="[[$component.selectAccount]]">
+                    <span slot="startIcon" class="icons icon-forward-arrow"></span>
+                    <span data-bind="text:$component.locale.generic.common.proceed"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-secondary " on-click="[[$dashboard.hideDetails]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.locale.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+    <!-- ko if: $component.isReady -->
+    <!-- ko ifnot: $baseModel.small() -->
+    <div data-bind='component: {name: "nav-bar", params:{scrollIntoView: true, menuOptions: menuOptions, uiOptions: uiOptions, navBarDescription: $component.locale.navBarDescription}}'></div>
+    <!-- /ko -->
+    <!-- ko if: childRouter.currentValue() -->
+    <!-- ko ifnot: $component.isFlow() -->
+    <div class="menu-option" data-bind="component: {name: childRouter.currentValue().component , params : {rootModel : {params : $component.parameters, previousState: $component.previousState}, options : {metaData : childRouter.currentValue()}, changeView: $component.changeView}}">
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: $component.isFlow() -->
+    <flow params="{ rootModel: { params: { flowName: $component.menuSelection(), flowStageRootModel: { changeView: $component.changeView } } }, baseModel: $baseModel, dashboard: $dashboard, rootRouterInstance: childRouter }"></flow>
+    <!-- /ko -->
+    <!-- ko ifnot: $baseModel.small() -->
+    <a class="back-link" href="#" data-bind="text: $component.locale.backToDashboard, click: $dashboard.switchModule.bind($data, null)"></a>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>

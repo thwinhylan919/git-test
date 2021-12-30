@@ -1,0 +1,25 @@
+<div class="oj-flex oj-flex-items-pad">
+	<div class="oj-flex-item oj-sm-12 label">
+		<oj-label for="deliveryLocation">
+			<span data-bind="text:$component.locale.chequeDetails.chequeDetails"></span></oj-label>
+	</div>
+	<div class="oj-flex-item oj-sm-12">
+		<oj-radioset id="deliveryLocation" :aria-label="[[$component.locale.chequeDetails.chequeDetails]]" on-value-changed="[[$component.selectChequeDetails]]"
+		 value="{{$component.optionSelected}}" class="oj-choice-direction-row">
+			<oj-option value="Number" id="Number" name="name"><span for="Number" data-bind="text: $component.locale.chequeDetails.number"></span></oj-option>
+		</oj-radioset>
+	</div>
+</div>
+
+<div class="oj-flex oj-flex-items-pad">
+	<div class="oj-flex-item oj-sm-12 label">
+		<oj-label for="chequeNumber"><span data-bind="text:$component.locale.chequeDetails.chequeNumber"></span></oj-label>
+	</div>
+	<div class="oj-flex-item oj-sm-12">
+		<oj-input-text data-id="chequeNo" id="chequeNumber" required validators="[[$baseModel.getValidator('ALPHANUMERIC', $component.locale.messages.chequeNumber, {type: 'length', options: {
+                min: 1,
+                max: 15
+              }})]]"
+		 :invalidcomponenttracker="[[validationTracker]]" value="{{$component.chequeNo.startChequeNumber}}"></oj-input-text>
+	</div>
+</div>

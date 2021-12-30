@@ -1,0 +1,14 @@
+{
+  "componentName": "finance-maturing-widget",
+  "module": "supply-chain-finance",
+  "segment": ["corporateuser"],
+  "width": {
+    "large": "4",
+    "medium": "4"
+  },
+  "height": "220",
+  "icon": "",
+  "template": "",
+  "isVisible": true,
+  "isWidget": true
+}

@@ -1,0 +1,11 @@
+<!-- ko if: render() -->
+<div class="widget-container">
+    <div data-bind="template: {name : 'dashboard-notification'}"></div>
+    <div class="oj-flex" data-bind="css: !$baseModel.small() ? 'oj-flex-items-pad' : ''">
+        <!-- ko foreach: $component.layout -->
+        <section class="oj-flex-item" data-bind="css:$data.style ? style:'oj-sm-12',component: {name: componentName, params:{data:$data}}">
+        </section>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

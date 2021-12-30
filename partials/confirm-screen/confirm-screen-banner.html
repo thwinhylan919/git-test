@@ -1,0 +1,19 @@
+<!-- ko foreach: $component.headerMessages -->
+<!-- ko if: $data.summaryMessage -->
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12 confirm-screen__header confirm-screen-header" data-bind="css: $data.headerStyle">
+        <div class="confirm-screen-header__text confirm-screen-header-text">
+            <img class="confirm-screen-header-text__image" data-bind="loadImage : $data.icon"></img>
+            <span class="confirm-screen-header-text__message" data-bind="text: $data.headerMessage,css: $data.headerStyle"></span>
+        </div>
+        <div class="confirm-screen-header__successMessage" data-id="success-message" data-bind="text: $data.summaryMessage"></div>
+        <!-- ko if: $data.eReceiptDetails && $data.eReceiptDetails.enableEReceipt -->
+        <a href="#" id="eReceipt" class="confirm-screen__eReceipt-top" data-bind="attr:{'alt':eReceiptDetails.altText ,'title':eReceiptDetails.title,'aria-label':$component.confirmScreenResources.confirm.downloadEreceipt },click: $component.downloadEreceipt">
+            <span class="confirm-screen__eReceipt-top-icon icons icon-claim-money"></span>
+            <span class="confirm-screen__eReceipt-top-text" data-bind="text:eReceiptDetails.header"></span>
+        </a>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->

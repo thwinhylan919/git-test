@@ -1,0 +1,245 @@
+<div class="full-width">
+    <oj-validation-group id="tracker">
+        <!-- ko if: !$component.review -->
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label pageDescription">
+            <oj-label for="loanAmountDetailsDiscription">
+                <span data-bind="text:$component.nls.loadRequirements.loanAmountDetailsDiscription"></span>
+            </oj-label>
+        </div>
+        <div>
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading:$component.nls.loadRequirements.loanAmountDetails"
+                class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                <!-- ko if:$component.isCurrencyLoaded() -->
+                <div class="oj-flex-items-pad oj-flex oj-lg-5 oj-md-12 oj-sm-12">
+                    <amount-input
+                        params="amount :$component.path().payload.loanDetails.loanAmount,currency : $component.path().payload.loanDetails.loanCurrencyCode, label :$component.nls.loadRequirements.amountNeeded,validator:$component.validation,placeholder:$component.nls.loadRequirements.amountNeeded,isMandatory:true,currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'loanAmount',rootClass:''">
+                    </amount-input>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$component.monthsLoaded() -->
+                <div class="oj-flex-items-pad oj-flex">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="durationOfLoan">
+                            <span data-bind="text:$component.nls.loadRequirements.durationOfLoan"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-1 oj-md-3 oj-sm-12">
+                        <oj-input-text id="year" placeholder="[[$component.nls.loadRequirements.year]]"
+                            on-value-changed="[[$component.filledYear]]" value="{{noYears}}"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.loadRequirements.onlyNumber,{type: 'length',options: {min: 1, max: 20}})]]"
+                            required></oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-flex-items-pad oj-lg-1 oj-md-5 oj-sm-12">
+                        <oj-select-one id="noOfMonths" placeholder="[[$component.nls.loadRequirements.month]]"
+                            on-value-changed="[[$component.filledMonth]]" value="{{noOfMonths}}" required>
+                            <!-- ko foreach: $component.monthArray -->
+                            <oj-option value="[[month]]"><span data-bind="text: month"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading:$component.nls.loadRequirements.linkFacilities,headerTemplate :'facilityHeader'"
+                class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                <!-- ko if:$component.noFacilityFlag() -->
+                <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-flex-items-pad">
+                        <span data-bind="text:$component.nls.loadRequirements.noFacilitiesAvailable"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$component.facilityFlag() -->
+                <div class="oj-flex oj-flex-items-pad linkFaciltyDivPadding oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                        <span data-bind="text:$component.nls.loadRequirements.youCanFacilitiesAvailable"></span>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                        <oj-list-view :class="[['oj-listview-card-layout','oj-lg-4']]" :id="[['listview9']]" as='item'
+                            data="[[loanLinkData1]]"
+                            item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('counter_parties_list')]]"
+                            selection-mode="multiple" on-selection-changed="[[$component.valueChangeTest.bind($data)]]">
+                        </oj-list-view>
+                        <oj-paging-control class="oj-lg-12 oj-md-12" :id="[['CounterPartiesList8Paging']]"
+                            data="[[loanLinkData1]]" page-size="8" page-options="[[{orientation:['horizontal']}]]">
+                        </oj-paging-control>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <script type="text/html" id="counter_parties_list">
+                    <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 cardFormating">
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                            <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                                <div class="oj-flex-item left paddingBottom">
+                                    <span data-bind="text:$context.data.extFacilityId"></span>
+                                </div>
+                                <!-- ko if:$context.data.flag() -->
+                                <div class="oj-flex-item right">
+                                    <span slot="startIcon" class="icons icon-submit"></span>
+                                </div>
+                                <!-- /ko -->
+                                <div class="oj-flex oj-lg-12 oj-md-12"><span
+                                        data-bind="text:$context.data.categoryDesc"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12">
+                            <div class="oj-lg-8 oj-md-8 left">
+                                <oj-label>
+                                    <span data-bind="text:$component.nls.loadRequirements.facilityAmount"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-lg-4 oj-md-4 right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.limitAmountAmount, $context.data.limitAmountAmountCurr)"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12">
+                            <div class="oj-lg-8 oj-md-8 left">
+                                <oj-label>
+                                    <span data-bind="text:$component.nls.loadRequirements.availableAmount"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-lg-4 oj-md-4 right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.availableAmountAmount, $context.data.availableAmountAmountCurr)"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12">
+                            <div class="oj-lg-7 oj-md-7 left">
+                                <oj-label>
+                                    <span data-bind="text:$component.nls.loadRequirements.priority"></span>
+                                </oj-label>
+                            </div>
+                            <!-- ko if:$context.data.flag() -->
+                            <div class="oj-lg-5 oj-md-5 right" on-click="[[$component.textBox]]">
+                                <oj-input-text value="{{$context.data.utilizationOrder}}" required></oj-input-text>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: !$context.data.flag() -->
+                            <div class="oj-lg-5 oj-md-5 right" on-click="[[$component.textBox]]">
+                                <oj-input-text value="{{$context.data.utilizationOrder}}"></oj-input-text>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12">
+                            <div class="oj-lg-7 oj-md-7 left">
+                                <oj-label>
+                                    <span data-bind="text:$component.nls.loadRequirements.percentage"></span>
+                                </oj-label>
+                            </div>
+                            <!-- ko if:$context.data.flag() -->
+                            <div class="oj-lg-5 oj-md-5 right" on-click="[[$component.textBox]]">
+                                <oj-input-text value="{{$context.data.linkagePercent}}" required></oj-input-text>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: !$context.data.flag() -->
+                            <div class="oj-lg-5 oj-md-5 right" on-click="[[$component.textBox]]">
+                                <oj-input-text value="{{$context.data.linkagePercent}}"></oj-input-text>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </script>
+            </page-section>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$component.review -->
+        <div class="oj-flex-items-pad oj-flex oj-lg-12 sectionTop"
+            data-bind="with:$component.path().payload.loanDetails">
+            <div class="oj-flex oj-lg-6">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.loadRequirements.amountNeeded, value : (('loanAmount' in $data)?$formatter.formatCurrency(loanAmount(), loanCurrencyCode()):'-')">
+                </row>
+            </div>
+            <div class="oj-flex oj-lg-6">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.loadRequirements.durationOfLoan, value : $component.noYears() +' years, '+$component.noOfMonths()+' months'">
+                </row>
+            </div>
+        </div>
+        <div data-bind="attr:{id:'segment'+$index()}" class="oj-panel oj-panel-alt2 childpanel panelInternal">
+            <!-- ko if:$component.noFacilityFlag() -->
+            <div class="oj-flex-items-pad oj-flex">
+                <div class="oj-flex-item oj-flex-items-pad">
+                    <span data-bind="text:$component.nls.loadRequirements.noFacilitiesAvailable"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.facilityFlag() -->
+            <div class="oj-flex oj-flex-items-pad linkFaciltyDivPadding oj-lg-12 oj-md-12 oj-sm-12">
+                <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                    <span data-bind="text:$component.nls.loadRequirements.youCanFacilitiesAvailable"></span>
+                </div>
+                <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                    <oj-list-view :class="[['oj-listview-card-layout','oj-lg-4']]" :id="[['listview9']]" as='item'
+                        data="[[loanLinkData1]]"
+                        item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('counter_parties_list')]]"
+                        selection-mode="multiple"></oj-list-view>
+                    <oj-paging-control class="oj-lg-12" :id="[['CounterPartiesList8Paging']]" data="[[loanLinkData1]]"
+                        page-size="8" page-options="[[{orientation:['horizontal']}]]"></oj-paging-control>
+                </div>
+            </div>
+            <!-- /ko -->
+            <script type="text/html" id="counter_parties_list">
+                <div class="oj-flex oj-lg-12 cardFormating">
+                    <div class="oj-flex oj-lg-12">
+                        <div class="oj-flex oj-lg-12">
+                            <div class="oj-flex-item left paddingBottom">
+                                <span data-bind="text:$context.data.extFacilityId"></span>
+                            </div>
+                            <div class="oj-flex-item right">
+                                <span slot="startIcon" class="icons icon-submit"></span>
+                            </div>
+                            <div class="oj-flex oj-lg-12"><span data-bind="text:$context.data.categoryDesc"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-lg-12">
+                        <div class="oj-lg-8 left">
+                            <oj-label>
+                                <span data-bind="text:$component.nls.loadRequirements.facilityAmount"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-4 right"><span data-bind="text:$context.data.limitAmountAmount"></span></div>
+                    </div>
+                    <div class="oj-flex oj-lg-12">
+                        <div class="oj-lg-8 left">
+                            <oj-label>
+                                <span data-bind="text:$component.nls.loadRequirements.availableAmount"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-4 right"><span data-bind="text:$context.data.availableAmountAmount"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-lg-12">
+                        <div class="oj-lg-7 left">
+                            <oj-label>
+                                <span data-bind="text:$component.nls.loadRequirements.priority"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-5 right"><span data-bind="text:$context.data.utilizationOrder"></span></div>
+                    </div>
+                    <div class="oj-flex oj-lg-12">
+                        <div class="oj-lg-7 left">
+                            <oj-label>
+                                <span data-bind="text:$component.nls.loadRequirements.percentage"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-5 right"><span data-bind="text:$context.data.linkagePercent"></span></div>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <!-- /ko -->
+    </oj-validation-group>
+
+    <script type="text/html" id="facilityHeader">
+        <a href="#" class="pull-right"
+            data-bind="css:$component.selectedFlag() ? 'underLineText' : '',click:$component.selectedCards,text:$component.nls.loadRequirements.selected"></a>
+        <span class="pull-right linkFontSize" data-bind="text:$component.nls.loadRequirements.verticleSlash"></span>
+        <a href="#" class="pull-right allLinkPadding"
+            data-bind="css:$component.allFlag() ? 'underLineText' : '',click:$component.allCards,text:$component.nls.loadRequirements.all"></a>
+        <span class="pull-right linkFontSize" data-bind="text:$component.nls.loadRequirements.view"></span>
+    </script>
+</div>

@@ -1,0 +1,89 @@
+.preview-invoice {
+    .seperation-line {
+        border-bottom: 0.05rem solid var(--banner-background);
+        padding-top: 0.8rem;
+    }
+
+    .company-name {
+        font-size: 2rem;
+        @include single-padding(left, 0.7rem);
+    }
+
+    @include mq(large) {
+        width: 60rem;
+    }
+
+    @include mq(medium) {
+        width: 46rem;
+    }
+
+    @include mq(small) {
+        width: 20rem;
+    }
+
+    .amount-weight {
+        font-weight: var(--base-font-weight-bold);
+    }
+
+    .external-reference-padding {
+        padding-top: 0.7rem;
+    }
+
+    .invoice-seperation-line {
+        border-bottom: 0.05rem solid;
+        font-weight: var(--base-font-weight-bold);
+        border-top: 0.05rem solid var(--banner-background);
+        padding-top: 0.5rem;
+    }
+
+    .invoice-no-list {
+        border-bottom: 0.05rem solid;
+        font-weight: var(--base-font-weight-bold);
+    }
+
+    .invoice-background {
+        background: var(--banner-background);
+        padding-top: 0.5rem;
+        margin: auto;
+        padding-bottom: 0.5rem;
+        font-weight: var(--base-font-weight-bold);
+    }
+
+    .common-padding {
+        padding-top: 0.8rem;
+    }
+
+    .percent-weight {
+        font-size: var(--base-font-size-medium);
+    }
+
+    .discount-padding {
+        font-weight: var(--base-font-weight-bold);
+        padding-top: 1rem;
+    }
+
+    .discountvalue-padding {
+        padding-top: 1.9rem;
+    }
+
+    .supplier-address-design {
+        padding-top: 0.5rem;
+        line-height: 1.2rem;
+        width: 50%;
+    }
+
+    .buyer-address-design {
+        line-height: 1.2rem;
+        width: 50%;
+    }
+
+    .download_note{
+      background-color: var(--base-color-success-light);
+      border: 0.09rem solid var(--banner-background);
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      .note-header{
+        font-weight: var(--base-font-weight-bold);
+      }
+}
+}

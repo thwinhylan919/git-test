@@ -1,0 +1,454 @@
+<div class="page-section-content">
+  <oj-validation-group id="shipmentTracker" valid="{{shipmentGroupValid}}">
+    <!-- ko if: stages[stageIndex()].editable()-->
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="partialShipmentradioset"><span data-bind="text:$component.nls.labels.partialShipment"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-select-one id="partialShipmentradioset"
+              :invalidcomponenttracker="[[$component.validationTracker]]"
+              options="[[$component.partialShipmentOptionsArray]]"
+              placeholder="[[$component.tradeFinanceCommonNls.labels.pleaseSelect]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.partial}}">
+            </oj-select-one>
+          </div>
+        </div>
+      </div>
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="transShipmentradioset"><span data-bind="text:$component.nls.labels.transShipment"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-select-one id="transShipmentradioset"
+              :invalidcomponenttracker="[[$component.validationTracker]]"
+              options="[[$component.transShipmentOptionsArray]]"
+              placeholder="[[$component.tradeFinanceCommonNls.labels.pleaseSelect]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.transShipment}}">
+            </oj-select-one>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="shipmentDatePeriodRadioSet" class="hide-label"><span
+              data-bind="text:$component.nls.labels.transShipment"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-7">
+          <oj-radioset id="shipmentDatePeriodRadioSet" class="shipment-radio-button oj-choice-direction-row"
+            value="{{$component.shipmentDatePeriodRadioSetValue}}">
+            <oj-option value="latestdateofShipment" id="shipmentDateRadio" name="shipmentDatePeriodRadioSet"><span
+                for="shipmentDateRadio" data-bind="text:$component.nls.labels.lastdateofShipment"></span></oj-option>
+            <oj-option value="latestperiodofShipment" id="shipmentPeriodRadio" name="shipmentDatePeriodRadioSet"><span
+                for="shipmentPeriodRadio" data-bind="text:$component.nls.labels.shipmentPeriod"></span></oj-option>
+          </oj-radioset>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+          <!-- ko if : $component.shipmentDatePeriodRadioSetValue() === 'latestdateofShipment' -->
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="lastdateofShipment" class="hide-label"><span
+                data-bind="text:$component.nls.labels.lastdateofShipment"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-6 oj-md-5 oj-lg-3">
+
+            <oj-input-date id="lastdateofShipment" converter="[[$formatter.dateConverter]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.date}}"
+              :placeholder="[[$component.tradeFinanceCommonNls.labels.selectDate]]"
+              max="[[$component.letterOfCreditDetails.expiryDate]]" min="[[minEffectiveDate]]"></oj-input-date>
+
+          </div>
+          <!-- /ko -->
+
+          <!-- ko if : $component.shipmentDatePeriodRadioSetValue() === 'latestperiodofShipment' -->
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="shipmentPeriod" class="hide-label"><span
+                data-bind="text:$component.nls.labels.shipmentPeriod"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-text-area id="shipmentPeriod" maxlength="390"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.period}}" validators="[[$baseModel.getValidator('SWIFT_X',$component.errorNls.common.swiftXNewLine,{
+                                       type:'length',options:{
+                                           min:0,max:65}})]]"></oj-text-area>
+          </div>
+          <!-- /ko -->
+        </div>
+
+      </div>
+      <!-- ko if: $component.transactionType === 'SHIPPING_GUARANTEE' -->
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="transportationMode"><span data-bind="text:$component.nls.labels.transportationMode"></span>
+            </oj-label>
+          </div>
+          <!-- ko if: $component.modetypeLoaded() -->
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-select-one id="tmode" options="[[$component.transportationModes]]"
+              :placeholder="[[$component.tradeFinanceCommonNls.labels.pleaseSelect]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.mode}}">
+            </oj-select-one>
+          </div>
+          <!-- /ko -->
+        </div>
+
+      </div>
+      <!-- /ko -->
+    </div>
+
+
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="sellerAddress"><span data-bind="text:$component.nls.labels.shipmentFrom"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-input-text id="sellerAddress" maxlength="65"
+              :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[$baseModel.getValidator('SWIFT_X',$component.errorNls.common.swiftX,{
+                                    type:'length',options:{
+                                        min:0,max:65}})]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.source}}"></oj-input-text>
+          </div>
+        </div>
+      </div>
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="buyerAddress"><span data-bind="text:$component.nls.labels.shipmentTo"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-input-text id="buyerAddress" maxlength="65"
+              :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[$baseModel.getValidator('SWIFT_X',$component.errorNls.common.swiftX,{
+                                      type:'length',options:{
+                                          min:0,max:65}})]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.destination}}"></oj-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="portOfLoading"><span data-bind="text:$component.nls.labels.portOfLoading"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-input-text id="portOfLoading" maxlength="65"
+              :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[$baseModel.getValidator('SWIFT_X',$component.errorNls.common.swiftX,{
+                                      type:'length',options:{
+                                          min:0,max:65}})]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.loadingPort}}"></oj-input-text>
+          </div>
+        </div>
+      </div>
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="portOfDischarge"><span data-bind="text:$component.nls.labels.portOfDischarge"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-input-text id="portOfDischarge" maxlength="65"
+              :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[$baseModel.getValidator('SWIFT_X',$component.errorNls.common.swiftX,{
+                                      type:'length',options:{
+                                          min:0,max:65}})]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.dischargePort}}"></oj-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- ko ifnot: $component.multiGoodsSupported-->
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="goodsType"><span data-bind="text:$component.nls.labels.goods"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-select-one id="goodsType" :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]"
+              :placeholder="[[$component.tradeFinanceCommonNls.labels.pleaseSelect]]" options="[[goodsTypeOptions]]"
+              on-value-changed="[[goodsTypeHandler]]" value="{{goodsDescription}}">
+
+            </oj-select-one>
+          </div>
+        </div>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label for="descriptionOfGoods"><span data-bind="text:$component.nls.labels.descriptionOfGoods"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+            <oj-text-area id="descriptionOfGoods" validators="[[$baseModel.getValidator('SWIFT_Z',$component.errorNls.common.swiftZNewLine,{
+                                      type:'length',options:{
+                                          min:0,max:6500}})]]"
+              value="{{$component.letterOfCreditDetails.shipmentDetails.description}}"></oj-text-area>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.multiGoodsSupported-->
+    <!-- ko ifnot:$baseModel.small() -->
+    <div class="oj-flex oj-flex-items-pad">
+      <!-- ko if: $component.transactionType !== 'SHIPPING_GUARANTEE' -->
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 draft-table"
+        data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+        <label for="goodsTable" data-bind="text: $component.nls.labels.goods"></label>
+        <oj-table id="goodsTable" :aria-label="[[$component.nls.labels.goods]]"
+          row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_goods', true)]]"
+          columns="[[[{headerText:$component.nls.labels.srNo,style:'width: 5%'},{headerText:$component.nls.labels.goods,style:'width: 20%'},{headerText:$component.nls.labels.descriptionOfGoods,style:'width: 25%'},{headerText:$component.nls.labels.units,style:'width: 25%'},{headerText:$component.nls.labels.pricePerUnit,style:'width: 25%'}]]]"
+          edit-mode="[['rowEdit']]" data="[[datasourceForGoods]]">
+        </oj-table>
+      </div>
+      <!-- /ko -->
+
+      <!-- ko if: $component.transactionType === 'SHIPPING_GUARANTEE' -->
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 draft-table"
+        data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+        <label for="goodsTable" data-bind="text: $component.nls.labels.goods"></label>
+        <oj-table id="goodsTable" :aria-label="[[$component.nls.labels.goods]]"
+          row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_goods', true)]]"
+          columns="[[[{headerText:$component.nls.labels.srNo,style:'width: 5%'},{headerText:$component.nls.labels.goods,style:'width: 20%'},{headerText:$component.nls.labels.descriptionOfGoods,style:'width: 25%'},{headerText:$component.nls.labels.units,style:'width: 25%'},{headerText:$component.nls.labels.pricePerUnit,style:'width: 25%'}]]]"
+          edit-mode="[['rowEdit']]" data="[[datasourceForGoods]]">
+        </oj-table>
+      </div>
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$baseModel.small() -->
+    <div class="oj-flex grid-main-container">
+      <div class="oj-flex-item oj-sm-12">
+        <oj-label for="goods"><span data-bind="text: $component.nls.labels.goods"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <oj-list-view id="listview-txn-card" class="cards draft-cards"
+          item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('goods_list',true)}]]" selection-mode="[['single']]"
+          data="[[datasourceForGoods]]">
+        </oj-list-view>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad add-draft">
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <a href="#" data-bind="attr:{ title: $component.nls.labels.addGoods},
+                text:$component.nls.labels.addGoods,
+                click:$component.addGoods.bind()"></a>
+      </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if : $component.mode() === 'CREATE' -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+        data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <oj-button id="continueButtonShipment" class="action-button-secondary" on-click="[[continueFunc]]"
+          disabled=[[$component.duplicatesEntered]]>
+          <span slot="startIcon" class="icons icon-submit"></span>
+          <span data-bind="text:$component.tradeFinanceCommonNls.labels.continue"></span>
+        </oj-button>
+      </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- /ko -->
+  </oj-validation-group>
+</div>
+
+<script type="text/html" id="row_tmpl_goods">
+  <tr>
+
+    <!-- ko if: $component.transactionType !== 'SHIPPING_GUARANTEE' -->
+    <td class="draft-no" data-bind="text: $data.id">
+    </td>
+    <!-- /ko -->
+    <!-- ko if: $component.transactionType === 'SHIPPING_GUARANTEE' -->
+    <td class="draft-no" data-bind="text: $data.id">
+    </td>
+    <!-- /ko -->
+
+    <td>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1">
+          <label class="hide-label" data-bind="text:$component.nls.labels.goods, attr : {'for' :'code_' + $context.rowContext.status.rowIndex}"></label>
+        </div>
+        <!-- ko if: $component.transactionType !== 'SHIPPING_GUARANTEE' -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-11">
+          <oj-select-one data-bind="attr:{'id': 'code_'+ $context.rowContext.status.rowIndex}" on-value-changed="[[$component.goodsTypeHandler.bind($data, $context.rowContext.status.rowIndex)]]" value="{{code}}" placeholder="{{$component.tradeFinanceCommonNls.labels.pleaseSelect}}">
+            <!-- ko foreach:$component.goodsTypeOptions() -->
+              <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.transactionType === 'SHIPPING_GUARANTEE' -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-11">
+          <oj-select-one data-bind="attr:{'id': 'code_'+ $context.rowContext.status.rowIndex}" on-value-changed="[[$component.goodsTypeHandler.bind($data, $context.rowContext.status.rowIndex)]]" value="{{code}}" placeholder="{{$component.tradeFinanceCommonNls.labels.pleaseSelect}}">
+            <!-- ko foreach:$component.goodsTypeOptions() -->
+              <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+        </div>
+        <!-- /ko -->
+      </div>
+    </td>
+    <td>
+      <div class="oj-flex oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-label class="hide-label" data-bind="attr : {'for' :'description_' +  $context.rowContext.status.rowIndex}">
+          <span data-bind="text:$component.nls.labels.descriptionOfGoods"></span>
+        </oj-label>
+        <oj-text-area :id="[['description_' + $context.rowContext.status.rowIndex]]" validators="[[$baseModel.getValidator('SWIFT_Z',$component.errorNls.common.swiftZNewLine,{
+                                      type:'length',options:{
+                    min:0,max:6500}})]]" value="{{description}}"></oj-text-area>
+      </div>
+    </td>
+    <td>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex oj-sm-10 oj-md-9 oj-lg-10">
+        <oj-label class="hide-label" data-bind="attr : {'for' :'units_' +  $context.rowContext.status.rowIndex}">
+          <span data-bind="text:$component.nls.labels.units"></span>
+        </oj-label>
+        <oj-input-text  data-bind="attr:{'id': 'units_'+ $context.rowContext.status.rowIndex}" validators="[[$baseModel.getValidator('NUMBERS',$component.errorNls.shipmentDetails.invalidUnits,{
+                                      type:'numberRange',options:{
+                                      min:0,max:1000}})]]" value="{{units}}"></oj-input-text>
+      </div>
+      </div>
+    </td>
+
+    <td>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex oj-sm-10 oj-md-9 oj-lg-10">
+          <oj-label class="hide-label" data-bind="attr : {'for' :'pricePerUnit_' + $context.rowContext.status.rowIndex}">
+            <span data-bind="text:$component.nls.labels.pricePerUnit"></span>
+          </oj-label>
+          <oj-input-text  maxlength="16" :id="[['pricePerUnit_'+  $context.rowContext.status.rowIndex]]" :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[[$component.validateGoodsAmount]]]" converter="[[{type:'number',options:{
+                                              style:'currency',currency:typeof ko.utils.unwrapObservable($component.letterOfCreditDetails.amount.currency) ==='string'? ko.utils.unwrapObservable($component.letterOfCreditDetails.amount.currency):'',currencyDisplay:'symbol'}}]]" value="{{pricePerUnit}}"></oj-input-text>
+
+        </div>
+        <div class="oj-flex oj-sm-2 oj-md-3 oj-lg-2 flex-right">
+          <a href="#" data-bind="attr : {'id' :'delete_' + $context.rowContext.status.rowIndex}, click:$component.remove.bind($data)">
+              <span class="icons icon-delete delete-draft icon-2x" data-bind="attr:{ title: $component.resourceBundle.generic.common.delete}"></span>
+          </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+</script>
+
+<script type="text/html" id="goods_list">
+  <li data-bind="attr: {id: $data.id()}">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-9" data-bind="text: $baseModel.format($component.nls.labels.goodWithSrNo,
+            {srNo: $data.id()})">
+            </div>
+
+            <div class="oj-flex-item oj-sm-3 right">
+              <a href="#" data-bind="click:$component.remove.bind($data)">
+                  <span class="icons icon-delete icon-2x icon-padding-right" data-bind="attr:{ title: $component.resourceBundle.generic.common.delete}"></span>
+              </a>
+            </div>
+
+          </div>
+      </div>
+      <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12">
+                <label data-bind="text:$component.nls.labels.goods, attr : {'for' :'code_' + $context.index}"></label>
+              </div>
+              <!-- ko if: $component.transactionType !== 'SHIPPING_GUARANTEE' -->
+              <div class="oj-flex-item oj-sm-12">
+                <oj-select-one data-bind="attr:{'id': 'code_'+ $context.index}" on-value-changed="[[$component.goodsTypeHandler.bind($data, $context.index)]]" value="{{code}}" placeholder="{{$component.tradeFinanceCommonNls.labels.pleaseSelect}}">
+                  <!-- ko foreach:$component.goodsTypeOptions() -->
+                    <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+              <!-- /ko -->
+              <!-- ko if: $component.transactionType === 'SHIPPING_GUARANTEE' -->
+              <div class="oj-flex-item oj-sm-12">
+                <oj-select-one data-bind="attr:{'id': 'code_'+ $context.index}" on-value-changed="[[$component.goodsTypeHandler.bind($data, $context.index)]]" value="{{code}}" placeholder="{{$component.tradeFinanceCommonNls.labels.pleaseSelect}}">
+                  <!-- ko foreach:$component.goodsTypeOptions() -->
+                    <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+              <!-- /ko -->
+            </div>
+      </div>
+      <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+              <label data-bind="text:$component.nls.labels.descriptionOfGoods, attr : {'for' :'description_' +  $context.index}"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+                <oj-text-area data-bind="attr:{'id': 'description_'+ $context.index}"  validators="[[$baseModel.getValidator('SWIFT_Z',$component.errorNls.common.swiftZNewLine,{
+                                            type:'length',options:{
+                          min:0,max:6500}})]]" value="{{description}}"></oj-text-area>
+            </div>
+          </div>
+      </div>
+
+      <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+              <label data-bind="text:$component.nls.labels.units, attr : {'for' :'units_' +  $context.index}"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+              <oj-input-text  maxlength="60" :id="[['units_' +  $context.index]]" :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[$baseModel.getValidator('NUMBERS',$component.errorNls.shipmentDetails.invalidUnits,{
+                                            type:'numberRange',options:{
+                                            min:0,max:1000}})]]" value="{{units}}"></oj-input-text>
+            </div>
+          </div>
+      </div>
+      <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+              <label data-bind="text:$component.nls.labels.pricePerUnit, attr : {'for' :'pricePerUnit_' + $context.index}"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+              <oj-input-text  maxlength="16" :id="[['pricePerUnit_' +  $context.index]]" :invalidcomponenttracker="[[$component.shipmentDetailsValidationTracker]]" validators="[[[$component.validateGoodsAmount]]]" converter="[[{type:'number',options:{
+                                                  style:'currency',currency:typeof ko.utils.unwrapObservable($component.letterOfCreditDetails.amount.currency) ==='string'? ko.utils.unwrapObservable($component.letterOfCreditDetails.amount.currency):'',currencyDisplay:'symbol'}}]]" value="{{pricePerUnit}}"></oj-input-text>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </li>
+</script>

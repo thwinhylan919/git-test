@@ -1,0 +1,25 @@
+<div class="form-main-container">
+
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.headers.review">
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.userType , value : userType()"></row>
+        <!-- ko ifnot: (userType() ==="Administrator" || userType() ==="administrator")-->
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.partyid , value : partyId()"></row>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.username , value :userFullData().username"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.title , value :userFullData().title"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.fullName , value : $baseModel.format($component.nls.fieldname.displayFullName, {firstname:userFullData().firstName , middlename : userFullData().middleName, lastname: userFullData().lastName})"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.emailid , value :userFullData().emailId"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.nls.fieldname.contactmobile , value :userFullData().mobileNumber"></row>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+                <oj-label>
+                    <span data-bind="text:$component.nls.headers.lockUser"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                <oj-switch id="id" value="{{$component.statusOptionValue}}" disabled="[[true]]"></oj-switch>
+                <span data-bind="text: ($component.statusOptionValue() ? $component.nls.fieldname.lock : $component.nls.fieldname.unlock)"></span>
+            </div>
+        </div>
+    </page-section>
+</div>

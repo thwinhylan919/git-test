@@ -1,0 +1,80 @@
+$duration1:#C0392B;
+$duration2:#2E7D32;
+$duration3:#FFE45C;
+$duration4:#205D86;
+$duration5:#FF9538;
+$textcolor:#FFFFFF;
+$textcolor2:#2c3251;
+.sub-heading {
+    font-size: var(--base-font-size-small);
+}
+
+.align-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-specs {
+    height: 12.5rem;
+}
+
+.timeline-height {
+    height: 1rem;
+    ;
+}
+
+.timeline-padding {
+    @include padding(3rem, 0, 0.5rem, 0);
+}
+
+.timeline-border {
+    @include single-border(right, 0.1rem solid var(--banner-gradient-start-color));
+}
+
+.timeline-border-top {
+    border-top: 0.1rem solid var(--banner-gradient-start-color);
+    @include padding(1rem, 0, 0, 0);
+}
+
+.data-padding {
+    padding: 1rem;
+}
+
+.text-font {
+    font-size: var(--base-font-size-medium);
+}
+
+.amount-style {
+    font-size: var(--base-font-size-larger);
+    @include padding(0.4rem, 0, 0, 0);
+}
+
+.duration1-color {
+    background-color: $duration1;
+    color: $textcolor;
+}
+
+.duration2-color {
+    background-color: $duration2;
+    color: $textcolor;
+}
+
+.duration3-color {
+    background-color: $duration3;
+    color: $textcolor2;
+}
+
+.duration4-color {
+    background-color: $duration4;
+    color: $textcolor;
+}
+
+.duration5-color {
+    background-color: $duration5;
+    color: $textcolor2;
+}
+
+.text-alignment {
+    text-align: center;
+}

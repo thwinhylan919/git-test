@@ -1,0 +1,176 @@
+<div class="oj-flex-items-pad oj-lg-12">
+    <oj-validation-group id="setStructureDetailsTracker">
+        <!-- ko if:dataLoaded() -->
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.structureParameters">
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="structureDescription" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.structureDescription"></span>
+                    </oj-label>
+                    <oj-input-text id="structureDescription" :aria-label="[[$component.resource.structureDescription]]" class="oj-flex-item oj-lg-6 oj-sm-12" value="{{setStructureDetailsModel.desc}}" required>
+                    </oj-input-text>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="structureType" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.structureType"></span>
+                    </oj-label>
+                    <oj-select-one id="structureType" :aria-label="[[$component.resource.structureType]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" disabled="[[mode === 'edit']]" value="{{structureType}}" on-value-changed="[[structureTypeChangeHandler]]"
+                        required>
+                        <!-- ko foreach:structureTypeList -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="startDate" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.startDate"></span>
+                    </oj-label>
+                    <oj-input-date-time id="startDate" class="oj-flex-item oj-lg-6 oj-sm-12" :aria-label="[[$component.resource.startDate]]" value="{{effDate}}" converter="[[$formatter.dateTimeConverter]]" min="[[$oj.IntlConverterUtils.dateToLocalIso($component.currentDate())]]"
+                        max="[[$component.endDate() && (new Date($component.endDate()) > $component.currentDate()) ? $oj.IntlConverterUtils.dateToLocalIso(new Date(new Date($component.endDate())).getTime() - 60000) : null]]" required>
+                    </oj-input-date-time>
+                </div>
+                <!-- ko if:resetEndDate() -->
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="endDate" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.endDate"></span>
+                    </oj-label>
+                    <oj-input-date-time id="endDate" class="oj-flex-item oj-lg-6 oj-sm-12" :aria-label="[[$component.resource.endDate]]" value="{{endDate}}" converter="[[$formatter.dateTimeConverter]]" min="[[$component.minEndDate() ? $oj.IntlConverterUtils.dateToLocalIso($component.minEndDate()) : $oj.IntlConverterUtils.dateToLocalIso($component.currentDate())]]"
+                        required>
+                    </oj-input-date-time>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="interestMethod" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.interestMethod"></span>
+                    </oj-label>
+                    <oj-select-one id="interestMethod" :aria-label="[[$component.resource.interestMethod]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" disabled="[[structureType() !== 'Pool']]" value="{{interestMethod}}" required>
+                        <!-- ko foreach:interestMethodList -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="reallocationMethod" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.reallocationMethod"></span>
+                    </oj-label>
+                    <oj-select-one id="reallocationMethod" :aria-label="[[$component.resource.reallocationMethod]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" value="{{setStructureDetailsModel.reallocationMethod}}" required="[[structureType() !== 'Sweep']]"
+                        on-value-changed="[[reallocationMethodChangeHandler]]">
+                        <!-- ko foreach:reallocationMethodList -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="structurePriority" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.structurePriority"></span>
+                    </oj-label>
+                    <oj-input-text id="structurePriority" class="oj-flex-item oj-lg-6 oj-sm-12" :aria-label="[[$component.resource.structurePriority]]" value="{{setStructureDetailsModel.priority}}" validators="[[$baseModel.getValidator('NUMBERS',$component.resource.structurePriorityErrorMessage,{type: 'length',options: {min: 1, max: 5}})]]"
+                        required>
+                    </oj-input-text>
+                </div>
+                <!-- ko if:centralAccountRequired() -->
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="centralAccount" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.centralAccount"></span>
+                    </oj-label>
+                    <oj-select-one id="centralAccount" :aria-label="[[$component.resource.centralAccount]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" value="{{setStructureDetailsModel.centralAcc}}" required on-value-changed="[[centralAccountChangeHandler]]">
+                        <!-- ko foreach:accountList -->
+                        <oj-option value="[[value]]"><span data-bind="text:displayValue"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+        </page-section>
+        <script type="text/html" id="default-instruction-info">
+            <a href="#" class="default-instruction-info-link" data-bind="attr:{alt:'alt',title:'title',id:'instruction-poop-up'},click:$component.openPopup">
+                <span class="icons icon-information"></span>
+            </a>
+        </script>
+        <oj-popup id="default-instruction-info-popup" class="hide" tail="none" position.at.horizontal="end" position.at.vertical="bottom" position.my.horizontal="start" position.my.vertical="top">
+            <div class="set-structure-details-container">
+                <div class="oj-flex oj-flex-items-pad default-info-popup">
+                    <div class="oj-flex-item" data-bind="text : $component.resource.infoText"></div>
+                </div>
+            </div>
+        </oj-popup>
+        <!-- ko ifnot:structureType() === 'Pool' -->
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.defaultInstructionDetails, headerTemplate : 'default-instruction-info'">
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="reverseFrequency" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.reverseFrequency"></span>
+                    </oj-label>
+                    <oj-select-one id="reverseFrequency" :aria-label="[[$component.resource.reverseFrequency]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" value="{{setStructureDetailsModel.reverseFrequency}}">
+                        <!-- ko foreach:frequencyList -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="defaultFrequency" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.defaultFrequency"></span>
+                    </oj-label>
+                    <oj-select-one id="defaultFrequency" :aria-label="[[$component.resource.defaultFrequency]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" value="{{setStructureDetailsModel.defaultFrequency}}">
+                        <!-- ko foreach:frequencyList -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <div class="oj-flex-item oj-lg-6">
+                    <oj-label for="instructionType" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.resource.instructionType"></span>
+                    </oj-label>
+                    <oj-select-one id="instructionType" :aria-label="[[$component.resource.instructionType]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resource.pleaseSelect]]" value="{{setStructureDetailsModel.instructionType}}">
+                        <!-- ko foreach:instructionTypeList -->
+                        <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+        </page-section>
+        <!-- /ko -->
+        <div class="oj-flex-item button-container">
+            <oj-button class="action-button-primary" id="saveButton" on-click="[[$component.next]]">
+                <span slot="startIcon" class="icons icon-drop-right"></span>
+                <span data-bind="text: $component.resource.generic.common.next"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text: $component.resource.generic.common.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text: $component.resource.generic.common.back"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+    </oj-validation-group>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'default-instructions', header: $component.resource.generic.common.INFO">
+    <div class="confirm-dialog">
+        <div class="confirm-dialog__container confirm-dialog-container">
+            <div class="oj-flex oj-flex-items-pad confirm-dialog-container__message">
+                <div class="oj-flex-item oj-sm-12" data-bind="text: $component.resource.defaultInstructionsWarning"></div>
+            </div>
+            <div class="oj-flex-item confirm-dialog-container__buttons button-container">
+                <oj-button class="action-button-primary" id="yesButton" on-click="[[resetDefaultInstructions]]">
+                    <span slot="startIcon" class="icons icon-yes"></span>
+                    <span data-bind="text: $component.resource.generic.common.yes"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="noButton" on-click="[[closeDefaultInstructionsModal]]">
+                    <span slot="startIcon" class="icons icon-no"></span>
+                    <span data-bind="text: $component.resource.generic.common.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</modal-window>

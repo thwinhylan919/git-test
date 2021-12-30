@@ -1,0 +1,63 @@
+<div class="oj-panel accountBalance">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+      <h3 data-bind="text:$component.resource.header.accountBalance">
+      </h3>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-lg-7">
+      <oj-select-one :aria-label="[[$component.resource.realAccountNumber]]" :id="SelectRealAccount"
+        value="{{$component.selectedAccountFilter}}" options="[[$component.realAccountOptions]]"
+        :placeholder="{{$component.resource.labels.realAccountNumber}}"
+        on-value-changed="{{$component.changeAccountSelection}}" required>
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- ko if: viewTable -->
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12 accountBalance__table">
+      <oj-table id="tableAccountBalances" :aria-label="[[$component.resource.caption]]" data="[[dataSource]]"
+        columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns='[[[
+        {"headerText":$component.resource.labels.accountNumber,"template":"realAccountNumber","field":"realAccountNumber","sortable":"none","headerClassName": "table-header-style", "className": "break-word",id:"realAccountNo"},
+        {"headerText":$component.resource.labels.mappedStructures,"template":"mappedStructureIdentifier","field":"mappedStructures","sortable":"none","headerClassName": "table-header-style", "className": "break-word"},
+        {"headerText":$component.resource.labels.mappedVirtualAccounts,"template":"mappedAccountIdentifier","field":"mappedAccounts","sortable":"none","headerClassName": "table-header-style", "className": "break-word"}
+        ]]]'>
+        <caption class="hide-label" data-bind="text:$component.resource.caption"></caption>
+        <template slot="realAccountNumber">
+          <div :aria-label="[[$current.row.realAcoountNoDisplayValue]]"
+            data-bind="text:$current.row.realAcoountNoDisplayValue"></div>
+          <!-- ko if: $component.selectedAccountFilter() === "RealAccountSingleCurrency" -->
+          <span class="balanceText"
+            data-bind="text:$formatter.formatCurrency($current.row.balance, $current.row.currency)"></span>
+          <!-- /ko -->
+          <!-- ko if: $component.selectedAccountFilter() === "VirtualMultiCurrencyAccount" -->
+          <a :aria-label="[[$component.resource.labels.viewBalance]]" href="#"
+            attr="{'id':'balanceLink'+$context.rowContext.status.rowIndex}"
+            data-bind="text:$component.resource.labels.viewBalance, click:$component.onSelectedViewBalanceLink.bind($data,$current.row)"></a>
+          <!-- /ko -->
+        </template>
+        <template slot="mappedAccountIdentifier">
+          <span class="icon icon-accounts accountBalance__iconStyle"></span>
+          <a href="#" attr="{'id':'mappedAccounts'+$context.rowContext.status.rowIndex}"
+            data-bind="text:$current.row.mappedAccounts, click:$component.onSelectedMappedAccount.bind($data,$current.row)"></a>
+        </template>
+        <template slot="mappedStructureIdentifier">
+          <span class="icon icon-tree accountBalance__iconStyle"></span>
+          <a href="#" attr="{'id':'mappedStructures'+$context.rowContext.status.rowIndex}"
+            data-bind="text:$current.row.mappedStructures, click:$component.onSelectedMappedStructure.bind($data,$current.row)"></a>
+        </template>
+      </oj-table>
+      <oj-paging-control class="paddingClass" :id="pagingAccountBalances" data="[[dataSource]]" page-size="5"
+        slot="bottom">
+      </oj-paging-control>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<modal-window class=""
+  params="baseModel:$baseModel,rootModel:$data,id:'multi-currency-account-balance-details',header:$component.resource.header.balanceDetails">
+  <!-- ko if: $component.viewBalanceTable() -->
+  <div data-bind="template: { name: 'virtual-account-management/virtual-multi-currency-balance'}"></div>
+  <!-- /ko -->
+</modal-window>

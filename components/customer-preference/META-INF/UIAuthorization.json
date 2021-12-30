@@ -1,0 +1,23 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.party.service.profile.PartyPreferences",
+        "components": [{
+                "componentName": "preference-base",
+                "service": "read",
+                "perform": "preference-search#party-validate"
+            },
+            {
+                "componentName": "create-customer-preference",
+                "service": "create",
+                "perform": "preference-base#preference-search#party-validate#review-create-customer-preference",
+                "approve": "review-create-customer-preference"
+            },
+            {
+                "componentName": "modify-customer-preference",
+                "service": "update",
+                "perform": "review-modify-customer-preference",
+                "approve": "review-modify-customer-preference"
+            }
+        ]
+    }]
+}

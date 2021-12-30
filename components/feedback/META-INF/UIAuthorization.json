@@ -1,0 +1,41 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.feedback.service.Feedback",
+      "components": [{
+        "componentName": "feedback-capture",
+        "service": "create"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.feedback.service.report.FeedbackReport",
+      "components": [{
+        "componentName": "feedback-analysis",
+        "service": "list"
+      }]
+    },
+    {
+            "moduleName": "com.ofss.digx.app.feedback.service.template.FeedbackTemplate",
+            "components": [{
+                    "componentName": "feedback-template-search",
+                    "service": "list"
+                },
+                {
+                    "componentName": "feedback-template-create",
+                    "service": "read",
+                    "perform": "feedback-template-search#feedback-template-create"
+                },
+                {
+                    "componentName": "feedback-template-create",
+                    "service": "create",
+                    "perform": "feedback-template-search#feedback-template-landing#feedback-home#feedback-scale-configuration#feedback-question-configurations#feedback-transaction-configuration#feedback-template-create",
+                     "approve": "feedback-template-create"
+                },
+                {
+                    "componentName": "feedback-template-create",
+                    "service": "update",
+                    "perform": "feedback-template-search#feedback-template-create"
+                }
+            ]
+        }
+  ]
+}

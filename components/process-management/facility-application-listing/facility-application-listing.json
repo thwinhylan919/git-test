@@ -1,0 +1,8 @@
+{
+    "processStatusMap":
+    {
+        "SUBMITTED": "Submitted",
+        "IN_PROGRESS": "In Progress",
+        "DRAFT": "Draft"
+    }
+}

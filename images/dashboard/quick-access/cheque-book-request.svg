@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="842.35px" height="595.3px" viewBox="0 0 842.35 595.3" enable-background="new 0 0 842.35 595.3" xml:space="preserve">
+<g>
+	
+		<rect x="554.187" y="74.413" fill="#FFFFFF" stroke="#171C28" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="31.625" height="31.625"/>
+	
+		<path fill="#FFFFFF" stroke="#171C28" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M515.121,312.533H376.527c-6.511,0-11.162-5.581-11.162-11.162l0,0c0-27.905-23.254-52.089-52.089-52.089H185.845
+		c-6.511,0-11.162,5.581-11.162,11.162V475.31c0,6.511,5.581,11.162,11.162,11.162h155.336c2.79,0,5.581,0.93,7.441,0.93
+		c3.721,0.93,6.511,2.79,8.371,5.581c4.651,4.651,7.441,10.232,7.441,17.673c0,12.092-8.371,25.114-22.324,26.044 M364.435,506.935
+		V305.091 M253.747,504.145v12.092c0,11.162,8.371,20.463,20.463,20.463h52.089h0.93h320.904c11.162,0,20.463-8.371,20.463-20.463
+		V311.602l0,0h-31.625c-4.651,0-7.441,3.721-7.441,7.441v7.441"/>
+	<path fill="#0D3178" d="M190.496,459.497V276.256c0-6.511,5.581-11.162,11.162-11.162h111.619
+		c19.533,0,36.276,15.813,36.276,36.276v177.66c-7.441-5.581-14.883-7.441-23.254-7.441H202.588
+		C196.077,470.659,190.496,466.008,190.496,459.497z"/>
+	
+		<polyline fill="#FFFFFF" stroke="#171C28" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		538.375,106.038 490.937,106.038 490.937,240.91 	"/>
+	
+		<path fill="#FFFFFF" stroke="#171C28" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M538.375,122.781v329.275l23.254,15.813v26.975h17.673v-26.975l23.254-15.813V122.781v-16.743V58.6h-64.181V122.781
+		L538.375,122.781z"/>
+	<rect x="436.057" y="368.342" fill="#00984A" width="79.063" height="15.813"/>
+	<rect x="388.62" y="368.342" fill="#00984A" width="31.625" height="15.813"/>
+	<rect x="388.62" y="469.729" fill="#00984A" width="79.063" height="16.743"/>
+	
+		<line fill="none" stroke="#171C28" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="538.375" y1="106.038" x2="601.625" y2="106.038"/>
+</g>
+</svg>

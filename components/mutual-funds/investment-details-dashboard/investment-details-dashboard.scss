@@ -1,0 +1,79 @@
+.investment-details-dashboard {
+    .panel-height {
+        height: 20rem;
+    }
+    .panel-mobile {
+        height: 24rem;
+    }
+    .panel-small {
+        height: 9.5rem;
+    }
+    .padding-widget {
+        padding-top: 1.3rem;
+    }
+    .widget-border {
+        @include single-border(right, 0.05rem solid var(--banner-background));
+        @include single-border(top, 0.05rem solid var(--banner-background));
+        @include single-border(bottom, 0.05rem solid var(--banner-background));
+        @include single-border(left, 0.05rem solid var(--banner-background));
+    }
+    .account-overview {
+        @include margin(0, 1rem, 0, 0.5rem);
+    }
+    .asset-distribution {
+        @include margin(0, 1rem, 0, 0);
+    }
+    .asset-distribution-medium {
+        @include margin(1rem, 1rem, 0, 0);
+    }
+    .risk-profile-medium {
+        @include margin(1rem, 0, 0, 0);
+        @include padding(0, 1rem, 0, 0);
+    }
+    .widget-margin {
+        @include margin(0, 0, 1rem, 0);
+    }
+    .button-padding {
+        padding: 1rem 0;
+    }
+    .small-text {
+        font-size: var(--base-font-size-small);
+    }
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+    .details-padding {
+        padding: 1.4rem 0;
+        @include margin(0, 2.6rem, 0, 0);
+    }
+    .details-padding-medium {
+        padding: 1.4rem 0;
+    }
+    .download-link {
+        padding: 1.4rem 0;
+    }
+    .icon-size {
+        font-size: 1rem;
+    }
+    .disclaimer-style {
+        font-size: var(--base-font-size-medium);
+        padding: 0.2rem 0.5rem;
+    }
+    .disclaimer-style-medium {
+        font-size: var(--base-font-size-medium);
+        @include padding(0.2rem, 0.5rem, 1rem, 0.2rem);
+    }
+    .disclaimer-mobile {
+        font-size: var(--base-font-size-medium);
+        padding: 0.2rem;
+    }
+    .summary-report {
+        @include margin(0.2rem, 4rem, 0.5rem, 0);
+    }
+    .comp-title {
+        @include margin(0.6rem, 0, 0.6rem, 0.6rem);
+        padding-bottom: 0.5rem;
+        font-size: var(--form-header-font-size);
+        font-weight: var(--form-header-font-weight);
+    }
+}

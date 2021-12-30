@@ -1,0 +1,109 @@
+<!-- ko if : dataLoaded() -->
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-9">
+        <div class="form-main-container">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <oj-validation-group id="tracker">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-4 label">
+                            <oj-label for="SegmentCode">
+                                <span data-bind="text:$component.nls.SegmentDefinition.SegmentCode"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4">
+                            <oj-input-text id="SegmentCode" value="{{$component.modelInstance.code}}" disabled="[[mode!=='create']]" validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.nls.SegmentDefinition.SegmentCodeError,{type: 'length',options: {min: 1, max: 20}})]]"
+                                required="true"></oj-input-text>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-4 label">
+                            <oj-label for="SegmentName">
+                                <span data-bind="text:$component.nls.SegmentDefinition.SegmentName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4">
+                            <oj-input-text id="SegmentName" value="{{$component.modelInstance.name}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SOME_SPECIAL',$component.nls.SegmentDefinition.SegmentNameError,{type: 'length',options: {min: 1, max: 40}})]]" required="true"></oj-input-text>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-4 label">
+                            <oj-label for="UserType">
+                                <span data-bind="text:$component.nls.SegmentDefinition.UserType"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4">
+                            <oj-select-one :id="[['userType'+$baseModel.incrementIdCount()]]" value="{{$component.modelInstance.enterpriseRole}}" disabled="[[mode!=='create']]" placeholder="[[$component.nls.SegmentDefinition.placeholder]]" required="true" on-value-changed="[[changeRole]]">
+                                <!-- ko foreach: enterpriseRoleOptions -->
+                                <oj-option value="[[enterpriseRoleId]]"><span data-bind="text:enterpriseRoleName"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+
+                    <!-- ko if : appRoleEnumsLoaded -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-4 label">
+                            <oj-label for="AppRole">
+                                <span data-bind="text:$component.nls.SegmentDefinition.AllowedApplicationRoles"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4">
+                            <oj-combobox-many id="AppRole" value="{{$component.appRoles}}">
+                                <!-- ko foreach: appRoleEnums -->
+                                <oj-option value="[[applicationRoleName]]"><span data-bind="text:  applicationRoleName"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-combobox-many>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+
+                    <!-- ko if: $component.mode !== "create" -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-4 label">
+                            <oj-label for="SegmentStatus">
+                                <span data-bind="text:$component.nls.SegmentDefinition.SegmentStatus"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4">
+                            <oj-switch id="SegmentStatus" value="{{$component.status}}" required></oj-switch>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </oj-validation-group>
+            </page-section>
+
+            <!-- ko if: $component.limitPackageDataLoaded -->
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.SegmentDefinition.limitHeader">
+                <!-- ko foreach: $component.entityLimitPackageMapArray -->
+                <div data-bind="component: {name: 'access-point-mapping', params:{rootModel: $parent,
+              listLimitPackageArray:$component.entityLimitPackageMapArray()[$index()].limitPackages,
+              limitPackageDetails:$component.entityLimitPackageMapArray()[$index()].limitPackageDetails,
+              header:$component.entityLimitPackageMapArray()[$index()].entityName,
+              businessEntity:$component.entityLimitPackageMapArray()[$index()].entityId,
+              selectedLimitPackages:$component.entityLimitPackageMapArray()[$index()].selectedLimitPackages,
+              accessPointType:$component.accessPointType}}"></div>
+                <!-- /ko -->
+            </page-section>
+            <!-- /ko -->
+
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item button-container">
+                        <oj-button class="action-button-primary" id="submitbtn" on-click="[[$component.submit]]"><span data-bind="text:$component.nls.SegmentDefinition.Save"></span></oj-button>
+                        <oj-button class="action-button-secondary" id="cancelbtn" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span data-bind="text:$component.nls.SegmentDefinition.cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" id="backbtn" on-click="[[$dashboard.hideDetails]]"><span data-bind="text:$component.nls.SegmentDefinition.back"></span></oj-button>
+                    </div>
+                </div>
+            </page-section>
+
+        </div>
+    </div>
+
+    <div class="oj-flex-item oj-sm-3 oj-sm-only-hide oj-md-only-hide">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'segments'"></help>
+    </div>
+
+</div>
+<!-- /ko -->

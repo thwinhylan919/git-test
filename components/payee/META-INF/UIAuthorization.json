@@ -1,0 +1,128 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payee.DemandDraftPayee",
+        "components": [
+        {
+            "componentName": "manage-payees-billers",
+            "service": "updateStatus",
+            "perform": "demand-draft-payee#domestic-demand-draft#international-demand-draft#review-demand-draft-payee#image-upload#demand-draft-address#warning-message-dialog",
+            "approve": "review-demand-draft-payee"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "delete",
+            "perform": "payments-payee-list#payee-list#payee-details#account-type-dialog",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "update",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog#image-upload",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "read",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog"
+        }
+
+    ]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payee.DomesticPayee",
+        "components": [
+        {
+            "componentName": "manage-payees-billers",
+            "service": "updateStatus",
+            "perform": "bank-account-payee#domestic-payee#review-domestic-payee#image-upload#warning-message-dialog#uk-payee#sepa-payee",
+            "approve": "review-domestic-payee"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "delete",
+            "perform": "payments-payee-list#payee-list#payee-details#account-type-dialog",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "update",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog#image-upload",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "read",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payee.InternalPayee",
+        "components": [
+        {
+            "componentName": "manage-payees-billers",
+            "service": "updateStatus",
+            "perform": "bank-account-payee#internal-payee#review-internal-payee#image-upload#warning-message-dialog",
+            "approve": "review-internal-payee"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "delete",
+            "perform": "payments-payee-list#payee-list#payee-details#account-type-dialog",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "update",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog#image-upload",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "read",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payee.InternationalPayee",
+        "components": [
+        {
+            "componentName": "manage-payees-billers",
+            "service": "updateStatus",
+            "perform": "bank-account-payee#international-payee#review-international-payee#image-upload#warning-message-dialog",
+            "approve": "review-international-payee"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "delete",
+            "perform": "payments-payee-list#payee-list#payee-details#account-type-dialog",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "update",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog#image-upload",
+            "approve": "payee-details"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "read",
+            "perform": "payments-payee-list#payee-view-edit#payee-list#payee-details#account-type-dialog"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payee.PeerToPeerPayee",
+        "components": [
+        {
+            "componentName": "peer-to-peer-payee",
+            "service": "updateStatus",
+            "perform":"image-upload"
+        },
+        {
+            "componentName": "manage-payees-billers",
+            "service": "delete",
+            "perform": "payments-payee-list#payee-list#payee-details#account-type-dialog",
+            "approve": "payee-details"
+        }]
+    }]
+}

@@ -1,0 +1,24 @@
+<div class="form-main-container purchase-fund-container">
+<!-- ko if:$component.showTrain -->
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-lg-8 ">
+      <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValueIA}}" steps="[[stepArray]]"></oj-train>
+    </div>
+  </div>
+  <!-- ko if:$component.globalLoaded -->
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-lg-8">
+      <div data-bind="component:{name: $component.selectedStepValueIA(), params:{rootModel: $component}}"></div>
+    </div>
+    <!-- ko if: $baseModel.large()-->
+    <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-12">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'open-investment-account-train'"></help>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+<!-- /ko -->
+</div>
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToWealthDashboard, click: $dashboard.switchModule.bind($data,'mutual-funds')"></a>
+<!-- /ko -->

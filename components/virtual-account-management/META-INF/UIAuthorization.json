@@ -1,0 +1,168 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.vam.service.virtualaccount.VirtualAccount",
+      "components": [{
+          "componentName": "virtual-account",
+          "service": "create",
+          "perform": "virtual-account-create#review-virtual-account",
+          "approve": "review-virtual-account",
+          "view": "review-virtual-account"
+        }, {
+          "componentName": "virtual-account",
+          "service": "update",
+          "perform": "virtual-account-search#virtual-account-view#virtual-entity-create",
+          "approve": "review-virtual-account",
+          "view": "review-virtual-account"
+        }, {
+          "componentName": "virtual-account-search",
+          "service": "read",
+          "perform": "virtual-account-transaction-details#virtual-account-record-list"
+        }, {
+          "componentName": "virtual-account-view",
+          "service": "read",
+          "perform": "virtual-account-search#virtual-account-view"
+        }, {
+          "componentName": "virtual-account-view",
+          "service": "delete",
+          "perform": "virtual-account-search#virtual-account-view",
+          "approve": "review-virtual-account",
+          "view": "review-virtual-account"
+        }, {
+          "componentName": "virtual-account-search",
+          "service": "list",
+          "perform": "virtual-account-search"
+        }, {
+          "componentName": "view-balance-details",
+          "service": "fetchBalances",
+          "perform": "virtual-structure-tree-view#view-balance-details"
+        },
+        {
+          "componentName": "virtual-account-statement",
+          "service": "listStatements",
+          "perform": "virtual-account-statement"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.vam.service.virtualentity.VirtualEntity",
+      "components": [{
+          "componentName": "virtual-entity-search",
+          "service": "list",
+          "perform": "virtual-entity-search"
+        },
+        {
+          "componentName": "review-virtual-entity",
+          "service": "read",
+          "perform": "virtual-entity-search#review-virtual-entity#virtual-entity-information#virtual-entity-identification-details"
+        },
+        {
+          "componentName": "virtual-entity-create",
+          "service": "create",
+          "perform": "virtual-entity-create#virtual-entity-information#virtual-entity-identification-details#review-virtual-entity",
+          "approve": "review-virtual-entity",
+          "view": "review-virtual-entity"
+        },
+        {
+          "componentName": "virtual-entity-create",
+          "service": "update",
+          "perform": "virtual-entity-create#virtual-entity-information#virtual-entity-identification-details#review-virtual-entity",
+          "approve": "review-virtual-entity",
+          "view": "review-virtual-entity"
+        },
+        {
+          "componentName": "review-virtual-entity",
+          "service": "delete",
+          "perform": "virtual-entity-search#review-virtual-entity",
+          "approve": "review-virtual-entity",
+          "view": "review-virtual-entity"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.vam.service.structure.VirtualAccountStructure",
+      "components": [{
+          "componentName": "virtual-structure-search",
+          "service": "read",
+          "perform": "virtual-structure-tree-view#tree-view#virtual-structure-tab#virtual-account-structure-view",
+          "approve": null,
+          "view": null
+        },
+        {
+          "componentName": "virtual-account-structure-create",
+          "service": "create",
+          "perform": "virtual-account-structure-create#structure-configuration#link-structure-virtual-account#review-virtual-structure",
+          "approve": "review-virtual-structure",
+          "view": null
+        }
+      ]
+    },
+    {
+      "moduleName": "fetchVirtualIdentifiers^com.ofss.digx.app.generic.rest.service.GenericRestService",
+      "components": [{
+        "componentName": "remittance-search",
+        "service": "read",
+        "perform": "remittance-search#remittance-view",
+        "approve": null,
+        "view": null
+      }]
+    },
+    {
+      "moduleName": "updateVirtualIdentifiers^com.ofss.digx.app.generic.rest.service.GenericRestService",
+      "components": [{
+        "componentName": "virtual-identifiers-create",
+        "service": "update",
+        "perform": "create-remittance#review-virtual-identifiers-create",
+        "approve": "review-virtual-identifiers-create",
+        "view": "review-virtual-identifiers-create"
+      }]
+    },
+    {
+      "moduleName": "fetchVirtualIdentifiers^com.ofss.digx.app.generic.rest.service.GenericRestService",
+      "components": [{
+        "componentName": "remittance-view",
+        "service": "read",
+        "perform": "remittance-search#remittance-view",
+        "approve": null,
+        "view": null
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.vam.service.internaltransfer.InternalTransfer",
+      "components": [{
+        "componentName": "create-move-money",
+        "service": "create",
+        "perform": "create-move-money#review-move-money",
+        "approve": "review-move-money",
+        "view": null
+      }]
+    },
+    {
+      "moduleName": "createValueDatedBalances^com.ofss.digx.app.generic.rest.service.GenericRestService",
+      "components": [{
+        "componentName": "balance-trends",
+        "service": "create",
+        "perform": "virtual-account-balance-trends#balance-trends",
+        "approve": null,
+        "view": null
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.vam.service.multicurrencyaccount.MultiCurrencyAccount",
+      "components": [{
+          "componentName": "virtual-multi-currency-account-search",
+          "service": "read",
+          "perform": "virtual-multi-currency-account-search#virtual-multi-currency-account-view",
+          "approve": null,
+          "view": null
+        },
+        {
+          "componentName": "virtual-multi-currency-account",
+          "service": "create",
+          "perform": "create-virtual-multi-currency-account#review-virtual-multi-currency-account",
+          "approve": "review-virtual-multi-currency-account",
+          "view": null
+        }
+      ]
+    }
+  ]
+}

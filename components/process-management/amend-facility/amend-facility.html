@@ -1,0 +1,181 @@
+<!-- ko if: $component.review -->
+<!-- ko if:$component.newcollateralListDataLoaded -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item ">
+        <oj-list-view :id="[['newCollaterals']]" data="[[newCollateralsDataSource]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('NewCollateralListReview',true)]]"></oj-list-view>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko ifnot:$component.newcollateralListDataLoaded -->
+<div data-bind="text:$component.nls.AmendFacility.noItemsToDisplay">
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: !$component.review -->
+<oj-validation-group :id="[['tracker']]">
+    <!-- ko if:$component.collateralListDataLoaded -->
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <div class="oj-flex-item oj-label description">
+            <div data-bind="text:$component.nls.AmendFacility.Yourexistingcollateralsarelistedbelowyoucanaddnewcollateralsifrequired">
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-6 right">
+            <oj-button class="oj-help help-button" on-click="[[addCollaterals]]"><span slot="startIcon" class="icon-add oj-button-icon oj-start help-button"></span><span data-bind="text:$component.nls.AmendFacility.AddCollaterals"></span></oj-button>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.Collaterals, headerTemplate : ''">
+                <!-- ko if:$component.newcollateralListDataLoaded -->
+                <div class=" oj-flex-items-pad">
+                    <div class="oj-flex-item ">
+                        <oj-list-view :id="[['newCollaterals']]" data="[[newCollateralsDataSource]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('NewCollateralList',true)]]">
+                        </oj-list-view>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class=" oj-flex-items-pad">
+                    <div class="oj-flex-item ">
+                        <oj-list-view :id="[['collaterals100']]" data="[[dataSource36]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('CollateralList',true)]]">
+                        </oj-list-view>
+                    </div>
+                </div>
+            </page-section>
+        </div>
+    </div>
+    <!-- /ko -->
+</oj-validation-group>
+<!-- /ko -->
+<script type="text/html" id="CollateralList">
+    <li class="items">
+        <div class="oj-panel box">
+    
+            <div class="oj-flex oj-flex-items-pad">
+                <span data-bind="text:collateralCode"></span>
+                <!-- ko if:collateralDesc -->
+                        <span class=" pipe"></span>
+                        <!-- /ko -->
+
+                        <span data-bind="text:collateralDesc"></span>
+                     
+            </div>
+            <div class="oj-flex oj-flex-items-pad collat-desc1">
+                            <div class="oj-flex oj-md-3 oj-lg-2">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.CollateralAmount, value :$formatter.formatCurrency(collateralValue.amount, collateralValue.currency) "></row>
+                            </div>
+                            <div class="oj-flex oj-md-3 oj-lg-3 center">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.UtilizedAmount, value : $formatter.formatCurrency(collateralValue.amount-availableAmount.amount, availableAmount.currency)"></row>
+                            </div>
+                            <div class="oj-flex oj-lg-4 oj-md-3 right">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.AvailableAmount, value : $formatter.formatCurrency(availableAmount.amount, availableAmount.currency)"></row>
+                            </div>
+                            <div class="oj-flex oj-lg-2 oj-md-3  right">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.RevisionDate, value :$formatter.formatDate(startDate)"></row>
+                            </div>
+            </div>
+        </div>
+    </li>
+        </script>
+<script type="text/html" id="NewCollateralList">
+    <li class="items">
+        <div class="oj-panel box">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-sm-12 oj-md-12 oj-lg-3">
+                <div data-bind="text:collateralDesc"></div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9">
+                    <a href="#" data-bind="attr:{id : 'menuLauncher-billerlist-'+collateralType()+'-'+collateralDesc()}, click: $component.openMenu.bind($context)" class="icons icon-more-vertical pull-right">
+                </a>
+                    <oj-menu class="hide" :id="[['menuLauncher-billerlist-contents-'+collateralType()+'-'+collateralDesc()]]" on-oj-action="[[$component.menuItemSelect.bind($data, $data,$context.index)]]" open-options.launcher="[['menuLauncher-billerlist-'+collateralType()+'-'+collateralDesc()]]" open-options.display="dropDown">
+                <!-- ko foreach: $component.menuItems -->
+                <oj-option :value="[[id]]">
+                     <!-- ko if:$data.id==="remove" -->
+                     <a href="#" slot="startIcon" class="icons icon-cross"></a>
+                     <!-- /ko -->
+                     <!-- ko if:$data.id==="edit" -->
+                     <a href="#" slot="startIcon" class="icons icon-remarks"></a>
+                     <!-- /ko -->
+                <span data-bind="text: $data.label"></span>
+                </oj-option>
+                <!-- /ko -->
+                </oj-menu>
+                </div>
+
+
+
+        </div>
+
+            <span class="group tags" data-bind="text:$component.nls.AmendFacility.new"></span>
+    
+         
+        <div class="oj-flex oj-flex-items-pad collat-desc1">
+                            <div class="oj-flex oj-md-3  oj-lg-2">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.type, value : collateralType()"></row>
+                            </div>
+                            <div class="oj-flex  oj-md-3 oj-lg-3 center">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.currency, value : collateralValue.currency"></row>
+                            </div>
+                            <div class="oj-flex oj-md-3 oj-lg-4 right">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.EstimatedValue, value : collateralValue.amount"></row>
+                            </div>
+                            <div class="oj-flex oj-md-3 oj-lg-2 right">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.purpose, value :purpose"></row>
+                            </div>
+            </div>
+        </div>
+    </li>
+        </script>
+<script type="text/html" id="NewCollateralListReview">
+    <li class="items">
+                <!-- ko if: $context.index === 0 -->
+                <div class="oj-panel box">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex oj-sm-12 oj-md-12 oj-lg-12">
+                                <div data-bind="text:collateralDesc"></div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad oj-lg-12 collat-desc1">
+                                <div class="oj-flex-item oj-md-3  oj-lg-2">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.type, value : collateralType()"></row>
+                                </div>
+                                <div class="oj-flex-item  oj-md-3 oj-lg-3 center">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.currency, value : collateralValue.currency"></row>
+                                </div>
+                                <div class="oj-flex-item oj-md-3 oj-lg-4 right">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.EstimatedValue, value : collateralValue.amount"></row>
+                                </div>
+                                <div class="oj-flex-item oj-md-3 oj-lg-2 right">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.purpose, value :purpose"></row>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $context.index === 0 -->
+                    <div data-bind="attr:{id:'segment1'}" class="oj-panel box">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex oj-sm-12 oj-md-12 oj-lg-12">
+                                <div data-bind="text:collateralDesc"></div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad oj-lg-12 collat-desc1">
+                                <div class="oj-flex-item oj-md-3  oj-lg-2">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.type, value : collateralType()"></row>
+                                </div>
+                                <div class="oj-flex-item  oj-md-3 oj-lg-3 center">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.currency, value : collateralValue.currency"></row>
+                                </div>
+                                <div class="oj-flex-item oj-md-3 oj-lg-4 right">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.EstimatedValue, value : collateralValue.amount"></row>
+                                </div>
+                                <div class="oj-flex-item oj-md-3 oj-lg-2 right">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.AmendFacility.purpose, value :purpose"></row>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- /ko -->
+        
+            </li>
+        </script>

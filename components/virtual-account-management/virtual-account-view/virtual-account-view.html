@@ -1,0 +1,197 @@
+<!-- ko if:$component.templateLoaded  -->
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+  <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+    <label data-bind="text: $component.realCustomerName"></label>
+    <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+  </div>
+  <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+    <label data-bind="text: $component.resource.entityID"></label>
+    <div data-bind="text: $component.virtualAccountViewDTO.virtualEntityId"></div>
+  </div>
+</div>
+<div class="oj-flex form-main-container">
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.accountDetailHeader ">
+      <div class="row-group">
+        <!-- ko if:$component.virtualAccountViewDTO.id!==undefined -->
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.accountNo , value :$component.virtualAccountViewDTO.id.displayValue"></row>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.accountName , value :$component.virtualAccountViewDTO.virtualAccountName"></row>
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.entityName , value :$component.virtualAccountViewDTO.virtualEntityName"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.branchCode , value :$component.virtualAccountViewDTO.branchCode"></row>
+        <!-- /ko -->
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.status , value :$component.status"></row>
+         <!-- ko if:$component.viewBalanceLoaded -->
+         <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.balance"></row>
+         <div class="oj-flex oj-flex-items-pad">
+             <div class="oj-flex-item oj-sm-12 balance-link">
+                 <a href="#"
+                     data-bind="click:$component.displayBalancePanel, text:$formatter.formatCurrency($component.showBalance(),$component.balanceCurrency())">
+                 </a>
+             </div>
+         </div>
+         <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.creationDate , value :$formatter.formatDate($component.virtualAccountViewDTO.openingDate)"></row>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.productlabel , value : $component.displayProductName"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.currencyLabel, value :$component.displayCurrencyName()"></row>
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.purpose , value :$component.virtualAccountViewDTO.accountPurpose"></row>
+        <!-- /ko -->
+        <!-- ko if:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.purpose , value :$component.virtualAccountViewDTO.purpose"></row>
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 label">
+            <oj-label for="CorrespondenceAddress">
+              <span data-bind="text:$component.resource.correspondenceAddress"></span>
+            </oj-label>
+          </div>
+        </div>
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.addressLine1 , value :$component.virtualAccountViewDTO.address.line1"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.addressLine2 , value :$component.virtualAccountViewDTO.address.line2"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.country , value :$component.displayCountryName"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.pinCode , value :$component.virtualAccountViewDTO.address.zipCode"></row>
+        <!-- /ko -->
+        <!-- ko if:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.addressLine1 , value :$component.virtualAccountViewDTO.addressLine1"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.addressLine2 , value :$component.virtualAccountViewDTO.addressLine2"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.country , value :$component.displayCountryName"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.pinCode , value :$component.virtualAccountViewDTO.pincode"></row>
+        <!-- /ko -->
+      </div>
+    </page-section>
+  </div>
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.preferences ">
+      <div class="row-group">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.ibanRequired , value :$component.ibanRequired"></row>
+        <!-- ko if:$component.virtualAccountViewDTO.ibanRequired === true -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.ibanNo , value :$component.ibanAccNo"></row>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.balanceCheckForDebit , value :$component.balChkForDebits"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.balAvailabilityOptionsLabel , value :$component.balanceAvailabilityOptionValue"></row>
+        <!-- ko if:$component.virtualAccountViewDTO.balAvailabilityOptions === "B" -->
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fixedAmountFromPool , value :$formatter.formatCurrency($component.fixedAmtFromPoolAmount,$component.virtualAccountViewDTO.fixedAmtFromPool.currency)"></row>
+        <!-- /ko -->
+        <!-- ko if:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fixedAmountFromPool , value :$formatter.formatCurrency($component.virtualAccountViewDTO.fixedAmtFromPool,$component.virtualAccountViewDTO.defaultAccCcy)"></row>
+        <!-- /ko -->
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.debitTransactionAllowed , value :$component.debitTxnsAllowed"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.creditTransactionAllowed , value :$component.creditTxnsAllowed"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.overdraftOption , value :$component.overdraftAllowed"></row>
+        <!-- ko if:$component.virtualAccountViewDTO.overdraftAllowed === true -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fixedAmount , value :$formatter.formatCurrency($component.virtualAccountViewDTO.odFixedAmount.amount,$component.virtualAccountViewDTO.odFixedAmount.currency)"></row>
+        <!-- /ko -->
+        <!-- ko if:$component.fromFileUpload -->
+        <!-- ko if:$component.virtualAccountViewDTO.overdraftAllowed === "Y" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fixedAmount , value :$formatter.formatCurrency($component.virtualAccountViewDTO.overdraftAmount,$component.virtualAccountViewDTO.defaultAccCcy)"></row>
+        <!-- /ko -->
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.linktoRealAccount , value :$component.realAccLinkage"></row>
+        <!-- ko if:$component.virtualAccountViewDTO.realAccLinkage === "A" -->
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.realAccountNumber , value :$component.virtualAccountViewDTO.realAccountNo.displayValue"></row>
+        <!-- /ko -->
+        <!-- ko if:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.realAccountNumber , value :$component.virtualAccountViewDTO.realAccountNo"></row>
+        <!-- /ko -->
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.interestCalReq , value :$component.interestCalcReq"></row>
+        <!-- ko ifnot:$component.fromFileUpload -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountFrozen , value :$component.accountFrozen"></row>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 balance-link">
+              <a href="#"
+                  data-bind="click:$component.showStatement, text:$component.resource.getVirtualAccountStatement">
+              </a>
+          </div>
+        </div>
+        <!-- /ko -->
+      </div>
+
+    </page-section>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="button-container search-buttons">
+      <!-- ko if:$component.virtualAccountViewDTO.accountStatus === "O" -->
+      <oj-button class="action-button-primary" on-click="[[$component.edit]]">
+        <span slot="startIcon" class="icons icon-edit"></span>
+        <span data-bind="text:$component.resource.edit"></span>
+      </oj-button>
+      <oj-button class="action-button-secondary" on-click="[[$component.deleteConfirm]]">
+        <span slot="startIcon" class="icons icon-delete"></span>
+        <span data-bind="text:$component.resource.delete"></span>
+      </oj-button>
+      <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text:$component.resource.cancel"></span>
+      </oj-button>
+      <oj-button class="action-button-tertiary" on-click="[[backToSearch]]">
+        <span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text:$component.resource.back"></span>
+      </oj-button>
+      <!-- /ko -->
+      <!-- ko if:$component.virtualAccountViewDTO.accountStatus === "C" -->
+      <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text:$component.resource.cancel"></span>
+      </oj-button>
+      <oj-button class="action-button-tertiary" on-click="[[backToSearch]]">
+        <span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text:$component.resource.back"></span>
+      </oj-button>
+      <!-- /ko -->
+      <!-- ko if:$component.fromFileUpload -->
+      <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text:$component.resource.cancel"></span>
+      </oj-button>
+      <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+        <span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text:$component.resource.back"></span>
+      </oj-button>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'virtualAccountDelete', header: $component.resource.delete">
+  <div class="message-box">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item">
+        <div class="dialog-text"><span data-bind="text:$component.resource.askForDelete"></span></div>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+      <oj-button id="yesButton" class="action-button-primary" on-click="[[deleteVirtualAccount]]">
+        <span slot="startIcon" class="icons icon-confirm"></span>
+        <span data-bind="text:$component.resource.yes"></span>
+      </oj-button>
+      <oj-button id="noButton" class="action-button-secondary" on-click="[[doNotDelete]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text:$component.resource.no"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>
+<modal-window
+   params="baseModel : $baseModel, rootModel : $component, id:'virtualAccountZeroBalance', header: $component.resource.error">
+   <div class="message-box">
+       <div class="oj-flex oj-flex-items-pad">
+           <div class="oj-flex-item">
+               <div class="dialog-text"><span data-bind="text:$component.resource.zeroBalanceError"></span></div>
+           </div>
+       </div>
+       <div class="oj-flex oj-flex-items-pad button-container">
+           <oj-button id="okButton" class="action-button-primary" on-click="[[$component.closeMessage]]">
+               <span data-bind="text:$component.resource.ok"></span>
+           </oj-button>
+       </div>
+   </div>
+</modal-window>
+<!-- /ko -->

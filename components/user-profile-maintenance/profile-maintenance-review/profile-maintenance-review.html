@@ -1,0 +1,99 @@
+<div class="form-main-container">
+    <!-- ko if: $component.transactionId === undefined -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.nls.header.review , reviewHeader :$component.nls.messages.reviewHeader}}"></div>
+    <!-- /ko -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, rootParams: $component, heading :  $component.nls.header.details ">
+        <div class="oj-flex oj-flex-items-pad">
+
+            <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                <oj-label class="" for="personalInfo"><span data-bind="text:nls.fieldname.personalInfo"></span></oj-label>
+            </div>
+
+            <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-4">
+                <!-- ko if: allIdentificationTypes().length -->
+                <oj-combobox-many disabled="{{isProfileNotEditable}}" :id="[['combobox']]" value="{{selectedIdentificationType}}">
+                    <!-- ko foreach: allIdentificationTypes -->
+                    <oj-option value="[[value]]">
+                        <span data-bind="text: description"></span>
+                    </oj-option>
+                    <!-- /ko -->
+                </oj-combobox-many>
+                <!-- /ko -->
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+
+            <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                <oj-label class="" for="personalInfo"><span data-bind="text:nls.fieldname.contactInfo"></span></oj-label>
+            </div>
+
+
+            <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-4">
+                <!-- ko if: allContactTypes().length -->
+                <oj-combobox-many disabled="{{isProfileNotEditable}}" :id="[['combobox']]" value="{{selectedContactType}}">
+                    <!-- ko foreach: allContactTypes -->
+                    <oj-option value="[[code]]">
+                        <span data-bind="text: description"></span>
+                    </oj-option>
+                    <!-- /ko -->
+                </oj-combobox-many>
+                <!-- /ko -->
+            </div>
+
+
+        </div>
+
+
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko if: $component.showTable() -->
+            <!-- ko if: userProfileMaintenanceDatasource.data.length-->
+            <oj-table id='userProfileTable' :aria-label="[[$component.nls.header.userProfileTable]]" data="[[$component.userProfileMaintenanceDatasource]]" columns-default='{"sortable": "disabled"}' columns='[[[
+            {
+        "headerText": $component.nls.header.userDetails,
+        "template": "component_userdetails",
+        "field": "displayId",
+        "className" : ""
+        }, {
+        "headerText": $component.nls.header.modificationAllowed,
+        "template": "component_modificationAllowed",
+        "field": "editable",
+        "className" : ""
+        }
+        ]]]'>
+
+                <template slot="component_userdetails">
+          <td>
+            <div data-bind="text : $current.row.displayId"></div>
+          </td>
+        </template>
+                <template slot="component_modificationAllowed">
+          <td>
+            <oj-switch :id="[['isEditable_'+$baseModel.incrementIdCount()]]" value="{{$current.row.editable}}" disabled="{{$component.isProfileNotEditable}}">
+            </oj-switch>
+          </td>
+        </template>
+            </oj-table>
+            <!-- /ko -->
+            <!-- /ko -->
+
+
+        </div>
+
+    </page-section>
+    <!-- ko if: $component.transactionId === undefined -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+
+        <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+            <span data-bind="text:$component.nls.buttons.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span data-bind="text:$component.nls.buttons.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.editOnReview]]">
+            <span data-bind="text:$component.nls.buttons.edit"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+
+</div>

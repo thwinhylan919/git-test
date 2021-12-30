@@ -1,0 +1,574 @@
+{
+    "header": {
+        "background": {
+            "gradient-start-color": "--header-gradient-start-color",
+            "gradient-end-color": "--header-gradient-end-color",
+            "gradient-direction": "--header-gradient-direction"
+        },
+        "typography": {
+            "color": "--header-foreground-color",
+            "size": "--header-font-size",
+            "weight": "--header-font-weight"
+        },
+        "icon-size": {
+            "size": {
+                "size": "--header-icon-size"
+            }
+        },
+        "header-height": {
+            "size": {
+                "size": "--header-height"
+            }
+        },
+        "header-mobile-height": {
+            "size": {
+                "size": "--header-small-height"
+            }
+        },
+        "header-border": {
+            "border": {
+                "color": "--header-border-bottom-color"
+            }
+        }
+    },
+    "footer": {
+        "background": {
+            "gradient-start-color": "--footer-gradient-start-color",
+            "gradient-end-color": "--footer-gradient-end-color",
+            "gradient-direction": "--footer-gradient-direction"
+        },
+        "typography": {
+            "color": "--footer-foreground-color",
+            "size": "--footer-font-size",
+            "weight": "--footer-font-weight"
+        },
+        "footer-height": {
+            "size": {
+                "size": "--footer-height"
+            }
+        }
+    },
+    "help-panel": {
+        "background": {
+            "gradient-start-color": "--help-panel-gradient-start-color",
+            "gradient-end-color": "--help-panel-gradient-end-color",
+            "gradient-direction": "--help-panel-gradient-direction"
+        },
+        "typography": {
+            "color": "--help-panel-foreground-color",
+            "size": "--help-panel-font-size",
+            "weight": "--help-panel-font-weight"
+        },
+        "header": {
+            "typography": {
+                "color": "--help-panel-header-foreground-color",
+                "size": "--help-panel-header-font-size",
+                "weight": "--help-panel-header-font-weight"
+            }
+        },
+        "icon-size": {
+            "size": {
+                "size": "--help-panel-icon-size"
+            }
+        }
+    },
+    "menu": {
+        "background": {
+            "gradient-start-color": "--menu-gradient-start-color",
+            "gradient-end-color": "--menu-gradient-end-color",
+            "gradient-direction": "--menu-gradient-direction"
+        },
+        "typography": {
+            "color": "--menu-foreground-color",
+            "size": "--menu-font-size",
+            "weight": "--menu-font-weight"
+        },
+        "interaction": {
+            "type": "--menu-interaction"
+        },
+        "menu-hover": {
+            "hover": {
+                "color": "--menu-hover-color"
+            }
+        },
+        "welcome-box": {
+            "background": {
+                "gradient-start-color": "--welcome-box-gradient-start-color",
+                "gradient-end-color": "--welcome-box-gradient-end-color",
+                "gradient-direction": "--welcome-box-gradient-direction"
+            },
+            "typography": {
+                "color": "--welcome-box-foreground-color",
+                "size": "--welcome-box-font-size",
+                "weight": "--welcome-box-font-weight"
+            }
+        }
+    },
+    "table": {
+        "header": {
+            "background": {
+                "gradient-start-color": "--table-header-gradient-start-color",
+                "gradient-end-color": "--table-header-gradient-end-color",
+                "gradient-direction": "--table-header-gradient-direction"
+            },
+            "typography": {
+                "color": "--table-header-foreground-color",
+                "size": "--table-header-font-size",
+                "weight": "--table-header-font-weight"
+            }
+        },
+        "body": {
+            "background": {
+                "gradient-start-color": "--table-body-gradient-start-color",
+                "gradient-end-color": "--table-body-gradient-end-color",
+                "gradient-direction": "--table-body-gradient-direction"
+            },
+            "typography": {
+                "color": "--table-body-foreground-color",
+                "size": "--table-body-font-size",
+                "weight": "--table-body-font-weight"
+            }
+        },
+        "hover": {
+            "color": "--table-tr-hover-color"
+        }
+    },
+    "form": {
+        "typography": {
+            "color": "--form-foreground-color",
+            "size": "--form-font-size",
+            "weight": "--form-font-weight"
+        },
+        "background": {
+            "gradient-start-color": "--form-gradient-start-color",
+            "gradient-end-color": "--form-gradient-end-color",
+            "gradient-direction": "--form-gradient-direction"
+        },
+        "form-section-header": {
+            "typography": {
+                "color": "--form-header-foreground-color",
+                "size": "--form-header-font-size",
+                "weight": "--form-header-font-weight"
+            }
+        },
+        "label": {
+            "typography": {
+                "color": "--form-label-foreground-color",
+                "size": "--form-label-font-size",
+                "weight": "--form-label-font-weight"
+            }
+        },
+        "info-text": {
+            "typography": {
+                "color": "--form-info-text-foreground-color",
+                "size": "--form-info-text-font-size",
+                "weight": "--form-info-text-font-weight"
+            }
+        },
+        "icon": {
+            "size": {
+                "size": "--form-icon-size"
+            },
+            "hover": {
+                "color": "--form-icon-hover"
+            }
+        },
+        "disabled-input": {
+            "background": {
+                "gradient-start-color": "--disabledinput-gradient-start-color",
+                "gradient-end-color": "--disabledinput-gradient-end-color",
+                "gradient-direction": "--disabledinput-gradient-direction"
+            },
+            "typography": {
+                "color": "--disabledinput-foreground-color",
+                "size": "--disabledinput-font-size",
+                "weight": "--disabledinput-font-weight"
+            }
+        },
+        "link": {
+            "typography": {
+                "color": "--link-base",
+                "size": "--link-font-size",
+                "weight": "--link-font-weight"
+            },
+            "hover": {
+                "color": "--link-hover"
+            }
+        }
+    },
+    "button": {
+        "primary": {
+            "border": {
+                "color": "--button-primary-border-color",
+                "width": "--button-primary-border-width",
+                "radius": "--button-primary-border-radius"
+            },
+            "background": {
+                "gradient-start-color": "--button-primary-gradient-start-color",
+                "gradient-end-color": "--button-primary-gradient-end-color",
+                "gradient-direction": "--button-primary-gradient-direction"
+            },
+            "typography": {
+                "color": "--button-primary-foreground-color",
+                "size": "--button-primary-font-size",
+                "weight": "--button-primary-font-weight"
+            }
+        },
+        "secondary": {
+            "border": {
+                "color": "--button-secondary-border-color",
+                "width": "--button-secondary-border-width",
+                "radius": "--button-secondary-border-radius"
+            },
+            "background": {
+                "gradient-start-color": "--button-secondary-gradient-start-color",
+                "gradient-end-color": "--button-secondary-gradient-end-color",
+                "gradient-direction": "--button-secondary-gradient-direction"
+            },
+            "typography": {
+                "color": "--button-secondary-foreground-color",
+                "size": "--button-secondary-font-size",
+                "weight": "--button-secondary-font-weight"
+            }
+        },
+        "tertiary": {
+            "border": {
+                "color": "--button-tertiary-border-color",
+                "width": "--button-tertiary-border-width",
+                "radius": "--button-tertiary-border-radius"
+            },
+            "background": {
+                "gradient-start-color": "--button-tertiary-gradient-start-color",
+                "gradient-end-color": "--button-tertiary-gradient-end-color",
+                "gradient-direction": "--button-tertiary-gradient-direction"
+            },
+            "typography": {
+                "color": "--button-tertiary-foreground-color",
+                "size": "--button-tertiary-font-size",
+                "weight": "--button-tertiary-font-weight"
+            }
+        },
+        "help": {
+            "border": {
+                "color": "--button-help-border-color",
+                "width": "--button-help-border-width",
+                "radius": "--button-help-border-radius"
+            },
+            "background": {
+                "gradient-start-color": "--button-help-gradient-start-color",
+                "gradient-end-color": "--button-help-gradient-end-color",
+                "gradient-direction": "--button-help-gradient-direction"
+            },
+            "typography": {
+                "color": "--button-help-foreground-color",
+                "size": "--button-help-font-size",
+                "weight": "--button-help-font-weight"
+            }
+        },
+        "icon-size": {
+            "size": {
+                "size": "--button-icon"
+            }
+        }
+    },
+    "button-set": {
+        "border": {
+            "color": "--buttonset-border-color",
+            "width": "--buttonset-border-width",
+            "radius": "--buttonset-border-radius"
+        },
+        "background": {
+            "gradient-start-color": "--buttonset-gradient-start-color",
+            "gradient-end-color": "--buttonset-gradient-end-color",
+            "gradient-direction": "--buttonset-gradient-direction"
+        },
+        "typography": {
+            "color": "--buttonset-label-foreground-color",
+            "size": "--buttonset-label-font-size",
+            "weight": "--buttonset-label-font-weight"
+        },
+        "selected-button": {
+            "border": {
+                "color": "--buttonset-selected-border-color",
+                "width": "--buttonset-selected-border-width",
+                "radius": "--buttonset-selected-border-radius"
+            },
+            "background": {
+                "gradient-start-color": "--buttonset-selected-gradient-start-color",
+                "gradient-end-color": "--buttonset-selected-gradient-end-color",
+                "gradient-direction": "--buttonset-selected-gradient-direction"
+            },
+            "typography": {
+                "color": "--buttonset-selected-label-foreground-color",
+                "size": "--buttonset-selected-label-font-size",
+                "weight": "--buttonset-selected-label-font-weight"
+            }
+        }
+    },
+    "application": {
+        "background": {
+            "gradient-start-color": "--app-background-gradient-start-color",
+            "gradient-end-color": "--app-background-gradient-end-color",
+            "gradient-direction": "--app-background-gradient-direction"
+        },
+        "page-title": {
+            "typography": {
+                "size": "--form-page-title-font-size",
+                "weight": "--form-page-title-font-weight",
+                "color": "--form-page-title-foreground-color"
+            }
+        },
+        "base-border-default": {
+            "border": {
+                "color": "--base-border-default"
+            }
+        },
+        "font-size-small": {
+            "size": {
+                "size": "--base-font-size-small"
+            }
+        },
+        "font-size-medium": {
+            "size": {
+                "size": "--base-font-size-medium"
+            }
+        },
+        "font-size-large": {
+            "size": {
+                "size": "--base-font-size-large"
+            }
+        },
+        "font-size-larger": {
+            "size": {
+                "size": "--base-font-size-larger"
+            }
+        },
+        "font-size-default": {
+            "size": {
+                "size": "--base-font-size-default"
+            }
+        }
+    },
+    "modal-window": {
+        "header": {
+            "background": {
+                "gradient-start-color": "--modal-window-header-gradient-start-color",
+                "gradient-end-color": "--modal-window-header-gradient-end-color",
+                "gradient-direction": "--modal-window-header-gradient-direction"
+            },
+            "typography": {
+                "size": "--modal-window-header-font-size",
+                "weight": "--modal-window-header-font-weight",
+                "color": "--modal-window-header-foreground-color"
+            }
+        },
+        "body": {
+            "background": {
+                "gradient-start-color": "--modal-window-body-gradient-start-color",
+                "gradient-end-color": "--modal-window-body-gradient-end-color",
+                "gradient-direction": "--modal-window-body-gradient-direction"
+            },
+            "typography": {
+                "size": "--modal-window-body-font-size",
+                "weight": "--modal-window-body-font-weight",
+                "color": "--modal-window-body-foreground-color"
+            }
+        }
+    },
+    "nav-bar": {
+        "default": {
+            "typography": {
+                "color": "--nav-default-foreground-color",
+                "size": "--nav-default-font-size",
+                "weight": "--nav-default-font-weight"
+            }
+        },
+        "nav-hover": {
+            "hover": {
+                "color": "--nav-hover-foreground-color"
+            },
+            "border": {
+                "color": "--nav-hover-border-color",
+                "width": "--nav-hover-border-width",
+                "radius": "--nav-hover-border-radius"
+            },
+            "background": {
+                "gradient-start-color": "--nav-hover-gradient-start-color",
+                "gradient-end-color": "--nav-hover-gradient-end-color",
+                "gradient-direction": "--nav-hover-gradient-direction"
+            }
+        },
+        "nav-selected": {
+            "typography": {
+                "color": "--nav-selected-foreground-color",
+                "size": "--nav-selected-font-size",
+                "weight": "--nav-selected-font-weight"
+            },
+            "background": {
+                "gradient-start-color": "--nav-selected-background-gradient-start-color",
+                "gradient-end-color": "--nav-selected-background-gradient-end-color",
+                "gradient-direction": "--nav-selected-background-gradient-direction"
+            },
+            "border": {
+                "color": "--nav-selected-border-color",
+                "width": "--nav-selected-border-width",
+                "radius": "--nav-selected-border-radius"
+            }
+        }
+    },
+    "banner": {
+        "background": {
+            "gradient-start-color": "--banner-gradient-start-color",
+            "gradient-end-color": "--banner-gradient-end-color",
+            "gradient-direction": "--banner-gradient-direction"
+        },
+        "typography": {
+            "color": "--banner-foreground-color",
+            "size": "--banner-font-size",
+            "weight": "--banner-font-weight"
+        }
+    },
+    "review-banner": {
+        "background": {
+            "gradient-start-color": "--review-banner-gradient-start-color",
+            "gradient-end-color": "--review-banner-gradient-end-color",
+            "gradient-direction": "--review-banner-gradient-direction"
+        },
+        "border": {
+            "color": "--review-banner-border-color",
+            "width": "--review-banner-border-width",
+            "radius": "--review-banner-border-radius"
+        },
+        "typography": {
+            "color": "--review-banner-foreground-color",
+            "size": "--review-banner-font-size",
+            "weight": "--review-banner-font-weight"
+        }
+    },
+    "confirm-screen": {
+        "typography": {
+            "color": "--confirm-screen-text-foreground-color",
+            "size": "--confirm-screen-text-font-size",
+            "weight": "--confirm-screen-text-font-weight"
+        },
+        "success": {
+            "background": {
+                "gradient-start-color": "--confirm-screen-success-gradient-start-color",
+                "gradient-end-color": "--confirm-screen-success-gradient-end-color",
+                "gradient-direction": "--confirm-screen-success-gradient-direction"
+            },
+            "border": {
+                "color": "--confirm-screen-success-border-color",
+                "width": "--confirm-screen-success-border-width",
+                "radius": "--confirm-screen-success-border-radius"
+            }
+        },
+        "error": {
+            "background": {
+                "gradient-start-color": "--confirm-screen-error-gradient-start-color",
+                "gradient-end-color": "--confirm-screen-error-gradient-end-color",
+                "gradient-direction": "--confirm-screen-error-gradient-direction"
+            },
+            "border": {
+                "color": "--confirm-screen-error-border-color",
+                "width": "--confirm-screen-error-border-width",
+                "radius": "--confirm-screen-error-border-radius"
+            }
+        }
+    },
+    "scroll-bar": {
+        "scrolltrack": {
+            "border": {
+                "color": "--scroll-track"
+            }
+        },
+        "scrollthumb": {
+            "border": {
+                "color": "--scroll-thumb"
+            }
+        }
+    },
+    "accordion": {
+        "border": {
+            "color": "--accordion-border-color",
+            "width": "--accordion-border-width",
+            "radius": "--accordion-border-radius"
+        },
+        "header": {
+            "background": {
+                "gradient-start-color": "--accordion-header-gradient-start-color",
+                "gradient-end-color": "--accordion-header-gradient-end-color",
+                "gradient-direction": "--accordion-header-gradient-direction"
+            },
+            "typography": {
+                "color": "--accordion-header-foreground-color",
+                "size": "--accordion-header-font-size",
+                "weight": "--accordion-header-font-weight"
+            },
+            "icon-size": {
+                "size": {
+                    "size": "--accordion-header-icon-size"
+                }
+            }
+        },
+        "body": {
+            "background": {
+                "gradient-start-color": "--accordion-body-gradient-start-color",
+                "gradient-end-color": "--accordion-body-gradient-end-color",
+                "gradient-direction": "--accordion-body-gradient-direction"
+            },
+            "typography": {
+                "color": "--accordion-body-foreground-color",
+                "size": "--accordion-body-font-size",
+                "weight": "--accordion-body-font-weight"
+            }
+        },
+        "disabled-accordion-header": {
+            "background": {
+                "gradient-start-color": "--accordion-disabled-header-gradient-start-color",
+                "gradient-end-color": "--accordion-disabled-header-gradient-end-color",
+                "gradient-direction": "--accordion-disabled-header-gradient-direction"
+            },
+            "typography": {
+                "color": "--accordion-disabled-header-foreground-color",
+                "size": "--accordion-disabled-header-font-size",
+                "weight": "--accordion-disabled-header-font-weight"
+            }
+        }
+    },
+    "overlay": {
+        "background": {
+            "gradient-start-color": "--overlay-gradient-start-color",
+            "gradient-end-color": "--overlay-gradient-end-color",
+            "gradient-direction": "--overlay-gradient-direction"
+        },
+        "overlay-header": {
+            "typography": {
+                "color": "--overlay-header-foreground-color",
+                "size": "--overlay-header-font-size",
+                "weight": "--overlay-header-font-weight"
+            }
+        }
+    },
+    "alert-message": {
+        "background": {
+            "gradient-start-color": "--alert-notification-gradient-start-color",
+            "gradient-end-color": "--alert-notification-gradient-end-color",
+            "gradient-direction": "--alert-notification-gradient-direction"
+        },
+        "header": {
+            "typography": {
+                "color": "--alert-notification-header-foreground-color",
+                "size": "--alert-notification-header-font-size",
+                "weight": "--alert-notification-header-font-weight"
+            }
+        },
+        "body": {
+            "typography": {
+                "color": "--alert-notification-body-foreground-color",
+                "size": "--alert-notification-body-font-size",
+                "weight": "--alert-notification-body-font-weight"
+            }
+        }
+    }
+}

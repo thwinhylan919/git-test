@@ -1,0 +1,14 @@
+{
+  "componentName": "invoices-timeline-widget",
+  "module": "supply-chain-finance",
+  "segment": ["corporateuser"],
+  "width": {
+    "large": "8",
+    "medium": "8"
+  },
+  "height": "220",
+  "icon": "",
+  "template": "",
+  "isVisible": true,
+  "isWidget": true
+}

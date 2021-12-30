@@ -1,0 +1,33 @@
+<div class="form-main-container">
+    <!-- ko if:isAllNoticationsLoaded() -->
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.labels.notificationDetails">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <oj-table id="allNotifications" :aria-label="[[$component.resource.labels.notificationDetails]]" columns='[[[{
+			            "headerText":$component.resource.labels.dateTime,
+			            "template":"dateTime"
+			        },{
+			            "headerText":$component.resource.labels.message,
+			            "field":"message"
+			        }]]]' columns-default="[[{sortable:'disabled'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[notificationDetailsDataSource]]">
+                    <caption class="hide-label" data-bind="text:$component.resource.labels.notificationDetails">
+                    </caption>
+                    <template slot="dateTime">
+			        	<date-box params="{date : $current.row.date, baseModel : $baseModel}"></date-box>
+			        </template>
+                    <oj-paging-control id="paging" data="[[notificationDetailsDataSource]]" page-size="[[10]]" slot="bottom">
+                    </oj-paging-control>
+                </oj-table>
+            </div>
+        </div>
+    </page-section>
+    <!-- /ko -->
+
+    <div class="oj-flex-item button-container">
+        <oj-button id="back-Button" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.labels.back"></span>
+        </oj-button>
+    </div>
+
+</div>

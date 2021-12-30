@@ -1,0 +1,33 @@
+.view-deal-details {
+    .gauge {
+        height: 9rem !important;
+
+        &.labelSize {
+            font-size: var(--base-font-size-default);
+        }
+    }
+
+    .chart {
+        .labelPadding {
+            padding: 0 2rem;
+        }
+
+        .chartPadding {
+            width: 100%;
+        }
+    }
+
+    .deal-details-banner {
+        background: var(--banner-background);
+        color: var(--banner-text-secondary);
+        padding: var(--banner-padding);
+        font-weight: var(--base-font-weight-bold);
+
+        .description {
+            @include single-margin(right, 0.8rem);
+            @include single-padding(right, 0.8rem);
+            @include single-border(right, 0.05rem solid);
+        }
+    }
+
+}

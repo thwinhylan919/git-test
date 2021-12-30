@@ -1,0 +1,32 @@
+<div class="oj-panel loans-overview">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-9">
+      <h3 data-bind="text: $component.nls.accountDetails.labels.loanPortfolio"></h3>
+    </div>
+    <!-- ko if : $component.conventionalAccountsAvailable && $component.islamicAccountsAvailable -->
+    <div class="oj-flex-item oj-sm-3">
+      <oj-select-one value="{{$component.selectedValue}}" required on-value-changed="[[selectedAccountTypeChangedHandler]]" data-bind="attr:{id:$component.nls.accountDetails.labels.myAccountType + $baseModel.currentIdCount(),'aria-label':$component.nls.accountDetails.labels.myAccountType}">
+        <!-- ko foreach: typeOfAccounts -->
+        <oj-option value="[[id]]"><span data-bind="text: label"></span></oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: accountsLoaded() -->
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- ko if: productTypeSeries() -->
+    <div class="oj-flex-item oj-sm-12 loans-overview__chart loans-overview-chart">
+      <oj-chart class="loans-overview-chart__barChart" type="pie" series="[[productTypeSeries]]" animation-on-display="auto" animation-on-data-change="auto" style-defaults.dataLabelPosition="[[ko.toJS('outsideSlice')]]" legend="[[legendObject]]"
+        hover-behavior="dim">
+      </oj-chart>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: accountsLoaded -->
+  <div class="oj-flex oj-flex-items-pad noData">
+  <div class="oj-flex-item noData__text center" data-bind="text: $component.nls.accountDetails.labels.noData"></div>
+  </div>
+  <!-- /ko -->
+</div>

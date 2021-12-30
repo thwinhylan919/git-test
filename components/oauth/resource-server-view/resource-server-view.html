@@ -1,0 +1,42 @@
+
+    <div class="form-main-container full-width">
+
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.details">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.name, value : $component.selectedResourceServer.name"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.description, value : $component.selectedResourceServer.description"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.domainName, value : $component.selectedResourceServer.idDomain"></row>
+        </page-section>
+
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.scopes">
+        <!-- ko foreach:$component.selectedResourceServer.scopes -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.scopeName, value : scopeName"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.scopeDesc, value : description"></row>
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading:''">
+        </page-section>
+        <!-- /ko -->
+      </page-section>
+
+      <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.edit]]"><span data-bind="text:$component.Nls.edit"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.cancel]]"><span data-bind="text:$component.Nls.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.back]]"><span data-bind="text:$component.Nls.back"></span></oj-button>
+      </div>
+
+      <modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'reviewCancel',header:$component.Nls.reviewwarning">
+          <div class="message-box">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item">
+                <div class="dialog-text"><span data-bind="text:$component.Nls.cancelMessage"></span></div>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+              <oj-button class="action-button-primary" id="yesBtn" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                <span data-bind="text:$component.Nls.yes"></span>
+              </oj-button>
+              <oj-button class="action-button-secondary" id="noBtn" on-click="[[no]]">
+                <span data-bind="text:$component.Nls.no"></span>
+              </oj-button>
+            </div>
+          </div>
+        </modal-window>
+    </div>

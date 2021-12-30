@@ -1,0 +1,103 @@
+.oj-table {
+  width: 100%;
+
+  .oj-table-header-row {
+    color: var(--table-header-foreground-color);
+    background:linear-gradient(to var(--table-header-gradient-direction), var(--table-header-gradient-start-color), var(--table-header-gradient-end-color));
+  }
+
+  .oj-table-column-header-cell {
+    font-size: var(--table-header-font-size);
+    font-weight: var(--table-header-font-weight);
+    @include padding(0, 0, 0, 0.2rem);
+    text-overflow: initial !important;
+    @include mq(tablet-landscape) {
+      font-size: var(--table-header-font-size);  // to be handled ..previous value 0.8rem
+    }
+
+    &.oj-focus {
+      outline: none;
+    }
+
+    &.right {
+      @include text-align(right);
+    }
+  }
+
+  &.oj-table-editable {
+    .oj-table-column-header-asc,
+    .oj-table-column-header-dsc {
+      @include right(0);
+    }
+  }
+
+  .oj-table-body{
+    background:linear-gradient(to var(--table-body-gradient-direction), var(--table-body-gradient-start-color), var(--table-body-gradient-end-color));
+    color:var(--table-body-foreground-color);
+    font-size:var(--table-body-font-size);
+    font-weight:var(--table-body-font-weight);
+  }
+  .oj-table-data-cell {
+    font-size: var(--table-body-font-size);
+    white-space: normal;
+    vertical-align: middle;
+    color: var(--table-body-foreground-color);
+    &.oj-hover{
+      background:var(--table-tr-hover-color);
+    }
+
+    &.amountWithoutSort {
+      @include text-align(right);
+      @include single-padding(right, 0.9rem);
+    }
+
+    &.right {
+      @include text-align(right);
+    }
+        a {
+            color: var(--link-base);
+            &:hover,
+            &:visited,
+            &:focus {
+                color: var(--link-hover);
+            }
+        }
+        @include mq(tablet-landscape) {
+      font-size: 0.8rem;
+    }
+    .oj-inputdatetime .oj-inputdatetime-input{
+      border-bottom:0.05rem solid var(--form-input-border-color);
+    }
+    &.oj-form-control-inherit .oj-form-control{
+      font-size:inherit;
+      height:100%;    //override jet styling to render form control ebvenly in a table
+    }
+  }
+
+  .oj-table-hgrid-lines {
+    border-bottom: 0 !important;
+  }
+
+  .oj-table-no-data-message {
+    padding: 1.3rem 0.9rem;
+  }
+
+
+  .oj-table-body {
+    border: 0;
+
+    &.oj-hover {
+      background: var(--base-background-tertiary) !important;
+    }
+  }
+
+  // .oj-table-body-row {
+  //   &.oj-hover {
+  //     background: var(--table-tr-hover);
+  //   }
+  // }
+
+  table.oj-table-element {
+    width: 100%;
+  }
+ }

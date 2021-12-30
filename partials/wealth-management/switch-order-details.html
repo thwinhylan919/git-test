@@ -1,0 +1,130 @@
+<!-- ko ifnot: $baseModel.small() -->
+<!-- ko ifnot : $component.payLoadArray().length === 0 -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="header-text oj-flex-item oj-lg-12 oj-md-12 redeem-info-color">
+        <span data-bind="text: $component.resource.headerText"></span>
+    </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 redeem-info-color medium-text">
+        <span data-bind="text:$component.resource.numberOfFunds"></span>
+    </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-6 oj-md-6 redeem-info-color">
+        <span data-bind="text:$component.resource.selectedFunds"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-6 oj-md-6 right redeem-info-color">
+        <span data-bind="text:$component.resource.orderAmountReview"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-6 oj-md-6 header-text redeem-info-color">
+        <span data-bind="text:$component.payLoadArray().length"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-6 oj-md-6 header-text right redeem-info-color">
+        <span data-bind="text:$formatter.formatCurrency($component.totalAmount(), $component.payLoadArray()[0].switchFund.switchInDetails.txnAmount.currency)"></span>
+    </div>
+</div>
+<!-- ko foreach : $component.payLoadArray() -->
+<div class="border-color-custom">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-md-10 oj-lg-10 redeem-info">
+            <label data-bind="text:$component.resource.reviewScreen.switchOutScheme"></label>
+            <div data-bind="text: switchFund.switchOutDetails.scheme.schemeName"></div>
+            <!-- ko if: switchFund.switchOutDetails.folioNumber -->
+            <div data-bind="text: switchFund.switchOutDetails.folioNumber"></div>
+            <!-- /ko -->
+            <!-- ko ifnot: switchFund.switchOutDetails.folioNumber -->
+            <div data-bind="text: $component.resource.fundDetails.newFolio"></div>
+            <!-- /ko -->
+        </div>
+        <div class="oj-flex-item oj-md-2 oj-lg-2 redeem-info right">
+            <a href="#" data-bind="click: $component.deleteOrderConfirmModal.bind($data, $index())" :aria-label=[[$component.resource.deleteLabel]]>
+                <span class="icons icon-delete"></span>
+            </a>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-md-8 oj-lg-6 redeem-info">
+            <label data-bind="text:$component.resource.reviewScreen.switchInScheme"></label>
+            <div data-bind="text: switchFund.switchInDetails.scheme.schemeName"></div>
+            <!-- ko if: switchFund.switchInDetails.folioNumber -->
+            <div data-bind="text: switchFund.switchInDetails.folioNumber"></div>
+            <!-- /ko -->
+            <!-- ko ifnot: switchFund.switchInDetails.folioNumber -->
+            <div data-bind="text: $component.resource.fundDetails.newFolio"></div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: onetimeSwitchType === "AMT" -->
+        <div class="oj-flex-item oj-lg-6 oj-md-4 right redeem-info">
+            <span data-bind="text:$formatter.formatCurrency(switchFund.switchInDetails.txnAmount.amount, switchFund.switchInDetails.txnAmount.currency)"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: onetimeSwitchType === "UN" || onetimeSwitchType === "AUN" -->
+        <div class="oj-flex-item oj-lg-6 oj-md-4 right redeem-info">
+            <span data-bind="text:$formatter.formatCurrency(switchFund.switchInDetails.txnAmount.amount, navigationData.currency)"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+<div class="disclaimer">
+    <span class="icon-information medium-text"></span>
+    <span class="medium-text icon-padding" data-bind="text: $component.resource.disclaimer"></span>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+<!-- ko ifnot : $component.payLoadArray().length === 0 -->
+<div class="oj-flex redeem-info-color">
+    <div class="oj-flex-item oj-sm-6">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.selectedFunds , value : $component.payLoadArray().length"></row>
+    </div>
+    <div class="oj-flex-item oj-sm-6 right">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.orderAmountReview , value : $formatter.formatCurrency($component.totalAmount(), $component.payLoadArray()[0].switchFund.switchInDetails.txnAmount.currency)"></row>
+    </div>
+</div>
+<!-- ko foreach : $component.payLoadArray() -->
+<div class="border-color-custom oj-flex oj-flex-items-pad redeem-up redeem-info">
+    <div class="oj-flex-item oj-sm-10">
+        <span data-bind="text:$component.resource.reviewScreen.switchOutScheme"></span>
+        <div data-bind="text: switchFund.switchOutDetails.scheme.schemeName"></div>
+        <!-- ko if: switchFund.switchOutDetails.folioNumber -->
+        <div data-bind="text: switchFund.switchOutDetails.folioNumber"></div>
+        <!-- /ko -->
+        <!-- ko ifnot: switchFund.switchOutDetails.folioNumber -->
+        <div data-bind="text: $component.resource.fundDetails.newFolio"></div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex-item oj-sm-2 right">
+        <a href="#" data-bind="click: $component.deleteOrderConfirmModal.bind($data, $index())" :aria-label=[[$component.resource.deleteLabel]]>
+            <span class="icons icon-delete"></span>
+        </a>
+    </div>
+    <div class="oj-flex-item oj-sm-8 redeem-up">
+        <span data-bind="text:$component.resource.reviewScreen.switchInScheme"></span>
+        <div data-bind="text: switchFund.switchInDetails.scheme.schemeName"></div>
+        <!-- ko if: switchFund.switchInDetails.folioNumber -->
+        <div data-bind="text: switchFund.switchInDetails.folioNumber"></div>
+        <!-- /ko -->
+        <!-- ko ifnot: switchFund.switchInDetails.folioNumber -->
+        <div data-bind="text: $component.resource.fundDetails.newFolio"></div>
+        <!-- /ko -->
+    </div>
+    <!-- ko if: onetimeSwitchType === "AMT" -->
+    <div class="oj-flex-item oj-sm-4 right redeem-up">
+        <span data-bind="text:$formatter.formatCurrency(switchFund.switchInDetails.txnAmount.amount, switchFund.switchInDetails.txnAmount.currency)"></span>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: onetimeSwitchType === "UN" || onetimeSwitchType === "AUN" -->
+    <div class="oj-flex-item oj-sm-4 right redeem-up">
+        <span data-bind="text:$formatter.formatCurrency(switchFund.switchInDetails.txnAmount.amount, navigationData.currency)"></span>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<div class="disclaimer">
+    <span class="icon-information disctext"></span>
+    <span class="disctext" data-bind="text: $component.resource.disclaimer"></span>
+</div>
+<!-- /ko -->
+<!-- /ko -->

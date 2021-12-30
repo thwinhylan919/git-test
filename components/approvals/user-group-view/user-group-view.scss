@@ -1,0 +1,80 @@
+.cust-details {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    color: var(--banner-foreground-color);
+    font-size: var(--banner-font-size);
+    font-weight: var(--banner-font-weight);
+    padding: var(--banner-padding);
+    align-items: center;
+    width: 28rem;
+
+    .cust-name,
+    .cust-account,
+    &-heading {
+        @include mq(small) {
+            padding-bottom: 0.6rem;
+        }
+
+        @include mq(medium) {
+            padding-bottom: 0.6rem;
+        }
+    }
+
+
+    .user-info-label,
+    label {
+        color: var(--banner-text-primary);
+        font-size: var(--base-font-size-medium);
+        padding: 0;
+    }
+
+    .nickname {
+        white-space: nowrap;
+
+        @include mq(small) {
+            padding: 0;
+        }
+
+        .edit {
+            @include single-padding(left, 0.5rem);
+        }
+
+        a {
+            color: var(--banner-text-secondary);
+        }
+
+        &__label {
+            @include mq(large) {
+                @include single-padding(top, 0.3rem);
+            }
+        }
+
+        &-details {
+            &__input {
+                display: inline-block;
+            }
+
+            &__icons {
+                display: inline-block;
+            }
+
+            &-add {
+                padding: 0.6rem 0;
+
+                @include mq(small) {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+.user-row {
+    width: 28rem;
+    .delete-user {
+        font-size: 1.2rem;
+    }
+}
+
+.new-user-container{
+    margin: 0.5rem 0.3rem;
+}

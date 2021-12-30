@@ -1,0 +1,4 @@
+#ModuleName span:first-child {
+    white-space: pre-wrap;
+    line-height:calc(#{var(--form-line-height)} - 0.65rem);
+}

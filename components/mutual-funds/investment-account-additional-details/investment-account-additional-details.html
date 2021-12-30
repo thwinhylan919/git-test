@@ -1,0 +1,25 @@
+<div class="form-main-container purchase-fund-container">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-sm-7 oj-md-12 oj-lg-12 oj-flex-item">
+            <div data-bind='component:{name: "nav-bar", params:{rootModel: $component,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.resource.navDescription}}'>
+            </div>
+        </div>
+        <div class="oj-sm-8 oj-md-8 oj-lg-8 oj-flex-item">
+            <div data-bind="component:{name: $component.selectedComponent(), params:{rootModel: $component}}"></div>
+        </div>
+    </div>
+    <div class="oj-flex button-container">
+        <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.loadReview]]">
+            <span slot="startIcon" class="icons icon-forward-arrow"></span>
+            <span data-bind="text:$component.resource.generic.common.next"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" id="back"  on-click="[[$component.previousStep]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

@@ -1,0 +1,738 @@
+{
+	"info": {
+		"metadataVersion": "V3",
+		"version": "6.4.12",
+		"creationDate": 1568802633302,
+		"lastModified": 1585741584551
+	},
+	"componentType": "SINGLE_PAGE",
+	"formLayout": {
+		"labelEdge": "start",
+		"maxColumns": 1
+	},
+	"swaggerUrls": [{
+		"nickName": "default"
+	}],
+	"components": [{
+		"restFlow": "[{\"rests\":[\"/fileUploads/files/{fileRefId}/records get default v1\"],\"child\":[]},{\"rests\":[\"/fileUploads/files/{fileRefId}/records/{recordRefId} get default v1\"],\"child\":[]}]",
+		"data": {
+			"externalMappedParams": [{
+				"rest": "/fileUploads/files/{fileRefId}/records",
+				"method": "get",
+				"restOperation": null,
+				"reqParams": [{
+					"name": "fileRefId",
+					"mappingPath": "params.data[0]().fileId"
+				}],
+				"optParams": [],
+				"label": "/fileUploads/files/{fileRefId}/records get default v1",
+				"nickName": "default",
+				"payloadMap": {}
+			}, {
+				"rest": "/fileUploads/files/{fileRefId}/records/{recordRefId}",
+				"method": "get",
+				"restOperation": null,
+				"reqParams": [{
+					"name": "fileRefId",
+					"mappingPath": "params.data[0]().fileId"
+				}],
+				"optParams": [],
+				"label": "/fileUploads/files/{fileRefId}/records/{recordRefId} get default v1",
+				"nickName": "default",
+				"payloadMap": {}
+			}],
+			"initRests": [],
+			"css": "",
+			"componentHeader": "Uploaded Files Inquiry",
+			"validationTrackerID": "",
+			"stageName": ""
+		},
+		"layout": [{
+			"nameholder": "Virtual Account Record",
+			"conditionalExpression": {
+				"conditionalValue": "$component.response() && ($component.transactionType()===\"VAL\" || $component.transactionType()===\"VAT\")"
+			},
+			"valueClasses": "''",
+			"type": "PageSection",
+			"componentID": "VirtualAccountRecord94",
+			"children": [{
+				"nameholder": "Virtual Account Record List",
+				"mappedValue": "recordDataSource",
+				"use": "ObservableVariable",
+				"optionList": {
+					"optionSource": "custom",
+					"options": [{
+						"value": "recRefId",
+						"description": "Record Reference Number"
+					}, {
+						"value": "virtEntityId",
+						"description": "Virtual Entity ID"
+					}, {
+						"value": "virtAccName",
+						"description": "Virtual Account Name"
+					}, {
+						"value": "virtualAccountId",
+						"description": "Virtual Account Number"
+					}, {
+						"value": "currency",
+						"description": "Currency"
+					}, {
+						"value": "status",
+						"description": "Status"
+					}]
+				},
+				"conditionalExpression": {
+					"conditionalValue": "$component.response() && $component.transactionType()===\"VAT\""
+				},
+				"source": "dataSource72",
+				"template": "recRefId",
+				"idAttribute": "recRefId",
+				"valueClasses": "''",
+				"type": "Table",
+				"pagination": {
+					"pageSize": "10"
+				},
+				"componentID": "'VirtualAccountRecordList43'"
+			}, {
+				"containerType": "RowRenderer",
+				"template": "recRefId",
+				"valueClasses": "''",
+				"type": "Container",
+				"componentID": "recRefId67",
+				"children": [{
+					"nameholder": "Record Details",
+					"mappedValue": "recRefId",
+					"use": "TableRowColumn",
+					"hookFunctions": {
+						"chains": ["/fileUploads/files/{fileRefId}/records/{recordRefId} get v1"],
+						"code": "fileUploadsfilesfileRefIdrecordsrecordRefIdgetCall(self.fileUploadsfilesfileRefIdrecordsrecordRefIdgetfileRefId(),event.recRefId).then(function(response){\n                              \n                    self.selectedRecord(response.recordDetails );\n\n    params.dashboard.loadComponent(\"virtual-account-view\", self.selectedRecord());\n                    self.fileUploadsfilesfileRefIdrecordsrecordRefIdgetVar(response);\n                  })\n"
+					},
+					"anchorType": "Text",
+					"anchorAltTitle": "Record Details",
+					"valueClasses": "''",
+					"type": "AnchorTag",
+					"componentID": "RecordDetails81"
+				}, {
+					"nameholder": "Virtual Entity ID",
+					"mappedValue": "virtEntityId",
+					"use": "TableRowColumn",
+					"anchorType": "Text",
+					"anchorAltTitle": "Record Reference Number",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "VirtualEntityID26"
+				}, {
+					"nameholder": "Virtual Account Name",
+					"mappedValue": "virtAccName",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Div",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "VirtualAccountName32"
+				}, {
+					"nameholder": "Virtual Account Number",
+					"mappedValue": "virtualAccountId",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Div",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "VirtualAccountNumber71"
+				}, {
+					"nameholder": "Currency",
+					"mappedValue": "ccy",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "Currency44"
+				}, {
+					"nameholder": "Status",
+					"mappedValue": "status",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "Status41"
+				}]
+			}, {
+				"nameholder": "Virtual Account Record List",
+				"mappedValue": "recordDataSource",
+				"use": "ObservableVariable",
+				"optionList": {
+					"optionSource": "custom",
+					"options": [{
+						"value": "recRefId",
+						"description": "Record Reference Number"
+					}, {
+						"value": "virtEntityId",
+						"description": "Virtual Entity ID"
+					}, {
+						"value": "realAccNo",
+						"description": "Real Account Number"
+					}, {
+						"value": "virtAccName",
+						"description": "Virtual Account Name"
+					}, {
+						"value": "virtualAccountId",
+						"description": "Virtual Account Number"
+					}, {
+						"value": "status",
+						"description": "Status"
+					}]
+				},
+				"conditionalExpression": {
+					"conditionalValue": "$component.response() && $component.transactionType()===\"VAL\""
+				},
+				"source": "dataSource44",
+				"template": "recRefId11",
+				"idAttribute": "recRefId",
+				"valueClasses": "''",
+				"type": "Table",
+				"pagination": {
+					"pageSize": "10"
+				},
+				"componentID": "'VirtualAccountRecordList80'"
+			}, {
+				"containerType": "RowRenderer",
+				"template": "recRefId11",
+				"valueClasses": "''",
+				"type": "Container",
+				"componentID": "recRefId1194",
+				"children": [{
+					"nameholder": "Record Reference Number",
+					"mappedValue": "recRefId",
+					"use": "TableRowColumn",
+					"hookFunctions": {
+						"chains": ["/fileUploads/files/{fileRefId}/records/{recordRefId} get v1"],
+						"code": "fileUploadsfilesfileRefIdrecordsrecordRefIdgetCall(self.fileUploadsfilesfileRefIdrecordsrecordRefIdgetfileRefId(),event.recRefId).then(function(response){\n                              \n                   self.selectedRecord(response.recordDetails );\n    \n                   params.dashboard.loadComponent(\"virtual-account-view\", self.selectedRecord());\n                    self.fileUploadsfilesfileRefIdrecordsrecordRefIdgetVar(response);\n                  })"
+					},
+					"anchorType": "Text",
+					"anchorAltTitle": "Record Reference Number",
+					"valueClasses": "''",
+					"type": "AnchorTag",
+					"componentID": "RecordReferenceNumber49"
+				}, {
+					"nameholder": "Entity ID",
+					"mappedValue": "virtEntityId",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "EntityID62"
+				}, {
+					"nameholder": "Real Account Number",
+					"mappedValue": "realAccNo",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "RealAccountNumber2"
+				}, {
+					"nameholder": "Virtual Account Name",
+					"mappedValue": "virtAccName",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "VirtualAccountName59"
+				}, {
+					"nameholder": "Virtual Account Number",
+					"mappedValue": "virtualAccountId",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "VirtualAccountNumber88"
+				}, {
+					"nameholder": "Status",
+					"mappedValue": "status",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "Status58"
+				}]
+			}]
+		}, {
+			"nameholder": "Virtual Account Structure Record",
+			"conditionalExpression": {
+				"conditionalValue": "$component.response() && $component.transactionType()===\"VAS\""
+			},
+			"valueClasses": "''",
+			"type": "PageSection",
+			"componentID": "VirtualAccountStructureRecord80",
+			"children": [{
+				"nameholder": "Virtual Account Structure Record",
+				"mappedValue": "recordDataSource",
+				"use": "ObservableVariable",
+				"optionList": {
+					"optionSource": "custom",
+					"options": [{
+						"value": "recRefId",
+						"description": "Record Reference Number"
+					}, {
+						"value": "structCode",
+						"description": "Structure Code"
+					}, {
+						"value": "structName",
+						"description": "Structure Name"
+					}, {
+						"value": "accountNumber",
+						"description": "Real/Virtual Multi-Currency Account Number"
+					}, {
+						"value": "status",
+						"description": "Status"
+					}]
+				},
+				"source": "dataSource34",
+				"template": "recRefId22",
+				"idAttribute": "recRefId",
+				"valueClasses": "''",
+				"type": "Table",
+				"pagination": {
+					"pageSize": "10"
+				},
+				"componentID": "'VirtualAccountStructureRecord66'"
+			}, {
+				"containerType": "RowRenderer",
+				"template": "recRefId22",
+				"valueClasses": "''",
+				"type": "Container",
+				"componentID": "recRefId2240",
+				"children": [{
+					"nameholder": "Record Reference Number",
+					"mappedValue": "recRefId",
+					"use": "TableRowColumn",
+					"anchorType": "Text",
+					"anchorAltTitle": "Record Reference Number",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "RecordReferenceNumber79"
+				}, {
+					"nameholder": "Structure Code",
+					"mappedValue": "structCode",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "StructureCode33"
+				}, {
+					"nameholder": "Structure Name",
+					"mappedValue": "structName",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "StructureName92"
+				}, {
+					"nameholder": "Real/Virtual Multi-Currency Account Number",
+					"mappedValue": "accountNumber",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "RealVirtualMultiCurrencyAccountNumber72"
+				}, {
+					"nameholder": "Status",
+					"mappedValue": "status",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "Status27"
+				}]
+			}]
+		}, {
+			"nameholder": "Virtual Identifier Record",
+			"conditionalExpression": {
+				"conditionalValue": "$component.response() && $component.transactionType()===\"VI\""
+			},
+			"valueClasses": "''",
+			"type": "PageSection",
+			"componentID": "VirtualIdentifierRecord16",
+			"children": [{
+				"nameholder": "Virtual Identifier Record",
+				"mappedValue": "recordDataSource",
+				"use": "ObservableVariable",
+				"optionList": {
+					"optionSource": "custom",
+					"options": [{
+						"value": "recRefId",
+						"description": "Record Reference Number"
+					}, {
+						"value": "remListId",
+						"description": "Remitter List ID"
+					}, {
+						"value": "status",
+						"description": "Status"
+					}]
+				},
+				"source": "dataSource11",
+				"template": "recRefId44",
+				"idAttribute": "recRefId",
+				"valueClasses": "''",
+				"type": "Table",
+				"pagination": {
+					"pageSize": "10"
+				},
+				"componentID": "'VirtualIdentifierRecord53'"
+			}, {
+				"containerType": "RowRenderer",
+				"template": "recRefId44",
+				"valueClasses": "''",
+				"type": "Container",
+				"componentID": "recRefId4475",
+				"children": [{
+					"nameholder": "Record Reference Number",
+					"mappedValue": "recRefId",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "RecordReferenceNumber82"
+				}, {
+					"nameholder": "Remitter List ID",
+					"mappedValue": "remListId",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "RemitterListID18"
+				}, {
+					"nameholder": "Status",
+					"mappedValue": "status",
+					"use": "TableRowColumn",
+					"valueClasses": "''",
+					"tagType": "Span",
+					"textBindingOption": "Bindings",
+					"type": "Text",
+					"componentID": "Status13"
+				}]
+			}]
+		}],
+		"processedData": [{
+			"value": "/fileUploads/files/{fileRefId}/records",
+			"method": "get",
+			"label": "/fileUploads/files/{fileRefId}/records get default v1",
+			"restOperation": null,
+			"version": "v1",
+			"nickName": "default",
+			"funcName": "fileUploadsfilesfileRefIdrecordsget",
+			"requiredParametersList": [{
+				"value": "fileRefId",
+				"mappingPath": "params.data[0]().fileId",
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetfileRefId",
+				"in": "path"
+			}],
+			"optionalParametersList": [{
+				"value": "pageSize",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetpageSize",
+				"in": "query"
+			}, {
+				"value": "pageNumber",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetpageNumber",
+				"in": "query"
+			}, {
+				"value": "fromAmount",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetfromAmount",
+				"in": "query"
+			}, {
+				"value": "toAmount",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgettoAmount",
+				"in": "query"
+			}, {
+				"value": "currency",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetcurrency",
+				"in": "query"
+			}, {
+				"value": "valueDateStart",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetvalueDateStart",
+				"in": "query"
+			}, {
+				"value": "valueDateEnd",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetvalueDateEnd",
+				"in": "query"
+			}, {
+				"value": "recordStatus",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetrecordStatus",
+				"in": "query"
+			}, {
+				"value": "beneName",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetbeneName",
+				"in": "query"
+			}, {
+				"value": "creditAccount",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetcreditAccount",
+				"in": "query"
+			}, {
+				"value": "debitAccount",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetdebitAccount",
+				"in": "query"
+			}, {
+				"value": "transactionType",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgettransactionType",
+				"in": "query"
+			}, {
+				"value": "payeeType",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetpayeeType",
+				"in": "query"
+			}, {
+				"value": "accountType",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsgetaccountType",
+				"in": "query"
+			}],
+			"propertyResponse": [{
+				"label": ".recordDetails",
+				"value": ".recordDetails",
+				"name": "recordDetails",
+				"isKeyArray": true
+			}, {
+				"label": ".totalCount",
+				"value": ".totalCount",
+				"name": "totalCount",
+				"isKeyArray": false
+			}],
+			"payload": {
+				"fileUploadsfilesfileRefIdrecordsgetv1payload": {}
+			},
+			"dtoName": "fileUploadsfilesfileRefIdrecordsgetv1payload",
+			"payloadMap": {}
+		}, {
+			"value": "/fileUploads/files/{fileRefId}/records/{recordRefId}",
+			"method": "get",
+			"label": "/fileUploads/files/{fileRefId}/records/{recordRefId} get default v1",
+			"restOperation": null,
+			"version": "v1",
+			"nickName": "default",
+			"funcName": "fileUploadsfilesfileRefIdrecordsrecordRefIdget",
+			"requiredParametersList": [{
+				"value": "fileRefId",
+				"mappingPath": "params.data[0]().fileId",
+				"variableName": "fileUploadsfilesfileRefIdrecordsrecordRefIdgetfileRefId",
+				"in": "path"
+			}, {
+				"value": "recordRefId",
+				"mappingPath": null,
+				"variableName": "fileUploadsfilesfileRefIdrecordsrecordRefIdgetrecordRefId",
+				"in": "path"
+			}],
+			"optionalParametersList": [],
+			"propertyResponse": [{
+				"label": ".recordDetails.createdBy",
+				"value": ".recordDetails.createdBy",
+				"name": "createdBy",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.creationDate",
+				"value": ".recordDetails.creationDate",
+				"name": "creationDate",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.lastUpdatedBy",
+				"value": ".recordDetails.lastUpdatedBy",
+				"name": "lastUpdatedBy",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.lastUpdatedDate",
+				"value": ".recordDetails.lastUpdatedDate",
+				"name": "lastUpdatedDate",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.version",
+				"value": ".recordDetails.version",
+				"name": "version",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.entityStatus",
+				"value": ".recordDetails.entityStatus",
+				"name": "entityStatus",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.recordStatus",
+				"value": ".recordDetails.recordStatus",
+				"name": "recordStatus",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.generatedPackageId",
+				"value": ".recordDetails.generatedPackageId",
+				"name": "generatedPackageId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.configPackageId",
+				"value": ".recordDetails.configPackageId",
+				"name": "configPackageId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.unitOfOrderReference",
+				"value": ".recordDetails.unitOfOrderReference",
+				"name": "unitOfOrderReference",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.auditSequence",
+				"value": ".recordDetails.auditSequence",
+				"name": "auditSequence",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.fileRefId",
+				"value": ".recordDetails.fileRefId",
+				"name": "fileRefId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.recRefId",
+				"value": ".recordDetails.recRefId",
+				"name": "recRefId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.currencyAmount.currency",
+				"value": ".recordDetails.currencyAmount.currency",
+				"name": "currency",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.currencyAmount.amount",
+				"value": ".recordDetails.currencyAmount.amount",
+				"name": "amount",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.valueDate",
+				"value": ".recordDetails.valueDate",
+				"name": "valueDate",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.recStatus",
+				"value": ".recordDetails.recStatus",
+				"name": "recStatus",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.externalReferenceId",
+				"value": ".recordDetails.externalReferenceId",
+				"name": "externalReferenceId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.systemReferenceId",
+				"value": ".recordDetails.systemReferenceId",
+				"name": "systemReferenceId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.debitAccountId",
+				"value": ".recordDetails.debitAccountId",
+				"name": "debitAccountId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.debitAccountBranch",
+				"value": ".recordDetails.debitAccountBranch",
+				"name": "debitAccountBranch",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.debitAccountCurrency",
+				"value": ".recordDetails.debitAccountCurrency",
+				"name": "debitAccountCurrency",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.partyId",
+				"value": ".recordDetails.partyId",
+				"name": "partyId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.creditAccountId",
+				"value": ".recordDetails.creditAccountId",
+				"name": "creditAccountId",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.creditAccountBranch",
+				"value": ".recordDetails.creditAccountBranch",
+				"name": "creditAccountBranch",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.transactionType",
+				"value": ".recordDetails.transactionType",
+				"name": "transactionType",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.beneficiaryName",
+				"value": ".recordDetails.beneficiaryName",
+				"name": "beneficiaryName",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.type",
+				"value": ".recordDetails.type",
+				"name": "type",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.fileName",
+				"value": ".recordDetails.fileName",
+				"name": "fileName",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.status",
+				"value": ".recordDetails.status",
+				"name": "status",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.paymentType",
+				"value": ".recordDetails.paymentType",
+				"name": "paymentType",
+				"isKeyArray": false
+			}, {
+				"label": ".recordDetails.txnId",
+				"value": ".recordDetails.txnId",
+				"name": "txnId",
+				"isKeyArray": false
+			}, {
+				"label": ".errorDetails",
+				"value": ".errorDetails",
+				"name": "errorDetails",
+				"isKeyArray": true
+			}, {
+				"label": ".transactionType",
+				"value": ".transactionType",
+				"name": "transactionType",
+				"isKeyArray": false
+			}, {
+				"label": ".fullPartyName",
+				"value": ".fullPartyName",
+				"name": "fullPartyName",
+				"isKeyArray": false
+			}],
+			"payload": {
+				"fileUploadsfilesfileRefIdrecordsrecordRefIdgetv1payload": {}
+			},
+			"dtoName": "fileUploadsfilesfileRefIdrecordsrecordRefIdgetv1payload",
+			"payloadMap": {}
+		}],
+		"initHook": "function init(bindingContext, rootParams) {\n    self = bindingContext;\n    params = rootParams;\n    self.recordDataSource = ko.observableArray();\n    self.transactionType = ko.observable(rootParams.data[0]().transaction);\n    rootParams.baseModel.registerComponent('virtual-account-view', 'virtual-account-management');\n    self.response = ko.observable(false);\n    self.selectedRecord = ko.observable();\n    fileUploadsfilesfileRefIdrecordsgetCall(self.fileUploadsfilesfileRefIdrecordsgetfileRefId(), self.fileUploadsfilesfileRefIdrecordsgetpageSize(), self.fileUploadsfilesfileRefIdrecordsgetpageNumber(), self.fileUploadsfilesfileRefIdrecordsgetfromAmount(), self.fileUploadsfilesfileRefIdrecordsgettoAmount(), self.fileUploadsfilesfileRefIdrecordsgetcurrency(), self.fileUploadsfilesfileRefIdrecordsgetvalueDateStart(), self.fileUploadsfilesfileRefIdrecordsgetvalueDateEnd(), self.fileUploadsfilesfileRefIdrecordsgetrecordStatus(), self.fileUploadsfilesfileRefIdrecordsgetbeneName(), self.fileUploadsfilesfileRefIdrecordsgetcreditAccount(), self.fileUploadsfilesfileRefIdrecordsgetdebitAccount(), self.transactionType(), self.fileUploadsfilesfileRefIdrecordsgetpayeeType(), self.fileUploadsfilesfileRefIdrecordsgetaccountType()).then(function (response) {\n        if (self.transactionType() === 'VAS') {\n            response.recordDetails.forEach(function (item) {\n                if (item.realAccNo) {\n                    item.accountNumber = item.realAccNo;\n                } else {\n                    item.accountNumber = item.accGroupId;\n                }\n            });\n        }\n        self.recordDataSource(response.recordDetails);\n        self.response(true);\n    });\n    return true;\n}",
+		"componentName": "virtual-account-record-list"
+	}]
+}

@@ -1,0 +1,14 @@
+{
+    "componentName": "sweep-log",
+    "module": "liquidity-management",
+    "segment": ["corporateuser"],
+    "width": {
+      "large": "8",
+      "medium": "8"
+    },
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+  }
+  

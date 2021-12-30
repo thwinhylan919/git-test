@@ -1,0 +1,40 @@
+{
+
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.generic.rest.maintenance.service.APIGroupBuilder",
+    "components": [{
+        "componentName": "api-group-search",
+        "service": "read",
+        "perform": "api-group-search"
+      },
+      {
+        "componentName": "api-group-search",
+        "service": "create",
+        "perform": "api-group-create#api-group-review"
+      },
+      {
+        "componentName": "api-group-search",
+        "service": "update",
+        "perform": "api-group-view#api-group-edit#api-group-review"
+      }
+    ]
+  }, {
+    "moduleName": "com.ofss.digx.app.generic.rest.maintenance.service.APIBuilder",
+    "components": [{
+        "componentName": "api-builder-search",
+        "service": "read",
+        "perform": "api-builder-search"
+      },
+      {
+        "componentName": "api-builder-search",
+        "service": "create",
+        "perform": "api-builder-create#api-builder-review"
+      },
+      {
+        "componentName": "api-builder-search",
+        "service": "update",
+        "perform": "api-builder-view#api-builder-edit#api-group-search#api-builder-group-view"
+      }
+    ]
+  }]
+}

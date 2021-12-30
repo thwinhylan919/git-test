@@ -1,0 +1,182 @@
+<oj-validation-group id="moveMoneyTracker" valid="{{$component.groupValid}}">
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text: $dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <div class="oj-flex form-main-container">
+        <div class="move-money-wrapper">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : '' ">
+                    <div class="oj-flex">
+                        <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-8">
+                            <div class="oj-flex-item oj-sm-12 label">
+                                <oj-label for="realAccountNumber"><span
+                                        data-bind="text:$component.resource.realAccount"></span>
+                                </oj-label>
+                            </div>
+                            <!-- ko if:$component.realAcountDetailsLoaded -->
+                            <div class="oj-flex-item oj-sm-12 oj-lg-11 oj-md-12">
+                                <oj-select-one :id="realAccount" on-value-changed="[[realAccountNumberSelection]]"
+                                    :aria-label="[[$component.resource.realAccount]]"
+                                    value="{{$component.selectedAccount()}}" required>
+                                    <!-- ko foreach: $component.VAEnabledRealAccounts -->
+                                    <oj-option value="{{realAccountNo.value}}"><span
+                                            data-bind="text: realAccountNo.displayValue"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad">
+                                <!-- ko if:$component.showRealAccountBalanceInfo -->
+                                <div class="oj-flex-item oj-sm-12 oj-lg-12">
+                                    <span class="balance-text"
+                                        data-bind="text:$baseModel.format($component.resource.balance , {balance : $formatter.formatCurrency($component.selectedRealAccountBalance(),$component.selectedRealAccountCurrency())})"></span>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+                            <!-- ko if:$component.virtualAccountLoaded  -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 label">
+                                    <oj-label for="virtualAccountFrom"><span
+                                            data-bind="text:$component.resource.transferFrom"></span></oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-lg-11">
+                                    <oj-select-one id="virtualAccountFrom" :aria-label="virtualAccountFrom"
+                                        value="{{$component.selectedVirtualAccountFrom}}"
+                                        :placeholder="{{$component.resource.selectVirtualAccount}}"
+                                        on-value-changed="{{$component.selectedAccountChangeHandler}}" required>
+                                        <!-- ko foreach: $component.virtualAccountData -->
+                                        <oj-option value=[[id]]><span data-bind="text:id.displayValue"></span>
+                                        </oj-option>
+                                        <!-- /ko -->
+                                    </oj-select-one>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $component.showVirtualAccountFromInfo -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12 oj-sm-12">
+                                    <span class="balance-text"
+                                        data-bind="text:$baseModel.format($component.resource.balance , {balance : $formatter.formatCurrency($component.selectedVirtualAccountBalanceFrom(),$component.selectedVirtualAccountCurrencyFrom())})"></span>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+                            <!-- ko if:$component.virtualAccountLoaded && $component.transferFromSelected -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 label">
+                                    <oj-label for="virtualAccountTo"><span
+                                            data-bind="text:$component.resource.transferTo"></span></oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-lg-11">
+                                    <oj-select-one id="virtualAccountTo" :aria-label="virtualAccountTo"
+                                        value="{{$component.selectedVirtualAccountTo}}"
+                                        :placeholder="{{$component.resource.selectVirtualAccount}}"
+                                        on-value-changed="{{$component.selectedAccountChangeHandler}}" required>
+                                        <!-- ko foreach: $component.virtualAccountDataTo -->
+                                        <oj-option value=[[id]]><span data-bind="text:id.displayValue"></span>
+                                        </oj-option>
+                                        <!-- /ko -->
+                                    </oj-select-one>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $component.showVirtualAccountToInfo -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-lg-12">
+                                    <span class="balance-text"
+                                        data-bind="text:$baseModel.format($component.resource.balance , {balance : $formatter.formatCurrency($component.selectedVirtualAccountBalanceTo(),$component.selectedVirtualAccountCurrencyTo())})"></span>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- ko if:$component.currencyLoaded  -->
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div data-bind="component: {
+                          name: 'amount-input', params: {
+                          amount :$component.amount,
+                          label : $component.resource.amount,
+                          currency: $component.currencyCode,
+                          currencyListRequired : true,
+                          converter:$formatter.formatCurrency,
+                          currencyParser : $component.currencyParser,
+                          rootClass:'form-input',
+                          isMandatory:true,
+                          rootId:'dd-amount' + $baseModel.incrementIdCount(),
+                          valueClasses : 'oj-lg-4'
+                      }
+                    }">
+                                <div class="oj-flex-item">
+                                    <a data-id="viewLimits" href="#"
+                                        data-bind="attr:{for : 'viewLimits' + $baseModel.incrementIdCount(), 'alt':$data.resource.viewLimits,'title':$data.resource.viewLimitsTitle},click:viewLimits, text:$data.resource.viewLimits">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex-item  button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.goToReviewMoveMoney]]">
+                            <span slot="startIcon" class="icons icon-confirm"></span><span
+                                data-bind="text:$component.resource.submit"></span></oj-button>
+                        <oj-button class="action-button-secondary"
+                            on-click="[[ $dashboard.switchModule.bind($data, null)]]"><span slot="startIcon"
+                                class="icons icon-cancel"></span><span
+                                data-bind="text:$component.resource.cancel"></span></oj-button>
+                    </div>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>
+
+<modal-window
+    params="baseModel : $baseModel, rootModel : $component,header:$component.resource.mylimits,id:$component.viewLimitsModalId">
+    <page-section class="page-section" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <!-- ko if: $component.loadAccessPointList() -->
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 label_icon">
+                <span data-bind="text:$component.resource.channel"></span>
+                <a class="channel_align" id="channel-disclaimer" href="#"
+                    data-bind="attr:{title:$component.resource.showInformation},click:$component.channelPopup.bind($data,true)">
+                    <span class="icons icon-2x icon-information iconStyling"></span></a>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+                <oj-select-one :id="[['channel']]" value="[[selectedChannelIndex]]"
+                    on-value-changed="[[channelTypeChangeHandler]]">
+                    <!-- ko foreach:$component.channelList -->
+                    <oj-option value="{{id}}"><span data-bind="text:description"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: isViewlimits() && $component.selectedChannel() -->
+        <div
+            data-bind="component:{name:'available-limits', params:{rootModel: $component,type:$component.parentTaskCode,id:$component.customPayeeId,accessPointValue:$component.selectedChannelType}}">
+        </div>
+        <!-- /ko -->
+    </page-section>
+    <div class="button-container ">
+        <oj-button class="action-button-primary" on-click="[[done]]"><span slot="startIcon"
+                class="icons icon-ok"></span>
+            <span data-bind="text:$component.resource.ok"></span>
+        </oj-button>
+    </div>
+</modal-window>
+<oj-popup id="channel-popup" modality="modeless" tail="simple" position.my.horizontal="start" position.my.vertical="top"
+    position.at.horizontal="right" position.at.vertical="bottom">
+    <span data-bind="text:$component.resource.showInformation"></span>
+</oj-popup>

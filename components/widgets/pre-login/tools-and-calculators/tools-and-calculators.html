@@ -1,0 +1,24 @@
+<div class="tc oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item left oj-sm-12 oj-md-6">
+        <div data-bind="component: {name: 'product-header-text',
+        params:{rootModel: nls.toolCalc.labels.toolHeading}}">
+        </div>
+        <div class="icon-title_desc" data-bind="html:$component.nls.toolCalc.desc.calculator"></div>
+    </div>
+    <div class="oj-flex-item left oj-sm-12 oj-md-6 right-section">
+        <ul class="oj-flex oj-flex-items-pad tc-flex-container">
+            <!-- ko foreach:toolsData -->
+            <li class="tc-flex-container__listItems tc-flex-container-listItems">
+                <a href="#" data-bind="attr:{'aria-label':blueTxt, title:id },click: $component.openCal">
+                    <div class="icon-title" data-bind="text:blueTxt"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+        </ul>
+        <!-- ko if: !$dashboard.isDashboard() -->
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+            <span data-bind="text:$component.nls.toolCalc.back"></span>
+        </oj-button>
+        <!-- /ko -->
+    </div> 
+</div>

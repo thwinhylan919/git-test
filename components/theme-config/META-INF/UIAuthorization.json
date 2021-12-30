@@ -1,0 +1,39 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.brand.service.BrandManagement",
+        "components": [{
+            "componentName": "theme-list",
+            "service": "listBrand"
+        }, {
+            "componentName": "theme-list",
+            "service": "listBrandMapping"
+        }, {
+            "componentName": "theme-list",
+            "service": "deleteBrandMapping"
+        }, {
+            "componentName": "create-theme",
+            "service": "create",
+            "perform": "background#border#shadow#theme-list#hover#interaction#selected#size#typography#preview-theme#review-dashboard-mapping#account-nickname#review-theme"
+        }, {
+            "componentName": "create-theme",
+            "service": "update",
+            "perform": "background#border#shadow#theme-list#hover#interaction#selected#size#typography#preview-theme#review-dashboard-mapping#account-nickname#review-theme"
+        }, {
+            "componentName": "create-mapping",
+            "service": "createBrandMapping",
+            "perform": "theme-list#party-validate#review-mapping"
+        }, {
+            "componentName": "review-theme",
+            "service": "deleteBrand",
+            "perform": "background#border#shadow#theme-list#hover#interaction#selected#size#typography#preview-theme#review-dashboard-mapping#account-nickname"
+        }, {
+            "componentName": "preview-brand-list",
+            "service": "createBrandMappingUser",
+            "perform": "preview-brand"
+        }, {
+            "componentName": "preview-brand-list",
+            "service": "deleteBrandMappingUser",
+            "perform": "preview-brand"
+        }]
+    }]
+}

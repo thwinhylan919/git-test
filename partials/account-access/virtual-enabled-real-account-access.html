@@ -1,0 +1,63 @@
+<!-- ko if: $component.parentAccessLevel()==="PARTY" -->
+
+<page-section params="baseModel : $baseModel, rootModel : $component, heading :''">
+  <h4 data-bind=" text:  $component.nls.headers.newAccounts"></h4>
+
+
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3">
+        <label class="pull-left" data-bind="text: $component.nls.fieldname.mapAccts"></label>
+        <span class="icons icon-help tool-tip">
+             <div class="tooltip-content" data-bind=" html:$baseModel.format($component.nls.messages.tooltip.autoManualMessage,{accountType:$component.transactionNames.ver,accountType1:$component.transactionNames.ver})">
+            </div>
+      </span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9">
+        <oj-buttonset-one disabled="[[$component.showEditableForm()]]" on-value-changed="[[$component.verDefaultPolicyChangeHandler]]" value="{{$component.selectedVamEnabledRealAccPolicy}}"><oj-option name="verPolicy" value="{{'verAuto'}}" :id="[['verAuto']]"><span data-bind="attr: {for: 'verAuto'},text:$component.nls.common.auto"></span></oj-option><oj-option name="verPolicy" value="{{'verManual'}}" :id="[['verManual']]"><span data-bind="attr: {for: 'verManual'},text:$component.nls.common.manual"></span></oj-option></oj-buttonset-one>
+    </div>
+</div>
+</page-section>
+
+<h4 data-bind=" text:   $component.nls.headers.existingAccounts"></h4>
+
+<!-- /ko -->
+
+<!-- ko if: $component.parentAccessLevel()==="USER" -->
+
+<div class=" oj-flex oj-flex-items-pad">
+    <oj-checkboxset class="oj-flex-item" disabled="[[$component.showEditableForm()]]" value="{{$component.selectedVERPolicyChecked}}" on-value-changed="[[$component.verDefaultPolicyChangeHandler]]"><oj-option value="verAuto" id="apply_changes_checkboxVER"><span data-bind="text: $component.nls.common.ApplyChanges" for="apply_changes_checkboxVER">
+            </span></oj-option></oj-checkboxset>
+</div>
+
+<!-- /ko -->
+
+<div class="oj-flex oj-flex-items-pad">
+    <oj-checkboxset class="oj-flex-item" value="{{$component.mapAllVirtualEnabledRealAccts}}" on-click="[[$component.toggleAllVERCheckbox]]" disabled="[[$component.showEditableForm()]]">
+      <oj-option id="ver_all" value="{{'ALL'}}">
+        <span for="ver_all" data-bind="text: $component.nls.fieldname.mapallAccts">
+        </span></oj-option></oj-checkboxset>
+</div>
+
+<!-- ko if: $component.loadVERTemplate -->
+<div class="oj-flex oj-flex-items-pad table-data">
+    <oj-table id="verAccountsTable" :aria-label="[[$component.nls.headers.verAccounts]]"
+    columns="[[[{headerText:'',field:'accountType','renderer': $oj.KnockoutTemplateUtils.getRenderer('verCheckbox', true)},
+    {headerText:$component.nls.headers.AccountNumber,field:'ID'},
+    {headerText:$component.nls.headers.currency,field:'currency'},
+    {headerText:$component.nls.headers.displayName,field:'displayName'},
+    {headerText:$component.nls.headers.accountStatus,field:'accountStatus'}]]]"
+     columns-default="[[{sortable:'enabled'}]]" selection-mode="[[{row:'multiple',column:'multiple'}]]" data="[[$component.verAccountdataSource]]">
+        <caption class="hide-label" data-bind="text:$component.nls.headers.verAccounts"></caption>
+    </oj-table>
+    <script type="text/html" id="verCheckbox">
+        <td>
+          <input type="checkbox"
+          data-bind="attr:{'aria-label': 'verCheckbox'+$context.row.accountNumber.value ,
+           id : 'verCheckbox'+ $context.row.accountNumber.value,
+           'class' : $component.selectedVAMEnabledRealAccounts.indexOf($context.row.accountNumber.value) > -1 ? 'oj-selected' :  ''},
+           value:$context.row.accountNumber.value ,disable:$component.showEditableForm(), checked:$component.selectedVAMEnabledRealAccounts">
+          <label class="oj-checkbox-label" data-bind="attr:{for :'verCheckbox'  + $context.row.accountNumber.value}"></label>
+   </td>
+    </script>
+</div>
+<!-- /ko -->

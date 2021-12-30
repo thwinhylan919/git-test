@@ -1,0 +1,12 @@
+{
+	"modules": [{
+			"moduleName": "",
+			"components": [{
+					"componentName": "banner-list",
+					"service": "",
+					"perform": ""
+				}]
+		}
+
+	]
+}

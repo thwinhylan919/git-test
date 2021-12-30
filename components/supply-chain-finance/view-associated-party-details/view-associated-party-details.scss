@@ -1,0 +1,86 @@
+$active-color:#2E7D32;
+$bgcolor:#FFFFFF;
+
+.banner-design {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.party-name-style {
+  font-size: var(--base-font-size-large);
+}
+
+.party-id-style {
+  font-weight: var(--base-font-weight-light);
+  font-size: var(--base-font-size-medium);
+}
+
+.program-background {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.program-name-space {
+  @include single-padding(bottom, 0.3rem);
+}
+
+.active-color {
+  background-color: $active-color;
+  color: $bgcolor;
+}
+
+.active-color-list {
+  background-color: var(--base-color-success);
+  color: var(--base-color-secondary-text);
+  height: 70%;
+  margin-top: 0.7rem;
+}
+
+.donut_chart_pie {
+  width: 100%;
+}
+
+.disclaimer-text {
+  font-size: var(--base-font-size-medium);
+  color: var(--form-label-foreground-color);
+  font-weight: var(--form-label-font-weight);
+}
+
+.disclaimer-text-currency {
+  font-size: var(--base-font-size-small);
+  color: var(--form-label-foreground-color);
+}
+
+.note-text {
+  font-size: var(--base-font-size-medium);
+}
+
+.program-details-padding {
+  @include single-padding(top, 0.3rem);
+}
+
+.list-width {
+  width: 17rem;
+  border: 0.05rem solid var(--base-border-default);
+  padding: 0.25rem;
+}
+
+.noDataText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.align-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-img img {
+  height: 12rem;
+}

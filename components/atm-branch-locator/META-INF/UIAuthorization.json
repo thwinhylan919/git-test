@@ -1,0 +1,12 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.location.service.locator.Locator",
+           "components": [{
+                   "componentName": "locator",
+                   "service": "list",
+                   "perform": "map"
+               }
+           ]
+       }
+   ]
+}

@@ -1,0 +1,95 @@
+.walletRegisteredLabel {
+    padding: 0 0 20px 0;
+}
+
+.walletSuccess {
+    height: 20px;
+}
+
+.welcomeNote {
+    text-align: center
+}
+
+.walletSuccessModal {
+    text-align: center
+}
+
+.success-image {
+    img {
+        width: 130px;
+        height: 130px;
+        margin: 0 0 15px 42%;
+    }
+}
+
+.wallet-money {
+    img {
+        width: 130px;
+        height: 140px;
+        margin: 0 10px 0 0;
+    }
+}
+
+.wallet-details {
+    width: 10px;
+    height: 300px;
+}
+
+.wallet-success {
+    width: 10px;
+    height: 33px;
+    text-align: center;
+}
+
+.terms-and-condition {
+    padding: 10px 10px 10px 10px;
+}
+
+.terms-and-condition-accept {
+    text-align: center;
+    align-items: center;
+    width: 63px;
+}
+
+.terms-and-condition-link {
+    padding: 5px 0px 0px 10px;
+}
+
+.registered-wallet-image {
+    width: 30%;
+    max-width: 120px;
+    margin: 0 0 0 28%;
+}
+
+.wallet-head {
+    padding: 10px;
+
+    label {
+        font-size: var(--widget-header-font-size);
+    }
+
+}
+
+.wallet-available-tag {
+    line-height: calc(var(--form-line-height) + 0.5rem);
+
+    label {
+        font-size: .9rem;
+        padding: 10px;
+    }
+}
+
+.tag-divider:not(:last-child):after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    margin: 0 1.5rem;
+}
+
+.link-page-section {
+    padding: 10px 0 0 0;
+    border-top: 0.05rem solid var(--base-border-default);
+}

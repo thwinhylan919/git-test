@@ -1,0 +1,19 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <h3 class="heading oj-flex-item" data-bind="text:$component.nls.heading.LoansOverview">
+    </h3>
+  </div>
+  <!-- ko if: $component.accountsListLoaded() -->
+  <div class="oj-flex oj-flex-items-pad oj-lg-12">
+    <div class="oj-lg-4">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoansOverview.totalLoans, value : $component.totalLoans"></row>
+    </div>
+    <div class="oj-lg-4">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoansOverview.amountFinanced, value : $formatter.formatCurrency($component.totalAmount, $component.currency)"></row>
+    </div>
+    <div class="oj-lg-4">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.LoansOverview.outStandingBal, value : $formatter.formatCurrency($component.outstanding, $component.currency)"></row>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>

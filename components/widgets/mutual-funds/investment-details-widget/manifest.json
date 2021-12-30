@@ -1,0 +1,14 @@
+{
+  "componentName": "investment-details-widget",
+  "module": "mutual-funds",
+  "segment": ["retailuser"],
+  "width": {
+    "large": "4",
+    "medium": "6"
+  },
+  "height": "220",
+  "icon": "",
+  "template": "",
+  "isVisible": true,
+  "isWidget": true
+}

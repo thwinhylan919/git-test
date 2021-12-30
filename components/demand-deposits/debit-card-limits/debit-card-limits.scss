@@ -1,0 +1,33 @@
+.debit-card-limits-container {
+  .debit-card-limit {
+    .text-minimize {
+      font-size: 0.8rem;
+    }.buttons-padding{
+      padding: 1.3rem 0rem;
+    }
+
+   .limit-text{color: #999999;
+    font-size: var(--form-label-font-size);
+  }
+    .card-title {
+      margin-top: 0.6rem;
+      font-size: var(--form-header-font-size);
+      font-weight: var(--form-header-font-weight);
+    }
+
+    .card-header {
+      border-bottom: 0.05rem solid #cccccc;
+      padding-bottom: 0.5rem;
+
+      .edit {
+        @include float(right);
+        padding-top: 0.7rem;
+      }
+    }
+
+    .combined-limit-section {
+      background: var(--banner-background);
+      padding: 0.7rem 0.7rem;
+    }
+  }
+}

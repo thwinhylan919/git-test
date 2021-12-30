@@ -1,0 +1,79 @@
+<div class="form-main-container loan-disbursement">
+    <div class="oj-flex oj-flex-items-pad oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <account-input params="baseModel : $baseModel, rootModel: $data ,label : $component.locale.disbursement.selectAccount,
+													 account : $component.accountNumberSelected,
+													 additionalDetails : $component.additionalDetails,
+                                                      customURL : 'loan',
+                                                      readOnly: !!$component.params.id,
+													 validator:$component.validationTracker,
+													 taskCode:'LN_I_DD'">
+                    </account-input>
+                <!-- ko if:$component.detailsFetched() -->
+                <div class="row-group">
+                    <!-- ko if: loanDetails().module === "CON" -->
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.disbursement.sanctionedAmount , value :$formatter.formatCurrency($component.loanDetails().approvedAmount.amount,$component.loanDetails().approvedAmount.currency)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.disbursement.disbursedAmount , value :$formatter.formatCurrency($component.loanDetails().disbursedAmount.amount,$component.loanDetails().disbursedAmount.currency)"></row>
+                    <!-- /ko -->
+                    <!-- ko if: loanDetails().module === "ISL" -->
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.disbursement.FinAmount , value :$formatter.formatCurrency($component.loanDetails().approvedAmount.amount,$component.loanDetails().approvedAmount.currency)"></row>
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.disbursement.finDisbursedAmount , value :$formatter.formatCurrency($component.loanDetails().disbursedAmount.amount,$component.loanDetails().disbursedAmount.currency)"></row>
+                    <!-- /ko -->
+                </div>
+                <!-- ko if:$baseModel.large() -->
+                <oj-table :aria-label="[[$component.locale.disbursement.tableLabel]]" columns="[[[{headerText:$component.locale.disbursement.disbursementDate,field:'date','data-id':'disbursementDate',template:'date',style:'width: 50%'},{headerText:$component.locale.disbursement.amount,field:'amount',headerClassName:'right',style:'width: 50%; text-align:right'}]]]"
+                    columns-default="[[{sortable:'none'}]]" data="[[datasource]]">
+                    <caption class="hide-label" data-bind="text:$component.locale.disbursement.tableLabel"></caption>
+                    <template slot="date">
+                        <span data-bind="text: $formatter.formatDate($current.row.date)"></span>
+                    </template>
+                </oj-table>
+                <!-- /ko -->
+                <!-- ko ifnot:$baseModel.large() -->
+                <oj-list-view class="loan-disbursement-content__listView loan-disbursement-content-listView" id="listview" selection-mode="[['single']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('data-template',true)}]]" data="[[datasource]]">
+                </oj-list-view>
+                <!-- /ko -->
+                <!-- ko if:$baseModel.large() -->
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                        <span class="icons icon-back-arrow" slot="startIcon"></span><span data-bind="text:$component.locale.generic.common.back"></span>
+                    </oj-button>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </page-section>
+        </div>
+        <!-- ko if: $baseModel.large() && $component.loanDetails() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'loan-disbursement'"></help>
+        </div>
+        <!-- /ko -->
+    </div>
+    <script type="text/html" id="data-template">
+        <li class="loan-disbursement-content-listView__listItems" data-bind="attr: {id: 'no'}">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-6">
+                    <div class="oj-flex oj-flex-items-pad loan-disbursement__content">
+                        <div class="oj-flex-item oj-sm-12">
+                            <span data-bind="text:$component.locale.disbursement.disbursementDate"></span>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <span data-bind="text:$formatter.formatDate(date)"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-6">
+                    <div class="oj-flex oj-flex-items-pad loan-disbursement__content">
+                        <div class="oj-flex-item oj-sm-12">
+                            <span data-bind="text:$component.locale.disbursement.amount"></span>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <span data-bind="text:amount"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </script>
+</div>

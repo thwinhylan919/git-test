@@ -1,0 +1,69 @@
+<div class="form-main-container">
+    <!-- ko if:ko.utils.unwrapObservable($component.params.reviewMode) -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.nls.generic.common.review , reviewHeader : $component.params.iseditable ? $component.nls.forexDeal.reviewHeaderMsg:$component.nls.forexDeal.reviewHeaderMsg}}"></div>
+    <!-- /ko -->
+    <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : $component.nls.forexDeal.partyDetails">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.partyId, value : $dashboard.userData.userProfile.partyId.displayValue"></row>
+            <!-- ko if:$component.partyName() -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.partyName, value : $component.partyName()"></row>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.forexDeal.transactionDetails">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.dealType, value : $component.dealType"></row>
+            <!-- ko if:$component.forward -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.validity, value : $baseModel.format($component.nls.forexDeal.totalNoDays,{bookingDate:$formatter.formatDate($component.createForexDealModel.forexDealDTO.bookingDate()),valueDate:$formatter.formatDate($component.createForexDealModel.forexDealDTO.expiryDate()),noOfDays:parseInt($component.createForexDealModel.forexDealDTO.forwardPeriod())})"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.currencyCombination, value : $component.currencyCombo"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.transType, value : $component.selectedRateType"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.selectedRateType, value : $formatter.formatCurrency($component.rateAmount(),$component.rateCurrency())"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.exchangeRate, value : $formatter.formatCurrency($component.createForexDealModel.forexDealDTO.rate.amount(),$component.createForexDealModel.forexDealDTO.rate.currency())"></row>
+        </div>
+    </page-section>
+    <!-- ko if:$component.createForexDealModel.forexDealDTO.swap() -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.forexDeal.swapDetails">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.dealType, value : nls.forexDeal.forward"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.transType, value : $component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.rateType() === 'S' ? $component.nls.forexDeal.sell:$component.nls.forexDeal.buy"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.rateType() === 'S' ? $component.nls.forexDeal.sell:$component.nls.forexDeal.buy, value : $component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.rateType() === 'S' ?
+            $formatter.formatCurrency($component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.sellAmount.amount(),$component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.sellAmount.currency())
+            :
+            $formatter.formatCurrency($component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.buyAmount.amount(),$component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.buyAmount.currency())"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.exchangeRate, value : $formatter.formatCurrency($component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.rate.amount(),$component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.rate.currency())"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.forexDeal.validity, value : $baseModel.format($component.nls.forexDeal.totalNoDays,{bookingDate:$formatter.formatDate($component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.bookingDate()),valueDate:$formatter.formatDate($component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.expiryDate()),noOfDays:parseInt($component.createForexDealModel.forexDealDTO.swapDealDTO.forexDealDTO.forwardPeriod())})"></row>
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- ko if:ko.utils.unwrapObservable($component.params.reviewMode) -->
+    <div id="button-container" class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="confirmButton" on-click="[[confirmForexDealBooking]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text: $component.nls.generic.common.confirm"></span>
+        </oj-button>
+        <!-- ko ifnot:$baseModel.small() -->
+        <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text: $component.nls.generic.common.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary" id="backButton" on-click="[[onBack]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text: $component.nls.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.dealId() -->
+    <modal-window params="baseModel : $baseModel, rootModel : $component, id:'confirm-deal', dashboard : $dashboard, header : $component.nls.forexDeal.confirmationHeader, closeHandler :  $dashboard.switchModule.bind($data, null)">
+        <div data-bind="component:{name: 'forex-deal-timer', params: {rootModel : {
+                        params : {
+                        currencyCombo: $component.currencyCombo(),
+                        branchCode: $component.params.homeBranchCodeParams,
+                        rateType: $component.createForexDealModel.forexDealDTO.rateType(),
+                        rateCurrency: $component.createForexDealModel.forexDealDTO.rate.currency(),
+                        dealId: $component.dealId(),
+                        forexDealBooking: $component.forexDealBooking}}}}"></div>
+    </modal-window>
+    <!-- /ko -->
+</div>

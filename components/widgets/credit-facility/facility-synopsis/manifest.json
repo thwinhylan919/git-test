@@ -1,0 +1,14 @@
+{
+    "componentName": "facility-synopsis",
+    "module": "credit-facility",
+    "segment":["corporateuser"],
+    "width": {
+       "large":"4",
+       "medium":"4"
+     },
+    "height": "220",
+    "icon": "",
+    "template": "",
+    "isVisible":true,
+    "isWidget":true
+}

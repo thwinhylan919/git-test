@@ -1,0 +1,74 @@
+.paddingBottom {
+    padding-bottom: 0.5rem;
+}
+
+.paddingTop {
+    padding: 0px !important;
+}
+
+.text-style {
+    @include margin(1rem, 0rem, 0rem, 0rem);
+}
+
+.side-documents {
+    margin: 0.5rem;
+}
+
+.img-style {
+    margin: 0.4rem;
+}
+
+.title-size {
+    font-size: 0.6rem;
+    @include single-padding(left, 0.8rem);
+}
+
+.img-customizations {
+    width: 100%;
+    height: 3rem;
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--base-border-default));
+    @include single-padding(right, 0.3rem);
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot1 {
+    background-color: var(--base-color-success);
+}
+
+.dot2 {
+    background-color: var(--base-color-danger);
+}
+
+.fontDescription {
+    font-size: 0.8rem
+}
+
+.fontSmall {
+    font-size: 0.7rem
+}
+
+.paddingBottom {
+    @include padding(0rem, 0rem, 0.3rem, 0rem);
+}
+
+.img-customizations1 {
+    width: 1.4rem;
+    height: 1.2rem;
+}
+
+.cust-details {
+    background: var(--banner-background);
+    color: var(--banner-text-secondary);
+    padding: var(--banner-padding);
+    justify-content: center;
+    align-items: center;
+}

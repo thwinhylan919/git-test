@@ -1,0 +1,35 @@
+<div class="form-main-container">
+    <!-- ko if: showButtons -->
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header:$component.nls.generic.common.review, reviewHeader:$component.nls.reviewHeader}}">
+    </div>
+    <!-- /ko -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+        <row
+            params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageEdit.Code, value : $component.reviewData.data.code">
+        </row>
+        <!-- ko if: localeLoaded -->
+        <row
+            params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageEdit.Locale, value : $component.reviewData.localeDescription">
+        </row>
+        <!-- /ko -->
+        <row
+            params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.ApplicationMessageEdit.Message, value : $component.reviewData.data.message">
+        </row>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''"></page-section>
+
+    <!-- ko if: showButtons -->
+    <div class="button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.confirm]]"><span slot="startIcon"
+                class="icons icon-confirm"></span><span data-bind="text:$component.nls.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span
+                slot="startIcon" class="icons icon-cancel"></span><span
+                data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.backReview]]"><span slot="startIcon"
+                class="icons icon-back-arrow"></span><span data-bind="text:$component.nls.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>

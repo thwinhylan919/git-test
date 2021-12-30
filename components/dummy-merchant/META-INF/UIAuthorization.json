@@ -1,0 +1,10 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.payment.service.transfer.MerchantTransferData",
+        "components": [{
+            "componentName": "dummy-merchant-dashboard",
+            "service": "create",
+            "perform": ""
+        }]
+    }]
+}

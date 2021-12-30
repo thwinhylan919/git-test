@@ -1,0 +1,194 @@
+<!-- ko if:isReportFrequencyListLoaded() -->
+<div class="form-main-container">
+    <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+            <oj-validation-group id="reportTracker" valid="{{validationTracker}}">
+                <page-section params="baseModel : $baseModel, rootModel : $component">
+                    <div
+                        data-bind='component: {name: "nav-bar", params:{rootModel: $data, menuOptions: menuOptions, uiOptions: uiOptions, navBarDescription: $component.Nls.navBarDescription}}'>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad"></div>
+                    <!-- ********************** DropDown For Report Types ********************** -->
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <!-- ko if:isReportTypesListLoaded() -->
+                        <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2 ">
+                            <oj-label for="reportType"> <span data-bind="text:$component.Nls.report"></span></oj-label>
+                        </div>
+                        <!-- ko  if:$component.reportGenerationPayload.reportFreq()+"" ==="ADHOC" -->
+                        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+                            <oj-select-one required id="reportType"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                :placeholder="[[$component.Nls.selectReportType]]"
+                                on-value-changed="[[reportTypeValueChangeHandler]]"
+                                value="{{$component.reportGenerationPayload.reportIdentifier}}">
+                                <!-- ko foreach:$component.adhocReportTypeList -->
+                                <oj-option value="{{reportId}}"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko  if:$component.reportGenerationPayload.reportFreq()+"" !=="ADHOC" -->
+                        <div class="oj-flex-item label oj-sm-12 oj-md-8 oj-lg-6 ">
+                            <oj-select-one required id="reportType"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                :placeholder="[[$component.Nls.selectReportType]]"
+                                on-value-changed="[[reportTypeValueChangeHandler]]"
+                                value="{{$component.reportGenerationPayload.reportIdentifier}}">
+                                <!-- ko foreach:$component.scheduledReportTypeList -->
+                                <oj-option value="{{reportId}}"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <!-- ko if:$component.isReportFormatListLoaded() -->
+                        <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2">
+                            <oj-label for="reportFormat"> <span data-bind="text:$component.Nls.reportFormat"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4">
+                            <oj-select-one required id="reportFormat"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                :placeholder="[[$component.Nls.selectReportFormat]]"
+                                value="{{$component.reportGenerationPayload.formatType}}">
+                                <!-- ko foreach:$component.reportFormatList -->
+                                <oj-option value="{{code}}"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- ko  if:$component.frequencySelected() && $component.reportGenerationPayload.reportFreq()+"" !=="ADHOC"  -->
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2 ">
+                            <oj-label for="reportSchFreq"> <span data-bind="text:$component.Nls.selectFrequency"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4 ">
+                            <oj-select-one required id="reportSchFreq" name="reportSchFreq"
+                                :placeholder="[[$component.Nls.select]]"
+                                :invalidcomponenttracker="[[$component.validationTracker]]"
+                                value="{{$component.reportGenerationPayload.reportSchFreq}}">
+                                <!-- ko foreach:$component.scheduledFrequencyList -->
+                                <oj-option value="{{code}}"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2 ">
+                            <oj-label for="startDateScheduled"> <span data-bind="text:$component.Nls.startDate"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-4">
+                            <oj-input-date-time required :id="[['startDateScheduled']]"
+                                value="{{$component.reportGenerationPayload.startTime}}"
+                                :placeholder="[[$component.Nls.from]]" min="[[$component.today()]]"
+                                min="[[$component.today]] " time-picker.time-increment="00:15:00:00"></oj-input-date-time>
+                        </div>
+                        <!-- ko  if:$component.reportGenerationPayload.reportSchFreq()+'' !=="ONCE" -->
+                        <div class="oj-flex-item label  oj-sm-12 oj-md-4 oj-lg-2 ">
+                            <oj-label for="endDateScheduled"> <span data-bind="text:$component.Nls.endDate"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-4">
+                            <oj-input-date-time required :id="[['endDateScheduled']]"
+                                :placeholder="[[$component.Nls.to]]"
+                                value="{{$component.reportGenerationPayload.endTime}}"
+                                min=[[$component.reportGenerationPayload.startTime]] time-picker.time-increment="00:15:00:00"></oj-input-date-time>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:selected() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                    </div>
+                    <!-- ko if:$component.isReportsJSONLoaded() -->
+                    <div
+                        data-bind="component:{name: $component.paramsComponent, params:{rootModel: $component, validationTracker:$component.validationTracker}}">
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </page-section>
+            </oj-validation-group>
+            <div class="button-container">
+                <!-- ko  if:$component.reportGenerationPayload.reportFreq()+"" !=="ADHOC" -->
+                <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-primary" on-click="[[$component.createReport]]">
+                    <span class="icons icon-calendar" slot="startIcon"></span>
+                    <span data-bind="text:$component.Nls.scheduleReport"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-primary" on-click="[[$component.createReport]]">
+                    <span data-bind="text:$component.Nls.scheduleReport"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $component.reportGenerationPayload.reportFreq()+"" ==="ADHOC" -->
+                <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-primary" on-click="[[$component.createReport]]">
+                    <span class="icons icon-subscription" slot="startIcon"></span>
+                    <span data-bind="text:$component.Nls.generateReport"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-primary" on-click="[[$component.createReport]]">
+                    <span data-bind="text:$component.Nls.generateReport"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: $baseModel.small() -->
+                <!-- ko if:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.Nls.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span class="icons icon-cancel" slot="startIcon"></span>
+                    <span data-bind="text:$component.Nls.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-tertiary" on-click="[[$component.clear]]">
+                    <span data-bind="text:$component.Nls.clear"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-tertiary" on-click="[[clear]]">
+                    <span slot="startIcon" class="icons icon-refresh"></span>
+                    <span data-bind="text:$component.Nls.clear"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if: $baseModel.small() -->
+                <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span class="icons icon-cancel" slot="startIcon"></span>
+                    <span data-bind="text:$component.Nls.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- ko  if:$component.reportGenerationPayload.reportFreq()+"" !=="ADHOC" -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-12">
+                    <a href="#"
+                        data-bind="click:$dashboard.loadComponent.bind($data,'scheduled-reports',{data:$component.reportMapForReportId, formatMap:$component.reportFormatListMap, todayDate : $component.today})">
+                        <div data-bind="text:$component.Nls.viewScheduledReports"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $baseModel.large() -->
+        <div class="oj-sm-12 oj-md-12 oj-lg-3 oj-sm-only-hide oj-md-only-hide pull-right help-panel">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'report-generation'"></help>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,146 @@
+<!-- ko if:$component.viewbalanceLoaded -->
+<div class="form-main-container oj-lg-12 oj-sm-12 oj-md-12 pop-up-width">
+  <page-section params="baseModel : $baseModel, rootModel : $component, heading :">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.accountNumber"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span data-bind="text:$component.viewBalDetails().id.displayValue"></span>
+      </div>
+    </div>
+    <div class="oj-flex border-bottom">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.accountCurrency"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span data-bind="text:$component.viewBalDetails().currencyCode"></span>
+      </div>
+    </div>
+    <div class="oj-flex extra-padding">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.ownBalance"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().currentBalance.amount,$component.balance().currentBalance.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.childContri"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin add-color">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().childContributions.amount,$component.balance().childContributions.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <oj-accordion class="oj-lg-12" id="accordionPage" :aria-label="[[$component.resource.accordionText]]">
+        <oj-collapsible id="c1" class="no-border">
+          <span slot="header" class="no-border no-padding">
+            <span data-bind="text:$component.resource.accordionText"></span>
+          </span>
+          <!-- ko foreach: $component.balance().contributionDtoList.amount -->
+          <div class="oj-flex no-border child-contributions">
+            <div class="oj-flex-item oj-lg-7">
+              <oj-label><span data-bind="text: currency"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-3 extra-margin add-color child-contributions-font">
+              <span data-bind="text: $formatter.formatCurrency(amount,currency)"></span>
+            </div>
+          </div>
+          <!-- /ko -->
+        </oj-collapsible>
+      </oj-accordion>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.blockedChildContri"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin substract-color">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().childBlock.amount,$component.balance().childBlock.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.blockeAmt"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin substract-color">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().amountBlocked.amount,$component.balance().amountBlocked.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.unauthorizedDeb"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin substract-color">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().unauthDr.amount,$component.balance().unauthDr.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.overdraftAmt"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin add-color">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().unutilizedOdAmount.amount,$component.balance().unutilizedOdAmount.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-5">
+      </div>
+      <div class="oj-flex-item oj-lg-5 extra-margin add-color border-bottom">
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7 title-bold">
+        <span data-bind="text:$component.resource.avlBal"></span>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().availableBal.amount,$component.balance().availableBal.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-12 border-bottom">
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.benefitsFromPool"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().benifitFromPool.amount,$component.balance().benifitFromPool.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.effectAvlBal"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().effectiveBal.amount,$component.balance().effectiveBal.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-lg-7">
+        <oj-label><span data-bind="text:$component.resource.unAuthCredit"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-lg-3 extra-margin">
+        <span
+          data-bind="text:$formatter.formatCurrency($component.balance().unauthCr.amount,$component.balance().unauthCr.currency)"></span>
+      </div>
+    </div>
+    <div class="button-container search-buttons">
+      <oj-button class="action-button-primary" on-click="[[closeRightPanel]]">
+        <span data-bind="text:$component.resource.ok"></span>
+      </oj-button>
+    </div>
+  </page-section>
+</div>
+<!-- /ko -->

@@ -1,0 +1,100 @@
+<!-- ko pageTitle: pageTitle -->
+<!-- /ko -->
+
+<!-- ko if:dataLoaded -->
+<div class="">
+  <div class="product-main-container">
+    <div class="oj-flex oj-flex-items-pad product-header" data-bind="template:{name:'origination/product-header'}"></div>
+    <div data-bind="visible:productflowComponent(),component:{name: productComponentName, params:{rootModel: $data }}"></div>
+    <div data-bind="visible:!productflowComponent(),component:{name: pluginCompName, params:{rootModel: $data }}"></div>
+  </div>
+
+  <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'privacyAndSecurityPolicy', header:$component.resource.privacyAndSecurityPolicyTitle">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label" data-bind="text:$component.resource.privacyAndSecurityPolicyText"></div>
+      <div class="oj-flex-item message-btn button-container">
+        <oj-button id="privacyAndSecurityPolicyButton" class="toUpperCase action-button-primary" on-click="[[$baseModel.modalInteraction.bind($data, '#privacyAndSecurityPolicy', 'closeModal', null)]]">
+          <span data-bind="text:$component.resource.generic.common.ok"></span>
+        </oj-button>
+      </div>
+    </div>
+  </modal-window>
+
+  <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'balanceTransferInfoText', header:$component.resource.generic.common.info">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label scroll" data-bind="text:$component.resource.balanceTransferText"></div>
+      <div class="oj-flex-item message-btn button-container">
+        <oj-button id="balanceTransferInfoTextButton" class="toUpperCase action-button-primary" on-click="[[$baseModel.modalInteraction.bind($data, '#balanceTransferInfoText', 'closeModal', null)]]">
+          <span data-bind="text:$component.resource.generic.common.ok"></span>
+        </oj-button>
+      </div>
+    </div>
+  </modal-window>
+
+  <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'whatisThisCredit', header:$component.resource.generic.common.info">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label scroll" data-bind="html:$component.resource.whatisThisTextCredit"></div>
+    </div>
+  </modal-window>
+  <modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component,id:'whatisThisDebit', header:$component.resource.generic.common.info">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label scroll" data-bind="text:$component.resource.whatisThisTextDebit"></div>
+    </div>
+  </modal-window>
+  <modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component,id:'vehicleIdNumber', header:$component.resource.generic.common.info">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label scroll" data-bind="text:$component.resource.vehicleNumRequirement"></div>
+    </div>
+  </modal-window>
+  <modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component,id:'mileage', header:$component.resource.generic.common.info">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label scroll" data-bind="text:$component.resource.mileageRequirement"></div>
+    </div>
+  </modal-window>
+  <modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component,id:'activityProfileRequirement', header:$component.resource.generic.common.info">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item message-text label scroll" data-bind="html:$component.resource.activityProfileRequirement"></div>
+    </div>
+  </modal-window>
+</div>
+<!-- /ko -->
+<modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component,id:'alreadyRegistered', header:$component.resource.generic.common.info">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item message-text label scroll" data-bind="text:$component.resource.alreadyRegisteredMsg"></div>
+    <div class="oj-flex-item message-btn button-container">
+      <oj-button id="alreadyRegisteredButton" class="toUpperCase form-button-primary" on-click="[[$baseModel.modalInteraction.bind($data, '#alreadyRegistered', 'closeModal', null)]]">
+        <span data-bind="text:$component.resource.generic.common.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>
+<modal-window class="origination-popup message" params="baseModel : $baseModel, closeHandler:$component.wrongStateModalClose,rootModel : $component,id:'wrongStateSelection', header:$component.resource.generic.common.info">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item message-text label scroll" data-bind="text:$component.resource.wrongStateSelection"></div>
+    <div class="oj-flex-item message-btn button-container">
+      <oj-button id="wrongStateSelectionButton" class="toUpperCase form-button-primary" on-click="[[$baseModel.modalInteraction.bind($data, '#wrongStateSelection', 'closeModal', null)]]">
+        <span data-bind="text:$component.resource.generic.common.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>
+<modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component, id:'createSubmissionError', header:$component.resource.generic.common.info">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item message-text label scroll" data-bind="text: $component.submissionErrorMessage()"></div>
+    <div class="oj-flex-item message-btn button-container">
+      <oj-button id="createSubmissionErrorButton" class=" action-button-primary toUpperCase form-button-primary" on-click="[[$component.closeModalAndGoToHomePage.bind($data, '#createSubmissionError', null)]]">
+        <span data-bind="text:$component.resource.generic.common.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>
+<modal-window class="origination-popup message" params="baseModel : $baseModel, rootModel : $component, id:'dealerDetailsPostError', header:$component.resource.generic.common.info">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item message-text label scroll" data-bind="text:$component.dealerDetailsPostErrorMsg()"></div>
+    <div class="oj-flex-item message-btn button-container">
+      <oj-button id="dealerDetailsPostErrorButton" class="toUpperCase form-button-primary" on-click="[[$component.closeModalAndGoToHomePage.bind($data, '#dealerDetailsPostError')]]">
+        <span data-bind="text:$component.resource.generic.common.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>

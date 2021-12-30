@@ -1,0 +1,286 @@
+<div class="address">
+    <oj-radioset class="oj-choice-direction-row" id="chequeSet" value="{{$component.address.modeofDelivery}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'demandDraftPayeeDTO.demandDraftDeliveryDTO.deliveryMode', [['#chequeSet']] )]]]" on-value-changed="[[modeOfDeliveryChangeHandler]]">
+        <!-- ko foreach: $component.modeOfDeliveryArray -->
+        <oj-option :value="[[id]]" :id="[[id]]" :name="[[label]]"><span :for="[[id]]" data-bind="text:label"></span></oj-option>
+        <!-- /ko -->
+    </oj-radioset>
+    <!-- ko if: $component.address.modeofDelivery() === "BRN" && cityLoaded() -->
+    <div class="oj-flex">
+          <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label :for="[['citylist'+($baseModel.incrementIdCount())]]"><span data-bind="text:$component.resource.city"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12">
+            <oj-select-one required :id="[['citylist'+($baseModel.currentIdCount())]]" :placeholder="[[$component.resource.messages.address.selectCity]]" value="{{$component.address.postalAddress.city}}" on-value-changed="[[loadbranches]]">
+              <!-- ko foreach:$component.cityList() -->
+              <oj-option :id="[[code+$baseModel.incrementIdCount()]]" value="{{code}}"><span data-bind="text:description"></span></oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+
+        </div>
+</div>
+    <!-- /ko -->
+    <!-- ko if: $component.address.modeofDelivery() === "BRN" && branchLoaded() -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label ">
+              <oj-label :for="[['branchlist'+($baseModel.incrementIdCount())]]"><span data-bind="text:$component.resource.address.branch"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+              <oj-select-one data-id="branchList" required :id="[['branchlist'+($baseModel.currentIdCount())]]"  value="{{$component.address.postalAddress.branch}}" on-value-changed="[[fetchBranchAddress]]">
+                <!-- ko foreach:$component.branchList() -->
+                  <oj-option value="{{code}}"><span data-bind="text:description"></span></oj-option>
+                <!-- /ko -->
+              </oj-select-one>
+            </div>
+            <!-- ko if:branchAddressLoaded() -->
+        <div class="addressfields ">
+            <!-- ko if:address.postalAddress.line1 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line1"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line2 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line2"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line3 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line3"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line4 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line4"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line5 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line5"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line6 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line6"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line7 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line7"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line8 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line8"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line9 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line9"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line10 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line10"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line11 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line11"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line12 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line12"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.state !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.state"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.city !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.city"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.country !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.country"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.zipCode !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.zipCode"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.address.modeofDelivery() === "MAI" -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label class="hide-label" :for="[['addressType'+($baseModel.incrementIdCount())]]"><span data-bind="text:$component.resource.address.addressType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+           <!-- ko if:myAddressLoaded() -->
+            <oj-select-one data-id="addressTypeDropdown" required :id="[['addressType'+($baseModel.currentIdCount())]]" :placeholder="[[$component.resource.messages.address.selectAddress]]" value="{{$component.address.addressType}}" on-value-changed="[[setMyAddress]]">
+                <!-- ko foreach:myAddressArray -->
+                <oj-option value="[[code]]"><span data-bind="text:description"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+        <div class="addressfields ">
+            <!-- ko if:address.postalAddress.line1 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line1"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line2 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line2"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line3 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line3"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line4 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line4"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line5 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line5"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line6 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line6"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line7 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line7"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line8 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line8"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line9 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line9"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line10 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line10"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line11 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line11"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.line12 !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.line12"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.state !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.state"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.city !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.city"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.country !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.country"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:address.postalAddress.zipCode !== "" -->
+            <div>
+                <span data-bind="text:address.postalAddress.zipCode"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.address.modeofDelivery() === "OTHADD" -->
+    <!-- ko if: $component.typeOfDraft.toLowerCase() === "international" && $component.isCountriesLoaded() -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label">
+            <oj-label :for="[['otherAddressCountry'+$baseModel.incrementIdCount()]]" class="oj-flex-item oj-lg-12 oj-sm-12">
+                <span data-bind="text:$component.resource.country"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+            <oj-select-one data-id="addressTypeDropdown" required :id="[['otherAddressCountry'+$baseModel.currentIdCount()]]" :placeholder="[[$component.resource.messages.pleaseSelect]]" value="{{$component.address.postalAddress.country}}">
+                <!-- ko foreach:countries -->
+                <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+    </div>
+     <!-- /ko -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label">
+            <oj-label for="draftAddress1" class="oj-flex-item oj-lg-12 oj-sm-12">
+                <span data-bind="text:$component.resource.address1"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-12">
+            <oj-input-text id="draftAddress1" class="oj-flex-item oj-lg-10 oj-sm-12" value="{{$component.address.postalAddress.line1}}" validators="[[$baseModel.getValidator('ADDRESS')]]" required>
+            </oj-input-text>
+        </div>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label">
+            <oj-label for="draftAddress2" class="oj-flex-item oj-lg-12 oj-sm-12">
+                <span data-bind="text:$component.resource.address2"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-12">
+            <oj-input-text id="draftAddress2" class="oj-flex-item oj-lg-10 oj-sm-12" value="{{$component.address.postalAddress.line2}}" validators="[[$baseModel.getValidator('ADDRESS')]]" required>
+            </oj-input-text>
+        </div>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label">
+            <oj-label for="draftCity" class="oj-flex-item oj-lg-12 oj-sm-12">
+                <span data-bind="text:$component.resource.city"></span>
+            </oj-label>
+        </div>
+        <oj-input-text id="draftCity" class="oj-flex-item oj-lg-10 oj-sm-12" value="{{$component.address.postalAddress.city}}" validators="[[$baseModel.getValidator('CITY')]]" required>
+        </oj-input-text>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label">
+            <oj-label for="draftState" class="oj-flex-item oj-lg-12 oj-sm-12">
+                <span data-bind="text:$component.resource.state"></span>
+            </oj-label>
+        </div>
+        <oj-input-text id="draftState" class="oj-flex-item oj-lg-10 oj-sm-12" value="{{$component.address.postalAddress.state}}" required>
+        </oj-input-text>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="draftZip" class="oj-flex-item oj-lg-12 oj-sm-12">
+            <span data-bind="text:$component.resource.zipCode
+"></span>
+        </oj-label>
+        </div>
+        <oj-input-text id="draftZip" class="oj-flex-item oj-lg-8 oj-sm-7" value="{{$component.address.postalAddress.zipCode}}" validators="[[$baseModel.getValidator('POSTAL_CODE')]]" required>
+        </oj-input-text>
+    </div>
+    <!-- /ko -->
+</div>

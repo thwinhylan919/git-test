@@ -1,0 +1,33 @@
+.banner-design {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    color: var(--banner-foreground-color);
+    font-size: var(--banner-font-size);
+    font-weight: var(--banner-font-weight);
+    padding: var(--banner-padding);
+    align-items: center;
+}
+
+.template-style {
+    line-height: calc(var(--form-line-height)*1.5);
+    font-size: var(--base-font-size-medium);
+}
+
+.success-color {
+    color: var(--base-color-success);
+}
+
+.failure-color {
+    color: var(--base-color-danger);
+}
+
+.form-padding {
+    padding-bottom: 1rem;
+}
+
+.bulk-upload-text {
+    padding-top: 1.5rem;
+}
+
+.larger-font {
+    font-size: var(--base-font-size-larger);
+}

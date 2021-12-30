@@ -1,0 +1,23 @@
+<!-- ko if: $baseModel.large() -->
+<div class="hover_container">
+  <div class="content center">
+      <div class="content-overlay"></div>
+      <img class="content-image" data-bind ="loadImage: source">
+      <div class="content-details fadeIn-bottom">
+      <div class="content-text" data-bind ="text:textOnImage"></div>
+      <span class="click-text" data-bind="text:$component.nls.clickHere"></span>
+      </div>    
+  </div>
+   <!-- ko if : $component.header -->
+  <div class="oj-lg-12 oj-md-12 oj-sm-12 center dataPadding" data-bind="text:header"></div>
+  <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko ifnot : $baseModel.large()  -->
+<div class="oj-lg-12 oj-md-12 oj-sm-12">
+<img data-bind="attr:{'aria-label': header},loadImage: source" ></img>
+<div class="oj-lg-12 oj-md-12 oj-sm-12 center dataPadding text-color" data-bind="text:header"></div>
+<div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 left text-color" data-bind="css:$baseModel.large() ? 'description' : 'smallScreenDiscription',text:textOnImage"></div>
+<div class="oj-lg-12 oj-md-12 oj-sm-12 left " data-bind="text:$component.nls.clickHere"></div>
+</div>
+<!-- /ko -->

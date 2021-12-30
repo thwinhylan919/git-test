@@ -1,0 +1,28 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.sms.service.user.password.policy.PasswordPolicy",
+        "components": [{
+                "componentName": "read",
+                "service": "read",
+                "perform": "policy-search"
+            },
+            {
+                "componentName": "password-policy-create",
+                "service": "create",
+                "perform": "policy-search#review-create",
+                "approve": "review-create"
+            },
+            {
+                "componentName": "update",
+                "service": "update",
+                "perform": "review-update",
+                "approve": "review-update"
+            },
+            {
+                "componentName": "search-results",
+                "service": "list",
+                "perform": ""
+            }
+        ]
+    }]
+}

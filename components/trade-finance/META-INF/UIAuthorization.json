@@ -1,0 +1,19 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.tradefinance.service.application.TradeApplication",
+    "components": [{
+      "componentName": "trade-finance-application-tracker",
+      "service": "list",
+      "perform": "application-tracker-film-strip#hover-text-image"
+    },{
+      "componentName": "view-trade-application-details",
+      "service": "read",
+      "perform": "trade-finance-tracker-details#view-guarantee-application-details#view-amend-lc-application-details"
+    },
+    {
+      "componentName": "application-tracker-documents",
+      "service": "fetchDocuments",
+      "perform": "trade-finance-tracker-details"
+    }]
+  }]
+}

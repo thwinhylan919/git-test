@@ -1,0 +1,76 @@
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+
+  .label,
+  label {
+    color: var(--banner-text-primary);
+    font-size: var(--base-font-size-medium);
+  }
+}
+
+$button-selected-color: #01838f;
+$selected-text-color: #ffffff;
+$currency-color: var(--base-color-warning);
+
+.card-title {
+  font-size: var(--widget-header-font-size);
+  margin-top: calc(2 * (var(--widget-header-font-size) / 3));
+  font-weight: var(--widget-header-font-weight);
+  color: var(--form-foreground-color);
+}
+
+.balance-text {
+  font-size: var(--base-font-size-default);
+  color: var(--base-text-secondary);
+}
+
+.padding-card {
+  @include single-padding(bottom, 0 !important);
+}
+
+.icon-size {
+  font-size: 1rem;
+  padding: 0.625rem;
+  color: $currency-color;
+}
+
+.text-alignment {
+  text-align: center;
+  padding: 0.625rem;
+  align-self: center;
+}
+
+.default-style {
+  background-color: $button-selected-color;
+  color: $selected-text-color;
+  text-align: center;
+  line-height: 2rem;
+  vertical-align: middle;
+  @include single-padding(bottom, 0 !important);
+}
+
+.card-style {
+  border: 0.05rem solid var(--base-border-default);
+  @include single-margin(right, 1.1rem);
+}
+
+.card-text-style {
+  padding: 0.625rem;
+}
+
+.padding-card-division {
+  @include single-padding(left, 0.625rem);
+}
+
+.separator-for-banner {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+}
+
+.div-margin {
+  @include single-margin(top, 1.2rem);
+}

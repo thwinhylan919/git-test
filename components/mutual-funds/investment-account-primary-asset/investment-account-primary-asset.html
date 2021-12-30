@@ -1,0 +1,66 @@
+<div class="form-main-container">
+  <oj-validation-group id="tracker">
+    <!-- ko if: $component.showAssets -->
+    <!-- ko foreach : $component.dummyModal.additionalDetails.assets -->
+    <page-section params="baseModel : $baseModel, rootModel : $component">
+      <div class="oj-flex oj-flex-items-pad ">
+        <div class="oj-flex-item  heading">
+          <div class="oj-flex-item oj-lg-8 oj-sm-8 oj-md-8">
+            <span data-bind="text: $baseModel.format($component.nls.heading.pageSectionHeading,{asset : $index()+1})"></span>
+          </div>
+        </div>
+        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4">
+          <a href="#" data-bind="attr:{id: 'delete_'+$index(),alt:$component.nls.PrimaryAsset.clickToDelete,title:$component.nls.PrimaryAsset.Asset}, click:$component.deleteAsset.bind($data,$index())">
+            <div class="icons icon-delete" aria-hidden="true"></div>
+          </a>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+          <oj-label :for="[['assetType'+ $index()]]" >
+            <span data-bind="text:$component.nls.PrimaryAsset.Asset"></span>
+          </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+          <!-- ko if: $component.assetsLoaded -->
+          <oj-select-one :id="[['assetType'+ $index()]]" :placeholder="[[$component.nls.PrimaryAsset.select]]" value="{{$component.dummyModal.additionalDetails.assets[$index()].assetType}}" on-value-changed="[[$component.assetSelectedHandler.bind($data,$index())]]">
+            <!-- ko foreach : $component.assets-->
+            <oj-option :id="[['code'+$baseModel.incrementIdCount()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+          <!-- /ko -->
+        </div>
+      </div>
+      <div data-bind="component: {
+                name: 'amount-input', params: {
+                  amount :$component.dummyModal.additionalDetails.assets[$index()].value.amount,
+                  label : $component.nls.PrimaryAsset.value,
+                  currency:$component.dummyModal.additionalDetails.assets[$index()].value.currency,
+                  converter:$formatter.formatCurrency,
+                  isMandatory:$component.dummyModal.additionalDetails.assets[$index()].assetRequired,
+                  currencyListRequired : true,
+                  currencyURL : 'currency',
+                  currencyParser : $component.currencyParser,
+                  rootId:'amount-investment'+ $baseModel.incrementIdCount(),
+                  rootClass:'form-input',
+                  valueClasses : 'oj-lg-12 oj-md-12 oj-sm-12'
+            }
+          }"></div>
+    </page-section>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <a href="#" data-bind="click:$component.addAsset">
+            <span class="icons icon-add" slot="startIcon"></span>
+            <span data-bind="text:$component.nls.PrimaryAsset.add"></span>
+          </a>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickSave]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.PrimaryAsset.save"></span></oj-button>
+      </div>
+    </div>
+    <!-- /ko -->
+  </oj-validation-group>
+</div>

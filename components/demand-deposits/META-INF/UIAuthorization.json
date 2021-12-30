@@ -1,0 +1,114 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.dda.service.core.DemandDeposit",
+      "components": [{
+        "componentName": "account-details",
+        "service": "read",
+        "perform": "demand-deposit-details#account-nickname#quick-links#account-snapshot#account"
+      }, {
+        "componentName": "demand-deposit-transactions",
+        "service": "fetchTransactions",
+        "perform": "account-transactions#account-snapshot-details#balance-certificate"
+      }, {
+        "componentName": "demand-deposit-statement-request",
+        "service": "requestAdhocStatement",
+        "perform": "review-physical-statement#statement-request#review-statement-request#physical-statement#electronic-statement-download#electronic-statement",
+        "approve": "review-physical-statement#statement-request#review-statement-request#electronic-statement-download#electronic-statement"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.dda.service.debitcard.DebitCard",
+      "components": [{
+          "componentName": "debit-card-list",
+          "service": "list",
+          "perform": "debit-card#debit-card-list"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "read",
+          "perform": "debit-card#debit-card-list#debit-card-details#debit-card-limits"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "requestATMPin",
+          "perform": "debit-card#debit-card-list#debit-card-details#debit-card-pin-request#review-debit-card-pin-request"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "hotlistDebitCard",
+          "perform": "debit-card#debit-card-list#debit-card-details#debit-card-hotlisting#review-debit-card-hotlisting"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "resetPin",
+          "perform": "debit-card#debit-card-list#debit-card-details#debit-card-reset-pin#reset-pin"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "requestDebitCardLimitChange",
+          "perform": "debit-card#debit-card-list#debit-card-details#debit-card-limits"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "applyDebitCard",
+          "perform": "debit-card#debit-card-list#debit-card-apply"
+        },{
+          "componentName": "debit-card-list",
+          "service": "fetchApplicableDebitCardTypes",
+          "perform": "upgrade-card#review-upgrade-card"
+        },
+        {
+          "componentName": "debit-card-list",
+          "service": "replaceDebitCard",
+          "perform": "reissue-card#review-reissue-card"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.dda.service.cheque.ChequeManagement",
+      "components": [{
+        "componentName": "cheque-book-request",
+        "service": "requestChequeBook",
+        "perform": "review-cheque-book-request",
+        "approve": "review-cheque-book-request"
+      }, {
+        "componentName": "cheque-status-inquiry",
+        "service": "list"
+      }, {
+        "componentName": "cheque-stop-unblock",
+        "service": "chequeInstruction",
+        "perform": "review-cheque-stop-unblock#cheque-details-range",
+        "approve": "review-cheque-stop-unblock"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.dda.service.sweepInInstruction.SweepInInstruction",
+      "components": [{
+        "componentName": "sweep-in-instruction",
+        "service": "listSweepInInstruction",
+        "perform": "review-sweep-in-instruction",
+        "approve": "review-sweep-in-instruction"
+      }, {
+        "componentName": "sweep-in-instruction",
+        "service": "createSweepInInstruction",
+        "perform": "review-sweep-in-instruction#multiple-sweep-in-instruction-status",
+        "approve": "review-sweep-in-instruction#multiple-sweep-in-instruction-status"
+      }, {
+        "componentName": "sweep-in-instruction",
+        "service": "deleteSweepInInstruction",
+        "perform": "review-sweep-in-instruction",
+        "approve": "review-sweep-in-instruction"
+      }]
+    }, {
+      "moduleName": "com.ofss.digx.app.payment.service.transfer.QRCodeTransfer",
+      "components": [{
+        "componentName": "scan-qr",
+        "service": "create",
+        "perform": "scan-qr#scan-to-pay#review-scan-to-pay",
+        "approve": "review-scan-to-pay",
+        "view": "review-scan-to-pay"
+      }]
+    }
+
+  ]
+}

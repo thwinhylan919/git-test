@@ -1,0 +1,21 @@
+.successStatus {
+  color: var(--base-color-success);
+}
+.failedStatus {
+  color: var(--base-color-danger);
+}
+.inProgressStatus {
+  color: var(--base-color-warning);
+}
+.download{
+  @include float(right);
+}
+.payeeHeader{
+font-size:var(--base-font-size-large);
+}
+.payeeContent{
+  font-size:var(--base-font-size-medium);
+}
+.amount{
+  @include text-align(right);
+}

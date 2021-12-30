@@ -1,0 +1,103 @@
+<oj-validation-group id="SweepLogValidationTracker">
+    <div class="form-main-container">
+        <!-- ko if:renderSearchFields -->
+        <div class=" oj-flex-item oj-lg-12">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                    <div class="oj-flex-item oj-lg-6">
+                        <oj-label for="structure" class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+                            <span data-bind="text:$component.resource.structure"></span>
+                        </oj-label>
+                        <oj-select-one id="structure" :aria-label="[[$component.resource.structure]]" class="oj-flex-item oj-lg-4" :placeholder="[[$component.resource.generic.common.select]]" options="[[structureList]]" value="{{structureId}}" required>
+                        </oj-select-one>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <oj-label for="status" class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-6">
+                            <span data-bind="text:$component.resource.status"></span>
+                        </oj-label>
+                        <oj-select-one id="status" :aria-label="[[$component.resource.status]]" class="oj-flex-item oj-lg-3" placeholder="[[$component.resource.generic.common.select]]" value="{{selectedStatus}}" options="[[statusCodes]]" required>
+                        </oj-select-one>
+                    </div>
+                </div>
+                <!-- ko if:selectedStatus() -->
+                <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                    <div class="oj-flex-item oj-lg-6">
+                        <oj-label for="fromDate" class="oj-flex-item oj-lg-4">
+                            <span data-bind="text:$component.resource.fromDate"></span>
+                        </oj-label>
+                        <oj-input-date-time id="fromDate" class="oj-flex-item oj-lg-4" value="{{fromDate}}" converter="[[$formatter.dateTimeConverter]]" max="[[selectedStatus() !== 'P'?$oj.IntlConverterUtils.dateToLocalIso($component.toDate()?(new Date($component.toDate())):$component.currentDate()):($component.toDate()?$oj.IntlConverterUtils.dateToLocalIso((new Date($component.toDate()))) : null)]]"
+                            min="[[selectedStatus() === 'P'?$oj.IntlConverterUtils.dateToLocalIso($component.currentDate()):null]]" required>
+                        </oj-input-date-time>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <oj-label for="toDate" class="oj-flex-item oj-lg-4">
+                            <span data-bind="text:$component.resource.toDate"></span>
+                        </oj-label>
+                        <oj-input-date-time id="toDate" class="oj-flex-item oj-lg-4" value="{{toDate}}" converter="[[$formatter.dateTimeConverter]]" max="[[selectedStatus() !== 'P'?$oj.IntlConverterUtils.dateToLocalIso($component.currentDate()):null]]" min="[[selectedStatus() === 'P'?$oj.IntlConverterUtils.dateToLocalIso($component.fromDate()?(new Date($component.fromDate())):$component.currentDate()):($component.fromDate()?$oj.IntlConverterUtils.dateToLocalIso(new Date($component.fromDate())):null)]]"
+                            required>
+                        </oj-input-date-time>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex-item button-container">
+            <oj-button id="submitButton" class="action-button-primary" on-click="[[$component.submitDetails]]">
+                <span slot="startIcon" class="icons icon-submit"></span>
+                <span data-bind="text:$component.resource.generic.common.submit"></span>
+            </oj-button>
+            <!-- ko if:!isDataloaded() -->
+            <oj-button id="cancelButton" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.generic.common.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+        </div>
+        <!-- ko if:sweepLogLoaded() -->
+        <modal-window params="baseModel : $baseModel, rootModel : $data, id:'passwordDialog', header : $component.resource.passwordNotification">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text: $component.resource.passCombination"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text: $component.resource.passwordExample"></span>
+                </div>
+            </div>
+            <div class="oj-flex button-container">
+                <oj-button id="ok" class="action-button-primary" on-click="[[$component.closeModal]]">
+                    <span data-bind="text:$component.resource.generic.common.ok"></span>
+                </oj-button>
+            </div>
+        </modal-window>
+
+        <div class=" oj-flex-item oj-lg-12">
+            <!-- ko if:fetchedSweepLogList().length -->
+            <div class="oj-flex oj-flex-items-pad grid-row-group flex-right">
+                <oj-menu-button class="action-button-primary" id="menuButton">
+                    <span data-bind="text:$component.resource.downloadPdf"></span>
+                    <oj-menu id="myMenu" slot="menu" class="hide" on-oj-action="[[download]]">
+                        <!-- ko foreach: menuItems -->
+                        <oj-option :id="[[id]]" :value="[[id]]">
+                            <span data-bind="text: value "></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-menu>
+                </oj-menu-button>
+            </div>
+            <!-- /ko -->
+            <div data-bind="template: { name: 'liquidity-management/view-sweep-log', data:{ status:$component.filtertype, dataSource:$component.sweepLogDetailsDataSource}}"></div>
+            <div class="oj-flex-item button-container ">
+                <!-- ko if:isDataloaded() -->
+                <oj-button id="cancel-button" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.generic.common.cancel "></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</oj-validation-group>

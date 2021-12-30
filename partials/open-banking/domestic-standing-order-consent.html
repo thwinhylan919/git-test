@@ -1,0 +1,86 @@
+<page-section
+    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.ConsentAuthorization.selectDetail">
+
+    <div class="oj-flex">
+        <div class=" oj-sm-12 oj-md-6 oj-lg-6">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.payeeName, value :
+                $component.consentDTO.Initiation.CreditorAccount.Name">
+            </row>
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.sortCode, value : $component.consentDTO.Initiation.CreditorAccount.SecondaryIdentification">
+            </row>
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.accountNumber, value : $component.consentDTO.Initiation.CreditorAccount.Identification">
+            </row>
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.paymentReference, value : $component.consentDTO.Initiation.Reference">
+            </row>
+            <!-- ko if : hasDebitorAccount -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.debitorAccountNumber,
+                    value : $component.consentDTO.Initiation.DebtorAccount.Identification">
+            </row>
+            <!-- /ko -->
+        </div>
+        <div class="oj-sm-12 oj-md-12 oj-lg-6">
+            <div class="row-group">
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.amount, value :
+                    $formatter.formatCurrency($component.consentDTO.Initiation.FirstPaymentAmount.amount,
+                    $component.consentDTO.Initiation.FirstPaymentAmount.currency)">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.firstPaymentDate,
+                    value : $formatter.formatDate($component.consentDTO.Initiation.FirstPaymentDateTime) ">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.endDate,
+                    value : $formatter.formatDate($component.consentDTO.Initiation.FinalPaymentDateTime) ">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.frequency,
+                    value :$component.nls[$component.consentDTO.Initiation.Frequency] ">
+                </row>
+            </div>
+        </div>
+    </div>
+</page-section>
+<!-- ko ifnot : hasDebitorAccount -->
+<page-section
+    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.ConsentAuthorization.SelectDebitorAccount">
+
+
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+
+            <oj-radioset :id="[['debitorAccount']]" value="{{$component.debitorAccount}}" required="true">
+                <!-- ko foreach : accountsArray -->
+                <oj-option value="[[id.value]]">
+                    <div class="oj-flex oj-flex-items-pad name">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <span class="nameHeading" data-bind="text : $data.accountNickname ? $data.accountNickname
+: $data.partyName "></span>
+
+                        </div>
+
+                    </div>
+                </oj-option>
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <span class=" oj-sm-12 oj-label validity"
+                        data-bind="text:$baseModel.format($component.nls.accountValue,{accountType : ddaAccountType,accountNumber : id.displayValue})"></span>
+                </div>
+                <!-- /ko -->
+            </oj-radioset>
+
+        </div>
+    </div>
+
+
+</page-section>
+<!-- /ko -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="submitbtn"
+            on-click="[[$component.authorizeConsent.bind($data,$root)]]"><span
+                data-bind="text:$component.nls.generic.common.proceed"></span></oj-button>
+        <oj-button class="action-button-secondary" id="cancelbtn"
+            on-click="[[$component.denyConsent.bind($data,$root)]]"><span
+                data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+    </div>
+</div>

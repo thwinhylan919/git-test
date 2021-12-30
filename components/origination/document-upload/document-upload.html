@@ -1,0 +1,175 @@
+<div class="form-main-container">
+  <div class="">
+    <div class="page-container">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <h3 class="primary-heading" data-bind="text: $component.resource.uploadDocuments"></h3>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <label class="text" data-bind="text:$component.resource.uploadDocumentText1"></label>
+          <span>
+            <a class="link text" href="#"
+              data-bind="click:$baseModel.modalInteraction.bind($data,'#uploadDocumentInstructions', 'openModal', null),text:$component.resource.uploadDocumentText2 ,attr:{alt: $component.resource.uploadDocumentPolicyClick, title: $component.resource.uploadDocumentPolicyTitle}"></a>
+          </span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <label class="" data-bind="text: $component.resource.uploadDocumentText3"></label>
+        </div>
+      </div>
+      <!-- ko if: $component.dataLoaded() -->
+      <div class="documents-list"></div>
+      <oj-accordion class="oj-lg-7 alerts-accordionPage">
+        <!-- ko foreach: $component.documentCategories() -->
+        <oj-collapsible :id="[['collapsibleDiv' + $index()]]">
+          <span class="acc-header" slot="header">
+            <div class="primary-heading" data-bind="text: $data.category"></div>
+          </span>
+          <!-- ko foreach: $data.type -->
+          <div class="oj-flex oj-flex-items-pad collapsible-row">
+            <!-- ko if: $data.mandatory -->
+            <div class="oj-flex-item oj-sm-9 oj-md-3 oj-lg-3 oj-lg-offset-1 oj-md-offset-1 type_font">
+              <label
+                data-bind="html : $component.format($component.resource.documentRequired, {documentType: $data.type})"></label>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $data.mandatory -->
+            <div class="oj-flex-item oj-sm-9 oj-md-3 oj-lg-3 oj-lg-offset-1 oj-md-offset-1 type_font">
+              <label data-bind="text : $data.type"></label>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $data.anyDocumentUploaded -->
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+              <oj-file-picker
+                :id="{{JSON.stringify($parentContext.$index())+JSON.stringify($index())+'-document-upload'}}"
+                selection-mode="single" selectOn="click"
+                on-oj-select="[[$component.fileSelectListener.bind($data, $index(), $parentContext.$index())]]">
+                <div tabindex="0" slot="trigger" class="file_picker oj-filepicker-text"
+                  data-bind="html: $component.resource.attachDocument">
+                </div>
+              </oj-file-picker>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: $data.anyDocumentUploaded -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-lg-12 oj-md-12 oj-lg-offset-1 oj-md-offset-1">
+                <!-- ko if: $data.dataRefreshed() -->
+                <oj-table id="table" :aria-label="[[$component.resource.tableHeading]]"
+                  columns="[[$component.columnsArray]]" selection-mode="[[{row:'none',column:'none'}]]"
+                  display="[['grid']]" data="[[$data.dataSource]]">
+                  <caption class="hide-label" data-bind="text:$component.resource.tableHeading"></caption>
+                </oj-table>
+                <!-- /ko -->
+
+                <script type="text/html" id="document_template">
+                  <td>
+                    <!-- ko if: $context.row.uploaded -->
+                    <a href="#"
+                      data-bind="text: $context.row.document, click: $component.downloadDocument.bind($data, $context.row.contentId), attr:{alt: $component.resource.documentDownloadClick, title: $component.resource.documentDownloadClickTitle}"></a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $context.row.uploaded -->
+                    <div data-bind="text: $context.row.document"></div>
+                    <!-- /ko -->
+                  </td>
+                </script>
+                <script type="text/html" id="action_template">
+                  <td>
+                    <a href="#"
+                      data-bind="css: $context.row.iconDelete, click: $component.deleteDocument.bind($data, $parentContext.$parentContext.$index(), $index(), $context.row.rowIndex), attr:{alt: $component.resource.deleteDocumentClick, title: $component.resource.deleteDocumentClickTitle}"></a>
+                  </td>
+                </script>
+                <script type="text/html" id="remarks_template">
+                  <td>
+                    <!-- ko ifnot: $context.row.uploaded -->
+                    <div class="oj-flex oj-flex-items-pad">
+                      <div class="oj-flex-item">
+                        <oj-input-text maxlength="30" name="remarks" id="remarks" autocomplete="off" spellcheck="false"
+                          value="{{$context.row.remarks}}"></oj-input-text>
+                      </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $context.row.uploaded -->
+                    <div class="oj-flex oj-flex-items-pad">
+                      <div class="oj-flex-item">
+                        <div data-bind="text: $context.row.remarks"></div>
+                      </div>
+                    </div>
+                    <!-- /ko -->
+                  </td>
+                </script>
+              </div>
+            </div>
+            <!-- /ko -->
+          </div>
+          <!-- ko if: $data.showProcessing() -->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 oj-lg-offset-1 oj-md-offset-1">
+              <div class="">
+                <img class="processing-image" data-bind="loadImage:'origination/app-tracker/processing.gif'" alt="">
+              </div>
+            </div>
+          </div>
+          <!-- /ko -->
+          <!-- /ko -->
+
+        </oj-collapsible>
+        <!-- /ko -->
+      </oj-accordion>
+
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad button-container product-button-panel oj-lg-12 oj-sm-12 oj-md-12">
+    <div class="oj-flex-item oj-lg-2 oj-sm-12 oj-md-3">
+      <oj-button raised="" id="saveAndContinue" class="action-button-primary oj-lg-12 oj-sm-12 oj-md-12"
+        on-click="[[$component.documentUploadContinue]]">
+        <span data-bind="text:$component.resource.saveAndContinue"></span>
+      </oj-button>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-sm-12 oj-md-3">
+      <oj-button raised="" id="cancelApplication" class="action-button-secondary oj-lg-12 oj-sm-12 oj-md-12"
+        on-click="[[$component.cancelApplicationFromDocument]]">
+        <span data-bind="text:$component.resource.generic.common.cancelApp"></span>
+      </oj-button>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-sm-12 oj-md-3">
+      <oj-button raised="" id="returnToApplication" class="action-button-tertiary oj-lg-12 oj-sm-12 oj-md-12"
+        on-click="[[$component.previousPage]]">
+        <span data-bind="text:$component.resource.generic.common.returnApplication"></span>
+      </oj-button>
+    </div>
+  </div>
+</div>
+
+<modal-window class="message"
+  params="baseModel : $baseModel, rootModel : $component,id:'NOFILE', header: $component.resource.generic.common.error">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 message-text scroll" data-bind="text:$component.resource.noFile"></div>
+    <div class="oj-flex-item oj-sm-12 message-btn button-container">
+      <oj-button id="hideButton" class="oj-button action-button-primary"
+        on-click="[[$baseModel.modalInteraction.bind($data, '#NOFILE', 'closeModal', null)]]">
+        <span data-bind="text:$component.resource.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>
+<modal-window class="message"
+  params="baseModel : $baseModel, rootModel : $component, id:'uploadDocumentInstructions', header:$component.resource.uploadDocumentPolicyTitle">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 message-text scroll">
+      <ul>
+        <li data-bind="text:$component.resource.documentIns1"></li>
+        <li data-bind="text:$component.resource.documentIns2"></li>
+        <li data-bind="text:$component.resource.documentIns3"></li>
+        <li data-bind="text:$component.resource.documentIns4"></li>
+      </ul>
+    </div>
+    <div class="oj-flex-item oj-sm-12 message-btn button-container">
+      <oj-button id="privacyAndSecurityPolicyutton2" class="toUpperCase action-button-primary"
+        on-click="[[$baseModel.modalInteraction.bind($data, '#uploadDocumentInstructions', 'closeModal', null)]]">
+        <span data-bind="text:$component.resource.generic.common.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>

@@ -1,0 +1,11 @@
+.list-bottom-pad {
+  padding-bottom: 0.6rem;
+}
+
+.list-top-pad {
+  padding-top: 0.5rem;
+}
+
+.float-right {
+  @include float(right);
+}

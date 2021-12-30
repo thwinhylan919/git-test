@@ -1,0 +1,58 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading:$component.Nls.payeeDetails">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.payeeType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('payeeType' in $data.recordDetails())?$data.recordDetails().payeeType:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.payeeName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('payeeName' in $data.recordDetails())?$data.recordDetails().payeeName:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.draftType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('accountType' in $data.recordDetails())?$data.recordDetails().accountType:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.draftFavouring"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('draftFavouring' in $data.recordDetails())?$data.recordDetails().draftFavouring:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.draftPayableAt"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('payableAtCity' in $data.recordDetails())?$data.recordDetails().payableAtCity:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.deliverDraftTo"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('deliverDraftTo' in $data.recordDetails())?$data.recordDetails().deliverDraftTo:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.deliveryLoc"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('deliveryLocation' in $data.recordDetails())?$data.recordDetails().deliveryLocation:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.accessType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('accessType' in $data.recordDetails())?$data.recordDetails().accessType:'-')"></span>
+        </div>
+    </div>
+</page-section>

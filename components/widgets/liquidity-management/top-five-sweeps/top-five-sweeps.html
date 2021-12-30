@@ -1,0 +1,35 @@
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-8">
+            <h3 data-bind="text:$baseModel.format($component.resource.header.topFiveSweep,{currency:$component.selectedEquivalentCurrency()})">
+            </h3>
+        </div>
+        <div class="oj-flex-item oj-lg-4">
+            <!-- ko if:iscurrencyLoaded() -->
+            <oj-select-one id="currencybar" :aria-label="[[$component.resource.labels.topFiveSweep]]" class="oj-flex-item oj-sm-12" value="{{$component.selectedEquivalentCurrency}}" on-value-changed="[[currencyChangedHandler]]">
+                <!-- ko foreach:currencyList -->
+                <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if:$component.topfiveArray().length -->
+    <div data-bind="css:$component.barChartDataSource().length ? 'oj-flex oj-flex-items-pad topfiveSweeps__dataScrolling' : 'oj-flex oj-flex-items-pad'">
+        <div class="oj-flex-item oj-lg-12 topfiveSweeps">
+            <oj-chart id="barChart" type="bar" orientation="vertical" series="[[$component.barChartDataSource()]]" groups="[[$component.barGroupsValue()]]" animation-on-display="auto" legend.rendered="off" animation-on-data-change="auto" hover-behavior="none">
+            </oj-chart>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko ifnot:$component.topfiveArray().length -->
+    <div class="oj-flex oj-flex-items-pad notification__noData">
+        <div class="oj-flex-item oj-sm-12 notification__noData__image">
+            <img data-bind="attr:{'alt': $component.resource.labels.details,'title':$component.resource.labels.noData},loadImage:'dashboard/currency-sweeps.svg'">
+        </div>
+        <div class="oj-flex-item oj-sm-12 notification__text" data-bind="text:$component.resource.labels.noData"></div>
+        <div class="oj-flex-item oj-sm-12 notification__subText info-text-small" data-bind="text:$component.resource.labels.subData"></div>
+    </div>
+    <!-- /ko -->
+</div>

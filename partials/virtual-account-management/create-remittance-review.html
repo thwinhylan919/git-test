@@ -1,0 +1,66 @@
+<div class="form-main-container">
+    <!-- ko if:$component.payloadLength() === 1 -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.bannerMessageSingle}}">
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot:$component.payloadLength() === 1 -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.bannerMessageMultiple}}">
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex">
+        <div class="oj-flex-items-pad search-remitter-container">
+            <div class="oj-flex-item oj-sm-12 label">
+                <oj-label><span data-bind="html: $dashboard.userData.userProfile.accessibleEntityDTOs[0].partyName"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <span data-bind="html:$dashboard.userData.userProfile.partyId.displayValue"></span>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-8">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.listId , value :$component.remittanceObj"></row>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item account-input__info-text-small">
+                        <span data-bind="text:$baseModel.format($component.resource.remListName,{ 'value' : $component.remListName()})"></span>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-12">
+                        <oj-table id="table" :aria-label="[[$component.resource.pageHeader]]" columns="[[[
+        {headerText:$component.resource.pageHeader,field:'remId',
+        },
+        {headerText:$component.resource.from,field:'fromDate', 'template':'fromDateTemplate'},
+        {headerText:$component.resource.to,field:'toDate','template':'toDateTemplate'},
+        {headerText:$component.resource.reconcilationInformation,field:'reconcilationInformation'},
+        {headerText:$component.resource.additionalInfo,field:'additionalInfo'}]]]" columns-default="[[{sortable:'enabled'}]]" selection-mode="[[{row:'single',column:'single'}]]" data="[[$component.dataSource]]" as="cell">
+                            <template slot="fromDateTemplate">
+                <div data-bind="text : $formatter.formatDate(cell.data)"></div>
+              </template>
+                            <template slot="toDateTemplate">
+                <div data-bind="text : $formatter.formatDate(cell.data)"></div>
+              </template>
+                            <caption class="hide-label" data-bind="text:$component.resource.pageHeader"></caption>
+                        </oj-table>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item  button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+                            <span slot="startIcon" class="icons icon-confirm"></span>
+                            <span data-bind="text:$component.resource.confirm"></span>
+                        </oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span>
+                            <span data-bind="text:$component.resource.cancel"></span>
+                        </oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.backFromReview]]">
+                            <span slot="startIcon" class="icons icon-back-arrow"></span>
+                            <span data-bind="text:$component.resource.back"></span></oj-button>
+                    </div>
+                </div>
+            </page-section>
+        </div>
+    </div>
+</div>

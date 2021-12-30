@@ -1,0 +1,69 @@
+<script type="text/html" id="assets-details-template">
+  <a href="#" class="align-icon" data-bind="attr:{id: 'edit_'+$component.resource.assetsHeading,alt:$component.resource.assetsHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'primary-assets')">
+    <span class="icon icon-edit" aria-hidden="true"></span>
+  </a>
+</script>
+<script type="text/html" id="liabilities-details-template">
+  <a class="align-icon" href="#" data-bind="attr:{id: 'edit_'+$component.resource.liabilitiesHeading,alt:$component.resource.liabilitiesHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'primary-liabilities')">
+    <span class="icon icon-edit" aria-hidden="true"></span>
+  </a>
+  </script>
+  <script type="text/html" id="investment-details-template">
+    <a href="#" class="align-icon" data-bind="attr:{id: 'edit_'+$component.resource.investmentsHeading,alt:$component.resource.investmentsHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'investments')">
+      <span class="icon icon-edit" aria-hidden="true"></span>
+    </a>
+  </script>
+  <script type="text/html" id="relatives-details-template">
+    <a href="#" class="align-icon"  data-bind="attr:{id: 'edit_'+$component.resource.relativesHeading,alt:$component.resource.relativesHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'relatives')">
+      <span class="icon icon-edit" aria-hidden="true"></span>
+    </a>
+  </script>
+<!-- ko if: $component.openInvestmentAccountData().additionalDetails.assets[0] -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.assetsHeading, headerTemplate : 'assets-details-template'">
+  <!-- ko foreach : $component.openInvestmentAccountData().additionalDetails.assets -->
+  <div class="align-header">
+  <span class="sub-heading" data-bind="text: $baseModel.format($component.resource.primaryAssets.heading.pageSectionHeading,{asset : $index()+1})"></span>
+  </div>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.primaryAssets.PrimaryAsset.Asset , value : $component.openInvestmentAccountData().additionalDetails.assets[$index()].assetType"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.primaryAssets.PrimaryAsset.value , value : $formatter.formatCurrency($component.openInvestmentAccountData().additionalDetails.assets[$index()].value.amount(),$component.openInvestmentAccountData().additionalDetails.assets[$index()].value.currency())"></row>
+  <!-- /ko -->
+</page-section>
+<!-- /ko -->
+<!-- ko if: $component.openInvestmentAccountData().additionalDetails.liability[0] -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.liabilitiesHeading, headerTemplate : 'liabilities-details-template'">
+  <!-- ko foreach : $component.openInvestmentAccountData().additionalDetails.liability -->
+  <div class="align-header">
+  <span class="sub-heading" data-bind="text: $baseModel.format($component.resource.primaryLiabilities.Primaryliabilities.LiabilityNumber,{index : $index()+1})"></span>
+</div>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.primaryLiabilities.Primaryliabilities.Liabilities , value : $component.openInvestmentAccountData().additionalDetails.liability[$index()].liabilityType"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.primaryLiabilities.Primaryliabilities.TotalAmout , value : $formatter.formatCurrency($component.openInvestmentAccountData().additionalDetails.liability[$index()].original.amount(),$component.openInvestmentAccountData().additionalDetails.liability[$index()].original.currency())"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.primaryLiabilities.Primaryliabilities.BalanceDue , value : $formatter.formatCurrency($component.openInvestmentAccountData().additionalDetails.liability[$index()].outstanding.amount(),$component.openInvestmentAccountData().additionalDetails.liability[$index()].outstanding.currency())"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.primaryLiabilities.Primaryliabilities.RepaymentFrequency , value : $component.openInvestmentAccountData().additionalDetails.liability[$index()].repaymentFrequency"></row>
+  <!-- /ko -->
+</page-section>
+<!-- /ko -->
+<!-- ko if: $component.openInvestmentAccountData().additionalDetails.investments[0] -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.investmentsHeading, headerTemplate : 'investment-details-template'">
+  <!-- ko foreach : $component.openInvestmentAccountData().additionalDetails.investments -->
+  <div class="align-header">
+  <span class="sub-heading" data-bind="text: $baseModel.format($component.resource.investments.Investments.InvestmentNumber,{index : $index()+1})"></span>
+</div>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.investments.Investments.InvestmentType , value : $component.openInvestmentAccountData().additionalDetails.investments[$index()].investmentType"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.investments.Investments.InvestmentDate , value : $formatter.formatDate($component.openInvestmentAccountData().additionalDetails.investments[$index()].investmentDate)"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.investments.Investments.CurrentMarketValue , value : $formatter.formatCurrency($component.openInvestmentAccountData().additionalDetails.investments[$index()].value.amount(),$component.openInvestmentAccountData().additionalDetails.investments[$index()].value.currency())"></row>
+  <!-- /ko -->
+</page-section>
+<!-- /ko -->
+<!-- ko if: $component.openInvestmentAccountData().additionalDetails.relatives[0] -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.relativesHeading, headerTemplate : 'relatives-details-template'">
+  <!-- ko foreach : $component.openInvestmentAccountData().additionalDetails.relatives -->
+  <div class="align-header">
+  <span class="sub-heading" data-bind="text: $baseModel.format($component.resource.relatives.Relatives.RelativeNumber,{index : $index()+1})"></span>
+  </div>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.relatives.Relatives.RelationType , value : $component.openInvestmentAccountData().additionalDetails.relatives[$index()].temp_invRelationship"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.relatives.Relatives.Name , value : $component.openInvestmentAccountData().additionalDetails.relatives[$index()].name"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.relatives.Relatives.Age , value : $component.openInvestmentAccountData().additionalDetails.relatives[$index()].age"></row>
+  <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.relatives.Relatives.Dependent , value : $component.openInvestmentAccountData().additionalDetails.relatives[$index()].isDependant"></row>
+  <!-- /ko -->
+</page-section>
+<!-- /ko -->

@@ -1,0 +1,90 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div data-bind="css:'oj-flex-item oj-lg-12'">
+        <div class="form-main-container">
+            <!-- ko if:dataLoaded -->
+            <!-- ko if:$component.mode()==='REVIEW'-->
+
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionMessage}"></div>
+
+            <!-- /ko -->
+            <!-- ko if:$component.mode()==='VIEW'|| $component.params.mode === 'approval' || $component.mode() === 'approval' || $component.mode()==='REVIEW' || $component.mode()==='NOASPECTS' -->
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.common.aspects">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label class="" for="roles"><span data-bind="text:$component.resource.common.transaction"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label class="" for="roles"><span data-bind="text:taskName"></span></oj-label>
+                    </div>
+                </div>
+                <!-- ko foreach:supportedTaskList() -->
+                <!-- ko if:$rawData.taskAspect !== 'approval' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label :for="[['options1_'+$index()]]"><span data-bind="text:$component.resource.common[$data.taskAspect]"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                        <oj-switch :id="[['options1_'+$index()]]" value="{{enabled}}" disabled="[[$component.switchEnabled]]" required></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$rawData.taskAspect === 'approval' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label :for="[['options1_'+$index()]]"><span data-bind="text:$component.resource.common[$data.taskAspect]"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                        <oj-switch :id="[['options1_'+$index()]]" value="{{enabled}}" on-value-changed="[[$component.changeGrace]]" disabled="[[$component.switchEnabled]]" required></oj-switch>
+                    </div>
+                </div>
+                <!-- ko if: $component.graceperiod()  -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label><span data-bind="text:$component.resource.common[$component.graceperiod().taskAspect]"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                        <oj-switch :id="[['graceperiod_'+$index()]]" value="{{$component.graceperiod().enabled}}" disabled="[[$component.graceEnabled]]" required></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $component.emptyList() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label><span data-bind="text:$component.resource.common.message"></span></oj-label>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <!-- ko if:$component.mode()==='NOASPECTS' -->
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-button id="viewBackButton" class="action-button-primary" on-click="[[$dashboard.hideDetails]]">
+                        <span data-bind="text:$component.resource.generic.back"></span>
+                    </oj-button>
+                    <oj-button id="viewCancelButton" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                        <span data-bind="text:$component.resource.generic.cancel"></span>
+                    </oj-button>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if:$component.mode()==='REVIEW' -->
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-button id="reviewConfirmButton" class="action-button-primary" on-click="[[confirm]]">
+                        <span data-bind="text:$component.resource.generic.confirm"></span>
+                    </oj-button>
+                    <oj-button id="reviewCancelButton" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                        <span data-bind="text:$component.resource.generic.cancel"></span>
+                    </oj-button>
+                    <oj-button id="reviewEditButton" class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                        <span data-bind="text:$component.resource.generic.back"></span>
+                    </oj-button>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

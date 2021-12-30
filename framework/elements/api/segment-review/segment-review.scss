@@ -1,0 +1,35 @@
+$panal-border-color: #FFFFFF;
+.panelInternal {
+    width: 100% !important;
+    border-color: $panal-border-color !important;
+}
+
+.externalPanel {
+    width: 100% !important;
+}
+
+.sectionTop {
+    @include padding(1rem, 0, 1rem, 0, !important);
+}
+
+.childpanel {
+    display: none;
+}
+
+.basepanel {
+    padding-top: 0.8rem;
+    height: inherit;
+}
+
+.expand-button {
+    justify-content: center;
+    .help-button {
+        button {
+            border-radius: 1rem!important;
+        }
+    }
+}
+
+.editSize {
+    font-size: 1.3rem;
+}

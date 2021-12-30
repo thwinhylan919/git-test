@@ -1,0 +1,10 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.openbanking.service.saml.OpenBankingSAML",
+		"components": [{
+			"componentName": "authorize-consent",
+			"service": "getAccounts",
+			"perform": ""
+		}]
+	}]
+}

@@ -1,0 +1,39 @@
+.oj-inputnumber .oj-buttonset {
+  border: 0;
+
+  .oj-button {
+    border-color: transparent !important;
+    background: transparent !important;
+    padding: 0 !important;
+
+    &.oj-default {
+      border-color: transparent !important;
+      background: transparent !important;
+      padding: 0 !important;
+    }
+
+    &.oj-hover {
+      border-color: transparent !important;
+    }
+  }
+}
+
+.oj-menu-dropdown {
+  font-size: var(--base-font-size-default);
+}
+
+.round {
+  .oj-button {
+    border-width: 0;
+    border-radius: 1rem !important;
+    margin: 0 0.2rem !important;
+    height: 1.8rem;
+    font-size: var(--base-font-size-default);
+  }
+
+  &.oj-buttonset-multi.oj-button-full-chrome {
+    .oj-buttonset-last {
+      @include single-border(right,0);
+    }
+  }
+}

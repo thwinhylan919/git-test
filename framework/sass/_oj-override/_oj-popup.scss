@@ -1,0 +1,21 @@
+.oj-popup{
+  .oj-popup-content{
+    padding:0.6rem;
+      .oj-checkboxset{
+        width:100%;
+        .oj-checkbox-label{
+          font-size: var(--base-font-size-default);
+        }
+      }
+      label{
+        color: var(--form-label-foreground-color);
+        font-size: var(--form-label-font-size);
+        font-weight: var(--form-label-font-weight);
+      }
+      .popup-link{
+        &-item{
+          font-size:var(--base-font-size-medium);
+        }
+      }
+  }
+}

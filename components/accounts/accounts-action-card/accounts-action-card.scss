@@ -1,0 +1,70 @@
+@import "utils";
+.accounts-action-card{
+  &__heading{
+    height:3.1rem;
+  }
+  &__header{
+    padding:0.6rem;
+  }
+  &-header{
+    &__text{
+      margin:0;
+      font-weight: var(--base-font-weight-regular);
+      font-size:var(--base-font-size-larger);
+      color: var(--color-white);
+      display:block;
+    }
+  }
+  &__seperator{
+    padding:0.6rem 0;
+  }
+  &.colorCasa,&.colorTd,&.colorLoan{
+    height:10rem;
+    @include mq(small){
+      height:5rem;
+    }
+  }
+  &__info{
+    font-weight: var(--base-font-weight-regular);
+    font-size:var(--base-font-size-default);
+    color: var(--color-white);
+    text-align: center;
+    margin: 0 auto;
+    width:90%;
+    @include mq(small){
+      height:inherit;
+      display:flex;
+      align-items:center;
+    }
+  }
+  &__content{
+    padding:0 0.6rem;
+  }
+  &-content{
+    @include mq(small){
+      position:relative;
+      top:0.3rem;
+    }
+    &__filmstrip{
+      width:100%;
+    }
+    &-filmstrip{
+      &__amount{
+        font-size:var(--base-font-size-larger);
+      }
+   }
+   &__pagingControl{
+      @include mq(small){
+        position: relative;
+        bottom: 0.3rem;
+      }
+      }
+  }
+&__icon{
+
+  padding:0.6rem;
+}
+&__img{
+  height:2.5rem;
+}
+}

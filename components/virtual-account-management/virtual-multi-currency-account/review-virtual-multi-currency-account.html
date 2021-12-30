@@ -1,0 +1,128 @@
+<div class="form-main-container">
+    <!-- ko ifnot:$component.mode === "approval" -->
+    <!-- ko ifnot:$component.mode === "edit" -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.reviewBannerMessage}}">
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.mode === "edit" -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.reviewBannerUpdateMessage}}">
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex separator-for-banner oj-sm-12 oj-lg-12 oj-md-12">
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-12 oj-md-12">
+                <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+                    <div data-bind="text:$component.realCustomerName"></div>
+                    <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+                </div>
+            </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.mode === "approval" -->
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex div-margin">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <!-- ko if:$component.deleteFlag() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <!-- ko ifnot:$baseModel.small() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item  oj-sm-12 oj-lg-4 oj-md-6 label">
+                        <oj-label for="Virtual Multi-Currency Account Id"><span data-bind="text:$component.resource.virtualMultiCurrencyAccountId"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-6 label">
+                        <oj-label for="Virtual Multi-Currency Account Name"><span data-bind="text:$component.resource.virtualMultiCurrencyAccountName"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item  oj-sm-12 oj-lg-4 oj-md-6">
+                        <span data-bind="text:$component.virtualMultiCurrencyAccountId">
+            </span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-6">
+                        <span data-bind="text:$component.virtualMultiCurrencyAccountName">
+            </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$baseModel.small() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item  oj-sm-12 oj-lg-6 oj-md-6 label">
+                        <oj-label for="Virtual Multi-Currency Account Id"><span data-bind="text:$component.resource.virtualMultiCurrencyAccountId"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item  oj-sm-12 oj-lg-6 oj-md-6">
+                        <span data-bind="text:$component.virtualMultiCurrencyAccountId">
+            </span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-6 label">
+                        <oj-label for="Virtual Multi-Currency Account Id"><span data-bind="text:$component.resource.virtualMultiCurrencyAccountName"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-6">
+                        <span data-bind="text:$component.virtualMultiCurrencyAccountName">
+            </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+            <!-- /ko -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.title">
+                <div class="oj-flex oj-flex-items-pad padding-card-division" id="MultiCurrencyGroupCard">
+                    <!-- ko foreach:$component.multiCurrencyList -->
+                    <div class="oj-flex oj-lg-3 oj-md-5 oj-sm-12">
+                        <div class="oj-flex-item oj-lg-11 oj-md-11 oj-sm-12 card-style">
+                            <div class="oj-flex padding-card">
+                                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-3 text-alignment">
+                                        <span class="card-currency-color" data-bind="text: $data.realAccountCurrency"></span>
+                                    </div>
+                                    <div class="oj-flex-item oj-lg-9 oj-md-9 oj-sm-9 card-text-style">
+                                        <div class="card-title word-wrap">
+                                            <span data-bind="text: $component.realCustomerName">
+                      </span>
+                                        </div>
+                                        <div class="word-wrap">
+                                            <span data-bind="text: $data.realAccountNo.displayValue"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 padding-card">
+                                    <!-- ko if:$data.defaultAccount -->
+                                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 default-style">
+                                        <span data-bind="text: $component.resource.defaultCurrency"></span>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot:$data.defaultAccount-->
+                                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 default-style">
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </page-section>
+        </div>
+    </div>
+    <!-- ko ifnot:$component.mode === "approval" -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item  button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resource.confirm"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span></oj-button>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

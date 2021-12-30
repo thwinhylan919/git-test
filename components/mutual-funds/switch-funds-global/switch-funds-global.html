@@ -1,0 +1,80 @@
+<!-- ko if: $component.investmentAccountYes()-->
+<!-- ko ifnot: $baseModel.small() -->
+<!-- ko if:$component.globalLoaded -->
+<div class="form-main-container redeem-fund-container">
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-md-8 oj-lg-8">
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-6 oj-md-10">
+          <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"></oj-train>
+        </div>
+        <div class="oj-flex-item oj-md-12 oj-lg-12">
+          <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+        </div>
+      </div>
+    </div>
+    <!-- ko if: $component.orderWidget -->
+    <div class="oj-flex-item oj-sm-4 oj-md-4 oj-lg-4 upper-margin">
+      <div data-bind="template:{name: 'wealth-management/switch-order-details', data: $component}"></div>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>
+<!-- /ko -->
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+<!-- ko if:$component.globalLoaded -->
+<div class="form-main-container redeem-fund-container">
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12">
+      <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]"></oj-train>
+    </div>
+    <div class="oj-flex-item">
+      <div data-bind="component:{name: $component.selectedStepValue(), params:{rootModel: $component}}"></div>
+    </div>
+  </div>
+</div>
+<!-- ko if:$component.showFloatingButton()-->
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-12">
+    <a href="#" data-bind="click: $component.openpartials">
+      <div class="floating-button"><span class="icons icon-plus"></span></div>
+    </a>
+  </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.orderWidget -->
+<div class="oj-flex redeem-fund-container">
+  <modal-window class="message oj-sm-12" params="baseModel : $baseModel, rootModel : $component, id:'switch-fund-cart',  header:$component.resource.headerText ">
+    <div data-bind="template:{name: 'wealth-management/switch-order-details', data: $component}"></div>
+  </modal-window>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->
+<!-- /ko -->
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'delete-order-confirm', header: $component.deleteSwitchOrders.deleteOrderHeader">
+  <div class="confirm-dialog">
+      <div class="confirm-dialog__container confirm-dialog-container">
+          <div class="oj-flex oj-flex-items-pad confirm-dialog-container__message">
+              <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 left" data-bind="text: $component.deleteSwitchOrders.deleteOrderText"></div>
+          </div>
+          <div class="oj-flex-item confirm-dialog-container__buttons button-container">
+              <oj-button class="action-button-primary" id="yesButtonConfirm" on-click="[[yesDeleteOrder]]">
+                  <span slot="startIcon" class="icons icon-yes"></span>
+                  <span data-bind="text: $component.deleteSwitchOrders.yes"></span>
+              </oj-button>
+              <oj-button class="action-button-secondary" id="noButtonConfirm" on-click="[[noDeleteOrder]]">
+                  <span slot="startIcon" class="icons icon-no"></span>
+                  <span data-bind="text: $component.deleteSwitchOrders.no"></span>
+              </oj-button>
+          </div>
+      </div>
+  </div>
+</modal-window>
+<!-- /ko -->

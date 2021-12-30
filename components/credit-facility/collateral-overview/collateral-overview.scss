@@ -1,0 +1,86 @@
+
+.progress-bar-property {
+    width: 50%;
+    height: 0.5rem;
+    margin: 0.625rem;
+    opacity: .3;
+    background-color: var(--oj-neutral-color13);
+  }
+  .covanent-title{
+    @include padding(1rem, 1.5rem, 1rem, 1rem);
+  }
+  .covanent-title5{
+    @include padding(1rem, 1.5rem, 1rem, 1.5rem);
+  }
+  .label{
+      font-weight:var(--base-font-weight-regular);
+  }
+  .titleField{
+      font-size: 20px;
+      font-weight:var(--base-font-weight-regular);
+
+  }
+  .titleField2{
+    font-size: 1.1rem;
+}
+.group{
+   background: rgba(102, 0, 51, 1);
+   color:var(--base-background-primary);
+}
+
+.group2{
+    border-radius: 6px;
+     background:var(--graph-color2);
+     color:var(--base-background-primary);
+     @include padding(0rem, 1rem, 0rem, 1rem);
+
+  }
+  .items{
+    border-bottom: none;
+  }
+  .filterMargin {
+    @include single-margin(right, 0.5rem);
+}
+.title1{
+  @include padding(2rem,0rem,0rem,0rem);
+}
+.contri{
+  @include padding(0rem, 1rem, 0rem, 2rem);
+}
+.pipe{
+  @include single-border(left, 0.05rem solid var(--base-border-default));
+  @include single-padding(right, 0.3rem);
+  }
+  .filterAlign{
+    @include single-margin(left,-4rem);
+    @include single-margin(top, 0.6rem);
+  }
+  .contriGroup{
+    @include single-margin(top,-0.2rem);
+  }
+  .partyClass{
+    font-size: 1.2rem;
+  }
+  .titleField3{
+    font-size: 0.8rem;
+  }
+.covanent-title2{
+  @include single-padding(left,2rem);
+  padding-top:1rem !important;
+}
+.notCollateral{
+  color: silver;
+}
+.utilized{
+  @include padding(0rem, 0rem, 0rem, 0.7rem);
+}
+.contriPercent{
+  @include single-margin(left,-0.6rem);
+ }
+
+ .pipe{
+  @include single-border(left, 0.05rem solid var(--base-border-default));
+  @include single-padding(right, 0.3rem);
+  height: 2rem;
+  @include single-margin(top,0.8rem);
+  }

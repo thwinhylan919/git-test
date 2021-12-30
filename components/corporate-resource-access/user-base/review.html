@@ -1,0 +1,11 @@
+<review-transaction-details params="dashboard : $dashboard, baseModel : $baseModel, rootModel : $data">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-12">
+            <oj-checkboxset class="oj-choice-direction-row" :id="[['applyPartyLevelChangesAutomatically']]"
+                value="{{$component.accessData.partyLevelAccess}}" disabled="[['true']]">
+                <oj-option value="{{'true'}}"><span data-bind="text:$component.nls.applyPartyLevel"></span>
+                </oj-option>
+            </oj-checkboxset>
+        </div>
+    </div>
+</review-transaction-details>

@@ -1,0 +1,44 @@
+<!-- ko if: $component.investmentAccountYes()-->
+<div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between risk-profile-account-selection">
+  <div class="oj-flex-item oj-lg-8">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12">
+            <span class="span-weight" data-bind="text:$component.resource.investAccountLabel1"></span>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad firsttext-padding">
+        <oj-label class="oj-flex-item oj-lg-9 oj-md-9" for="investmentAccount2">
+          <span data-bind="text:$component.resource.investAccountLabel2"></span>
+        </oj-label>
+        <div class="oj-flex-item oj-lg-9 oj-md-9">
+          <!-- ko if: $component.accountsLoaded() -->
+          <oj-select-one id="investmentAccount2" :aria-label="[[$component.resource.investAccountLabel2]]" value="{{$component.investmentAccount().value}}"
+            on-value-changed="[[valueChange]]">
+            <!-- ko foreach : $component.accountNumber -->
+            <oj-option value="[[value]]"><span data-bind="text:name+'-'+text+'-'+pattern"></span> </oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+          <!-- /ko -->
+        </div>
+      </div>
+    </page-section>
+    <div class="oj-flex button-container">
+      <oj-button class="action-button-primary" id="saveButtonId"  on-click="[[$component.showRiskProfile]]">
+        <span slot="startIcon" class="icons icon-submit"></span>
+        <span data-bind="text:$component.resource.kyrpButton"></span>
+      </oj-button>
+    </div>
+  </div>
+  <!-- ko ifnot: $baseModel.small()-->
+
+  <div class="oj-sm-4">
+    <help params="baseModel : $baseModel, rootModel : $component, transaction: 'risk-profile-help'"></help>
+  </div>
+  <!-- /ko -->
+</div>
+<!-- /ko -->
+
+<!-- ko if: $component.investmentAccountYes() && !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->

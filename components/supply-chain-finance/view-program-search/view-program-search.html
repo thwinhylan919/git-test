@@ -1,0 +1,225 @@
+<oj-validation-group :id="[['tracker']]">
+  <div class="oj-flex oj-flex-items-pad party-details oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-lg-12 oj-md-12">
+      <div class="party-name-style"><span data-bind="text:$component.partyName()"></span></div>
+      <div class="banner-label"><span
+          data-bind="text:$baseModel.format($component.nls.ViewProgramBanner.PartyID,{partyId : $component.partyId()})"></span>
+      </div>
+    </div>
+  </div>
+  <div class="form-main-container">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-12 oj-md-12">
+        <page-section
+          params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.SwitchView, headerTemplate : ''">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-md-12"><span
+                data-bind="text:$component.nls.SwitchView.SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables"></span>
+            </div>
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-buttonset-one :id="[['roleButton98']]" value="{{$component.selectedRole}}">
+                <oj-option value="{{'B'}}"><span data-bind="text:$component.nls.SwitchView.Buyer"></span></oj-option>
+                <oj-option value="{{'S'}}"><span data-bind="text:$component.nls.SwitchView.Supplier"></span>
+                </oj-option>
+              </oj-buttonset-one>
+            </div>
+          </div>
+        </page-section>
+      </div>
+      <!-- ko if : $component.programTypesLoaded() && $component.counterpartiesLoaded() -->
+      <div class="oj-flex-item oj-lg-12 oj-md-12">
+        <page-section
+          params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.Search, headerTemplate : 'supply-chain-finance/view-program-link'">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-6 oj-md-6">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                  <oj-label :for="[['ProgramName']]"><span data-bind="text:$component.nls.Search.ProgramName"></span>
+                  </oj-label>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-md-6">
+                  <oj-input-text :id="[['ProgramName']]" value="{{$component.programName}}">
+                  </oj-input-text>
+                </div>
+              </div>
+            </div>
+            <div class="oj-flex-item oj-lg-6 oj-md-6">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                  <oj-label :for="[['ProgramId']]"><span data-bind="text:$component.nls.Search.ProgramId"></span>
+                  </oj-label>
+                </div>
+              </div>
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6 oj-md-6">
+                  <oj-input-text :id="[['ProgramId']]" value="{{$component.programCode}}">
+                  </oj-input-text>
+                </div>
+              </div>
+            </div>
+            <div class="oj-flex-item oj-lg-6 oj-md-6">
+              <div class="oj-lg-12">
+                <oj-label :for="[['CounterPartyName']]"><span
+                    data-bind="text:$component.nls.Search.CounterPartyName"></span></oj-label>
+              </div>
+              <div class="oj-lg-6">
+                <oj-select-one :placeholder="[[$component.nls.select]]" :id="[['CounterPartyName']]"
+                  value="{{$component.associatedPartyId}}">
+                  <!-- ko foreach : fetchedCounterparties -->
+                  <oj-option value="[[$data.code]]"><span data-bind="text:$data.label"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+            <div class="oj-flex-item oj-lg-6 oj-md-6">
+              <div class="oj-lg-12">
+                <oj-label :for="[['ProgramType']]"><span data-bind="text:$component.nls.Search.ProgramType"></span>
+                </oj-label>
+              </div>
+              <div class="oj-lg-6">
+                <oj-select-one :placeholder="[[$component.nls.select]]" :id="[['ProgramType']]"
+                  value="{{$component.programType}}">
+                  <!-- ko foreach : fetchedProgramTypes -->
+                  <oj-option value="[[$data.productCode]]"><span data-bind="text:$data.productDescription"></span>
+                  </oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.onClickSearch]]"><span slot="startIcon"
+                class="icons icon-search"></span><span data-bind="text:$component.nls.Search.Search"></span></oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.onClickClear]]"><span slot="startIcon"
+                class="icons icon-refresh"></span><span data-bind="text:$component.nls.Search.Clear"></span></oj-button>
+          </div>
+        </page-section>
+      </div>
+      <!-- /ko -->
+      <!-- ko if : $component.programsListLoaded() -->
+      <div class="oj-flex-item oj-lg-12 oj-md-12">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+          <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-11 oj-md-10 heading-border">
+              <div><span data-bind="attr:{'class':&quot;heading&quot;},text:$component.nls.heading.ProgramList"></span>
+              </div>
+            </div>
+            <div class="oj-flex-item oj-lg-1 oj-md-2">
+              <oj-buttonset-one display="[[&quot;icons&quot;]]" :id="[['viewButtonSet']]" value="{{activeLayout}}">
+                <!-- ko foreach : layoutViewRadios -->
+                <oj-option value="[[id]]"><span data-bind="text:label"></span><span slot="startIcon"
+                    data-bind="attr: {class: icon}"></span></oj-option>
+                <!-- /ko -->
+              </oj-buttonset-one>
+            </div>
+          </div>
+          <div class="oj-flex">
+            <!-- ko if : $component.showList() -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-list-view :aria-label="[[$component.nls.ProgramList.programslist]]"
+                :id="[[&quot;programsListView&quot;]]" :class="[[&quot;oj-listview-card-layout&quot;]]"
+                data="[[dataSource16]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('programsList')]]">
+              </oj-list-view>
+              <oj-paging-control :id="[['ProgramsListPaging']]" data="[[dataSource16]]" page-size="9">
+              </oj-paging-control>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.showList() -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+              <oj-table :aria-label="[[$component.nls.ProgramList.programsTable]]"
+                :id="[[&quot;programsTableView&quot;]]" data="[[dataSource34]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('programsTable')]]"
+                columns="[[[{'headerText':$component.nls.ProgramList.ProgramnameandId, field:'programCode'},{'headerText':$component.nls.ProgramList.UserRole, field:'userRole'},{'headerText':$component.nls.ProgramList.TypeofProgram, field:'typeOfProgram'},{'headerText':$component.nls.ProgramList.CounterpartiesNo, field:'counterparties'},{'headerText':$component.nls.ProgramList.Status, field:'status'}]]]">
+              </oj-table>
+              <oj-paging-control :id="[['programsTablePaging']]" data="[[dataSource34]]" page-size="9">
+              </oj-paging-control>
+            </div>
+            <!-- /ko -->
+          </div>
+          <div id="scriptContainerForList">
+            <script type="text/html" id="programsList">
+              <a href="#"
+                data-bind="attr:{'alt':$component.nls.ProgramList.linkAltText,'title':$component.nls.ProgramList.linkTitle,'id':$context.index+'party'},click:$component.onClickProgramName">
+                <div
+                  data-bind="attr:{'class':&quot;card-width&quot;, 'id': $context.index + '_hover'}, event: {mouseenter: $component.onHoverEvent($context.index, event), mouseleave: $component.onHoverEvent($context.index, event)}">
+                  <div class="oj-flex oj-flex-items-pad card-border-bottom">
+                    <div class="oj-flex-item oj-lg-10 oj-md-9 no-pad-cols">
+                      <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item">
+                          <span class="text-color" data-bind="text:$context.data.programName"></span>
+                        </div>
+                      </div>
+                      <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item"><label
+                            data-bind="html:$baseModel.format($component.nls.ProgramList.ID,{linkText : 'link-text' ,programId : $context.data.programCode})"></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-2 oj-md-2"><span
+                        data-bind="css:'tags ' + $context.data.statusClass,text:$context.data.status"></span>
+                    </div>
+                  </div>
+                  <div class="oj-flex oj-flex-items-pad align-card">
+                    <div class="oj-flex-item oj-lg-6 oj-md-6"><label
+                        data-bind="text:$component.nls.ProgramList.UserRole"></label></div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-6"><span class="text-color"
+                        data-bind="text:$context.data.userRole"></span>
+                    </div>
+                  </div>
+                  <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6 oj-md-6"><label
+                        data-bind="text:$component.nls.ProgramList.TypeofProgram"></label></div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-6">
+                      <!-- ko if : $context.data.programProduct -->
+                      <span class="text-color" data-bind="text:$context.data.programProduct.productDescription"></span>
+                      <!-- /ko -->
+                      <!-- ko ifnot : $context.data.programProduct -->
+                      <span clas="text-color" data-bind="text:'-'"></span>
+                      <!-- /ko -->
+                    </div>
+                  </div>
+                  <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6 oj-md-6"><label
+                        data-bind="text:$component.nls.ProgramList.CounterpartiesNo"></label></div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-6"><span class="text-color"
+                        data-bind="text:$context.data.noOfAssociatedParties"></span></div>
+                  </div>
+                </div>
+              </a>
+            </script>
+          </div>
+          <div id="scriptContainerForTable">
+            <script type="text/html" id="programsTable">
+              <td>
+                <div class="oj-flex">
+                  <div class="oj-flex-item">
+                    <a href="#" class="form-button-link"
+                      data-bind="attr:{'alt':$component.nls.ProgramList.ProgramName,'title':$component.nls.ProgramList.linkTitle},click:$component.onClickProgramName"><span
+                        data-bind="text:$context.row.programName"></span>
+                    </a>
+                  </div>
+                </div>
+                <div class="oj-flex">
+                  <div class="oj-flex-item"><span data-bind="text:$context.data.programCode"></span></div>
+                </div>
+              </td>
+              <td><span data-bind="text:$context.row.userRole"></span></td>
+              <td>
+                <!-- ko if : $context.row.programProduct --><span
+                  data-bind="text:$context.row.programProduct.productDescription"></span><!-- /ko -->
+                <!-- ko ifnot : $context.row.programProduct -->
+                <span data-bind="text:'-'"></span>
+                <!-- /ko -->
+              </td>
+              <td><span data-bind="text:$context.row.noOfAssociatedParties"></span></td>
+              <td><span data-bind="css:'tags ' + $context.data.statusClass,text:$context.row.status"></span></td>
+            </script>
+          </div>
+        </page-section>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+</oj-validation-group>

@@ -1,0 +1,70 @@
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+    <!-- ko if: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+    <div class="oj-lg-6">
+        <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko foreach: $data -->
+            <div class="oj-flex-item oj-sm-6 oj-md-4 oj-lg-12">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label><span data-bind="text:$data.label"></span></oj-label>
+                    </div>
+                    <!-- ko ifnot:Array.isArray($data.value) -->
+                    <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-12 content">
+                        <span data-bind="text:$data.value"></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</page-section>
+<div class="oj-flex-item">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,null)">
+                    <img data-bind="attr:{'title':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'alt':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$component.openTransaction.bind($data,'application-tracker-film-strip','process-management','')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAppTracker}),'title':$component.confirmScreenResources.confirm.actions.goToAppTracker},loadImage:'dashboard/quick-access/application-tracker.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToAppTracker"></div>
+                </a>
+            </li>
+            <!-- ko if: $component.params.confirmScreenExtensions.type === "Facility" -->
+            <li>
+                <a href="#" data-bind="click:$component.openTransaction.bind($data,'apply-new-facility-landing','processManagement','')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.applyforNewFacility}),'title':$component.confirmScreenResources.confirm.actions.applyforNewFacility},loadImage:'dashboard/quick-access/new-facility-application.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.applyforNewFacility"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: $component.params.confirmScreenExtensions.type === "Evaluation" -->
+            <li>
+                <a href="#" data-bind="click:$component.openTransaction.bind($data,'collateral-evaluation-landing','credit-facility','')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.newCollateralEvaluation}),'title':$component.confirmScreenResources.confirm.actions.newCollateralEvaluation},loadImage:'process-management/inquire-collateral.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.newCollateralEvaluation"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: $component.params.confirmScreenExtensions.type === "Revaluation" -->
+            <li>
+                <a href="#" data-bind="click:$component.openTransaction.bind($data,'collateral-details','credit-facility','')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.collateralDetails}),'title':$component.confirmScreenResources.confirm.actions.collateralDetails},loadImage:'process-management/inquire-collateral.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.collateralDetails"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+</div>

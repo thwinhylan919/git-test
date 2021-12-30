@@ -1,0 +1,27 @@
+.postionByCurrency {
+  max-height: 27rem;
+  padding: 0;
+
+  &__table {
+    @include single-margin (top,0.5rem);
+		height: 22.2rem;
+  }
+};
+
+.entityNameText {
+  font-size: var(--form-info-txt-font-size);
+  color: var(--form-info-txt-foreground-color);
+  font-weight: var(--form-info-txt-font-weight);
+  line-height: calc(#{var(--form-line-height)} - 0.9rem);
+}
+
+.paddingClass {
+  @include single-padding(right,0.625rem);
+  @include single-padding(left,0.625rem);
+}
+
+.table-header-style {
+  line-height: normal;
+  word-wrap: break-word;
+  white-space: normal;
+}

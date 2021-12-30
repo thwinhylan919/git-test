@@ -1,0 +1,14 @@
+<!--
+  ~ Copyright (c) 2017 Oracle. All rights reserved.
+  ~
+  ~ This material is the confidential property of Oracle Corporation or its
+  ~ licensors and may be used, reproduced, stored or transmitted only in
+  ~ accordance with a valid Oracle license or sublicense agreement.
+  -->
+
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+    <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+        <circle cx="34" cy="34" r="34" stroke="#FFF" stroke-width="2"/>
+        <path fill="#FFF" d="M41 24h-4a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V25a1 1 0 0 0-1-1m-9 1v18a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1"/>
+    </g>
+</svg>

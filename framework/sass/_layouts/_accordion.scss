@@ -1,0 +1,108 @@
+
+$accordion-max-width: 100%;
+$accordion-height: 3.5rem;
+$accordion-height-small: 3rem;
+$accordion-strip-height: 2rem;
+$accordion-strip-height-small: 1.5rem;
+$accordion-strip-margin-top: 0.75rem;
+$accordion-box-shadow-color: #ebecec;
+$accordions: "anti-money-laundering",
+"account-funding",
+"basic-primary-info",
+"account-holder",
+"primary-registration",
+"occupation-info",
+"contact-info",
+"identity-info",
+"income-info",
+"liabilities-info",
+"assets-info",
+"expense-info",
+"vehicle-info",
+"property-info",
+"offers",
+"funding-table",
+"requirements";
+.accordion {
+    .card {
+        margin-bottom: 0.6rem !important;
+        max-width: $accordion-max-width;
+        .card-header {
+            height: $accordion-height;
+            background: var(--base-color-secondary-text);
+            @include mq(small) {
+                height: $accordion-height-small;
+            }
+            .card-icons-title {
+                height: 100%;
+            }
+            .accordion-strip {
+                width: 0.2rem;
+                height: $accordion-strip-height;
+                background-color: var(--accordion-header-foreground-color);
+                position: absolute;
+                margin-top: $accordion-strip-margin-top;
+                @include mq(small) {
+                    width: 0.2rem;
+                    height: $accordion-strip-height-small;
+                    position: inherit;
+                }
+            }
+            background: linear-gradient(to var(--accordion-header-gradient-direction), var(--accordion-header-gradient-start-color), var(--accordion-header-gradient-end-color));
+      border-width: 0 0 var(--accordion-border-width) 0 !important;
+      border-bottom:var(--accordion-border-width) solid var(--accordion-border-color);
+      border-radius: var(--accordion-border-radius);
+
+            .card-title {
+                color: var(--base-color-primary);
+                font-weight: var(--base-font-weight-light);
+                margin: auto 0;
+            }
+            .card-expander {
+                font-size: var(--accordion-header-font-size);
+        font-weight: var(--accordion-header-font-weight);
+        color: var(--accordion-header-foreground-color);
+        margin: auto 0;
+                .icon {
+                    @include float(right);
+                    color: var(--accordion-header-foreground-color);
+        }
+            }
+            .icon-success,.icon-alert {
+                color: var(--accordion-header-foreground-color);
+            }
+            .card-icon-container {
+                text-align: center;
+                height: 100%;
+                width: 4rem;
+                @include single-padding(left, 1rem);
+                @include mq(small) {
+                    width: 2rem;
+                    @include single-padding(left, 0.5rem);
+                }
+                .card-icon {
+                    font-size: 1.6rem;
+                    height: 100%;
+                    align-items: center;
+                    display: flex;
+                    color: var(--accordion-header-foreground-color);
+                     @include mq(small) {
+                        font-size: $accordion-strip-height-small;
+                    }
+                    @each $accordion in $accordions {
+                        &.icon-#{$accordion}:before {
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+        .card-body.form-main-container {
+            border-width: 0px;
+            font-size: var(--accordion-body-font-size);
+            font-weight: var(--accordion-body-font-weight);
+            color: var(--accordion-body-foreground-color);
+            background: linear-gradient(to var(--accordion-body-gradient-direction), var(--accordion-body-gradient-start-color), var(--accordion-body-gradient-end-color));
+          }
+        }
+      }

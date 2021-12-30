@@ -1,0 +1,98 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <nav-bar
+                params="baseModel : $baseModel,dashboard:$dashboard,rootModel: $data,menuOptions: [{'id':'new_invoice','label':$component.nls.CreateInvoice.NewInvoice},{'id':'template','label':$component.nls.CreateInvoice.Template}],uiOptions:uiOptions,   navBarDescription:$component.nls.CreateInvoice.Choosebetweennewinvoiceandtemplateoptions">
+            </nav-bar>
+            <div class="form-padding">
+                <div class="banner-design oj-flex oj-flex-items-pad oj-sm-flex-items-initial">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                        <div data-bind="text:$component.partyName"></div>
+                        <span data-bind="text:$baseModel.format($component.nls.CreateInvoice.PartyIDpartyId,{partyId: $component.partyId()})"></span>
+                    </div>
+                </div>
+                <!-- ko if : $component.showNewForm() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="bulk-upload-text larger-font oj-lg-4"
+                        data-bind="text: $component.nls.CreateInvoice.invoiceCreationText"></div>
+                    <div class="oj-lg-8 bulk-upload-text right">
+                        <span data-bind="text: $component.nls.CreateInvoice.manyInvoicesOption"></span>
+                        <a href="#"
+                            data-bind="attr:{'id': 'bulk-option','alt': $component.nls.CreateInvoice.bulkUpload,'title': $component.nls.CreateInvoice.bulkUploadTitle},click: $component.bulkUploadClick, text: $component.nls.CreateInvoice.bulkUpload"></a>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- ko if : $component.showNewForm() -->
+            <!-- ko foreach : $component.invoicesArray() -->
+            <!-- ko if : $component.dataLoaded() -->
+            <div
+                data-bind="component:{name: 'invoice-creation-form', params:{rootModel: $component, referenceData: $data, copyInvoice: $component.copyInvoice, deleteInvoice: $component.deleteInvoice, currencyList: $component.currencyList}}">
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12"><a href="#" class="form-button-link" id="AddInvoice38"
+                        data-bind="attr:{'alt':$component.nls.CreateInvoice.AddInvoice,'title':$component.nls.CreateInvoice.AddInvoiceTitle},click:$component.onClickAddInvoice38,text:$component.nls.CreateInvoice.AddInvoice"></a>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['SaveAsTemplate17']]"><span
+                            data-bind="text:$component.nls.CreateInvoice.SaveAsTemplate"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-4">
+                    <oj-radioset class="oj-choice-direction-row" :class="[['oj-choice-direction-row']]"
+                        :id="[['SaveAsTemplate17']]" value="{{saveAsTemplate}}">
+                        <oj-option value="{{true}}"><span data-bind="text:$component.nls.CreateInvoice.Yes"></span>
+                        </oj-option>
+                        <oj-option value="{{false}}"><span data-bind="text:$component.nls.CreateInvoice.No"></span>
+                        </oj-option>
+                    </oj-radioset>
+                </div>
+            </div><!--  ko if : saveAsTemplate()  -->
+            <oj-validation-group :id="[['validateTemplate']]">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12">
+                        <oj-label :for="[['TemplateName72']]"><span
+                                data-bind="text:$component.nls.CreateInvoice.TemplateName"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3">
+                        <oj-input-text on-value-changed="[[$component.templateNameListener]]" :id="[['TemplateName72']]"
+                            value="{{templateName}}" validators="[[[validateTemplateName]]]" required="[[true]]">
+                        </oj-input-text>
+                    </div><!--  ko if : $component.showCheckAvailability()  -->
+                    <div class="oj-flex-item oj-lg-3"><a href="#" class="form-button-link" id="CheckAvailability46"
+                            data-bind="attr:{'class':'template-style','alt':$component.nls.CreateInvoice.CheckAvailability,'title':$component.nls.CreateInvoice.CheckAvailabilityTitle},click:$component.onClickCheckAvailability46,text:$component.nls.CreateInvoice.CheckAvailability"></a>
+                    </div><!--  /ko  -->
+                    <!--  ko if : !$component.showCheckAvailability()  -->
+                    <!-- ko if: $component.isTemplateNameAvailable() -->
+                    <div class="oj-flex-item oj-lg-3"><span
+                            data-bind="attr:{'class':'template-style success-color'},text:$component.nls.CreateInvoice.Available"></span>
+                    </div><!-- /ko -->
+                    <!-- ko if: !$component.isTemplateNameAvailable() -->
+                    <div class="oj-flex-item oj-lg-3"><span
+                            data-bind="attr:{'class':'template-style failure-color'},text:$component.nls.CreateInvoice.Unavailable"></span>
+                    </div><!-- /ko -->
+                    <!--  /ko  -->
+                </div>
+            </oj-validation-group><!--  /ko  -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.onClickSubmit43]]"><span
+                        slot="startIcon" class="icons icon-submit"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Submit"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel53]]"><span
+                        slot="startIcon" class="icons icon-cancel"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Cancel"></span></oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack82]]"><span slot="startIcon"
+                        class="icons icon-back-arrow"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Back"></span></oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot : $component.showNewForm() -->
+            <div data-bind="component:{name: 'create-invoice-template', params:{rootModel: $component,
+                formDataSaved: $component.formDataSaved()}}"></div>
+            <!-- /ko -->
+        </page-section>
+    </div>
+</oj-validation-group>

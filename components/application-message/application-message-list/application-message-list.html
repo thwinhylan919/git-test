@@ -1,0 +1,116 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-9">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <oj-validation-group :id="[['tracker']]">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-2">
+                                <oj-label :for="[['Code22']]" class="label"><span
+                                        data-bind="text:$component.nls.ApplicationMessageSearch.Code"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4">
+                                <oj-input-text required="[[true]]" :id="[['Code22']]"
+                                    value="{{$component.applicationMessagesgetcode}}"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'code', [['#Code22']] )]]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <!--  ko if : showLocale  -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-2">
+                                <oj-label class="label" :for="[['Locale35']]"><span
+                                        data-bind="text:$component.nls.ApplicationMessageSearch.Locale"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4">
+                                <oj-combobox-one required="[[true]]" :id="[['Locale35']]"
+                                    value="{{$component.applicationMessagesgetlocale}}"
+                                    placeholder="[[$component.nls.ApplicationMessageSearch.select]]">
+                                    <!-- ko foreach : enumerationslocalegetVar().enumRepresentations[0].data -->
+                                    <oj-option value="[[code]]"
+                                        async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'code', [[#code]] )]]]">
+                                        <span data-bind="text:description"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-combobox-one>
+                            </div>
+                        </div>
+                        <!--  /ko  -->
+                    </oj-validation-group>
+
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickSearch21]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageSearch.Search"></span></oj-button>
+                        <!-- ko ifnot: listLoaded -->
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel29]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageSearch.Cancel"></span></oj-button>
+                        <!-- /ko -->
+                        <oj-button class="action-button-tertiary"><span
+                                data-bind="text:$component.nls.ApplicationMessageSearch.clear"
+                                on-click="[[$component.onClickReset13]]"></span></oj-button>
+                    </div>
+
+                    <!--  ko if : listLoaded  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item">
+                            <oj-table id="ApplicationMessageList" data="[[dataSource16]]"
+                                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('appMsgListRenderer', true)]]"
+                                columns="[[[{'headerText':$component.nls.ApplicationMessageSearch.Code, field: 'code'}, {'headerText':$component.nls.ApplicationMessageSearch.Locale, field: 'locale'}, {'headerText':$component.nls.ApplicationMessageSearch.Message, field: 'message'}]]]">
+                            </oj-table>
+                            <oj-paging-control id="paging" data='[[dataSource16]]' page-size='10' slot='bottom'>
+                            </oj-paging-control>
+                        </div>
+                    </div>
+
+                    <script type="text/html" id="appMsgListRenderer">
+                        <tr>
+                            <td>
+                                <div class="oj-flex-item "><a href="#" class="form-button-link" id="Code72"
+                                        data-bind="attr:{'alt':$component.nls.ApplicationMessageSearch.Code,'title':$component.nls.ApplicationMessageSearch.CodeTitle},click:$component.onClickCode72"><span
+                                            data-bind="text:$context.row.code"></span></a></div>
+                            </td>
+                            <td>
+                                <div class="oj-flex-item"><span data-bind="text:$context.row.localeDescription"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="oj-flex-item"><span data-bind="text:$context.row.message"></span></div>
+                            </td>
+                        </tr>
+                    </script>
+
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel29]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageSearch.Cancel"></span></oj-button>
+                    </div>
+                    <!--  /ko  -->
+
+                    <modal-window class=""
+                        params="baseModel: $baseModel, rootModel: $component, id: 'searchError', header: $component.nls.searchError">
+                        <div class="message-box">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item">
+                                    <div class="dialog-text">
+                                        <span data-bind="text: $component.nls.searchErrorMessage"></span></div>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad button-container">
+                                <oj-button class="action-button-primary" id="okBtn"
+                                    on-click="[[$component.closeDialogBox]]">
+                                    <span data-bind="text:$component.nls.ok"></span>
+                                </oj-button>
+                            </div>
+                        </div>
+                    </modal-window>
+                </page-section>
+            </div>
+            <div class="oj-flex-item oj-lg-3 help-panel">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <help
+                        params="baseModel: $baseModel, rootModel: $component, transaction: 'application-message-help'">
+                    </help>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

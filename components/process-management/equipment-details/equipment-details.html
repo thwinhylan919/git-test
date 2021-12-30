@@ -1,0 +1,178 @@
+<div class="full-width">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label descriptionDetails">
+        <oj-label for="equipmentDetailsDescription">
+            <span data-bind="text:$component.nls.equipmentDetails.equipmentDetailsDescription"></span>
+        </oj-label>
+    </div>
+    <oj-validation-group id="tracker">
+        <!-- ko if: !$component.review -->
+        <div class="oj-flex oj-flex-items-pad fullPage">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading:''">
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12">
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm12">
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <oj-label for="machineryType">
+                                    <span data-bind="text:$component.nls.equipmentDetails.labelMachineryType"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm12">
+                                <oj-select-one id="machineryType"
+                                    placeholder="[[$component.nls.equipmentDetails.machineryType]]"
+                                    value="{{$component.path().payload.equipmentDetails.machineryType}}" required>
+                                    <!-- ko foreach: $component.machineryTypeList -->
+                                    <oj-option value="[[typeOfMachine]]"><span data-bind="text:typeOfMachine"></span>
+                                    </oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <oj-label for="manufacturerName">
+                                    <span data-bind="text:$component.nls.equipmentDetails.labelManufacturerName"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text id="manufacturerName"
+                                    placeholder="[[$component.nls.equipmentDetails.manufacturerName]]"
+                                    value="{{$component.path().payload.equipmentDetails.manufacturerName}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <oj-label for="manufacturerModel">
+                                    <span
+                                        data-bind="text:$component.nls.equipmentDetails.labelManufacturerModel"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm12">
+                                <oj-input-text id="manufacturerModel"
+                                    placeholder="[[$component.nls.equipmentDetails.manufacturerModel]]"
+                                    value="{{$component.path().payload.equipmentDetails.manufacturerModel}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex-items-pad oj-flex oj-lg-9 oj-md-12 oj-sm-12">
+                            <amount-input
+                                params="amount :$component.path().payload.equipmentDetails.assetValue,currency : $component.path().payload.equipmentDetails.currencyCode, label :$component.nls.equipmentDetails.labelAssetValue,validator:$component.validation,placeholder:$component.nls.equipmentDetails.labelAssetValue,isMandatory:true,currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'assetValue',rootClass:''">
+                            </amount-input>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm12">
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <oj-label for="machineDetails">
+                                    <span data-bind="text:$component.nls.equipmentDetails.labelMachineDetails"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm12">
+                                <oj-input-text id="machineDetails"
+                                    placeholder="[[$component.nls.equipmentDetails.machineDetails]]"
+                                    value="{{$component.path().payload.equipmentDetails.machineDetails}}" required>
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <oj-label for="manufacturedYear">
+                                    <span data-bind="text:$component.nls.equipmentDetails.labelManufacturedYear"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-12 oj-sm12">
+                                <oj-input-text id="manufacturedYear"
+                                    placeholder="[[$component.nls.equipmentDetails.yearPlaceholder]]"
+                                    validators="[[$baseModel.getValidator('NUMBERS',$component.nls.equipmentDetails.onlyNumber,{type: 'length',options: {min: 0, max: 4}})]]"
+                                    value="{{$component.path().payload.equipmentDetails.manufacturedYear}}">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <oj-label for="intendedUse">
+                                    <span data-bind="text:$component.nls.equipmentDetails.labelIntendedUse"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm12">
+                                <oj-input-text id="intendedUse"
+                                    placeholder="[[$component.nls.equipmentDetails.intendedUse]]"
+                                    value="{{$component.path().payload.equipmentDetails.intendedUse}}" required>
+                                </oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm12 label">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                                <label for="purchaseDate"
+                                    data-bind="text:$component.nls.equipmentDetails.labelPurchaseDate"></label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm12">
+                                <oj-input-date id="purchaseDate"
+                                    placeholder="[[$component.nls.equipmentDetails.select]]"
+                                    converter="[[$formatter.dateConverter]]"
+                                    value="{{$component.path().payload.equipmentDetails.purchaseDate}}">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm12 label">
+                        <oj-label for="remarks">
+                            <span data-bind="text:$component.nls.equipmentDetails.labelRemarks"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3">
+                        <oj-input-text id="remarks" placeholder="[[$component.nls.equipmentDetails.remarks]]"
+                            value="{{$component.path().payload.equipmentDetails.remarks}}"></oj-input-text>
+                    </div>
+                </div>
+            </page-section>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.review -->
+        <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12 sectionTop"
+            data-bind="with:$component.path().payload.equipmentDetails">
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelMachineryType, value : (('machineryType' in $data)?machineryType:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelManufacturerName, value : (('manufacturerName' in $data)?manufacturerName:'-')">
+                </row>
+            </div>
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelMachineDetails, value : (('machineDetails' in $data)?machineDetails:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelManufacturedYear, value : (('manufacturedYear' in $data)?manufacturedYear:'-')">
+                </row>
+
+            </div>
+        </div>
+        <div data-bind="attr:{id:'segment'+$index()}" class="oj-flex oj-panel oj-panel-alt2 childpanel panelInternal">
+            <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12"
+                data-bind="with:$component.path().payload.equipmentDetails">
+                <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelManufacturerModel, value : (('manufacturerModel' in $data)?manufacturerModel:'-')">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelAssetValue, value : (('assetValue' in $data)?$formatter.formatCurrency(assetValue(), currencyCode()):'-')">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelRemarks, value : (('remarks' in $data)? remarks : '-')">
+                    </row>
+                </div>
+                <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelIntendedUse, value : (('intendedUse' in $data)? intendedUse :'-')">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.equipmentDetails.labelPurchaseDate, value : (('purchaseDate' in $data)?purchaseDate:'-')">
+                    </row>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </oj-validation-group>
+</div>

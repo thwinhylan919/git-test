@@ -1,0 +1,13 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.creditfacility.service.collateral.Collateral",
+        "components": [
+        {
+            "componentName": "collateral-revaluation-flow-stage1",
+            "service": "revaluate",
+            "perform": "collateral-revaluation-flow#collateral-revaluation-details#collateral-revaluation-flow-review",
+            "approve": "collateral-revaluation-flow-review"
+        }]
+    }]
+}

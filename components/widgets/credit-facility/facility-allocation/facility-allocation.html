@@ -1,0 +1,128 @@
+
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-6">
+      <h3 data-bind="text: $component.nls.facilityAllocation"></h3>
+    </div>
+    <div class="oj-flex-item oj-sm-6">
+      <oj-buttonset-one id="buttonSet" class="pull-right" value="{{currencyView}}">
+        <oj-option value='FC'>
+          <span data-bind="text: $component.nls.facilityCurrency"></span>
+        </oj-option>
+        <oj-option value='LC'>
+          <span data-bind="text: $component.nls.localCurrency"></span>
+        </oj-option>
+      </oj-buttonset-one>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- ko if:$component.show() -->
+    <div class="oj-flex-item oj-md-4">
+      <oj-chart id="pieChart" type="pie" series="[[pieSeriesValue]]" groups="[[pieGroupsValue]]"
+        style-defaults.pie-inner-radius="[[innerRadius]]" pie-center.renderer="[[centerCallback]]"
+        style-defaults.data-label-position="none" style-defaults.data-label-style="[['word-wrap: break-word']]" animation-on-data-change="auto" class="donut-size oj-md-12 oj-lg-12">
+      </oj-chart>
+      <div class="oj-flex-item">
+        <oj-label><span data-bind="text:$component.nls.eqLocalCurrency" class="label1"></span></oj-label>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex-item oj-md-8">
+      <!-- ko if:$component.show() -->
+
+      <div>
+        <oj-conveyor-belt>
+        <oj-tab-bar selection="{{selectedFacilityType}}" edge="top" class="tab oj-sm-condense">
+          <ul data-bind="foreach: $component.facilityTypeArray">
+            <li data-bind="attr: {id: facilityType}">
+              <a href="#">
+                <span data-bind="text:facilityType"></span>
+                <div data-bind="text:utilizedPercentage + '%'"></div>
+              </a>
+            </li>
+          </ul>
+        </oj-tab-bar>
+      </oj-conveyor-belt>
+      </div>
+      <br>
+      <div>
+          <oj-table id='FacilityTable' data="[[$component.datasource]]" columns-default="[[{sortable:'enabled'}]]" 
+          columns="[[[
+            {
+                headerText: $component.nls.facilityName,
+                sortable: 'enabled',
+                sortProperty: 'key'
+            },
+            {
+                headerText: $component.nls.sanctionedAmount,
+                sortable: 'enabled',
+                headerClassName: 'right',
+                className:'right',
+                sortProperty: 'sanctionedAmt'
+            },
+            {
+                headerText: $component.nls.utilizedAmount,
+                headerClassName: 'right',
+                sortable: 'enabled',
+                className:'right',
+                sortProperty: 'utilizedAmt'
+
+            },
+            {
+                headerText: $component.nls.availableAmount,
+                headerClassName: 'right',
+                sortable: 'enabled',
+                className:'right',
+                sortProperty: 'availableAmt'
+            },
+            {
+                headerText: $component.nls.utilizedStatus,
+                headerClassName: 'center',
+                sortable: 'enabled',
+                className:'right',
+                sortProperty: 'utilizedPer'
+            }
+            ]]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('template_row', true)]]">
+           
+        <oj-paging-control id="paging" data='[[$component.datasource]]' page-size='4' slot='bottom'></oj-paging-control>
+        </oj-table>
+      </div>
+      <!-- /ko -->
+      <script type="text/html" id="template_row">
+          <tr>
+              <td>
+				         <a href="#" data-bind="text:lineCode+'_'+lineSerialNumber,click:$component.showFacilityDetails.bind($data)"></a>
+              </td>
+              <!-- ko if:$component.currencyView()=="FC" -->
+              <td>
+                  <span data-bind="text:$formatter.formatCurrency(effectiveAmount.amount, effectiveAmount.currency)"></span>
+              </td>
+              <td>
+                  <span data-bind="text:$formatter.formatCurrency(utilizedAmount.amount, utilizedAmount.currency)"></span>
+              </td>
+              <td>
+                  <span data-bind="text:$formatter.formatCurrency(availableAmount.amount, availableAmount.currency)"></span>
+              </td>
+              <!-- /ko -->
+              <!-- ko if:$component.currencyView()=="LC" -->
+              <td>
+                  <span data-bind="text:$formatter.formatCurrency(effectiveAmountInBaseCurr.amount, effectiveAmountInBaseCurr.currency)"></span>
+              </td>
+              <td>
+                  <span data-bind="text:$formatter.formatCurrency(utilizedAmountInBaseCurr.amount, utilizedAmountInBaseCurr.currency)"></span>
+              </td>
+              <td>
+                  <span data-bind="text:$formatter.formatCurrency(availableAmountInBaseCurr.amount, availableAmountInBaseCurr.currency)"></span>
+              </td>
+              <!-- /ko -->
+              <td>
+                <div class="oj-table-data-cell oj-form-control-inherit">
+                  <span  data-bind="text: $baseModel.format($component.nls.progressValue,{number : utilizedPer})"></span>
+                  <div class="marginLeft" ><oj-progress  class="progress-bar-property" value="{{utilizedPer}}"></oj-progress></div>
+                  </div>
+              </td>
+          </tr>
+      </script>
+    </div>
+  </div>
+</div>

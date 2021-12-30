@@ -1,0 +1,113 @@
+<div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.common.review , reviewHeader : $component.resource.payeeCount.initiateHeader}}"></div>
+ <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+<row params="baseModel : $baseModel, rootModel :  $component, label : $component.resource.payeeCount.userType , value :$component.enterpriseRole"></row>
+<!-- ko if: $component.targetType()!=="ROLE" -->
+<row params="baseModel : $baseModel, rootModel :  $component, label : $component.resource.payeeCount.userSegment , value :$component.segmentSelectedForRole"></row>
+<!-- /ko -->
+</page-section>
+<!-- ko if: $component.searchResultLoaded() -->
+        <!-- ko foreach: $component.searchResult -->
+ <page-section params="baseModel : $baseModel, rootModel : $component, heading : payeeType !== 'ALL' && payeeType !== '' ?$component.resource.payeeCount[payeeType]:''">
+        <!-- ko if: $parent.payeeType === "ALL" -->
+        <!-- ko if: $parent.accountPayee.length >0 -->
+        <!-- ko foreach: $parent.accountPayee -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label><span data-bind="text:$component.resource.payeeCount.totalpyeecount"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+                <span id="totalpayeepermittedperdaypayeeCountStatus" data-bind="text:$data.payeeCountLimitStatus()==='Y'?$component.resource.common.yes:$component.resource.common.no"></span>
+            </div>
+
+            <!-- ko if:payeeCountLimitStatus() === "Y" -->
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label for="totalpayeepermittedperday"><span data-bind="text:$component.resource.payeeCount.totalpayeepermittedperday"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1">
+                <span id="totalpayeepermittedperday" data-bind="text:payeesPerDay"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $parent.accountPayee.length >0 -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item" data-bind="text:$component.resource.payeeCount.accountpayee"></div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $parent.payeeType === "DOMESTIC" -->
+        <!-- ko foreach: $parent.accountPayee -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label>
+                    <span data-bind="text:$component.resource.payeeCount.payeeRestriction"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+                <span data-bind="attr:{id : 'domestic-' + payeeType},text:$data.payeeCountLimitStatus()==='Y'?$component.resource.common.yes:$component.resource.common.no"></span>
+            </div>
+
+            <!-- ko if:payeeCountLimitStatus() === "Y" -->
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label :for="[['domestic-payeecount-'+ payeeType]]"><span data-bind="text:$component.resource.payeeCount.payeepermittedperday"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1">
+                <span data-bind="attr:{id : 'domestic-payeecount-' + payeeType},text:payeesPerDay"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: $parent.payeeType !== "DOMESTIC" -->
+        <!-- ko foreach: $parent.accountPayee -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label :for="[[payeeType + $index()]]"><span data-bind="text:$component.resource.payeeCount.payeeRestriction"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+                <span data-bind="attr:{id : payeeType + $index()},text:$data.payeeCountLimitStatus()==='Y'?$component.resource.common.yes:$component.resource.common.no"></span>
+            </div>
+
+            <!-- ko if:payeeCountLimitStatus() === "Y" -->
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label :for="[['payeecount-'+ payeeType + $index()]]"><span data-bind="text:$component.resource.payeeCount.payeepermittedperday"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1">
+                <span data-bind="attr:{id : 'payeecount-' + payeeType + $index()}, text:payeesPerDay"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: $parent.draftpayee.length > 0 -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item" data-bind="text:$component.resource.payeeCount.draftpayee"></div>
+        </div>
+        <!-- /ko -->
+
+         <!-- ko foreach: $parent.draftpayee -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label :for="[['draftPayeeRestriction_'+ $data.payeeType]]"><span data-bind="text:$component.resource.payeeCount.payeeRestriction"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+            <span data-bind="attr: {id:'draftPayeeRestriction_' + $data.payeeType}, text:$data.payeeCountLimitStatus()==='Y'?$component.resource.common.yes:$component.resource.common.no"></span>
+           </div>
+
+            <!-- ko if:payeeCountLimitStatus() === "Y" -->
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                <oj-label :for="[['payeecount-draftPayeeRestriction_'+ $data.payeeType]]"><span data-bind="text:$component.resource.payeeCount.payeepermittedperday"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1">
+                  <span data-bind="attr: {id:'payeecount-draftPayeeRestriction_' + $data.payeeType},text:payeesPerDay"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </page-section>
+    <!-- /ko -->
+<!-- /ko -->

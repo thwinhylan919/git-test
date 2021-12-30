@@ -1,0 +1,35 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.td.service.account.interest.TermDepositInterest",
+    "components": [{
+      "componentName": "interest-certificate-td",
+      "service": "list",
+      "perform": "",
+      "approve": ""
+    }]
+  }, {
+    "moduleName": "com.ofss.digx.app.dda.service.interest.DemandDepositInterest",
+    "components": [{
+      "componentName": "interest-certificate-casa",
+      "service": "listInterest",
+      "perform": "",
+      "approve": ""
+    }]
+  }, {
+    "moduleName": "com.ofss.digx.app.loan.service.account.interest.LoanAccountInterest",
+    "components": [{
+      "componentName": "interest-certificate-loans",
+      "service": "list",
+      "perform": "",
+      "approve": ""
+    }]
+  },{
+    "moduleName": "com.ofss.digx.app.account.service.core.Account",
+    "components": [{
+      "componentName": "balance-certificate",
+      "service": "fetchBalanceCertificate",
+      "perform": "",
+      "approve": ""
+    }]
+  }]
+}

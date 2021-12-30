@@ -1,0 +1,61 @@
+{
+    "accounts": [{
+        "id": {
+            "displayValue": "xxxxxxxxxxxx0018",
+            "value": "27DBAA9448D18503AD2370CAD3A8231B3906E894C858519F5A16290B04D6D1A24F26"
+        },
+        "partyId": {
+            "displayValue": "***308",
+            "value": "56BFADE706A8FCDADEEE89A7D2A90E59895125E8C32B"
+        },
+        "status": "ACTIVE",
+        "type": "CSA",
+        "currencyCode": "GBP",
+        "branchCode": "AT3",
+        "productDTO": {
+            "productClass": "C",
+            "productGroup": "S",
+            "productId": "SAVIN",
+            "currencySpecificParameterDTO": {
+                "minimumBalanceAmount": {
+                    "amount": 0
+                }
+            },
+            "demandDepositProductFacilitiesDTO": {
+                "hasChequeBookFacility": true,
+                "hasOverDraftFacility": false,
+                "hasPassbookFacility": true,
+                "hasATMFacility": false
+            }
+        },
+        "openingDate": "2019-03-22T00:00:00",
+        "partyName": "Sunrise Coffee",
+        "holdingPattern": "SINGLE",
+        "module": "CON",
+        "defaultAccount": false,
+        "ddaAccountType": "Saving Account",
+        "availableBalance": {
+            "currency": "GBP",
+            "amount": 30000
+        },
+        "currentBalance": {
+            "currency": "GBP",
+            "amount": 30000
+        },
+        "noOfDebitCards": 0,
+        "accountFacilities": {
+            "hasChequeBook": true,
+            "lmEnabled": false
+        },
+        "equivalentAvailableBalance": {
+            "currency": "GBP",
+            "amount": 30000
+        },
+        "nomineeRegistered": false,
+        "equivalentCurrentBalance": {
+            "currency": "GBP",
+            "amount": 30000
+        },
+        "sortCode": "AT3"
+    }]
+}

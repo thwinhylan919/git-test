@@ -1,0 +1,112 @@
+<!-- ko ifnot: $baseModel.small() -->
+<!-- ko if:$component.showConfirmResults() -->
+<div class="form-main-container multiple-purchase-detail">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12">
+            <oj-table class="table-resize" id="search-results" :aria-label="[[$component.resource.purchaseConfirm]]"
+                data="[[dataSource]]" columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+                columns="[[headerText]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('purchase_confirm_template',true)]]">
+            </oj-table>
+            <script type="text/html" id="purchase_confirm_template">
+                <tr>
+                    <td>
+                        <!-- ko ifnot: $component.isSwitch -->
+                        <span data-bind="text: headerName"></span>
+                        <!-- /ko -->
+                        <!-- ko if: $component.isSwitch -->
+                        <oj-label>
+                            <span data-bind="text:$component.resource.reviewScreen.switchInScheme"></span>
+                        </oj-label>
+                        <span data-bind="text:headerInName"></span>
+                        <oj-label>
+                            <span data-bind="text:$component.resource.reviewScreen.switchOutScheme"></span>
+                        </oj-label>
+                        <span data-bind="text:headerOutName"></span>
+                        <!-- /ko -->
+                    </td>
+                    <td>
+                        <span data-bind="text: referenceNo"></span>
+                    </td>
+                    <td>
+                        <!-- ko if: statusMsg === "Success" -->
+                        <span class="sucessColor" data-bind="text: statusMsg"></span>
+                        <!-- /ko -->
+                        <!-- ko if: statusMsg === "Failed" -->
+                        <span class="failColor" data-bind="text: statusMsg"></span>
+                        <!-- /ko -->
+                    </td>
+                    <td>
+                        <span data-bind="text: failureReason"></span>
+                    </td>
+                </tr>
+            </script>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+<!-- ko if:$component.showConfirmResults() -->
+<div class="form-main-container multiple-purchase-detail">
+    <div params="rootModel : $data, heading : ''" class="oj-sm-12">
+        <oj-list-view id="purchase-order-mobile-list" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('purchase_confirmlist_template',true)}]]"
+            data="[[dataSource]]">
+        </oj-list-view>
+    </div>
+    <script type="text/html" id="purchase_confirmlist_template">
+        <li>
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko ifnot: $component.isSwitch -->
+                <div class="oj-flex-item oj-sm-12">
+                    <span class="bold-headername" data-bind="text: headerName"></span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: $component.isSwitch -->
+                <div class="oj-flex-item oj-sm-6">
+                    <oj-label>
+                        <span data-bind="text:$component.resource.reviewScreen.switchInScheme"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-6 right">    
+                    <oj-label>
+                        <span data-bind="text:$component.resource.reviewScreen.switchOutScheme"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-6">    
+                    <span data-bind="text:headerInName"></span>
+                </div>
+                <div class="oj-flex-item oj-sm-6 right">    
+                    <span data-bind="text:headerOutName"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad list-top">    
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label class="oj-sm-12">
+                        <span data-bind="text: $component.resource.referenceNo"></span>
+                    </oj-label>
+                    <span class="oj-sm-12 medium-text" data-bind="text:referenceNo"></span>
+                </div>
+                <div class="oj-flex-item oj-sm-12 list-top">
+                    <oj-label class="oj-sm-12">
+                        <span data-bind="text: $component.multiplePurchasenls.confirmScreen.status"></span>
+                    </oj-label>
+                    <!-- ko if: statusMsg === "Success" -->
+                    <span class="oj-sm-12 medium-text sucessColor" data-bind="text:statusMsg"></span>
+                    <!-- /ko -->
+                    <!-- ko if: statusMsg === "Failed" -->
+                    <span class="oj-sm-12 medium-text failColor" data-bind="text:statusMsg"></span>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex-item oj-sm-12 list-top">
+                    <oj-label class="oj-sm-12">
+                        <span data-bind="text: $component.multiplePurchasenls.confirmScreen.failureReason"></span>
+                    </oj-label>
+                    <span class="oj-sm-12 medium-text" data-bind="text:failureReason"></span>
+                </div>        
+            </div>
+        </li>
+    </script>
+</div>
+<!-- /ko -->
+<!-- /ko -->

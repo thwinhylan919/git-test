@@ -1,0 +1,148 @@
+<div class="form-main-container full-width">
+    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-8 oj-sm-8">
+        <!-- ko if:$component.datasegmentLoaded() -->
+        <!-- ko foreach: $component.datasegments() -->
+        <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-8 oj-sm-8">
+            <oj-accordion class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-8 oj-sm-8">
+                <oj-collapsible class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-8 oj-sm-8">
+                    <h3 class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-8 oj-sm-8" slot="header">
+                        <span data-bind="text:$data.name"></span>
+                    </h3>
+                    <div data-bind="template: {name: $data.code, data: $component.Dto}"></div>
+                </oj-collapsible>
+            </oj-accordion>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>
+
+<script type="text/html" id="fsgbu-ob-clmo-ds-loan-details">
+    <div class="oj-flex-items-pad oj-flex oj-lg-12">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.amountNeeded, value : $data.loanDetails.loanAmount +' '+$data.loanDetails.loanCurrencyCode"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.durationOfLoan, value : $component.years +' years, '+$component.months+' months'"></row>
+    </div>
+    <div>
+        <!-- ko if: !$component.facilityFlag() -->
+			<div class="oj-flex-items-pad oj-flex">
+				<div class="oj-flex-item oj-flex-items-pad">
+					<span data-bind="text:$component.nls.noFacilitiesAvailable"></span>
+				</div>
+			</div>
+			<!-- /ko -->
+            <!-- ko if:$component.facilityFlag() -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                <span data-bind="text:$component.nls.availableFacility"></span>
+            </div>
+            <!-- ko foreach: $component.facility -->
+            <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 label">
+                        <div class="oj-lg-12">
+                            <oj-label for="ownershipStatus">
+                                <span data-bind="text:$component.nls.linkageId"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-12">
+                            <span data-bind="text: $data.extFacilityId"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 label">
+                        <div class="oj-lg-12">
+                            <oj-label for="ownershipStatus">
+                                <span data-bind="text:$component.nls.priority"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-12">
+                            <span data-bind="text: $data.utilizationOrder"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 label">
+                        <div class="oj-lg-12">
+                            <oj-label for="ownershipStatus">
+                                <span data-bind="text:$component.nls.percentage"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-lg-12">
+                            <span data-bind="text: $data.linkagePercent"></span>
+                        </div>
+                    </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+    </div>
+ </script>
+<script type="text/html" id="fsgbu-ob-clmo-ds-businessactivity-details">
+    <div class="oj-flex-items-pad oj-flex oj-lg-12">
+        <div class ="oj-flex-items-pad oj-flex-item oj-lg-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessNature, value : $data.businessActivity.businessNature"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.turnoverccy, value : $data.businessActivity.yearWiseDetails[0].currency"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.placeholderProfit, value : $data.businessActivity.yearWiseDetails[0].operatingProfit +' '+ $data.businessActivity.yearWiseDetails[0].currency"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.exportImportLicenceNo, value : $data.businessActivity.exportImportLicenceNo"></row>
+        </div>
+        <div class ="oj-flex-items-pad oj-flex-item oj-lg-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.currentYear, value : $data.businessActivity.yearWiseDetails[0].year"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.balanceSheetSize, value : $data.businessActivity.yearWiseDetails[0].balanceSheetSize+' '+$data.businessActivity.yearWiseDetails[0].currency"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.currentYearNetProfit, value : $data.businessActivity.yearWiseDetails[0].netProfit+' '+$data.businessActivity.yearWiseDetails[0].currency"></row>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="fsgbu-ob-clmo-ds-plant-machinery">
+    <div class="oj-flex-items-pad oj-flex oj-lg-12">
+        <div class ="oj-flex-items-pad oj-flex-item oj-lg-6">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelMachineryType, value : $data.equipmentDetails.machineryType"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelManufacturerName, value : $data.equipmentDetails.manufacturerName"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelManufacturerModel, value : $data.equipmentDetails.manufacturerModel"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelAssetValue, value : $data.equipmentDetails.assetValue"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelRemarks, value : $data.equipmentDetails.remarks"></row>
+        </div>
+        <div class ="oj-flex-items-pad oj-flex-item oj-lg-6">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelMachineDetails, value : $data.equipmentDetails.machineDetails"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelManufacturedYear, value : $data.equipmentDetails.manufacturedYear"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelIntendedUse, value : $data.equipmentDetails.intendedUse"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.labelPurchaseDate, value : $data.equipmentDetails.purchaseDate"></row>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="fsgbu-ob-clmo-ds-real-estate">
+    <div class="oj-flex-items-pad oj-flex oj-lg-12">
+        <div class ="oj-flex-items-pad oj-flex-item oj-lg-6">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.propertyType, value : $data.realEstateDetails.propertyType"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.constructionStatus, value : $data.realEstateDetails.constructionStatus"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.constructionCompleted, value : $data.realEstateDetails.constructionCompleted"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.registrationNumber, value : $data.realEstateDetails.registrationNumber"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.city, value : $data.realEstateDetails.city"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.country, value : $data.realEstateDetails.country"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.propertyArea, value : $data.realEstateDetails.propertyArea"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.marketValue, value : $data.realEstateDetails.marketValue"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.builderName, value : $data.realEstateDetails.builderName"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ownershipStatus, value : $data.realEstateDetails.ownershipStatus"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.isZone, value : $data.realEstateDetails.zone"></row>
+        </div>
+        <div class ="oj-flex-items-pad oj-flex-item oj-lg-6">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.propertyStatus, value : $data.realEstateDetails.propertyStatus"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.constructionCompletion, value : $data.realEstateDetails.constructionCompletion"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.propertyPurchase, value : $data.realEstateDetails.propertyPurchase"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.propertyLocation, value : $data.realEstateDetails.addressLine1 +' '+ $data.realEstateDetails.addressLine2 +' '+ $data.realEstateDetails.addressLine3 +' '+ $data.realEstateDetails.addressLine4"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.state, value : $data.realEstateDetails.state"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.zipCode, value : $data.realEstateDetails.zipCode"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.unit, value : $data.realEstateDetails.unit"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.eligibleValue, value : $data.realEstateDetails.eligibleValue"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.builderClassification, value : $data.realEstateDetails.builderClassification"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.pendingCharges, value : $data.realEstateDetails.pendingCharges"></row>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="fsgbu-ob-clmo-ds-document-upload">
+    <!-- ko if:$component.documentFlag() -->
+    <!-- ko foreach: $component.documentList() -->
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <span data-bind="text:$component.nls.documentType[$data] +' '+ $component.nls.documentUploaded"></span>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: !$component.documentFlag() -->
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <span data-bind="text:$component.nls.noDocumentUploaded"></span>
+    </div>
+    <!-- /ko -->
+</script>

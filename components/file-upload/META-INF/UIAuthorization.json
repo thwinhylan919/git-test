@@ -1,0 +1,77 @@
+{
+
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.fileupload.service.FileIdentifierRegistration",
+			"components": [{
+					"componentName": "file-create",
+					"service": "read",
+					"perform": "file-admin-create#file-identifier-view#file-identifier-search"
+			},
+			{		
+					"componentName": "file-create",
+					"service": "create",
+					"perform": "file-admin-create#file-identifier-create#review-file-identifier-create#file-identifier-search",
+					"approve": "transaction-journey#review-file-identifier"
+
+			},
+			{
+					"componentName": "file-create",
+					"service": "update",
+					"perform": "file-admin-create#file-identifier-view#file-identifier-edit#file-identifier-search",
+					"approve": "transaction-journey#review-file-identifier"
+			}
+		]
+	},{
+			"moduleName": "com.ofss.digx.app.fileupload.service.UserFIMapping",
+			"components": [{
+					"componentName": "user-search-type",
+					"service": "read",
+					"perform": "user-search-admin#user-map#user-search"
+			},
+			{		
+					"componentName": "file-create",
+					"service": "create",
+					"perform": "user-search-admin#user-map#review-file-identifier-map#user-search",
+					"approve": "transaction-journey#review-user-map"
+
+			},
+			{
+					"componentName": "file-create",
+					"service": "update",
+					"perform": "user-search-admin#user-map#review-file-identifier-map#user-search",
+					"approve": "transaction-journey#review-user-map"
+			}]
+	},{
+			"moduleName": "com.ofss.digx.app.fileupload.service.UploadService",
+			"components": [
+			{		
+					"componentName": "file-upload",
+					"service": "create",
+					"perform": "file-upload#file-input",
+					"approve": "review-file-identifier-map"
+
+			}]
+	},{
+			"moduleName": "com.ofss.digx.app.fileupload.service.UploadService",
+			"components": [{
+					"componentName": "file-view",
+					"service": "read",
+					"perform": "record-listing#record-list-admin#record-view-admin#file-history#record-list-financial#record-list-non-financial#record-view#record-view-financial#record-view-non-financial"
+			},
+			{		
+					"componentName": "file-view",
+					"service": "cancelFile",
+					"perform": "file-view",
+					"approve": "file-view",
+					"view": "file-view"
+
+			},
+			{
+					"componentName": "file-view",
+					"service": "cancelRecords",
+					"perform": "file-view#record-listing#record-list-admin#record-list-financial#record-list-non-financial#record-view-admin#record-view#record-view-financial#record-view-non-financial",
+					"approve": "record-view-admin#record-view#record-view-financial#record-view-non-financial",
+					"view": "record-view"
+			}]
+	}]
+}

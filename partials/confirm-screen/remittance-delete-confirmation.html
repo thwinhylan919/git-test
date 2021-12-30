@@ -1,0 +1,23 @@
+<!-- <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.confirmScreenResources.heading.success"></page-section> -->
+<div class="oj-flex-item">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <ul class="confirm-screen__list">
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,$root.currentRole())">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,'virtual-account-management')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resourceBundle.goToOverview},loadImage:'dashboard/quick-access/account-details.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resourceBundle.goToOverview"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

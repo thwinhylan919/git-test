@@ -1,0 +1,16 @@
+[ {
+    "name": "locator",
+    "icon": "icon-location-arrow",
+    "module": "locator"
+},{
+    "name": "help",
+    "icon": "icon-help",
+    "type": "FUNCTION",
+    "default": true,
+    "functionName": "openWebHelpWindow"
+}, {
+    "name": "about",
+    "icon": "icon-information",
+    "default": true,
+    "type": "MODAL"
+}]

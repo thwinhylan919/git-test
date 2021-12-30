@@ -1,0 +1,126 @@
+<div class="oj-panel fundreports padding-panel">
+  <div class="oj-flex oj-flex-items-pad oj-lg-12">
+    <div class="oj-flex-item oj-lg-6 oj-sm-6">
+      <h3 data-bind="text:$component.resource.heading.PortfolioSummary">
+                  </h3>
+      <!-- ko if: $component.summaryDataLoaded -->
+      <span data-bind="text:$baseModel.format($component.resource.PortfolioSummary.asOnDate,{asOnDate: $formatter.formatDate($component.summaryData().asOnDate)})"></span>
+      <!-- /ko -->
+    </div>
+    <!-- ko ifnot: $baseModel.large() -->
+    <div class="oj-flex-item oj-lg-6 oj-sm-6 right message-margin">
+      <a id="estimated-date-info" href="#" data-bind="attr:{alt: $component.resource.PortfolioSummary.investmentDetails,title:$component.resource.PortfolioSummary.statisticsMessage}, click:$component.openPopup.bind($data,true)">
+        <span class="icons icon-information medium-text termsConditionsText"></span>
+      </a>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-lg-6 oj-sm-6 right message-margin small-text">
+      <span data-bind="text:$component.resource.PortfolioSummary.statisticsMessage"></span>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: $component.summaryDataLoaded -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 margin-box corner-border">
+      <oj-label for="investedvalue">
+        <span data-bind="text:$component.resource.PortfolioSummary.investedValue" class="medium-text"></span>
+      </oj-label>
+      <div class="big-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.summaryData().amountInvested.amount,$component.summaryData().amountInvested.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 margin-box corner-border">
+      <oj-label for="currentvalue">
+        <span data-bind="text:$component.resource.PortfolioSummary.currentValue" class="medium-text"></span>
+      </oj-label>
+      <div class="big-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.summaryData().marketValue.amount,$component.summaryData().marketValue.currency)"></span>
+        <oj-legend id="legend-market-value" orientation='horizontal' data="[[currentLegendDataSource]]" text-style="[[textStyleCurrentValue]]" class="legend-height">
+        <template slot="itemTemplate">
+          <oj-legend-item text="[[$baseModel.format($component.resource.PortfolioSummary.legendValue,{currency:$formatter.formatCurrency($current.data.text,$component.summaryData().marketValue.currency)})]]" marker-color="[[$current.data.color]]" marker-shape="[[$current.data.markerShape]]">
+          </oj-legend-item>
+        </template>
+        </oj-legend>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 margin-box corner-border">
+      <oj-label for="profitloss">
+        <span data-bind="text:$component.resource.PortfolioSummary.profitLoss" class="medium-text"></span>
+      </oj-label>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12 big-text">
+        <span data-bind="text:$formatter.formatCurrency($component.summaryData().profitLoss.amount,$component.summaryData().profitLoss.currency)"></span>
+        <oj-legend id="legend-prof-loss" orientation='horizontal' data="[[profitLegendDataSource]]" text-style="[[textStyleProfitLoss]]" class="legend-height">
+          <template slot="itemTemplate">
+            <oj-legend-item text="[[$baseModel.format($component.resource.PortfolioSummary.legendValue,{currency:$formatter.formatCurrency($current.data.text,$component.summaryData().amountInvested.currency)})]]" marker-color="[[$current.data.color]]" marker-shape="[[$current.data.markerShape]]">
+            </oj-legend-item>
+          </template>
+        </oj-legend>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-4 oj-md-3 margin-box">
+      <oj-label for="returnrate">
+        <span data-bind="text:$component.resource.PortfolioSummary.rateOfReturn" class="medium-text"></span>
+      </oj-label>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12 big-text">
+        <span class="medium-text" data-bind="text:$component.summaryData().irr"></span>
+        <oj-legend id="legend-irr" orientation='horizontal' sections="[[legendSectionsIRR]]" text-style="[[textStyleIRR]]" class="legend-height">
+        </oj-legend>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad top-border">
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 margin-box corner-border">
+      <oj-label for="realizedGainLoss">
+        <span data-bind="text:$component.resource.PortfolioSummary.realisedGainLoss" class="medium-text"></span>
+      </oj-label>
+      <div class="big-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.summaryData().realizedGainLoss.amount,$component.summaryData().realizedGainLoss.currency)"></span>
+      </div>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12">
+        <a href="#" data-bind="click: $component.capitalGainReport"><span
+            class="small-text" data-bind="text:$component.resource.PortfolioSummary.reports"></span></a>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 margin-box corner-border">
+      <oj-label for="dividends">
+        <span data-bind="text:$component.resource.PortfolioSummary.dividends" class="medium-text"></span>
+      </oj-label>
+      <div class="big-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.summaryData().dividend.amount,$component.summaryData().dividend.currency)"></span>
+      </div>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12">
+        <a href="#" data-bind="click: $component.dividendHistoryReport"><span
+            class="small-text" data-bind="text:$component.resource.PortfolioSummary.reports"></span></a>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 margin-box corner-border">
+      <oj-label for="sips">
+        <span data-bind="text:$component.resource.PortfolioSummary.sips" class="medium-text"></span>
+      </oj-label>
+      <div class="big-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$component.summaryData().numberOfSIP"></span>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-6 oj-md-3 investment-button-margin center">
+      <oj-button class="help-button" id="investmentdetails"  on-click="[[$component.investmentDetails]]">
+        <span data-bind="text:$component.resource.PortfolioSummary.investmentDetails"></span>
+      </oj-button>
+    </div>
+
+  </div>
+  <div class="oj-flex oj-flex-items-pad message-banner padding-message ">
+    <div class="oj-flex-item oj-lg-6 oj-sm-6 small-text">
+      <span data-bind="text:$component.resource.PortfolioSummary.message"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-6 oj-sm-6 right">
+      <a href="#" data-bind="click: $component.openInvestmentAccount">  <span data-bind="text:$component.resource.PortfolioSummary.investmentAccount"></span></a>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<oj-popup id="show-more-info" modality="modeless" tail="none" position.my.horizontal="left" position.my.vertical="bottom" position.at.horizontal="left" position.at.vertical="bottom">
+    <div class="oj-flex oj-flex-items-pad portfolio-summary-widget-container">
+      <div class="oj-flex-item oj-sm-12 popup-width" data-bind="text:$component.resource.PortfolioSummary.statisticsMessage"></div>
+    </div>
+</oj-popup>

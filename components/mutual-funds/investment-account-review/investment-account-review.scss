@@ -1,0 +1,10 @@
+.sub-heading{
+  font-size: var(--base-font-size-large);
+  padding: 0.5rem;
+}
+.align-header{
+  margin-bottom: 0.5rem;
+}
+.align-icon{
+  @include float(right);
+}

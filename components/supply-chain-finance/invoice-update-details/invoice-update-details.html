@@ -1,0 +1,29 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <div>
+                        <oj-table :id="[['InvoiceAcceptDetails95']]" data="[[dataSource58]]"
+                            row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('tableRender')]]"
+                            columns="[[columnsArray]]"></oj-table>
+                        <oj-paging-control :id="[['InvoiceAcceptDetails95Paging']]" data="[[dataSource58]]"
+                            page-size="10"></oj-paging-control>
+                    </div>
+                    <div id="scriptContainer">
+                        <script type="text/html" id="tableRender">
+                            <td><span data-bind="text:$context.data.invoiceRefNumber"></span></td>
+                            <td><span data-bind="text:$context.data.supplierName"></span></td>
+                            <td><span data-bind="text:$context.data.invoiceNumber"></span></td>
+                            <td><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.invoiceAmount,$context.data.invoiceCurrency)"></span>
+                            </td>
+                            <td><span data-bind="text:$context.data.responseStatus"></span></td>
+                            <td><span data-bind="text:$context.data.responseMessage"></span></td>
+                        </script>
+                    </div>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

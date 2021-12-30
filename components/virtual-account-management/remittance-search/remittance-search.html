@@ -1,0 +1,120 @@
+<div class="remittance-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+        <oj-label><span data-bind="text: $component.realCustomerName"></span></oj-label>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+</div>
+<div class="oj-flex form-main-container remittance-search">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <page-section params="baseModel : $baseModel, rootModel : $data">
+            <!-- ko ifnot: fromApproval -->
+            <div class="oj-flex oj-flex-items-pad search-entity-container">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label><span data-bind="attr:{id:'remitterListId'},text: $component.resource.searchRemittanceListID"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-input-text id="searchRemittanceListID" :aria-label="[[$component.resource.searchRemittanceListID]]" value="{{$component.remittanceListID}}">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label><span data-bind="attr:{id:'templateId'},text: $component.resource.searchRemittanceListName"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-input-text id="searchRemittanceListName" :aria-label="[[$component.resource.searchRemittanceListName]]" value="{{$component.remittanceListName}}">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.fromApproval -->
+            <div class="button-container search-buttons">
+                <oj-button class="action-button-primary" on-click="[[searchResult]]">
+                    <span slot="startIcon" class="icons icon-search"></span>
+                    <span data-bind="text:$component.resource.search"></span>
+                </oj-button>
+                <!-- ko ifnot: $component.dataSourceCreated -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-tertiary" on-click="[[clear]]">
+                    <span slot="startIcon" class="icons icon-refresh"></span>
+                    <span data-bind="text:$component.resource.clear"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: viewTable -->
+            <div class="oj-flex spacing-table">
+                <div class="oj-flex-item oj-sm-12">
+                    <div class="oj-flex header-underline oj-flex-items-pad">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item oj-lg-4 left">
+                                <span class="comp-title oj-lg-4" data-bind="text: $component.resource.tableHeader"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-table id="table" :aria-label="[[$component.resource.cancel]]" data="[[dataSource]]" columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns="[[headerText]]">
+                        <caption class="hide-label" data-bind="text:$component.resource.cancel"></caption>
+                    </oj-table>
+                    <oj-paging-control id="paging" slot='bottom' page-size='10' data='[[dataSource]]'></oj-paging-control>
+                </div>
+            </div>
+            <!-- ko ifnot: $component.fromApproval -->
+            <!-- ko if: $component.dataSourceCreated -->
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </page-section>
+    </div>
+    <script type="text/html" id="searchIdentifier">
+        <td>
+            <!-- ko ifnot:$component.fromApproval -->
+            <a href="#" data-bind="text:$context.row.remittanceListID,click:$component.onSelectedInTable.bind($data,$context.row)"></a>
+            <!-- /ko -->
+            <!-- ko if:$component.fromApproval -->
+            <div href="#" data-bind="text:$context.row.remittanceListID"></div>
+            <!-- /ko -->
+            <div data-bind="text:$context.row.remittanceListName"></div>
+        </td>
+    </script>
+    <script type="text/html" id="dateFromIdentifier">
+        <td>
+            <span data-bind="text: $formatter.formatDate($context.row.validFrom,'dateFormat')"></span>
+        </td>
+    </script>
+    <script type="text/html" id="dateToIdentifier">
+        <td>
+            <span data-bind="text: $formatter.formatDate($context.row.validTo,'dateFormat')"></span>
+        </td>
+    </script>
+</div>
+<modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'searchError',header:$component.resource.searchError">
+    <div class="message-box">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <div class="dialog-text">
+                    <span data-bind="text:$component.resource.searchErrorMessage"></span>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" id="okBtn" on-click="[[$component.closeDialogBox]]">
+                <span data-bind="text:$component.resource.ok"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

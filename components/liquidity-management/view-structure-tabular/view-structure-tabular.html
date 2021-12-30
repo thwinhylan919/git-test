@@ -1,0 +1,162 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+    <!-- table-->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+            <oj-table id="tabular-table" :aria-label="[[$component.resource.structureHeader]]" data="[[viewStructureDetailsDataSource]]" row-renderer='[[$oj.KnockoutTemplateUtils.getRenderer("row_template", true)]]' columns="[[[
+                    {
+                        headerText:$component.resource.partyName,
+                        sortable:'none'
+                    },
+                    {
+                        headerText:$component.resource.accountName,
+                        sortable:'none'
+                    }].concat($component.structureType() === 'Hybrid' ? [{
+                        headerText:$component.resource.type,
+                        sortable:'none'
+                    }] : []).concat([{
+                        headerText:$component.resource.accountType,
+                        sortable:'none'
+                    },
+                    {
+                        headerText:$component.resource.accountNumber,
+                        sortable:'none'
+                    },
+                    {
+                        headerText:$component.resource.accountBalance,
+                        className:'right',
+                        headerClassName:'right',
+                        sortable:'none'
+                    }]).concat($component.structureType() === 'Pool'?[]:[
+                    {
+                        headerText:$component.resource.priority,
+                        sortable:'none'
+                    }])
+                    .concat([{
+                        headerText:$component.resource.accountLinked,
+                        sortable:'none'},{
+                        headerText: $component.mode() === 'create' ? $component.resource.actions : $component.resource.instructions,
+                        sortable:'none'}])]]">
+            </oj-table>
+        </div>
+        <script type="text/html" id="row_template">
+            <tr>
+                <td>
+                    <oj-row-expander context="[[$context.rowContext]]"></oj-row-expander>
+                    <span data-bind="text: accountDetails.customerDesc || $component.partyName()"></span>
+                </td>
+                <td>
+                    <span data-bind="text: accountDetails.accountDesc"></span>
+                </td>
+                <!-- ko if: $component.structureType() === 'Hybrid' -->
+                <td>
+                    <span data-bind="text: $data.cashCCMethod || '-'"></span>
+                </td>
+                <!-- /ko -->
+
+                <!-- ko if:Object.keys(accountDetails).indexOf('isExtAccChk') > -1 -->
+                <td>
+                    <span class="structure__accountType tags" data-bind="text : $component.resource.accountCheck[accountDetails.isExtAccChk]">
+                    </span>
+                </td>
+                <!-- /ko -->
+
+                <!-- ko ifnot:Object.keys(accountDetails).indexOf('isExtAccChk') > -1 -->
+                <td>
+                    <span data-bind="text:'-'"></span>
+                </td>
+                <!-- /ko -->
+
+                <td>
+                    <span data-bind="text:accountDetails.accountKey.accountNo.displayValue"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $formatter.formatCurrency(accountDetails.currentBalance,accountDetails.accountKey.ccyId) || '-'"></span>
+                </td>
+                <!-- ko if: $component.structureType() !== 'Pool' -->
+                <td>
+                    <span data-bind="text: $data.instructionPriority || '-'"></span>
+                </td>
+                <!-- /ko -->
+                <td>
+                    <span data-bind="text:$component.linkedAccountNoMap[accountDetails.accountKey.accountNo.value] || 0"></span>
+                </td>
+                <!-- ko if: $component.mode && ($component.mode() === 'approval' || $component.mode() === 'view' || $component.mode() === 'edit' || $component.mode() === 'review' || $component.mode() === 'Resumed' || $component.mode() === 'Paused' || $component.mode() === 'execute') -->
+                <!-- ko if:$context['rowContext']['depth'] !== 1 -->
+                <td>
+                    <a href="#" data-bind="click:$component.instructionDetails.bind($data,$data),
+                     attr : {'aria-label':$component.resource.instructionDetails, id:accountDetails.accountKey.accountNo.value,alt:$component.resource.instructionDetails,title : $component.resource.instructionDetailsTitle}">
+                        <div data-bind="text : $component.resource.view"></div>
+                    </a>
+                </td>
+                <!-- /ko -->
+                <!-- ko if: $context['rowContext']['depth'] === 1 -->
+                <td>
+                    <span data-bind="text:'-'"></span>
+                </td>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $component.mode && $component.mode() === 'create' -->
+                <!-- ko if: $context['rowContext']['depth'] === 1 && $component.structureDetails().structureList()[0].structureKey.versionNo() > 1 -->
+                <td>
+                    <a class="structure__link-color" href="#" data-bind="click:$component.linkAccountClicked.bind($data, accountDetails.accountKey.accountNo.value, $data.cashCCMethod, $data.level),
+                     attr : {id:'linkAccounts-assembleStructure-' + accountDetails.accountKey.accountNo.value, alt:$component.resource.moreOptionsAlt, title:$component.resource.moreOptionsTitle}">
+                        <div class="icons icon-plus"></div>
+                    </a>
+                </td>
+                <!-- /ko -->
+                <!-- ko if: $context['rowContext']['depth'] !== 1 || $component.structureDetails().structureList()[0].structureKey.versionNo() === 1 -->
+                <td>
+                    <a href="#" openprofile="true" data-bind="click:$component.openMenu,
+                     attr : {id:'menuLauncher-viewStructure-' + accountDetails.accountKey.accountNo.value, alt:$component.resource.moreOptionsAlt, title:$component.resource.moreOptionsTitle}">
+                        <div class="icons icon-more-vertical"></div>
+                    </a>
+                    <oj-menu :id="[['menuLauncher-viewStructure-contents-' + accountDetails.accountKey.accountNo.value]]" class="hide" on-oj-action="[[$component.menuItemSelect.bind($data,$data)]]" open-options.launcher="[['menuLauncher-viewStructure-'  + accountDetails.accountKey.accountNo.value]]">
+                        <!-- ko foreach: $component.menuItems -->
+                        <oj-option :id="[[id]]" value="[[id]]">
+                            <span data-bind="text : label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-menu>
+                </td>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $component.mode && $component.mode() === 'update' -->
+                <!-- ko if: $context['rowContext']['depth'] === 1 -->
+                <td>
+                    <span data-bind="text:'-'"></span>
+                </td>
+                <!-- /ko -->
+                <!-- ko if: $context['rowContext']['depth'] !== 1 && $data.level<=1 && $component.structureType() !== 'Sweep' && $component.structureDetails().structureKey.versionNo() === 1 -->
+                <td>
+                    <span data-bind="text:'-'"></span>
+                </td>
+                <!-- /ko -->
+                <!-- ko if: $context['rowContext']['depth'] !== 1 && $data.level>1 && $component.structureType() !== 'Sweep' && $component.structureDetails().structureKey.versionNo() === 1 -->
+                <td>
+                    <a href="#" data-bind="click:$component.instructionDetails.bind($data,$data),
+                     attr : {id:accountDetails.accountKey.accountNo.value,alt:$component.resource.instructionDetails,title : $component.resource.instructionDetailsTitle}">
+                        <div data-bind="text : $component.resource.update"></div>
+                    </a>
+                </td>
+                <!-- /ko -->
+                <!-- ko if: $context['rowContext']['depth'] !== 1 && $component.structureType() !== 'Sweep' && $component.structureDetails().structureKey.versionNo() > 1 -->
+                <td>
+                    <a href="#" data-bind="click:$component.instructionDetails.bind($data,$data),
+                     attr : {id:accountDetails.accountKey.accountNo.value,alt:$component.resource.instructionDetails,title : $component.resource.instructionDetailsTitle}">
+                        <div data-bind="text : $component.resource.update"></div>
+                    </a>
+                </td>
+                <!-- /ko -->
+                <!-- ko if: $context['rowContext']['depth'] !== 1 && $data.level>0 && $component.structureType() === 'Sweep' -->
+                <td>
+                    <a href="#" data-bind="click:$component.instructionDetails.bind($data,$data),
+                     attr : {id:accountDetails.accountKey.accountNo.value,alt:$component.resource.instructionDetails,title : $component.resource.instructionDetailsTitle}">
+                        <div data-bind="text : $component.resource.update"></div>
+                    </a>
+                </td>
+                <!-- /ko -->
+                <!-- /ko -->
+            </tr>
+        </script>
+    </div>
+</page-section>

@@ -1,0 +1,12 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.sms.service.user.registration.Registration",
+           "components": [{
+                   "componentName": "user-credentials",
+                   "service": "register",
+                   "perform": "otp-verification#user-creation"
+               }
+           ]
+       }
+   ]
+}

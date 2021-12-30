@@ -1,0 +1,101 @@
+.page-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.4rem;
+
+ .filmStripBlock {
+    border: none;
+    width: 100%;
+    .filmStripDiv{
+      position: relative;
+    }
+  }
+  .page-banner-section {
+    width: 100%;
+    
+    .upper-block{
+      display: flex;
+      flex-direction: row;
+      
+      .left-section{
+        flex: 1;
+        @include single-padding(left, 5rem);
+
+        @include mq(small){
+          margin-top: -21rem;
+          position: relative;
+          @include single-padding(left, 1rem);
+        }
+        @include mq(medium){
+          margin-top: -21rem;
+          position: relative;
+          @include single-padding(left, 1rem);
+        }
+        .icon-title_desc {
+            padding-top: 1rem;
+            padding-bottom: 0.9375rem;
+            color: var(--base-text-primary);
+            letter-spacing: 0.025rem;
+            font-weight: var(--link-font-weight);
+
+            @include mq(small){
+              font-size: 0.8rem;
+              padding-top: 0rem;
+            }
+        }
+      }
+      .right-section{
+        position: relative;
+        background: linear-gradient( #FFFFFF, #FFF4F4);
+        height: 31.25rem;
+        margin-top: 0.625rem;
+        @include single-margin(right, 0.0625rem);
+        @include mq(small){
+          position: inherit;
+          height: 35.25rem;
+        }
+        .image-block{
+          height: 100%;
+        }
+        img.banner1-2{
+          position: absolute;
+          top: 10%;
+          width: 12.5rem;
+          @include left(20%);
+        }
+
+        img.banner1{
+          position: absolute;
+          bottom: 0px;
+          @include right(10%);
+          width: 18.75rem;
+        } 
+
+        img.alexa{
+          position: absolute;
+          top: 7%;
+          @include right(0);
+          width: 27rem;
+
+          @include mq(small){
+            top: 3%;
+            width: 15rem;
+          }
+          @include mq(medium){
+            top: 3%;
+            width: 17rem;
+          }
+        }
+
+        img.mobile-banner{
+          width: 13.75rem;
+        }
+      }
+    }
+  } 
+  .overlaid-paging-control{
+    text-align: center;
+  }
+
+}

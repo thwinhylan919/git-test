@@ -1,0 +1,91 @@
+<div class="form-main-container">
+  <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+    <div class="oj-flex oj-flex-items-pad">
+      <div data-bind='component:{name: "nav-bar",
+        params:{rootModel: $data,menuOptions: listItem, uiOptions:uiOptions,navBarDescription:$component.resource.navBarDescription}}'>
+      </div>
+    </div>
+    <div class="oj-flex-items-pad">
+      <div class="serviceDetails" data-bind="with:$component.apiServiceDTO">
+        <!-- ko if: $component.selectedItem() === "Service Details" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.groupName, value : $component.groupName()"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.serviceURL, value : (('serviceURL' in $data)?serviceURL:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.serviceId, value : (('serviceId' in $data)?serviceId:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.serviceName, value : (('serviceName' in $data)?serviceName:'-')"></row>
+        <!-- ko if: $component.header().length === 0 -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.header, value : '-'"></row>
+        <!-- /ko -->
+        <!-- ko if: $component.header().length !== 0 -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3">
+            <span class="headerText" data-bind="text:$component.resource.header"></span>
+          </div>
+          <div class="oj-flex-item oj-lg-9 headerData">
+            <!-- ko foreach: $component.header() -->
+            <div class="oj-lg-4 left">
+              <span id="header + $baseModel.currentIdCount()" data-bind="text: $data.key + ' : ' + $data.value"
+                aria-labelledby="header"></span>
+            </div>
+            <!-- /ko -->
+          </div>
+        </div>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.methodType, value : (('methodType' in $data)?methodType:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.transactionType, value : (('transactionType' in $data)?$component.transactionType():'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.taskCode, value : (('taskCode' in $data)?taskCode:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.redactionType, value : (('redactionType' in $data)?redactionType:'-')"></row>
+        <!-- ko if: dynamicBusinessPolicy -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dynaBussPolicy, value : $component.resource.yes"></row>
+        <!-- /ko -->
+        <!-- ko ifnot: dynamicBusinessPolicy -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dynaBussPolicy, value : $component.resource.no"></row>
+        <!-- /ko -->
+        <!-- ko if: $component.isTaskAspectFetched -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="taskAspect">
+              <span data-bind="text:$component.resource.taskAspect"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex oj-flex-item oj-lg-9 label">
+            <oj-combobox-many id="taskAspect" value="{{$component.selectedTaskAspects}}" disabled>
+              <!-- ko foreach: $component.taskAspects() -->
+              <oj-option value="[[value]]"><span data-bind="text: text"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-combobox-many>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.isTaskAspectFetched -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.taskAspect, value : '-'"></row>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $component.selectedItem() === "Entitlement Details" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.moduleName, value : (('moduleName' in $data)?$component.selectedModule():'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.categoryName, value : (('categoryName' in $data)?$component.selectedCategory():'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.actionType, value : (('actionTypes' in $data)?$component.actionTypes():'-')"></row>
+        <!-- /ko -->
+        <!-- ko if: $component.selectedItem() === "JSON Path" -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.partyId, value : (('jsonPathParty' in $data)?jsonPathParty:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accNo, value : (('jsonPathAcc' in $data)?jsonPathAcc:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.currency, value : (('jsonPathCurrency' in $data)?jsonPathCurrency:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.amount, value : (('jsonPathAmount'in $data)?jsonPathAmount:'-')"></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.errorCode, value : (('jsonPathErrorCode' in $data)?jsonPathErrorCode:'-')"></row>
+        <!-- /ko -->
+        <!-- ko if: $component.selectedItem() === "Alerts" -->
+        <!-- ko if: alertRequired -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.alerts, value : $component.resource.yes"></row>
+        <!-- /ko -->
+        <!-- ko ifnot: alertRequired -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.alerts, value : $component.resource.no"></row>
+        <!-- /ko -->
+        <!-- /ko -->
+      </div>
+    </div>
+  </page-section>
+  <div class="oj-row button-container">
+    <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span data-bind="text:$component.resource.cancel"></span></oj-button>
+    <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span data-bind="text:$component.resource.back"></span></oj-button>
+  </div>
+</div>

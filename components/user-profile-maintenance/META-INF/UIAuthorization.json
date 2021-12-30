@@ -1,0 +1,21 @@
+{
+  "modules": [
+    {
+      "moduleName": "com.ofss.digx.app.sms.service.user.profile.config.UserProfileConfig",
+      "components": [
+        {
+          "componentName": "profile-maintenance",
+          "service": "create",
+          "perform": "profile-maintenance-review#profile-maintenance-search",
+          "approve": "profile-maintenance-review"
+        },
+        {
+          "componentName": "profile-maintenance",
+          "service": "update",
+          "perform": "profile-maintenance-review#profile-maintenance-search",
+          "approve": "profile-maintenance-review"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+<!-- ko ifnot:$baseModel.small() -->
+<div class="scheme-details-bar oj-sm-flex-items-initial">
+  <div class="oj-flex oj-flex-items-pad banner-height">
+    <div class="oj-flex-item oj-md-4 oj-lg-4">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.schemeNameLabel"></span>
+      </oj-label>
+      <div data-bind="text: $component.modelData.redeemFund.scheme.schemeName"></div>
+      <oj-rating-gauge value="{{ratingValue}}" max="{{maxRating}}" class="rating-icons" readonly></oj-rating-gauge>
+    </div>
+    <div class="oj-flex-item oj-md-3 oj-lg-3">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.latestPriceLabel"></span>
+      </oj-label>
+      <div>
+        <div class="oj-flex oj-lg-12 oj-md-12">
+          <div class="oj-flex-item oj-lg-12 oj-md-12">
+            <div data-bind="text: $component.diffValue"></div>
+          </div>
+          <div class="oj-flex-item oj-lg-12 oj-md-12">
+            <oj-legend orientation="vertical" sections="[[legendSections]]" text-style="[[textStyle]]" class="oj-flex-item oj-md-12 oj-lg-12 legend-height">
+            </oj-legend>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-md-3 oj-lg-3">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.fundHouseLabel"></span>
+      </oj-label>
+      <div data-bind="text: $component.modelData.navigationData.fundHouse" id="fundhouse"></div>
+    </div>
+    <div class="oj-flex-item oj-md-2 oj-lg-2">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.suitabilityLabel"></span>
+      </oj-label>
+      <!-- ko if: $component.modelData.navigationData.suitable -->
+      <div data-bind="text: $component.resource.schemeDetailsBar.yes"></div>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.modelData.navigationData.suitable -->
+      <div data-bind="text: $component.resource.schemeDetailsBar.no"></div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 right">
+      <!-- ko if:$component.showMore  -->
+      <a href="#" class="medium-text" data-bind="text:$component.resource.schemeDetailsBar.viewMore, click: $component.showDetails"></a>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$baseModel.small() -->
+<div class="scheme-details-bar oj-sm-flex-items-initial">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-7">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.schemeNameLabel"></span>
+      </oj-label>
+      <div data-bind="text: $component.modelData.redeemFund.scheme.schemeName"></div>
+      <oj-rating-gauge value="{{ratingValue}}" max="{{maxRating}}" class="rating-icons" readonly></oj-rating-gauge>
+    </div>
+    <div class="oj-flex-item oj-sm-5 right">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.latestPriceLabel"></span>
+      </oj-label>
+      <div>
+        <div class="oj-flex oj-sm-12">
+          <div class="oj-flex-item oj-sm-12">
+            <div data-bind="text: $component.diffValue"></div>
+          </div>
+          <div class="oj-flex-item oj-sm-12">
+            <oj-legend orientation="vertical" sections="[[legendSections]]" text-style="[[textStyle]]" class="oj-flex-item oj-sm-12 legend-height legend-padding">
+            </oj-legend>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-7">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.fundHouseLabel"></span>
+      </oj-label>
+      <div data-bind="text: $component.modelData.navigationData.fundHouse" id="fundhouse"></div>
+    </div>
+    <div class="oj-flex-item oj-sm-5 right">
+      <oj-label>
+        <span data-bind="text: $component.resource.schemeDetailsBar.suitabilityLabel"></span>
+      </oj-label>
+      <!-- ko if: $component.modelData.navigationData.suitable -->
+      <div data-bind="text: $component.resource.schemeDetailsBar.yes"></div>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.modelData.navigationData.suitable -->
+      <div data-bind="text: $component.resource.schemeDetailsBar.no"></div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 right">
+      <!-- ko if:$component.showMore  -->
+      <a href="#" class="medium-text" data-bind="text:$component.resource.schemeDetailsBar.viewMore, click: $component.showDetails"></a>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>
+<!-- /ko -->

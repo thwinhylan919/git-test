@@ -1,0 +1,146 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <!--  ko if : $component.isVisible  -->
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div
+                data-bind="template:{name: 'review-screen/review-banner-template', data:{header: $component.nls.reviewScreen.reviewCaption, reviewHeader: $component.headerText()}}">
+            </div>
+        </page-section>
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-10 oj-sm-12 oj-md-10">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.ProgramDetails, headerTemplate : 'supply-chain-finance/create-program-review/review-edit-program-details'">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.TypeofProgram, value : $component.modelInstance.programProduct.productDescription">
+                            </row>
+                        </div>
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.ProgramName, value : $component.modelInstance.programName">
+                            </row>
+                        </div>
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.ProgramCode, value : $component.modelInstance.programCode">
+                            </row>
+                        </div>
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.ProgramValidityFrom, value : $formatter.formatDate($component.modelInstance.effectiveDate)">
+                            </row>
+                        </div>
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.ProgramValidityTo, value : $formatter.formatDate($component.modelInstance.expiryDate)">
+                            </row>
+                        </div>
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoAcceptInvoice, value : $component.autoAcceptanceApplicable">
+                            </row>
+                        </div><!--  ko if : $component.autoAcceptanceApplicable() === 'Yes'  -->
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.Numberofdaysforautoacceptance, value : $component.modelInstance.acceptanceDays">
+                            </row>
+                        </div><!--  /ko  -->
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoFinance, value : $component.autoFinanceApplicable">
+                            </row>
+                        </div>
+                        <!--  ko if : $component.autoFinanceApplicable() === 'Yes'  -->
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementCurrency, value : $component.modelInstance.disbursementCurrency">
+                            </row>
+                        </div>
+                        <!-- ko if : $component.disbursementModeLoaded() -->
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementMode, value : $component.disbursementModeValue">
+                            </row>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot : $component.disbursementModeLoaded() -->
+                        <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementMode, value : $component.nls.noData">
+                            </row>
+                        </div>
+                        <!-- /ko -->
+                        <!--  /ko  -->
+                    </div>
+                </page-section>
+            </div>
+            <div class="oj-flex-item oj-lg-10 oj-sm-12 oj-md-10 ">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.LinkCounterParties, headerTemplate : 'supply-chain-finance/create-program-review/review-edit-link-parties'">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <div>
+                                <oj-list-view :class="[['oj-listview-card-layout']]" :id="[['CounterPartiesList']]"
+                                    :aria-label="[[$component.nls.heading.LinkCounterParties]]" data="[[dataSource56]]"
+                                    item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('counter_parties_list')]]">
+                                </oj-list-view>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="scriptContainer">
+                        <script type="text/html" id="counter_parties_list">
+                            <div data-bind="attr:{'class':'list-width'}">
+                                <div data-bind="attr:{'class':'cp-border'}">
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-3">
+                                            <oj-avatar role="img" size="[['xs']]"
+                                                initials="[[$context.data.associatedPartyInitials]]"
+                                                data-bind="attr:{'aria-label':$component.nls.avatarLabel}"></oj-avatar>
+                                        </div>
+                                        <div class="oj-flex-item oj-lg-7 oj-sm-7 oj-md-7">
+                                            <div>
+                                                <div class="word-style" data-bind="text:$context.data.associatedPartyName"></div>
+                                                <span
+                                                    data-bind="attr:{'class':'cpid-container'},text:$baseModel.format($component.nls.LinkCounterParties.id,{spokeId: $context.data.associatedPartyId.displayValue})"></span>
+                                            </div>
+                                        </div>
+                                        <div class="oj-flex-item oj-lg-1 oj-md-1 oj-sm-1 right">
+                                            <oj-checkboxset class="oj-choice-direction-row"
+                                                :disabled="[[$component.checkBoxDisabled]]"
+                                                :id="[['CounterPartyValue' + $context.data.associatedPartyId.value]]"
+                                                value="{{$component.currentCpValue}}">
+                                                <oj-option :aria-label="[[$component.nls.checkBoxLabel]]"
+                                                    value="{{'checked'}}"></oj-option>
+                                            </oj-checkboxset>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    data-bind="attr:{'class':'oj-lg-12 oj-md-12 oj-sm-12  cp-address cpid-container word-style'},text:$context.data.associatedPartyAddress">
+                                </div>
+                            </div>
+                        </script>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <!--  ko if : $component.isVisible  -->
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <div class="oj-flex oj-flex-items-pad button-container">
+                                <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm]]"><span
+                                        slot="startIcon" class="icons icon-confirm"></span><span
+                                        data-bind="text:$component.nls.LinkCounterParties.Confirm"></span></oj-button>
+                                <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span
+                                        slot="startIcon" class="icons icon-cancel"></span><span
+                                        data-bind="text:$component.nls.LinkCounterParties.Cancel"></span></oj-button>
+                                <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span
+                                        slot="startIcon" class="icons icon-back-arrow"></span><span
+                                        data-bind="text:$component.nls.LinkCounterParties.Back"></span></oj-button>
+                            </div>
+                        </div><!--  /ko  -->
+                    </div>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

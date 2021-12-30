@@ -1,0 +1,25 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payer.DomesticPayer",
+        "components": [
+        {
+            "componentName": "debtor-group-list",
+            "service": "updateStatus",
+            "perform": "add-new-debtor#review-add-new-debtor#debtor-sub-list"
+        },
+        {
+            "componentName": "debtor-group-list",
+            "service": "delete"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.instruction.payin.DomesticPayinInstruction",
+        "components": [
+        {
+            "componentName": "debtor-money-request",
+            "service": "updateStatus",
+            "perform": "review-debtor-money-request#debtor-group-list#debtor-sub-list"
+        }]
+    }]
+}

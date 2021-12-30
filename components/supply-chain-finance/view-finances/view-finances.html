@@ -1,0 +1,301 @@
+<div class="banner-design oj-flex oj-flex-items-pad oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <div data-bind="text:$component.partyName"></div>
+        <span
+            data-bind="text:$baseModel.format($component.nls.ViewFinance.PartyId,{partyId:$component.partyId()})"></span>
+    </div>
+</div>
+<div class="form-main-container">
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.search, headerTemplate : ''">
+        <!-- ko if: refresh -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <div class="oj-flex-item oj-lg-12 oj-md-12">
+                    <oj-label :for="[['finance_ref']]"><span data-bind="text:$component.nls.Search.FinanceRefNo"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7 oj-md-7">
+                    <oj-input-text :id="[['finance_ref']]" value="{{financeRefNo}}"></oj-input-text>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <div class="oj-flex-item oj-lg-12 oj-md-12">
+                    <oj-label :for="[['req_id']]"><span data-bind="text:$component.nls.Search.requestId"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7 oj-md-7">
+                    <oj-input-text :id="[['req_id']]" value="{{requestId}}"></oj-input-text>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.counterpartiesLoaded()  -->
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['CounterPartyName52']]"><span
+                            data-bind="text:$component.nls.Search.CounterPartyName"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7">
+                    <oj-select-one placeholder="[[$component.nls.select]]" :id="[['CounterPartyName52']]"
+                        value="{{counterpartyId}}">
+                        <!-- ko foreach : $component.counterPartyList -->
+                        <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option><!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <div class="oj-flex-item oj-lg-4 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.programTypesLoaded()  -->
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['ProgramName30']]"><span
+                            data-bind="text:$component.nls.Search.ProgramName"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-9">
+                    <oj-select-one placeholder="[[$component.nls.select]]" :id="[['ProgramName30']]"
+                        value="{{programCode}}">
+                        <!-- ko foreach : programNameList -->
+                        <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option><!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <!--  ko if : $baseModel.large() -->
+            <!--  ko ifnot : $component.showMoreOptionsClicked()  -->
+            <div class="oj-flex-item oj-lg-3 right">
+                <div class="more-search-options"><a href="#" class="form-button-link" id="MoreSearchOptions91"
+                        data-bind="attr:{'alt':$component.nls.Search.MoreSearchOptions,'title':$component.nls.Search.MoreSearchOptionsTitle},click:$component.onClickMoreSearchOptions64">
+                        <span data-bind="text:$component.nls.Search.MoreSearchOptions"></span>
+                        <span id="moreOptionId" class="icon-arrow-down"></span></a>
+                </div>
+            </div><!-- /ko -->
+            <!-- /ko -->
+        </div>
+
+        <!--  ko if : $component.showMoreOptionsClicked()  -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.financeStatusLoaded()  -->
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['finance_status']]"><span
+                            data-bind="text:$component.nls.Search.FinanceStatus"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7">
+                    <oj-select-one :id="[['finance_status']]" placeholder="[[$component.nls.select]]"
+                        value="{{financeStatus}}">
+                        <!-- ko foreach : $component.financeStatusList -->
+                        <oj-option value="[[code]]"><span data-bind="text:description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div><!-- /ko -->
+            </div>
+
+            <div class="oj-flex-item oj-lg-4 oj-md-5 oj-sm-6">
+                <div class="oj-flex-item oj-lg-12">
+                    <label data-bind="text:$component.nls.Search.FinanceDueDate"></label>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-5 oj-md-6">
+                        <oj-label for="from-date">
+                            <span data-bind="text:$component.nls.Search.From"></span>
+                        </oj-label>
+                        <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['from-date']]"
+                            value="{{fromDate}}" max="[[toDate]]"></oj-input-date>
+                    </div>
+                    <div class="oj-flex-item oj-lg-5 oj-md-6">
+                        <oj-label for="to-date">
+                            <span data-bind="text:$component.nls.Search.To"></span>
+                        </oj-label>
+                        <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['to-date']]" value="{{toDate}}"
+                            min="[[fromDate]]"></oj-input-date>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-7">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12">
+                        <label data-bind="text:$component.nls.Search.FinanceAmountRange"></label>
+                    </div>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-lg-7 oj-md-7 oj-sm-7">
+                        <div>
+                            <amount-input
+                                params="amount : fromFinanceAmount, currency : $component.financeCurrency, label :$component.nls.Search.From,validator:$component.validation,isMandatory: '',currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'fromFinanceAmount',rootClass:''">
+                            </amount-input>
+                        </div>
+                    </div>
+                    <div class="oj-lg-4 oj-md-4 oj-sm-4">
+                        <div>
+                            <amount-input
+                                params="amount : toFinanceAmount, currency : $component.financeCurrency, label :$component.nls.Search.To,validator:$component.validation,isMandatory: '',rootId:'toFinanceAmount',rootClass:''">
+                            </amount-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-lg-7 oj-md-7 oj-sm-6 right">
+                <div class="less-search-options">
+                    <a href="#" class="form-button-link" id="LessSearchOptions95"
+                        data-bind="attr:{'alt':$component.nls.Search.LessSearchOptions,'title':$component.nls.Search.LessSearchOptionsTitle},click:$component.onClickLessSearchOptions4"><span
+                            data-bind="text:$component.nls.Search.LessSearchOptions"></span>
+                        <span id="lessOptionId" class="icon-arrow-up"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.onClickSearch]]"><span slot="startIcon"
+                    class="icons icon-search"></span><span data-bind="text:$component.nls.Search.Search"></span>
+            </oj-button>
+
+            <oj-button class="action-button-tertiary" on-click="[[$component.clearResults]]"> <span slot="startIcon"
+                    class="icons icon-refresh"></span><span data-bind="text:$component.nls.Search.Clear"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+    </page-section>
+
+    <div class="oj-flex">
+        <!-- ko if : $component.financeDataLoaded() -->
+        <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.FinanceList, headerTemplate : ''">
+                <div>
+                    <oj-table :id="[['finance-table']]" data="[[dataSource]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('financeRenderer')]]"
+                        selection-mode='{"row":"single","column":"single"}'
+                        columns="[[[{'headerText':$component.nls.FinanceList.CounterpartyName, 'field': 'counterpartyName'},{'headerText':$component.nls.FinanceList.ProgramName, 'field': 'programName'},{'headerText':$component.nls.FinanceList.ReferenceNo, 'field': 'id'},
+                        {'headerText':$component.nls.FinanceList.DueDate, 'field': 'dueDate'},
+                        {'headerText':$component.nls.FinanceList.RequestId, 'field': 'requestId', headerClassName: 'table-header-style'},{'headerText':$component.nls.FinanceList.FinancedAmount, headerClassName:'right', sortable: false},{'headerText':$component.nls.FinanceList.OutstandingAmount, headerClassName:'right', sortable: false},{'headerText':$component.nls.FinanceList.RepaidAmount, headerClassName:'right', sortable: false},{'headerText':$component.nls.FinanceList.Status, 'field': 'statusDescription'}]]]">
+                    </oj-table>
+                    <oj-paging-control :id="[['FinancesListId43']]" data="[[dataSource]]" page-size="10">
+                    </oj-paging-control>
+                </div>
+                <div id="scriptContainer">
+                    <script type="text/html" id="financeRenderer">
+                        <td>
+                            <span data-bind="text:$context.row.counterpartyName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text:$context.row.programName"></span>
+                        </td>
+                        <td>
+                            <a href="#" class="form-button-link"
+                                data-bind="attr:{'id':$context.row.id,'alt':$component.nls.FinanceList.ReferenceNo,'title':$component.nls.FinanceList.FinanceNoTitle},click:$component.onClickFinance"><span
+                                    data-bind="text:$context.row.id"></span></a>
+                        </td>
+                        <td>
+                            <div data-bind="text:$formatter.formatDate($context.row.dueDate)">
+                            </div>
+                        </td>
+                        <td>
+                            <!-- ko if: $context.row.requestId !== "-" -->
+                            <span data-bind="text:$context.row.requestId"></span>
+                            <!-- /ko -->
+                            <!-- ko if: $context.row.requestId === "-" -->
+                            <div class="center-align">
+                                <span data-bind="text:$context.row.requestId"></span>
+                            </div>
+                            <!-- /ko -->
+                        </td>
+                        <td class="right">
+                            <span
+                                data-bind="text:$formatter.formatCurrency($context.row.totalAmount.amount,$context.row.totalAmount.currency)"></span>
+                        </td>
+                        <td>
+                            <!-- ko if: $context.row.outstandingAmount !== "-" -->
+                            <div class="right">
+                                <span
+                                    data-bind="text:$formatter.formatCurrency($context.row.outstandingAmount.amount,$context.row.outstandingAmount.currency)"></span>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $context.row.outstandingAmount === "-" -->
+                            <div class="center-align">
+                                <span data-bind="text:$context.row.outstandingAmount"></span>
+                            </div>
+                            <!-- /ko -->
+                        </td>
+                        <td>
+                            <!-- ko if: $context.row.repaidAmount !== "-" -->
+                            <div class="right">
+                                <span
+                                    data-bind="text:$formatter.formatCurrency($context.row.repaidAmount.amount,$context.row.repaidAmount.currency)"></span>
+                                <a href="#" openprofile="true" data-bind="attr : {'id':'repaid-amount-' + $context.row.id,'alt':$component.nls.FinanceList.RepaidAmount,
+                                    'title':$component.nls.FinanceList.MoreInfoTitle},click:$component.openBreakup"
+                                    class="amount-split-padding icons icon-more pull-right">
+                                </a>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $context.row.repaidAmount === "-" -->
+                            <div class="center-align">
+                                <span data-bind="text:$context.row.repaidAmount"></span>
+                            </div>
+                            <!-- /ko -->
+                        </td>
+                        <td>
+                            <div class="center-align">
+                                <!-- ko if: $context.row.status === "DISBURSED" -->
+                                <span class="tags disbursed-Color"
+                                    data-bind="text:$context.row.statusDescription"></span>
+                                <!-- /ko -->
+                                <!-- ko if: $context.row.status === "SETTLED" -->
+                                <span class="tags settled-Color" data-bind="text:$context.row.statusDescription"></span>
+                                <!-- /ko -->
+                                <!-- ko if: $context.row.status === "PARTIAL_SETTLED" -->
+                                <span class="tags partially-settled-Color"
+                                    data-bind="text:$context.row.statusDescription"></span>
+                                <!-- /ko -->
+                                <!-- ko if: $context.row.status === "OTHERS" -->
+                                <span class="tags other-Color" data-bind="text:$context.row.statusDescription"></span>
+                                <!-- /ko -->
+                                <!-- ko ifnot: $context.row.status -->
+                                <span class="tags in-process-Color"
+                                    data-bind="text:$context.row.statusDescription"></span>
+                                <!-- /ko -->
+                            </div>
+                        </td>
+                    </script>
+                </div>
+                <div id="popupWrapper">
+                    <oj-popup id="breakUpPopUp">
+                        <div>
+                            <label data-bind="text:$component.nls.FinanceList.InterestAmount"></label>
+                            <!-- ko if: $component.interestAmount() !== "-" -->
+                            <span
+                                data-bind="text:$formatter.formatCurrency($component.interestAmount(),$component.currency())"></span>
+                            <!-- /ko -->
+                            <!-- ko if: $component.interestAmount() === "-" -->
+                            <span data-bind="text:$component.interestAmount()"></span>
+                            <!-- /ko -->
+                        </div>
+                        <div>
+                            <label data-bind="text:$component.nls.FinanceList.PrincipalAmount"></label>
+                            <!-- ko if: $component.principalAmount() !== "-" -->
+                            <span
+                                data-bind="text:$formatter.formatCurrency($component.principalAmount(),$component.currency())"></span>
+                            <!-- /ko -->
+                            <!-- ko if: $component.principalAmount() === "-" -->
+                            <span data-bind="text:$component.principalAmount()"></span>
+                            <!-- /ko -->
+                        </div>
+                    </oj-popup>
+                </div>
+            </page-section>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

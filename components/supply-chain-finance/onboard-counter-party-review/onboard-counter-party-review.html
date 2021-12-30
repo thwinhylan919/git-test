@@ -1,0 +1,107 @@
+    <div class="form-main-container">
+        <!--  ko if : $component.isVisible()  -->
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div
+                data-bind="template:{name: 'review-screen/review-banner-template', data:{header: $component.nls.reviewCaption, reviewHeader: $component.nls.reviewHeader}}">
+            </div>
+        </page-section>
+        <!-- /ko -->
+        <!-- ko if : $component.dataLoaded() -->
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.PartyName, value : $component.reviewData.name">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.ShortName, value : $component.reviewData.shortName">
+                    </row>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.CategoryofCorporate, value : $component.reviewData.categoryDesc">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.CorporateRegistrationNumber, value : $component.reviewData.corporateRegistrationNumber">
+                    </row>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.Mobile, value : $baseModel.format($component.nls.CounterPartyDetails.mobileNumberValue,{code:$component.reviewData.countryCode,number:$component.reviewData.mobileNumber})">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.TaxRegistrationNumber, value : $component.reviewData.taxRegistrationNumber">
+                    </row>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <!--  ko if : $component.reviewData.phoneNumber  -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.LandlineNumber, value : $component.reviewData.phoneNumber">
+                    </row>
+                    <!--  /ko  -->
+                    <!--  ko ifnot : $component.reviewData.phoneNumber  -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.LandlineNumber, value : $component.nls.CounterPartyDetails.notApplicable">
+                    </row>
+                    <!--  /ko  -->
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.EmailId, value : $component.reviewData.emailId">
+                    </row>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.Address, value : $baseModel.format($component.nls.CounterPartyDetails.totalAddress,{address1: $component.reviewData.address.line1,address2: $component.reviewData.address.line2,city:$component.reviewData.address.city,state:$component.reviewData.address.stateName,country:$component.reviewData.address.countryName,pinCode:$component.reviewData.address.zipCode})">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.PINCode, value : $component.reviewData.address.zipCode">
+                    </row>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                    <!-- ko if: $component.reviewData.preferredModeOfCommunication === "EMAIL" -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.PreferredCommunicationMode, value : $component.nls.CounterPartyDetails.Email">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if: $component.reviewData.preferredModeOfCommunication === "MOBILE" -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CounterPartyDetails.PreferredCommunicationMode, value : $component.nls.CounterPartyDetails.Mobile">
+                    </row>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!--  ko if : $component.isVisible()  -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm60]]"><span
+                        slot="startIcon" class="icons icon-confirm"></span><span
+                        data-bind="text:$component.nls.CounterPartyDetails.Confirm"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel63]]"><span
+                        slot="startIcon" class="icons icon-cancel"></span><span
+                        data-bind="text:$component.nls.CounterPartyDetails.Cancel"></span></oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack25]]"><span slot="startIcon"
+                        class="icons icon-back-arrow"></span><span
+                        data-bind="text:$component.nls.CounterPartyDetails.Back"></span></oj-button>
+            </div>
+            <!--  /ko  -->
+        </page-section>
+        <!-- /ko -->
+    </div>

@@ -1,0 +1,82 @@
+<oj-validation-group id="tracker">
+  <div class="form-main-container">
+    <!-- ko if: $component.showInvestments -->
+    <div class="oj-flex oj-flex-items-pad purchase-fund-container">
+     <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 align-label">
+         <span data-bind="text:$component.nls.Investments.pageTitle"></span>
+     </div>
+     </div>
+    <!-- ko foreach : $component.dummyModal.additionalDetails.investments -->
+    <page-section params="baseModel : $baseModel, rootModel : $component">
+      <div class="oj-flex oj-flex-items-pad ">
+        <div class="oj-flex-item heading">
+          <div class="oj-flex-item oj-lg-8 oj-sm-8 oj-md-8">
+            <span data-bind="text: $baseModel.format($component.nls.Investments.InvestmentNumber,{index : $index()+1})"></span>
+          </div>
+        </div>
+        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4">
+          <a href="#" data-bind="attr:{id: 'delete_'+$index(),alt:$component.nls.Investments.clickToDelete,title:$component.nls.Investments.deleteInvestment}, click:$component.deleteInvestment.bind($data,$index())">
+            <div class="icons icon-delete" aria-hidden="true"></div>
+          </a>
+        </div>
+      </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label :for="[['InvestmentType'+$index()]]">
+              <span data-bind="text:$component.nls.Investments.InvestmentType"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+        <!-- ko if: $component.investmentListLoaded() -->
+        <oj-select-one :id="[['InvestmentType'+$index()]]" :placeholder="[[$component.nls.Investments.select]]"  value="{{$component.dummyModal.additionalDetails.investments[$index()].investmentType}}"
+        on-value-changed="[[$component.investmentSelectedHandler.bind($data,$index())]]">
+          <!-- ko foreach : $component.investmentsList -->
+          <oj-option :id="[['code'+$baseModel.incrementIdCount()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      <!-- /ko -->
+      </div>
+      </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label :for="[['InvestmentDate'+$index()]]">
+              <span data-bind="text:$component.nls.Investments.InvestmentDate"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6">
+            <oj-input-date :id="[['InvestmentDate'+$index()]]" value="{{$component.dummyModal.additionalDetails.investments[$index()].investmentDate}}" max="[[$oj.IntlConverterUtils.dateToLocalIso($component.today())]]"  :required="[[$component.dummyModal.additionalDetails.investments[$index()].investmentRequired]]"></oj-input-date>
+          </div>
+        </div>
+        <div data-bind="component: {
+                  name: 'amount-input', params: {
+                    amount :$component.dummyModal.additionalDetails.investments[$index()].value.amount,
+                    label : $component.nls.Investments.CurrentMarketValue,
+                    currency:$component.dummyModal.additionalDetails.investments[$index()].value.currency,
+                    converter:$formatter.formatCurrency,
+                    isMandatory:$component.dummyModal.additionalDetails.investments[$index()].investmentRequired,
+                    currencyListRequired : true,
+                    currencyURL : 'currency',
+                    currencyParser : $component.currencyParser,
+                    rootId:'amount-investment'+ $baseModel.incrementIdCount(),
+                    rootClass:'form-input',
+                    valueClasses : 'oj-lg-12 oj-md-12 oj-sm-12'
+              }
+            }"></div>
+    </page-section>
+    <!-- /ko -->
+      <!-- /ko -->
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+          <a href="#" data-bind="click:$component.addInvestment">
+                <span class="icons icon-add" slot="startIcon"></span>
+                <span data-bind="text:$component.nls.Investments.addInvestment"></span>
+              </a>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item button-container">
+          <oj-button class="action-button-primary" on-click="[[$component.onClickSave]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.Investments.Save"></span></oj-button>
+        </div>
+      </div>
+  </div>
+</oj-validation-group>

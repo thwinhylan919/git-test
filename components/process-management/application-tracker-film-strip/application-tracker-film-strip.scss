@@ -1,0 +1,69 @@
+.proceedButton {
+    @include padding(1rem, 1rem, 1rem, 4.2rem);
+}
+
+.filmStripPadding {
+    padding-top: 3.6rem;
+}
+
+.description {
+    @include padding(0.5rem, 2rem, 0, 2rem);
+    width: 24.5rem;
+    height: 4.5rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.boldHeading {
+    padding-top: 1.8rem;
+    font-size: 1.2rem;
+}
+
+.buttonCustomPad {
+    padding: 1.3rem 0.6rem;
+}
+
+.imgWidth {
+    @include mq(large) {
+        width: 65%;
+    }
+}
+
+.tickmarkBackground {
+    display: inline-block;
+    min-width: 0.6rem;
+    padding: 0.01rem 0.015rem;
+    font-size: 0.4rem;
+    font-weight: 400;
+    line-height: 0.8;
+    color: var(--base-color-secondary-text);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: var(--base-color-success);
+    border-radius: 0.9rem;
+    position: relative;
+    top: -1.6rem;
+    @include left(-0.5rem);
+    margin: 0 -0.8em;
+    zoom: 130%
+}
+
+.tickMarkPadding {
+    position: absolute;
+    width: 17.7rem;
+    top: 1.6rem;
+    z-index: 1;
+}
+
+.smallOfferText {
+    @include padding(0.5rem, 0rem, 1.5rem, 0rem);
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.offerText {
+    @include padding(0.5rem, 20rem, 1.5rem, 20rem);
+    font-size: 0.8rem;
+    opacity: 0.6;
+}

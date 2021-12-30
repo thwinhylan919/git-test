@@ -1,0 +1,131 @@
+<oj-validation-group id="tracker">
+    <!-- ko ifnot:$component.collateralPopup -->
+    <!-- ko if:$component.collateralDataLoaded -->
+
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div class="oj-flex oj-flex-items-pad cust-details greyBar">
+
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.collateralAmount">
+                    </div>
+                    <div class="cust-account" data-bind="text: $formatter.formatCurrency($component.collateralData().collateralDTO.collateralValue.amount,$component.collateralData().collateralDTO.collateralValue.currency)">
+                    </div>
+
+                </div>
+
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.limitContribution">
+                    </div>
+                    <div class="cust-account" data-bind="text:$formatter.formatCurrency($component.collateralData().collateralDTO.limitContribution,$component.collateralData().collateralDTO.availableAmount.currency)">
+                    </div>
+                </div>
+
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.utilizedAmount">
+                    </div>
+                    <div class="cust-account" data-bind="text: $formatter.formatCurrency($component.collateralData().collateralDTO.utilizationAmount.amount,$component.collateralData().collateralDTO.utilizationAmount.currency) ">
+                    </div>
+                </div>
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.blockAmount">
+                    </div>
+                    <div class="cust-account" data-bind="text:$component.collateralData().collateralDTO.blockAmount.amount ? $formatter.formatCurrency($component.collateralData().collateralDTO.blockAmount.amount,$component.collateralData().collateralDTO.blockAmount.currency): '-'">
+                    </div>
+                </div>
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.availableAmount">
+                    </div>
+                    <div class="cust-account" data-bind="text: $formatter.formatCurrency($component.collateralData().collateralDTO.availableAmount.amount,$component.collateralData().collateralDTO.availableAmount.currency) ">
+                    </div>
+                </div>
+                
+
+
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.startDate">
+                    </div>
+                    <div class="cust-account" data-bind="text:$formatter.formatDate($component.collateralData().collateralDTO.startDate)">
+                    </div>
+                </div>
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.endDate">
+                    </div>
+                    <div class="cust-account" data-bind="text:$formatter.formatDate($component.collateralData().collateralDTO.endDate)">
+                    </div>
+                </div>
+
+                <div class="oj-flex-item  oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.revisionDate">
+                    </div>
+                    <!-- ko if: $component.collateralData().collateralDTO.revisionDate -->
+
+                    <div class="cust-account" data-bind="text:$formatter.formatDate($component.collateralData().collateralDTO.revisionDate)">
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.collateralData().collateralDTO.revisionDate -->
+                    <div class="cust-account center" data-bind="text:$component.blank()">
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex-item oj-lg-1.5">
+                    <div class="label" data-bind="text:$component.locale.lendableMargin">
+                    </div>
+                    <div class="cust-account" data-bind="text:$baseModel.format($component.locale.structure.labels.percentage,{number: $component.collateralData().collateralDTO.lendableMargin})">
+                    </div>
+                </div>
+            </div>
+        </page-section>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-12" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.locale.header}}'></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12">
+                <div class="form-main-container" data-bind="component:{name : compName, params:{rootModel:$component}}"></div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- /ko -->
+
+    <!-- /ko -->
+    <!-- ko if :$component.collateralPopup -->
+        <div data-bind="descendantsComplete : $component.showModal">
+    <modal-window params="baseModel : $baseModel, rootModel : $data,id:'choicePopup',closeHandler:closeHandler, header : $component.locale.chooseCollateral">
+        <div class="form-main-container">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12" data-bind="text: $component.locale.collateralId">
+                </div>
+                <!-- ko if:$component.showFacilityModal -->
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 vertical-ruler">
+                    <oj-select-one id="select" value="{{$component.collateralIdValue}}" on-value-changed="[[collateralIdChangeHandler]]">
+                        <!-- ko foreach: $component.collateralIdOptions -->
+                        <oj-option value="{{id}}"><span data-bind="text: label"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary " on-click="[[$component.proceed]]">
+                        <span slot="startIcon" class="icons icon-forward-arrow oj-button-icon oj-start"></span>
+                        <span data-bind="text:$component.locale.generic.common.proceed"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary " on-click="[[$component.closeHandler]]">
+                        <span slot="startIcon" class="icon-cancel"></span>
+                        <span data-bind="text:$component.locale.generic.common.cancel"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </div>
+
+    </modal-window>
+        </div>
+    <!-- /ko -->
+</oj-validation-group>

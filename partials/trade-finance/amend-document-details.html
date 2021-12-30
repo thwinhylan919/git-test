@@ -1,0 +1,414 @@
+<div class="page-section-content">
+  <!-- ko if:$component.mode() === 'EDIT' || $component.mode() === 'CREATE' -->
+  <!-- ko if : $component.showDocuments() -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <!-- ko ifnot:$baseModel.small() -->
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 doc-table">
+        <oj-table id="docTable" :aria-label="[[$component.resourceBundle.instructionsDetails.labels.documentTable]]"
+          row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_doc', true)]]"
+          columns="[[[{headerTemplate:'hdr_doc_checkbox_tmpl',sortable:'none',style:'width: 10%'},{headerText:$component.resourceBundle.documents.labels.docName,sortProperty:'name',style:'width: 40%'},{headerText:$component.resourceBundle.documents.labels.original,style:'width: 20%'},{headerText:$component.resourceBundle.documents.labels.copies,style:'width: 15%'},{headerText:$component.resourceBundle.documents.labels.clause,style:'width: 15%'}]]]"
+          edit-mode="[['rowEdit']]" data="[[$component.datasourceForDoc]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.documents.labels.documentsRequired">
+          </caption>
+          <template slot="hdr_doc_checkbox_tmpl">
+            <oj-checkboxset on-value-changed='[[$component.selectAllDocListener]]'>
+              <oj-option value="true" id="headerboxForDoc_labelID">
+                <span class="oj-checkbox-label hide-label" for="headerboxForDoc_labelID"
+                  data-bind="text:$component.resourceBundle.documents.labels.documentsRequired"></span>
+              </oj-option>
+            </oj-checkboxset>
+          </template>
+        </oj-table>
+        <oj-paging-control id="paging" slot="bottom" :page-size="[[5]]" data="[[$component.datasourceForDoc]]">
+        </oj-paging-control>
+      </div>
+      <!-- /ko -->
+
+      <!-- ko if:$baseModel.small() -->
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-checkboxset id="selectionParentDocument" on-value-changed='[[$component.selectAllDocListener]]'>
+            <oj-option value="true" id="headerboxForDoc"><span class="oj-checkbox-label" for="headerboxForDoc"
+                data-bind="text:$component.resourceBundle.common.labels.selectAll"></span></oj-option>
+          </oj-checkboxset>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+          <oj-list-view id="listview-txn-card" class="cards"
+            item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('document_list_card',true)}]]"
+            selection-mode="[['single']]" data="[[$component.datasourceForDoc]]">
+          </oj-list-view>
+          <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]"
+            :page-size="[[2]]" data="[[$component.datasourceForDoc]]">
+          </oj-paging-control>
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- ko if:$baseModel.large() -->
+  <!-- ko foreach: $component.clauseTableArray -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <h4 class="sub-heading" data-bind="text: $data.docName"></h4>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 clause-table">
+        <oj-table id="clauseTable" :aria-label="[[$component.resourceBundle.documents.labels.clauses]]"
+          row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_clause', true)]]"
+          columns="[[[{headerTemplate:'hdr_clause_checkbox_tmpl',sortable:'none',style:'width: 10%'},{headerText:$component.resourceBundle.documents.labels.clauseDesc,sortProperty:'clauseDesc',style:'width: 90%'}]]]"
+          columns-default="[[{sortable:'enabled'}]]" edit-mode="[['rowEdit']]" data="[[$data.datasourceForClause]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.documents.labels.clauses"></caption>
+          <template slot="hdr_clause_checkbox_tmpl">
+            <oj-checkboxset on-value-changed='[[$component.selectAllClauseListener.bind($data, $data.docId)]]'>
+              <oj-option :id="[['headerboxForClause_labelID_'+ $data.docName]]" :value="[[true]]">
+                <span class="oj-checkbox-label hide-label"
+                  data-bind="text:$component.resourceBundle.documents.labels.documentsRequired, for: 'headerboxForClause_labelID_'+$data.docName"></span>
+              </oj-option>
+            </oj-checkboxset>
+          </template>
+        </oj-table>
+        <oj-paging-control id="paging" slot="bottom" :page-size="[[5]]" data="[[$data.datasourceForClause]]">
+        </oj-paging-control>
+      </div>
+
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko ifnot:$component.mode() === 'EDIT' || $component.mode() === 'CREATE' -->
+  <!-- ko if: $component.showDocuments() -->
+
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <label for="docTable" data-bind="text: $component.resourceBundle.documents.labels.docDetails"></label>
+        <!-- ko if: $component.isDocumentTableChanged -->
+        <!-- ko if: $component.letterOfCreditDetails.document.length === 0 -->
+        <a href="#" id="prev-documents"
+          data-bind="click:$component.showPreviousValueForTable.bind($data, $component.resourceBundle.none, 'prev-documents', 'lc-amendment-popup-document-table')"><span
+            class="icons icon-received"></span></a>
+        <!-- /ko -->
+        <!-- ko if: $component.letterOfCreditDetails.document.length > 0 -->
+        <a href="#" id="prev-documents"
+          data-bind="click:$component.showPreviousValueForTable.bind($data,null , 'prev-documents', 'lc-amendment-popup-document-table')"><span
+            class="icons icon-received"></span></a>
+        <!-- /ko -->
+        <!-- /ko -->
+      </div>
+      <!-- ko ifnot:$baseModel.small() -->
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-table id="docTable" :aria-label="[[$component.resourceBundle.documents.labels.documentTable]]"
+          row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_doc_review', true)]]"
+          columns="[[$component.docTblColumns]]" data="[[$component.datasourceForDocReview]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.documents.labels.documentsRequired">
+          </caption>
+        </oj-table>
+        <oj-paging-control id="paging" slot="bottom" :page-size="[[5]]" data="[[$component.datasourceForDocReview]]">
+        </oj-paging-control>
+      </div>
+      <!-- /ko -->
+      <!-- ko if:$baseModel.small() -->
+      <div class="oj-flex grid-main-container doc-cards-container">
+        <div class="oj-flex-item oj-sm-12">
+          <oj-list-view id="listview-txn-card" class="cards"
+            item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('document_list_card',true)}]]"
+            selection-mode="[['single']]" data="[[$component.datasourceForDocReview]]">
+          </oj-list-view>
+          <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]"
+            :page-size="[[5]]" data="[[$component.datasourceForDocReview]]">
+          </oj-paging-control>
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+
+
+  <!-- ko if:$baseModel.large() -->
+  <!-- ko foreach: $component.clauseTableArrayForReview -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 grid-row-group"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <h4 class="sub-heading" data-bind="text: $data.docName"></h4>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-table id="clauseTable"
+          columns="[[[{headerText:$component.resourceBundle.documents.labels.clauseDesc,field:'description',sortProperty:'clauseDesc',style:'width: 100%'}]]]"
+          columns-default="[[{sortable:'enabled'}]]" data="[[datasourceForClauseReview]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.documents.labels.clauses"></caption>
+        </oj-table>
+        <oj-paging-control id="paging" slot="bottom" :page-size="[[5]]" data="[[datasourceForClauseReview]]">
+        </oj-paging-control>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if:$component.mode() === 'EDIT' || $component.mode() === 'CREATE' -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 doc-days-div">
+          <span class="doc-presented pull-left"
+            data-bind="text:$component.resourceBundle.documents.labels.documentsToBePresented"></span>
+          <span class="pull-left">
+            <oj-label class="hide-label" for="documentDays">
+              <span data-bind="text:$component.resourceBundle.documents.labels.documentsToBePresented"></span>
+            </oj-label>
+            <oj-input-text class="condition-input" id="documentDays" maxlength="3" :maxlength="[[3]]" validators="[[$baseModel.getValidator('NUMBERS',$component.resourceBundle.tradeFinanceErrors.documentDetails.invalidDescription,{
+                type:'numberRange',options:{
+                    min:1,max:$component.remainingDays()}})]]"
+              value="{{$component.lcAmendmentDetails.documentPresentationDays}}"
+              display-options='{"messages": "notewindow"}'></oj-input-text>
+          </span>
+          <span class="shipment-days pull-left"
+            data-bind="text:$component.resourceBundle.documents.labels.daysAfterShipment"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot:$component.mode() === 'EDIT' || $component.mode() === 'CREATE' -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <span
+            data-bind="text: $baseModel.format($component.resourceBundle.documents.labels.documentsPresentedInDays,
+                  {noOfDays: ko.utils.unwrapObservable($component.lcAmendmentDetails.documentPresentationDays)})"></span>
+          <!-- ko if: $component.letterOfCreditDetails.documentPresentationDays !== ko.utils.unwrapObservable($component.lcAmendmentDetails.documentPresentationDays) -->
+          <a href="#" id="prev-document-presentation-days"
+            data-bind="click:$component.showPreviousValue.bind($data, $component.letterOfCreditDetails.documentPresentationDays, 'prev-document-presentation-days')"><span
+              class="icons icon-received"></span></a>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+      data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <label for="incoterm" class="align-left"
+            data-bind="text: $component.resourceBundle.lcDetails.labels.incoterm"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 content">
+          <span id="incoterm" data-bind="text:$component.dropdownLabels.incoterm"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/html" id="clause_list_card">
+  <li>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.medium() }">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item">
+            <label data-bind="text: $component.resourceBundle.documents.labels.clauseDesc"></label>
+            <div data-bind="text: $data.description"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</script>
+
+<script type="text/html" id="document_list_card">
+  <li>
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-9 description" data-bind="text: $data.name">
+          </div>
+        </div>
+      </div>
+
+      <div class="oj-flex-item oj-sm-12 grid-row-group">
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item">
+            <label data-bind="text: $component.resourceBundle.documents.labels.original"></label>
+            <div data-bind="text: $data.originals"></div>
+          </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item">
+            <label data-bind="text: $component.resourceBundle.documents.labels.copies"></label>
+            <div data-bind="text: $data.copies"></div>
+          </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item">
+            <a href="#" data-bind="text: $component.resourceBundle.documents.labels.viewClause, click: $component.viewClauses.bind()"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </li>
+</script>
+
+<script type="text/html" id="row_tmpl_doc_review">
+  <tr>
+    <td data-bind="text: $data.name">
+            <!-- ko if: $component.letterOfCreditDetails.document && $component.letterOfCreditDetails.document.length > 0 -->
+            <!-- ko if: $component.letterOfCreditDetails.document[$context.rowContext.status.rowIndex].name !== ko.utils.unwrapObservable($data.name) -->
+            <a href="#" :id="{{'prev-document-name' + $context.rowContext.status.rowIndex}}"
+              data-bind="click:$component.showPreviousValue.bind($data, $component.resourceBundle.lcDetails.notSelected, 'prev-document-name' + $context.rowContext.status.rowIndex)"><span
+                class="icons icon-received"></span></a>
+            <!-- /ko -->
+            <!-- /ko -->
+    </td>
+    <td data-bind="text: $data.originals">
+            <!-- ko if: $component.letterOfCreditDetails.document && $component.letterOfCreditDetails.document.length > 0 -->
+            <!-- ko if: $component.letterOfCreditDetails.document[$context.rowContext.status.rowIndex].originals !== ko.utils.unwrapObservable($data.originals) -->
+            <a href="#" :id="{{'prev-document-originals' + $context.rowContext.status.rowIndex}}"
+              data-bind="click:$component.showPreviousValue.bind($data, $component.letterOfCreditDetails.document[$context.rowContext.status.rowIndex].originals, 'prev-document-originals' + $context.rowContext.status.rowIndex)"><span
+                class="icons icon-received"></span></a>
+            <!-- /ko -->
+            <!-- /ko -->
+    </td>
+    <td data-bind="text: $data.copies">
+            <!-- ko if: $component.letterOfCreditDetails.document && $component.letterOfCreditDetails.document.length > 0 -->
+            <!-- ko if: $component.letterOfCreditDetails.document[$context.rowContext.status.rowIndex].copies !== ko.utils.unwrapObservable($data.copies) -->
+            <a href="#" :id="{{'prev-document-copies' + $context.rowContext.status.rowIndex}}"
+              data-bind="click:$component.showPreviousValue.bind($data, $component.letterOfCreditDetails.document[$context.rowContext.status.rowIndex].copies, 'prev-document-copies' + $context.rowContext.status.rowIndex)"><span
+                class="icons icon-received"></span></a>
+            <!-- /ko -->
+            <!-- /ko -->
+    </td>
+    <!-- ko if: $baseModel.medium -->
+    <td><a href="#" data-bind="text: $component.resourceBundle.documents.labels.viewClause, click: $component.viewClauses.bind()"></a></td>
+    <!-- /ko -->
+  </tr>
+</script>
+<script type="text/html" id="row_tmpl_doc">
+  <tr>
+      <td>
+          <span class="check-box-align">
+        <oj-checkboxset :id="[['docSelected_'+ id]]" value="{{docSelected}}" on-value-changed="[[$component.docSelectionHandler]]"><oj-option value="true" name="docSelected" :id="[['name_'+ id]]"><span class="oj-checkbox-label hide-label" data-bind="text:name, attr : {'for' :'name_' + id}"></span></oj-option></oj-checkboxset>
+      <span>
+      </td>
+      <td data-bind="text: name">
+      </td>
+      <td class="doc-copies">
+        <div class="oj-flex oj-flex-items-pad grid-row-group">
+          <div class="oj-flex oj-flex-item oj-sm-4 oj-md-2 oj-lg-3">
+            <oj-label class="hide-label" data-bind="attr : {'for' :'originalDocs_' + id}">
+              <span data-bind="text:name"></span>
+            </oj-label>
+            <oj-input-text class = "alignText" maxlength="2" :id="[['originalDocs_'+ id]]" :invalidcomponenttracker="[[$component.documentsValidationTracker]]" validators="[[$baseModel.getValidator('NUMBERS',$component.resourceBundle.tradeFinanceErrors.documentDetails.invalidInput,{
+                                      type:'length',options:{
+                                          min:1,max:2}})]]" disabled="[[docSelected()[0] ==='true'?false:true]]" value="{{originals}}"></oj-input-text>
+          </div>
+          <div class="oj-flex oj-flex-item oj-sm-1 oj-md-1 oj-lg-1 forward-slash">
+            <span data-bind="text: $component.resourceBundle.documents.labels.forwardSlash"></span>
+          </div>
+          <div class="oj-flex oj-flex-item oj-sm-4 oj-md-2 oj-lg-3">
+            <oj-label class="hide-label" data-bind="attr : {'for' :'originalDocsCutoff_' + id}"></">
+              <span data-bind="text:name"></span>
+            </oj-label>
+            <oj-input-text  class = "alignText" maxlength="2" :id="[['originalDocsCutoff_'+ id]]" :invalidcomponenttracker="[[$component.documentsValidationTracker]]" validators="[[$baseModel.getValidator('NUMBERS',$component.resourceBundle.tradeFinanceErrors.documentDetails.invalidInput,{
+                                      type:'length',options:{
+                                          min:1,max:2}})]]" disabled="[[docSelected()[0] ==='true'?false:true]]" value="{{originalsOutOff}}"></oj-input-text>
+          </div>
+        </div>
+      </td>
+      <td class="doc-copies">
+        <div class="oj-flex">
+          <div class="oj-flex oj-flex-item oj-sm-4 oj-md-2 oj-lg-3">
+            <oj-label class="hide-label" data-bind="attr : {'for' :'originalCopies_' + id}"></">
+              <span data-bind="text:name"></span>
+            </oj-label>
+            <oj-input-text  maxlength="2" class = "alignText" :id="[['originalCopies_'+ id]]" :invalidcomponenttracker="[[$component.documentsValidationTracker]]" validators="[[$baseModel.getValidator('NUMBERS',$component.resourceBundle.tradeFinanceErrors.documentDetails.invalidInput,{
+                                      type:'length',options:{
+                                          min:1,max:2}})]]" disabled="[[docSelected()[0] ==='true'?false:true]]" value="{{copies}}"></oj-input-text>
+          </div>
+        </div>
+      </td>
+
+      <td>
+        <!-- ko if: docSelected()[0] ==='true'  -->
+        <a href="#" data-bind="text: $component.resourceBundle.documents.labels.viewClause, click: $component.viewClauses.bind()"></a>
+        <!-- /ko -->
+        <!-- ko ifnot: docSelected()[0] ==='true' -->
+        <span data-bind="text: $component.resourceBundle.documents.labels.viewClause"></span>
+        <!-- /ko -->
+      </td>
+  </tr>
+</script>
+<script type="text/html" id="row_tmpl_clause">
+
+  <tr>
+    <td>
+        <span class="check-box-align">
+      <oj-checkboxset value="{{selected}}"><oj-option value="true" name="clauseSelected" :id="[['id_'+ rowId]]" :class="[['clause-cb-'+ rowId.split('_')[0]]]"><span class="oj-checkbox-label hide-label" data-bind="text:description, attr : {'for' :'id_' + rowId}"></span></oj-option></oj-checkboxset>
+        </span>
+    </td>
+    <td class="clause-desc">
+      <div class="">
+        <oj-label class="hide-label" data-bind="attr : {'for' :'description_'+ rowId}">
+          <span data-bind="text:name"></span>
+        </oj-label>
+        <oj-text-area  id="description" maxlength="9750" :id="[['description_'+ rowId]]" validators="[[$baseModel.getValidator('SWIFT_Z',$component.resourceBundle.tradeFinanceErrors.common.swiftZNewLine,{type:'length',options:{
+            min:0,max:9750}})]]" disabled="[[selected()[0] ==='true'?false:true]]" required="[[true]]" value="{{description}}"></oj-text-area>
+        
+        </div>
+    </td>
+    
+  </tr> 
+</script>
+<modal-window
+  params="baseModel : $baseModel, rootModel:$component, id:'documentClauses', header:$component.clauseModalHeading,display:'full-screen'">
+  <!-- ko if: $component.selectedClauses -->
+  <div class="oj-flex grid-main-container doc-cards-container">
+    <div class="oj-flex-item oj-sm-12">
+      <oj-list-view id="listview-txn-card" class="cards"
+        item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('clause_list_card',true)}]]"
+        selection-mode="[['single']]" data="[[$component.selectedClauses().datasourceForClause]]">
+      </oj-list-view>
+      <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]"
+        :page-size="[[5]]" data="[[$component.selectedClauses().datasourceForClause]]">
+      </oj-paging-control>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad button-container">
+    <span slot="startIcon" class="icons icon-done"></span>
+    <oj-button class="action-button-secondary"
+      on-click="[[$baseModel.displayInteraction.bind($data,'hide','#documentClauses')]]"><span
+        data-bind="text:$component.resourceBundle.generic.common.ok"></span></oj-button>
+  </div>
+  <!-- /ko -->
+</modal-window>

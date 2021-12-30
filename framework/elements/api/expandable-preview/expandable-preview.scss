@@ -1,0 +1,27 @@
+.button-center {
+    justify-content: center;
+}
+
+.edit-button {
+    font-size: 1.3rem;
+    padding-top: 0.5rem;
+}
+
+.panel {
+    background-color: var(--expandable-preview-background-color);
+    border-radius: var(--expandable-preview-border-radius);
+    border-width: var(--expandable-preview-border-width);
+    border-style: solid;
+    border-color: var(--expandable-preview-border-color);
+    padding: 0 0 .6rem 0;
+    height: 100%;
+    margin: 1rem 0;
+
+    .expandable-preview-header > h3 {
+        font-size: var(--expandable-preview-header-font-size);
+        color: var(--expandable-preview-header-color);
+        margin: 0.6rem 0;
+        font-weight: var(--expandable-preview-header-font-weight-regular);
+        display: inline-block;
+    }
+}

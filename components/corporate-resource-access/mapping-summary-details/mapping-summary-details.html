@@ -1,0 +1,53 @@
+<!-- ko if : $component.dataLoaded() -->
+<page-section
+    params="baseModel : $baseModel, rootModel : $data, heading : $baseModel.format($component.nls.heading.ResourceMappingSummary,{attributeName:$component.mappingData.accessData.attributeName}), headerTemplate : ''">
+    <div class="oj-flex oj-flex-items-pad">
+        <!--  ko if : !$component.partySetUpNotExists() -->
+        <!--  ko if : !$component.isSetupExists() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3">
+            <div data-bind="text:$component.noAttributeMapMsg"></div>
+        </div>
+        <div class="oj-flex-item  oj-sm-12 oj-md-6 oj-lg-9">
+            <oj-button class="help-button createBtn" on-click="[[$component.onClickMap16]]"><span
+                    data-bind="text:$component.nls.ProgramMappingSummary.Map"></span></oj-button>
+        </div>
+        <!--  /ko  -->
+        <!--  /ko  -->
+    </div>
+    <!--  ko if : !$component.partySetUpNotExists() -->
+    <!--  ko if :$component.isSetupExists() -->
+    <oj-table :id="[['ProgramMappingSummary8']]"
+        :aria-label="[[$baseModel.format($component.nls.heading.ResourceMappingSummary,{attributeName:$component.mappingData.accessData.attributeName})]]"
+        data="[[dataSource4]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('summaryData')]]"
+        columns="[[columnArray]]">
+    </oj-table>
+    <!-- /ko -->
+    <!--  /ko  -->
+    <div id="scriptContainer">
+        <script type="text/html" id="summaryData">
+            <td><a href="#" class="form-button-link" id="AttributeName62"
+                    data-bind="attr:{'alt':$component.nls.ProgramMappingSummary.AttributeName,'title':$component.nls.ProgramMappingSummary.AttributeNameTitle},click:$component.onClickAttributeName62"><span
+                        data-bind="text:$context.row.attributeName"></span></a></td>
+            <td><span data-bind="text:$context.row.totalAttributes"></span></td>
+            <td><span data-bind="text:$context.row.mappedAttributes"></span></td>
+        </script>
+    </div>
+    <!--  ko if :$component.partySetUpNotExists() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+            <div
+                data-bind="text:$baseModel.format($component.nls.ProgramMappingSummary.partySetupMissing,{module:$component.mappingData.accessData.attributeName})">
+            </div>
+        </div>
+    </div>
+    <!--  /ko  -->
+</page-section>
+<!--  /ko  -->
+
+<!-- ko if : !$component.dataLoaded() && $component.noData() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-8">
+        <div class="noData" data-bind="text:$component.nls.ProgramMappingSummary.noData"></div>
+    </div>
+</div>
+<!--  /ko  -->

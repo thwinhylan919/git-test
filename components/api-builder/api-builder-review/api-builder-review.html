@@ -1,0 +1,94 @@
+<div class="form-main-container full-width">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.reviewHeading , reviewHeader : $component.resource.reviewMessage}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.serviceDetails">
+        <div data-bind="with:$component.apiServiceDTO">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.groupName, value : $component.groupName()"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.serviceurl, value : serviceURL"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.serviceid, value : serviceId"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.serviceName, value : serviceName"></row>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3">
+                    <span class="headerText" data-bind="text:$component.resource.header"></span>
+                </div>
+                <div class="oj-flex-item oj-lg-9 headerData">
+                    <!-- ko foreach: $component.header() -->
+                    <div class="oj-lg-4 left">
+                        <span class="" data-bind="text: $data.key + ' : ' + $data.value" aria-labelledby="header"></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.methodType, value : methodType"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.transactionType, value : $component.transactionType()"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.taskCode, value : taskCode"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.redactionType, value : responseRedactionType"></row>
+            <!-- ko if: $component.apiServiceDTO().responseRedactionType() === "JAVA" -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fileName, value : responseRedaction().name"></row>
+            <!-- /ko -->
+            <!-- ko if: refBusinessPolicy -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dynamicBussPolicy, value : $component.resource.yes"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fileName, value : refBusinessPolicy().name"></row>
+            <!-- /ko -->
+            <!-- ko ifnot: refBusinessPolicy -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.dynamicBussPolicy, value : $component.resource.no"></row>
+            <!-- /ko -->
+            <!-- ko if: $component.isTaskAspectFetched -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-3 label">
+                    <oj-label for="header">
+                        <span data-bind="text:$component.resource.taskAspect"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex oj-flex-item oj-lg-9 label">
+                    <oj-combobox-many id="taskAspect" value="{{$component.selectedTaskAspects}}" disabled>
+                        <!-- ko foreach: $component.taskAspects() -->
+                        <oj-option value="[[value]]"><span data-bind="text: text"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-combobox-many>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.isTaskAspectFetched -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.taskAspect, value : '-'"></row>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.entDetails">
+        <div data-bind="with:$component.apiServiceDTO">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.moduleName, value : $component.selectedModule()"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.categoryName, value : $component.selectedCategory()"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.actionType, value : $component.actionTypes()"></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.jsonPath">
+        <div data-bind="with:$component.apiServiceDTO">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.partyId, value : jsonPathParty"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accNo, value : jsonPathAcc"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.currency, value : jsonPathCurrency"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.amount, value : jsonPathAmount"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.errorCode, value : jsonPathErrorCode"></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.alerts">
+        <div data-bind="with:$component.apiServiceDTO">
+            <!-- ko if: alertRequired -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.alertsRequired, value : $component.resource.yes"></row>
+            <!-- /ko -->
+            <!-- ko ifnot: alertRequired -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.alertsRequired, value : $component.resource.no"></row>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+            <span data-bind="text:$component.resource.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span data-bind="text:$component.resource.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]">
+            <span data-bind="text:$component.resource.back"></span>
+        </oj-button>
+    </div>
+</div>

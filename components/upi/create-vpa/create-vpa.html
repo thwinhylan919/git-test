@@ -1,0 +1,73 @@
+<oj-validation-group id="createVpaTracker">
+    <div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-lg-8 create-vpa">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-lg-5">
+                        <div class=" oj-flex oj-flex-items-pad">
+                            <!-- ko if:!$component.params.isEdit -->
+                            <div class="oj-flex-item checkAvailability">
+                                <oj-label for="entervpa" class="oj-lg-12 oj-flex-item">
+                                    <span data-bind="text: $component.resource.createVpa.enterVpa"></span>
+                                </oj-label>
+                                <div class="oj-flex-bar oj-sm-12">
+                                    <oj-input-text class="oj-flex-item oj-sm-8" id="entervpa" value="{{$component.vpaId}}" placeholder="[[$component.resource.createVpa.vpaPlaceholder]]" required></oj-input-text>
+                                    <div class="oj-sm-4 oj-label-inline">
+                                        <span data-bind="text: $component.resource.createVpa.vpaHandler"></span>
+                                    </div>
+                                </div>
+                                <!-- ko if:checkAvailabilityLink() -->
+                                <div class="oj-flex-item oj-sm-12">
+                                    <a id="vpa-handler" href="#" data-bind="attr:{alt:$baseModel.format($component.resource.createVpa.alt, {reference: $component.resource.createVpa.checkAvailability}),title:$baseModel.format($component.resource.createVpa.title, {reference: $component.resource.createVpa.checkAvailability})},click:$component.checkAvailability.bind($data,$data), text: $component.resource.createVpa.checkAvailability">
+                                    </a>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:!checkAvailabilityLink() -->
+                                <div data-bind="css:$component.vpaAvailable() ? 'success' : 'failure'">
+                                    <span data-bind="css: $component.vpaAvailable() ? 'icon-ok' : 'icon-cancel'" class="icons"></span>
+                                    <span data-bind="text:$component.resource.createVpa.checkVpaAvailability.status[$component.vpaAvailable()]"></span>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:$component.params.isEdit -->
+                            <oj-label class="oj-lg-12 oj-sm-12 oj-flex-item">
+                                <span data-bind="text: $component.resource.createVpa.vpa"></span>
+                            </oj-label>
+                            <div class="oj-flex-item oj-sm-12 oj-lg-12">
+                                <span data-bind="text: $component.vpaId()"></span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-9">
+                        <account-input params="baseModel : $baseModel, rootModel: $data ,label : $component.resource.createVpa.accountNo,
+                        validator:$component.validationTracker, account : $component.createVpaModel.accountId.value ,additionalDetails : additionalDetails, type: 'nodeValue', accountsParser: $component.accountsParser "></account-input>
+                    </div>
+                </div>
+            </page-section>
+            <div id="button-container1" class="oj-flex-item button-container">
+                <oj-button class="action-button-primary" id="createVpa-button" on-click="[[createVpa]]">
+                    <span slot="startIcon" data-bind="css:!$component.params.isEdit ? 'icon-add' : 'icon-save'" class="icons "></span>
+                    <span data-bind="text: !$component.params.isEdit ? $component.resource.generic.common.create : $component.resource.generic.common.save"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text: $component.resource.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+        <modal-window params="baseModel : $baseModel, rootModel : $component, id:'vpa-available', dashboard : $dashboard, header : $component.resource.createVpa.checkVpaAvailability.status[$component.vpaAvailable()]">
+            <div class="oj-flex oj-flex-items-pad">
+                <div for="validity" class="oj-flex-item oj-sm-12">
+                    <span data-bind="text:$component.resource.createVpa.checkVpaAvailability.status[$component.vpaAvailable()]"></span>
+                </div>
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary" id="ok" on-click="">
+                        <span slot="startIcon" class="icons icon-ok"></span><span data-bind="text:$component.resource.generic.common.proceed"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </modal-window>
+    </div>
+</oj-validation-group>

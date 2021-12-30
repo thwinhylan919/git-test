@@ -1,0 +1,41 @@
+<div class="page-section-content">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <!-- ko ifnot:$baseModel.small() -->
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-table id="tncTable" :aria-label="[[$component.resourceBundle.termsAndConditions.labels.tncTable]]" columns="[[[{headerText:$component.resourceBundle.termsAndConditions.labels.srNo, field: 'srNo', style:'width: 5%'},{headerText:$component.resourceBundle.termsAndConditions.labels.type, field: 'undertakingType', style:'width: 15%'},{headerText:$component.resourceBundle.termsAndConditions.labels.description, field: 'description',style:'width: 80%'}]]]"
+          data="[[$component.datasourceForTermsAndConditionsReview]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.termsAndConditions.labels.tncTable"></caption>
+        </oj-table>
+        <oj-paging-control id="tncTablePaging" data="[[$component.datasourceForTermsAndConditionsReview]]" page-size="5" page-options="[[{orientation:['horizontal']}]]"></oj-paging-control>
+      </div>
+      <!-- /ko -->
+      <!-- ko if:$baseModel.small() -->
+      <div class="oj-flex-item oj-sm-12">
+        <oj-list-view id="listview-tnc-card" class="cards" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('tnc_list_card',true)}]]" selection-mode="[['single']]" data="[[$component.datasourceForTermsAndConditionsReview]]">
+        </oj-list-view>
+        <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[5]]" data="[[$component.datasourceForTermsAndConditionsReview]]">
+        </oj-paging-control>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>
+<script type="text/html" id="tnc_list_card">
+  <li>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12">
+        <label data-bind="text: $component.resourceBundle.termsAndConditions.labels.type"></label>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <span data-bind="text: $component.resourceBundle.termsAndConditions.labels.guarantee"></span>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <label data-bind="text: $component.resourceBundle.termsAndConditions.labels.description"></label>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <span data-bind="text: $data.description"></span>
+      </div>
+    </div>
+  </li>
+</script>

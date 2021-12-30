@@ -1,0 +1,124 @@
+{
+  "module": [{
+      "Name": "OnBoarding",
+      "transactionDetails": [{
+        "name": "UserManagement",
+        "img": "user-management.svg",
+        "module": "user-management",
+        "component": "users"
+
+      }, {
+        "name": "PartyPreferences",
+        "img": "party-preferences.svg",
+        "module": "customer-preference",
+        "component": "preference-base"
+
+      }]
+    }, {
+      "Name": "Approvals",
+      "transactionDetails": [{
+        "name": "WorkflowManagement",
+        "img": "work-flow.svg",
+        "module": "approvals",
+        "component": "workflow-type",
+        "type": "Workflow"
+      }, {
+        "name": "ApprovalRules",
+        "img": "approver-rules.svg",
+        "module": "approvals",
+        "component": "rule-type",
+        "type": "Rules"
+
+      }]
+    },
+
+    {
+      "Name": "AccountAccess",
+      "transactionDetails": [{
+        "name": "PartyAccountAccess",
+        "img": "party-account-access.svg",
+        "module": "account-access-management",
+        "component": "access-management-base"
+
+      }, {
+        "name": "UserAccountAccess",
+        "img": "user-account-access.svg",
+        "module": "account-access-management",
+        "component": "user-access-management-base"
+
+      }]
+    },
+    {
+      "Name": "ResourceAccess",
+      "transactionDetails": [{
+        "name": "PartyResourceAccess",
+        "img": "party-account-access.svg",
+        "module": "corporate-resource-access",
+        "component": "party-base",
+        "class": "transaction"
+
+      }, {
+        "name": "UserResourceAccess",
+        "img": "user-account-access.svg",
+        "module": "corporate-resource-access",
+        "component": "user-base",
+        "class": "transaction"
+
+      }]
+    },
+
+    {
+      "Name": "FileUpload",
+      "transactionDetails": [{
+        "name": "FileIdentifierMaintenance",
+        "img": "file-identifier.svg",
+        "component": "file-identifier-search",
+        "module": "file-upload"
+
+
+      }, {
+        "name": "UserFileIdentifierMapping",
+        "img": "user-file-identifier.svg",
+        "component": "user-search",
+        "module": "file-upload"
+
+      }]
+    },
+    {
+      "Name": "OriginationAdmin",
+      "transactionDetails": [{
+        "name": "WorkflowConfiguration",
+        "img": "work-flow-configuration.svg",
+        "module": "origination",
+        "component": "workflow-base"
+
+      }]
+    },
+    {
+      "Name": "OTHERS",
+      "transactionDetails": [{
+          "name": "ServiceRequestsInfo",
+          "img": "service-request-config.svg",
+          "module": "service-requests",
+          "component": "service-requests-base"
+        }, {
+          "name": "Feedback",
+          "img": "sms-banking",
+          "module": "feedback",
+          "component": "feedback-template-search"
+        }, {
+          "name": "UserHelpDesk",
+          "img": "user-helpdesk",
+          "module": "help-desk-user",
+          "component": "help-desk-user-search"
+        },
+        {
+          "name": "UserProfileMaintenance",
+          "img": "user-management",
+          "module": "user-profile-maintenance",
+          "component": "profile-maintenance-search"
+        }
+      ]
+    }
+  ]
+}

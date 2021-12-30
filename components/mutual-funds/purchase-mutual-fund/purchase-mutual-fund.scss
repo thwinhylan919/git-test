@@ -1,0 +1,25 @@
+.purchase-fund {
+  .small-text {
+    font-size: var(--base-font-size-small);
+  }
+
+  .medium-text {
+    font-size: var(--base-font-size-medium);
+  }
+
+  .action-border {
+    @include single-border(right, 0.05rem solid var(--link-base));
+  }
+
+  .action-style {
+    width: 12rem;
+  }
+
+  .scheme-color {
+    background-color: var(--banner-background);
+  }
+
+  .tab-bottom-pad {
+    padding-bottom: 1rem;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.dashboard.service.DashboardManagement",
+    "components": [{
+      "componentName": "dashboard-mapping",
+      "service": "createDashboardMapping",
+      "perform": "template-list#dashboard-mapping-list"
+    }, {
+      "componentName": "dashboard-mapping-list",
+      "service": "listDashboardMapping",
+      "perform": "template-list#view-dashboard-design"
+    }, {
+      "componentName": "dashboard-mapping-list",
+      "service": "deleteDashboardMapping",
+      "perform": "template-list#dashboard-mapping-list"
+    }, {
+      "componentName": "template-list",
+      "service": "listDashboards"
+    }, {
+      "componentName": "view-dashboard-design",
+      "service": "deleteDashboard",
+      "perform": "template-list"
+    }, {
+      "componentName": "view-dashboard-design",
+      "service": "createUserDashboard",
+      "perform": "dashboard-create#preview-dashboard-design#template-list#select-persona#preview-dashboard-design#design-dashboard"
+    }, {
+      "componentName": "view-dashboard-design",
+      "service": "readUserDashboard"
+    }, {
+      "componentName": "view-dashboard-design",
+      "service": "updateUserDashboard",
+      "perform": "dashboard-create#preview-dashboard-design#template-list#select-persona#preview-dashboard-design#design-dashboard"
+    }, {
+      "componentName": "view-dashboard-design",
+      "service": "deleteUserDashboard"
+    }, {
+      "componentName": "dashboard-create",
+      "service": "create",
+      "perform": "template-list#select-persona#preview-dashboard-design#design-dashboard"
+    }, {
+      "componentName": "dashboard-create",
+      "service": "updateDashboard",
+      "perform": "template-list#select-persona#preview-dashboard-design#design-dashboard"
+    }]
+  }]
+}

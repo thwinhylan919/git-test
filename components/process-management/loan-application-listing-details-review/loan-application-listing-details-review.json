@@ -1,0 +1,37 @@
+{
+    "segments": {
+        "fsgbu-ob-clmo-ds-real-estate": {
+            "id": "real-estate-details",
+            "imgPath": "process-management/real-estate.svg"
+        },
+        "fsgbu-ob-clmo-ds-businessactivity-details": {
+            "id": "business-details",
+            "imgPath": "process-management/business-details.svg"
+        },
+        "fsgbu-ob-clmo-ds-loan-details": {
+            "id": "loan-requirements",
+            "imgPath": "process-management/summary.svg"
+        },
+        "fsgbu-ob-clmo-ds-plant-machinery": {
+            "id": "equipment-details",
+            "imgPath": "process-management/equipment-finance.svg"
+        },
+        "fsgbu-ob-clmo-ds-document-upload": {
+            "id": "document-upload",
+            "imgPath": "process-management/file-upload-identifier.svg"
+        }
+    },
+    "segment": {
+        "loan-requirements": "Loan Requirement",
+        "real-estate-details": "Real Estate Details",
+        "business-details": "Business Details",
+        "corporate-details": "Applicant Details",
+        "document-upload": "Upload Documents",
+        "equipment-details": "Equipment Details",
+        "trade-details": "Trade Details",
+        "facility-application": "Facility Requirements",
+        "apply-new-facility": "Facility Requirements",
+        "amend-facility": "Collaterals",
+        "upload-documents": "Upload Documents"
+    }
+}

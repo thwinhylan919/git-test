@@ -1,0 +1,119 @@
+<script type="text/html" id="add-acocunt-button-template">
+    <oj-button class="help-button add-accounts-button" id="addButton" disabled="[[!$parent.isAccountListLoaded()]]" on-click="[[$parent.addAccount]]">
+        <span slot="startIcon" class="icons icon-plus"></span>
+        <span data-bind="text: $parent.resource.labels.addAccount"></span>
+    </oj-button>
+</script>
+<!-- ko if:$component.selectedAccountArray().length -->
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.labels.infoMessage, headerTemplate : 'add-acocunt-button-template'">
+    <oj-table id="accountMappingTable" :aria-label="[[$component.resource.labels.tableheader]]" data="[[$component.addedAccountDataSource]]" columns="[[[
+    {
+        headerText:$component.resource.labels.partyName,
+        sortable:'none',
+        field:'accountDetails.customerDesc' 
+    },{
+        headerText:$component.resource.labels.accountType,
+        sortProperty:'none',
+        template:'accountType'
+        },
+    {
+        headerText:$component.resource.labels.accountNumber,
+        sortable:'none',
+        field:'accountDetails.accountKey.accountNo.displayValue'
+    },
+    {
+        headerText:$component.resource.labels.branch,
+        sortable:'none',
+        field:'accountDetails.accountKey.branchCodeId'
+    },
+    {
+        headerText:$component.resource.labels.currentBalance,
+        sortable:'none',
+        headerClassName : 'right',
+        template:'currentBalance'
+    },
+    {
+        headerText:$component.resource.labels.availableBalance,
+        sortable:'none',
+        headerClassName : 'right',
+        template:'availableBalance'
+    },
+    {
+        headerText:$component.resource.labels.actions,
+        sortable:'none',
+        template:'removeAction'
+    }]]]">
+        <template slot="availableBalance">
+            <div class="oj-flex-item right" data-bind="text:$formatter.formatCurrency($current.row.accountDetails.currentBalance, $current.row.accountDetails.limitCcy)"></div>
+        </template>
+        <template slot="currentBalance">
+            <div class="oj-flex-item right" data-bind="text:$formatter.formatCurrency($current.row.accountDetails.currentBalance, $current.row.accountDetails.limitCcy)"></div>
+        </template>
+        <template slot="accountType">
+            <span class="structure__accountType tags" data-bind="text : $component.resource.labels.accountCheck[$current.row.accountDetails.isExtAccChk]">
+            </span>
+        </template>
+        <template slot="removeAction">
+            <a href="#" data-bind="attr:{
+                title: $component.resource.labels.removeTitle,
+                alt : $component.resource.labels.removeAlt
+                },
+                text:$component.resource.labels.remove,
+                click:$component.deleteRow.bind($data, $current.row.accountDetails.accountKey.accountNo)">
+                </a>
+        </template>
+    </oj-table>
+    <oj-paging-control id="paging" data="[[$component.addedAccountDataSource]]" page-size="10"></oj-paging-control>
+</page-section>
+<!-- /ko -->
+<!-- ko ifnot:$component.selectedAccountArray().length -->
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+    <div class="nodata center">
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12 ">
+                <img alt="" data-bind="loadImage:'lm/liquidity-management_add-account.svg'">
+            </div>
+            <div class="oj-flex-item oj-lg-12 nodata__message" data-bind="text:$component.resource.labels.infoMessage"></div>
+        </div>
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12">
+                <oj-button class="help-button" id="addButton" disabled="[[!$component.isAccountListLoaded()]]" on-click="[[addAccount]]">
+                    <span slot="startIcon" class="icons icon-plus"></span>
+                    <span data-bind="text: $component.resource.labels.addAccount"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</page-section>
+<!-- /ko -->
+<div class="oj-flex-item button-container">
+    <!-- ko if:$component.selectedAccountArray().length -->
+    <oj-button class="action-button-primary" id="saveButton" on-click="[[$component.next]]">
+        <span slot="startIcon" class="icons icon-drop-right"></span>
+        <span data-bind="text: $component.resource.generic.common.next"></span>
+    </oj-button>
+    <!-- /ko -->
+    <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text: $component.resource.generic.common.cancel"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" id="backButton" on-click="[[$component.back]]">
+        <span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text: $component.resource.generic.common.back"></span>
+    </oj-button>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'existing-account', header: $component.resource.labels.warning">
+    <div class="oj-flex oj-flex-items-pad confirm-dialog-container__message">
+        <div class="oj-flex-item oj-sm-12" data-bind="text:$baseModel.format($component.resource.labels.existingAccountWarningMessage,{accountNo : $component.accountToBeDisplayed()})"></div>
+    </div>
+    <div class="button-container">
+        <oj-button id="button-yes" class="action-button-primary" on-click="[[resetStructureAccount]]">
+            <span slot="startIcon" class="icons icon-ok"></span>
+            <span data-bind="text:$component.resource.generic.common.yes"></span>
+        </oj-button>
+        <oj-button id="corpbutton-no" class="action-button-secondary" on-click="[[closeWarning.bind($data,'#existing-account')]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.generic.common.no"></span>
+        </oj-button>
+    </div>
+</modal-window>

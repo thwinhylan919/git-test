@@ -1,0 +1,50 @@
+$tc-icon-img-size: 4.4rem;
+$tc-icon-text-size: 1rem;
+
+.tc {
+  padding: 0.6rem;
+  max-width: 80rem !important;
+  margin: 0 auto;
+
+  .icon-title_desc {
+    padding-top: 1rem;
+    padding-bottom: 0.9375rem;
+    color: var(--base-text-primary);
+    letter-spacing: 0.025rem;
+    font-weight: var(--link-font-weight);
+    @include mq(small){
+      font-size: 0.8rem;
+    }
+  }
+  .right-section{
+    margin-top: 2rem;
+  }
+
+  &-flex-container {
+    justify-content: space-around;
+    width: 100%;
+    list-style: none;
+    padding-bottom: 1.9rem;
+    flex-wrap:nowrap;
+    flex-direction: column;
+    
+    @include mq(small){
+      flex-wrap:wrap;
+      padding:0.6rem;
+    }
+
+    &-listItems {
+      .icon-title {
+        font-size: $tc-icon-text-size;
+        margin: 0.6rem 0;
+      }
+
+      &:hover {
+        .icon-title,
+        .icons {
+          color: var(--link-base-hover);
+        }
+      }
+    }
+  }
+}

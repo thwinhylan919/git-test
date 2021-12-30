@@ -1,0 +1,434 @@
+{
+    "dictionaryArray": null,
+    "refLinks": null,
+    "status": {
+        "result": "SUCCESSFUL",
+        "referenceNumber": null,
+        "externalReferenceNumber": null,
+        "contextID": null,
+        "message": {
+            "title": null,
+            "detail": null,
+            "code": "null",
+            "validationError": null,
+            "relatedMessage": null,
+            "type": "INFO"
+        },
+        "receiptAvailable": null,
+        "lastKnownError": null
+    },
+    "batchId": null,
+    "batchDetailResponseDTOList": [
+        {
+            "dictionaryArray": null,
+            "refLinks": null,
+            "header": null,
+            "status": 200,
+            "responseObj": {
+                "refLinks": [
+                    {
+                        "href": "/accounts/demandDeposit",
+                        "rel": "self",
+                        "method": "GET"
+                    }
+                ],
+                "status": {
+                    "result": "SUCCESSFUL",
+                    "contextID": "005dZfYapXFFw0H6yvqYMG0002FJ0001VO,0:1:143:1",
+                    "message": {
+                        "type": "INFO"
+                    }
+                },
+                "accounts": [
+                    {
+                        "refLinks": [
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740",
+                                "rel": "self",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/transactions",
+                                "rel": "fetchTransactions",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/preferences/eStatement",
+                                "rel": "fetchEStatementPreferences",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/statements",
+                                "rel": "listStatements",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/preferences/eStatement",
+                                "rel": "updateEStatementPreferences",
+                                "method": "PUT"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/adhocStatement",
+                                "rel": "requestAdhocStatement",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/cheques/chequeBook",
+                                "rel": "requestChequeBook",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/cheques/issued",
+                                "rel": "chequeManagementSubResourcelist",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/cheques",
+                                "rel": "chequeInstruction",
+                                "method": "PUT"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740/chequeBookType",
+                                "rel": "fetchChequeBookType",
+                                "method": "GET"
+                            }
+                        ],
+                        "id": {
+                            "displayValue": "xxxxxxxxxxxx9991",
+                            "value": "C033B0B4917AA7C29A374EAFA3BF7EF80C5819576806F6B897117AA6E09FDD0B3D330740"
+                        },
+                        "partyId": {
+                            "displayValue": "***336",
+                            "value": "CF3AB1BEE2328921013763E35EB44A51C5C24B672F8F"
+                        },
+                        "status": "ACTIVE",
+                        "type": "CSA",
+                        "currencyCode": "INR",
+                        "branchCode": "9999",
+                        "productDTO": {
+                            "description": "Savings Account - Asset Product 1",
+                            "productClass": "C",
+                            "productGroup": "S",
+                            "productId": "1111",
+                            "currencySpecificParameterDTO": {
+                                "minimumBalanceAmount": {
+                                    "currency": "INR",
+                                    "amount": 1000
+                                }
+                            },
+                            "demandDepositProductFacilitiesDTO": {
+                                "hasChequeBookFacility": true,
+                                "hasOverDraftFacility": true,
+                                "hasPassbookFacility": true,
+                                "hasATMFacility": true
+                            }
+                        },
+                        "openingDate": "2019-10-10T00:00:00",
+                        "partyName": "MUSTUFA YUSUF GARI",
+                        "holdingPattern": "SINGLE",
+                        "module": "CON",
+                        "defaultAccount": false,
+                        "ddaAccountType": "Saving Account",
+                        "availableBalance": {
+                            "currency": "INR",
+                            "amount": 1797455.33000000007450580596923828125
+                        },
+                        "currentBalance": {
+                            "currency": "INR",
+                            "amount": 1797455.33000000007450580596923828125
+                        },
+                        "noOfDebitCards": 0,
+                        "accountFacilities": {
+                            "hasChequeBook": true
+                        },
+                        "equivalentAvailableBalance": {
+                            "currency": "INR",
+                            "amount": 1797455.33000000007450580596923828125
+                        },
+                        "nomineeRegistered": false,
+                        "equivalentCurrentBalance": {
+                            "currency": "INR",
+                            "amount": 1797455.33000000007450580596923828125
+                        }
+                    },
+                    {
+                        "refLinks": [
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0",
+                                "rel": "self",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/transactions",
+                                "rel": "fetchTransactions",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/preferences/eStatement",
+                                "rel": "fetchEStatementPreferences",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/statements",
+                                "rel": "listStatements",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/preferences/eStatement",
+                                "rel": "updateEStatementPreferences",
+                                "method": "PUT"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/adhocStatement",
+                                "rel": "requestAdhocStatement",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/cheques/chequeBook",
+                                "rel": "requestChequeBook",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/cheques/issued",
+                                "rel": "chequeManagementSubResourcelist",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/cheques",
+                                "rel": "chequeInstruction",
+                                "method": "PUT"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0/chequeBookType",
+                                "rel": "fetchChequeBookType",
+                                "method": "GET"
+                            }
+                        ],
+                        "id": {
+                            "displayValue": "xxxxxxxxxxxx0009",
+                            "value": "C033B0B4917AA7C29A374EAFA3BF7EFB0551105F138A2579381A16A3B1351F8DB0A0E5A0"
+                        },
+                        "partyId": {
+                            "displayValue": "***336",
+                            "value": "CF3AB1BEE2328921013763E35EB44A51C5C24B672F8F"
+                        },
+                        "status": "ACTIVE",
+                        "type": "CSA",
+                        "currencyCode": "INR",
+                        "branchCode": "9999",
+                        "productDTO": {
+                            "description": "Savings Account - Asset Product 1",
+                            "productClass": "C",
+                            "productGroup": "S",
+                            "productId": "1111",
+                            "currencySpecificParameterDTO": {
+                                "minimumBalanceAmount": {
+                                    "currency": "INR",
+                                    "amount": 1000
+                                }
+                            },
+                            "demandDepositProductFacilitiesDTO": {
+                                "hasChequeBookFacility": true,
+                                "hasOverDraftFacility": true,
+                                "hasPassbookFacility": true,
+                                "hasATMFacility": true
+                            }
+                        },
+                        "openingDate": "2019-10-10T00:00:00",
+                        "partyName": "MUSTUFA YUSUF GARI",
+                        "holdingPattern": "SINGLE",
+                        "module": "CON",
+                        "defaultAccount": false,
+                        "ddaAccountType": "Saving Account",
+                        "availableBalance": {
+                            "currency": "INR",
+                            "amount": 1000
+                        },
+                        "currentBalance": {
+                            "currency": "INR",
+                            "amount": 90900
+                        },
+                        "noOfDebitCards": 0,
+                        "accountFacilities": {
+                            "hasChequeBook": true
+                        },
+                        "equivalentAvailableBalance": {
+                            "currency": "INR",
+                            "amount": 1000
+                        },
+                        "nomineeRegistered": true,
+                        "equivalentCurrentBalance": {
+                            "currency": "INR",
+                            "amount": 90900
+                        }
+                    },
+                    {
+                        "refLinks": [
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C",
+                                "rel": "self",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/transactions",
+                                "rel": "fetchTransactions",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/preferences/eStatement",
+                                "rel": "fetchEStatementPreferences",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/statements",
+                                "rel": "listStatements",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/preferences/eStatement",
+                                "rel": "updateEStatementPreferences",
+                                "method": "PUT"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/adhocStatement",
+                                "rel": "requestAdhocStatement",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/cheques/chequeBook",
+                                "rel": "requestChequeBook",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/cheques/issued",
+                                "rel": "chequeManagementSubResourcelist",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/cheques",
+                                "rel": "chequeInstruction",
+                                "method": "PUT"
+                            },
+                            {
+                                "href": "/accounts/demandDeposit/C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C/chequeBookType",
+                                "rel": "fetchChequeBookType",
+                                "method": "GET"
+                            }
+                        ],
+                        "id": {
+                            "displayValue": "xxxxxxxxxxxx2910",
+                            "value": "C032B9BDE044ECC79B364EAFA3BF7EF9075319573354AFFD400CEE284EDE56F9C194B61C8C"
+                        },
+                        "partyId": {
+                            "displayValue": "***336",
+                            "value": "CF3AB1BEE2328921013763E35EB44A51C5C24B672F8F"
+                        },
+                        "status": "ACTIVE",
+                        "type": "CSA",
+                        "currencyCode": "INR",
+                        "branchCode": "98001",
+                        "productDTO": {
+                            "description": "Savings Account - Asset Product 1",
+                            "productClass": "C",
+                            "productGroup": "S",
+                            "productId": "1111",
+                            "currencySpecificParameterDTO": {
+                                "minimumBalanceAmount": {
+                                    "currency": "INR",
+                                    "amount": 1000
+                                }
+                            },
+                            "demandDepositProductFacilitiesDTO": {
+                                "hasChequeBookFacility": true,
+                                "hasOverDraftFacility": true,
+                                "hasPassbookFacility": true,
+                                "hasATMFacility": true
+                            }
+                        },
+                        "openingDate": "2020-06-20T00:00:00",
+                        "partyName": "MUSTUFA YUSUF GARI",
+                        "holdingPattern": "SINGLE",
+                        "module": "CON",
+                        "defaultAccount": false,
+                        "ddaAccountType": "Saving Account",
+                        "availableBalance": {
+                            "currency": "INR",
+                            "amount": 0
+                        },
+                        "currentBalance": {
+                            "currency": "INR",
+                            "amount": 0
+                        },
+                        "noOfDebitCards": 0,
+                        "accountFacilities": {
+                            "hasChequeBook": true
+                        },
+                        "equivalentAvailableBalance": {
+                            "currency": "INR",
+                            "amount": 0
+                        },
+                        "nomineeRegistered": true,
+                        "equivalentCurrentBalance": {
+                            "currency": "INR",
+                            "amount": 0
+                        }
+                    }
+                ],
+                "summary": {
+                    "items": [
+                        {
+                            "accountType": "CSA",
+                            "party": {
+                                "displayValue": "***336",
+                                "value": "CF3AB1BEE2328921013763E35EB44A51C5C24B672F8F"
+                            },
+                            "partyName": "MUSTUFA YUSUF GARI",
+                            "count": 3,
+                            "totalAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 1798455.33000000007450580596923828125
+                            },
+                            "totalActiveAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 1888355.33000000007450580596923828125
+                            },
+                            "totalActiveNegativeBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalClosedAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalDormantAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalISLAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalISLActiveAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalISLActiveNegativeBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalISLClosedAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            },
+                            "totalISLDormantAvailableBalance": {
+                                "currency": "INR",
+                                "amount": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            "sequenceId": "0"
+        }
+    ]
+}

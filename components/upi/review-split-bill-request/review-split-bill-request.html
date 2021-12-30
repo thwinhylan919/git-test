@@ -1,0 +1,59 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header :$component.nls.review , reviewHeader : $component.nls.reviewHeader}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : '', headerTemplate : ''">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.SplitMoney.ReceiveIn, value : [$component.modelInstance.creditVPAId,$component.vpaArrayMap[$component.modelInstance.creditVPAId].account.displayValue]"></row>
+        <div class="oj-flex">
+            <div class="oj-sm-5">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.SplitMoney.Amount, value : $formatter.formatCurrency($component.modelInstance.totalAmount.amount,$component.modelInstance.totalAmount.currency)"></row>
+            </div>
+            <div class="oj-sm-5">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.SplitMoney.ValidTill, value : $formatter.formatDate($component.modelInstance.expiryDate)"></row>
+            </div>
+        </div>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.SplitMoney.Note, value : $component.modelInstance.remarks"></row>
+        <div class="oj-flex oj-flex-items-pad">
+            <oj-label class="oj-flex-item"><span data-bind="text:$component.nls.SplitMoney.splitMoneyWith"></span>
+            </oj-label>
+        </div>
+        <div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-2">
+                    <oj-avatar role="img" size="[['xs']]" initials="[[$component.userInitials]]" data-bind="attr:{'aria-label': $component.userName}"></oj-avatar>
+                </div>
+                <div class="oj-flex-item oj-sm-5 oj-label-inline">
+                    <span data-bind="text:$component.userName[0]"></span>
+                    <span data-bind="text:$component.userName[1]"></span></div>
+                <div class="oj-flex-item oj-sm-4 oj-label-inline">
+                    <div data-bind="text:$formatter.formatCurrency($component.myAmount,$component.modelInstance.totalAmount.currency)"></div>
+                </div>
+            </div>
+        </div><!-- ko foreach : $component.modelInstance.upFundRequestDTOs -->
+        <div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-2">
+                    <oj-avatar role="img" size="[['xs']]" initials="[[$component.payeeMap[$data.debitVPAId].initials]]" src="[[$component.payeeMap[$data.debitVPAId].contentId]]" data-bind="attr:{'aria-label': $data.debitVPAId}"></oj-avatar>
+                </div>
+                <!-- ko if: $component.payeeMap[$data.debitVPAId].name -->
+                <div class="oj-flex-item oj-sm-5">
+                    <div data-bind="text:$component.payeeMap[$data.debitVPAId].name"></div>
+                    <div data-bind="text:debitVPAId"></div>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.payeeMap[$data.debitVPAId].name -->
+                <div class="oj-flex-item oj-sm-5 oj-label-inline">
+                    <div data-bind="text:debitVPAId"></div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex-item oj-sm-5 oj-label-inline">
+                    <div data-bind="text:$formatter.formatCurrency(amount.amount,amount.currency)"></div>
+                </div>
+            </div>
+        </div><!-- /ko -->
+    </page-section>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm39]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.SplitMoney.Confirm"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.nls.SplitMoney.back"></span>
+        </oj-button>
+    </div>
+</div>

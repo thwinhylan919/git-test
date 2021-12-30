@@ -1,0 +1,475 @@
+<div class="form-main-container">
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <div class="oj-flex-item oj-lg-6">
+            <oj-form-layout label-edge="top">
+                <!-- ko if: $component.dropdownListLoaded()-->
+                <div :id="[['FundingType2']]" class="partyClass" data-bind="text: $component.partyIDoptions1()">
+                </div>
+                <!-- /ko -->
+            </oj-form-layout>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad oj-md-6 oj-lg-6 right">
+            <div class="oj-flex-item oj-md-8 oj-lg-11 right">
+                <search-box params="searchFields : ['description','poolId','collateralCode','collateralDesc'],rootModel:$component,
+                arrayReference: $component.allCollaterals,
+                refreshReference: $component.treeDataLoaded,
+                searchBy:$component.nls.structure.labels.searchBy">
+                </search-box>
+            </div>
+            <span class="oj-flex-item pipe"></span>
+            <div class="oj-flex-item oj-lg-0.5 filterAlign">
+                <div class="filterMargin">
+                    <a href="#" id="enable-filter"
+                        data-bind="click: $component.onFilterIconClick , attr: { alt: $component.nls.structure.labels.filterEnable }">
+                        <span class="icons icon-filter center"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <oj-popup id="filter-popup" modality="modeless" position.my.horizontal="{{$component.myHorizontal}}"
+        position.my.vertical="{{$component.myVertical}}" position.at.horizontal="{{$component.atHorizontal}}"
+        position.at.vertical="{{$component.atVertical}}">
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item right">
+                <a href="#" id="reset"
+                    data-bind="click: $component.clear , attr: { alt: $component.nls.structure.labels.reset }">
+                    <span data-bind="text:$component.nls.structure.labels.reset"></span>
+                </a>
+            </div>
+        </div>
+        <oj-validation-group id="tracker">
+
+            <oj-form-layout label-edge="top">
+                <oj-radioset label-hint="[[$component.nls.structure.labels.filterEnable]]" class="oj-choice-direction-row" value="{{searchType}}" :id="[['Searcspan4']]">
+                    <oj-option value="ByCollateralGroup"><span
+                            data-bind="text:$component.nls.Search.ByCollateralGroup"></span></oj-option>
+                    <oj-option value="ByCollateral"><span data-bind="text:$component.nls.Search.ByCollateral"></span>
+                    </oj-option>
+                    <oj-option value="ByNonCollateralGroup"><span
+                            data-bind="text:$component.nls.Search.ByNonCollateralGroup"></span></oj-option>
+                </oj-radioset>
+            </oj-form-layout>
+
+            <oj-form-layout label-edge="top" max-columns="10">
+                <!-- ko if : $component.searchType()==="ByCollateralGroup" -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-lg-12 label">
+                        <oj-label for="groupID"><span data-bind="text:$component.nls.Search.groupID"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-12">
+                        <oj-input-text :id="groupID"  value="{{$component.groupID}}">
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="Group_Amount_Range"><span
+                                data-bind="text:$component.nls.Search.Group_Amount_Range"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5">
+                        <oj-input-text :id="Group_Amount_Range"  placeholder="{{$component.nls.Search.Min}}"
+                             maxlength="16"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]"
+                            value="{{$component.Group_Amount_Range_min}}"></oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-1">
+                        <oj-label><span data-bind="text: $component.nls.Search.hypen" class="titleField"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5">
+                        <oj-input-text :id="Group_Amount_Range"  placeholder="{{$component.nls.Search.Max}}"
+                             maxlength="16"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]"
+                            value=" {{$component.Group_Amount_Range_max}} "></oj-input-text>
+                    </div>
+                </div>
+                <div class=" oj-flex oj-flex-items-pad ">
+                    <div class="oj-flex-item oj-sm-12 oj-lg-12 label ">
+                        <oj-label for="Available_Amount_Range "><span
+                                data-bind="text:$component.nls.Search.Available_Amount_Range "></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5 ">
+                        <oj-input-text :id="Available_Amount_Range " 
+                            placeholder="{{$component.nls.Search.Min}} "  maxlength="16 "
+                            validators="[[$baseModel.getValidator( 'NUMBERS',$component.nls.Search.invalidNumber,{type: 'numberRange'})]] "
+                            value="{{$component.Available_Amount_Range_min}} "></oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-1 ">
+                        <oj-label><span data-bind="text: $component.nls.Search.hypen " class="titleField "></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5 ">
+                        <oj-input-text :id="Available_Amount_Range " 
+                            placeholder="{{$component.nls.Search.Max}} "  maxlength="16 "
+                            validators="[[$baseModel.getValidator( 'NUMBERS',$component.nls.Search.invalidNumber,{type: 'numberRange'})]] "
+                            value="{{$component.Available_Amount_Range_max}} "></oj-input-text>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if : $component.searchType()==="ByNonCollateralGroup " -->
+                <div class="oj-flex oj-flex-items-pad ">
+                    <div class="oj-flex-item oj-sm-12 label ">
+                        <oj-label for="groupID "><span data-bind="text:$component.nls.Search.collateralID "></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-12 ">
+                        <oj-input-text :id="groupID "  value="{{$component.groupID}} ">
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad ">
+                    <div class="oj-flex-item oj-sm-12 label ">
+                        <oj-label for="Group_Amount_Range "><span
+                                data-bind="text:$component.nls.Search.Group_Amount_Range "></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5 ">
+                        <oj-input-text :id="Group_Amount_Range " 
+                            placeholder="{{$component.nls.Search.Min}} "  maxlength="16 "
+                            validators="[[$baseModel.getValidator( 'NUMBERS',$component.nls.Search.invalidNumber,{type: 'numberRange'})]] "
+                            value="{{$component.Group_Amount_Range_min}} "></oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-1 ">
+                        <oj-label><span data-bind="text: $component.nls.Search.hypen " class="titleField "></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5 ">
+                        <oj-input-text :id="Group_Amount_Range " 
+                            placeholder="{{$component.nls.Search.Max}} "  maxlength="16 "
+                            validators="[[$baseModel.getValidator( 'NUMBERS',$component.nls.Search.invalidNumber,{type: 'numberRange'})]] "
+                            value=" {{$component.Group_Amount_Range_max}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="
+                                oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="Available_Amount_Range"><span
+                                data-bind="text:$component.nls.Search.Available_Amount_Range"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5">
+                        <oj-input-text :id="Available_Amount_Range" 
+                            placeholder="{{$component.nls.Search.Min}}"  maxlength="16"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]"
+                            value="{{$component.Available_Amount_Range_min}}"></oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-1">
+                        <oj-label><span data-bind="text: $component.nls.Search.hypen" class="titleField"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-5">
+                        <oj-input-text :id="Available_Amount_Range" 
+                            placeholder="{{$component.nls.Search.Max}}"  maxlength="16"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]"
+                            value="{{$component.Available_Amount_Range_max}}"></oj-input-text>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if : $component.searchType()==="ByCollateral" -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-md-6 oj-lg-6 oj-lg-12">
+                        <oj-label><span data-bind="text: $component.nls.Search.CollateralType"
+                                class="titleField"></span></oj-label>
+
+                        <!-- ko if : $component.areTypesLoaded -->
+                        <oj-select-one label-hint="[[$component.nls.Search.CollateralType]]"
+                            :id="[['CollateralType93']]" value="{{CollateralType}}"
+                            :placeholder="[[$component.nls.generic.common.select]]">
+                            <!-- ko foreach: $component.collateralTypeListOptions -->
+                            <oj-option value="[[value]]"><span data-bind="text:label"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-lg-12 label">
+                        <oj-label for="collateralID"><span data-bind="text:$component.nls.Search.collateralID"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-12">
+                        <oj-input-text :id="collateralID"  value="{{$component.collateralID}}">
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad" id="slider-container">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-12">
+                            <oj-label for="collateralRange"><span
+                                    data-bind="text:$component.nls.Search.Collateral_Amount"></span></oj-label>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div data-bind="descendantsComplete: $component.callBack('min_collateral_range')">
+                                <div id="collateralRange" class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <oj-input-text :id="min_collateral_range" placeholder="{{$component.nls.Search.Min}}"
+                                        value="{{$component.Collateral_Amount_min}}"  maxlength="16" :aria-label="[[$component.nls.Search.Min]]"
+                                        validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                            <div data-bind="descendantsComplete: $component.callBack('max_collateral_range')">
+                                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                                    <oj-input-text :id="max_collateral_range" placeholder="{{$component.nls.Search.Max}}" :aria-label="[[$component.nls.Search.Max]]" value="{{$component.Collateral_Amount_max}}"  maxlength="16"
+                                        validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="Available_Amount_Range"><span
+                                data-bind="text:$component.nls.Search.Available_Amount_Range"></span></oj-label>
+                    </div>
+                    <div id="Available_Amount_Range" class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-6">
+                        <div data-bind="descendantsComplete: $component.callBack('min_Available_Amount_Range')">
+                        <oj-input-text :id="min_Available_Amount_Range" :aria-label="[[$component.nls.Search.Min]]"
+                            placeholder="{{$component.nls.Search.Min}}"  maxlength="16"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]"
+                            value="{{$component.Available_Amount_Range_min}}"></oj-input-text>
+                            </div>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-6">
+                        <div data-bind="descendantsComplete: $component.callBack('max_Available_Amount_Range')">
+                        <oj-input-text :id="max_Available_Amount_Range" :aria-label="[[$component.nls.Search.Max]]"
+                            placeholder="{{$component.nls.Search.Max}}"  maxlength="16"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Search.invalidNumber,{type:'numberRange'})]]"
+                            value="{{$component.Available_Amount_Range_max}}"></oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+            </oj-form-layout>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12 title1">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <oj-button class="action-button-primary" on-click="[[setCollateralList]]">
+                        <span data-bind="text:$component.nls.structure.labels.apply"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </oj-validation-group>
+    </oj-popup>
+
+    <page-section params="baseModel : $baseModel, rootModel : $data, headerTemplate : ''">
+
+        <!-- ko if : $component.treeDataLoaded() -->
+        <oj-list-view id="treeview" scroll-policy-options.max-count="2" selection-mode="multiple" data="[[datasource1]]"
+            scroll-policy-options.fetch-size="5"
+            item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]">
+        </oj-list-view>
+
+        <div>
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                <span slot="startIcon" class="icon-cancel">
+                </span>
+                <span data-bind="text:$component.nls.generic.common.cancel">
+                </span>
+            </oj-button>
+        </div>
+
+        <!-- /ko -->
+
+
+        <script type="text/html" id="item_template">
+            <!-- ko if : type==="P" -->
+
+            <li class="pfm-listView__items listView-items items">
+                <div class="oj-panel collateralbox">
+
+                    <div class="oj-flex oj-flex-items-pad oj-md-12 oj-lg-12">
+                        <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-9 oj-lg-9 covanent-title5">
+                            <oj-label><span data-bind="text: poolId" class="titleField"></span></oj-label>
+                            <div class="oj-lg-12">
+                                <span class="group tags" data-bind="text:$component.resources.group"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 covanent-title right">
+                            <div class="oj-flex oj-flex-items-pad">
+
+                                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 listContent__view-details view-details">
+                                    <a class="view-details__link view-details-link" href="#" data-bind="attr:{alt:$component.resources.linkedCollateral ,title:$component.resources.linkedCollateral}, click:$component.showCollaterals.bind($data)">
+                                        <span class="view-details-link__linkText" data-bind="text: $component.resources.linkedCollateral"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad oj-md-12 oj-lg-12">
+                            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-9 oj-lg-9">
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 ">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.collateralGroupAmount, value : $formatter.formatCurrency(groupAmount.amount, groupAmount.currency)"></row>
+
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.utilizedAmount, value : $formatter.formatCurrency(groupUtilizedAmount.amount+(~~groupBlockAmount.amount), groupUtilizedAmount.currency)"></row>
+
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.blockAmount, value : $formatter.formatCurrency(groupAmount.amount-(groupUtilizedAmount.amount+(~~groupBlockAmount.amount)+availableAmount.amount), groupBlockAmount.currency)"></row>
+
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.availableAmount, value : $formatter.formatCurrency(availableAmount.amount, availableAmount.currency)"></row>
+
+                                </div>
+
+                            </div>
+                            <div class="oj-flex oj-flex-items-pad oj-md-3 oj-lg-3">
+                                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                    <span class="utilized" data-bind="text: $baseModel.format($component.resources.optionPercentage,{number : $component.progressValue($data)})"></span>
+                                    <oj-progress class="progress-bar-property" value="{{$component.progressValue($data)}}"></oj-progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ko if: $component.treeDataLoaded2() -->
+                <!-- ko if: $component.selected() === poolId && $component.treeDataLoaded2() -->
+                <oj-list-view id="treeview2" scroll-policy-options.max-count="10" selection-mode="multiple" data="[[$component.datasource]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template2', true)]]">
+                </oj-list-view>
+                <!-- /ko -->
+                <!-- /ko -->
+
+
+            </li>
+            <!-- /ko -->
+            <!-- ko if : type==="C" -->
+            <li class="pfm-listView__items listView-items items">
+                <div class="oj-panel ">
+
+                    <div class="oj-flex oj-flex-items-pad oj-md-12 oj-lg-12">
+                        <div class="oj-flex covanent-title">
+                            <a class="view-details__link view-details-link" href="#" data-bind="attr:{alt:$component.resources.linkedCollateral ,title:$component.resources.linkedCollateral},click:$component.showCollateralDetails.bind($data)">
+                                <span class="view-details-link__linkText titleField2" data-bind="text: collateralCode"></span>
+                            </a>
+                        </div>
+                        <!-- ko if:collateralDesc -->
+                        <span class="oj-flex pipe"></span>
+                        <!-- /ko -->
+                        <div class="oj-flex-item  covanent-title2">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-12 listContent__view-details view-details">
+                                    <oj-label><span data-bind="text: collateralDesc" class="titleField2"></span></oj-label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 covanent-title right">
+                            <div class="oj-flex oj-flex-items-pad">
+
+                                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 listContent__view-details view-details">
+                                    <span class="view-details-link__linkText notCollateral" data-bind="text: $component.resources.notCollateral"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-item oj-md-12 oj-lg-12">
+                            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-9 oj-lg-9">
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 ">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.collateralAmount, value : $formatter.formatCurrency(collateralValue.amount, collateralValue.currency)"></row>
+
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.limitContribution, value : $formatter.formatCurrency(limitContribution, collateralValue.currency)"></row>
+
+                                </div>
+
+                                <div class="oj-flex-item oj-flex-items-pad oj-lg-3">
+                                      <!-- ko if:$data.endDate -->
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.endDate, value :$formatter.formatDate(endDate)"></row>
+                                       <!-- /ko -->
+                                      <!-- ko ifnot:$data.endDate -->
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.endDate, value : $component.nls.notAvailable"></row>
+                               <!-- /ko -->
+
+                                </div>
+
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.lendableMargin, value : $baseModel.format($component.resources.optionPercentage2,{number : lendableMargin})"></row>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!-- /ko -->
+
+
+        </script>
+
+        <script type="text/html" id="item_template2">
+
+            <li class="pfm-listView__items listView-items items">
+                <div class="oj-panel ">
+
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                        <div class="oj-flex covanent-title">
+                            <a class="view-details__link view-details-link" href="#" data-bind="attr:{alt:$component.resources.linkedCollateral ,title:$component.resources.linkedCollateral}, click:$component.showCollateralDetails2.bind($data)">
+                                <div class="view-details-link__linkText" class="titleField2" data-bind="text: collateralDetails.collateralCode"></div>
+                            </a>
+                        </div>
+                        <!-- ko if:collateralDetails.collateralDesc -->
+                        <span class="oj-flex pipe"></span>
+                        <!-- /ko -->
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9 covanent-title">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-12 listContent__view-details view-details">
+                                    <oj-label><span data-bind="text: collateralDetails.collateralDesc" class="titleField2"></span></oj-label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad oj-md-12 oj-lg-12">
+                            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-9 oj-lg-9">
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 ">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.collateralAmount, value : $formatter.formatCurrency(collateralDetails.childCollateralValue.amount, collateralDetails.childCollateralValue.currency)"></row>
+
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.limitContribution, value : $formatter.formatCurrency(collateralDetails.childLimitContribution, collateralDetails.childCollateralValue.currency)"></row>
+
+                                </div>
+                                
+                                <div class="oj-flex-item oj-flex-items-pad oj-lg-3">
+                                      <!-- ko if:$data.collateralDetails.endDate -->
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.endDate, value :$formatter.formatDate(collateralDetails.endDate)"></row>
+                                       <!-- /ko -->
+                                      <!-- ko ifnot:$data.collateralDetails.endDate -->
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.endDate, value : $component.nls.notAvailable"></row>
+                               <!-- /ko -->
+
+                                </div>
+
+                                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.resources.lendableMargin, value : $baseModel.format($component.resources.optionPercentage2,{number : collateralDetails.lendableMargin})"></row>
+
+                                </div>
+
+                                
+
+                            </div>
+                            <div class="oj-flex-items-pad oj-lg-3">
+                                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 contriGroup">
+                                        <oj-label><span data-bind="text: $component.resources.contributionToGroup"></span></oj-label>
+                                        <div class="oj-flex oj-flex-items-pad oj-lg-6 structure tags">
+                                            </strong> <span class="titleField3" data-bind="text: $formatter.formatCurrency(collateralDetails.utilizationAmount.amount, collateralDetails.utilizationAmount.currency)"></span></strong>
+                                            <span class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 group2" data-bind="text:$baseModel.format($component.resources.optionPercentage2,{number : allocatedGroupContributionInPercentage})"></span>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </script>
+
+
+
+    </page-section>
+</div>

@@ -1,0 +1,52 @@
+.label1{
+  font-size: 12px;
+}
+.dot {
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot1{
+  background-color: var(--base-color-danger);
+}
+
+.dot2{
+  background-color: var(--base-color-success);
+}
+
+.dot3{
+  background-color: var(--link-base);
+}
+
+.dot4{
+  background-color: var(--graph-color5);
+}
+.tab{
+padding:0rem;
+}
+.amount{
+  @include float(right);
+}
+.progress-bar-property {
+  width: 50%;
+  height: 0.625rem;
+  margin: 0.625rem;
+  opacity: .8;
+}
+.amountProperty{
+    @include float(right);
+    font-size: var(--table-body-font-size);
+    white-space: normal;
+    vertical-align: middle;
+    color: var(--table-body-foreground-color);
+    font-weight: 400;
+    min-width: 1rem;
+    min-height: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: content-box;
+    width:50%;
+     
+}
+

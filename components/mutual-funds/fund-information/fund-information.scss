@@ -1,0 +1,46 @@
+.fund-information {
+    @include mq(large) {
+        width: 60rem;
+    }
+    @include mq(medium) {
+        width: 46rem;
+    }
+    @include mq(small) {
+        width: 20rem;
+    }
+    .pad-bar {
+        padding-bottom: 1rem;
+    }
+    .bold-text {
+        font-weight: bold;
+    }
+    .pad-bar-mobile {
+        padding-top: 0.8rem;
+    }
+    .info-text {
+        padding-top: 1.3rem;
+        @include single-padding(top, 0.8rem solid var(--banner-background));
+    }
+    .nav-padding {
+        padding-bottom: 0.8rem;
+    }
+    .other-details-padding {
+        padding-top: 0.8rem;
+    }
+    .padding-panel {
+        @include margin(0, 0.5rem, 0, 0);
+    }
+    .list-view-header {
+        padding-bottom: 0.8rem;
+    }
+    .list-view-item {
+        padding-bottom: 0.3rem;
+    }
+    .fund-background {
+        background: var(--banner-background);
+    }
+    .fund-padding {
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+    }
+}

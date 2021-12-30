@@ -1,0 +1,21 @@
+<div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12" data-bind="css:$baseModel.large() ? 'dropDownPadding':''">
+    <div class="oj-flex-item oj-lg-5 oj-md-12 oj-sm-12 label" data-bind="css:$baseModel.large() ? 'productLabel':''">
+        <oj-label for="partyId">
+            <span data-bind="text:$baseModel.format($component.Nls.initiationFor , {'productName' :$component.productName() })"></span>
+        </oj-label>
+    </div>
+    <!-- ko if:$component.isPartyListLoaded() -->
+    <div class="oj-flex-item oj-lg-3 oj-md-12 oj-sm-12">
+        <oj-select-one id="partyId" value="{{partyId}}" :placeholder="[[$component.Nls.partyName]]" on-value-changed="[[partyChangeHandler]]">
+            <!-- ko foreach: $component.parties -->
+            <oj-option value="{{value}}"><span data-bind="text:desc"></span></oj-option>
+            <!-- /ko -->
+        </oj-select-one>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.onlyPartyId()-->
+    <div class="oj-flex-items-pad oj-flex-item oj-lg-4 oj-md-12 oj-sm-12">
+        <span data-bind="text:$component.loginParty"></span>
+    </div>
+    <!-- /ko -->
+</div>

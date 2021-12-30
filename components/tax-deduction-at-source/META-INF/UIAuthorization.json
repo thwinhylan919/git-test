@@ -1,0 +1,11 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.td.service.account.core.TermDeposit",
+    "components": [{
+      "componentName": "tax-deduction-at-source",
+      "service": "fetchTaxPaid",
+      "perform": "",
+      "approve": ""
+    }]
+  }]
+}

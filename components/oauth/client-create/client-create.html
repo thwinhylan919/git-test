@@ -1,0 +1,260 @@
+<div class="form-main-container  full-width">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading :  $component.Nls.clientDefn">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label for="clientId">
+                    <span data-bind="text:$component.Nls.clientId"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-4">
+                <oj-input-text id="clientId" value="{{$component.clientDTO.id}}" aria-labelledby="clientId"
+                    validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION')]]"></oj-input-text>
+            </div>
+            <oj-button class="action-button-primary" on-click="[[generateClientId]]">
+                <span data-bind="text:$component.Nls.generate"></span>
+            </oj-button>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label for="clientName">
+                    <span data-bind="text:$component.Nls.clientName"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-4">
+                <oj-input-text id="clientName" value="{{$component.clientDTO.name}}" aria-labelledby="clientName"
+                    validators="[[$baseModel.getValidator('APPLICATION_NAME')]]"></oj-input-text>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label for="clientDesc">
+                    <span data-bind="text:$component.Nls.clientDesc"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-4">
+                <oj-input-text id="clientDesc" value="{{$component.clientDTO.description}}" aria-labelledby="clientDesc"
+                    validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION')]]"></oj-input-text>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label :for="[['identityDomain'+$baseModel.currentIdCount()]]">
+                    <span data-bind="text:$component.Nls.identityDomain"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-6 ">
+                <!-- ko if:$component.isIdentityDomainListLoaded() -->
+                <oj-select-one :id="[['identityDomain'+$baseModel.currentIdCount()]]"
+                    :placeholder="[[$component.Nls.select]]" value="{{$component.clientDTO.idDomain}}"
+                    on-value-changed="[[$component.identityDomainChanged]]" :aria-label="[[$component.Nls.select]]"
+                    translations="[[{'required':{messageDetail:$component.Nls.invalidIdentityDomain}}]]"
+                    required="[[true]]">
+                    <!-- ko foreach:$component.identityDomains -->
+                    <oj-option value="{{name}}"><span data-bind="text:name"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label for="clientSecret">
+                    <span data-bind="text:$component.Nls.clientSecret"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-lg-4">
+                <oj-input-password id="clientSecret" value="{{$component.clientDTO.secret}}"
+                    aria-labelledby="clientSecret"
+                    validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.Nls.invalidClientSecret,{type: 'length',options: {min: 1, max: 255}})]]">
+                </oj-input-password>
+            </div>
+            <div class="oj-flex-item oj-lg-1">
+                <a href="#"
+                    data-bind="attr:{'alt':$component.Nls.togglePassword,'aria-label':$component.Nls.togglePassword },click:$component.togglePassword">
+                    <div id="eyecon" class="icon icon-eye-slash"></div>
+                </a>
+            </div>
+            <div class="oj-flex-item oj-lg-3">
+                <oj-button class="action-button-primary" on-click="[[generateSecret]]">
+                    <span data-bind="text:$component.Nls.generate"></span>
+                </oj-button>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label :for="[['clientType'+$baseModel.currentIdCount()]]"> <span
+                        data-bind="text:$component.Nls.clientType"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-6 ">
+                <!-- ko if:$component.params.isClientTypeListLoaded -->
+                <oj-select-one :id="[['clientType'+$baseModel.currentIdCount()]]"
+                    :aria-label="[[$component.Nls.clientType]]" :placeholder="[[$component.Nls.select]]"
+                    value="{{$component.clientDTO.clientType}}"
+                    translations="[[{'required':{messageDetail:$component.Nls.invalidClientType}}]]"
+                    required="[[true]]">
+                    <oj-option value="CONFIDENTIAL_CLIENT"><span
+                            data-bind="text:$component.Nls.clientTypes.CONFIDENTIAL_CLIENT"></span></oj-option>
+                    <oj-option value="PUBLIC_CLIENT"><span data-bind="text:$component.Nls.clientTypes.PUBLIC_CLIENT"></span>
+                    </oj-option>
+                    <oj-option value="MOBILE"><span data-bind="text:$component.Nls.clientTypes.MOBILE"></span></oj-option>
+                </oj-select-one>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-4 label">
+                <oj-label for="grantType"><span data-bind="text:$component.Nls.grantType"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-6 ">
+                <oj-select-many id="grantType" :aria-label="[[$component.Nls.grantType]]"
+                    :placeholder="[[$component.Nls.select]]" value="{{$component.clientDTO.grant_types}}">
+                    <oj-option value="AUTHORIZATION_CODE"><span
+                            data-bind="text:$component.Nls.grantTypes.AUTHORIZATION_CODE"></span></oj-option>
+                    <oj-option value="PASSWORD"><span data-bind="text:$component.Nls.grantTypes.PASSWORD"></span></oj-option>
+                    <oj-option value="CLIENT_CREDENTIALS"><span
+                            data-bind="text:$component.Nls.grantTypes.CLIENT_CREDENTIALS"></span></oj-option>
+                    <oj-option value="JWT_BEARER"><span data-bind="text:$component.Nls.grantTypes.JWT_BEARER"></span>
+                    </oj-option>
+                    <oj-option value="REFRESH_TOKEN"><span data-bind="text:$component.Nls.grantTypes.REFRESH_TOKEN"></span>
+                    </oj-option>
+                </oj-select-many>
+            </div>
+        </div>
+    </page-section>
+    <page-section id="redirectURLAdd"
+        params="baseModel : $baseModel, rootModel : $component, heading : $component.Nls.redirectURLs">
+        <script type="text/html" id="redirectURL_template">
+            <div data-bind="attr:{'id': 'repeatRedirectURL'+ $index()}">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                        <oj-label data-bind="attr:{'for': 'redUrl'+$index()}">
+                            <span data-bind="text:$component.Nls.redirectURL"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                        <oj-input-text required data-bind="attr:{'id': 'redUrl'+$index()}"
+                            validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION')]]" value="{{url}}"
+                            aria-labelledby="redUrl">
+                        </oj-input-text>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                        <a href="#" class="icon icon-delete pull-right"
+                            data-bind="click: $component.deleteURL.bind($index()), css: ($component.redirectURLArray().length === 1)?'disabled':''">
+                            <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label"
+                                data-bind="text:$component.Nls.deleteURL"></span>
+                        </a>
+                    </div>
+                </div>
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : ' '">
+                </page-section>
+            </div>
+        </script>
+        <div data-bind="template: { name: 'redirectURL_template', foreach: $component.redirectURLArray() }"></div>
+    </page-section>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2 ">
+            <oj-button class="help-button" on-click="[[duplicateRedirectURL]]">
+                <span data-bind="text:$component.Nls.addURL"></span>
+            </oj-button>
+        </div>
+    </div>
+    <page-section id="scopesToAdd"
+        params="baseModel : $baseModel, rootModel : $component, heading : $component.Nls.selectScopes">
+        <script type="text/html" id="scopes_template">
+            <!-- ko if:$component.resourceServerListLoaded -->
+        <div
+            data-bind="attr:{'id': 'repeat'+ $index()}, css: ($component.defaultScopeListLoaded() === false)?'':'disableDiv'">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                    <oj-label :for="[['resServer'+$baseModel.currentIdCount()]]">
+                        <span data-bind="text:$component.Nls.resourceServer"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                    <oj-select-one :id="[['resServer'+$baseModel.currentIdCount()]]"
+                        :placeholder="[[$component.Nls.select]]" value="{{resourceServer}}"
+                        on-value-changed="[[$component.resourceServerChanged.bind($index())]]" required="[[true]]"
+                        aria-labelledby="resServer">
+                        <!-- ko foreach:$component.resourceServerList -->
+                        <oj-option value="{{name}}"><span data-bind="text:name"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                    <a href="#" class="icon icon-delete pull-right"
+                        data-bind="click: $component.delete.bind($index()), css: ($component.defaultScopeListLoaded() === false)?'':'disabled'">
+                        <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label"
+                            data-bind="text:$component.Nls.deleteScope"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- ko if:$component.resourceScopeListLoaded -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                    <oj-label :for="[['scopes'+$baseModel.currentIdCount()]]">
+                        <span data-bind="text:$component.Nls.scopes"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                    <oj-select-many :id="[['scopes'+$baseModel.currentIdCount()]]"
+                        :placeholder="[[$component.Nls.select]]" value="{{selectedScopes}}" aria-labelledby="scopes"
+                        on-value-changed="[[$component.scopeChanged]]">
+                        <!-- ko foreach:scopes-->
+                        <oj-option value="{{$data.scopeName}}"><span data-bind="text:$data.scopeName"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-many>
+                </div>
+            </div>
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ' '">
+            </page-section>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        </script>
+        <div data-bind="template: { name: 'scopes_template', foreach: $component.scopesArray() }"></div>
+    </page-section>
+    <!-- ko if:$component.defaultScopeListLoaded() -->
+    <div id="defScope" class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+            <oj-label for="defaultScope">
+                <span data-bind="text:$component.Nls.defaultScope"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+            <oj-select-one value="{{$component.clientDTO.defaultScope}}" :placeholder="[[$component.Nls.select]]"
+                aria-labelledby="defaultScope" required>
+                <!-- ko foreach:$component.defaultScopesList -->
+                <oj-option value="{{name}}"><span data-bind="text:name"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+            <a href="#" class="icon icon-delete pull-right" data-bind="click: $component.deleteDefScope">
+                <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label"
+                    data-bind="text:$component.Nls.deleteDefaultScope"></span>
+            </a>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2">
+            <oj-button class="help-button disable" on-click="[[duplicate]]">
+                <span data-bind="text:$component.Nls.addScope"></span>
+            </oj-button>
+        </span>
+        <span class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2">
+            <oj-button class="help-button disableDef" on-click="[[listDefaultScope]]">
+                <span data-bind="text:$component.Nls.addDefaultScope"></span>
+            </oj-button>
+        </span>
+    </div>
+    <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.save]]"><span
+                data-bind="text:$component.Nls.save"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span
+                data-bind="text:$component.Nls.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span
+                data-bind="text:$component.Nls.back"></span></oj-button>
+    </div>
+</div>

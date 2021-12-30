@@ -1,0 +1,26 @@
+.spacing-table {
+  padding-top: 2.5rem;
+}
+
+.search-entity-container {
+  padding-top: 0.625rem;
+}
+
+.virtual-structure-search {
+  .search-options {
+    padding: 1.3rem;
+  }
+
+  .search-buttons {
+    padding: 0 0.6rem !important;
+  }
+}
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}

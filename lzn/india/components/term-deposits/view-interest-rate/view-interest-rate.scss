@@ -1,0 +1,20 @@
+@import "utils";
+
+.termDeposit {
+  &__link {
+    @include mq(large) {
+      margin-top: 1rem;
+    }
+    @include mq(medium) {
+      margin-top: 1rem;
+    }
+    @include mq(small) {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.rate-header {
+    white-space: normal;
+    height: auto;
+}

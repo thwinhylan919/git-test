@@ -1,0 +1,118 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading:$component.Nls.payeeDetails">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.payeeType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('payeeType' in $data.recordDetails())?$data.recordDetails().payeeType:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.payeeName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('payeeName' in $data.recordDetails())?$data.recordDetails().payeeName:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.accountType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('accountType' in $data.recordDetails())?$data.recordDetails().accountType:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.accountNumber"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('accountNumber' in $data.recordDetails())?$data.recordDetails().accountNumber:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.accountName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('accountName' in $data.recordDetails())?$data.recordDetails().accountName:'-')"></span>
+        </div>
+        <!-- ko if: 'bicCode' in $data.recordDetails() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.swiftCode"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('bicCode' in $data.recordDetails())?$data.recordDetails().bicCode:'-')"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko ifnot: 'bicCode' in $data.recordDetails() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.bankName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('bankName' in $data.recordDetails())?$data.recordDetails().bankName:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.bankAddress"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('bankAddress' in $data.recordDetails())?$data.recordDetails().bankAddress:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.country"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('bankCountry' in $data.recordDetails())?$data.recordDetails().bankCountry:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.city"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('bankCity' in $data.recordDetails())?$data.recordDetails().bankCity:'-')"></span>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.nickName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('nickName' in $data.recordDetails())?$data.recordDetails().nickName:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <oj-label><span data-bind="text:$component.Nls.accessType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('accessType' in $data.recordDetails())?$data.recordDetails().accessType:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <label data-bind="text : $component.Nls.payeeAddr1"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('addLine1' in $data.recordDetails())?$data.recordDetails().addLine1:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <label data-bind="text : $component.Nls.payeeAddr2"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('addLine2' in $data.recordDetails())?$data.recordDetails().addLine2:'-')"></span>
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <label data-bind="text : $component.Nls.payeeCity"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('city' in $data.recordDetails())?$data.recordDetails().city:'-')"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+            <label data-bind="text : $component.Nls.payeeCountry"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+            <span data-bind="text : (('country' in $data.recordDetails())?$data.recordDetails().country:'-')"></span>
+        </div>
+    </div>
+</page-section>

@@ -1,0 +1,155 @@
+[{
+        "name": "ON_BOARDING",
+        "icon": "icon-onboarding",
+        "submenus": [{
+            "name": "users",
+            "module": "user-management",
+            "targetComponent": "users"
+        }, {
+            "name": "preference-base",
+            "module": "customer-preference",
+            "targetComponent": "preference-base"
+        }, {
+            "name": "linkage-base",
+            "module": "party-linkage",
+            "targetComponent": "linkage-base"
+        }]
+    }, {
+        "name": "APPROVALS",
+        "icon": "icon-approvals",
+        "submenus": [{
+            "module": "approvals",
+            "name": "workflow"
+        }, {
+            "module": "approvals",
+            "name": "rules"
+        }]
+    }, {
+        "name": "LIMITS",
+        "icon": "icon-limit",
+        "submenus": [{
+            "module": "financial-limits",
+            "name": "limit-search"
+        }, {
+            "module": "financial-limit-package",
+            "name": "limit-package-search"
+        }]
+    }, {
+        "name": "ACCESS_MANAGEMENT",
+        "icon": "icon-account-access",
+        "submenus": [{
+            "name": "ACCOUNT_ACCESS",
+            "submenus": [{
+                "name": "access-management-base",
+                "module": "account-access-management"
+            }, {
+                "name": "user-access-management-base",
+                "module": "account-access-management"
+            }]
+        }, {
+            "name": "RESOURCE_ACCESS",
+            "submenus": [{
+                "name": "party-base",
+                "module": "corporate-resource-access",
+                "class": "transaction"
+            }, {
+                "name": "user-base",
+                "module": "corporate-resource-access",
+                "class": "transaction"
+            }]
+        }]
+    },
+    {
+        "name": "FILE_UPLOAD",
+        "icon": "icon-file-upload",
+        "submenus": [{
+            "name": "file-identifier-search",
+            "module": "file-upload"
+
+        }, {
+            "name": "user-search",
+            "module": "file-upload"
+
+        }]
+
+    }, {
+        "name": "REPORTS",
+        "icon": "icon-review",
+        "submenus": [{
+            "name": "report-generation",
+            "module": "reports",
+            "targetComponent": "report-generation"
+        }, {
+            "name": "report-list",
+            "module": "reports",
+            "targetComponent": "report-list"
+        }, {
+            "name": "report-user-search",
+            "module": "reports",
+            "targetComponent": "report-user-search"
+        }]
+    }, {
+        "name": "OTHERS",
+        "icon": "icon-others",
+        "submenus": [{
+            "module": "approvals",
+            "name": "user-group-type"
+        }, {
+            "name": "audit-log",
+            "module": "audit",
+            "targetComponent": "audit-log"
+        }, {
+            "name": "alerts-select-user",
+            "icon": "icon-alert",
+            "module": "alerts"
+        }]
+    },
+    {
+        "name": "MAILBOX_TITLE",
+        "icon": "icon-debit-card",
+        "submenus": [{
+                "name": "mailbox-base",
+                "resource": "mailbox"
+            },
+            {
+                "name": "alert-list",
+                "resource": "mailbox"
+            },
+            {
+                "name": "notification-list",
+                "resource": "mailbox"
+            }
+        ]
+    }, {
+        "name": "profile",
+        "icon": "icon-user",
+        "module": "base-components"
+    }, {
+        "name": "session-summary",
+        "icon": "icon-received",
+        "module": "base-components"
+    }, {
+        "name": "locator",
+        "icon": "icon-location-arrow",
+        "module": "locator"
+    }, {
+        "name": "change-password",
+        "icon": " icon-password",
+        "module": "change-password"
+    }, {
+        "name": "security-menu",
+        "icon": " icon-security-question",
+        "module": "security"
+    }, {
+        "name": "help",
+        "icon": "icon-help",
+        "type": "FUNCTION",
+        "default": true,
+        "functionName": "openWebHelpWindow"
+    }, {
+        "name": "about",
+        "icon": "icon-information",
+        "default": true,
+        "type": "MODAL"
+    }
+]

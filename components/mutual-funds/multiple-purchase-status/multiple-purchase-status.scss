@@ -1,0 +1,34 @@
+.multiple-purchase-detail {
+    
+  @include mq(large){
+    width:60rem;
+  }
+
+  @include mq(medium){
+    width:46rem;
+  }
+
+  @include mq(small){
+    width:20rem;
+  }
+    .bold-headername {
+        font-weight: var(--base-font-weight-bold);
+    }
+
+    .list-top {
+        padding-top: 0.5rem;
+    }
+
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+
+    .sucessColor{
+        color: var(--base-color-success);
+    }
+
+    .failColor{
+        color: var(--base-color-danger);
+    }
+    
+}

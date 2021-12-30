@@ -1,0 +1,185 @@
+<div class="form-main-container listStructure">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <!-- ko if: structureStatusList && structureTypeList && $component.showSearchBar() -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-11">
+                <!-- ko if:refreshSearchBox() -->
+                <search-box params="searchFields : ['header','structureType','structureStatus'],rootModel:$component,
+              arrayReference: $component.cardDetails,
+              refreshReference: $component.cardDataLoaded,
+              searchBy:$component.resource.searchFields"></search-box>
+                <!-- /ko -->
+            </div>
+            <div class="link">
+                <a href="#" data-bind="attr:{alt:$component.resource.link.filter,title:$component.resource.alt.filter,id:'filter'},click:$component.openMenu">
+                    <span class="icons icon-filter"></span>
+                </a>
+            </div>
+            <div class="link">
+                <a href="#" data-bind="attr:{alt:$component.resource.link.addStructure,title:$component.resource.link.addStructure},click:$dashboard.loadComponent.bind($data,'create-structure')">
+                    <span class="icons icon-plus"></span>
+                </a>
+            </div>
+        </div>
+        <oj-popup id="popup" class="hide" tail="none" position.at.horizontal="end" position.at.vertical="center" position.my.horizontal="start" position.my.vertical="top">
+            <div class="list-structure-container">
+                <div class="popup">
+                    <div class="oj-flex oj-flex-items-pad popup">
+                        <div class="oj-flex-item oj-lg-9">
+                            <oj-label for="structureStatus">
+                                <span data-bind="text:$component.resource.structureDetails.status"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right">
+                            <a href="#" data-bind="attr:{alt:$component.resource.alt.reset,title:$component.resource.link.reset}, click:reset">
+                                <span data-bind="text:$component.resource.reset"></span></a>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item">
+                            <oj-checkboxset id="structureStatus" disabled="[[$component.disableFilter]]" value="{{structureStatusArray}}" class="oj-flex-item oj-lg-12">
+                                <!-- ko foreach:structureStatusList -->
+                                <oj-option :id="[[$baseModel.incrementIdCount()]]" value="[[code]]">
+                                    <span slot='startIcon' class="listStructure-status__structureStatus listStructure-status__checkbox" data-bind="css:code==='Resumed' ? 'listStructure-status__structureStatusActive':(code==='Paused'?' listStructure-status__structureStatusPaused':'listStructure-status__structureStatusExpired')"></span>
+                                    <span data-bind="text:$baseModel.format($component.resource.structureDetails.statusWithCount,{
+                                status : description,
+                                count : $component.statusWiseCountMap[$component.structureType() ? code + $component.structureType() : code]
+                            })"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-checkboxset>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad listStructure__structureType">
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-label for="structureType">
+                                <span data-bind="text:$component.resource.structureType"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-select-one id="product" placeholder="[[$component.resource.pleaseSelect]]" disabled="[[$component.disableFilter]]" on-value-changed="[[structureTypeChangeHandler]]" :aria-label="[[$component.resource.structureType]]" class="oj-flex-item oj-lg-12" value="{{$component.structureType}}">
+                                <!-- ko foreach:structureTypeList -->
+                                <oj-option :id="[[$baseModel.incrementIdCount()]]" value="[[code]]"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 listStructure__view">
+                            <oj-label>
+                                <span data-bind="text:$component.resource.views"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 center popup-link">
+                            <a href="#" data-bind="attr:{alt:$component.resource.alt.summarised,title:$component.resource.link.summarised}, click:collapse">
+                                <span class="icons icon-detail-view"></span>
+                                <div class="popup-link-item" data-bind="text:$component.resource.alt.summarised"></div>
+                            </a>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 center popup-link">
+                            <a href="#" data-bind="attr:{alt:$component.resource.alt.detailed,title:$component.resource.link.detailed}, click:expand">
+                                <span class="icons icon-summary-view"></span>
+                                <div class="popup-link-item" data-bind="text:$component.resource.alt.detailed"></div>
+                            </a>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 center popup-link">
+                            <a href="#" data-bind="attr:{alt:$component.resource.alt.tabular,title:$component.resource.link.tabular}, click:openTabularFormat">
+                                <span class="icons icon-tabular-view"></span>
+                                <div class="popup-link-item" data-bind="text:$component.resource.alt.tabular"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </oj-popup>
+        <!-- /ko -->
+        <!-- ko if:$component.cardDataLoaded() && $component.cardDetails().length -->
+        <!-- ko if:$component.loadTabularFormat() -->
+        <div data-bind="component:{name:'list-structure-table',
+        params:{rootModel: {params : {
+        cardDetails : $component.cardDetails()
+      }}}}">
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$component.loadCardFormat() -->
+        <div class="oj-flex">
+            <!-- ko foreach:$component.cardDetails() -->
+            <div class="oj-flex-item oj-lg-4 oj-xl-3">
+                <action-card-list params="baseModel : $baseModel,
+         onCardClick : $component.onCardClick,
+         data : $data
+         header : header,
+        cardTitle : $baseModel.format($component.resource.alt.card, {
+        structureName : header
+    }),
+        cardDescription : $baseModel.format($component.resource.link.card, {
+        structureName : header
+    }),
+         rootModel : $component">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-3">
+                            <span class="tags" data-bind="text : $component.resource.structureDetails[structureType],css:structureType==='Sweep' ? 'structureTypeSweep':(structureType==='Pool'?'structureTypePool':'structureTypeHybrid')">
+                            </span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-9 listStructure__status listStructure-status right">
+                            <div class="listStructure-status__structureStatus listStructure-status__card" data-bind="css:structureStatus==='Resumed' ? ' listStructure-status__structureStatusActive':(structureStatus==='Paused'?' listStructure-status__structureStatusPaused':'listStructure-status__structureStatusExpired')"></div>
+                            <div class="listStructure-status__statusType" data-bind="text : $component.resource.structureDetails[structureStatus]"></div>
+                        </div>
+                    </div>
+                    <!-- ko if:$component.showadditionalData() -->
+                    <div class="oj-flex oj-flex-items-pad content listStructure-content">
+                        <!-- ko foreach: additionalData -->
+                        <!-- ko if:$data.value -->
+                        <div class="oj-flex-item oj-lg-12 listStructure-content__contentList listStructure-content-contentList">
+                            <oj-label class="listStructure-content-contentList__text"><span data-bind="text:$data.label"></span></oj-label>
+                            <!-- ko if: $data.isDate -->
+                            <div class="listStructure-content-contentList__value right" data-bind="text:$formatter.formatDate($data.value)">
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: $data.isDate -->
+                            <div class="listStructure-content-contentList__value right" data-bind="text :$data.value"></div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </action-card-list>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if:$component.cardDataLoaded() && !$component.cardDetails().length -->
+        <div class="nodata center">
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-12 ">
+                    <img alt="" data-bind="loadImage:'lm/liquidity-management_banner.svg'">
+                </div>
+                <!-- ko ifnot:$component.showSearchBar() -->
+                <div class="oj-flex-item oj-lg-12 nodata__message" data-bind="text:$component.resource.message.noStructure"></div>
+                <!-- /ko -->
+                <!-- ko if:$component.showSearchBar() -->
+                <div class="oj-flex-item oj-lg-12 nodata__message" data-bind="text:$component.resource.message.noStructureForFilter"></div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-button class="help-button" id="create-structure-button" on-click="[[$dashboard.loadComponent.bind($data,'create-structure')]]">
+                        <span slot="startIcon" class="icons icon-plus"></span>
+                        <span data-bind="text: $component.resource.structureDetails.createStructure"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </page-section>
+    <!-- ko if:$component.cardDetails().length -->
+    <div class="oj-flex-item button-container">
+        <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text: $component.resource.generic.common.cancel"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>

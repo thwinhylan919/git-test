@@ -1,0 +1,175 @@
+<div class="oj-flex virtual-account-bar">
+    <div class="oj-flex-item oj-lg-2">
+        <div data-bind="text: $component.realCustomerName"></div>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+    <div class="oj-flex-item oj-lg-2">
+        <div class="label" data-bind="text: $component.resource.structureCode"></div>
+        <div data-bind="text: $component.structureCode"></div>
+    </div>
+    <div class="oj-flex-item oj-lg-2">
+        <div class="label" data-bind="text: $component.resource.structureName"></div>
+        <div data-bind="text: $component.structureName"></div>
+    </div>
+
+    <div class="oj-flex-item oj-lg-3">
+        <!-- ko if:$component.realAccountNo() -->
+        <div class="label" data-bind="text: $component.resource.realAccountNumber"></div>
+        <div data-bind="text: $component.realAccountNo().displayValue"></div>
+        <!-- /ko -->
+        
+        <!-- ko if:$component.virtualMCA() -->
+        <div class="label" data-bind="text: $component.resource.virtualMultiCurrencyAccountNo"></div>
+        <div data-bind="text: $component.virtualMCA()"></div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex-item oj-lg-1">
+    </div>
+
+    <div class="oj-flex oj-lg-2">
+        <div class="oj-flex-item vertical-align-middle right">
+            <a href="#" data-bind="attr:{alt:$component.resource.treeView,
+                  title:$component.resource.treeViewTitlemsg},click:$component.setTreeView" id="treeIcon">
+                <span class="icon icon-tree icon-size"></span>
+            </a>
+        </div>
+        <div class="oj-flex-item vertical-align-middle flex-override right">
+            <a href="#" data-bind="attr:{id:'tableView', alt:$component.resource.tabularView,
+                  title:$component.resource.tableViewTitlemsg},click:$component.setTabularView" id="tableIcon">
+                <span class="icon icon-tabular-view icon-size"></span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="form-main-container listStructure">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <!-- ko if:$component.structureDetailsLoaded() && $component.mode() === "tree" -->
+        <tree-view params="
+         treeDetails :$component.structureDetails(),
+         nodeIdjsonPath:'childAccountId.value',
+         id:'childAccountId.value',
+         maxChildNodesToRender : Infinity,
+         nodeShortDescValue : 'childAccountId.displayValue',
+         nodeClickHandler:$component.nodeClicked,
+         treePanning:'auto',
+         treeZooming:'auto',
+         baseModel : $baseModel,
+         rootModel : $component">
+            <div class="oj-flex-items-pad structure__node">
+                <!-- ko if:$data.nodeData.mainAccountId -->
+                <div class="oj-flex-item oj-lg-12 structure__structureFill"
+                    data-bind="css : ($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep':'structure__structureFill__structureFillPool'">
+                    <div class="oj-flex-item">
+                        <div class="oj-flex-item structure__nodeData">
+                            <div class="oj-flex-item oj-lg-12 node-bold"
+                                data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                            <div class="oj-flex-item oj-lg-12 node-text"
+                                data-bind="text:$data.nodeData.childAccountName"></div>
+                            <div class="oj-flex-item oj-lg-12 node-line node-text">
+                                <span
+                                    data-bind="text:$formatter.formatCurrency($data.nodeData.balance.amount,$data.nodeData.balance.currency)"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:!$data.nodeData.mainAccountId -->
+                <div class="oj-flex-item oj-lg-12 structure__structureFillParent structure__parentNodeHeader"
+                    data-bind="css :'structure__structureFillParent__structureFillPool'">
+                    <div class="oj-flex-item">
+                        <div class="oj-flex-item structure__nodeData">
+                            <div class="oj-flex-item oj-lg-12 node-bold"
+                                data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                            <div class="oj-flex-item oj-lg-12 node-text"
+                                data-bind="text:$data.nodeData.childAccountName"></div>
+                            <div class="oj-flex-item oj-lg-12 node-line node-text">
+                                <span
+                                    data-bind="text:$formatter.formatCurrency($data.nodeData.balance.amount,$data.nodeData.balance.currency)"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </tree-view>
+        <!-- /ko -->
+        <!-- ko if:$component.structureDetailsLoaded() && $component.mode() === "table" -->
+        <virtual-structure-tab
+            params="structureDetails : structureDetails ,rootModel : $component, dashboard : $dashboard, baseModel:$baseModel">
+        </virtual-structure-tab>
+        <!-- /ko -->
+        <!-- ko ifnot:$component.structureStatus() === "C" -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="button-container search-buttons">
+                <oj-button class="action-button-primary" on-click="[[$component.edit]]">
+                    <span slot="startIcon" class="icons icon-remarks"></span>
+                    <span data-bind="text:$component.resource.edit"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.deleteConfirm]]">
+                    <span slot="startIcon" class="icons icon-delete"></span>
+                    <span data-bind="text:$component.resource.delete"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[backToSearch]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$component.structureStatus() === "C" -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="button-container search-buttons">
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[backToSearch]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </page-section>
+</div>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $component, id:'virtualStructureDelete', header: $component.resource.delete">
+    <div class="message-box">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <div class="dialog-text">
+                    <span data-bind="text:$component.resource.askForDelete"></span>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="yesButton" class="action-button-primary" on-click="[[deleteVirtualStructure]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resource.yes"></span>
+            </oj-button>
+            <oj-button id="noButton" class="action-button-secondary" on-click="[[doNotDelete]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.no"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $component, id:'virtualStructureZeroBal', header: $component.resource.error">
+    <div class="message-box">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <div class="dialog-text"><span data-bind="text:$component.resource.zeroBalanceError"></span></div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="okButton" class="action-button-primary" on-click="[[$component.closeMessage]]">
+                <span data-bind="text:$component.resource.ok"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

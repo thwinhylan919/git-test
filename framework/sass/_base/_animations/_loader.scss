@@ -1,0 +1,170 @@
+body,
+html {
+    height: 100%;
+    -webkit-text-size-adjust: none;
+    min-height: 100vh;
+    position: relative;
+}
+
+body {
+    &::after,
+    &::before {
+        box-sizing: border-box;
+        /* these are the 2 half blocks which cover the content once the animation is triggered */
+        content: '';
+        height: 50vh;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        background-color: #f5f5f5;
+        background-color: var(--header-gradient-start-color, #f5f5f5);
+        z-index: 1;
+        /* Force Hardware Acceleration */
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        transition: transform 0.4s 0.4s;
+    }
+    &::before {
+        top: 0;
+        transform: translateY(-100%);
+    }
+    &::after {
+        bottom: 0;
+        transform: translateY(100%);
+    }
+    &.page-is-changing::after,
+    &.page-is-changing::before {
+        transform: translateY(0);
+        transition: transform 0.4s 0s;
+    }
+}
+
+.cd-cover-layer {
+    position: fixed;
+    @include center;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 3;
+    visibility: hidden;
+    background-color: #f5f5f5;
+    background-color: var(--header-gradient-start-color, #f5f5f5);
+    transition: opacity 0.4s 0.4s, visibility 0s 0.8s;
+    .page-is-changing & {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+}
+
+.page-is-changing {
+    .cd-logo {
+        position: fixed;
+        z-index: 4;
+        background: url("./images/common/logo.svg") no-repeat;
+        top: 40%;
+        animation: animatezoom 0.8s;
+        left: calc(50% - 5.6rem);
+        width: 11.3rem;
+        height: 10%;
+    }
+}
+
+.cd-loading-bar {
+    position: fixed;
+    z-index: 4;
+    left: 50%;
+    top: 50%;
+    height: 0.1rem;
+    width: 90%;
+    background-color: #2c3251;
+    background-color: var(--header-foreground-color, #2c3251);
+    visibility: hidden;
+    transition: visibility 0s 0.4s, transform 0.4s 0s ease-in;
+    backface-visibility: hidden;
+    transform: translate3d(-50%, -50%, 0);
+    background-color: rgba(255, 255, 255, 0.1);
+    &::before {
+        content: '';
+        position: absolute;
+        @include left(0);
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #2c3251;
+        background-color: var(--header-foreground-color, #2c3251);
+        /* Force Hardware Acceleration */
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        transform: scaleX(0);
+        transform-origin: left center;
+    }
+    .page-is-changing & {
+        visibility: visible;
+        transform: translateX(-50%) translateY(-50%) scaleX(.3);
+        &::before {
+            animation-duration: 0.8s;
+            animation-delay: 0.8s;
+            animation-name: example;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in;
+        }
+    }
+}
+
+@keyframes example {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.se-pre-con {
+    &.load-bar {
+        position: relative;
+        width: 100%;
+        height: 5px;
+        z-index: 3;
+        background-color: #02629f;
+        .bar {
+            content: "";
+            display: inline;
+            position: absolute;
+            width: 0;
+            height: 100%;
+            left: 50%;
+            text-align: center;
+        }
+        .bar:nth-child(1) {
+            background-color: #C74634;
+            animation: loading 3s linear infinite;
+        }
+        .bar:nth-child(2) {
+            background-color: #333;
+            animation: loading 3s linear 1s infinite;
+        }
+        .bar:nth-child(3) {
+            background-color: #02629f;
+            animation: loading 3s linear 2s infinite;
+        }
+        @keyframes loading {
+            from {
+                left: 50%;
+                width: 0;
+                z-index: 100;
+            }
+            33.3333% {
+                left: 0;
+                width: 100%;
+                z-index: 10;
+            }
+            to {
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+}

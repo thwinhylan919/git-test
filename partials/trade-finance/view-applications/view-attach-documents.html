@@ -1,0 +1,46 @@
+<!-- ko ifnot : $component.mode() === 'CREATE' || $component.mode() === 'EDIT'  -->
+  <!-- ko if : $component.attachedDocuments().length === 0 -->
+  <div class="oj-flex oj-flex-items-pad padding-tb">
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() },
+        text: $component.viewApplicationsBundle.noDocsAttached">
+      </div>
+    </div>
+    <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if : $component.attachedDocuments().length > 0 -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <!-- ko ifnot:$baseModel.small() && $component.datasourceLoadedForAttachDocument() -->
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 doc-table">
+        <oj-table id="attachDocTable" :aria-label="[[$component.viewApplicationsBundle.labels.documentTable]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_attach_document', true)]]" columns="[[$component.attachDocTblColumns]]" data="[[$component.datasourceForAttachDocument]]">
+          <caption class="hide-label" data-bind="text:$component.viewApplicationsBundle.labels.attachedDocuments"></caption>
+        </oj-table>
+      </div>
+      <!-- /ko -->
+      <!-- ko if:$baseModel.small() && $component.datasourceLoadedForAttachDocument() -->
+      <div class="oj-flex-item oj-sm-12 grid-main-container">
+          <oj-list-view id="listview-txn-card" class="cards" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('attach_doc_list_card',true)}]]" selection-mode="[['single']]" data="[[datasourceForAttachDocument]]">
+          </oj-list-view>
+          <oj-paging-control class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[10]]" data="[[$component.templateDatasource]]">
+          </oj-paging-control>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
+  <script type="text/html" id="row_tmpl_attach_document">
+    <tr>
+      <td>
+        <span class="draft-no" data-bind="text:$component.getRowId($context.rowContext.status.rowIndex)"></span>
+        
+      </td>
+      <td data-bind="text:$data.contentId.displayValue">
+      </td>
+      <td data-bind="text: $data.category">
+      </td>
+      <td data-bind="text: $data.type">
+      </td>
+      <td class="content doc-remarks" data-bind="text: $data.remarks">
+      </td>
+    </tr>
+  </script>

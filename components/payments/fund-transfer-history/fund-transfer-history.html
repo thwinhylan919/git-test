@@ -1,0 +1,407 @@
+<div class="form-main-container fund-transfer-history-container">
+  <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+
+    <!-- ko if: filterDetailsLoaded -->
+
+    <!-- ko if:$baseModel.large() -->
+
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="payeeName">
+          <span data-bind="text:$component.nls.headers.payeeName"></span>
+        </oj-label>
+        <oj-select-one id="payeeName" :aria-label="[[$component.nls.headers.payeeName]]" value="{{$component.payeeName}}">
+          <!-- ko foreach: $component.payeeDetailsArray -->
+          <oj-option value="[[payeeNickName]]"><span data-bind="text:payeeNickName"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+      <div class="oj-flex-item oj-sm-10 oj-md-3 oj-lg-3">
+        <oj-label for="transactionReferenceNumber">
+          <span data-bind="text:$component.nls.headers.transactionReferenceNumber"></span>
+        </oj-label>
+        <oj-input-text id="transactionReferenceNumber" :aria-label="[[$component.nls.headers.transactionReferenceNumber]]" value="{{$component.transactionReferenceNumber}}"></oj-input-text>
+      </div>
+
+    </div>
+
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="status">
+          <span data-bind="text:$component.nls.tableHeaders.status"></span>
+        </oj-label>
+        <oj-select-one id="status" :aria-label="[[$component.nls.tableHeaders.status]]" :placeholder="[[$component.nls.history.placeHolder]]" value="{{$component.status}}">
+          <!-- ko foreach: $component.statusArray -->
+          <oj-option value="[[code]]"><span data-bind="text:description"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="transferType">
+          <span data-bind="text:$component.nls.tableHeaders.transferType"></span>
+        </oj-label>
+        <oj-select-one id="transferType" :aria-label="[[$component.nls.tableHeaders.transferType]]" :placeholder="[[$component.nls.history.placeHolder]]" value="{{$component.transferType}}">
+          <!-- ko foreach: $component.transferTypeArray -->
+          <oj-option value="[[code]]"><span data-bind="text:description"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+
+
+    </div>
+
+    <div class="oj-flex oj-flex-items-pad">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="debitAccountId">
+          <span data-bind="text:$component.nls.tableHeaders.debitAccountId"></span>
+        </oj-label>
+        <oj-select-one id="debitAccountId" :aria-label="[[$component.nls.tableHeaders.debitAccountId]]" :placeholder="[[$component.nls.history.placeHolder]]" value="{{$component.debitAccountId}}">
+          <!-- ko foreach: $component.accountList -->
+          <oj-option value="[[value]]"><span data-bind="text:displayValue"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+
+      <div class="oj-flex-item oj-sm-6 oj-lg-2">
+        <oj-label :for="[['fromDate'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.nls.headers.fromDate"></span></oj-label>
+        <oj-input-date :id="[['fromDate'+ $baseModel.currentIdCount()]]" :aria-label="[[$component.nls.headers.fromDate]]" value="{{$component.fromDate}}" converter="[[$formatter.dateConverter]]"></oj-input-date>
+      </div>
+
+      <div class="oj-flex-item oj-sm-6 oj-lg-2">
+        <oj-label :for="[['toDate'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.nls.headers.toDate"></span></oj-label>
+        <oj-input-date :id="[['fromDate'+ $baseModel.currentIdCount()]]" :aria-label="[[$component.nls.headers.toDate]]" value="{{$component.toDate}}" converter="[[$formatter.dateConverter]]"></oj-input-date>
+      </div>
+    </div>
+
+    <!-- /ko -->
+
+    <!-- ko ifnot:$baseModel.large() -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="payeeName">
+          <span data-bind="text:$component.nls.headers.payeeName"></span>
+        </oj-label>
+        <oj-select-one id="payeeName" :aria-label="[[$component.nls.headers.payeeName]]" value="{{$component.payeeName}}">
+          <!-- ko foreach: $component.payeeDetailsArray -->
+          <oj-option value="[[payeeNickName]]"><span data-bind="text:payeeNickName"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+
+    <!-- ko ifnot: showOptionRecords -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <a href="#" data-bind="click:$component.showOptions">
+          <span class="form-button-link" data-bind="text:$component.nls.history.showMoreOptions"> </span>
+          <span class="icon icon-arrow-down">
+          </span>
+        </a>
+      </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: showOptionRecords -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+        <oj-label for="transactionReferenceNumber">
+          <span data-bind="text:$component.nls.headers.transactionReferenceNumber"></span>
+        </oj-label>
+        <oj-input-text id="transactionReferenceNumber" :aria-label="[[$component.nls.headers.transactionReferenceNumber]]" value="{{$component.transactionReferenceNumber}}"></oj-input-text>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="status">
+          <span data-bind="text:$component.nls.tableHeaders.status"></span>
+        </oj-label>
+        <oj-select-one id="status" :aria-label="[[$component.nls.tableHeaders.status]]" :placeholder="[[$component.nls.history.placeHolder]]" value="{{$component.status}}">
+          <!-- ko foreach: $component.statusArray -->
+          <oj-option value="[[code]]"><span data-bind="text:description"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="transferType">
+          <span data-bind="text:$component.nls.tableHeaders.transferType"></span>
+        </oj-label>
+        <oj-select-one id="transferType" :aria-label="[[$component.nls.tableHeaders.transferType]]" :placeholder="[[$component.nls.history.placeHolder]]" value="{{$component.transferType}}">
+          <!-- ko foreach: $component.transferTypeArray -->
+          <oj-option value="[[code]]"><span data-bind="text:description"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+        <oj-label for="debitAccountId">
+          <span data-bind="text:$component.nls.tableHeaders.debitAccountId"></span>
+        </oj-label>
+        <oj-select-one id="debitAccountId" :aria-label="[[$component.nls.tableHeaders.debitAccountId]]" :placeholder="[[$component.nls.history.placeHolder]]" value="{{$component.debitAccountId}}">
+          <!-- ko foreach: $component.accountList -->
+          <oj-option value="[[value]]"><span data-bind="text:displayValue"></span> </oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-6 oj-md-3 oj-lg-2">
+        <oj-label :for="[['fromDate'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.nls.headers.fromDate"></span></oj-label>
+        <oj-input-date :id="[['fromDate'+ $baseModel.currentIdCount()]]" :aria-label="[[$component.nls.headers.fromDate]]" value="{{$component.fromDate}}" converter="[[$formatter.dateConverter]]"></oj-input-date>
+      </div>
+      <div class="oj-flex-item oj-sm-6 oj-md-3 oj-lg-2">
+        <oj-label :for="[['toDate'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.nls.headers.toDate"></span></oj-label>
+        <oj-input-date :id="[['fromDate'+ $baseModel.currentIdCount()]]" :aria-label="[[$component.nls.headers.toDate]]" value="{{$component.toDate}}" converter="[[$formatter.dateConverter]]"></oj-input-date>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+        <a href="#" data-bind="click:$component.showLessOptions, attr:{'aria-label': $component.nls.history.showLessOptions}">
+          <span class="form-button-link" data-bind="text:$component.nls.history.showLessOptions"> </span>
+          <span class="icon icon-arrow-up">
+          </span>
+        </a>
+      </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- /ko -->
+
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item  button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.search]]">
+          <span slot="startIcon" class="icons icon-search"></span>
+          <span data-bind="text:$component.nls.generic.common.search"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[clear]]">
+          <span slot="startIcon" class="icons icon-refresh"></span>
+          <span data-bind="text:$component.nls.generic.common.clear"></span>
+        </oj-button>
+      </div>
+    </div>
+
+    <!-- ko if:$component.fundTransfersLoaded() -->
+
+    <!-- ko if:$baseModel.large() -->
+
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item right">
+        <a href="#" data-bind="text:$component.nls.history.download,click:$component.download">
+        </a>
+      </div>
+    </div>
+
+    <div class="oj-flex-item oj-sm-12">
+      <oj-table id="FundTransferTable" :aria-label="[[$component.nls.tableHeaders.header]]" columns="[[[
+          {headerText:$component.nls.tableHeaders.date,template:'date'},
+          {headerText:$component.nls.tableHeaders.debitAccountId,template:'debitAccountId',sortable:'none'},
+          {headerText:$component.nls.tableHeaders.payeeDetails,template:'description',sortable:'none'},
+          {headerText:$component.nls.tableHeaders.amount,template:'formatted-amount',sortProperty:'amount'},
+          {headerText:$component.nls.tableHeaders.transferType,template:'transferType',sortable:'none'},
+          {headerText:$component.nls.tableHeaders.referenceNumber,template:'referenceNumber'},
+          {headerText:$component.nls.tableHeaders.status,template:'status',sortable:'status'},
+          {headerText:$component.nls.tableHeaders.Actions,template:'action-icons',sortable:'none'}
+          ]]]"
+        selection-mode="[[{column:'none',row:'none'}]]" columns-default="[[{sortable:'enabled'}]]" data="[[fundsDatasource]]">
+        <caption class="hide-label" data-bind="text:$component.nls.tableHeaders.header"></caption>
+        <template slot="date">
+          <td>
+            <date-box params="baseModel : $baseModel, date:$current.row.date"></date-box>
+          </td>
+        </template>
+        <template slot="debitAccountId">
+          <td>
+            <div data-bind="text:$current.row.debitAccountId"></div>
+          </td>
+        </template>
+        <template slot="description">
+          <div class="oj-flex oj-flex-items-pad">
+            <!-- ko if:$component.imageUploadFlag() -->
+            <!-- ko if:$current.row.initials -->
+            <oj-avatar role="img" size="xs" initials='[[$current.row.initials]]' src='[[$current.row.preview]]' data-bind="attr:{'aria-label':$current.row.externalReferenceNumber}">
+            </oj-avatar>
+            <!-- /ko -->
+
+            <!-- ko ifnot:$current.row.initials -->
+            <oj-avatar role="img" size="xs" data-bind="loadImage: $component.defaultImagePath,attr:{'aria-label':$current.row.externalReferenceNumber}">
+            </oj-avatar>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div data-bind="css:$component.imageUploadFlag() ? 'oj-flex-item':''">
+              <div class="oj-sm-12 payeeHeader" data-bind="text : $current.row.payeeNickName"></div>
+              <!-- ko if:$current.row.transferValue -->
+              <div class="oj-sm-12 payeeContent" data-bind="text : $current.row.transferValue"></div>
+              <!-- /ko -->
+              <!-- ko ifnot:$current.row.transferValue -->
+              <div class="oj-sm-12 payeeContent" data-bind="text : $current.row.payeeAccountId"></div>
+              <!-- /ko -->
+            </div>
+          </div>
+        </template>
+        <template slot="formatted-amount">
+          <td>
+            <div data-bind="css:'amount',text:$formatter.formatCurrency($current.row.amount,$current.row.currency)"></div>
+          </td>
+        </template>
+        <template slot="transferType">
+          <td>
+            <div data-bind="text:$component.nls.history.transferTypeList[$current.row.paymentType]"></div>
+          </td>
+        </template>
+        <template slot="referenceNumber">
+          <td>
+            <div data-bind="text:$current.row.externalReferenceNumber"></div>
+          </td>
+        </template>
+        <template slot="status">
+          <div data-bind="css:($current.row.status==='success')?'successStatus':($current.row.status==='failed')?'failedStatus':'inProgressStatus',text:$component.nls.history.statusHeaders[$current.row.status]"></div>
+        </template>
+        <template slot="action-icons">
+          <td>
+            <div class="oj-flex-item oj-lg-1">
+              <a href="#" openprofile="true" data-bind="attr:{'id':'menuLauncher-' + $current.row.externalReferenceNumber,'aria-label':$current.row.externalReferenceNumber},click:$component.openMenu.bind($data,$current.row)">
+                <div class="icons icon-more-vertical"></div>
+              </a>
+              <oj-menu class="hide" :id="[['menuLauncher-contents-'+ $current.row.externalReferenceNumber]]" on-oj-action="[[$component.menuItemSelect.bind($data,$current.row)]]" open-options.launcher="[['menuLauncher-' + $current.row.externalReferenceNumber]]">
+                <!-- ko foreach: $component.menuItems -->
+                <oj-option :value="[[id]]">
+                  <span data-bind="text : label"></span>
+                </oj-option>
+                <!-- /ko -->
+              </oj-menu>
+            </div>
+
+          </td>
+        </template>
+        <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" :page-size="[[10]]" data="[[fundsDatasource]]">
+        </oj-paging-control>
+      </oj-table>
+    </div>
+
+    <!-- /ko -->
+
+
+    <!-- ko ifnot:$baseModel.large() -->
+
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item right">
+        <a href="#" data-bind="text:$component.nls.history.download,click:$component.download">
+        </a>
+      </div>
+    </div>
+
+    <div class="oj-flex oj-sm-12">
+      <div id="listview" class="oj-sm-12">
+        <oj-list-view id="listview_funds" :aria-label="[[$component.nls.tableHeaders.header]]" selection-mode="[['single']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('content_template',true)}]]" data="[[fundsDatasource]]"></oj-list-view>
+        <oj-paging-control id="paging-small" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[5]]" data="[[$component.fundsDatasource]]"></oj-paging-control>
+        <script type="text/html" id="content_template">
+          <li data-bind="attr: {id:externalReferenceNumber}">
+
+                      <div class="oj-flex">
+                      <div class="oj-flex-item oj-sm-12 mobile-view">
+                        <oj-label for="date">
+                          <span data-bind="text:$formatter.formatDate(date)"></span>
+                        </oj-label>
+                      </div>
+                    </div>
+
+                      <div class="oj-flex oj-sm-12 mobile-view">
+                        <div class="oj-flex-item oj-sm-7 oj-md-3">
+                          <div class="oj-flex">
+
+                                <!-- ko if:$component.imageUploadFlag() -->
+                                <div class="oj-sm-3">
+                                  <!-- ko if:initials -->
+                                <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[preview]]'
+                                        data-bind="attr:{'aria-label':externalReferenceNumber}">
+                                </oj-avatar>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot:initials -->
+                                <oj-avatar role="img" size="xs" data-bind="loadImage: $component.defaultImagePath,attr:{'aria-label':externalReferenceNumber}">
+                                </oj-avatar>
+                                <!-- /ko -->
+
+                              </div>
+                                <!-- /ko -->
+
+                            <div class="oj-flex-item oj-sm-9">
+                            <div class="payeeHeader" data-bind="text : payeeNickName"></div>
+                            <!-- ko if:transferValue -->
+                            <div class="payeeContent" data-bind="text : transferValue"></div>
+                            <!-- /ko -->
+                            <!-- ko ifnot:transferValue -->
+                            <div class="payeeContent" data-bind="text : payeeAccountId"></div>
+                            <!-- /ko -->
+                        </div>
+                      </div>
+                      </div>
+
+                    <div class="oj-flex-item oj-sm-4 oj-md-8 right">
+                    <div data-bind="css:(status==='success')?'successStatus':(status==='failed')?'failedStatus':'inProgressStatus',text:$component.nls.history.statusHeaders[status]"></div>
+                  </div>
+                  <div class="oj-flex-item oj-sm-1 oj-md-1 right">
+                    <a href="#" openprofile="true" data-bind="attr:{'id':'menuLauncher-' + externalReferenceNumber,'aria-label':externalReferenceNumber},click:$component.openMenu">
+                          <div class="icons icon-more-vertical"></div>
+                      </a>
+                      <oj-menu class="hide" :id="[['menuLauncher-contents-' + externalReferenceNumber]]"
+                      on-oj-action="[[$component.menuItemSelect.bind($data,$data)]]"
+                      open-options.launcher="[['menuLauncher-' + externalReferenceNumber]]" open-options.display="dropDown">
+                          <!-- ko foreach: $component.menuItems -->
+                          <oj-option :value="[[id]]">
+                              <span data-bind="text : label"></span>
+                          </oj-option>
+                          <!-- /ko -->
+                      </oj-menu>
+                  </div>
+                </div>
+
+                <div class="oj-flex">
+                  <div class="oj-flex-item oj-sm-7 oj-md-5 mobile-view">
+                    <oj-label for="debitAccountId">
+                      <span data-bind="text:$component.nls.tableHeaders.debitAccountId"></span>
+                    </oj-label>
+                    <div  data-bind="text:debitAccountId"></div>
+                  </div>
+
+                  <div class="oj-flex-item oj-sm-5 oj-md-7 mobile-view">
+                    <oj-label for="transferType">
+                      <span data-bind="text:$component.nls.tableHeaders.transferType"></span>
+                    </oj-label>
+                    <div data-bind="text:$component.nls.history.transferTypeList[paymentType]"></div>
+                  </div>
+                </div>
+                <div class="oj-flex">
+                  <div class="oj-flex-item oj-sm-12 mobile-view">
+                    <oj-label for="referenceNumber">
+                      <span data-bind="text:$component.nls.tableHeaders.referenceNumber"></span>
+                    </oj-label>
+                    <div data-bind="text:externalReferenceNumber"></div>
+                  </div>
+                </div>
+                <div class="oj-flex">
+                  <div class="oj-flex-item oj-sm-12 mobile-view">
+                    <oj-label for="amount">
+                      <span data-bind="text:$component.nls.tableHeaders.amount"></span>
+                    </oj-label>
+                    <div data-bind="text:$formatter.formatCurrency(amount,currency)"></div>
+                  </div>
+                </div>
+                </li>
+            </script>
+      </div>
+    </div>
+
+    <!-- /ko -->
+
+    <!-- /ko -->
+
+    <!-- /ko -->
+  </page-section>
+
+</div>

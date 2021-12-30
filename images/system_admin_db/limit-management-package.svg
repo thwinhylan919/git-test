@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="216px" height="216px" viewBox="0 0 216 216" enable-background="new 0 0 216 216" xml:space="preserve">
+<polygon fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	190.35,110.7 36.112,110.7 36.112,92.475 36.112,72.225 36.112,45.225 190.35,45.225 "/>
+<polygon fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	190.35,163.013 36.112,163.013 36.112,83.362 117.45,83.362 132.638,67.837 190.35,67.837 "/>
+<polygon fill="#0D3178" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	176.513,153.9 51.3,153.9 51.3,99.9 117.45,99.9 129.6,89.438 176.513,89.438 "/>
+<rect id="XMLID_649_" x="25.65" y="163.013" fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="92.137" height="25.987"/>
+<polyline id="XMLID_629_" fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	117.787,131.963 117.787,163.013 25.313,163.013 25.313,123.525 117.787,123.525 "/>
+<g id="XMLID_608_">
+	
+		<line id="XMLID_624_" fill="none" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="27.675" y1="169.763" x2="117.787" y2="169.763"/>
+	
+		<line id="XMLID_617_" fill="none" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="27.675" y1="176.85" x2="117.787" y2="176.85"/>
+	
+		<line id="XMLID_616_" fill="none" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="27.675" y1="183.263" x2="117.787" y2="183.263"/>
+</g>
+<polyline id="XMLID_607_" fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	43.875,129.938 38.138,129.938 32.063,137.025 32.063,146.138 37.8,150.188 43.875,150.188 "/>
+<polyline id="XMLID_474_" fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	99.9,129.938 105.3,129.938 111.713,137.025 111.713,146.138 105.975,150.188 99.9,150.188 "/>
+<g id="XMLID_508_">
+	
+		<ellipse id="XMLID_606_" fill="#FFFFFF" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="72.563" cy="143.438" rx="13.5" ry="13.5"/>
+	<ellipse id="XMLID_588_" fill="#0D3178" cx="72.563" cy="143.438" rx="10.463" ry="10.463"/>
+</g>
+<line id="XMLID_507_" fill="none" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="40.5" y1="140.063" x2="50.625" y2="140.063"/>
+<line id="XMLID_505_" fill="none" stroke="#171C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="94.5" y1="140.063" x2="104.625" y2="140.063"/>
+<g>
+	<path fill="#FFFFFF" d="M66.737,138.349h1.293v4.83h0.045c0.267-0.387,0.535-0.743,0.788-1.07l3.062-3.76h1.605l-3.626,4.25
+		l3.909,5.767h-1.531l-3.299-4.919l-0.951,1.1v3.819h-1.293V138.349z"/>
+	<path fill="#FFFFFF" d="M74.568,147.027c0.386,0.253,1.07,0.521,1.724,0.521c0.951,0,1.397-0.476,1.397-1.07
+		c0-0.624-0.372-0.966-1.338-1.322c-1.293-0.461-1.902-1.175-1.902-2.036c0-1.159,0.937-2.11,2.482-2.11
+		c0.729,0,1.367,0.208,1.769,0.445l-0.327,0.951c-0.283-0.178-0.803-0.416-1.472-0.416c-0.772,0-1.204,0.446-1.204,0.981
+		c0,0.594,0.431,0.861,1.367,1.219c1.249,0.476,1.888,1.1,1.888,2.169c0,1.264-0.981,2.155-2.69,2.155
+		c-0.788,0-1.516-0.193-2.021-0.49L74.568,147.027z"/>
+</g>
+</svg>

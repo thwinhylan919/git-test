@@ -1,0 +1,295 @@
+<div class="oj-flex">
+    <div data-bind="css: $component.mode()==='REVIEW' ? 'oj-flex-item oj-sm-12' : 'oj-flex-item oj-sm-9'">
+<div class="form-main-container approvals admin-user-group-view-container">
+  <!-- ko if : $component.mode()==="REVIEW" -->
+  <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+  <!-- /ko -->
+  <page-section params="baseModel : $baseModel, rootModel : $data, heading: ''">
+  <oj-validation-group id="tracker">
+    <!-- ko if: $component.mode()==="CREATE"-->
+    
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+          <label for="groupCode1" data-bind="text:$component.nls.userGroup.groupCode"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4">
+          <oj-input-text :aria-label="[[$component.nls.userGroup.groupCode]]" id="groupCode1" required validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.nls.userGroup.invalidGroupCode,{type: 'length',options: {min: 1, max: 20}})]]"
+            value="{{groupCode}}"></oj-input-text>
+        </div>
+      </div>
+
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+          <label for="groupDescription1" data-bind="text:$component.nls.userGroup.groupDescription"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4">
+          <oj-input-text :aria-label="[[$component.nls.userGroup.groupDescription]]" id="groupDescription1" required
+            validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SOME_SPECIAL',$component.nls.userGroup.invalidGroupDescription,{type: 'length',options: {min: 1, max: 40}})]]"
+            value="{{groupDescription}}"></oj-input-text>
+        </div>
+      </div>
+    <!-- /ko -->
+
+    <!-- ko if: ($component.mode()==="VIEW") || ($component.mode()==="REVIEW") -->
+
+    
+
+      <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.userGroup.groupCode , value : groupCode"></row>
+      <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.userGroup.groupDescription , value : groupDescription"></row>
+
+    <!-- /ko -->
+
+
+
+    <!-- ko if: $component.mode()==="EDIT"-->
+    
+
+      <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.userGroup.groupCode , value : groupCode"></row>
+
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+          <label for="groupDescription3" data-bind="text:$component.nls.userGroup.groupDescription"></label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4">
+          <oj-input-text id="groupDescription3" maxlength="80"  translations="[[{'required':{messageDetail:$component.nls.approvals.common.empty}}]]"
+            required="[[true]]" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SOME_SPECIAL',$component.nls.userGroup.invalidGroupDescription,{type: 'length',options: {min: 1, max: 40}})]]"
+            value="{{groupDescription}}"></oj-input-text>
+        </div>
+      </div>
+    <!-- /ko -->
+
+  </oj-validation-group>
+  
+</page-section>
+  <!-- ko ifnot: $component.mode()==="SUCCESS" -->
+  <!-- ko if: !$baseModel.small()-->
+  <div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-7">
+      <oj-table id="table" :aria-label="[[$component.nls.userGroup.title]]" columns="[[[{headerText:$component.nls.userGroup.userInformation,template : ('showUserName')}]]]"
+        data="[[datasource]]">
+        <caption class="hide-label" data-bind="text:$component.nls.userGroup.title"></caption>
+        <template slot="showUserName">
+          <td>
+            <div class="oj-flex user-row  oj-sm-flex-items-initial">
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6">
+                <a href="#" data-bind="click:$component.showUserName.bind($data,$current.row)">
+                  <span :id="[[$current.row.userID]]" data-bind="text:$current.row.userID"></span>
+                </a>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6">
+                <!-- ko if: ($component.mode()==='EDIT') || ($component.mode()==='CREATE') -->
+                <a href="#" class="icon icon-delete delete-user pull-right" alt="delete-icon" title="delete-icon"
+                  data-bind="click:$component.deleteUserFromGroup.bind($data,$current.row.userID)"></a>
+                <!-- /ko -->
+              </div>
+            </div>
+            <!-- ko if: $current.row.showUserName() -->
+            <div class="oj-flex cust-details oj-sm-flex-items-initial">
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6">
+                <div class="user-info-label" data-bind="text:$component.nls.userGroup.fullName">
+                </div>
+                <div class="cust-name" data-bind="text:$current.row.userName()">
+                </div>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-6">
+                <div class="user-info-label" data-bind="text:$component.nls.userGroup.mobile">
+                </div>
+                <div class="cust-name" data-bind="text:$current.row.mobileNumber() ">
+                </div>
+              </div>
+            </div>
+            <!-- /ko -->
+
+          </td>
+        </template>
+      </oj-table>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item new-user-container">
+      <!-- ko if: ($component.mode()==='EDIT') || ($component.mode()==='CREATE') -->
+      <!-- ko ifnot : $component.buttonToDropDown() -->
+
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-button id="addNewBtn" class="form-button-primary help-button" on-click="[[$component.addNew]]">
+            <span data-bind="text:$component.nls.common.addNew"></span>
+          </oj-button>
+        </div>
+      </div>
+
+      <!-- /ko -->
+    
+      <!-- ko if : ($component.buttonToDropDown()) && ($component.userListLoaded()) -->
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+          <label for="userDropDown" class="hide-label" data-bind="text:$component.nls.approvals.common.placeholder.selectUser"></label>
+          <oj-select-one id="userDropDown" :placeholder="[[$component.nls.approvals.common.placeholder.selectUser]]"
+            value="{{selectedUser}}" required>
+            <!-- ko foreach: userList -->
+            <oj-option value="{{firstName+'~'+lastName+'~'+username}}"><span data-bind="text:$baseModel.format($component.nls.generic.common.userName,{firstName:firstName,lastName:lastName,userName:username})"></span></oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+        </div>
+
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4">
+          <oj-button id="addRowBtn" class="form-button-primary help-button" on-click="[[$component.addRow]]">
+            <span data-bind="text:$component.nls.common.addNew"></span>
+          </oj-button>
+        </div>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+    </div>
+  </div>
+
+
+  <!-- /ko -->
+  <!-- ko if: $baseModel.small()-->
+  <div class="grid-main-container">
+    <div class="oj-flex oj-flex-items-pad grid-table-header ">
+
+      <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label" data-bind="text:$component.nls.userGroup.UserName">
+      </div>
+
+      <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label" data-bind="text:$component.nls.userGroup.UserID">
+      </div>
+    </div>
+
+
+    <div id="userGroupListDiv" class="oj-flex oj-flex-items-pad">
+      <oj-list-view id="userUserGroupListView" translations="[[{
+                  msgNoData:''}]]" data="[[$component.datasource]]"
+        item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('userGroupuser_template',true)}]]" selection-mode="[['none']]"></oj-list-view>
+      <script type="text/html" id="userGroupuser_template">
+        <li data-bind="attr: {id: $data['userID']}">
+              <div class="oj-flex oj-flex-items-pad grid-row-group">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                  <span data-bind="text:userName"></span>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                  <span data-bind="text:userID"></span>
+                </div>
+                <!-- ko if: ($component.mode()==='EDIT') || ($component.mode()==='CREATE') -->
+                <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4 pull-right deleteIcon">
+                  <a href="#" class="icon icon-delete" data-bind="click:$component.deleteUserFromGroup.bind(userID)"></a>
+                </div>
+                <!-- /ko -->
+              </div>
+            </li>
+          </script>
+    </div>
+
+    <!-- ko if: ($component.mode()==='EDIT') || ($component.mode()==='CREATE') -->
+    <action-header params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.common.userToAdd">
+      <!-- ko ifnot : $component.buttonToDropDown() -->
+      <oj-button id="addNewBtn" class="form-button-primary" on-click="[[$component.addNew]]">
+        <span data-bind="text:$component.nls.common.addNew"></span>
+      </oj-button>
+      <!-- /ko -->
+
+      <!-- ko if : ($component.buttonToDropDown()) && ($component.userListLoaded()) -->
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+          <label for="userDropDown" class="hide-label" data-bind="text:$component.nls.approvals.common.placeholder.selectUser"></label>
+          <oj-select-one id="userDropDown" :placeholder="[[$component.nls.approvals.common.placeholder.selectUser]]"
+            required="[[true]]" value="{{selectedUser}}">
+            <!-- ko foreach: userList -->
+            <oj-option value="{{firstName+'~'+lastName+'~'+username}}"><span data-bind="text:$baseModel.format($component.nls.generic.common.userName,{firstName:firstName,lastName:lastName,userName:username})"></span></oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+        </div>
+
+
+        <!-- ko if : selectedUser -->
+        <!-- <div class="oj-flex-item oj-sm-4 oj-md-4 oj-lg-3">
+                    <span data-bind="text:userID"></span>
+                </div> -->
+        <div class="oj-flex-item oj-sm-4 oj-md-4 oj-lg-5">
+          <a href="#" data-bind="text:$component.nls.common.addNew,click:addRow"></a>
+        </div>
+        <!-- /ko -->
+      </div>
+
+      <!-- /ko -->
+
+      <!-- /ko -->
+
+    </action-header>
+  </div>
+
+  <!-- /ko -->
+
+  <!-- /ko -->
+  <!-- ko if: $component.mode()==="VIEW" -->
+  <div class="button-container">
+
+    <oj-button class="action-button-primary" on-click="[[editUserGroup]]">
+      <span data-bind="text:$component.nls.generic.common.edit"></span>
+    </oj-button>
+    <!-- ko ifnot: $component.mode()==="SUCCESS" -->
+    <oj-button id="cancelButton" class="action-button-secondary" on-click="[[cancel]]">
+      <span data-bind="text:$component.nls.generic.common.cancel"></span>
+    </oj-button>
+    <!-- /ko -->
+    <oj-button id="backbutton" class="action-button-tertiary" on-click="[[$component.viewBack]]">
+      <span data-bind="text:$component.nls.generic.common.back"></span>
+    </oj-button>
+
+  </div>
+  <!-- /ko -->
+
+  <!-- ko if: ($component.mode()==="EDIT") || ($component.mode()==="CREATE")  -->
+  <div class="button-container">
+
+
+    <oj-button id="saveButton" class="action-button-primary" on-click="[[save]]">
+      <span data-bind="text:$component.nls.generic.common.save"></span>
+    </oj-button>
+    <!-- ko ifnot: $component.mode()==="SUCCESS" -->
+    <oj-button id="cancelButton" class="action-button-secondary" on-click="[[cancel]]">
+      <span data-bind="text:$component.nls.generic.common.cancel"></span>
+    </oj-button>
+    <!-- /ko -->
+
+    <!-- ko if: $component.mode()==="CREATE" -->
+    <oj-button id="backbutton" class="action-button-tertiary" on-click="[[$component.createBack]]">
+      <span data-bind="text:$component.nls.generic.common.back"></span>
+    </oj-button>
+    <!-- /ko -->
+
+    <!-- ko if: $component.mode()==="EDIT" -->
+    <oj-button id="backbutton" class="action-button-tertiary" on-click="[[$component.updateBack]]">
+      <span data-bind="text:$component.nls.generic.common.back"></span>
+    </oj-button>
+    <!-- /ko -->
+
+
+
+  </div>
+  <!-- /ko -->
+
+  <!-- ko if: $component.mode()==="REVIEW" -->
+  <div class="button-container">
+    <oj-button id="confirmButton" class="action-button-primary" on-click="[[confirm]]">
+      <span data-bind="text:$component.nls.generic.common.confirm"></span>
+    </oj-button>
+    <!-- ko ifnot: $component.mode()==="SUCCESS" -->
+    <oj-button id="cancelButton" class="action-button-secondary" on-click="[[cancel]]">
+      <span data-bind="text:$component.nls.generic.common.cancel"></span>
+    </oj-button>
+    <!-- /ko -->
+    <oj-button class="action-button-tertiary" on-click="[[editUserGroup]]">
+      <span data-bind="text:$component.nls.generic.common.back"></span>
+    </oj-button>
+  </div>
+  <!-- /ko -->
+</div>
+</div>
+<!-- ko ifnot: $component.mode() ==='REVIEW' -->
+<div class="oj-flex-item oj-sm-3 help-panel">
+  <help params="baseModel : $baseModel, rootModel : $component, transaction: 'admin-user-group-view'"></help>
+</div>
+ <!-- /ko -->
+</div>
+

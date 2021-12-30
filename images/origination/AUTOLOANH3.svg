@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="23px" viewBox="0 0 55 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>auto-loan</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="final" transform="translate(-753.000000, -1060.000000)">
+            <g id="Group-22" transform="translate(62.000000, 946.000000)">
+                <g id="Group-20" transform="translate(0.000000, 67.000000)">
+                    <g id="Group-10" transform="translate(667.000000, 0.000000)">
+                        <g id="Group-15" transform="translate(25.000000, 48.000000)">
+                            <g id="auto-loan">
+                                <rect id="Rectangle" fill="#BC0110" x="30" y="0" width="11" height="6"></rect>
+                                <path d="M7.02083333,16.1875 L1.93104167,16.1875 C0.950208333,16.1875 0.145833333,15.383125 0.145833333,14.4022917 L0.145833333,11.7554167 C0.145833333,10.3391667 1.17020833,9.12916667 2.57041667,8.89541667 L13.1625,7.13541667 C13.64375,7.06666667 14.0791667,6.8375 14.4229167,6.49375 L19.2033333,1.71333333 C20.2070833,0.709583333 21.5683333,0.145833333 22.986875,0.145833333 L45.9791667,0.145833333 C48.4083333,0.145833333 49.325,0.352083333 50.5625,2.4375 L52.8541667,9.3125 L52.8541667,13.8958333 C52.8541667,13.8958333 51.4333333,16.1875 50.5625,16.1875 L48.2708333,16.1875 L7.02083333,16.1875 Z" id="Stroke-2" stroke="#171C28" stroke-width="2" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M48.2708333,16.1875 C48.2708333,18.7175 46.2175,20.7708333 43.6875,20.7708333 C41.1575,20.7708333 39.1041667,18.7175 39.1041667,16.1875 C39.1041667,13.6575 41.1575,11.6041667 43.6875,11.6041667 C46.2175,11.6041667 48.2708333,13.6575 48.2708333,16.1875 Z" id="Stroke-4" stroke="#171C28" stroke-width="2" fill="#E02020" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16.1875,16.1875 C16.1875,18.7175 14.1341667,20.7708333 11.6041667,20.7708333 C9.07416667,20.7708333 7.02083333,18.7175 7.02083333,16.1875 C7.02083333,13.6575 9.07416667,11.6041667 11.6041667,11.6041667 C14.1341667,11.6041667 16.1875,13.6575 16.1875,16.1875 Z" id="Stroke-6" stroke="#171C28" stroke-width="2" fill="#E02020" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M13.8958333,7.02083333 L51.7083333,7.02083333" id="Stroke-8" stroke="#171C28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M29.9375,0.145833333 L29.9375,7.02083333" id="Stroke-10" stroke="#171C28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M41.3958333,0.145833333 L41.3958333,7.02083333" id="Stroke-12" stroke="#171C28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,56 @@
+$status-approved: #006ab5;
+.details {
+    @include padding(0, 0, 1.5625rem, 0);
+    &__debitAmount {
+        color: var(--base-color-danger);
+    }
+    &__creditAmount {
+        color: var(--base-color-warning);
+        @include padding(0, 0, 0.3125rem, 0);
+    }
+    &__failed {
+        color: var(--base-color-danger);
+    }
+    &__completed {
+        color: var(--base-color-success);
+    }
+    &__approved {
+        color: $status-approved;
+    }
+    &__pending {
+        color: var(--base-color-warning);
+    }
+}
+
+.detailsData {
+    font-size: var(--form-font-size) !important;
+}
+
+.success-bar {
+    background: var(--base-color-success-light);
+    @include single-border(left, 0.4rem solid var(--base-color-success));
+    @include mq(small) {
+        padding: 0.6rem 0;
+    }
+}
+
+.structure {
+    &__splitType {
+        background-color: var(--base-color-warning);
+        color: var(--base-color-secondary-text);
+    }
+}
+
+.payeeIdSize {
+    font-size: var(--base-font-size-medium);
+    color: var(--base-text-secondary);
+}
+
+.noRequests {
+    text-align: center;
+    margin: 2rem;
+}
+
+.accountNumber {
+    font-size: var(--base-font-size-medium);
+}

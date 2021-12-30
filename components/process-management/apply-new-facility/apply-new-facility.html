@@ -1,0 +1,225 @@
+<!-- ko if: !$component.review -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <div class="oj-flex-item paddingBottom oj-label description" data-bind="text:$component.resourceBundle.facilityDescription"></div>
+    </div>
+</div>
+<br>
+<!-- ko if: !$component.productData().data.addFacilityFlag() -->
+<div class="nodata center">
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-12 ">
+            <img alt="" data-bind="loadImage:'credit-facility/createFacility.svg'">
+        </div>
+        <div class="oj-flex-item oj-lg-12 nodata__message" data-bind="text:$component.resourceBundle.addFacilityDescription"></div>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-12 addFacility">
+            <oj-button class="help-button" id="addButton" on-click="[[addFacility]]">
+                <span slot="startIcon" class="icons icon-plus"></span>
+                <span data-bind="text:$component.resourceBundle.addFacility"></span>
+            </oj-button>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.productData().data.addFacilityFlag() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-10">
+        <span data-bind="text:$component.resourceBundle.facilityRequirementDetails" class="letters"></span>
+    </div>
+</div>
+<br>
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <div class="oj-flex-item oj-lg-3">
+            <div class="oj-flex oj-flex-items-pad headingLine">
+                <div class="oj-flex-item oj-lg-12">
+                    <div data-bind="text:$component.productData().payload.category">
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad secondLine">
+                <div class="oj-flex-item oj-lg-12">
+                    <span data-bind="text:$formatter.formatCurrency($component.productData().payload.availableAmount.amount(),$component.productData().payload.availableAmount.currency())">
+                    </span>
+                    <span class="pipe"></span>
+                    <span data-bind="text:$component.calculateYears($component.productData().payload)+' years '+$component.calculateMonths($component.productData().payload)+' months'">
+                    </span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label>
+                    <div data-bind="text:$component.productData().payload.description" class="paddingLeft"></div>
+                    </oj-label>
+                </div>
+                
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12">
+                <oj-label>
+                <div data-bind="text:$component.productData().payload.instructions" class="paddingLeft"></div>
+                </oj-label>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9 headingLine">
+            <a href="#" data-bind="attr:{id : 'menuLauncher-billerlist-'+$component.productData().payload.availableAmount.currency()+'_'+$component.productData().payload.availableAmount.amount()+'_'+$component.productData().payload.description()}, click: $component.openMenuMain.bind($context)" class="icons icon-more-vertical pull-right">
+            </a>
+            <oj-menu class="hide" :id="[['menuLauncher-billerlist-contents-'+$component.productData().payload.availableAmount.currency()+'_'+$component.productData().payload.availableAmount.amount()+'_'+$component.productData().payload.description()]]" on-oj-action="[[$component.menuItemSelect.bind($data, $data,$data)]]" open-options.launcher="[['menuLauncher-billerlist-'+$component.productData().payload.availableAmount.currency()+'_'+$component.productData().payload.availableAmount.amount()+'_'+$component.productData().payload.description()]]" open-options.display="dropDown">
+                <!-- ko foreach: $component.menuItemsMain -->
+                <oj-option :value="[[id]]">
+                    <!-- ko if:$data.id==="addSubFacilityMain" -->
+                    <a href="#" slot="startIcon" class="icons icon-plus"></a>
+                    <!-- /ko -->
+                    <!-- ko if:$data.id==="editDetails" -->
+                    <a href="#" slot="startIcon" class="icons icon-remarks"></a>
+                    <!-- /ko -->
+                    <!-- ko if:$data.id==="removeFacilityMain" -->
+                    <a href="#" slot="startIcon" class="icons icon-cross"></a>
+                    <!-- /ko -->
+                    <span data-bind="text: $data.label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-menu>
+        </div>
+    </div>
+</div>
+<!-- ko if: $component.productData().data.addSubFacilityFlag()-->
+<div class="clt">
+    <ul>
+        <oj-list-view id="listview" selection-mode="multiple" data="[[datasource]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]">
+        </oj-list-view>
+    </ul>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<br>
+<!-- /ko -->
+<!-- ko if:$component.review -->
+<div class="form-main-container">
+    <div class="oj-panel">
+        <div class="oj-flex oj-flex-items-pad oj-lg-12 headingLine">
+            <div class="oj-flex-item oj-lg-10">
+                <div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <div data-bind="text:$component.facilityReviewDetails.category()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12">
+                            <span data-bind="text:$formatter.formatCurrency($component.facilityReviewDetails.availableAmount.amount(),$component.facilityReviewDetails.availableAmount.currency())"></span>
+                            <span class="pipe"></span>
+                            <span data-bind="text:$component.calculateYears($component.facilityReviewDetails)+' years '+$component.calculateMonths($component.facilityReviewDetails)+' months'">
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="paddingLeft">
+                            <oj-label>
+                                <div data-bind="text:$component.facilityReviewDetails.description()">
+                                </div>
+                            </oj-label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="paddingLeft">
+                            <oj-label>
+                                <div data-bind="text:$component.facilityReviewDetails.instructions()">
+                                </div>
+                            </oj-label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ko if: $component.productData().data.addSubFacilityFlag()-->
+    <div class="clt oj-panel oj-panel-alt2 childpanel panelInternal" data-bind="attr:{id:'segment'+$index()}">
+        <ul>
+            <oj-list-view id="listviewReview" selection-mode="multiple" data="[[datasourceReview]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]">
+            </oj-list-view>
+        </ul>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<script type="text/html" id="item_template">
+    <li class="oj-lg-11 pull-right items">
+        <div class="oj-panel">
+        
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+    
+                <div class="oj-flex-item oj-lg-11">
+                    <div>
+                        <div class="oj-flex oj-flex-items-pad headingLine">
+                            <div class="oj-flex-item oj-lg-12">
+                                <div data-bind="text:category()"></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad secondLine">
+                            <div class="oj-flex-item oj-lg-12">
+                                <span data-bind="text:$formatter.formatCurrency(availableAmount.amount(),availableAmount.currency())"></span>
+                                <span class="pipe"></span>
+    
+                                <span data-bind="text:$component.calculateYears($data)+' years '+$component.calculateMonths($data)+' months'">
+                        </span>
+                    </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                    <oj-label>
+                                <div data-bind="text:description()" class="paddingLeft"></div>
+                            </div>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                    <oj-label>
+                                <div data-bind="text:instructions()" class="paddingLeft"></div>
+                            </div>
+                            </oj-label>
+                        </div>
+                    </div>
+                </div>
+                <!-- ko ifnot:$component.review -->    
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-1 headingLine">
+                    <a href="#" data-bind="attr:{id : 'menuLauncher-billerlist-'+availableAmount.currency()+'_'+availableAmount.amount()+'_'+description()}, click: $component.openMenu"
+                        class="icons icon-more-vertical pull-right">
+                    </a>
+                    <oj-menu class="hide" :id="[['menuLauncher-billerlist-contents-'+availableAmount.currency()+'_'+availableAmount.amount()+'_'+description()]]"
+                        on-oj-action="[[$component.menuItemSelect.bind($data, $data, $context.index)]]" open-options.launcher="[['menuLauncher-billerlist-'+availableAmount.currency()+'_'+availableAmount.amount()+'_'+description()]]"
+                        open-options.display="dropDown">
+                        <!-- ko foreach: $component.menuItems -->
+                        <oj-option :value="[[id]]">
+                                <!-- ko if:$data.id==="addSubFacility" -->
+                                    <a href="#" slot="startIcon" class="icons icon-plus"></a>
+                                <!-- /ko -->
+                              <!-- ko if:$data.id==="editFacility" -->
+                              <a href="#" slot="startIcon" class="icons icon-remarks"></a>
+                              <!-- /ko -->
+                                <!-- ko if:$data.id==="removeFacility" -->
+                                <a href="#" slot="startIcon" class="icons icon-cross"></a>
+                                                <!-- /ko -->
+                            <span data-bind="text: $data.label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-menu>
+                </div>
+                <!-- /ko -->    
+            </div>
+        </div>
+        <!-- ko if: childFacilities().length>0-->
+        <div class="clt">   
+             <ul>
+        <oj-list-view id="listview" selection-mode="multiple" data="[[$component.datasourceNewCreate($data)]]"
+            item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]">
+        </oj-list-view>
+    </ul>
+    </div>
+    <!-- /ko -->
+</li>
+    </script>

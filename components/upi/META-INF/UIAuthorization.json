@@ -1,0 +1,51 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.upi.VirtualPaymentAddress",
+        "components": [
+        {
+            "componentName": "manage-vpa",
+            "service": "create",
+            "perform": "create-vpa#review-create-vpa"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.upi.Upi",
+        "components": [
+        {
+            "componentName": "adhoc-transfer-vpa",
+            "service": "create",
+            "perform": "review-adhoc-transfer-vpa#available-limits#transfer-payee-upi#review-transfer-payee-upi"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.payee.VPAPayee",
+        "components": [
+            {
+                "componentName": "upi-payee",
+                "service": "create",
+                "perform": "review-upi-payee"
+            }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.upifundrequest.UpiFundRequest",
+        "components": [
+            {
+                "componentName": "upi-request-money",
+                "service": "upiFundRequest",
+                "perform": "review-upi-request-money"
+            },{
+                "componentName": "upi-pending-request",
+                "service": "list",
+                "perform": "review-upi-pending-request"
+            },{
+                "componentName": "split-money-list",
+                "service": "splitBill",
+                "perform": "review-split-bill-request#split-bill-request"
+            },{
+                "componentName": "transaction-history",
+                "service": "fetchUpiTransactionHistory"
+
+            }]
+    }]
+}

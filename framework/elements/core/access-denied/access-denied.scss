@@ -1,0 +1,37 @@
+$header-color:#5F2D61;
+.access-denied {
+    position: relative;
+    .msgContainer {
+        background-image: url('{images}/access-denied/access-denied-banner.svg');
+        height: 325px;
+        max-width: 938px;
+        width: 100%;
+        @include mq(medium) {
+            height: 250px;
+        }
+        @include mq(small) {
+            height: 200px;
+            background-image: none;
+        }
+        margin: 0 auto;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: table;
+        .msgContents {
+            display: table-cell;
+            vertical-align: middle;
+            .header {
+                margin-bottom: 10px;
+                font-size: 2.5rem;
+                color: $header-color;
+                width: 100%;
+                display: block;
+            }
+            .bodyTxt {
+                color: var(--base-color-primary);
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

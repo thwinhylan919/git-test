@@ -1,0 +1,27 @@
+.search-account-container {
+  padding-top: 0.625rem;
+  padding-bottom: 0.75rem;
+  @include single-padding(left, 0.625rem);
+}
+
+.extra-padding {
+  @include single-padding(left, 3.5rem);
+}
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.separator-for-banner {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+  @include single-margin(top, 1rem);
+}
+
+.top-padding {
+  @include single-padding(top, 1rem);
+}

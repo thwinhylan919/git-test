@@ -1,0 +1,568 @@
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+  <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+      <div data-bind="text: $component.realCustomerName"></div>
+      <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+    <!-- ko if:$component.fromViewScreen  -->
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+      <div class="label" data-bind="text:$component.resource.entityId"></div>
+      <div data-bind="text: $component.viewEntityId"></div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+      <div class="label" data-bind="text: $component.resource.virtualEntityName"></div>
+      <div data-bind="text: $component.viewEntityName"></div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+      <div class="label" data-bind="text:$component.resource.branchCode"></div>
+      <div data-bind="text: $component.modelPayload.branchCode()"></div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div class="form-main-container">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+        <div class="">
+          <page-section params="baseModel : $baseModel, rootModel : $component, heading : '' ">
+            <!-- ko if:$component.virtualEntitiesLoaded  -->
+            <!-- ko ifnot:$component.fromViewScreen  -->
+            <div class="oj-flex oj-flex-items-pad search-entity-container">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="EntityID"><span data-bind="text:$component.resource.entityId"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="EntityID" value="{{$component.modelPayload.virtualEntityId}}"
+                :placeholder="{{$component.resource.selectEntity}}"
+                validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.requiredMessage)]]"
+                on-value-changed="{{$component.selectedEntityChangeHandler}}" 
+                required>
+                <!-- ko foreach: $component.virtualEntities -->
+                <oj-option value=[[virtualEntityId]]><span data-bind="text: virtualEntityId"></span></oj-option>
+                <!-- /ko -->
+              </oj-select-one>
+              </div>
+            </div>
+            <!-- ko if:$component.modelPayload.virtualEntityName && $component.showVirtualEntityInfo -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item virtual-account__info-text-small">
+                <span
+                  data-bind="text:$baseModel.format($component.resource.entityName,{ 'value' : $component.modelPayload.virtualEntityName()})"></span>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.branchCodeLoaded  -->
+            <div class="oj-flex oj-flex-items-pad search-entity-container">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="branchCode"><span data-bind="text:$component.resource.branchCode"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="branchCode" value="{{$component.modelPayload.branchCode}}"
+                  :placeholder="{{$component.resource.selectbranchCode}}"
+                  validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.requiredMessage)]]"
+                  on-value-changed="{{$component.selectbranchCodeHandler}}" required>
+                  <!-- ko foreach: $component.branchCodeList -->
+                  <oj-option value=[[branchCode]]><span data-bind="text: branchCode"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+          </page-section>
+          <page-section
+            params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.accountDetailHeader ">
+            <!-- ko if:$component.fromViewScreen  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label><span data-bind="text:$component.resource.searchAccountNumber"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <div data-bind="text: $component.modelPayload.id.displayValue"></div>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label><span data-bind="text:$component.resource.status"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <div data-bind="text: $component.viewStatus"></div>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label><span data-bind="text:$component.resource.creationDate"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <div data-bind="text: $formatter.formatDate($component.viewCreationDate)"></div>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label><span data-bind="text:$component.resource.productlabel"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <div data-bind="text: $component.viewVirtualProduct"></div>
+              </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="accountName"><span data-bind="text:$component.resource.accountName"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="accountName"
+                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinationCreate,'virtualAccountDTO.virtualAccountName','accountName')]]]" value="{{$component.modelPayload.virtualAccountName}}"></oj-input-text>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="Purpose"><span data-bind="text:$component.resource.purpose"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="purpose" value="{{$component.modelPayload.accountPurpose}}"
+                  :aria-label="[[$component.resource.purpose]]" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinationCreate,'virtualAccountDTO.accountPurpose','purpose')]]]"></oj-input-text>
+              </div>
+            </div>
+
+            <!-- ko if: $component.showVirtualProduct -->
+            <!-- ko ifnot:$component.fromViewScreen  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="product"><span data-bind="text:$component.resource.productlabel"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="product"
+                value="{{$component.modelPayload.virtualAccProduct}}"
+                  :placeholder="{{$component.resource.selectProduct}}" required>
+                  <!-- ko foreach: $component.VirtualAccountproducts -->
+                  <oj-option value=[[accCode]]><span data-bind="text: ([[accCode]] + ' - ' + [[codeDesc]])"></span>
+                  </oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="linktoRealAccount"><span data-bind="text:$component.resource.linktoRealAccount"></span>
+                </oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="linktoRealAccount" value="{{$component.realAccLinkageValue}}"
+                  on-value-changed="[[$component.realAccLinkageChangeHandler]]"></oj-switch>
+              </div>
+            </div>
+            <!-- ko if: $component.modelPayload.realAccLinkage && $component.realAccLinkageValue() -->
+            <!-- ko if: $component.realAccountNumberDisplay() -->
+            <div class="oj-flex">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 label">
+                  <oj-label for="realAccountNumber"><span data-bind="text:$component.resource.realAccountNumber"></span>
+                  </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+                  <oj-select-one :id="realAccountNumber" :placeholder="[[$component.resource.pleaseSelect]]"
+                    :aria-label="[[$component.resource.realAccountNumber]]"
+                    on-value-changed="[[accountNumberSelection]]" value="{{$component.selectedValue()}}" required>
+                    <oj-optgroup label="[[$component.resource.singleCurrencyText]]">
+                      <!-- ko foreach: $component.singleCurrencyAccountsList -->
+                      <oj-option value="{{realAccountNo.value}}"><span
+                          data-bind="text: realAccountNo.displayValue"></span></oj-option>
+                      <!-- /ko -->
+                    </oj-optgroup>
+                    <oj-optgroup label="[[$component.resource.multiCurrencyText]]">
+                      <!-- ko foreach: $component.multipleCurrencyAccountsList -->
+                      <oj-option value="{{realAccountNo.value}}"><span
+                          data-bind="text: realAccountNo.displayValue"></span></oj-option>
+                      <!-- /ko -->
+                    </oj-optgroup>
+                  </oj-select-one>
+                  <!-- ko if: $component.singleCurrencyBalanceDisplay() -->
+                  <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12 balance-wrapper virtual-account__info-text-small">
+                      <span class="balance-text" data-bind="text:$component.resource.balanceText"></span>
+                      <span
+                        data-bind="text:$formatter.formatCurrency($component.availableBalanceAmount(),$component.availableBalanceCurrency())"></span>
+                    </div>
+                  </div>
+                  <!-- /ko -->
+                  <!-- ko if: $component.showViewBalanceLink -->
+                  <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12 label balance-wrapper">
+                      <a href="#"
+                        data-bind="attr:{'id':'viewBalance','aria-label':$component.resource.viewBalance,'title':$component.resource.viewBalance},click: $component.showViewBalance">
+                        <span data-bind="text: $component.resource.viewBalance"></span>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- /ko -->
+                </div>
+              </div>
+            </div>
+            <!-- /ko -->
+            <modal-window class=""
+              params="baseModel:$baseModel,rootModel:$data,id:'multi-currency-account-number',header:$component.resource.balanceDetails">
+              <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                  <div class="label" data-bind="text: $component.realCustomerName"></div>
+                  <div data-bind="text:$component.selectedValue()"></div>
+                </div>
+              </div>
+              <!-- ko if: $component.viewTable() -->
+              <div class="oj-flex">
+                <div class="oj-flex-item oj-lg-12">
+                  <oj-table id="tableAccountBalances" :aria-label="[[$component.resource.cancel]]" data="[[dataSource]]"
+                    columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns='[[[
+                      {"headerText":$component.resource.realAccountName,"template":"realAccountName","field":"realAccountName","sortable":"none","headerClassName": "break-word",
+                              "className": "break-word",id:"realAccountName"},
+                      {"headerText":$component.resource.realAccountNumber,"template":"realAccountNo","field":"realAccountNo","sortable":"none","headerClassName": "break-word",
+                              "className": "break-word",id:"realAccountNo"},
+                      {"headerText":$component.resource.currency,"template":"currency","field":"currency","sortable":"none","headerClassName": "break-word",
+                              "className": "break-word",id:"currency"},
+                      {"headerText":$component.resource.amount,"template":"amount","field":"amount","sortable":"none","headerClassName": "break-word",
+                              "className": "break-word"}
+                              ]]]'>
+                    <caption class="hide-label" data-bind="text:$component.resource.cancel"></caption>
+                    <template slot="realAccountName">
+                      <div data-bind="text:$current.row.realAccountName"></div>
+                    </template>
+                    <template slot="realAccountNo">
+                      <div data-bind="text:$current.row.realAccountNo"></div>
+                    </template>
+                    <template slot="currency">
+                      <div data-bind="text:$current.row.currency"></div>
+                    </template>
+                    <template slot="amount">
+                      <div data-bind="text:$formatter.formatCurrency($current.row.amount, $current.row.currency)"></div>
+                    </template>
+                  </oj-table>
+                </div>
+              </div>
+              <!-- /ko -->
+            </modal-window>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="intrestCalculation"><span
+                    data-bind="text:$component.resource.interestCalculation"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="intrestCalculation" value="{{$component.interestCalcReqValue}}"></oj-switch>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.currencyLoaded  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="currency"><span data-bind="text:$component.resource.currencyLabel"></span></oj-label>
+              </div>
+              <!-- ko ifnot:$component.fromViewScreen  -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="currency" value="{{$component.modelPayload.currencyCode}}"
+                  :placeholder="{{$component.resource.selectCurrency}}" required>
+                  <!-- ko foreach: $component.currencyListData -->
+                  <oj-option value=[[currencyCode]]><span data-bind="text:currencyName"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+              <!-- /ko -->
+              <!-- ko if:$component.fromViewScreen  -->
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <div data-bind="text: $component.modelPayload.currencyCode()"></div>
+              </div>
+              <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot:$component.fromViewScreen  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="CorrespondenceAddress"><span
+                    data-bind="text:$component.resource.correspondenceAddress"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-checkboxset id="correspondenceAddress" class="oj-choice-direction-row"
+                  :aria-label="[[$component.resource.addressText]]" value={{$component.correspondenceAddress}}
+                  on-value-changed="[[$component.correspondenceAddressChangehandler]]">
+                  <oj-option value="entityAddressSelected"><span
+                      data-bind="text: $component.resource.addressText"></span></oj-option>
+                </oj-checkboxset>
+              </div>
+            </div>
+            <!-- ko if:$component.displayAddress -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="addressLine1"><span data-bind="text:$component.resource.addressLine1"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="addressLine1" value="{{$component.modelPayload.address.line1}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.resource.requiredMessage,{
+                               type: 'length',
+                               options: {
+                                   min: 0,
+                                   max: 35
+                               }})]]"></oj-input-text>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="addressLine2"><span data-bind="text:$component.resource.addressLine2"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="addressLine2" value="{{$component.modelPayload.address.line2}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.resource.requiredMessage,{
+                               type: 'length',
+                               options: {
+                                   min: 0,
+                                   max: 35
+                               }})]]"></oj-input-text>
+              </div>
+            </div>
+            <!-- ko if:$component.countryLoaded  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="country"><span data-bind="text:$component.resource.country"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="country" value="{{$component.modelPayload.address.country}}"
+                  :placeholder="{{$component.resource.selectCountry}}">
+                  <!-- ko foreach: $component.countryOptions -->
+                  <oj-option value="{{countryCode}}"><span data-bind="text:description"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="pinCode"><span data-bind="text:$component.resource.pinCode"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="pinCode" value="{{$component.modelPayload.address.zipCode}}"
+                  validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.requiredMessage,{type:'length',options:{min:1,max:10}})]]">
+                </oj-input-text>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if:$component.fromViewScreen  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="CorrespondenceAddress"><span
+                    data-bind="text:$component.resource.correspondenceAddress"></span></oj-label>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="addressLine1"><span data-bind="text:$component.resource.addressLine1"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="addressLine1" value="{{$component.modelPayload.address.line1}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.resource.requiredMessage,{
+                               type: 'length',
+                               options: {
+                                   min: 0,
+                                   max: 35
+                               }})]]"></oj-input-text>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="addressLine2"><span data-bind="text:$component.resource.addressLine2"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="addressLine2" value="{{$component.modelPayload.address.line2}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.resource.requiredMessage,{
+                               type: 'length',
+                               options: {
+                                   min: 0,
+                                   max: 35
+                               }})]]"></oj-input-text>
+              </div>
+            </div>
+            <!-- ko if:$component.countryLoaded  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="country"><span data-bind="text:$component.resource.country"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="country" value="{{$component.modelPayload.address.country}}"
+                  :placeholder="{{$component.resource.selectCountry}}">
+                  <!-- ko foreach: $component.countryOptions -->
+                  <oj-option value="{{countryCode}}"><span data-bind="text:description"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="pinCode"><span data-bind="text:$component.resource.pinCode"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-input-text id="pinCode" value="{{$component.modelPayload.address.zipCode}}"
+                  validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.resource.requiredMessage)]]">
+                </oj-input-text>
+              </div>
+            </div>
+            <!-- /ko -->
+          </page-section>
+          <page-section
+            params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.preferences ">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="ibanRequired"><span data-bind="text:$component.resource.ibanRequired"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="ibanRequired" value="{{$component.ibanRequiredValue}}"
+                  disabled="[[$component.disabledState]]"></oj-switch>
+              </div>
+            </div>
+            <!-- ko if:$component.fromViewScreen && $component.ibanRequiredValue && $component.viewIbanNo -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="ibanNo"><span data-bind="text:$component.resource.ibanNo"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <div data-bind="text: $component.viewIbanNo"></div>
+              </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="balanceCheckForDebit"><span
+                    data-bind="text:$component.resource.balanceCheckForDebit"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="balanceCheckForDebit" value="{{$component.balChkForDebitsValue}}"></oj-switch>
+              </div>
+            </div>
+            <!-- ko if: $component.ShowbalAvailabilityOptions -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="balanceAvailability"><span
+                    data-bind="text:$component.resource.balAvailabilityOptions"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-select-one id="balanceAvailability" value="{{$component.modelPayload.balAvailabilityOptions}}"
+                  :placeholder="{{$component.resource.pleaseSelect}}"
+                  on-value-changed="[[$component.balAvlOptChangeHandler]]" required>
+                  <!-- ko foreach: $component.balAvailabilityOptionsValue -->
+                  <oj-option value=[[id]]><span data-bind="text:description"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.displayBalAvlAmount  || $component.modelPayload.balAvailabilityOptions === "B"-->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5" data-bind="component:{
+                name: 'amount-input',
+                params: {
+                amount :$component.modelPayload.fixedAmtFromPool.amount,
+                label : $component.resource.fixedAmountFromPool,
+                currency:$component.modelPayload.currencyCode(),
+                converter:$formatter.formatCurrency,
+                isMandatory:true,
+                rootId:'amount-3'+$baseModel.incrementIdCount(),
+                rootClass:'form-input'
+              }
+            }">
+              </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="debitTransactionAllowed"><span
+                    data-bind="text:$component.resource.debitTransactionAllowed"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="debitTransactionAllowed" value="{{$component.debitTxnsAllowedValue}}"></oj-switch>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="creditTransactionAllowed"><span
+                    data-bind="text:$component.resource.creditTransactionAllowed"></span></oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="creditTransactionAllowed" value="{{$component.creditTxnsAllowedValue}}"></oj-switch>
+              </div>
+            </div>
+            <!-- ko if:$component.fromViewScreen  -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="accountFrozen"><span data-bind="text:$component.resource.accountFrozen"></span>
+                </oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="accountFrozen" value="{{$component.accountFrozenValue}}"></oj-switch>
+              </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="overdraftOption"><span data-bind="text:$component.resource.overdraftAllowed"></span>
+                </oj-label>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <oj-switch id="overdraftOption" value="{{$component.overdraftOptionValue}}"
+                  on-value-changed="[[$component.overdraftOptionChangeHandler]]"></oj-switch>
+              </div>
+            </div>
+
+            <!-- ko if: $component.overdraftOptionValue -->
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5" data-bind="component: {
+                name: 'amount-input',
+                params: {
+                  amount :$component.modelPayload.odFixedAmount.amount,
+                  label : $component.resource.overdraftAmount,
+                  currency:$component.modelPayload.currencyCode(),
+                  converter:$formatter.formatCurrency,
+                  isMandatory:true,
+                  rootId:'amount-3'+$baseModel.incrementIdCount(),
+                  rootClass:'form-input'
+              }
+              }">
+              </div>
+            </div>
+            <!-- /ko -->
+
+          </page-section>
+          <!-- ko ifnot: $component.fromViewScreen -->
+
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item  button-container">
+              <oj-button class="action-button-primary" on-click="[[$component.submit]]">
+                <span slot="startIcon" class="icons icon-submit"></span>
+                <span data-bind="text:$component.resource.submit"></span></oj-button>
+              <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span></oj-button>
+            </div>
+          </div>
+          <!-- /ko -->
+
+          <!-- ko if: $component.fromViewScreen-->
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item  button-container">
+              <oj-button class="action-button-primary" on-click="[[$component.submit]]">
+                <span slot="startIcon" class="icons icon-submit"></span>
+                <span data-bind="text:$component.resource.save"></span></oj-button>
+              <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span></oj-button>
+              <oj-button class="action-button-tertiary" on-click="[[backToView]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span>
+              </oj-button>
+            </div>
+          </div>
+          <!-- /ko -->
+
+        </div>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'virtual-account-create'"></help>
+      </div>
+    </div>
+  </div>
+</oj-validation-group>

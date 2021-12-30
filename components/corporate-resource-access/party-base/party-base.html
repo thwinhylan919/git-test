@@ -1,0 +1,31 @@
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-9">
+        <div class="form-main-container">
+            <!-- ko if : !$component.hideValidate() -->
+            <div data-bind="component:{name: 'party-validate', params:{data : $data, partyDetails: $component.partyDetails, additionalDetails: $component.partyDetails.partyAdditionalDetails, hideValidate : $component.hideValidate}}">
+            </div><!-- /ko -->
+            <!-- ko if : $component.hideValidate() -->
+            <div data-bind="component:{name: 'module-search', params:{isPartyFetched: $component.partyDetails.partyDetailsFetched(), hideValidate : $component.hideValidate, partyDetails : $component.partyDetails, isModuleSelected : $component.isModuleSelected, selectedModule : $component.selectedModule}}">
+            </div><!-- /ko -->
+            <!-- ko if : $component.hideValidate() && $component.isModuleSelected() -->
+            <div data-bind="component:{name: 'mapping-summary-details', params:{partyDetails: $component.partyDetails,accessLevel:$component.accessLevel, isModuleSelected : $component.isModuleSelected, selectedModule: $component.selectedModule,readAttributeAccess:$component.readAttributeAccess}}">
+            </div><!-- /ko -->
+            <!-- ko if : $component.hideValidate() -->
+            <oj-button class="action-button-secondary"
+                       on-click="[[$component.onClickCancel86]]"><span
+                      data-bind="text:$component.nls.PartyBase.Cancel"></span></oj-button>
+            <!-- /ko -->
+            <!-- ko if : $component.hideValidate() && !($dashboard.appData.segment === "CORPADMIN") -->
+            <oj-button class="action-button-tertiary"
+                       on-click="[[$component.onClickBack78]]"><span
+                      data-bind="text:$component.nls.PartyBase.Back"></span></oj-button>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-9 oj-lg-3">
+        <div class="help-panel">
+            <help params="baseModel : $baseModel, rootModel : $data, transaction: 'access-management-party-base'">
+            </help>
+        </div>
+    </div>
+</div>

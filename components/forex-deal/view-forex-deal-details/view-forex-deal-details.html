@@ -1,0 +1,199 @@
+<div class="form-main-container view-deal-details">
+    <!-- ko if:$component.dataSourceLoaded() -->
+    <div class="deal-details-banner label oj-sm-12" data-bind="text: $baseModel.format($component.resource.viewForexDeal.dealIdHeader, {
+                    dealNumber: $component.dealData().deal.dealId
+                })">
+    </div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : $component.resource.viewForexDeal.partyDetails">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.partyId, value : $dashboard.userData.userProfile.partyId.displayValue"></row>
+            <!-- ko if:$component.partyName() -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.partyName, value : $component.partyName"></row>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <page-section class="oj-lg-12" params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.viewForexDeal.transactionDetails">
+        <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-5 oj-lg-12" data-bind="with : $component.dealData()">
+            <div class="oj-sm-12 oj-lg-3">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.viewForexDeal.status, value : status"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.viewForexDeal.dealType, value : dealType"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.duration, value : $baseModel.format($component.resource.viewForexDeal.dealDuration, {
+                    validity:$component.customDateHandler(deal.bookingDate, deal.expiryDate)})"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.currCombo, value : $baseModel.format($component.resource.viewForexDeal.currComboValue,{buyCurrency: deal.buyAmount.currency, sellCurrency : deal.sellAmount.currency})"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.trnscType, value : rateType"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.exchgRate, value : deal.rate.amount"></row>
+            </div>
+            <div class="oj-sm-12 oj-lg-3">
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.bookedAmount, value : $formatter.formatCurrency(deal.rateType === 'B' ? deal.buyAmount.amount : deal.sellAmount.amount,
+                    deal.rateType === 'B' ? deal.buyAmount.currency : deal.sellAmount.currency)"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.utilizedAmount, value : $formatter.formatCurrency(($component.dealAmount() - $component.availableAmount()),
+                    deal.rateType === 'B' ? deal.buyAmount.currency : deal.sellAmount.currency)"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.availableAmount, value : $formatter.formatCurrency(
+                    deal.availableAmount.amount,
+                    deal.rateType === 'B' ? deal.buyAmount.currency : deal.sellAmount.currency)"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.bookingDate, value : $formatter.formatDate(deal.bookingDate)"></row>
+                <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.viewForexDeal.expiryDate, value : $formatter.formatDate(deal.expiryDate)"></row>
+            </div>
+            <!-- ko if:$component.params.reviewMode -->
+            <div class="oj-sm-12 oj-lg-5 chart" data-bind="css: !$baseModel.large() ? 'oj-flex oj-flex-items-pad' : null">
+                <div class="oj-sm-12 oj-flex-item" data-bind="css: $baseModel.large() ? 'labelPadding' : null">
+                    <span data-bind="text: $component.resource.viewForexDeal.dealUtilization"></span>
+                </div>
+                <oj-chart class="oj-flex-item oj-sm-12 chartPadding" id="pieChart" type="pie" series="[[$component.pieSeriesValue]]" pie-center.label="[[$baseModel.format($component.resource.viewForexDeal.percentUtilization, {percent : $formatter.formatCurrency($component.dealAmount() - $component.availableAmount(),$component.dealAmountCurrency())})]]"
+                    pie-center.label-style="[[{'font-size': '2rem'}]]" style-defaults.pie-inner-radius="[[.8]]" animation-on-display="auto" animation-on-data-change="auto" hover-behavior="dim"></oj-chart>
+            </div>
+            <!-- ko if:deal.swap -->
+            <div class="oj-flex-item oj-sm-12">
+                <a data-id="viewSwapDetails" href="#" data-bind="attr:{for : 'button' + $baseModel.incrementIdCount(), 'alt':$baseModel.format($component.resource.viewForexDeal.alt, {reference : $component.resource.viewForexDeal.viewSwapDetails}),'title':$baseModel.format($component.resource.viewForexDeal.title, {reference : $component.resource.viewForexDeal.viewSwapDetails})},click:$component.viewSwapDetails, text:$component.resource.viewForexDeal.viewSwapDetails">
+                </a>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- ko if:$component.params.reviewMode -->
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.viewForexDeal.dealsUtilizationTable">
+        <!-- ko if:$baseModel.large() -->
+        <oj-table class='oj-lg-12' id='table' data='[[paymentDealsDataSource]]' :aria-label="[[$component.resource.viewForexDeal.dealsUtilizationTable]]" columns='[[[{
+                headerText: $component.resource.generic.common.date,
+                template: "creation_Date"
+            },
+            {
+                headerText: $component.resource.viewForexDeal.paymentId,
+                field: "paymentId",
+                sortable:"none"
+            },
+            {
+                headerText: $component.resource.viewForexDeal.description,
+                field: "description",
+                sortable:"none"
+            },
+            {
+                headerText: $component.resource.viewForexDeal.sourceAccount,
+                field: "debitAccountId",
+                sortable:"none"
+            },
+            {
+                headerText: $component.resource.viewForexDeal.destinatonAccount,
+                field: "creditAccountId",
+                sortable:"none"
+            },
+            {
+                headerText: $component.resource.viewForexDeal.utilizedAmount,
+                template: "transaction_Amount",
+                sortable: "enabled",
+                sortProperty: "amount",
+                className:"right oj-lg-2",
+                headerClassName: "right"
+            },
+            {
+                headerText: $component.resource.viewForexDeal.utilizationStatus,
+                field: "utilizationStatusDescription",
+                sortable:"none"
+            }]]]'>
+            <template slot="transaction_Amount">
+                <div class="date" data-bind='text:$formatter.formatCurrency($current.row.amount, $current.row.currency)'></div>
+            </template>
+            <template slot="creation_Date">
+                <div class="date" data-bind='text:$formatter.formatDate($current.row.transactionDate)'></div>
+            </template>
+        </oj-table>
+        <oj-paging-control id="paging" data='[[paymentDealsDataSource]]' page-size='10' slot='bottom'>
+        </oj-paging-control>
+        <!-- /ko -->
+        <!-- ko if:!$baseModel.large() -->
+        <oj-list-view id="listview " :aria-label="[[$component.resource.viewForexDeal.dealsUtilizationTable]] " data="[[paymentDealsDataSource]] " item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer( 'card_template', true)]] " selection-mode="single">
+            <oj-paging-control id="paging " data='[[paymentDealsDataSource]]' page-size='5' slot='bottom'>
+            </oj-paging-control>
+        </oj-list-view>
+        <script type="text/html" id="card_template">
+            <li data-bind="attr: {id: $data['dealNumber']} ">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-sm-12">
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div>
+                                <label data-bind="text: $component.resource.generic.common.date "></label>
+                                <div data-bind="text:$formatter.formatDate($context.data.transactionDate)"></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div class="oj-sm-12 ">
+                                <label data-bind="text:  $component.resource.viewForexDeal.paymentId "></label>
+                                <div data-bind="text: $context.data.paymentId "></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div class="oj-sm-12 ">
+                                <label data-bind="text: $component.resource.viewForexDeal.description"></label>
+                                <div data-bind="text: $context.data.description"></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div class="oj-sm-12 ">
+                                <label data-bind="text:  $component.resource.viewForexDeal.sourceAccount"></label>
+                                <div data-bind="text: $context.data.debitAccountId"></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div class="oj-sm-12 ">
+                                <label data-bind="text: $component.resource.viewForexDeal.destinatonAccount"></label>
+                                <div data-bind="text: $context.data.creditAccountId "></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div class="oj-sm-12 ">
+                                <label data-bind="text: $component.resource.viewForexDeal.utilizedAmount"></label>
+                                <div data-bind="text:$formatter.formatCurrency($context.data.amount, $context.data.currency) "></div>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-sm-12 oj-md-4 oj-flex-items-pad ">
+                            <div class="oj-sm-12 ">
+                                <label data-bind="text: $component.resource.viewForexDeal.utilizationStatus"></label>
+                                <div data-bind="text: $context.data.utilizationStatusDescription"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </script>
+        <!-- /ko -->
+    </page-section>
+    <div class="button-container">
+        <!-- ko if: $component.dealData().status==="ACTIVE" && $component.showReversal() -->
+        <oj-button class="action-button-primary" id="reverse" on-click="[[reverseConfirm]]">
+            <span slot="startIcon" class="icons icon-undo"></span>
+            <span data-bind="text: $component.resource.viewForexDeal.revers"></span>
+        </oj-button>
+        <!-- /ko -->
+        <!-- ko if: $baseModel.large() -->
+        <oj-button class="action-button-secondary" id="button-cancel" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.generic.common.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary" id="button-back" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text: $component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <modal-window params="baseModel : $baseModel, rootModel : $component, id:'reverse-deal', dashboard : $dashboard, header : $component.resource.viewForexDeal.reversheader">
+        <!-- ko if:$component.dataSourceLoaded() -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div for="validity" class="oj-flex-item oj-sm-12">
+                <span data-bind="text:$baseModel.format($component.resource.viewForexDeal.reverseConfiramation,{dealId : $component.dealData().deal.dealId})"></span>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="ok" on-click="[[reverseForexDeal]]">
+                    <span slot="startIcon" class="icons icon-ok"></span><span data-bind="text:$component.resource.generic.common.ok"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancel" on-click="[[reverseClose]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </modal-window>
+</div>

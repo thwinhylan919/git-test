@@ -1,0 +1,39 @@
+{
+  "modules": [{
+          "moduleName": "com.ofss.digx.app.sms.service.user.User",
+          "components": [{
+                  "componentName": "users-create",
+                  "service": "createUser",
+                  "perform": "users#user-type#party-validate#accessible-entity#review-user-create",
+                  "approve": "review-user-create"
+              },
+              {
+                  "componentName": "user-read",
+                  "service": "read",
+                  "perform": "users#user-type#users-search#party-name-search#user-search-list"
+              },
+              {
+                  "componentName": "users-update",
+                  "service": "update",
+                  "perform": "access-point-mapping#accessible-entity#party-validate#review-user-update",
+                  "approve": "review-user-update"
+              },
+              {
+                  "componentName": "review-user-status",
+                  "service": "lockUser",
+                  "approve": "review-user-status"
+              },
+              {
+                  "componentName": "review-user-channel-access",
+                  "service": "softDelete",
+                  "approve": "review-user-channel-access"
+              },{
+                "componentName": "review-user-action",
+                "service": "resetCredentials",
+                "approve": "review-user-action"
+            }
+
+          ]
+      }
+  ]
+}

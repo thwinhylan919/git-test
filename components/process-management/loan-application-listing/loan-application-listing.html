@@ -1,0 +1,221 @@
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="oj-flex oj-flex-items-pad application-tracker-header">
+            <div class="">
+                <img class="img-customizations" alt="" data-bind="loadImage:'loans/loans.svg'" />
+            </div>
+            <div class="oj-flex-item header-customizations">
+                <span class="" data-bind="text:$component.nls.loan"></span>
+            </div>
+            <!-- ko if : $component.responseLoaded -->
+            <oj-select-one class="oj-lg-2 oj-sm-7 pull-right party-selection label" id="CustomerId"
+                :aria-label="[[$component.nls.CustomerName]]" value="{{selectedCustomerId}}"
+                on-value-changed="[[partyChangedHandler]]">
+                <!-- ko foreach : $component.applicantNameArray -->
+                <oj-option value=" {{value}}">
+                    <span data-bind="text:label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $baseModel.small() -->
+        <div class="oj-flex-item  oj-lg-6"
+            data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.nls.header}}'>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad">
+            <!-- ko ifnot: $baseModel.small() -->
+            <div class="oj-flex-item  oj-lg-6"
+                data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.nls.header}}'>
+            </div>
+            <!-- /ko -->
+
+            <div class="oj-flex-item search-box-customizations">
+                <!-- ko if:$component.filteredApplicationListLoaded() -->
+                <search-box params="searchFields : ['refId','midOfficeRefNo','draftName'],rootModel:$component,
+                    arrayReference: $component.filteredApplicationList,
+                    refreshReference: $component.searchRefresh,
+                    searchBy:$component.nls.searchFields">
+                </search-box>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex filter-margin">
+                <a href="#" id="enable-filter"
+                    data-bind="click: $component.onFilterIconClick , attr: { alt: $component.nls.filterEnable ,title:$component.nls.filterTitle }">
+                    <span class="icons icon-filter"></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ko if : $component.showHeaderStrip() -->
+        <div class="oj-flex oj-flex-items-pad confirm-strip">
+            <div class="oj-flex-item oj-lg-10 oj-sm-10">
+                <div data-bind="">
+                    <span class="icons icon-confirm"></span>
+                    <span
+                        data-bind="text:$baseModel.format($component.nls.draftDeleteMsg,{referenceId:$component.referenceId()})"></span>
+                </div>
+            </div>
+            <div class="oj-flex-item  right oj-lg-2 oj-sm-2">
+                <a href="#" data-bind="click: $component.onCloseCancelStrip , attr: { alt: $component.nls.close,
+                            'title':$component.nls.close,'aria-label':$component.nls.ClickOnClose }">
+                    <span class="icons icon-cancel"></span>
+                </a>
+            </div>
+        </div>
+        <!-- /ko -->
+        <oj-popup id="filter-popup" modality="modeless" tail="simple"
+            position.my.horizontal="{{$component.myHorizontal}}" position.my.vertical="{{$component.myVertical}}"
+            position.at.horizontal="{{$component.atHorizontal}}" position.at.vertical="{{$component.atVertical}}">
+            <div class="oj-flex oj-flex-items-pad ">
+
+                <div class="oj-flex-item ">
+                    <a href="#" class="pull-right" id="reset"
+                        data-bind="click: $component.onReset , attr: { alt: $component.nls.reset }">
+                        <span data-bind="text:$component.nls.reset"></span>
+                    </a>
+                </div>
+
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md -12">
+                    <oj-label for="applicationTypeArray">
+                        <span data-bind="text:$component.nls.RequestType"></span>
+                    </oj-label>
+                    <oj-select-one id="requestType" value="{{selectedRequestType}}"
+                        on-value-changed="[[requestTypeChangedHandler]]">
+                        <!-- ko foreach:$component.requestTypeArray -->
+                        <oj-option value="{{value}}"><span data-bind="text:key"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                    <oj-label for="applicationDuration">
+                        <span data-bind="text:$component.nls.durationHeading"></span>
+                    </oj-label>
+                    <oj-select-one id="duration" value="{{selectedDuration}}" :placeholder="[[$component.nls.select]]"
+                        on-value-changed="[[requestTypeChangedHandler]]">
+                        <!-- ko foreach:$component.durationArray -->
+                        <oj-option value="{{value}}"><span data-bind="text:key"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+        </oj-popup>
+
+        <!-- ko if:$component.filteredApplicationListLoaded() -->
+        <div class="oj-flex-item ">
+            <oj-list-view :class="[['oj-listview-card-layout']]" selection-mode="[['single']]" id='LoanApplication'
+                data="{{pagingDataSource}}"
+                item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('loan-application-id')]]"
+                translations.msg-no-data="[[$component.nls.Nodata]]">
+            </oj-list-view>
+            <oj-paging-control id="paging" page-options="[[{layout:['all']}]]" data="{{pagingDataSource}}"
+                translations="[[{'labelLoadMore':$component.nls.loadMore}]]" mode='page'
+                page-size="[[$baseModel.small()?3:9]]" slot='bottom'>
+            </oj-paging-control>
+        </div>
+        <!-- /ko -->
+    </page-section>
+    <div class="oj-row button-container">
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+            <span slot="startIcon" class="icon-cancel"></span>
+            <span data-bind="text:$component.nls.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]">
+            <span slot="startIcon" class="icon-back-arrow"></span>
+            <span data-bind="text:$component.nls.back"></span>
+        </oj-button>
+    </div>
+    <div id="scriptContainer">
+        <script type="text/html" id="loan-application-id">
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-12 demo-panel-customizations panel" data-bind="css:$data.status==='IN_PROGRESS' ?
+             'in-progress':($data.status==='DRAFT'?'draft':($data.status==='SUBMITTED'?'submit':'completed')),click:$component.onCardSelection.bind($data)">
+                    <div class="oj-flex oj-sm-12 oj-lg-12">
+                        <div class="oj-flex-item oj-sm-1 oj-lg-1">
+                            <!-- ko if : type === $component.nls.requestType.TermLoan -->
+                            <span class="icon-tds img-style "></span>
+                            <!-- /ko -->
+                            <!-- ko if : type === $component.nls.requestType.EquipmentFinancingLoan -->
+                            <span class="icon-vehicle-info img-style "></span>
+                            <!-- /ko -->
+                            <!-- ko if : type === $component.nls.requestType.RealEstateLoan -->
+                            <span class="icon-branch-details img-style "></span>
+                            <!-- /ko -->
+                            <!-- ko if : type === $component.nls.requestType.WorkingCapitalLoan -->
+                            <span class="icon-request-money img-style "></span>
+                            <!-- /ko -->
+                            <!-- ko if : type === "Loan Drawdown" -->
+                            <span class="icon-loans img-style "></span>
+                            <!-- /ko -->
+                        </div>
+                        <div class="oj-flex-item oj-sm-8 oj-lg-8">
+                            <div data-bind="text:$data.type"></div>
+                        </div>
+
+                        <!-- ko if : status === 'DRAFT' -->
+                        <div class="oj-flex-item oj-sm-3 oj-lg-3 right">
+                            <a href="#" data-bind="attr: {'aria-label':$component.nls.delete,'alt': $component.nls.delete ,'id' :'delete'+ $context.index},clickBubble: false,click:$component.confirmDelete.bind($data)">
+                                <span class="icons icon-delete pull-right"></span>
+                            </a>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-12 oj-md-12">
+                         <!-- ko ifnot : remarks -->
+                         <div class="oj-flex-item" data-bind="text:$data.draftName?$data.draftName:$data.midOfficeRefNo"></div>
+                          <!-- /ko -->
+                           <!-- ko if : remarks -->
+                         <div class="oj-flex-item" data-bind=""></div>
+                          <!-- /ko -->
+                    </div>
+                    <div class="oj-flex  oj-lg-12 oj-sm-12 oj-md-12">
+                             <!-- ko ifnot : remarks -->
+                            <span class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-5 panel-child3-customizations" data-bind="text:$data.refId"></span>
+                            <!-- /ko -->
+                            <!-- ko if : remarks -->
+                            <span class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-5 panel-child3-customizations" data-bind="text:$data.draftName?$data.draftName:$data.midOfficeRefNo"></span>
+                            <!-- /ko -->
+                            <span class="oj-lg-6 oj-md-6 oj-sm-6 panel-child3-customizations customize-status" data-bind="text:$component.nls.processStatus[$data.status]"></span>
+                    </div>
+                    <div class="oj-flex oj-sm-12">
+                        <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-6 panel-amount-customizations">
+
+                            <!-- ko if : $data.amount -->
+                             <div class="oj-flex-item">
+                             <span data-bind="text:$formatter.formatCurrency($data.amount,$data.currency)"></span>
+                             </div>
+                            <!-- /ko -->
+                        </div>
+                        <div class="oj-flex-item  oj-lg-4 oj-md-4 oj-sm-6 right panel-child3-customizations">
+                            <!-- ko if : status === 'DRAFT' -->
+                            <div data-bind="text:$component.nls.SavedOn"></div>
+                            <!-- /ko -->
+                             <!-- ko ifnot : status === 'DRAFT' -->
+                            <div data-bind="text:$component.nls.SubmittedOn"></div>
+                            <!-- /ko -->
+                            <div data-bind="text:$formatter.formatDate($data.appDate,'dateTimeFormat')"></div>
+                        </div>
+                    </div>
+            </div>
+        </script>
+    </div>
+
+</div>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, id:'deleteTemplate', header:$component.nls.confirmDelete">
+    <div class="oj-flex oj-flex-items-pad grid-row-group">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12"
+            data-bind="text:$baseModel.format($component.nls.deleteMsg,{referenceId:$component.referenceId()})">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary btn proceed-main-btn" on-click="[[$component.deleteDraft]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.nls.yes"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary btn proceed-main-btn" on-click="[[$component.hideDeleteTemplate]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.nls.no"></span>
+        </oj-button>
+    </div>
+</modal-window>

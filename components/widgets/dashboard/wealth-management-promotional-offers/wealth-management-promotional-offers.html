@@ -1,0 +1,7 @@
+<div class="promotional-offer">
+  <!-- ko foreach: ads -->
+  <!-- ko if: title === $component.imageTitle() -->
+  <img data-bind="loadImage:'dashboard/' + $data.img">
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

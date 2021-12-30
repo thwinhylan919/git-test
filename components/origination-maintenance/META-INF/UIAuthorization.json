@@ -1,0 +1,41 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.origination.service.producttype.ProductType",
+      "components": [{
+        "componentName": "bank-products",
+        "service": "list",
+        "perform": ""
+      }, {
+        "componentName": "product-details",
+        "service": "list",
+        "perform": "maintenance-base"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.origination.service.financialincometype.FinancialIncomeType",
+      "components": [{
+        "componentName": "financial-type-maintenance",
+        "service": "create",
+        "perform": "maintenance-base"
+      }, {
+        "componentName": "financial-type-maintenance",
+        "service": "list",
+        "perform": "maintenance-base"
+      }]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.origination.service.dealer.DealerDetails",
+      "components": [{
+          "componentName": "dealer-details",
+          "service": "update",
+          "perform": "maintenance-base"
+        },
+        {
+          "componentName": "dealer-details",
+          "service": "list",
+          "perform": "maintenance-base"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+
+<oj-diagram data-bind="css : $component.overriteTreeCss ? $component.overriteTreeCss : ($component.wrapTree !== 'true' ? 'viewStructure__svgHeight' : '')" :id="[[treeId]]" animation-on-data-change="[['none']]" data="[[dataSource]]" layout="[[dropLayout]]" renderer="[[nodeRenderer]]" panning="[[treePanning]]" zooming="[[treeZooming]]" link-properties="[[linkProperties]]" overview.rendered="[[overViewRenderer]]" selection-mode="[['single']]" selection="{{selectedNodesValue}}" style-defaults.link-defaults.label-style="[[{color : '#2C3251',fontWeight : 400}]]">
+</oj-diagram>
+<script type="text/html" :id="[[$component.nodeDataId()]]">
+    <svg>
+        <!-- ko ifnot: nodeData.moreNodesCount -->
+        <foreignObject :width="[[$component.svgWidth]]" :height="[[$component.svgHeight]]">
+            <div class="tree">
+                <!-- ko template: { nodes: $componentTemplateNodes}-->
+                <!-- /ko -->
+            </div>
+        </foreignObject>
+        <!-- /ko -->
+        <!-- ko if: nodeData.moreNodesCount -->
+        <circle :cx="[[($component.svgWidth/2)]]" :cy="[[($component.svgHeight/2)]]" :r="[[($component.svgHeight)/2]]" data-bind="css : $component.getCSSclass(nodeData)" />
+        <text class="moreNode" :x="[[($component.svgWidth/2)]]" :y="[[($component.svgHeight/2) + 6]]" text-anchor="middle" data-bind="text : $baseModel.format($component.resource.more, {count : nodeData.moreNodesCount})"></text>
+        <!-- /ko -->
+    </svg>
+</script>
+<!-- ko if: $component.treeZooming !== "none" && !$baseModel.isTouchDevice() -->
+<div class="oj-flex zoom-control">
+    <div class="oj-flex-item oj-lg-2">
+        <oj-toolbar id='zoom-control-tool-bar'>
+            <oj-button id='zoom-in' display='icons' class="zoom-control__button" on-click="[[triggerKeyDownEvent.bind($data,187)]]">
+                <span slot='startIcon' class='zoom-control__icon icons icon-plus'></span>
+                <span data-bind="text : $component.resource.zoomin"></span>
+            </oj-button>
+            <oj-button id='zoom-out' display='icons' class="zoom-control__button" on-click="[[triggerKeyDownEvent.bind($data,189)]]">
+                <span slot='startIcon' class='zoom-control__icon icons icon-minus'></span>
+                <span data-bind="text : $component.resource.zoomout"></span>
+            </oj-button>
+            <oj-button id='fit-to-screen' display='icons' class="zoom-control__button" on-click="[[triggerKeyDownEvent.bind($data,48)]]">
+                <span slot='startIcon' class='zoom-control__icon icons icon-re-centre'></span>
+                <span data-bind="text : $component.resource.fitscreen"></span>
+            </oj-button>
+        </oj-toolbar>
+    </div>
+</div>
+<!-- /ko -->

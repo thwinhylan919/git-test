@@ -1,0 +1,26 @@
+.review-banner {
+    @include single-border(left, var(--review-banner-border-width) solid var(--review-banner-border-color));
+    border-radius: var(--review-banner-border-radius);
+    background: linear-gradient(to var(--review-banner-gradient-direction), var(--review-banner-gradient-start-color), var(--review-banner-gradient-end-color));
+    margin: 0 0 0.5rem;
+    padding: 0.6rem 0;
+    &__image {
+        img {
+            height: 1.3rem;
+        }
+    }
+    &-content {
+        &__header {
+            font-size: var(--review-banner-font-size);
+            color: var(--review-banner-foreground-color);
+            font-weight: var(--review-banner-font-weight);
+            display: inline-block;
+            position: relative;
+            bottom: 0.3rem;
+            padding: 0.3rem;
+        }
+        &__message {
+            padding: 0 1.6rem;
+        }
+    }
+}

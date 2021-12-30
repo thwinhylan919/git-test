@@ -1,0 +1,345 @@
+<div class="individual-container">
+  <!-- ko if: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+  <page-section params="baseModel : $baseModel, rootModel : $component ">
+    <div class="row-group">
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.entityID, value:$component.viewModel.virtualEntityId()">
+      </row>
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.entityName, value:$component.viewModel.virtualEntityName()">
+      </row>
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.firstName, value:$component.viewModel.individualDetails.firstName()">
+      </row>
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.lastName, value:$component.viewModel.individualDetails.lastName()">
+      </row>
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.dateOfBirth, value:$formatter.formatDate($component.viewModel.individualDetails.dateOfBirth(),'dateFormat')">
+      </row>
+      <!-- ko if: $component.gender -->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.gender, value:$component.gender">
+      </row>
+      <!-- /ko -->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.nationality, value:$component.nationality">
+      </row>
+      <!-- ko if: $component.viewModel.individualDetails.identificationNumber -->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.nationalID, value: $component.individualNationalIdMasked">
+      </row>
+      <!-- /ko -->
+      <!-- ko if: ($component.viewModel.individualDetails.phoneNo.areaCode() || $component.viewModel.individualDetails.phoneNo.number())-->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.homePhone, value: ($component.viewModel.individualDetails.phoneNo.areaCode() + $component.viewModel.individualDetails.phoneNo.number())">
+      </row>
+      <!-- /ko -->
+      <!-- ko if: ($component.viewModel.individualDetails.workNumber.areaCode() || $component.viewModel.individualDetails.workNumber.number())-->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.workPhone, value: ($component.viewModel.individualDetails.workNumber.areaCode() + $component.viewModel.individualDetails.workNumber.number())">
+      </row>
+      <!-- /ko -->
+      <!-- ko if: ($component.viewModel.individualDetails.mobileNo.areaCode() || $component.viewModel.individualDetails.mobileNo.number())-->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.mobile, value: ($component.viewModel.individualDetails.mobileNo.areaCode() + $component.viewModel.individualDetails.mobileNo.number())">
+      </row>
+      <!-- /ko -->
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.emailID, value: $component.viewModel.individualDetails.email">
+      </row>
+      <row
+        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.preferredMode, value:$component.preferredMode">
+      </row>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label">
+          <oj-label for="CorrespondenceAddress"><span data-bind="text:$component.resource.correspondenceText"></span>
+          </oj-label>
+        </div>
+      </div>
+      <page-section
+        params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.correspondenceText ">
+        <row
+          params="baseModel : $baseModel, rootModel : $data, label:$component.resource.addressLine1, value: $component.viewModel.address.line1">
+        </row>
+        <!-- ko if: $component.viewModel.address.line2 -->
+        <row
+          params="baseModel : $baseModel, rootModel : $data, label:$component.resource.addressLine2, value: $component.viewModel.address.line2">
+        </row>
+        <!-- /ko -->
+        <row
+          params="baseModel : $baseModel, rootModel : $data, label:$component.resource.country, value: $component.correspondenceCountry">
+        </row>
+        <oj-bind-if test="[[$component.viewModel.address.zipCode()]]">
+          <row
+            params="baseModel : $baseModel, rootModel : $data, label:$component.resource.zipCode, value: $component.viewModel.address.zipCode">
+          </row>
+        </oj-bind-if>
+      </page-section>
+    </div>
+  </page-section>
+  <!-- /ko -->
+  <!-- ko ifnot: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+  <page-section params="baseModel : $baseModel, rootModel : $component ">
+    <!-- ko if: $component.virtualEntityDisplay -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="entityID"><span data-bind="text:$component.resource.entityID"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-text id="entityID" aria-labelledby="entityID" value="{{$component.modelInstance.virtualEntityId}}"
+          validators="[[[{'type': 'regExp',
+                  'options': {
+                    'pattern': $component.virtualEntityMaskPattern(),
+                    'hint': $baseModel.format($component.resource.virtualEntityHintText, {maskPattern:$component.virtualEntityMask()}),
+                    'messageDetail': $component.resource.messageDetail }}]]]" required
+          readonly="[[$component.editFromViewScreen]]"></oj-input-text>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="entityName"><span data-bind="text:$component.resource.entityName"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-text id="entityName" aria-labelledby="entityName"
+          value="{{$component.modelInstance.virtualEntityName}}"
+          async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'virtualEntityName','#entityName')]]]">
+        </oj-input-text>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="firstName"><span data-bind="text:$component.resource.firstName"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-text id="firstName" aria-labelledby="firstName"
+          value="{{$component.modelInstance.individualDetails.firstName}}"
+          async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.firstName','#firstName')]]]">
+        </oj-input-text>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="lastName"><span data-bind="text:$component.resource.lastName"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-text id="lastName" aria-labelledby="lastName"
+          value="{{$component.modelInstance.individualDetails.lastName}}"
+          async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.lastName','#lastName')]]]">
+        </oj-input-text>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="dateOfBirth"><span data-bind="text:$component.resource.dateOfBirth"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 ">
+        <oj-input-date id="dateOfBirth" aria-labelledby="dateOfBirth"
+          value="{{$component.modelInstance.individualDetails.dateOfBirth}}" max="[[$component.today()]]"
+          converter="[[$formatter.dateConverter]]" required>
+        </oj-input-date>
+      </div>
+    </div>
+    <!-- ko if: $component.genderOptionsTemplateLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="gender"><span data-bind="text:$component.resource.gender"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 ">
+        <oj-select-one id="gender" aria-labelledby="gender"
+          value="{{$component.modelInstance.individualDetails.gender}}" required
+          :placeholder="{{$component.resource.placeholder}}">
+          <!-- ko foreach: $component.genderOptions -->
+          <oj-option value="{{code}}"><span data-bind="text: description"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.nationalityTemplateLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="nationality"><span data-bind="text:$component.resource.nationality"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 ">
+        <oj-select-one id="nationality" aria-labelledby="nationality"
+          value="{{$component.modelInstance.individualDetails.nationality}}" required
+          :placeholder="{{$component.resource.placeholder}}">
+          <!-- ko foreach: $component.countryOptions -->
+          <oj-option value="{{countryCode}}"><span data-bind="text:description"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="nationalID"><span data-bind="text:$component.resource.nationalID"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-password id="nationalID" aria-labelledby="nationalID"
+          value="{{$component.modelInstance.individualDetails.identificationNumber}}"
+          async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.identificationNumber','#nationalID')]]]">
+        </oj-input-password>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="homePhone"><span data-bind="text:$component.resource.homePhone"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-4">
+            <oj-input-text id="homePhoneIsd" :aria-label="[[$component.resource.homePhoneIsd]]"
+              value="{{$component.modelInstance.individualDetails.phoneNo.areaCode}}"
+              async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.phoneNo.areaCode','#homePhoneIsd')]]]">
+            </oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-8">
+            <oj-input-text id="homePhone" aria-labelledby="homePhone"
+              value="{{$component.modelInstance.individualDetails.phoneNo.number}}"
+              async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.phoneNo.number','#homePhone')]]]">
+            </oj-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="workPhone"><span data-bind="text:$component.resource.workPhone"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-4">
+            <oj-input-text id="workPhoneIsd" :aria-label="[[$component.resource.workPhoneIsd]]"
+              value="{{$component.modelInstance.individualDetails.workNumber.areaCode}}"
+              async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.workNumber.areaCode','#workPhoneIsd')]]]">
+            </oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-8">
+            <oj-input-text id="workPhone" aria-labelledby="workPhone"
+              value="{{$component.modelInstance.individualDetails.workNumber.number}}"
+              async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.workNumber.number','#workPhone')]]]">
+            </oj-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="mobile"><span data-bind="text:$component.resource.mobile"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-4">
+            <oj-input-text id="mobileIsd" :aria-label="[[$component.resource.mobileIsd]]"
+              value="{{$component.modelInstance.individualDetails.mobileNo.areaCode}}"
+              async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.mobileNo.areaCode','#mobileIsd')]]]"
+              required=[[$component.mobileRequired]]></oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-8">
+            <oj-input-text id="mobile" aria-labelledby="mobile"
+              value="{{$component.modelInstance.individualDetails.mobileNo.number}}"
+              async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'individualDetails.mobileNo.number','#mobile')]]]"
+              required=[[$component.mobileRequired]]></oj-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="emailID"><span data-bind="text:$component.resource.emailID"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-text id="emailID" aria-labelledby="emailID"
+          value="{{$component.modelInstance.individualDetails.email}}" validators="[[$baseModel.getValidator('EMAIL')]]"
+          required=[[$component.emailRequired]]></oj-input-text>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="PreferredMode"><span data-bind="text:$component.resource.preferredMode"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row"
+          value="{{$component.modelInstance.individualDetails.preferredModeOfCommunication}}"
+          on-value-changed="[[$component.preferredModeChangeHandler]]" required>
+          <oj-option value="M"><span data-bind="text:$component.resource.mobile"></span></oj-option>
+          <oj-option value="E"><span data-bind="text:$component.resource.email"></span></oj-option>
+        </oj-radioset>
+      </div>
+    </div>
+  </page-section>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label">
+      <oj-label for="correspondenceAddress"><span data-bind="text:$component.resource.correspondenceText"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+      <oj-checkboxset id="correspondenceAddress" aria-labelledby="correspondenceAddress" class="oj-choice-direction-row"
+        :aria-label="[[$component.resource.addressText]]" value={{$component.correspondenceAddress}}
+        on-value-changed="[[$component.correspondenceAddressChangedHandler]]">
+        <oj-option value="generic"><span data-bind="text: $component.resource.entityAddressText"></span></oj-option>
+      </oj-checkboxset>
+    </div>
+  </div>
+  <!-- ko if:$component.displayCorrespondenceAddress -->
+  <page-section
+    params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.correspondenceText ">
+    <div class="oj-flex-item oj-sm-12 correspondence-address-padding">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label">
+          <oj-label for="addressLine1"><span data-bind="text:$component.resource.addressLine1"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+          <oj-input-text id="addressLine1" aria-labelledby="addressLine1"
+            value="{{$component.modelInstance.address.line1}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_ALL_SPECIAL',$component.resource.validationMessage,{
+                          type:'length',options:{
+                              min:0,max:105}})]]" required></oj-input-text>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label">
+          <oj-label for="addressLine2"><span data-bind="text:$component.resource.addressLine2"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+          <oj-input-text id="addressLine2" aria-labelledby="addressLine2"
+            value="{{$component.modelInstance.address.line2}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_ALL_SPECIAL',$component.resource.validationMessage,{
+                          type:'length',options:{
+                              min:0,max:105}})]]"></oj-input-text>
+        </div>
+      </div>
+    </div>
+    <!-- ko if: $component.nationalityTemplateLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="country"><span data-bind="text:$component.resource.country"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 ">
+        <oj-select-one id="country" aria-labelledby="country" value="{{$component.modelInstance.address.country}}"
+          :placeholder="{{$component.resource.placeholder}}" required>
+          <!-- ko foreach: $component.countryOptions -->
+          <oj-option value="{{countryCode}}"><span data-bind="text:description"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+      </div>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 label">
+        <oj-label for="zipCode"><span data-bind="text:$component.resource.zipCode"></span></oj-label>
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+        <oj-input-text id="zipCode" aria-labelledby="zipCode" value="{{$component.modelInstance.address.zipCode}}"
+          validators="[[$baseModel.getValidator('NUMBERS',$component.resource.validationMessage,{
+                    type:'length',options:{
+                        min:0,max:15}})]]"></oj-input-text>
+      </div>
+    </div>
+  </page-section>
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

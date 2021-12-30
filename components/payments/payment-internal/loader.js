@@ -1,0 +1,8 @@
+define(["text!./payment-internal.html", "./payment-internal", "text!./payment-internal.json"], function(template, viewModel) {
+  "use strict";
+
+  return {
+    viewModel: viewModel,
+    template: template
+  };
+});

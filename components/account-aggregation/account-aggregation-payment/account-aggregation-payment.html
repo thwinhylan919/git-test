@@ -1,0 +1,203 @@
+<div class="oj-flex-item oj-sm-12">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+            <!-- ko if: accountsLoaded -->
+            <!-- ko if: accountsMatchedLoaded -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['accountID']]"> <span data-bind="text:$component.resource.toAccount"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-select-one required :id="[['accountID']]" :aria-label="[['accountId']]" disabled="[[false]]" value="{{toAccountValue}}" on-value-changed="[[toAccountChangedHandler]]">
+                        <!-- ko foreach : Object.keys($component.accountsMatched()) -->
+                        <oj-optgroup label="[[$data]]">
+                            <!-- ko foreach : $component.accountsMatched()[$data] -->
+                            <oj-option value="[[$data]]"><span data-bind="text: $data.id.displayValue"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-optgroup>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <!-- ko if: loadIfsc -->
+            <oj-validation-group id="ifscValidate">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-label :for="[['ifsc']]"> <span data-bind="text:$component.resource.ifsc"></span></oj-label>
+                    </div>
+                    <!-- ko ifnot:$component.additionalBankDetails() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-6">
+                            <oj-validation-group id="verify-code-tracker" valid="{{groupValid}}">
+                                <oj-input-text id="domSwiftCode" required validators="[[validateCode]]" value="{{ifsc}}"></oj-input-text>
+                            </oj-validation-group>
+                        </div>
+                        <div class="oj-flex-item oj-sm-6">
+                            <oj-button data-id="verify" class="form-button-secondary " on-click="[[$component.verifyCode]]">
+                                <span slot="startIcon" class="icons icon-verify"></span>
+                                <span data-bind="text:$component.resource.buttons.verify"></span>
+                            </oj-button>
+                        </div>
+                        <div class="oj-flex-item">
+                            <a data-id="lookupifsccode" href="#" class="form-button-link" data-bind="attr:{'alt':$component.resource.lookupifsccode,'title':$component.resource.lookupifsccodeTitle},text:$component.resource.lookupifsccode,
+                  click:openLookup"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:$component.additionalBankDetails() -->
+                    <div class="oj-flex oj-flex-items-pad" data-bind="with:$component.additionalBankDetails">
+                        <div class="oj-flex-item">
+                            <div data-bind="text:$component.ifsc()"></div>
+                            <div data-bind="text:name"></div>
+                            <div data-bind="text:branchAddress.line1"></div>
+                            <div data-bind="text:branchAddress.city"></div>
+                            <div data-bind="text:branchAddress.country"></div>
+                            <div class="">
+                                <oj-button class="form-button-secondary" id="resetbutton" on-click="[[$component.resetCode]]">
+                                    <span data-bind="text:$component.resource.generic.common.reset"></span>
+                                </oj-button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </oj-validation-group>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-sm-12 oj-lg-9">
+                    <account-input params="baseModel : $baseModel, rootModel: $data ,label : $component.resource.fromAccount,taskCode : $component.parentTaskCode(),
+            validator:$component.validationTracker,type : 'balance' , account : fromAccountValue ,additionalDetails : additionalDetailsFrom "></account-input>
+                </div>
+            </div>
+            <!-- ko if: loadIfsc -->
+            <!-- ko if:isNetworkTypesLoaded() -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['payvia']]"> <span data-bind="text:$component.resource.payVia"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 ">
+                    <oj-radioset id="payvia" aria-labelledby="payvia" required class="oj-choice-direction-row" value="{{$component.network}}" on-value-changed="[[$component.networkTypeChanged]]">
+                        <!-- ko foreach: Object.keys($component.domesticNetworkTypesObj) -->
+                        <oj-option value="{{$data}}" disabled="[[$component.domesticNetworkTypesObj[$data].disabled]]">
+                            <span data-bind="text:$component.domesticNetworkTypesObj[$data].text"></span>
+                            <!-- ko if:$component.domesticNetworkTypesObj[$data].suggested-->
+                            <span class="suggested-network" data-bind="text:$component.resource.suggested"></span>
+                            <!-- /ko -->
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-radioset>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <oj-validation-group id="amountInputTracker">
+                <div class="oj-flex-item oj-lg-4 oj-sm-12">
+                    <div data-bind="component: {
+            name: 'amount-input', params: {
+            amount :$component.amount,
+            label : $component.resource.amount,
+            currency: $component.currency,
+            currencyListRequired : true,
+            validator:$component.validationTracker,
+            isMandatory:true,
+            currencyURL : customCurrencyURL(),
+            currencyParser:$component.currencyParser,
+            rootId:'specific-amount',
+            rootClass:'form-input',
+            valueClasses : 'oj-lg-8'
+          }
+        }">
+
+                        <div class="oj-flex-item">
+                            <a data-id="viewLimits" href="#" class="form-button-link" data-bind="attr:{for : 'button' + $baseModel.incrementIdCount(), 'alt':$data.resource.viewLimits,'title':$data.resource.viewLimitsTitle},click:viewLimits, text:$data.resource.viewLimits">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </oj-validation-group>
+
+            <modal-window params="baseModel : $baseModel, rootModel : $component,header:$component.resource.mylimits,id:$component.viewLimitsModalId">
+                <page-section class="page-section" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <!-- ko if: $component.loadAccessPointList() -->
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 label_icon">
+                            <span data-bind="text:$component.resource.channel"></span>
+                            <a class="channel_align" id="channel-disclaimer" href="#" data-bind="attr:{title:$component.resource.showInformation},click:$component.channelPopup.bind($data,true)">
+                                <span class="icons icon-2x icon-information iconStyling"></span></a>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-select-one :id="[['channel']]" value="[[selectedChannelIndex]]" on-value-changed="[[channelTypeChangeHandler]]">
+                                <!-- ko foreach:$component.channelList -->
+                                <oj-option value="[[$index]]"><span data-bind="text:description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: isViewlimits() && $component.selectedChannel() -->
+                    <div data-bind="component:{name:'available-limits', params:{rootModel: $component,type:$component.parentTaskCode,id:$component.customPayeeId,accessPointValue:$component.selectedChannelType}}">
+                    </div>
+                    <!-- /ko -->
+                </page-section>
+                <div class="button-container ">
+                    <oj-button class="action-button-primary " on-click="[[done]]"><span slot="startIcon" class="icons icon-ok"></span>
+                        <span data-bind="text:$component.resource.generic.common.ok"></span>
+                    </oj-button>
+                </div>
+            </modal-window>
+
+            <modal-window params="baseModel : $baseModel, rootModel : $component,header:$component.resource.validationError,id:'accountSelectionWarning'">
+                <page-section class="page-section" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <span data-bind="text:$component.resource.accountSelectionWarning"></span>
+                </page-section>
+                <div class="button-container ">
+                    <oj-button class="action-button-primary " on-click="[[accountSelectionOk]]"><span slot="startIcon" class="icons icon-ok"></span>
+                        <span data-bind="text:$component.resource.generic.common.ok"></span>
+                    </oj-button>
+                </div>
+            </modal-window>
+            <!-- ko if: loadIfsc -->
+            <div data-bind="template: { name: 'account-aggregation/purpose'}"></div>
+            <!-- /ko -->
+            <div class="oj-flex-item oj-lg-4 oj-sm-12">
+                <div data-bind="component:{name: 'comment-box',
+              params:{
+              rootModel: $root,
+              maxlength:40,
+              label:$component.resource.note,
+              rootId:'payComment',
+              rootClass:'form-input',
+              required:$component.isCommentRequired,
+              validator:$component.validationTracker,
+              comment:$component.note}}">
+                </div>
+            </div>
+            <oj-popup id="channel-popup" modality="modeless" tail="simple" position.my.horizontal="start" position.my.vertical="top" position.at.horizontal="right" position.at.vertical="bottom">
+                <span data-bind="text:$component.resource.showInformation"></span>
+            </oj-popup>
+
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="pay" on-click="[[transfer]]"><span slot="startIcon" class="icons icon-transfer"></span>
+                    <span data-bind="text:$component.resource.transfer"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancel" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+
+            <!-- ko if:refreshLookup() -->
+            <div data-bind="component: {name: 'bank-look-up', params:{rootModel: $component,
+                            clearingCodeType:$component.network,
+                            accountType:'Domestic',
+                            region:$component.region(),
+                            networkCode:$component.ifsc,
+                            additionalBankDetails:$component.additionalBankDetails}}">
+            </div>
+            <!-- /ko -->
+        </page-section>
+    </div>
+</div>

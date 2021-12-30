@@ -1,0 +1,163 @@
+<div class="oj-flex form-main-container">
+    <div class="oj-flex-item oj-sm-12">
+        <div class="identification-details-container">
+            <!-- ko if: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+            <page-section
+                params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.otherDetails ">
+                <div class="row-group">
+                    <!-- ko if: $component.viewModel.identificationType -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.identificationType, value:$component.identificationType">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if: $component.viewModel.identificationNumber -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.identificationNumber, value:$component.identificationNoDisplay">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if: $component.viewModel.taxIdentifier -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.taxIdentificationNumber, value:$component.viewModel.taxIdentifier">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if: ($component.statementPreferences() || $component.frequency() || $component.dueOn()) -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.statementPreferences, value:$component.statementPreferences">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.frequency, value:$component.frequency">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.dueOn, value: $component.dueOn">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.reviewMode() || $component.fromApproval() -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $data, label:$component.resource.mappedVirtualAccounts, value:$component.mappedVirtualAccounts">
+                    </row>
+                    <!-- /ko -->
+                </div>
+            </page-section>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component ">
+                <!-- ko if: $component.identificationTemplateLoaded -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="identificationType"><span
+                                data-bind="text:$component.resource.identificationType"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+                        <oj-select-one id="identificationType" aria-labelledby="identificationType"
+                            value="{{$component.modelInstance.identificationType}}"
+                            :placeholder="{{$component.resource.placeholder}}"
+                            on-value-changed="[[$component.identificationTypeChangeHandler]]">
+                            <!-- ko foreach: $component.identificationTypeList -->
+                            <oj-option value="{{identificationType}}"><span data-bind="text: description"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="identificationNumber"><span
+                                data-bind="text:$component.resource.identificationNumber"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 label">
+                        <oj-input-password id="identificationNumber" aria-labelledby="identificationNumber"
+                            value="{{$component.modelInstance.identificationNumber}}"
+                            placeholder="{{$component.resource.typeId}}"
+                            async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'identificationNumber','#identificationNumber')]]]">
+                        </oj-input-password>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="taxIdentificationNumber"><span
+                                data-bind="text:$component.resource.taxIdentificationNumber"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 label">
+                        <oj-input-text id="taxIdentificationNumber" aria-labelledby="taxIdentificationNumber"
+                            value="{{$component.modelInstance.taxIdentifier}}"
+                            placeholder="{{$component.resource.typeId}}"
+                            async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'taxIdentifier','#taxIdentificationNumber')]]]">
+                        </oj-input-text>
+                    </div>
+                </div>
+            </page-section>
+            <page-section
+                params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.preferences ">
+                <div class="preferences-container">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="StatementPreferences"><span
+                                    data-bind="text:$component.resource.statementPreferences"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-radioset id="StatementPreferences" labelled-by="mainlabelid"
+                                class="oj-choice-direction-row"
+                                value="{{$component.modelInstance.statementPreferences.statementType}}" required>
+                                <oj-option value="C"><span data-bind="text:$component.resource.consolidated"></span>
+                                </oj-option>
+                                <oj-option value="A"><span data-bind="text:$component.resource.accountLevel"></span>
+                                </oj-option>
+                            </oj-radioset>
+                        </div>
+                    </div>
+                    <!-- ko if: $component.frequencyTemplateLoaded -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="frequency"><span data-bind="text:$component.resource.frequency"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 ">
+                            <oj-select-one id="frequency" aria-labelledby="frequency"
+                                value="{{$component.modelInstance.statementPreferences.frequency}}"
+                                :placeholder="{{$component.resource.placeholder}}"
+                                on-value-changed="{{$component.frequencySelectionHandler}}" required>
+                                <!-- ko foreach: $component.frequencyOptions -->
+                                <oj-option value="{{code}}"><span data-bind="text: description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $component.dueOnTemplateLoaded() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="dueOn"><span data-bind="text:$component.resource.dueOn"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 ">
+                            <oj-select-one id="dueOn" aria-labelledby="dueOn"
+                                value="{{$component.modelInstance.statementPreferences.dueOn}}"
+                                :placeholder="{{$component.resource.placeholder}}" required>
+                                <!-- ko foreach: $component.dueOnOptions -->
+                                <oj-option value="{{code}}"><span data-bind="text: description"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </page-section>
+            <!-- /ko -->
+        </div>
+        <!-- ko ifnot: ($component.viewMode() || $component.reviewMode() || $component.fromApproval()) -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item  button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.goToReviewEntity]]"><span
+                        slot="startIcon" class="icons icon-confirm"></span><span
+                        data-bind="text:$component.resource.submit"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span><span
+                        data-bind="text:$component.resource.cancel"></span></oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.previousStep]]"><span slot="startIcon"
+                        class="icons icon-back-arrow"></span><span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

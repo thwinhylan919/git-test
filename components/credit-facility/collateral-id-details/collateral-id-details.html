@@ -1,0 +1,27 @@
+<oj-validation-group id="tracker">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data">
+            <oj-form-layout label-edge="top" max-columns="3">
+                <!-- ko if: $component.collateralPropValueArray().length > 0 -->
+                <!-- ko foreach: $component.collateralPropValueArray-->
+                <oj-label><span class="textPad" data-bind="text: $component.nls.categories[label]"></span></oj-label>
+                <!-- ko ifnot: value.constructor === Object-->
+                <span data-bind="text: value || '-'"></span>
+                <!-- /ko -->
+                <!-- ko if: value.constructor === Object-->
+                <span data-bind="text: $formatter.formatCurrency(value.amount,$component.currency()) || '-'"></span>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $component.collateralPropValueArray().length === 0 -->
+                <span data-bind="text: $component.nls.noDataToDisplay"></span>
+                <!-- /ko -->
+            </oj-form-layout>
+            <div class="oj-flex oj-flex-items-pad button-container buttonPad">
+                <oj-button class="action-button-primary" on-click="[[loadRevaluate]]"><span slot="startIcon" class="icons icon-update"></span><span data-bind="text:$component.nls.revaluate"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]"><span slot="startIcon" class="icon-cancel"></span><span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[back]]"><span slot="startIcon" class="icon-back-arrow"></span><span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+            </div>
+        </page-section>
+    </div>
+</oj-validation-group>

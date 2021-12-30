@@ -1,0 +1,22 @@
+<div class="checkboxtree-container">
+  <oj-tree-view class="attribute-treeview-checkbox oj-flex oj-flex-items-pad oj-md-6 oj-sm-12 oj-lg-12"
+    :id="[['program'+$component.attributeDataId]]" :data-id="[['program'+$component.attributeDataId]]"
+    data="[[dataSource]]"
+    item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('item_template'+$component.attributeDataId, true)]]"
+    on-click="[[handleClick]]" on-keydown="[[handleKeyDown]]" expanded="[[expandAllKeySet]]"
+    :aria-label="[[$baseModel.format($component.nls.attributeTree,{attributeName:$component.attributeDataId})]]">
+  </oj-tree-view>
+</div>
+<script type="text/html" data-bind="attr:{id:'item_template'+$component.attributeDataId}">
+  <li :aria-selected='[[selected() === 1 ? "true" : "false"]]'
+    data-bind="css: {'pull-left oj-flex-item oj-md-6 oj-sm-12 oj-lg-3' : $context.leaf}">
+    <span class="attribute-treeview-checkbox  oj-choice-direction-row"
+      :style.display='[[selected() === 1 ? "" : "none"]]' data-bind="css: {'oj-fwk-icon-checkbox-dis-selected' : $component.disableTree(),
+      'oj-fwk-icon-checkbox-ena-selected' : !$component.disableTree()}"></span>
+
+    <span class="attribute-treeview-checkbox oj-choice-direction-row"
+      :style.display='[[selected() === -1 ? "" : "none"]]' data-bind="css: {'oj-fwk-icon-checkbox-dis-unselected' : $component.disableTree(),
+      'oj-fwk-icon-checkbox-ena-unselected' : !$component.disableTree()}"></span>
+    <span class="" data-bind="text: title"></span>
+  </li>
+</script>

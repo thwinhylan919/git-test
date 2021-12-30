@@ -1,0 +1,22 @@
+<div class="preview-container" :id="[['brand' + $component.brandData.brandId]]">
+    <div brand="header" class="oj-flex">
+        <div class="oj-flex-item oj-sm-11">
+            <div class="logo"></div>
+        </div>
+        <span class="oj-flex-item oj-sm-1 tick hide icons icon-submit"></span>
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-2 menu" brand="menu"></div>
+        <div class="oj-flex-item oj-sm-10" brand="form-background">
+            <span class="pageTitle" data-bind="text: $component.nls.pageTitle"></span>
+            <div class="form-foreground" brand="form-foreground">
+                <div class="bodyText" data-bind="text: $component.nls.bodyText"></div>
+                <div class="myButtons">
+                    <oj-button class="btn" brand="primary-button"></oj-button>
+                    <oj-button class="btn" brand="secondary-button"></oj-button>
+                    <oj-button class="btn" brand="tertiary-button"></oj-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<oj-validation-group :id="[['tracker']]">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.EntityDetails.PartyID, value : partyId">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.EntityDetails.PartyName, value : partyName">
+            </row>
+            <!--  ko if : isUserSelected  -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.EntityDetails.UserId, value : userData.userid">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.EntityDetails.UserName, value : userData.username">
+            </row>
+            <!--  /ko  -->
+
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.EntityDetails.ModuleName, value : moduleName">
+            </row>
+        </page-section>
+</oj-validation-group>

@@ -1,0 +1,67 @@
+<oj-validation-group id="tracker">
+    <div class="form-main-container">
+        <div class="container">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                <div class="header-section oj-flex">
+                    <span class="header" data-bind="text:$component.nls.productHeader[$component.productData().productId].line1"></span>
+                    <span class="sub-header" data-bind="text:$baseModel.format($component.nls.productHeader[$component.productData().productId].line2,{ productType: $component.productData().data.productName ? $component.productData().data.productName:''})"></span>
+                    <div class="oj-flex progress-container">
+                        <oj-progress class="progress-bar oj-flex-item oj-lg-3" id="progressBarWrapper" value="{{progressValue}}"></oj-progress>
+                        <span data-bind="text:$baseModel.format($component.nls.computedProgress, {computedData : $component.remainingProgress()})"></span>
+                    </div>
+                    <div data-bind="component:{name:$component.productData().partySelector, params: {rootModel:$component, payload: productData().payload, data:  productData().data,  selectedParty: $component.selectedParty }}">
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad segment-list">
+                    <div class="oj-lg-10 oj-flex-item">
+                        <!-- ko if : isDatasegmentset -->
+                        <oj-list-view selection-mode="single" on-selection-changed="[[$component.loadSegment]]" :id="[['LoanApplication77']]"
+                            :aria-label="[[$component.nls.LoanApplication]]" data="[[dataSource]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('dataSegmentTemplate')]]">
+                        </oj-list-view>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </page-section>
+            <div class="button-container segmentPad">
+                <oj-button class="action-button-primary" on-click="[[$component.saveAndReview]]">
+                    <span slot="startIcon" class="icons icon-submit"></span>
+                    <span data-bind="text:$component.nls.submit"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.nls.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.nls.back"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>
+
+<script type="text/html" id="dataSegmentTemplate">
+    <div data-bind="css:{'incomplete':$context.data.status !== 'completed'} ">
+    <div class="oj-flex oj-flex-items-pad items">
+        <div class="oj-flex-item oj-lg-2 oj-md-2">
+            <div class="icon-logo">
+                <img data-bind="loadImage:$context.data.imgPath">
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-6 oj-md-6">
+            <div class="oj-flex oj-flex-items-pad">
+                <span data-bind="text:$component.nls.segments[$context.data.id].name"></span>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <span class="sub-header" data-bind="text: $component.nls.segments[$context.data.id].description"></span>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-3 oj-md-3 right">
+            <img class="tag"  data-bind="loadImage:'segment-status/'+$component.iconMap[$context.data.status]+'.svg'">
+        </div>
+        <div class="oj-flex-item oj-lg-1 oj-md-1 right">
+            <span class="icon icon-arrow-right"></span>
+        </div>
+    </div>
+</div>
+</script>

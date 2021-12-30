@@ -1,0 +1,14 @@
+{
+    "componentName": "loan-installments-due",
+    "module": "loans",
+    "segment": ["corporateuser"],
+    "width": {
+        "large": "8",
+        "medium": "6"
+    },
+    "height": "289",
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+}

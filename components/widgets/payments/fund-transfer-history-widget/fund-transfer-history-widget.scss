@@ -1,0 +1,63 @@
+@import "utils";
+$credit-color: var(--base-text-primary);
+.funds {
+    &__section {
+        height: calc(100% - 2rem);
+    }
+    &__content {
+        //height: 15rem;
+        //overflow-y: auto;
+        ul {
+            @include mq(small) {
+                padding: 0;
+            }
+            li {
+                padding: 0.6rem 0;
+            }
+        }
+    }
+    &-transfer-history {
+        &__title {
+            font-size: var(--base-font-size-large);
+            font-weight: var(--base-font-weight-bold);
+            padding-bottom: 0.3rem;
+        }
+        &__info {
+            font-size: var(--base-font-size-medium);
+            color: var(--base-text-secondary);
+        }
+        &__successStatus {
+            color: var(--base-color-success);
+        }
+        &__failedStatus {
+            color: var(--base-color-danger);
+        }
+        &__inProgressStatus {
+            color: var(--base-color-warning);
+        }
+    }
+    // ul{
+    //   li{
+    //     padding:0.6rem 0;
+    //   }
+    // }
+}
+
+.view {
+    @include view-all;
+}
+
+.heading {
+    font-weight: var(--base-font-weight-regular);
+    margin: 0.6rem 0;
+}
+
+.funds-transfers {
+    text-align: center;
+    img {
+        height: 8rem;
+    }
+    &-msg {
+        margin-bottom: 2rem;
+    }
+}

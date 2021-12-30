@@ -1,0 +1,88 @@
+<div class="oj-flex form-main-container">
+    <div class=" oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 switch-order-details">
+        <oj-validation-group id="order-details">
+            <!-- ko if: $component.switchType() === "ONE_TIME" -->
+            <div data-bind="template:{name: 'wealth-management/switch-in-scheme', data: $component}"></div>
+            <!-- /ko -->
+            <!-- ko if: $component.switchType() === "STP" || $component.switchType() === "PSTP" -->
+            <div data-bind="template:{name: 'wealth-management/switch-in-installments', data: $component}"></div>
+            <!-- /ko -->
+        </oj-validation-group>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-4 save-button">
+                <oj-button class="help-button" id="save-button"  on-click="[[save]]">
+                    <span data-bind="text:$component.resource.orderDetails.save"></span>
+                </oj-button>
+            </div>
+            <!-- ko ifnot:$component.buttonDisabled -->
+            <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4 left add-another">
+                <a href="#" on-click="[[switchAnotherFund]]">
+                    <span data-bind="text:$component.resource.orderDetails.switchAnother"></span>
+                </a>
+            </div>
+            <!-- /ko -->
+        </div>
+        <oj-validation-group id="termstracker">
+            <!-- ko ifnot:$component.submitDisabled -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                    <oj-checkboxset id="terms-conditions" aria-labelledby="termsAndConditionsTitle" translations="[[{'required':{messageDetail:$component.resource.orderDetails.termsAndConditionsError}}]]" required>
+                        <oj-option value="accept">
+                            <span class="oj-choice-row-inline" data-bind="text:$component.resource.orderDetails.iAgree">
+              </span></oj-option>
+                    </oj-checkboxset>
+                </div>
+                <div class="viewTnC">
+                    <a href="#" class="medium-text" data-bind="click: $component.showTermsAndConditions, attr:{alt: $component.resource.orderDetails.termsAndConditions, title: $component.resource.orderDetails.termsAndConditions}"><span
+              data-bind="text: $component.resource.orderDetails.viewTnC"></span></a></div>
+            </div>
+            <!-- /ko -->
+        </oj-validation-group>
+        <!-- ko ifnot:$baseModel.small()-->
+        <div class="oj-flex button-container">
+            <oj-button class="action-button-primary" id="submit-button"  on-click="[[submit]]" disabled="{{$component.submitDisabled}}">
+                <span slot="startIcon" class="icons icon-submit"></span>
+                <span data-bind="text:$component.resource.orderDetails.submit"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" id="back-button"  on-click="[[$component.previousStep]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$baseModel.small()-->
+        <div class="oj-flex button-padding">
+            <oj-button class="action-button-primary" id="submit-button"  on-click="[[submit]]" disabled="{{$component.submitDisabled}}">
+                <span slot="startIcon" class="icons icon-submit"></span>
+                <span data-bind="text:$component.resource.orderDetails.submit"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary back-margin" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary back-margin" id="back-button"  on-click="[[$component.previousStep]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<modal-window class="message" params="baseModel : $baseModel, rootModel : $component, id:'terms-n-conditions',  header: $component.resource.orderDetails.termsAndConditions">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="oj-flex oj-flex-items-pad switch-order-details">
+            <div class="oj-flex-item label">
+                <!-- ko ifnot:$baseModel.small()-->
+                <span data-bind="text:$component.resource.orderDetails.termsConditionsText"></span>
+                <!-- /ko -->
+                <!-- ko if:$baseModel.small()-->
+                <span class="tnctext" data-bind="text:$component.resource.orderDetails.termsConditionsText"></span>
+                <!-- /ko -->
+            </div>
+        </div>
+    </page-section>
+</modal-window>

@@ -1,0 +1,83 @@
+<div class="form-main-container">
+    <!-- ko if: $component.params.mode ==='review' -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+    <!-- /ko -->
+    <page-section class="review" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="row-group">
+            <!--          <div data-bind="text:redeemDetails().redemptionDetailDTO.maturityAmount.currency"></div>-->
+            <!-- ko if: params.data.accountId -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.redeem.tdAccountNumber , dataClass : 'highlight-text',value :params.data.accountId.displayValue"></row>
+            <!-- /ko -->
+            <!-- ko if: params.holdAmount -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.transactions.redeem.holdAmount , value :$formatter.formatCurrency(params.holdAmount.amount,params.holdAmount.currency)"></row>
+            <!-- /ko -->
+            <!-- ko if: params.data.redemptionAmount.amount -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.redeem.inputRedemptionAmount , dataClass : 'highlight-text',value :$formatter.formatCurrency(params.data.redemptionAmount.amount,params.data.redemptionAmount.currency)"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.redeem.redemptionType , value : resource.transactions.redeem.type[ko.utils.unwrapObservable(params.data.typeRedemption)]"></row>
+            <!-- ko if: params.data.charges -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.redeem.charges , dataClass : 'highlight-text',value :$formatter.formatCurrency(params.data.charges.amount,params.data.charges.currency)"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.redeem.redemptionAmount , dataClass : 'highlight-text',value :$formatter.formatCurrency(params.data.netCreditAmt.amount,params.data.netCreditAmt.currency)"></row>
+
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.payTo , dataClass : 'highlight-text',value : resource.transactions.termDepositDetails.payoutInstructions.payoutType[params.data.payoutInstructions[0].type]"></row>
+            <!-- ko if: params.data.payoutInstructions[0].type==='O' -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.transferAccount, value : [params.data.payoutInstructions[0].beneficiaryName,params.data.payoutInstructions[0].accountId.displayValue,params.data.payoutInstructions[0].bankName,params.data.payoutInstructions[0].address.line1,params.data.payoutInstructions[0].address.line2,params.data.payoutInstructions[0].address.city,params.data.payoutInstructions[0].address.country]"></row>
+            <!-- /ko -->
+
+            <!-- ko if: params.data.payoutInstructions[0].type==='I' -->
+            <internal-account-input class="oj-flex oj-flex-items-pad oj-sm-12" params="{
+                        baseModel:$baseModel,
+                        account : ko.observable(params.data.payoutInstructions[0].account),
+                        label:resource.transactions.termDepositDetails.payoutInstructions.transferAccount,
+                        required:true,
+                        readOnly: true
+                    }">
+            </internal-account-input>
+            <!-- /ko -->
+
+            <!-- ko if: params.data.payoutInstructions[0].type==='E' -->
+
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.branch ,
+
+          value :[params.data.payoutInstructions[0].beneficiaryName,
+          params.data.payoutInstructions[0].account,
+          params.data.payoutInstructions[0].networkType ? params.data.payoutInstructions[0].networkType : '',
+		      params.data.payoutInstructions[0].clearingCode ? params.data.payoutInstructions[0].clearingCode : '',
+          params.data.payoutInstructions[0].bankName,
+   		  params.data.payoutInstructions[0].address.line1,
+   		  params.data.payoutInstructions[0].address.line2,
+   		  params.data.payoutInstructions[0].address.city,
+   		  params.data.payoutInstructions[0].address.country
+
+          ]"></row>
+            <!-- /ko -->
+
+            <!-- ko if:$component.params.data.payoutInstructions[0].type==='INT' -->
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.swiftCode , value : params.data.payoutInstructions[0].clearingCode"></row>
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.beneficiaryName , value : params.data.payoutInstructions[0].beneficiaryName"></row>
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.account , value :[params.data.payoutInstructions[0].account]"></row>
+            <row params="baseModel : $baseModel, rootModel : $parent, label : resource.transactions.termDepositDetails.payoutInstructions.correspondenceCharges , value : resource.transactions.termDepositDetails.payoutInstructions.remittanceChargesOption[params.data.payoutInstructions[0].correspondenceChargeType]"></row>
+            <!-- /ko -->
+            <!-- ko if:params.data.typeRedemption === 'P' -->
+            <div data-bind="template: { name: 'term-deposit/review-td-redeem' }"></div>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- ko if:$component.params.mode ==='review'-->
+    <div class="button-container">
+        <oj-button id="dialogtopupButton" class="action-button-primary " on-click="[[$component.params.redeemTransactionConfirm]]"><span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <!-- ko if: !$baseModel.small() -->
+        <oj-button class="action-button-secondary " on-click="[[$dashboard.switchModule.bind($data,true)]]"><span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.generic.common.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary " on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+
+    </div>
+    <!-- /ko -->
+</div>

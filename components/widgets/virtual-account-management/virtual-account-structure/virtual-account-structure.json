@@ -1,0 +1,9 @@
+{
+    "virtual-account-management": [{
+        "name": "virtual-account-structure-create",
+        "module": "virtual-account-management"
+    }, {
+        "name": "virtual-structure-search",
+        "module": "virtual-account-management"
+    }]
+}

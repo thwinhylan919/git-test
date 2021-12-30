@@ -1,0 +1,41 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.budget.service.core.Budget",
+        "components": [
+        {
+            "componentName": "list-budget",
+            "service": "create",
+            "perform": "budget-data-card#percentage-graph"
+        },
+        {
+            "componentName": "list-budget",
+            "service": "update",
+            "perform": "budget-data-card#percentage-graph"
+        },
+        {
+            "componentName": "list-budget",
+            "service": "delete",
+            "perform": "budget-data-card#percentage-graph"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.spendanalysis.service.transaction.CategorizedTransaction",
+        "components": [
+        {
+            "componentName": "transaction-list",
+            "service": "update",
+            "perform": "spend-category-create#manage-spend-categories#spend-transaction-card#spend-category-edit#user-spend-category-card"
+        },
+        {
+            "componentName": "transaction-list",
+            "service": "list",
+            "perform": "spend-category-create#manage-spend-categories#spend-transaction-card"
+        },
+        {
+            "componentName": "transaction-list",
+            "service": "splitTransaction",
+            "perform": "spend-category-create#manage-spend-categories#spend-transaction-card"
+        }]
+    }]
+}

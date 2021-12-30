@@ -1,0 +1,174 @@
+<!-- ko if:transferOptionsLoaded -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label for="accTransferOption"><span data-bind="text:$component.payToComponent"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-lg-12">
+        <oj-select-one id="accTransferOption" required="[[true]]" value="{{$component.payoutInstructions.type}}" :placeholder="[[$component.locale.placeholder.pleaseSelect]]">
+            <!-- ko foreach: $component.transferOptionsList -->
+            <oj-option value="{{code}}"><span data-bind="text:description"></span></oj-option>
+            <!-- /ko -->
+        </oj-select-one>
+    </div>
+</div>
+<!-- /ko -->
+
+<!-- ko if:$component.payoutInstructions.type()==='O' -->
+<div class="oj-flex-item oj-sm-9 oj-md-5 oj-lg-12">
+    <div data-bind="component:{name: 'account', params:{rootModel: {params : {
+     account : $component.payoutInstructions.accountId.value,
+     type : 'address',
+     customURL: $component.customURL,
+     depositTypeChanged: $component.depositTypeChanged,
+     specificCurrency: $component.rootModelInstance.createTDData?$component.rootModelInstance.createTDData.principalAmount.currency():$component.additionalDetails()?$component.additionalDetails().account.principalAmount.currency:$component.params.currencyCode,
+     productType: $component.productType,
+     label:$component.locale.payoutInstructions.transferTo,
+     additionalDetails: $component.additionalDetailsTransfer,validator:$component.validationTracker
+     }}}}"></div>
+</div>
+<!-- /ko -->
+
+<!-- ko if:$component.payoutInstructions.type()==='E' -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label class="" :for="[['accountNumber'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.payoutInstructions.accNumber"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-8">
+        <oj-input-text maxlength="20" required="true" :id="[['accountNumber'+ $baseModel.currentIdCount()]]" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[$baseModel.getValidator('ACCOUNT')]]" value="{{$component.payoutInstructions.account}}"></oj-input-text>
+
+    </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label for="beneficiaryName" class=""><span data-bind="text:$component.locale.payoutInstructions.accName"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-8">
+        <oj-input-text id="beneficiaryName" required="true" maxlength="35" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[$baseModel.getValidator('NAME')]]" value="{{$component.payoutInstructions.beneficiaryName}}"></oj-input-text>
+    </div>
+</div>
+
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label for="bankCode" class=""><span data-bind="text:$component.locale.payoutInstructions.bankCode"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-8">
+        <oj-input-text id="bankCode" required="true" maxlength="20" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[$baseModel.getValidator('BANK_CODE')]]" value="{{$component.payoutInstructions.clearingCode}}"></oj-input-text>
+    </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-lg-8">
+        <oj-button id="bankCodeOpener" class="help-button" on-click="[[bankDetails]]">
+            <span data-bind="text:$component.locale.generic.common.verify"></span>
+        </oj-button>
+        <span data-bind="text:$component.locale.payoutInstructions.or"></span>
+        <a href="#" class="form-button-link" data-bind="text:$component.locale.payoutInstructions.lookUpBankCode,click:bankLookupHandler"></a>
+
+        <!-- ko if:additionalBankDetails() -->
+        <div data-bind="text:$component.additionalBankDetails().name"></div>
+        <div data-bind="text:$component.additionalBankDetails().branchAddress.line1"></div>
+        <div data-bind="text:$component.additionalBankDetails().branchAddress.line2"></div>
+        <div data-bind="text:$component.additionalBankDetails().branchAddress.city"></div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div data-bind="component: {name: 'bank-look-up', params:{rootModel: $component,clearingCodeType:$component.payoutInstructions.networkType,accountType:'Domestic',networkCode :$component.payoutInstructions.clearingCode,additionalBankDetails:$component.additionalBankDetails}}"></div>
+<!-- /ko -->
+
+<!-- ko if:$component.payoutInstructions.type()==='I' -->
+<internal-account-input class="oj-flex oj-flex-items-pad oj-sm-12" params="{
+     baseModel:$baseModel,
+     account : $component.payoutInstructions.account,
+     label: $component.locale.payoutInstructions.accNumber,
+     confirmStyleAccount: true,
+     required:true
+    }">
+</internal-account-input>
+<!-- /ko -->
+
+<!-- ko if:$component.payoutInstructions.type()==='S' -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label class="" :for="[['sourceAccount'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.locale.payoutInstructions.accNumber"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-lg-7">
+        <oj-input-text id="sourceAccount" class="oj-flex-item" value="[[$data.additionalDetails().account.id.displayValue]]" readonly>
+        </oj-input-text>
+    </div>
+</div>
+<!-- /ko -->
+
+<!-- ko if:$component.payoutInstructions.type()==='INT' -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label class="" :for="[['sourceAccount']]"><span data-bind="text:$component.locale.payoutInstructions.accNumber"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-8">
+        <oj-input-text id="sourceAccount" required="true" class="oj-flex-item" value="{{$component.payoutInstructions.account}}">
+        </oj-input-text>
+    </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label">
+        <oj-label class="" :for="swiftCode"><span data-bind="text:$component.locale.payoutInstructions.swiftCode"></span></oj-label>
+    </div>
+</div>
+<!-- ko ifnot:$component.additionalBankDetails() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-8">
+        <oj-input-text id="swiftCode" required="true" class="oj-flex-item" required value="{{$component.payoutInstructions.clearingCode}}"></oj-input-text>
+    </div>
+</div>
+
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+        <oj-button class="help-button" on-click="[[verifyCode]]">
+            <span data-bind="text:$component.locale.generic.common.verify"></span>
+        </oj-button>
+        <span data-bind="text:$component.locale.payoutInstructions.or"></span>
+        <a href="#" class="form-button-link" data-bind="attr:{'alt':$component.locale.alt.lookUpSwiftCodeAlt,'title':$component.locale.title.lookUpSwiftCodeTitle},text:$component.locale.payoutInstructions.lookUpSwiftCode,click:$component.openLookup">
+        </a>
+    </div>
+    <div data-bind="component: {name: 'bank-look-up', params:{rootModel: $component,clearingCodeType:$component.payoutInstructions.networkType,accountType:'International',networkCode :$component.payoutInstructions.clearingCode,additionalBankDetails:$component.additionalBankDetails}}"></div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.additionalBankDetails() -->
+<div class="oj-flex oj-flex-items-pad" data-bind="with:$component.additionalBankDetails">
+    <div class="oj-flex-item">
+        <div data-bind="text:code"></div>
+        <div data-bind="text:('name' in $data)?name:''"></div>
+        <div data-bind="text:('line1' in branchAddress)?branchAddress.line1:''"></div>
+        <div data-bind="text:('city' in branchAddress)?branchAddress.city:''"></div>
+        <div data-bind="text:('country' in branchAddress)?branchAddress.country:''"></div>
+        <div class="">
+            <oj-button class="help-button" on-click="[[$component.resetCode]]">
+                <span data-bind="text:$component.locale.generic.common.reset"></span>
+            </oj-button>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label class="" :for="[['beneficiaryName']]"><span data-bind="text:$component.locale.payoutInstructions.beneficiaryName"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-8">
+        <oj-input-text id="beneficiaryName" required="true" class="oj-flex-item" value="{{$component.payoutInstructions.beneficiaryName}}">
+        </oj-input-text>
+    </div>
+</div>
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 label ">
+        <oj-label class="" :for="correspondenceCharges"><span data-bind="text:$component.locale.payoutInstructions.correspondenceCharges"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-9 oj-md-4 oj-lg-12">
+        <!-- ko if:isChargesLoaded() -->
+        <oj-select-one required id="correspondenceCharges" :placeholder="[[$component.locale.placeholder.pleaseSelect]]" value="{{$component.payoutInstructions.correspondenceChargeType}}">
+            <!-- ko foreach:correspondenceCharges() -->
+            <oj-option value="{{value}}"><span data-bind="text:text"></span></oj-option>
+            <!-- /ko -->
+        </oj-select-one>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

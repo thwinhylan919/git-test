@@ -1,0 +1,22 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 data-bind="text:$component.nls.heading.InvestmentAllocation">
+      </h3>
+    </div>
+  </div>
+  <!-- ko ifnot: $baseModel.small()-->
+  <!-- ko if: distributionLoaded-->
+  <oj-chart id="barchart" type="bar" hover-behavior="dim" series="[[pieSeriesValue]]" groups="[[pieGroupsValue]]" animation-on-data-change="auto"
+    class="donut-size oj-md-12 oj-lg-12">
+  </oj-chart>
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if: $baseModel.small()-->
+  <!-- ko if: distributionLoaded-->
+  <oj-chart id="barchart" type="bar" hover-behavior="dim" series="[[pieSeriesValue]]" groups="[[pieGroupsValue]]" animation-on-data-change="auto"
+    class="donut-size oj-sm-12" legend.position="bottom">
+  </oj-chart>
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

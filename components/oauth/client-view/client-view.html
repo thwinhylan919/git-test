@@ -1,0 +1,37 @@
+<div class="form-main-container full-width">
+    <!-- ko if:$component.clientDataLoaded() -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.clientDefn">
+        <div data-bind="with:$component.clientData">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientId, value : id "></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientName, value : name ">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientDesc, value : description ">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.identityDomain, value : idDomain"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientType, value : $component.clType"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.grantType, value : grant_types "></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.redirectURLs">
+        <div data-bind="with:$component.clientData">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.redirectURL, value : url "></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.scopes">
+        <div>
+            <!-- ko foreach:Object.keys($component.clientData().resMap) -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.resourceServer, value : $data "></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.scopes, value : $component.clientData().resMap[$data] "></row>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <div data-bind="with:$component.clientData">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.defaultScope, value : $component.clientData().defaultScope "></row>
+    </div>
+    <!-- /ko -->
+    <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickEdit]]"><span data-bind="text:$component.Nls.edit"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span data-bind="text:$component.Nls.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span data-bind="text:$component.Nls.back"></span></oj-button>
+    </div>
+</div>

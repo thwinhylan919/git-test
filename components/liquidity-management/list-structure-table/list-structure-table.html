@@ -1,0 +1,47 @@
+<div class="oj-flex oj-flex-items-pad">
+    <oj-table id="strucureDetailsTable" :aria-label="[[$component.resource.structureDetails.structureDetailsTable]]" columns='[[[
+            {
+                "headerText":$component.resource.structureDetails.structureId,
+                "field":"structureId"
+            },
+            {
+                "headerText":$component.resource.structureDetails.structureName,
+                "field":"header"
+            },
+            {
+                "headerText":$component.resource.structureDetails.type,
+                "field":"structureType"
+            },
+            {
+                "headerText":$component.resource.structureDetails.startDate,
+                "template":"startDate",
+                "sortProperty":"startDate"
+            },
+            {
+                "headerText":$component.resource.structureDetails.endDate,
+                "template":"endDate",
+                "sortProperty":"endDate"
+            },
+            {
+                "headerText":$component.resource.structureDetails.priority,
+                "field":"structurePriority"
+            },
+            {
+                "headerText":$component.resource.structureDetails.status,
+                "template":"structureStatus",
+                "sortProperty":"structureStatus"
+            }            
+        ]]]' columns-default="[[{sortable:'enabled'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[$component.structureDetailsDataSource]]">
+        <template slot="startDate">
+            <div data-bind="text : $formatter.formatDate($current.row.startDate)"></div>
+        </template>
+        <template slot="endDate">
+            <div data-bind="text : $formatter.formatDate($current.row.endDate)"></div>
+        </template>
+        <template slot="structureStatus">
+            <div data-bind="text : $component.resource.structureDetails[$current.row.structureStatus]"></div>
+        </template>
+        <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" :page-size="[[10]]" data="[[$component.structureDetailsDataSource]]">
+        </oj-paging-control>
+    </oj-table>
+</div>

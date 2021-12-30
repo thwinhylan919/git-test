@@ -1,0 +1,71 @@
+<oj-validation-group id="tracker">
+    <div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-5">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading :($dashboard.appData.segment === 'CORP')?$component.payments.payee.demanddraft:''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label ">
+                        <label for="name" data-bind="text: $component.nls.upiPayee.payeeName"></label>
+                    </div>
+                    <!-- ko ifnot:$component.isExisting() -->
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-validation-group id="dd-payee-name-tracker">
+                            <oj-input-text required id="name" validators="[[$baseModel.getValidator('NAME')]]" value="{{payeeName}}"></oj-input-text>
+                        </oj-validation-group>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:$component.isExisting() -->
+                    <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-12" data-bind="text:$component.payeeName()"></div>
+                    <!-- /ko -->
+                </div>
+                <!-- ko if:$component.imageUploadFlag() -->
+                <div class="oj-flex oj-flex-items-pad oj-lg-10 oj-sm-12">
+                    <div class="oj-flex-item">
+                        <image-upload params="baseModel : $baseModel, rootModel:$component,
+                            preview:$component.preview,
+                            contentId:$component.contentId,
+                            fileId:$component.fileId,
+                            defaultImagePath :'nominee/add-another-nominee.svg',
+                            imageId:$component.imageId,
+                            imageUploaded : ko.utils.unwrapObservable($component.preview) ? 0 : 1,
+                            isThumbnail:true,
+                            file:$component.file">
+                        </image-upload>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label ">
+                        <label for="vpa" data-bind="text: $component.nls.upiPayee.payeeVpa"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-12" data-bind="text:$component.vpaId()"></div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label ">
+                        <label for="accountName" data-bind="text: $component.nls.upiPayee.accountName"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-12" data-bind="text:$component.accountName()"></div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label ">
+                        <label for="nickName" data-bind="text: $component.nls.upiPayee.nickName"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-validation-group id="dd-payee-name-tracker">
+                            <oj-input-text required id="name" validators="[[$baseModel.getValidator('NAME')]]" value="{{nickName}}"></oj-input-text>
+                        </oj-validation-group>
+                    </div>
+                </div>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" data-id="addPayee" on-click="[[$component.addPayee]]">
+                    <span slot="startIcon" class="icons icon-add"></span>
+                    <span data-bind="text:$component.nls.upiPayee.add"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="buttoncancel" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.nls.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

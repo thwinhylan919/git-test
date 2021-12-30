@@ -1,0 +1,7 @@
+<!-- ko if : $baseModel.large() -->
+<oj-buttonset-one class="pull-right" display="[[&quot;icons&quot;]]" :id="[['viewSwitch32']]" value="{{$component.activeLayout}}" on-value-changed="[[handleCardStyleChange]]">
+  <!-- ko foreach : layoutViewRadios -->
+  <oj-option value="[[$data.id]]"><span data-bind="text:$data.label"></span><span slot="startIcon" data-bind="attr: {class: icon}"></span></oj-option>
+  <!-- /ko -->
+</oj-buttonset-one>
+  <!-- /ko -->

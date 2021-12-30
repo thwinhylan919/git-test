@@ -1,0 +1,131 @@
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+        <div data-bind="text: $component.realCustomerName"></div>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+</div>
+<div class="oj-flex form-main-container virtual-account-search">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <page-section params="baseModel : $baseModel, rootModel : $data">
+            <div class="oj-flex oj-flex-items-pad search-account-container">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label><span
+                                    data-bind="attr:{id:'AccountNumber'},text: $component.resource.searchAccountNumber"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-input-text id="searchAccountNumber"
+                                :aria-label="[[$component.resource.searchAccountNumber]]"
+                                value="{{$component.virtualAccountNo}}">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad grid-row-group">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label><span
+                                    data-bind="attr:{id:'templateId'},text: $component.resource.searchEntityID"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                            <oj-input-text id="searchEntityID" :aria-label="[[$component.resource.searchEntityID]]"
+                                value="{{$component.virtualEntityId}}">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ko ifnot: $component.showMoreSearchTemplate -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <a href="#" attr="{'id':'showMoreSearch'}" data-bind="click: $component.showMoreSearch">
+                        <span data-bind="text: $component.resource.showMoreSearch"></span>
+                        <span class="icon icon-arrow-down"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: $component.showMoreSearchTemplate -->
+            <div
+                data-bind="template: { name: 'virtual-account-management/virtual-account-more-search', afterRender: $component.afterRender}">
+            </div>
+            <!-- /ko -->
+            <div class="button-container">
+                <oj-button class="action-button-primary" on-click="[[searchResult]]">
+                    <span slot="startIcon" class="icons icon-search"></span>
+                    <span data-bind="text:$component.resource.search"></span>
+                </oj-button>
+                <!-- ko ifnot: $component.dataSourceCreated -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-tertiary" on-click="[[clear]]">
+                    <span slot="startIcon" class="icons icon-refresh"></span>
+                    <span data-bind="text:$component.resource.clear"></span>
+                </oj-button>
+            </div>
+            <!-- ko if: viewTable -->
+            <div class="oj-flex spacing-table">
+                <div class="oj-flex-item oj-sm-11">
+                    <div class="oj-flex header-underline oj-flex-items-pad">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item oj-lg-4 left">
+                                <span class="title-bold oj-lg-4"
+                                    data-bind="text: $component.resource.listOfAccounts"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-11">
+                    <oj-table id="table" :aria-label="[[$component.resource.cancel]]" data="[[dataSource]]"
+                        columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+                        columns="[[headerText]]">
+                        <caption class="hide-label" data-bind="text:$component.resource.cancel"></caption>
+                    </oj-table>
+                    <oj-paging-control id="paging" slot='bottom' page-size='10' data='[[dataSource]]'>
+                    </oj-paging-control>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: $component.dataSourceCreated -->
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+        </page-section>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span class="disclaimer-note info-text-small" data-bind="text:$component.resource.disclaimer"></span>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="searchIdentifier">
+        <td>
+            <a href="#" data-bind="text:$context.row.virtualAccountNo,click:$component.onSelectedInTable.bind($data,$context.row)"></a>
+            <div data-bind="text:$context.row.virtualAccountName"></div>
+        </td>
+    </script>
+    <script type="text/html" id="entityIdentifier">
+        <td>
+            <span data-bind="text:$context.row.virtualEntityId"></span>
+            <div data-bind="text:$context.row.virtualEntityName"></div>
+        </td>
+    </script>
+    <script type="text/html" id="dateIdentifier">
+        <td>
+            <span data-bind="text: $formatter.formatDate($context.row.accOpenDate,'dateFormat')"></span>
+        </td>
+    </script>
+    <script type="text/html" id="avlBalance">
+        <td>
+            <span data-bind="text:$formatter.formatCurrency($context.row.avlBal,$context.row.currency)"></span>
+        </td>
+    </script>
+</div>

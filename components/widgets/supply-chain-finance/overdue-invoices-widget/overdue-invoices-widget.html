@@ -1,0 +1,82 @@
+<div class="oj-panel align-div">
+  <div class="oj-flex oj-flex-items-pad ">
+    <div class="oj-flex-item oj-lg-4">
+      <div>
+        <h3 data-bind="text:$component.nls.Overdue.Overdue"></h3>
+      </div>
+    </div>
+    <!-- ko if : $component.listLoaded() -->
+    <div class="oj-flex-item oj-lg-8 right">
+      <oj-buttonset-one class="[[&quot;align-buttonset&quot;]]" :id="[['switchButtonset56']]" value="{{accountType}}">
+        <oj-option value="{{'receivables'}}"><span data-bind="text:$component.nls.Overdue.Receivables"></span>
+        </oj-option>
+        <oj-option value="{{'payables'}}"><span data-bind="text:$component.nls.Overdue.Payables"></span></oj-option>
+      </oj-buttonset-one>
+    </div>
+    <!-- /ko -->
+    <!-- ko if : $component.listLoaded() && $component.overdueList().length > 0 -->
+    <!-- ko ifnot: $baseModel.small() -->
+    <oj-table :id="[['overdueTable74']]" :aria-label="[[$component.nls.Overdue.overdueTable]]" data="[[dataSource26]]"
+      row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('overdueTable')]]" columns="[[tableColumns]]"></oj-table>
+    <!-- /ko -->
+    <!-- ko if: $baseModel.small() -->
+    <oj-list-view :aria-label="[[$component.nls.Overdue.overdueTable]]" :id="[['programslist72']]"
+      data="[[dataSource16]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('programs')]]"></oj-list-view>
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
+  <!-- ko if : $component.listLoaded() && $component.overdueList().length === 0 -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="align-img"><img alt=""
+        data-bind="loadImage:'dashboard/quick-access/upcoming-payment-new.svg'"></div>
+    <h3 data-bind="attr:{'class':'center text-style oj-flex-item oj-lg-12'},text:$component.nls.nooverdueMessage"></h3>
+  </div>
+  <!-- /ko -->
+  <!-- ko if : $component.listLoaded() && $component.overdueList().length > 0 -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item center align-link"><a href="#" class="form-button-link" id="ViewAllInvoices84"
+        data-bind="attr:{'alt':$component.nls.Overdue.ViewAllInvoices,'title':$component.nls.Overdue.ViewAllInvoicesTitle},click:$component.onClickViewAllInvoices84,text:$component.nls.Overdue.ViewAllInvoices"></a>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<div id="scriptContainer">
+  <script type="text/html" id="overdueTable">
+    <td><span data-bind="text:$context.row.invoiceNumber"></span></td>
+    <td><span
+        data-bind="text:$formatter.formatCurrency($context.row.outstandingAmount.amount,$context.row.outstandingAmount.currency)"></span>
+    </td>
+    <td><span data-bind="text:$context.row.noOfDaysOverdue"></span></td>
+  </script>
+</div>
+<div id="scriptContainer2">
+  <script type="text/html" id="programs">
+    <!-- ko if : $context.data.headerClass -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-6 oj-sm-6 no-pad-cols">
+      <span data-bind="text:$component.nls.InvoiceNumber"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 no-pad-cols">
+      <span data-bind="text:$component.nls.AmountOverdue"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-sm-2 no-pad-cols">
+      <span data-bind="text:$component.nls.Noofdaysoverdue"></span>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot : $context.data.headerClass  -->
+  <div class="oj-flex oj-flex-items-pad cell-background">
+    <div class="oj-flex-item oj-lg-6 oj-sm-6 no-pad-cols">
+      <span data-bind="text:$context.data.invoiceNumber"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 no-pad-cols">
+      <span
+        data-bind="text:$formatter.formatCurrency($context.data.outstandingAmount.amount,$context.data.outstandingAmount.currency)"></span>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-sm-2  no-pad-cols">
+      <span data-bind="text:$context.data.noOfDaysOverdue"></span>
+    </div>
+  </div>
+  <!-- /ko -->
+  </script>
+</div>

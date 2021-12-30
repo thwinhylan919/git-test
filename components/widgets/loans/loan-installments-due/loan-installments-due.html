@@ -1,0 +1,92 @@
+<div class="oj-panel">
+    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+        <div class="oj-flex-item oj-lg-8">
+            <h3 class="heading oj-flex-item" data-bind="text:$component.nls.heading.InstallmentsDue">
+            </h3>
+            <!-- ko if: $component.accountsListLoaded() && $component.upcoming() -->
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <span class="oj-flex-item info-text-small" data-bind="text:$component.nls.InstallmentsDue.upcomingText"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="oj-flex-item oj-lg-4 right">
+            <oj-buttonset-one id="summaryType" value="{{$component.currentSummaryType}}" on-value-changed="[[summaryTypeChanged]]">
+                <oj-option id="upcoming" name="mod" value="{{'UPCOMING'}}"><span for="upcoming" data-bind="text:$component.nls.InstallmentsDue.upcoming"></span></oj-option>
+                <oj-option id="overDue" name="mod" value="{{'OVERDUE'}}"><span for="overDue" data-bind="text:$component.nls.InstallmentsDue.overDue"></span></oj-option>
+            </oj-buttonset-one>
+        </div>
+    </div>
+    <!-- ko if: $component.accountsListLoaded() && $component.overDue() && $component.overDuedatasource().length > 0 -->
+    <oj-table :id="[['InstallmentsDue3']]" data="[[overDuedataSource75]]" columns="[[[{'headerText':$component.nls.InstallmentsDue.DueDate,template:'dueDate'},
+          {'headerText':$component.nls.InstallmentsDue.LoanAccountDetails,template:'accNo',sortProperty:'productDTO.name'},
+          {'headerText':$component.nls.InstallmentsDue.PartyName, field:'partyName'},
+          {'headerText':$component.nls.InstallmentsDue.AmountDue,className:'right',template:'amount'},
+          {'headerText':'', template:'pay'}]]]">
+        <template slot="accNo">
+            <td>
+                <div data-id="prodName" data-bind="text:$current.row.productDTO.name"></div>
+                <a href="#" data-bind="attr:{ title:$baseModel.format($component.nls.InstallmentsDue.linkDetails,{account : $current.row.accountNo}), alt :$baseModel.format($component.nls.InstallmentsDue.linkDetailsText,{account : $current.row.accountNo})},text:$current.row.accountNo,click:$component.showLoanDetails.bind($data,$current.row)"></a>
+                <div data-id="accountName" data-bind="text:$baseModel.format($component.nls.InstallmentsDue.displayContent,{nickname: $current.row.accountNickname ? $current.row.accountNickname : ''})"></div>
+            </td>
+        </template>
+        <template slot="pay">
+            <a href="#" data-bind="attr:{ title:$component.nls.InstallmentsDue.clickpay, alt :$component.nls.InstallmentsDue.clickpay},text:$component.nls.InstallmentsDue.payNow,click:$component.payLoan.bind($data,$current.row)"></a>
+        </template>
+        <template slot="amount">
+            <td>
+                <div data-bind="text:$current.row.amount.amount?$formatter.formatCurrency($current.row.amount.amount,$current.row.amount.currency):$current.row.amount.amount"></div>
+            </td>
+        </template>
+        <template slot="dueDate">
+            <td>
+                <div data-bind="text:$formatter.formatDate($current.row.dueDate)"></div>
+            </td>
+        </template>
+    </oj-table>
+        <oj-paging-control class="oj-flex-item" id="paging" slot="bottom" :page-size="[[5]]" data="[[$component.overDuedataSource75]]">
+                </oj-paging-control>
+    <!-- /ko -->
+    <!-- ko if: $component.accountsListLoaded() && $component.overDue() && !$component.overDuedatasource().length > 0 -->
+    <div class="oj-flex-item oj-sm-12 oj-lg-12 center">
+        <img class="no-installments-image" data-bind="loadImage:'dashboard/currency-sweeps.svg'">
+        <div data-bind="text:$component.nls.InstallmentsDue.noOverDueData"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $component.accountsListLoaded() && $component.upcoming() && $component.upcomingdatasource().length > 0 -->
+    <oj-table :id="[['InstallmentsDue3']]" data="[[upcomingdataSource75]]" columns="[[[{'headerText':$component.nls.InstallmentsDue.DueDate,template:'dueDate'},
+       {'headerText':$component.nls.InstallmentsDue.LoanAccountDetails,template:'accNo'},
+       {'headerText':$component.nls.InstallmentsDue.PartyName, field:'partyName'},
+       {'headerText':$component.nls.InstallmentsDue.Amount, headerClassName:'right',className:'right',template:'amount'},
+       {'headerText':$component.nls.InstallmentsDue.AutoPayment, field:'paymentMethod'},
+       {'headerText':'', template:'pay'}]]]">
+        <template slot="accNo">
+            <td>
+                <div data-id="prodName" data-bind="text:$current.row.productDTO.name"></div>
+                <a href="#" data-bind="attr:{ title:$baseModel.format($component.nls.InstallmentsDue.linkDetails,{account : $current.row.accountNo}), alt :$baseModel.format($component.nls.InstallmentsDue.linkDetailsText,{account : $current.row.accountNo})},text:$current.row.accountNo,click:$component.showLoanDetails.bind($data,$current.row)"></a>
+                <div data-id="accountName" data-bind="text:$baseModel.format($component.nls.InstallmentsDue.displayContent,{nickname: $current.row.accountNickname ? $current.row.accountNickname : ''})"></div>
+            </td>
+        </template>
+        <template slot="pay">
+            <a href="#" data-bind="attr:{ title:$component.nls.InstallmentsDue.clickpay, alt :$component.nls.InstallmentsDue.clickpay},text:$component.nls.InstallmentsDue.pay,click:$component.payLoan.bind($data,$current.row)"></a>
+        </template>
+        <template slot="amount">
+            <td>
+                <div data-bind="text:$current.row.amount.amount?$formatter.formatCurrency($current.row.amount.amount,$current.row.amount.currency):$current.row.amount.amount"></div>
+            </td>
+        </template>
+        <template slot="dueDate">
+            <td>
+                <div data-bind="text:$formatter.formatDate($current.row.dueDate)"></div>
+            </td>
+        </template>
+    </oj-table>
+    <oj-paging-control class="oj-flex-item" id="paging" slot="bottom" :page-size="[[5]]" data="[[$component.upcomingdataSource75]]">
+                </oj-paging-control>
+    <!-- /ko -->
+    <!-- ko if: $component.accountsListLoaded() && $component.upcoming() && !$component.upcomingdatasource().length > 0 -->
+    <div class="oj-flex-item oj-sm-12 oj-lg-12 center">
+        <img class="no-installments-image" data-bind="loadImage:'dashboard/currency-sweeps.svg'">
+        <div data-bind="text:$component.nls.InstallmentsDue.noupcomingData"></div>
+    </div>
+    <!-- /ko -->
+</div>

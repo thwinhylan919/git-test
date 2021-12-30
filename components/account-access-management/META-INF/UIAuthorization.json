@@ -1,0 +1,102 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.access.service.account.party.PartyAccountAccess",
+			"components": [{
+					"componentName": "access-management-base",
+					"service": "read",
+					"perform": "validation#party-validate#summary#account-transactions-mapping#confirmation#mapping-modules#party-access-exclusion"
+				},
+				{
+					"componentName": "access-management-base",
+					"service": "create",
+					"perform": "validation#party-validate#summary#account-transactions-mapping#confirmation#mapping-modules#party-access-exclusion#review-party-access-management#transaction-selection",
+					"approve": "review-party-access-management"
+				},
+				{
+					"componentName": "access-management-base",
+					"service": "update",
+					"perform": "review-party-access-management#transaction-selection",
+					"approve": "review-party-access-management"
+				}, {
+					"componentName": "access-management-base",
+					"service": "delete"
+				}
+			]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.access.service.account.linkedParty.LinkedPartyAccountAccess",
+			"components": [{
+					"componentName": "access-management-base",
+					"service": "read",
+					"perform": "validation#party-validate#summary#account-transactions-mapping#confirmation#mapping-modules#linked-party-access-exclusion"
+				},
+				{
+					"componentName": "access-management-base",
+					"service": "create",
+					"perform": "validation#party-validate#summary#account-transactions-mapping#confirmation#mapping-modules#linked-party-access-exclusion#transaction-selection#review-linked-party-access-management",
+					"approve": "review-linked-party-access-management"
+				},
+				{
+					"componentName": "access-management-base",
+					"service": "update",
+					"perform": "review-linked-party-access-management#transaction-selection",
+					"approve": "review-linked-party-access-management"
+				},
+				{
+					"componentName": "access-management-base",
+					"service": "delete"
+				}
+			]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.access.service.account.party.user.UserAccountAccess",
+			"components": [{
+					"componentName": "user-access-management-base",
+					"service": "read",
+					"perform": "validation#user-list-details#summary#party-validate#account-transactions-mapping#confirmation#mapping-modules#user-access-exclusion"
+				},
+				{
+					"componentName": "user-access-management-base",
+					"service": "create",
+					"perform": "validation#user-list-details#summary#party-validate#account-transactions-mapping#confirmation#mapping-modules#user-access-exclusion#review-user-access-management#transaction-selection",
+					"approve": "review-user-access-management"
+				},
+				{
+					"componentName": "user-access-management-base",
+					"service": "update",
+					"perform": "review-user-access-management#transaction-selection",
+					"approve": "review-user-access-management"
+				},
+				{
+					"componentName": "user-access-management-base",
+					"service": "delete"
+				}
+			]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.access.service.account.linkedParty.user.LinkedUserAccountAccess",
+			"components": [{
+					"componentName": "user-access-management-base",
+					"service": "read",
+					"perform": "validation#party-validate#summary#account-transactions-mapping#confirmation#mapping-modules#linked-user-access-exclusion"
+				},
+				{
+					"componentName": "user-access-management-base",
+					"service": "create",
+					"perform": "validation#party-validate#summary#account-transactions-mapping#confirmation#mapping-modules#linked-user-access-exclusion#review-linked-user-access-management#transaction-selection",
+					"approve": "review-linked-user-access-management"
+				},
+				{
+					"componentName": "user-access-management-base",
+					"service": "update",
+					"perform": "review-linked-user-access-management#transaction-selection",
+					"approve": "review-linked-user-access-management"
+				},
+				{
+					"componentName": "user-access-management-base",
+					"service": "delete"
+				}
+			]
+		}
+	]
+}

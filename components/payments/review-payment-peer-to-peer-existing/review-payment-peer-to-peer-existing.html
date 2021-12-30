@@ -1,0 +1,56 @@
+<div class="form-main-container">
+    <!-- ko ifnot:$component.params.mode -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : $baseModel.format($component.resource.common.reviewHeaderMsg, {txnName : $component.resource.payments.txnname})}}"></div>
+    <!-- /ko -->
+
+    <!-- ko if:$component.loadData() -->
+    <page-section class="review" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div data-bind="with:p2ppaymentData">
+            <!-- ko if:$component.imageUploadFlag() -->
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+                <oj-label class="oj-flex-item oj-lg-12 oj-sm-12" for="previewImage">
+                    <span data-bind="text: $component.resource.payments.peertopeer.transferto"></span>
+                </oj-label>
+                <div class="oj-flex oj-flex-item">
+                    <oj-avatar id="previewImage" role="img" size="xs" initials='[[$component.payeeDetails().initials]]' src='[[$component.payeeDetails().preview?$component.payeeDetails().preview():""]]' data-bind="attr:{'aria-label':$component.resource.payments.peertopeer.transferto}">
+                    </oj-avatar>
+                    <div class="oj-label-inline oj-flex-item">
+                        <span data-bind="text:$component.payeeDetails().payeeNickName"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot:$component.imageUploadFlag() -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.payments.peertopeer.transferto ,
+                     value :$component.payeeDetails().payeeNickName"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.payments.payvia ,
+                     value :$component.resource.payments.transfermode[transferMode]"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.payments.peertopeer.transferValue ,
+                     value :transferValue"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.payments.peertopeer.amount ,
+                 value :$formatter.formatCurrency(transferDetails.amount.amount,transferDetails.amount.currency),dataClass :'highlight-text'"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.payments.peertopeer.transferfrom ,
+                 value :transferDetails.debitAccountId.displayValue"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.payments.peertopeer.note ,
+                 value :transferDetails.remarks"></row>
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- ko ifnot:$component.params.mode -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary " id="verifyPaymentbutton" on-click="[[$component.params.retainedData.verifyPayment]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.resource.common.confirm"></span>
+        </oj-button>
+        <!-- ko if: $baseModel.large() -->
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.common.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>

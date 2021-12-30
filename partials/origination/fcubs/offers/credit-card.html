@@ -1,0 +1,96 @@
+<div class="oj-flex oj-flex-items-pad">
+	<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-5">
+		<div class="oj-flex">
+			<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 details-header">
+				<oj-label class="details-text"><span data-bind="text:$component.resource.casa.facilities"></span>
+				</oj-label>
+			</div>
+			<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 facilities-values">
+				<div class="oj-flex oj-flex-items-pad">
+					<!-- ko if:offerDetailsDTO.standardFeatureDTO.balanceTransferAllowed -->
+					<div class="">
+						<span class="icons icon-check"></span>
+					</div>
+					<div class="oj-flex-item">
+						<div class="details-text" data-bind="text:$component.resource.creditCard.balanceTransferAllowed"></div>
+					</div>
+					<!-- /ko  -->
+				</div>
+				<!-- ko if:offerDetailsDTO.pictureCard -->
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="">
+						<span class="icons icon-check"></span>
+					</div>
+					<div class="oj-flex-item">
+						<div class="details-text" data-bind="text:$component.resource.creditCard.pictureCardAllowed"></div>
+					</div>
+				</div>
+				<!-- /ko  -->
+				<!-- ko if:offerDetailsDTO.standardFeatureDTO.addOnCardAllowed -->
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="">
+						<span class="icons icon-check"></span>
+					</div>
+					<div class="oj-flex-item">
+						<div class="details-text" data-bind="text:$component.resource.creditCard.addOnCardAllowed"></div>
+					</div>
+				</div>
+				<!-- /ko  -->
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-7">
+
+		<div class="oj-flex oj-flex-items-pad">
+			<!-- ko if: offerDetailsDTO.creditCardLimitDetailDTOList[0].minimumCreditLimit -->
+			<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+				<div class="oj-flex">
+					<div class="oj-flex-item oj-sm-12">
+						<oj-label class="details-header"><span
+								data-bind="text:$component.resource.creditCard.minCreditLimit"></span>
+						</oj-label>
+					</div>
+					<div class="oj-flex-item oj-sm-12">
+						<span class="details-text-value"
+							data-bind="text: $formatter.formatCurrency(offerDetailsDTO.creditCardLimitDetailDTOList[0].minimumCreditLimit, offerDetailsDTO.allowedCurrencies[selectedCurrencyIndex])"></span>
+					</div>
+				</div>
+			</div>
+			<!-- /ko  -->
+			<!-- ko if: offerDetailsDTO.creditCardLimitDetailDTOList[0].maximumCreditLimit -->
+			<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+				<div class="oj-flex">
+					<div class="oj-flex-item oj-sm-12">
+						<oj-label class="details-header"><span
+								data-bind="text:$component.resource.creditCard.maxCreditLimit"></span>
+						</oj-label>
+					</div>
+					<div class="oj-flex-item oj-sm-12">
+						<span class="details-text-value"
+							data-bind="text: $formatter.formatCurrency(offerDetailsDTO.creditCardLimitDetailDTOList[0].maximumCreditLimit, offerDetailsDTO.allowedCurrencies[selectedCurrencyIndex])"></span>
+					</div>
+				</div>
+			</div>
+			<!-- /ko  -->
+
+			<!-- ko if: offerDetailsDTO.standardFeatureDTO.maximumAddOnCard -->
+			<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+				<div class="oj-flex">
+					<div class="oj-flex-item oj-sm-12">
+						<oj-label class="details-header"><span
+								data-bind="text:$component.resource.creditCard.maxAddOnCardAllowed"></span>
+						</oj-label>
+					</div>
+					<div class="oj-flex-item oj-sm-12">
+						<span class="details-text-value" data-bind="text: offerDetailsDTO.standardFeatureDTO.maximumAddOnCard"></span>
+					</div>
+				</div>
+			</div>
+			<!-- /ko  -->
+
+			
+		</div>
+	</div>
+</div>

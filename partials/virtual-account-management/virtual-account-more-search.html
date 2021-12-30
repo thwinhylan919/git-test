@@ -1,0 +1,75 @@
+<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    <page-section params="baseModel : $baseModel, rootModel : $data">
+        <div class="oj-flex oj-flex-items-pad search-account-container">
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label><span
+                                data-bind="attr:{id:'AccountName'},text: $component.resource.searchAccountName"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                        <oj-input-text id="searchAccountName" :aria-label="[[$component.resource.searchAccountName]]"
+                            value="{{$component.virtualAccountName}}">
+                        </oj-input-text>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                <div class="oj-flex oj-flex-items-pad grid-row-group">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label><span
+                                data-bind="attr:{id:'templateName'},text: $component.resource.searchEntityName"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-8">
+                        <oj-input-text id="searchEntityName" :aria-label="[[$component.resource.searchEntityName]]"
+                            value="{{virtualEntityName}}">
+                        </oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad search-account-container">
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="VALinkage"><span
+                                data-bind="text:$component.resource.virtaulAccountLinkage"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                        <oj-select-one id="VALinkage" value="{{$component.selectedVALinakageValue}}"
+                            :placeholder="{{$component.resource.filterPlaceholder}}" required>
+                            <!-- ko foreach: $component.accountLinkageValue -->
+                            <oj-option value=[[id]]><span data-bind="text:description"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="status"><span data-bind="text:$component.resource.status"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                        <oj-select-one id="status" value="{{$component.selectedStatusValue}}"
+                            :placeholder="{{$component.resource.filterPlaceholder}}" required>
+                            <!-- ko foreach: $component.statusValue -->
+                            <oj-option value=[[id]]><span data-bind="text:description"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <a href="#" attr="{'id':'hideMoreSearch'}" data-bind="click: $component.hideMoreSearch">
+                    <span data-bind="text: $component.resource.hideMoreSearch"></span>
+                    <span class="icon icon-arrow-up"></span>
+                </a>
+            </div>
+        </div>
+    </page-section>
+</div>

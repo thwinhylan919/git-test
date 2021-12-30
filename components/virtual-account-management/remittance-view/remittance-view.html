@@ -1,0 +1,242 @@
+<!-- ko ifnot: $component.review() -->
+<div class="remittance-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+        <oj-label><span data-bind="text: $component.realCustomerName"></span></oj-label>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+        <oj-label><span data-bind="text: $component.resource.remitterListIdHeader"></span></oj-label>
+        <div data-bind="text: $component.remittanceViewDTO.remitterListId"></div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-3">
+        <oj-label><span data-bind="text: $component.resource.remitterListIdNameHeader"></span></oj-label>
+        <div data-bind="text: $component.remitterDesc"></div>
+    </div>
+</div>
+<div class="oj-flex form-main-container">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+        <!-- ko ifnot: $component.editMode() -->
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.remitterListHeader ">
+            <div class="row-group">
+                <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.status , value :$component.recordStatus">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.remitterID , value :$component.remittanceViewDTO.remitterId">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.from , value :$formatter.formatDate($component.remittanceViewDTO.validityStartDate)">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.to , value : $formatter.formatDate($component.remittanceViewDTO.validityEndDate)">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.reconciliationInformation, value :$component.remittanceViewDTO.reconInfo">
+                </row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.additionalInformation , value :$component.remittanceViewDTO.additionalInfo">
+                </row>
+            </div>
+        </page-section>
+        <!-- /ko -->
+        <!-- ko if: $component.editMode() -->
+        <page-section params="baseModel : $baseModel, rootModel : $component">
+            <!-- ko if: $component.recordStatusTemplateLoaded -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label for="status">
+                        <span data-bind="text:$component.resource.status"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-select-one id="status" value="{{$component.editRemittanceViewDTO().recordStatus}}">
+                        <!-- ko foreach: $component.recordStatusList -->
+                        <oj-option value=[[code]]>
+                            <span data-bind="text:description"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <oj-label><span data-bind="text: $component.resource.remitterID"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5">
+                    <span id="remitterId" :aria-label="[[$component.resource.remitterID]]" data-bind="text: $component.editRemittanceViewDTO().remitterId">
+                    </span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 extra-padding">
+                    <oj-label for="fromDate">
+                        <span data-bind="text:$component.resource.from"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                    <oj-input-date id="fromDate" value="{{$component.editRemittanceViewDTO().validityStartDate}}" converter="[[$formatter.dateConverter]]" on-value-changed="[[$component.fromDateChanged.bind($data)]]">
+                    </oj-input-date>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 extra-padding">
+                    <oj-label for="endDate">
+                        <span data-bind="text:$component.resource.to"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+                    <oj-input-date id="endDate" value="{{$component.editRemittanceViewDTO().validityEndDate}}" converter="[[$formatter.dateConverter]]" min="[[$component.minDate()]]">
+                    </oj-input-date>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 label">
+                    <oj-label for="reconciliationInformation">
+                        <span data-bind="text:$component.resource.reconciliationInformation"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 label">
+                    <oj-input-text id="reconciliationInformation" value="{{$component.editRemittanceViewDTO().reconInfo}}">
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 label">
+                    <oj-label for="additionalInformation">
+                        <span data-bind="text:$component.resource.additionalInformation"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-5 label">
+                    <oj-input-text id="additionalInformation" value="{{$component.editRemittanceViewDTO().additionalInfo}}">
+                    </oj-input-text>
+                </div>
+            </div>
+        </page-section>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item  button-container">
+                    <oj-button class="action-button-primary" on-click="[[$component.save]]">
+                        <span slot="startIcon" class="icons icon-submit"></span>
+                        <span data-bind="text:$component.resource.save"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                        <span slot="startIcon" class="icons icon-cancel"></span>
+                        <span data-bind="text:$component.resource.cancel"></span>
+                    </oj-button>
+                    <oj-button class="action-button-tertiary" on-click="[[backToView]]">
+                        <span slot="startIcon" class="icons icon-back-arrow"></span>
+                        <span data-bind="text:$component.resource.back"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.editMode() -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="button-container search-buttons">
+                <!-- ko if:$component.remittanceViewDTO.recordStatus === "O" || $component.remittanceViewDTO.recordStatus === "I" -->
+                <oj-button class="action-button-primary" on-click="[[$component.edit]]">
+                    <span slot="startIcon" class="icons icon-remarks"></span>
+                    <span data-bind="text:$component.resource.edit"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.deleteConfirm]]">
+                    <span slot="startIcon" class="icons icon-delete"></span>
+                    <span data-bind="text:$component.resource.delete"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[backToSearch]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if:$component.remittanceViewDTO.recordStatus === "C" -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[backToSearch]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'remittance-view-template'"></help>
+    </div>
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $component, id:'remittanceDelete', header: $component.resource.delete">
+    <div class="message-box">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <div class="dialog-text">
+                    <span data-bind="text:$component.resource.askForDelete"></span>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="yesButton" class="action-button-primary" on-click="[[deleteRemittance]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resource.yes"></span>
+            </oj-button>
+            <oj-button id="noButton" class="action-button-secondary" on-click="[[doNotDelete]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.no"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>
+<!-- /ko -->
+<!-- ko if: $component.review() -->
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.bannerMessage}}">
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-items-pad search-remitter-container-edit">
+            <div class="oj-flex-item oj-sm-12 label">
+                <oj-label><span data-bind="text: $dashboard.userData.userProfile.accessibleEntityDTOs[0].partyName"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-5 oj-md-5">
+                <span data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></span>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+        <div class="row-group">
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.remitterListIdHeader , value :$component.editRemittanceViewDTO().remitterListId">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.remitterListIdNameHeader , value :$component.remitterDesc">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.status , value :$component.recordStatus">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.remitterID , value :$component.editRemittanceViewDTO().remitterId">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.valid"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.from , value :$component.editRemittanceViewDTO().validityStartDate">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.to , value : $component.editRemittanceViewDTO().validityEndDate">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.resource.reconciliationInformation, value :$component.editRemittanceViewDTO().reconInfo">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.additionalInformation , value :$component.editRemittanceViewDTO().additionalInfo">
+            </row>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item  button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+                    <span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.resource.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.backFromReview]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span></oj-button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

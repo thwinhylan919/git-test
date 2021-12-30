@@ -1,0 +1,413 @@
+<!-- ko if: dataFetched1() -->
+<!-- ko if: !$dashboard.userData.firstLoginFlowDone -->
+<div data-bind="component:{name: 'user-login-configuration-header',
+  params:{rootModel: $component,data: $data}}">
+</div>
+<!-- /ko -->
+<div class="form-main-container profile">
+	<!-- ko if: $dashboard.appData.segment !=="RETAIL" -->
+
+	<div class="profile-header oj-flex oj-flex-items-pad">
+		<div class="oj-flex-item oj-sm-12 oj-md-6">
+			<img class="profile-image" data-bind="loadImage : 'corp/common/user management.svg'"></img>
+			<span class="profile-name" data-bind="text:$component.partyData().fullName"></span>
+		</div>
+		<!--div class="oj-flex-item oj-sm-12 oj-md-6 profile-header__link right"
+			data-bind="css: !$baseModel.small() ? 'right' : ''">
+			<a href="#" class=""
+				data-bind="attr:{'alt':$component.nls.download ,'title':$component.nls.downloadFile,'aria-label':$component.nls.downloadFile}, click: $component.downloadPartyDetails ">
+				<span class="icons icon-download"></span>
+				<span data-bind="text:$component.nls.downloadFile">
+				</span>
+			</a>
+		</div-->
+	</div>
+
+	<page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.personalInformation">
+
+		<div class="oj-flex oj-flex-items-pad">
+			<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+				<oj-label for="">
+					<span data-bind="text:nls.dob"></span>
+				</oj-label>
+			</div>
+			<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="oj-flex-item">
+						<span data-bind="text:$formatter.formatDate(partyData().birthDate)"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</page-section>
+	<page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.contactInformation">
+		<div class="oj-flex oj-flex-items-pad">
+			<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+				<oj-label for="">
+					<span data-bind="text: nls.address"></span>
+				</oj-label>
+			</div>
+			<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="oj-flex-item">
+						<span data-bind="text:address()"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="oj-flex oj-flex-items-pad">
+			<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+				<oj-label for="">
+					<span data-bind="text: nls.email"></span>
+				</oj-label>
+			</div>
+			<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="oj-flex-item">
+						<span data-bind="text:partyData().email"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="oj-flex oj-flex-items-pad">
+			<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+				<oj-label for="">
+					<span data-bind="text: nls.phone"></span>
+				</oj-label>
+			</div>
+			<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="oj-flex-item">
+						<span data-bind="text: phoneNumber()"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</page-section>
+
+	<!-- /ko -->
+	<!-- ko if: $dashboard.appData.segment ==="RETAIL" -->
+	<!-- ko if: $component.showConfirmation() -->
+	<div class="confirm-screen"
+		data-bind="template: { name: 'confirm-screen/confirm-screen-banner', data: $component.headerMessages}"></div>
+	<!-- /ko -->
+	<div class="profile-header oj-flex oj-flex-items-pad">
+		<div class="oj-flex-item oj-sm-12 oj-md-6">
+			<img class="profile-image" data-bind="loadImage : 'corp/common/user management.svg'"></img>
+			<span class="profile-name" data-bind="text:$component.partyData().fullName"></span>
+		</div>
+		<!--div class="oj-flex-item oj-sm-12 oj-md-6 profile-header__link right"
+			data-bind="css: !$baseModel.small() ? 'right' : ''">
+			<a href="#" class=""
+				data-bind="attr:{'alt':$component.nls.download ,'title':$component.nls.downloadFile,'aria-label':$component.nls.downloadFile}, click: $component.downloadPartyDetails ">
+				<span class="icons icon-download"></span>
+				<span data-bind="text:$component.nls.downloadFile">
+				</span>
+			</a>
+		</div-->
+	</div>
+	<page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.personalInformation">
+		<div class="oj-flex oj-flex-items-pad">
+			<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+				<oj-label for="">
+					<span data-bind="text:nls.dob"></span>
+				</oj-label>
+			</div>
+			<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+				<div class="oj-flex oj-flex-items-pad">
+					<div class="oj-flex-item">
+						<span data-bind="text: $formatter.formatDate($component.partyData().birthDate)"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ko foreach:attributeList().personalDetails -->
+		<span data-bind="attr:{id:'blocktoshow_'+ fieldName }">
+
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="">
+						<span data-bind="text:displayValue"></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<div class="oj-flex oj-flex-items-pad">
+						<div class="oj-flex-item">
+							<span
+								data-bind="text: $component.partyData()[fieldName]?($component.partyData()[fieldName].displayValue ? $component.partyData()[fieldName].displayValue : $component.partyData()[fieldName]):''"></span>
+						</div>
+					</div>
+				</div>
+				<!-- ko if: editable -->
+				<!-- ko ifnot: $component.disableEdit -->
+				<a href="#"
+					data-bind="click:$component.edit.bind($data,fieldName,$component.partyData()[fieldName]), attr:{'alt':$component.nls.phone, 'title' : $component.nls.update ,'aria-label':$component.nls.update}">
+					<span class="oj-lg-3 oj-flex-item icon icon-remarks"></span>
+				</a>
+				<!-- /ko -->
+				<!-- ko if: $component.disableEdit -->
+				<a href="#"
+					data-bind="attr:{'alt':$component.nls.phone, 'title' : $component.nls.update ,'aria-label':$component.nls.update}">
+					<span class="oj-lg-3 oj-flex-item icon icon-remarks"></span>
+				</a>
+				<!-- /ko -->
+				<!-- /ko -->
+			</div>
+		</span>
+		<div data-bind="attr:{id:'blockdetails_'+fieldName}" class="hide banner-update">
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label :for="[[fieldName]]">
+						<span data-bind="text:displayValue "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text :id="[[fieldName]]"  value="{{$component.attributeValue}}"
+						:aria-label="[[displayValue]]"></oj-input-text>
+				</div>
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label>
+						<span class="hide" data-bind="text:displayValue "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item">
+					<oj-button id="save" class="action-button-primary" on-click="[[$component.save]]">
+						<span slot="startIcon" class="icons icon-save"></span>
+						<span data-bind="text:$component.nls.save"></span>
+					</oj-button>
+					<oj-button id="cancel" class="action-button-secondary"
+						on-click="[[$component.hideUpdatedDetails.bind($data, [[fieldName]])]]">
+						<span slot="startIcon" class="icons icon-cancel"></span>
+						<span data-bind="text:$component.nls.cancel"></span>
+					</oj-button>
+				</div>
+			</div>
+		</div>
+
+		<!-- /ko -->
+
+	</page-section>
+
+	<page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.contactInformation">
+		<!-- ko foreach:attributeList().contactDetails -->
+		<!-- ko if: !(fieldName === 'PHONEISDNO' || fieldName === 'FAXISDNO') -->
+		<span data-bind="attr:{id:'blocktoshow_'+ fieldName }">
+
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="">
+						<span data-bind="text:displayValue"></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<div class="oj-flex oj-flex-items-pad">
+						<div class="oj-flex-item">
+							<span data-bind="text: $component.partyData()[fieldName]"></span>
+						</div>
+					</div>
+				</div>
+				<!-- ko if: editable -->
+				<!-- ko ifnot: $component.disableEdit -->
+				<a href="#"
+					data-bind="click:$component.edit.bind($data,fieldName,$component.partyData()[fieldName]), attr:{'alt':displayValue, 'title' : $component.nls.update ,'aria-label':$component.nls.update}">
+					<span class="oj-lg-3 oj-flex-item icon icon-remarks"></span>
+				</a>
+				<!-- /ko -->
+				<!-- ko if: $component.disableEdit -->
+				<a href="#"
+					data-bind="attr:{'alt':displayValue, 'title' : $component.nls.update ,'aria-label':$component.nls.update}">
+					<span class="oj-lg-3 oj-flex-item icon icon-remarks"></span>
+				</a>
+				<!-- /ko -->
+
+				<!-- /ko -->
+			</div>
+		</span>
+		<!-- ko if: fieldName!== 'ADDRESS' -->
+
+		<div data-bind="attr:{id:'blockdetails_'+fieldName}" class="hide banner-update">
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label :for="[[fieldName]]">
+						<span data-bind="text:displayValue "></span>
+					</oj-label>
+				</div>
+				<!-- ko if: fieldName === 'FAXNO' && $component.isFaxIsdSupport() -->
+				<div class="oj-flex-item oj-sm-2 oj-md-3 oj-lg-1">
+					<oj-input-text :id="[[fieldName]]"  value="{{$component.faxNumber().areaCode}}"
+						:aria-label="[[displayValue]]"></oj-input-text>
+				</div>
+				<div class="oj-flex-item oj-sm-4 oj-md-5 oj-lg-5">
+					<oj-input-text :id="[[fieldName]]"  value="{{$component.faxNumber().number}}"
+						:aria-label="[[displayValue]]"></oj-input-text>
+				</div>
+				<!-- /ko -->
+				<!-- ko if: fieldName === 'PHONENO' && $component.isMobileIsdSupport() -->
+				<div class="oj-flex-item oj-sm-2 oj-md-3 oj-lg-1">
+					<oj-input-text :id="[[fieldName]]"  value="{{$component.phoneNumber().areaCode}}"
+						:aria-label="[[displayValue]]"></oj-input-text>
+				</div>
+				<div class="oj-flex-item oj-sm-4 oj-md-5 oj-lg-5">
+					<oj-input-text :id="[[fieldName]]"  value="{{$component.phoneNumber().number}}"
+						:aria-label="[[displayValue]]"></oj-input-text>
+				</div>
+				<!-- /ko -->
+				<!-- ko if: !((fieldName === 'PHONENO' && $component.isMobileIsdSupport())  || (fieldName === 'FAXNO' && $component.isFaxIsdSupport())) -->
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text :id="[[fieldName]]"  value="{{$component.attributeValue}}"
+						:aria-label="[[displayValue]]"></oj-input-text>
+				</div>
+				<!-- /ko -->
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label>
+						<span class="hide" data-bind="text:displayValue "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item">
+					<oj-button class="action-button-primary" on-click="[[$component.save]]">
+						<span slot="startIcon" class="icons icon-save"></span>
+
+						<span data-bind="text:$component.nls.save"></span>
+					</oj-button>
+					<oj-button class="action-button-secondary"
+						on-click="[[$component.hideUpdatedDetails.bind($data, [[fieldName]])]]">
+						<span slot="startIcon" class="icons icon-cancel"></span>
+						<span data-bind="text:$component.nls.cancel"></span>
+					</oj-button>
+				</div>
+			</div>
+		</div>
+		<!-- /ko -->
+		<!-- ko if: fieldName=== 'ADDRESS'-->
+		<div data-bind="attr:{id:'blockdetails_'+'ADDRESS'}" class="hide banner-update">
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="addressLine1">
+						<span data-bind="text:$component.nls.address "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text id="addressLine1"  value="{{$component.fullAddress().line1}}"
+						:aria-label="[[ $component.nls.line1]]"></oj-input-text>
+				</div>
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="addressLine2">
+						<span class="hide" data-bind="text:$component.nls.address "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text id="addressLine2"  value="{{$component.fullAddress().line2}}"
+						:aria-label="[[ $component.nls.line2]]"></oj-input-text>
+				</div>
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="addressLine3">
+						<span class="hide" data-bind="text:$component.nls.address "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text id="addressLine3"  value="{{$component.fullAddress().line3}}"
+						:aria-label="[[ $component.nls.line3]]"></oj-input-text>
+				</div>
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="city">
+						<span data-bind="text:$component.nls.city "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text id="city"  value="{{$component.fullAddress().city}}"
+						:aria-label="[[ $component.nls.city]]"></oj-input-text>
+				</div>
+			</div>
+
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="country">
+						<span data-bind="text:$component.nls.country "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-select-one id="country" :placeholder="[[$component.nls.country]]"
+						:invalidcomponenttracker="[[$component.validationTracker]]"
+						:aria-label="[[ $component.nls.country]]" value="{{$component.country}}">
+						<!-- ko foreach: $component.countries -->
+						<oj-option value="{{value}}">
+							<span data-bind="text:text"></span>
+						</oj-option>
+						<!-- /ko -->
+					</oj-select-one>
+				</div>
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label for="pincode">
+						<span data-bind="text:$component.nls.pincode "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item oj-sm-6 oj-md-8 oj-lg-6">
+					<oj-input-text id="pincode"  value="{{$component.fullAddress().postalCode}}"
+						:aria-label="[[ $component.nls.pincode]]"></oj-input-text>
+				</div>
+			</div>
+			<div class="oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-sm-5 oj-md-3 oj-lg-3">
+					<oj-label>
+						<span class="hide" data-bind="text:$component.nls.address "></span>
+					</oj-label>
+				</div>
+				<div class="oj-flex-item">
+					<oj-button class="action-button-primary" on-click="[[$component.save]]">
+						<span slot="startIcon" class="icons icon-save"></span>
+
+						<span data-bind="text:$component.nls.save"></span>
+					</oj-button>
+					<oj-button class="action-button-secondary"
+						on-click="[[$component.hideUpdatedDetails.bind($data, 'ADDRESS')]]">
+						<span slot="startIcon" class="icons icon-cancel"></span>
+						<span data-bind="text:$component.nls.cancel"></span>
+					</oj-button>
+				</div>
+			</div>
+		</div>
+		<!-- /ko -->
+		<!-- /ko -->
+		<!-- /ko -->
+
+	</page-section>
+
+
+	<!-- /ko -->
+
+	<!-- ko if: $dashboard.userData.firstLoginFlowDone -->
+	<div class="oj-flex oj-flex-items-pad button-container">
+		<oj-button id="ok" class="action-button-primary" on-click="[[$dashboard.hideDetails]]">
+			<span slot="startIcon" class="icons icon-ok"></span>
+			<span data-bind="text:nls.ok"></span>
+		</oj-button>
+
+	</div>
+	<!-- /ko -->
+	<!-- ko if: !$dashboard.userData.firstLoginFlowDone -->
+	<div class="oj-flex oj-flex-items-pad button-container">
+		<oj-button id="next" class="action-button-primary" on-click="[[$component.loadNextComponent]]">
+			<span data-bind="text:nls.next"></span>
+		</oj-button>
+		<!-- ko ifnot : componentMandatory -->
+		<oj-button class="action-button-secondary " on-click="[[$component.loadNextComponent]]"><span slot="startIcon"
+				class="icons icon-forward-arrow"></span>
+			<span data-bind="text:nls.skip"></span>
+		</oj-button>
+		<!-- /ko -->
+	</div>
+	<!-- /ko -->
+</div>
+<!-- /ko -->

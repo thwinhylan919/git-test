@@ -1,0 +1,49 @@
+.fundreports {
+    .message-banner {
+        @include single-border(top, 0.05rem solid var(--banner-background));
+    }
+    .message-margin {
+        margin: 0.6rem 0;
+    }
+    .corner-border {
+        @include single-border(right, 0.05rem solid var(--banner-background));
+    }
+    .top-border {
+        @include single-border(top, 0.05rem solid var(--banner-background));
+    }
+    .legend-height {
+        height: 1.4rem;
+        width: 5.8rem;
+    }
+    .margin-box {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .investment-button-margin {
+        margin: auto;
+    }
+    .big-text {
+        font-size: var(--base-font-size-larger);
+    }
+    .padding-message {
+        padding: 0.5rem;
+    }
+    .padding-panel {
+        padding: 0;
+    }
+    .medium-text {
+        font-size: var(--base-font-size-default);
+    }
+    .small-text {
+        font-size: var(--base-font-size-small);
+    }
+    .termsConditionsText {
+        @include padding(0, 0, 0, 0.5rem);
+    }
+}
+
+.popup-width {
+    max-width: 15rem;
+    padding-bottom: 0.625rem;
+    line-height: 1.43rem;
+}

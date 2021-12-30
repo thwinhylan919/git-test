@@ -1,0 +1,7 @@
+{
+    "currencyList": [{
+        "code": "GBP",
+        "description": "Great Britain Pound",
+        "type": "PC"
+    }]
+}

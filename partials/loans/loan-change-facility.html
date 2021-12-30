@@ -1,0 +1,36 @@
+<!-- <modal-window params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'chooseFacility', header : $component.nls.heading.ChooseFacility"> -->
+      <page-section params="baseModel : $baseModel, rootModel : $component, heading :''">
+ <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item ">
+                <div data-bind="text:$component.nls.ChangeFacility.Selectcreditfacilitytoinitiateloandrawdownrequest"></div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12"><label data-bind="text:$component.nls.ChangeFacility.FacilityID"></label></div><!--  ko if : $component.liabilityliabilityIdfacilitygetVar()  -->
+            <div class="oj-flex-item oj-lg-12">
+                <oj-select-one :id="[['FacilityID52']]" value="{{facilityId}}" on-value-changed="[[facilityChangeHandler]]">
+                    <!-- ko foreach : $component.liabilityliabilityIdfacilitygetVar().facilitydtos -->
+                    <oj-option value="[[lineCodeNew]]"><span data-bind="text:lineCodeNew"></span></oj-option><!-- /ko -->
+                </oj-select-one>
+            </div><!--  /ko  -->
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12"><label data-bind="text:$component.nls.ChangeFacility.FundingType"></label></div><!--  ko if : $component.selectedFacility()  -->
+            <div class="oj-flex-item oj-lg-12">
+                <div data-bind="text:$component.selectedFacility().categoryDesc"></div>
+            </div><!--  /ko  -->
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <!--  ko if : $component.selectedFacility()  -->
+            <div class="oj-flex-item oj-lg-12"><label data-bind="text:$component.nls.ChangeFacility.AvailableAmount"></label></div><!--  /ko  -->
+            <!--  ko if : $component.selectedFacility()  -->
+            <div class="oj-flex-item oj-lg-12">
+                <div data-bind="text:$formatter.formatCurrency($component.selectedFacility().availableAmount.amount, $component.selectedFacility().availableAmount.currency)"></div>
+            </div><!--  /ko  -->
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.proceed]]"><span slot="startIcon" class="icon icon-forward-arrow"></span><span data-bind="text:$component.nls.ChangeFacility.Proceed"></span></oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.cancel]]"><span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.nls.ChangeFacility.Cancel"></span></oj-button>
+        </div>
+    </page-section>
+    <!-- </modal-window> -->

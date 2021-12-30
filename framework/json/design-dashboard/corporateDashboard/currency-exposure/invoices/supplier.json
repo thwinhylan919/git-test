@@ -1,0 +1,86 @@
+{
+
+    "invoices": [{
+        "version": 1,
+        "generatedPackageId": false,
+        "auditSequence": 1,
+        "invoiceId": "INV129190",
+        "shipmentDate": "2020-03-30T00:00:00",
+        "amount": {
+            "currency": "GBP",
+            "amount": 16000.00
+        },
+        "supplierName": "HP INDUSTRIES",
+        "discountPercentage": 0.00,
+        "invoiceStatus": "RAISED",
+        "invoiceDueDate": "2020-04-30T00:00:00",
+        "invoiceDate": "2019-11-22T00:00:00",
+        "poNumber": "PO89012344",
+        "paymentTerms": "no terms",
+        "taxPercentage": 0.00,
+        "purchaseOrderDate": "2019-11-12T00:00:00",
+        "totalAmount": {
+            "currency": "GBP",
+            "amount": 16000.00
+        },
+        "invoiceNumber": "INVHDFCOBDX8911",
+        "paymentStatus": "UNPAID",
+        "supplierId": {
+            "displayValue": "***227",
+            "value": "9731C72BC60988FD351DBB81ACEF530168970F2F84EF"
+        },
+        "taxAmount": 0.00,
+        "discountAmount": 0.00,
+        "outstandingAmount": {
+            "currency": "GBP",
+            "amount": 16000.00
+        },
+        "acceptanceAmount": {
+            "currency": "GBP",
+            "amount": 0.00
+        },
+        "associatedParty": {
+            "version": 1,
+            "generatedPackageId": false,
+            "auditSequence": 1,
+            "id": {
+                "displayValue": "***000111",
+                "value": "E942C129C40E53D7A48A92AF546DFE906C9932A5AB3C1469B36D"
+            },
+            "address": {
+                "line1": "test",
+                "line2": "test",
+                "city": "AL",
+                "country": "US",
+                "zipCode": "2009"
+            },
+            "name": "nehcp3008"
+        },
+        "program": {
+            "version": 1,
+            "generatedPackageId": false,
+            "auditSequence": 1,
+            "programCode": "HPPROGRAMFIN1",
+            "programName": "HPPROGRAMFIN1",
+            "anchorId": {
+                "displayValue": "***227",
+                "value": "9731C72BC60988FD351DBB81ACEF530168970F2F84EF"
+            },
+            "programProduct": {
+                "version": 1,
+                "generatedPackageId": false,
+                "auditSequence": 1,
+                "productCode": "DELF",
+                "productType": "S"
+            },
+            "associatedParties": [],
+            "role": "S",
+            "relation": "A"
+        },
+        "financeAmount": {
+            "currency": "GBP",
+            "amount": 0.00
+        },
+        "maxFinancePercentage": 90.00
+    }]
+}

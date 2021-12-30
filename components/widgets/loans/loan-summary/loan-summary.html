@@ -1,0 +1,121 @@
+<div class="oj-panel account-summary">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-7">
+      <h3 data-bind="text:nls.pageTitle.loanSummaryTitle"></h3>
+    </div>
+    <div class="oj-flex-item oj-sm-5 right">
+      <!-- ko if:loanAccountDetaislLoaded() -->
+      <div data-bind="component:{name: 'search-box', params:{rootModel:$component ,data:datasource(),searchFields:['id.displayValue','partyName','status'],refreshReference : $component.refreshList,searchBy:$component.nls.accountSummary.search}}"></div>
+      <!-- /ko -->
+    </div>
+    <!-- ko if : $component.conventionalAccountsAvailable() && $component.islamicAccountsAvailable() -->
+    <div class="oj-flex-item oj-sm-5 right">
+      <oj-select-one value="{{$component.selectedValue}}" required on-value-changed="[[selectedAccountTypeChangedHandler]]" data-bind="attr:{id:$component.nls.accountSummary.myAccountType + $baseModel.currentIdCount(),'aria-label':$component.nls.accountSummary.myAccountType}">
+        <!-- ko foreach: typeOfAccounts -->
+        <oj-option value="[[id]]"><span data-bind="text: label"></span></oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+    <!-- /ko -->
+  </div>
+
+  <!-- ko ifnot:$baseModel.small() -->
+  <!-- ko if:loanAccountDetaislLoaded() && refreshList -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 no-pad-cols">
+      <oj-table id="LOANSummaryTable" data-id="summaryTable" :aria-label="[[$component.nls.accountSummary.accountSummary]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('loan_row_tmpl', true)]]" columns="[[[{headerText:nls.accountSummary.loanAccountDetails,sortProperty:'productName'},
+      {headerText:nls.accountSummary.partyName,sortProperty:'partyName'},
+      {headerText:nls.accountSummary.amountFinanced,headerClassName:'right',className:'right account-summary-list-items__success',sortProperty:'amountFinanced'},
+      {headerText:nls.accountSummary.outstandingBalance,headerClassName:'right',className:'right',sortProperty:'rawAvailableBalance'},
+      {headerText:nls.accountSummary.maturityDate,sortProperty:'maturityDate'}]
+    .concat($component.isAutoPay() ?[{'headerText':$component.nls.accountSummary.autoPayment, field:'autoPayment'}]:[])
+    .concat({headerText:nls.accountSummary.status,sortProperty:'status'})
+    ]]"
+        columns-default="[[{sortable:'enabled'}]]" data="[[datasource]]">
+        <caption class="hide-label" data-bind="text:$component.nls.accountSummary.accountSummary"></caption>
+      </oj-table>
+      <script type="text/html" id="loan_row_tmpl">
+        <tr>
+          <td>
+            <div data-id="prodName" data-bind="text:productDTO.name"></div>
+            <a data-id="      " href="#" data-bind="attr:{ title:  $baseModel.format($component.nls.accountSummary.linkDetails,{accountNo : id.displayValue}), alt :  $baseModel.format($component.nls.accountSummary.linkDetailsText,{accountNo : id.displayValue})},text:id.displayValue,click:$component.showAccountDetails.bind($data,$data)"></a>
+            <div data-id="accountName" data-bind="text:$baseModel.format($component.nls.accountSummary.displayContent,{nickname: $data.accountNickname ? $data.accountNickname : ''})"></div>
+          </td>
+           <td data-bind="text: partyName">
+          </td>
+                <td data-bind="text: $formatter.formatCurrency(approvedAmount.amount,approvedAmount.currency)">
+          </td>
+              <td data-bind="css:'amount',text: $formatter.formatCurrency(outstandingAmount.amount,outstandingAmount.currency)">
+          </td>
+          <td data-bind="text:  $formatter.formatDate(maturityDate)">
+          </td>
+          <!-- ko if:$component.isAutoPay() -->
+           <td>
+             <div data-bind="text:$component.nls.accountSummary.autoPaymentHeaders[paymentType]"></div>
+           </td>
+           <!-- /ko -->
+              <td data-bind="text:  $component.nls.accountSummary.statusType[status]">
+          </td>
+        </tr>
+      </script>
+
+    </div>
+    <oj-paging-control class="oj-flex-item oj-md-8 pagination" id="paging" slot="bottom" :page-size="[[5]]" data="[[datasource]]">
+    </oj-paging-control>
+    <div class="oj-flex-item oj-md-4 download right">
+      <a href="#" data-bind="attr:{ title: nls.accountSummary.downloadText},click:$component.downloadAccounts">
+        <div class="" data-bind="text:nls.accountSummary.download"></div>
+      </a>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: loanAccountDetaislLoaded -->
+  <div class="oj-flex oj-flex-items-pad noData">
+    <div class="oj-flex-item oj-sm-12 noData__text" data-bind="text:nls.accountSummary.noAccounts"></div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if:$baseModel.small() -->
+  <!-- ko if:loanAccountDetaislLoaded() -->
+  <div class="grid-main-container" params="rootModel : $data, heading : ''">
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <oj-list-view class="account-summary__list account-summary-list" id="listview" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('data-template2',true)}]]" data="[[datasource]]">
+        </oj-list-view>
+        <oj-paging-control class="oj-flex-item account-statement-details__pagination" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[5]]" data="[[datasource]]"></oj-paging-control>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 right">
+        <a href="#" data-bind="attr:{ title: nls.accountSummary.downloadText},click:$component.downloadAccounts">
+          <div class="" data-bind="text:nls.accountSummary.download"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: loanAccountDetaislLoaded -->
+  <div class="oj-flex oj-flex-items-pad noData">
+    <div class="oj-flex-item oj-sm-12 noData__text center" data-bind="text:nls.accountSummary.noAccounts"></div>
+  </div>
+  <!-- /ko -->
+  <script type="text/html" id="data-template2">
+    <li class="account-summary-list__items account-summary-list-items" data-bind="attr: {id: 'id'}">
+      <a href="#" data-bind="attr:{ title:  $baseModel.format($component.nls.accountSummary.linkDetails,{accountNo : id.displayValue}), alt :  $baseModel.format($component.nls.accountSummary.linkDetailsText,{accountNo : id})},click:$component.showAccountDetails.bind($data)">
+        <div class="oj-flex oj-flex-items-pad ">
+          <div class="oj-flex-item oj-sm-12 account-summary-list-items__description" data-bind="text:productDTO.name"></div>
+          <div class="oj-flex-item oj-sm-12 account-summary-list-items__party-id" data-bind="text : id.displayValue"></div>
+          <div class="oj-flex-item oj-sm-12 account-summary-list-items__acc-name" data-bind="text : partyName"></div>
+          <div class="oj-flex-item oj-sm-12 account-summary-list-items__ref-no-text" data-bind="text : $baseModel.format($component.nls.accountSummary.depositRateAndMaturityDate,{interestRate: $formatter.formatNumber(interestRate/100,'percent'),maturityDate:$formatter.formatDate(maturityDate)})"></div>
+          <div class="oj-flex-item oj-sm-6">
+            <span class="account-summary-list-items__bal-amt-text" data-bind="text:$component.nls.accountSummary.outstandingBalance"></span>
+          </div>
+          <div class="oj-flex-item oj-sm-6 right">
+            <span class="account-summary-list-items__amount" data-bind="text : $formatter.formatCurrency(outstandingAmount.amount,outstandingAmount.currency)"></span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </script>
+  <!-- /ko -->
+</div>

@@ -1,0 +1,7 @@
+<!-- ko if: $component.goToLogin() -->
+<div data-bind="component : {name :$component.type,params:{rootModel:$component,root:$root} }">
+</div>
+<!-- /ko -->
+<!-- ko if:!$baseModel.large() && !$component.hideMobileLanding() -->
+<mobile-landing params="baseModel : $baseModel, dashboard: $dashboard, rootModel : $component"></mobile-landing>
+<!-- /ko -->

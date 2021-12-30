@@ -1,0 +1,14 @@
+{
+    "processStatusMap": {
+        "SUBMITTED": "SUBMITTED",
+        "IN_PROGRESS": "IN_PROGRESS",
+        "DRAFT": "DRAFT",
+        "COMPLETED": "COMPLETED"
+    },
+    "products": {
+        "Equipment Loan": "EQLN",
+        "Term Loan": "TRLN",
+        "Working Capital": "WCLN",
+        "Real Estate Loan": "RELN"
+    }
+}

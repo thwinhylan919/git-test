@@ -1,0 +1,32 @@
+{
+  "elements": [
+    "html5"
+  ],
+  "rules": {
+    "close-attr": 2,
+    "close-order": 2,
+    "element-name": [
+      2,
+      {
+        "whitelist": [
+          "help",
+          "flow",
+          "row",
+          "extra"
+        ]
+      }
+    ],
+    "no-conditional-comment": 2,
+    "no-dup-class": 1,
+    "no-dup-attr": 1,
+    "no-deprecated-attr": 1,
+    "deprecated": 2,
+    "no-self-closing": 2,
+    "no-raw-characters": 1,
+    "no-redundant-role": 2,
+    "no-style-tag": 2,
+    "script-type": 2,
+    "unrecognized-char-ref": 1,
+    "element-permitted-content": 1
+  }
+}

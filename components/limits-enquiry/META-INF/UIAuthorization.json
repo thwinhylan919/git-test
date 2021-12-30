@@ -1,0 +1,29 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.common.finlimit.service.AssignedLimitPackage",
+		"components": [{
+			"componentName": "my-limits",
+			"service": "getAssignedLimitPackage",
+			"perform": "limits-graph"
+		}, {
+			"componentName": "list-user",
+			"service": "getAssignedLimitPackageByUserId",
+			"perform": "limit-data-grid#bank-custom-limits"
+		}]
+	}, {
+		"moduleName": "com.ofss.digx.app.finlimit.service.userlimit.UserLimit",
+		"components": [{
+			"componentName": "my-limits",
+			"service": "create",
+			"perform": "my-target-linkages"
+		}, {
+			"componentName": "my-limits",
+			"service": "read",
+			"perform": "limits-graph"
+		}, {
+			"componentName": "list-user",
+			"service": "readByUserId",
+			"perform": "limit-data-grid#bank-custom-limits"
+		}]
+	}]
+}

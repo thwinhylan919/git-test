@@ -1,0 +1,41 @@
+$upcoming-sm-data-size-small:0.9rem;
+$upcoming-sm-data-color:var(--base-color-secondary);
+
+.upcomingpayments-nodata{
+  padding: 1.3rem 0;
+  color: var(--base-color-secondary);
+}
+
+
+.upcomingpayments-sm{
+        &__amount {
+          color: var(--base-color-danger);
+        }
+    }
+
+.right{
+  position: absolute;
+  @include right(16.5rem);
+}
+
+.top{
+  position: relative;
+  bottom: 0.63rem;
+}
+
+.payments{
+  .payments-list{
+      @include mq(small){
+          &__listItem {
+          padding:0;
+          margin-bottom:0.5rem;
+          }
+      }
+      @include mq(medium){
+          &__listItem {
+          padding:0;
+          margin-bottom:0.5rem;
+          }
+      }
+  }
+}

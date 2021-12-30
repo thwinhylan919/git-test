@@ -1,0 +1,94 @@
+<!-- ko if: loadReview -->
+<div class="oj-flex-item oj-sm-12">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : $baseModel.format($component.resource.reviewHeaderMsg, {txnName : $component.resource.txnName})}}"></div>
+            <!-- ko if: accountsLoaded -->
+            <!-- ko if: accountsMatchedLoaded -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['accountID']]"> <span data-bind="text:$component.resource.toAccount"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text:$component.toAccountValue().id.displayValue"></span>
+                </div>
+            </div>
+            <!-- ko if: loadIfsc -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.ifsc, value :[
+         additionalBankDetails().code,
+         ('name' in additionalBankDetails())?additionalBankDetails().name:'',
+         (('branchAddress' in additionalBankDetails()) && ('line1' in additionalBankDetails().branchAddress))?additionalBankDetails().branchAddress.line1:'',
+         (('branchAddress' in additionalBankDetails())&&('city' in additionalBankDetails().branchAddress))?additionalBankDetails().branchAddress.city:'',
+         (('branchAddress' in additionalBankDetails())&&('country' in additionalBankDetails().branchAddress))?additionalBankDetails().branchAddress.country:''
+         ]"></row>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['accountID1']]"> <span data-bind="text:$component.resource.fromAccount"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text:$component.additionalDetailsFrom().account.id.displayValue"></span>
+                </div>
+            </div>
+
+            <!-- ko if:isNetworkTypesLoaded() -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['payvia']]"> <span data-bind="text:$component.resource.payVia"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text:$component.network"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['payvia']]"> <span data-bind="text:$component.resource.amount"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text:$formatter.formatCurrency($component.amount(),$component.currency())"></span>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['payvia']]"> <span data-bind="text:$component.resource.transferOn"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text:$formatter.formatDate(currentDate.valueDate)"></span>
+                </div>
+            </div>
+
+            <!-- ko if: loadIfsc -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label :for="[['purpose']]"> <span data-bind="text:$component.resource.purpose"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-4">
+                    <span data-bind="text:$component.purpose().text"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.note ,
+                         value :note()"></row>
+
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="pay" on-click="[[$component.confirmTransfer]]"><span slot="startIcon"></span>
+                    <span data-bind="text:$component.resource.generic.common.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancel" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary " on-click="[[back]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.generic.common.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </page-section>
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,32 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.loan.service.account.core.LoanAccount",
+			"components": [{
+					"componentName": "loan-details",
+					"service": "fetchDetails",
+					"perform": "loan-corporate-details#quick-links#account-nickname"
+				},
+				{
+					"componentName": "loan-disbursement",
+					"service": "fetchDisbursements"
+				},
+				{
+					"componentName": "loan-schedule",
+					"service": "fetchScheduleItems",
+					"perform": "loan-schedule-chart"
+				},
+				{
+					"componentName": "loan-repayment",
+					"service": "createLoanSettlement",
+					"perform": "review-loan-repayment",
+					"approve": "review-loan-repayment"
+				}, {
+					"componentName": "loan-transactions",
+					"service": "fetchTransactions",
+					"perform": "account-transactions"
+				}
+			]
+		}
+
+	]
+}

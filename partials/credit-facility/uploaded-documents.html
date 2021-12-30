@@ -1,0 +1,20 @@
+<!-- ko if:$component.payload.document-->
+<!-- ko if:$component.payload.document.attachedDocuments && $component.payload.document.attachedDocuments.length > 0 -->
+<!-- ko foreach:$component.payload.document.attachedDocuments -->
+<div class="oj-flex-item oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+    <div class="oj-flex-item oj-sm-6">
+        <span data-bind="text:name"></span>
+    </div>
+    <div class="oj-flex-item oj-sm-4">
+        <span data-bind="text:fileName || '-'"></span>
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot:$component.payload.document-->
+<!-- ko if:$component.payload.document.attachedDocuments && $component.payload.document.attachedDocuments.length === 0 -->
+<div data-bind="text:$component.resourceBundle.noDocumentUploaded">
+</div>
+<!-- /ko -->
+<!-- /ko -->

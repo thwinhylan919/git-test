@@ -1,0 +1,268 @@
+<div class="form-main-container td-open">
+    <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+            <!-- ko if: !$component.openTDSuccessful() -->
+            <!-- ko if: !$component.openTDReview() -->
+            <!-- ko if: $dashboard.appData.segment === 'CORP' -->
+            <!-- ko if: $component.depositTypesLoaded() -->
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.openTermDeposit.holdingPattern.holdingDetails">
+                <div class="row-group">
+                    <!-- ko if: $component.rootModelInstance.createTDData.holdingPattern()  !== null -->
+                    <!-- ko if: $component.partyDetailsLoaded() -->
+                    <div class="oj-flex oj-flex-items-pad party-id">
+                        <div class="oj-flex-item oj-sm-12">
+                            <label data-bind="attr:{for: $baseModel.incrementIdCount()}, text:$component.locale.openTermDeposit.holdingPattern.primaryAccHolder"></label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-select-one :id="[[$baseModel.currentIdCount()]]" value="{{selectedParty}}">
+                                <!-- ko foreach: $component.partyEnums -->
+                                <oj-option value="{{partyId}}"><span data-bind="text:partyName"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </page-section>
+            <!-- /ko -->
+            <!-- /ko -->
+
+            <oj-validation-group id="tdTracker" valid="{{groupValid}}">
+                <!-- ko if: $component.maturityInstructionListLoaded-->
+                <div data-bind="component:{name: 'deposit-type', params:{rootModel: {params : {
+                        customURL: $component.customURL,
+                        setProductList: $component.setProductList,
+                        depositTypeLoaded: $component.depositTypeLoaded,
+                        productType: $component.productType,
+                        loadedFromReview: $component.loadedFromReview,
+                        depositTypeChanged: $component.depositTypeChanged,
+                        depositTypesLoaded: $component.depositTypesLoaded,
+                        currency: $component.sourceCurrency,
+                        resetData: $component.resetData,
+                        account: $component.rootModelInstance.createTDData.payInInstruction()[0].accountId.value
+                        }}}}"></div>
+                <!-- /ko -->
+                <!-- ko if: $component.depositTypesLoaded() -->
+                <!-- ko if: $component.rootModelInstance.createTDData.holdingPattern() -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.openTermDeposit.depositDetails.depositDetails">
+                    <div class="oj-flex-item oj-lg-12">
+                        <!--source account start-->
+                        <div data-bind="component:{name: 'account', params:{rootModel: {params : {
+                        excludeBaseCurrency: true,
+                        taskCode: 'TD_F_OTD',
+                        customURL: $component.customURL,
+                        account : $component.rootModelInstance.createTDData.payInInstruction()[0].accountId.value ,
+                        type:'balance',
+                        depositTypeChanged: $component.depositTypeChanged,
+                        productType: $component.productType,
+                        label:$component.locale.openTermDeposit.depositDetails.sourceAccount, additionalDetails : $component.additionalDetails,validator:$component.validationTracker
+                        }}}}"></div>
+                        <!--source account end-->
+                        <!-- ko if: $component.productType!=="RFC" || ($component.productType==="RFC" && $component.rootModelInstance.createTDData.payInInstruction()[0].accountId.value) -->
+                        <div data-bind="component:{name: 'product-list', params:{rootModel: {params : {
+                        productType: $component.productType,
+                        additionalDetails: $component.additionalDetails,
+                        setProductList: $component.setProductList
+                        }}}}"></div>
+
+                        <div data-bind="component:{name: 'view-interest-rate', params:{rootModel: {params : {
+                        productId:$component.rootModelInstance.createTDData.productDTO.productId, currency: $component.rootModelInstance.createTDData.principalAmount.currency(),
+                        module:$component.rootModelInstance.createTDData.module(),
+                        valueClasses : 'oj-lg-12'
+                        }}}}"></div>
+                        <!-- /ko -->
+
+                        <!-- ko if:productSelected -->
+                        <div data-bind="component: {
+                                name: 'amount-input', params: {
+                                amount :$component.rootModelInstance.createTDData.principalAmount.amount,
+                                changedCurrency: $component.changedCurrency,
+                                minimumAmount: $component.minAmount,
+                                maximumAmount: $component.maxAmount,
+                                label : $component.locale.openTermDeposit.depositDetails.depositAmount,
+                                currency: $component.rootModelInstance.createTDData.principalAmount.currency,
+                                currencyListRequired : true,
+                                validator:$component.validationTracker,
+                                isMandatory:true,
+                                rootId:'td-amount',
+                          		currencyParser : $component.currencyParser,
+                                rootClass:'form-input',
+                                valueClasses : 'oj-lg-8'
+                            }
+                          }">
+
+                  <!-- ko if:rootModelInstance.createTDData.productDTO.productId() -->
+                  <oj-label class="oj-flex-item">
+                      <span class="info-text-small" data-bind="text: $baseModel.format(locale.openTermDeposit.depositDetails.productAmountMessage, {
+                  minAmount: $formatter.formatCurrency($component.minimumAmount(), $component.changedCurrency()),
+                  maxAmount: $formatter.formatCurrency($component.maximumAmount(), $component.changedCurrency())
+                })"></span>
+                  </oj-label>
+                  <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if:$component.showRate() && $component.rootModelInstance.createTDData.principalAmount.amount -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 td-open__exchangeRate td-open-exchangeRate">
+                              <oj-label for="currentExchangeRate"><span data-bind="text:$component.locale.openTermDeposit.depositDetails.currentExchangeRate"></span></oj-label>
+                              <div id="currentExchangeRate" class="td-open-exchangeRate__amount" data-bind="text:$formatter.formatCurrency($component.foreignAmount(), $component.rootModelInstance.createTDData.principalAmount.currency())+' = '+$formatter.formatCurrency($component.currentExchangeRate(), $component.sourceCurrency())"></div>
+                            </div>
+                            <div class="oj-flex-item oj-md-1 td-open__divider"></div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 td-open__exchangeRate td-open-exchangeRate">
+                              <oj-label for="exchangeAmount"><span data-bind="text:$component.locale.openTermDeposit.depositDetails.exchangeAmount"></span></oj-label>
+                              <div id="exchangeAmount" class="td-open-exchangeRate__amount" data-bind="text:$formatter.formatCurrency($component.exchangeAmount(), $component.sourceCurrency())"></div>
+                            </div>
+                        </div>
+
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12">
+                                <oj-button class="help-button" on-click="[[resetExchangeAmount]]">
+                                    <span data-bind="text:$component.locale.generic.common.reset"></span>
+                                </oj-button>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!--tenure or date-->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="tenureYear" class="oj-flex-item oj-lg-12">
+                                    <span data-bind="text:$component.locale.openTermDeposit.depositDetails.depositTenure"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12" data-bind="">
+                                <oj-radioset class="depositTenure oj-choice-direction-row" :aria-label="[[$component.locale.openTermDeposit.depositDetails.depositTenure]]" value="{{depositTenureCheck}}" on-value-changed="[[tenureChangeHandler]]">
+                                    <oj-option value="TENURE" id="Tenure" name="mod1"><span for="Tenure" data-bind="text:$component.locale.openTermDeposit.depositDetails.tenure"></span></oj-option>
+                                    <oj-option value="DATE" id="Date" name="mod1"><span for="Date" data-bind="text:$component.locale.generic.common.date"></span></oj-option>
+                                </oj-radioset>
+                            </div>
+                        </div>
+                        <!-- ko if:depositTenureCheck -->
+                        <!-- tenure-->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <!-- ko if:depositTenureCheck()==='TENURE' -->
+                            <div class="oj-flex-item oj-sm-4">
+                                <label for="years" data-bind="text:$component.locale.openTermDeposit.tenure.years"></label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-4">
+                                <label for="months" data-bind="text:$component.locale.openTermDeposit.tenure.months"></label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-4">
+                                <label for="days" data-bind="text:$component.locale.openTermDeposit.tenure.days"></label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-4">
+                                <oj-input-text id="years" :aria-label="[[$component.locale.openTermDeposit.tenure.years]]"  maxlength="2" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[[validateTenure]]]" value="{{$component.rootModelInstance.createTDData.tenure.years}}"></oj-input-text>
+                            </div>
+                            <div class="oj-flex-item oj-sm-4">
+                                <oj-input-text id="months" :aria-label="[[$component.locale.openTermDeposit.tenure.months]]"  maxlength="3" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[[validateTenure]]]" value="{{$component.rootModelInstance.createTDData.tenure.months}}"></oj-input-text>
+                            </div>
+                            <div class="oj-flex-item oj-sm-4">
+                                <oj-input-text id="days" :aria-label="[[$component.locale.openTermDeposit.tenure.days]]"  maxlength="3" :invalidcomponenttracker="[[$component.validationTracker]]" validators="[[[validateTenure]]]" value="{{$component.rootModelInstance.createTDData.tenure.days}}"></oj-input-text>
+                            </div>
+                            <!-- /ko -->
+                            <!-- date-->
+                            <!-- ko if:depositTenureCheck()==='DATE' -->
+                            <div class="oj-flex-item oj-sm-5 oj-md-4 oj-lg-4 label">
+                                <oj-label id="maturityDateLabel" class="hide-label" for="maturityDate">
+                                    <!-- ko text: $component.locale.openTermDeposit.depositDetails.maturityDate  -->
+                                    <!-- /ko -->
+                                </oj-label>
+                                <oj-input-date labelled-by="maturityDateLabel" min="[[$component.minDate]]" max="[[$component.maxDate]]" id="maturityDate"  required="[[true]]" converter="[[$formatter.dateConverter]]" value="{{$component.rootModelInstance.createTDData.maturityDate}}"></oj-input-date>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:$component.rootModelInstance.createTDData.productDTO.productId() -->
+                            <div class="oj-flex-item oj-sm-12">
+                              <oj-label class="oj-flex-item">
+                                  <span class="info-text-small" data-bind="text:$baseModel.format($component.locale.openTermDeposit.depositDetails.productTenureMessage,{minTenure:$component.formatTenure(minTenure()),maxTenure:$component.formatTenure(maxTenure())})"></span>
+                              </oj-label>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!--calculate maturity start-->
+                        <!-- ko if:maturityDetailsLoaded -->
+                        <!-- Calculated Maturity-->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.openTermDeposit.depositDetails.maturityAmount , value :$formatter.formatCurrency(maturityDetails().termDepositDetails.maturityAmount.amount, maturityDetails().termDepositDetails.maturityAmount.currency)"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.locale.openTermDeposit.depositDetails.interestRate , value :$formatter.formatNumber((maturityDetails().termDepositDetails.interestRate)/100, 'percent')"></row>
+                        <!-- reset button-->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12">
+                                <oj-button class="form-button-secondary" on-click="[[reset]]">
+                                    <span data-bind="text:$component.locale.generic.common.reset"></span>
+                                </oj-button>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if:!maturityDetailsLoaded() -->
+                        <!-- Calculate Button-->
+                        <!-- ko if:$component.rootModelInstance.createTDData.module() ==='CON' -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12">
+                                <a href="#" class="form-button-link" id="calculateMaturity" data-bind="text:$component.locale.openTermDeposit.depositDetails.calculateMaturity,click:$component.calculateMaturityAmount.bind($data,false)">
+							</a>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!--calculate maturity end-->
+                        <!-- ko if:jointAccount -->
+                        <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                            <div for="holdingPattern" class="termDeposit__holdingPattern oj-flex-item oj-lg-12 oj-md-12" data-bind="text:$component.locale.openTermDeposit.holdingPattern.currentHoldingPattern"></div>
+                            <oj-label for="holdingPattern" class="oj-flex-item oj-lg-12"><span data-bind="text:$component.locale.openTermDeposit.holdingPattern.modifyHoldingPattern"></span></oj-label>
+                            <div class="oj-flex-item oj-sm-4">
+                                <oj-checkboxset id="holdingPattern" value="{{holdingPattern}}" on-value-changed="[[holdingPatternChangeHandler]]" class="oj-flex-item">
+                                <oj-option value="SINGLE">
+                                    <span data-bind="text:$component.locale.openTermDeposit.holdingPattern.single">
+											</span></oj-option>
+                                </oj-checkboxset>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- product list close-->
+                    </div>
+                </page-section>
+                <!-- /ko -->
+                <!-- ko if: $component.rootModelInstance.createTDData.holdingPattern -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.locale.openTermDeposit.depositDetails.maturityDetails">
+                    <div class="row-group">
+                        <div class="oj-lg-12" data-bind="template: { name: 'accounts/td-maturity-instructions' }"></div>
+                    </div>
+                </page-section>
+                <div data-bind="component:{name: 'nominee', params:{rootModel: {params : {
+                        isNomineeRequired: $component.isNomineeRequired,
+                        addNomineeModel: $component.addNomineeModel,
+                        nomineeDetails: $component.nomineeDetails,
+                        rootModelInstance: $component.rootModelInstance,
+                        resetNomineeModel: $component.resetNomineeModel,
+                        isMinor: $component.isMinor,
+                        manageNominee: $component.manageNominee,
+                        hostSupportsNominee: $component.hostSupportsNominee,
+                        accountModule: $component.accountModule,
+                        jointAccount: $component.jointAccount,
+                        holdingPattern: $component.holdingPattern
+                        }}}}"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </oj-validation-group>
+            <!-- ko if: $component.depositTypesLoaded -->
+            <div class="button-container">
+                <oj-button id="dialogtopupButton" class="action-button-primary " on-click="[[$component.createTDConfirm.bind($data,true)]]"><span slot="startIcon" class="icons icon-submit"></span>
+                    <span data-bind="text:$component.locale.generic.common.create"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary " on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.locale.generic.common.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $baseModel.large() -->
+        <!-- ko if: $component.depositTypesLoaded() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'td-open'"></help>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>

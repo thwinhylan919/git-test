@@ -1,0 +1,98 @@
+<page-section params="baseModel : $baseModel, rootModel : $data, heading :limitsHeader()">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <oj-data-grid id="datagrid" class="bank-custom-limits__grid" header.row.style="[[rowHeaderRenderer]]"
+                header.column.style="[[columnHeaderRenderer]]" header.column.class-name="oj-sm-justify-content-flex-end"
+                :aria-label="[[nls.BankCustomLimits.header]]" data="[[dataSource]]" cell.renderer="[[cellRenderer]]"
+                cell.class-name="[[getCellClassName]]"></oj-data-grid>
+
+            <script type="text/html" id="editCellTemplate">
+
+                <!-- ko if: $context.data -->
+                <!-- ko if: $context.keys.row.indexOf("newValue") == -1 -->
+                <span class="bank-custom-limits__grid__text" data-bind="text:($context.data.currency ?$formatter.formatCurrency($context.data.value, $context.data.currency):$context.data.value)"></span>
+                <!-- /ko  -->
+                 <!-- ko if: $context.keys.row.indexOf("newValue") > -1&&($component.mode()==="REVIEW" || $component.approvalMode()=== "approval")-->
+                    <!-- ko if: $context.data.value() !== 0 -->
+                    <span class="bank-custom-limits__new-value" data-bind="text: ($context.data.currency ? $formatter.formatCurrency($context.data.value(), $context.data.currency):$context.data.value())"></span>
+                    <!-- /ko  -->
+                    <!-- ko if: ! $context.data.value() || $context.data.value() === 0  -->
+                    <span class="bank-custom-limits__grid__text" data-bind="text: $component.nls.BankCustomLimits.notChanged"></span>
+                    <!-- /ko  -->
+                 <!-- /ko  -->
+                <!-- ko if: ($context.keys.row.indexOf("newValue") > -1 && $component.mode()==="EDIT") -->
+                <oj-input-text :id = "[[$context.indexes.column+'-'+$context.indexes.row]]" :aria-label = "[[$context.indexes.column+'-'+$context.indexes.row]]"  validators="[[$baseModel.getValidator('AMOUNT')]]" 
+                       placeholder="[[$component.nls.BankCustomLimits.newValue]]" 
+                    class="oj-helper-text-align-end" value="{{$context.data.value}}">
+                </oj-input-text>
+                <!-- /ko  -->
+                <!-- /ko  -->
+                <!-- ko ifnot: $context.data -->
+                <span class="bank-custom-limits__grid" data-bind="text:'--'"></span>
+                <!-- /ko  -->
+            </script>
+
+        </div>
+    </div>
+</page-section>
+
+<page-section params="baseModel : $baseModel, rootModel : $data, heading :''">
+    <!-- ko if : mode()==="EDIT" -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-2">
+            <oj-label for="effectiveDate">
+                <span data-bind="text: nls.BankCustomLimits.effectiveDate"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-3">
+            <oj-input-date id="effectiveDate" min="[[$component.today]]" converter="[[$formatter.dateConverter]]"
+                :placeholder="[[nls.BankCustomLimits.effectiveDate]]" value="{{$component.effectiveDate}}"></oj-input-date>
+        </div>
+    </div>
+
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-2">
+            <oj-label for="endDate">
+                <span data-bind="text:nls.BankCustomLimits.endDate"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-3">
+            <oj-input-date id="endDate" min="[[$component.minEndDate]]" converter="[[$formatter.dateConverter]]"
+                :placeholder="[[nls.BankCustomLimits.endDate]]" value="{{$component.endDate}}"></oj-input-date>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if : mode()==="REVIEW" || approvalMode()=== "approval" -->
+    <div class="oj-lg-6">
+        <row params="baseModel : $baseModel, rootModel : $parent, label : nls.BankCustomLimits.effectiveDate, value :  $formatter.formatDate(effectiveDate())"></row>
+        <!-- ko if :endDate() -->
+        <row params="baseModel : $baseModel, rootModel : $parent, label : nls.BankCustomLimits.endDate, value : $formatter.formatDate(endDate())"></row>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+
+</page-section>
+
+<div class="oj-flex oj-flex-items-pad">
+    <!-- ko if : mode()==="VIEW" && approvalMode()!== "approval"-->
+    <div class="oj-flex-item button-container  bank-custom-limits__button-container">
+        <oj-button class="action-button-primary" id="submitbtn" on-click="[[edit]]"><span data-bind="text:$component.nls.generic.common.edit"></span></oj-button>
+        <oj-button class="action-button-secondary" id="cancelbtn" on-click="[[cancel]]"><span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" id="backbtn" on-click="[[$dashboard.hideDetails]]"><span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if : mode()==="EDIT" -->
+    <div class="oj-flex-item button-container  bank-custom-limits__button-container">
+        <oj-button class="action-button-primary" id="submitbtn" on-click="[[save]]"><span data-bind="text:$component.nls.generic.common.save"></span></oj-button>
+        <oj-button class="action-button-secondary" id="cancelbtn" on-click="[[cancel]]"><span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" id="backbtn" on-click="[[$dashboard.hideDetails]]"><span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if : mode()==="REVIEW" -->
+    <div class="oj-flex-item button-container  bank-custom-limits__button-container">
+        <oj-button class="action-button-primary" id="submitbtn" on-click="[[confirm]]"><span data-bind="text:$component.nls.generic.common.confirm"></span></oj-button>
+        <oj-button class="action-button-secondary" id="cancelbtn" on-click="[[cancel]]"><span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" id="backbtn" on-click="[[backToEdit]]"><span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+    </div>
+    <!-- /ko -->
+</div>

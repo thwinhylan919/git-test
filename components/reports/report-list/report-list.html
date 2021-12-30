@@ -1,0 +1,193 @@
+<!-- ko if:isReportFrequencyListLoaded() -->
+<div class="form-main-container">
+    <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+            <div
+                data-bind='component: {name: "nav-bar", params:{rootModel: $data, menuOptions: menuOptions, uiOptions: uiOptions, navBarDescription: $component.Nls.navBarDescription}}'>
+            </div>
+            <div class="search-section">
+                <page-section params="rootModel : $data, heading:''">
+                    <!-- ko if:!$component.searchEnabled()-->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-11 oj-lg-11">
+                            <h3 data-bind="text:$component.Nls.reportId"></h3>
+                        </div>
+                        <div class="oj-flex-item oj-sm-1 oj-lg-1 report-list__search report-list-search">
+                            <a href="" class="icon icon-search report-list-search__icon"
+                                data-bind="click: $component.searchEnable , attr: { alt: $component.Nls.searchEnable, title: $component.Nls.searchAllowed }"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:$component.searchEnabled() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-9">
+                            <h3 data-bind="text:$component.Nls.search"></h3>
+                        </div>
+                        <div class="oj-flex-item oj-sm-3 report-list__search report-list-search">
+                            <a href="" class="icon icon-search report-list-search__icon"
+                                data-bind="click: $component.searchEnable , attr: { alt: $component.Nls.searchEnable, title: $component.Nls.searchAllowed }"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </page-section>
+                <div id="search" class="search-container">
+                    <page-section params="rootModel : $data, heading:''">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2 ">
+                                <label for="reportId" data-bind="text: $component.Nls.reportId"> </label>
+                            </div>
+
+                            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4">
+                                <oj-input-text id="reportId" value="{{$component.searchData.reportId}}"
+                                    validators="[[$baseModel.getValidator('REPORT_ID')]]"></oj-input-text>
+                            </div>
+                            <!-- ********************** DropDown For reportName ********************** -->
+                            <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2 ">
+                                <label for="reportName" data-bind="text: $component.Nls.reportName"> </label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4">
+                                <!-- ko if:$component.isReportTypeListLoaded() -->
+                                <oj-select-one id="reportName"
+                                    disabled="[[($component.searchData.reportId()?true:false)]]"
+                                    :placeholder="[[$component.Nls.select]]"
+                                    value="{{$component.searchData.reportType}}">
+                                    <!-- ko foreach:$component.reportTypeList -->
+                                    <oj-option value="{{reportId}}"><span data-bind="text:description"></span>
+                                    </oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-2 ">
+                                <label for="generationDate" data-bind="text: $component.Nls.generationDate"> </label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2">
+                                <oj-input-date :id="[['frDt']]"
+                                    disabled="[[($component.searchData.reportId()?true:false)]]"
+                                    datepicker="[[{changeYear:'none'}]]" max="[[$component.today]]"
+                                    value="{{$component.searchData.generationDateStartRange}}"
+                                    :placeholder="[[$component.Nls.from]]" converter="[[$formatter.dateConverter]]">
+                                </oj-input-date>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2">
+                                <oj-input-date :id="[['tDt']]"
+                                    disabled="[[($component.searchData.reportId()?true:false)]]"
+                                    datepicker="[[{'changeYear':'none'}]]"
+                                    min="[[$component.searchData.generationDateStartRange]]"
+                                    value="{{$component.searchData.generationDateEndRange}}"
+                                    :placeholder="[[$component.Nls.to]]" converter="[[$formatter.dateConverter]]">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </page-section>
+                    <!-- **************************** Search Button **************************** -->
+                    <div class="button-container">
+                        <!-- ko if:$component.userType()== "ADMIN" -->
+                        <oj-button class="action-button-secondary" id="button" on-click="[[searchReport]]">
+                            <span data-bind="text:$component.Nls.search"></span>
+                        </oj-button>
+                        <!-- /ko -->
+                        <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                        <oj-button class="action-button-primary" on-click="[[searchReport]]">
+                            <span slot="startIcon" class="icons icon-search"></span>
+                            <span data-bind="text:$component.Nls.search"></span>
+                        </oj-button>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- ko if:$baseModel.large() -->
+            <page-section params="rootModel : $data, heading:$component.viewing">
+                <div class="widget-table">
+                    <oj-table id="table" class="record" :aria-label="[[$component.Nls.details]]"
+                        columns="[[$component.columnArray]]" selection-mode="[[{row:'single',column:'single'}]]"
+                        translations="[[{msgNoData:$component.Nls.noData}]]" data="[[$component.datasource()]]">
+                        <caption class="hide-label" data-bind="text:$component.Nls.details"></caption>
+                    </oj-table>
+                </div>
+                <template slot="reportStatus">
+                    <td>
+                        <div class="status"
+                            data-bind="css: status==='ERROR' ? 'rejected':  status==='PROCESSED' ? 'processed' : status === 'PENDING' ? 'in-progress' : 'in-progress' ">
+                            <span class="icons"
+                                data-bind="css: status==='ERROR' ? 'icon-reject':  (status==='PROCESSED' ? ' icon-success' : status === 'PENDING' ? ' icon-pre-processed' : ' icon-pre-processed'"></span><span
+                                data-bind="text:$component.Nls.status[status]"></span>
+                        </div>
+                    </td>
+                </template>
+                <script type="text/html" id="download_report">
+                    <td>
+                        <a href="#" :title="{{$component.Nls.reportSubId}}" :alt=[[$component.Nls.reportSubId]]
+                            data-bind="text:$context.row.reportRequestId.substring(0, $context.row.reportRequestId.length-3)+'-'+$context.row.reportRequestId.substring($context.row.reportRequestId.length-3);,click:$component.downloadReport.bind($data)"></a>
+                    </td>
+                </script>
+                <oj-paging-control id="paging" slot="bottom" :page-size="[[10]]" data="[[datasource()]]">
+                </oj-paging-control>
+            </page-section>
+            <!-- /ko -->
+            <!-- ko ifnot:$baseModel.large() -->
+            <page-section params="rootModel : $data, heading:''">
+                <div class="grid-main-container">
+                    <oj-list-view id="listview" :aria-label="[[$component.Nls.collectionList]]" selection-mode="single"
+                        on-selection-changed=[[$component.downloadReport.bind($data)]]
+                        item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('file_template',true)}]]"
+                        data="[[$component.datasource()]]">
+                    </oj-list-view>
+                </div>
+                <script type="text/html" id="file_template">
+                    <li>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-md-6 oj-sm-12">
+                                <label data-bind="text: $component.Nls.reportName"></label>
+                                <span data-bind="text: reportName"></span>
+                            </div>
+                            <div class="oj-flex-item oj-md-6 oj-sm-12">
+                                <label data-bind="text: $component.Nls.reportSubId"></label>
+                                <span data-bind="text: reportRequestId"></span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-md-6 oj-sm-12">
+                                <label data-bind="text: $component.Nls.generationDateTime"></label>
+                                <span class="date" data-bind="text: executionDate"></span>
+                            </div>
+                            <div class="oj-flex-item oj-md-6 oj-sm-12">
+                                <label data-bind="text: $component.Nls.reportStatus"></label>
+                                <span data-bind="text: status"></span>
+                            </div>
+                        </div>
+                    </li>
+                </script>
+                <div class="center">
+                    <oj-paging-control id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[10]]"
+                        data="[[datasource()]]">
+                    </oj-paging-control>
+                </div>
+            </page-section>
+            <!-- /ko -->
+            <!-- ko ifnot: $baseModel.small() -->
+            <div class="button-container">
+                <!-- ko if:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.Nls.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko ifnot:$component.userType()== "ADMIN" -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span class="icons icon-cancel" slot="startIcon"></span>
+                    <span data-bind="text:$component.Nls.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $baseModel.large() -->
+        <div class="oj-sm-12 oj-md-12 oj-lg-3 oj-sm-only-hide oj-md-only-hide pull-right">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'report-list'"></help>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

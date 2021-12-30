@@ -1,0 +1,151 @@
+<!-- ko ifnot: showConfirmation -->
+<!-- ko ifnot: showConfirmationForCreate -->
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.common.review">
+
+    <div class="oj-flex oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+            <div class="oj-flex oj-flex-items-pad ">
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-label><span data-bind="text:nls.fieldname.parentPartyID"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <span data-bind="text:$component.party.displayValue()"></span>
+                </div>
+
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-label><span data-bind="text:nls.fieldname.parentPartyName"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <span data-bind="text:$component.partyName()"></span>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-2 ">
+            <div class="oj-flex oj-flex-items-pad ">
+            </div>
+            <div class="oj-flex oj-flex-items-pad ">
+                <span class="icon icon-arrow-right arrow-icon-size"></span>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+            <div class="oj-flex oj-flex-items-pad ">
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-label><span data-bind="text:nls.fieldname.linkedPartyID"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <span data-bind="text:linkedPartyId().displayValue"></span>
+                </div>
+
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-label><span data-bind="text:nls.fieldname.linkedPartyName"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <span data-bind="text:linkedpartyName()"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ko if: $component.selectedUserId() -->
+
+    <div class="oj-flex oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-label><span data-bind="text:nls.fieldname.userID"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <span data-bind="text:$component.selectedUserId()"></span>
+                </div>
+
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad ">
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-label><span data-bind="text:nls.fieldname.userName"></span></oj-label>
+                </div>
+
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <span data-bind="text:$component.selectedUserName()"></span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- /ko -->
+</page-section>
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.fieldname.linkedTransMapping">
+
+    <div data-bind="descendantsComplete : $component.activateTab">
+        <div class="mapping-module">
+
+        <div class="" id="tabs-container-select">
+            <div class="oj-flex oj-flex-items-pad" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: $component.tabLists, uiOptions:$component.uiOptions, navBarDescription:nls.common.navDescription}}'></div>
+            <!-- ko if: showTemplateReview -->
+            <div data-bind="template: { name: 'account-access/' + $component.templateReview()}, attr: { id: $component.idReview() }"></div> <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</page-section>
+
+<!-- ko ifnot : $component.rootParams && $component.rootParams.linkedUserAccountAccessDTOs -->
+
+
+<div class="oj-flex oj-flex-items-pad button-container">
+
+    <oj-button class="action-button-secondary" on-click="[[$component.cancel]]">
+        <span data-bind="text:nls.common.cancel"></span>
+    </oj-button>
+
+    <oj-button class="action-button-primary" on-click="[[$component.editAccountAccess]]">
+        <span data-bind="text:nls.common.edit"></span>
+    </oj-button>
+
+
+    <!-- ko ifnot: $component.isAccessCreated -->
+    <oj-button class="action-button-primary" on-click="[[$component.createAccess]]">
+        <span data-bind="text:nls.common.confirm"></span>
+    </oj-button>
+    <!-- /ko -->
+
+    <!-- ko if: $component.isAccessCreated -->
+    <!-- ko if: $component.editButtonPressed -->
+    <oj-button class="action-button-primary" on-click="[[$component.updateAccess]]">
+        <span data-bind="text:nls.common.confirm"></span>
+    </oj-button>
+    <!-- /ko -->
+    <!-- /ko -->
+
+</div>
+
+
+<!-- /ko -->
+
+<!-- /ko -->
+<!-- /ko -->
+
+<modal-window params="baseModel : $baseModel, rootModel : $data, id:'confirmCancellationScreen'">
+    <div data-bind='component:{name: "confirmation", params:{rootModel: $component, hideDetails : false}}'>
+    </div>
+</modal-window>

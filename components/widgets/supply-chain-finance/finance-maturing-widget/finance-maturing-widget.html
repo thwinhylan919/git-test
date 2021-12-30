@@ -1,0 +1,56 @@
+<div class="oj-panel">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-9">
+      <div>
+        <h3 data-bind="html:$component.nls.heading.Timeline">
+        </h3>
+      </div>
+    </div>
+
+    <div class="oj-flex-item oj-lg-3 right">
+      <oj-label class="hide-label" :for="[['Currency-Selection']]"><span
+          data-bind="text:$component.nls.currency"></span></oj-label>
+      <!--  ko if : $component.currencyLoaded()  -->
+      <oj-select-one :id="[['Currency-Selection']]" value="{{$component.currency}}">
+        <!-- ko foreach : currencies -->
+        <oj-option value="[[code]]"><span data-bind="text:code"></span></oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+      <!--  /ko  -->
+    </div>
+  </div>
+
+  <!-- ko if : $component.showGraph() -->
+  <!-- ko if : !$component.showEmptyImage() -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item graph-style">
+      <oj-chart class="chart-width" id="lineChart" type="line" series="[[lineSeries]]" groups="[[lineGroups]]"
+        animation-on-display="auto" animation-on-data-change="auto" orientation="vertical"
+        style-defaults.line-type="straight" style-defaults.marker-displayed="on" legend.rendered="off"
+        style-defaults.data-label-position="aboveMarker" y-axis.title="[[currency]]"
+        x-axis.title="[[$component.nls.days]]" value-formats.label.converter="[[numberformatter]]"
+        value-formats.value.converter="[[numberformatter]]">
+      </oj-chart>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if : $component.showEmptyImage() -->
+  <div class="oj-flex oj-flex-items-pad center">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 align-img">
+      <img class="img-specs" data-bind="loadImage:'dashboard/maturing-finance.svg'">
+    </div>
+    <div class="oj-flex-item oj-lg-12 align-text">
+      <div>
+        <h3 data-bind="text:$component.nls.noFinancesText"></h3>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item center align-link"><a href="#" class="form-button-link" id="View-Finances"
+        data-bind="attr:{'alt':$component.nls.viewFinancesLink,'title':$component.nls.viewFinances},click:$component.onClickViewAllFinances,text:$component.nls.viewFinances"></a>
+    </div>
+  </div>
+  <!-- /ko -->
+
+</div>

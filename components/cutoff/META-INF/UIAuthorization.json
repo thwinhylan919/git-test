@@ -1,0 +1,30 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.workingwindow.service.WorkingWindow",
+			"components": [{
+					"componentName": "transaction-cutoff",
+					"service": "read",
+					"perform": "standard-work-window#cutoff-exceptions#cutoff-nav-bar"
+				},
+				{
+					"componentName": "transaction-cutoff",
+					"service": "create",
+					"perform": "create-cutoff-exceptions#create-standard-work-window#cutoff-exceptions#review-exception-working-window#review-standard-work-window#review-working-window#cutoff-nav-bar",
+					"approve": "review-exception-working-window#review-standard-work-window#review-working-window"
+				},
+				{
+					"componentName": "transaction-cutoff",
+					"service": "update",
+					"perform": "review-exception-working-window#review-standard-work-window#review-working-window",
+					"approve": "review-exception-working-window#review-standard-work-window#review-working-window"
+				},
+				{
+					"componentName": "transaction-cutoff",
+					"service": "update",
+					"perform": "review-exception-working-window#review-standard-work-window#review-working-window",
+					"approve": "review-exception-working-window#review-standard-work-window#review-working-window"
+				}
+			]
+		}
+	]
+}

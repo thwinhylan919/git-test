@@ -1,0 +1,419 @@
+[{
+        "name": "ACCOUNTS_TITLE",
+        "icon": "icon-accounts",
+        "submenus": [{
+                "name": "CASA_ACCOUNT",
+                "submenus": [{
+                        "name": "demand-deposits",
+                        "type": "MODULE"
+                    },
+                    {
+                        "name": "cheque-status-inquiry",
+                        "module": "demand-deposits"
+                    },
+                    {
+                        "name": "cheque-book-request",
+                        "module": "demand-deposits",
+                        "class": "transaction"
+                    },
+                    {
+                        "name": "cheque-stop-unblock",
+                        "module": "demand-deposits"
+                    },
+                    {
+                        "name": "demand-deposit-statement-request",
+                        "module": "demand-deposits",
+                        "type": "CSA"
+                    }
+                ]
+            },
+            {
+                "name": "TERM_DEPOSIT_ACCOUNT",
+                "submenus": [{
+                        "name": "term-deposits",
+                        "type": "MODULE"
+                    },
+                    {
+                        "name": "td-open",
+                        "module": "term-deposits"
+                    },
+                    {
+                        "name": "td-topup",
+                        "module": "term-deposits"
+                    },
+                    {
+                        "name": "td-redeem",
+                        "module": "term-deposits"
+                    },
+                    {
+                        "name": "td-amend",
+                        "module": "term-deposits"
+                    },
+                    {
+                        "name": "term-deposit-statement-request",
+                        "module": "term-deposits",
+                        "type": "TRD"
+                    }
+                ]
+            },
+            {
+                "name": "LOAN",
+                "submenus": [{
+                        "name": "loans",
+                        "type": "MODULE"
+                    },
+                    {
+                        "name": "loan-repayment",
+                        "module": "loans"
+                    },
+                    {
+                        "name": "loan-disbursement",
+                        "module": "loans"
+                    },
+                    {
+                        "name": "loan-schedule",
+                        "module": "loans"
+                    }, {
+                        "name": "loan-drawdown",
+                        "class": "flow"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "PAYMENTS_TITLE",
+        "icon": "icon-payments",
+        "submenus": [{
+                "name": "favorites",
+                "module": "payments"
+            },
+            {
+                "name": "SETUP",
+                "submenus": [{
+                        "name": "payee-list",
+                        "module": "payee"
+                    },
+                    {
+                        "name": "biller-list",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "standing-instructions-list",
+                        "module": "payments"
+                    }
+                ]
+            },
+            {
+                "name": "payments-transfers",
+                "submenus": [{
+                        "name": "payments-money-transfer",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "adhoc-draft",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "adhoc-payments",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "multiple-payments",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "bill-payments",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "multiple-bill-payments",
+                        "module": "payments"
+                    }
+                ]
+            },
+            {
+                "name": "INQUIRES",
+                "submenus": [{
+                        "name": "scheduled-payments",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "inward-remittance",
+                        "module": "payments"
+                    },
+                    {
+                        "name": "outward-remittance",
+                        "module": "payments"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "BILL_PAYMENTS_TITLE",
+        "icon": "icon-pay",
+        "submenus": [{
+                "name": "bill-payments-favorites",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "manage-bill-payments",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "register-biller",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "modify-biller",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "quick-bill-payment",
+                "module": "quick-bill-payment",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "quick-recharge",
+                "module": "quick-recharge",
+                "applicationType": "billPayments"
+            },
+            {
+                "name": "payment-history",
+                "module": "bill-payments",
+                "applicationType": "billPayments"
+            }
+        ]
+    },
+    {
+        "name": "TRADE_FINANCE",
+        "icon": "icon-file-upload",
+        "submenus": [{
+                "name": "letter-of-credit",
+                "submenus": [{
+                        "name": "lc-nav-bar",
+                        "module": "letter-of-credit"
+                    },
+                    {
+                        "name": "import-lc",
+                        "module": "letter-of-credit"
+                    },
+                    {
+                        "name": "export-lc",
+                        "module": "letter-of-credit"
+                    }
+                ]
+            },
+            {
+                "name": "bills",
+                "submenus": [{
+                        "name": "list-collection",
+                        "module": "collection"
+                    },
+                    {
+                        "name": "import-bills",
+                        "module": "collection"
+                    },
+                    {
+                        "name": "export-bills",
+                        "module": "collection"
+                    }
+                ]
+            },
+            {
+                "name": "guarantee",
+                "submenus": [{
+                        "name": "guarantee-list",
+                        "module": "guarantee"
+                    },
+                    {
+                        "name": "outward-guarantees",
+                        "module": "guarantee"
+                    },
+                    {
+                        "name": "inward-guarantees",
+                        "module": "guarantee"
+                    }
+                ]
+            },
+            {
+                "name": "customer-acceptance-nav-bar",
+                "module": "customer-acceptance"
+            },
+            {
+                "name": "search-beneficiary-maintenance",
+                "module": "beneficiary-maintenance"
+            },
+            {
+                "name": "search-credit-line",
+                "module": "credit-line-limit"
+            },
+            {
+                "name": "shipping-guarantee",
+                "submenus": [{
+                        "name": "shipping-guarantee-nav-bar",
+                        "module": "shipping-guarantee"
+                    },
+                    {
+                        "name": "shipping-guarantees",
+                        "module": "shipping-guarantee"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "view-forex-deal",
+        "icon": "icon-foreign-exchange",
+        "module": "forex-deal"
+    },
+    {
+        "name": "SUPPLY_CHAIN_FINANCE",
+        "icon": "icon-module",
+        "submenus": [{
+                "name": "supply-chain-finance",
+                "type": "MODULE"
+            },
+            {
+                "name": "PROGRAM_MANAGEMENT",
+                "submenus": [{
+                        "name": "program-management-global",
+                        "module": "supply-chain-finance"
+                    },
+                    {
+                        "name": "select-role",
+                        "module": "supply-chain-finance"
+                    }
+                ]
+            },
+            {
+                "name": "INVOICE_MANAGEMENT",
+                "submenus": [{
+                        "name": "invoice-creation-home",
+                        "module": "supply-chain-finance"
+                    },
+                    {
+                        "name": "select-role-invoice",
+                        "module": "supply-chain-finance"
+                    },
+                    {
+                        "name": "invoice-accept-reject",
+                        "module": "supply-chain-finance"
+                    }
+                ]
+            },
+            {
+                "name": "ASSOCIATED_PARTY_MANAGEMENT",
+                "submenus": [{
+                        "name": "onboard-counter-party-form",
+                        "module": "supply-chain-finance"
+                    },
+                    {
+                        "name": "counter-party-list",
+                        "module": "supply-chain-finance"
+                    }
+                ]
+            },
+            {
+                "name": "FINANCE_MANAGEMENT",
+                "submenus": [{
+                        "name": "request-finance-global",
+                        "module": "supply-chain-finance"
+                    },
+                    {
+                        "name": "view-finances",
+                        "module": "supply-chain-finance"
+                    }
+                ]
+            }
+
+        ]
+    },
+    {
+        "name": "FILE_UPLOAD",
+        "icon": "icon-file-upload",
+        "submenus": [{
+                "name": "file-upload",
+                "module": "file-upload"
+            },
+            {
+                "name": "file-view",
+                "module": "file-upload"
+            }
+        ]
+    },
+    {
+        "name": "ACCOUNT_SETTINGS",
+        "icon": "icon-setting",
+        "submenus": [{
+                "name": "side-menu",
+                "icon": "icon-setting",
+                "module": "security"
+            },
+            {
+                "name": "change-password",
+                "icon": " icon-password",
+                "module": "change-password"
+            },
+            {
+                "name": "my-limits",
+                "icon": "icon-limit",
+                "module": "limits-enquiry"
+            },
+            {
+                "name": "session-summary",
+                "icon": "icon-received",
+                "module": "base-components"
+            }, {
+                "name": "dashboard-create",
+                "icon": "icon-debit-card",
+                "module": "dashboard-template"
+            }
+        ]
+    },
+    {
+        "name": "MAILBOX_TITLE",
+        "icon": "icon-debit-card",
+        "submenus": [{
+                "name": "mailbox-base",
+                "module": "mailbox"
+            },
+            {
+                "name": "alert-list",
+                "module": "mailbox"
+            },
+            {
+                "name": "notification-list",
+                "module": "mailbox"
+            }
+        ]
+    },
+    {
+        "name": "feedback-capture",
+        "icon": "icon-request",
+        "module": "feedback"
+    },
+    {
+        "name": "locator",
+        "icon": "icon-location-arrow",
+        "module": "locator"
+    },
+    {
+        "name": "help",
+        "icon": "icon-help",
+        "default": true,
+        "type": "FUNCTION",
+        "functionName": "openWebHelpWindow"
+    },
+    {
+        "name": "about",
+        "icon": "icon-information",
+        "default": true,
+        "type": "MODAL"
+    }
+]

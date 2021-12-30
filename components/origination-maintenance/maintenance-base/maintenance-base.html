@@ -1,0 +1,39 @@
+<!-- ko if: $component.dataLoaded() -->
+<div class="form-main-container ">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 train-container">
+                <oj-train id="train" class="oj-train-stretch" selected-step="{{selectedStep}}" on-selected-step-changed="[[updateSelectedStep]]" steps="[[stepArray]]"></oj-train>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12" data-bind="component: {
+       name: $component.selectedComponent(),
+       params:{rootModel:$component }
+     }">
+            </div>
+        </div>
+
+    </page-section>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <!-- ko if: $component.params.mode === "EDIT" -->
+        <oj-button id="backButton" class="action-button-primary" on-click="[[save]]">
+            <span data-bind="text:$component.resource.generic.common.save"></span></oj-button>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.params.mode === "EDIT" -->
+        <oj-button id="nextButton" class="action-button-primary" on-oj-action="[[nextStep]]">
+            <span data-bind="text:$component.resource.generic.common.next"></span></oj-button>
+        <!-- /ko -->
+        <oj-button id="cancelButton" class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span data-bind="text:$component.resource.generic.common.cancel"></span></oj-button>
+        <!-- ko if: $component.params.mode === "EDIT" -->
+        <oj-button id="nextButton" class="action-button-tertiary" on-oj-action="[[nextStep]]">
+            <span data-bind="text:$component.resource.generic.common.next"></span></oj-button>
+        <!-- /ko -->
+        <!-- ko if: $component.selectedComponent() !== "product-details" -->
+        <oj-button id="backButton" class=" action-button-tertiary" on-oj-action="[[previousStep]]">
+            <span data-bind="text:$component.resource.generic.common.back"></span></oj-button>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

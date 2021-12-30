@@ -1,0 +1,10 @@
+.redeem-order-details {
+
+    .button-padding {
+        @include single-padding(left, 0.7rem);
+    }
+
+    .back-margin {
+        @include single-margin(left, 0);
+    }
+}

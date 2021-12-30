@@ -1,0 +1,10 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.tradefinance.service.shippingguarantee.ShippingGuarantee",
+    "components": [{
+      "componentName": "initiate-shipping-guarantee",
+      "service": "create",
+      "perform": "shipping-guarantee-nav-bar#lc-details#shipment-details#document-details#instructions-details#attach-documents#review-shipping-guarantee#collection-filters#lc-lookup#shipping-guarantees#view-shipping-guarantee"
+    }]
+  }]
+}

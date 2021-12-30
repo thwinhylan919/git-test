@@ -1,0 +1,37 @@
+.page-section {
+	&heading {
+		overflow: hidden;
+		display: inline-block;
+	}
+	&-heading {
+		margin: 0 auto !important;
+		&__text {
+			width: 100%;
+			@include text-align(left);
+			color: var(--form-header-foreground-color);
+			margin: 0.6rem;
+			border-bottom: 0.05rem solid var(--base-border-default);
+			padding-bottom: 0.5rem;
+			font-size: var(--form-header-font-size);
+    		font-weight: var(--form-header-font-weight);
+		}
+	}
+	&-container__body {
+		h2,
+		h3 {
+			display: none;
+		}
+	}
+	&-content {
+		margin-bottom: 0.6rem;
+		&__data {
+			@include mq(small) {
+				margin: 0 auto !important;
+			}
+			margin: 0 auto 0.6rem !important;
+			>.oj-flex {
+				padding-bottom: .5rem;
+			}
+		}
+	}
+}

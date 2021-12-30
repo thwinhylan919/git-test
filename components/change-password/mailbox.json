@@ -1,0 +1,40 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.collaboration.service.mailbox.message.mail.Mail",
+           "components": [{
+                   "componentName": "mailbox-base",
+                   "service": "read",
+                   "perform": "inbox#sent-mails#deleted-mails#message-detail#mini-mailbox#message-base#message-nav-bar"
+               },
+			   {
+                   "componentName": "compose-mail",
+                   "service": "create",
+                   "perform": "mailbox-base"
+               },
+			   {
+                   "componentName": "",
+                   "service": "reply",
+                   "perform": ""
+               }
+           ]
+       },
+	   {
+           "moduleName": "com.ofss.digx.app.collaboration.service.mailbox.message.alert.Alert",
+           "components": [{
+                   "componentName": "alert-list",
+                   "service": "read",
+                   "perform": "alert-detail#mini-mailbox#message-base#message-nav-bar"
+               }
+           ]
+       },
+	   {
+           "moduleName": "com.ofss.digx.app.collaboration.service.mailbox.message.mailer.Mailer",
+           "components": [{
+                   "componentName": "notification-list",
+                   "service": "read",
+                   "perform": "notification-detail#mini-mailbox#message-base#message-nav-bar"
+               }
+           ]
+       }   
+   ]
+}

@@ -1,0 +1,40 @@
+<div class="form-main-container third-party-consents">
+    <!-- ko if : dataLoaded() -->
+    <!-- ko if : confirmScreen() -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+    <!-- /ko -->
+
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <!-- ko if : displayAccessPoints() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12  third-party-consents__accounts-tab-container">
+            <div class="oj-sm-12 oj-md-12" data-bind='component: {name: "nav-bar", params:{rootModel: $data,
+              menuOptions: accessPointTabs,
+              uiOptions: accessPointUIOptions,
+              navBarDescription: nls.labels.mappedAccessPoints}}'>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if : accountTabLoaded() && displayAccounts()-->
+        <div class="oj-flex-item" data-bind='component:{name: "account-access",params:{rootModel: $data  }}'>
+        </div>
+        <!-- /ko -->
+
+
+    </page-section>
+    <!-- /ko -->
+    <!-- ko if: accessPointNotFound -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 third-party-consents__account-list__message">
+                <span data-bind="text:nls.labels.accessPointNotAvailable"></span>
+            </div>
+            <div class="oj-flex-item  button-container">
+                <oj-button class="action-button-primary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                        <span slot="startIcon" class="icons icon-ok"></span>
+                    <span data-bind="text:$component.nls.generic.common.ok"></span>
+                </oj-button>
+            </div>
+        </div>
+    </page-section>
+    <!-- /ko -->
+</div>

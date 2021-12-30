@@ -1,0 +1,137 @@
+<div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+                <!-- ko ifnot: ($component.mode() === "create") -->
+                <oj-table id="tabular-table" :aria-label="[[$component.resource.structureHeader]]" data="[[viewStructureDetailsDataSource]]" row-renderer='[[$oj.KnockoutTemplateUtils.getRenderer("row_template", true)]]' columns="[[[
+	                {
+	                	headerText:$component.resource.vAccNumber,
+	                	sortable:'none'
+	                },
+	                {
+	                	headerText:$component.resource.vAccName,
+	                	sortable:'none'
+	                },
+	                {
+	                	headerText:$component.resource.bal,
+	                	sortable:'none'
+	                },
+	                {
+	                	headerText:$component.resource.accountLinked,
+	                	sortable:'none'},
+
+										{
+                        headerText: $component.mode() === 'create' || $component.methodType === 'UPDATE' ? $component.resource.action : $component.resource.instructions,
+                        sortable:'none'} ]]]">
+                </oj-table>
+                <!-- /ko -->
+                <!-- ko if: ($component.mode() === "create") -->
+                <oj-table id="tabular-table" :aria-label="[[$component.resource.structureHeader]]" data="[[viewStructureDetailsDataSource]]" row-renderer='[[$oj.KnockoutTemplateUtils.getRenderer("row_template", true)]]' columns="[[[
+	                {
+	                	headerText:$component.resource.vAccNumber,
+	                	sortable:'none'
+	                },
+	                {
+	                	headerText:$component.resource.vAccName,
+	                	sortable:'none'
+	                },
+	                {
+	                	headerText:$component.resource.accountLinked,
+	                	sortable:'none'},
+
+										{
+                        headerText: $component.mode() === 'create' || $component.methodType === 'UPDATE' ? $component.resource.action : $component.resource.instructions,
+                        sortable:'none'} ]]]">
+                </oj-table>
+                <!-- /ko -->
+            </div>
+            <script type="text/html" id="row_template">
+                <tr>
+                    <td>
+                        <oj-row-expander context="[[$context.rowContext]]">
+                        </oj-row-expander>
+                        <span data-bind="text:childAccountId.displayValue"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text:childAccountName"></span>
+                    </td>
+                    <!-- ko ifnot: ($component.mode() === "create") -->
+                    <td>
+                        <span data-bind="text:$formatter.formatCurrency(balance.amount,balance.currency)"></span>
+                    </td>
+                    <!-- /ko -->
+                    <td>
+                        <span data-bind="text:$component.linkedAccountNoMap[childAccountId.value] || 0"></span>
+                    </td>
+                    <!-- ko if: $component.mode() === "view" -->
+                    <td>
+                        <a href="#" :aria-label="[[$component.resource.viewAccountBalanceDetails]]" data-bind="text:$component.resource.viewAccountBalanceDetails,click:$component.onSelectedInTable.bind($data,childAccountId)"></a>
+                    </td>
+                    <!-- /ko -->
+                    <!-- ko if: $component.mode() === 'create' -->
+                    <td>
+                        <a href="#" openprofile="true" data-bind="click:$component.openMenu,
+                             attr : {id:'menuLauncher-viewStructure-' + $data.childAccountId.value,'aria-label':$component.resource.viewAccountBalanceDetails}">
+                            <div class="icons icon-more-vertical"></div>
+                        </a>
+                        <oj-menu class="hide" :id="[['menuLauncher-viewStructure-contents-' + $data.childAccountId.value]]" on-oj-action="[[$component.menuItemSelect.bind($data, $data.childAccountId.value)]]" open-options.launcher="[['menuLauncher-viewStructure-' + $data.childAccountId.value]]">
+                            <!-- ko ifnot: $data.headerAccountNo -->
+                            <!-- ko foreach: $component.menuItems -->
+                            <oj-option :id="[[id+$context.data.childAccountId.value+$index()]]" :value="[[id]]">
+                                <span data-bind="text : label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if: $data.headerAccountNo -->
+                            <!-- ko foreach: $component.menuItems -->
+                             <!-- ko if:$index() === 1 -->
+                             <oj-option :id="[[id+$context.data.headerAccountNo.value+$index()]]" :value="[[id]]" disabled="true">
+                                    <span data-bind="text : label"></span>
+                                </oj-option>
+                            <!-- /ko -->
+                            <!-- ko ifnot:$index() === 1 -->
+                            <oj-option :id="[[id+$context.data.headerAccountNo.value+$index()]]" :value="[[id]]">
+                                    <span data-bind="text : label"></span>
+                                </oj-option>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </oj-menu>
+                    </td>
+                    <!-- /ko -->
+                    <!-- ko if: $component.mode() === 'UPDATE' -->
+                    <td>
+                        <a href="#" openprofile="true" data-bind="click:$component.openMenu,
+                             attr : {id:'menuLauncher-viewStructure-' + $data.childAccountId.value,'aria-label':$component.resource.viewAccountBalanceDetails}">
+                            <div class="icons icon-more-vertical"></div>
+                        </a>
+                        <oj-menu class="hide" :id="[['menuLauncher-viewStructure-contents-' + $data.childAccountId.value]]" on-oj-action="[[$component.menuItemSelect.bind($data, $data.childAccountId.value)]]" open-options.launcher="[['menuLauncher-viewStructure-' + $data.childAccountId.value]]">
+                            <!-- ko ifnot: $data.headerAccountNo -->
+                            <!-- ko foreach: $component.menuItems -->
+                            <oj-option :id="[[id + $context.data.childAccountId.value+$index()]]" :value="[[id]]">
+                                <span data-bind="text : label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if: $data.headerAccountNo -->
+                            <!-- ko foreach: $component.menuItems -->
+                             <!-- ko if:$index() === 1 -->
+                             <oj-option :id="[[id+$context.data.headerAccountNo.value+$index()]]" :value="[[id]]" disabled="true">
+                                    <span data-bind="text : label"></span>
+                                </oj-option>
+                            <!-- /ko -->
+                            <!-- ko ifnot:$index() === 1 -->
+                            <oj-option :id="[[id+$context.data.headerAccountNo.value+$index()]]" :value="[[id]]">
+                                    <span data-bind="text : label"></span>
+                                </oj-option>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </oj-menu>
+                    </td>
+                    <!-- /ko -->
+                </tr>
+            </script>
+        </div>
+    </page-section>
+</div>

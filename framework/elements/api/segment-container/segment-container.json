@@ -1,0 +1,123 @@
+{
+    "segments": {
+        "fsgbu-ob-clmo-ds-real-estate": {
+            "id": "real-estate-details",
+            "imgPath": "process-management/real-estate.svg"
+        },
+        "fsgbu-ob-clmo-ds-businessactivity-details": {
+            "id": "business-details",
+            "imgPath": "process-management/business-details.svg"
+        },
+        "fsgbu-ob-clmo-ds-loan-details": {
+            "id": "loan-requirements",
+            "imgPath": "process-management/summary.svg"
+        },
+        "fsgbu-ob-clmo-ds-trade-details": {
+            "id": "trade-details",
+            "imgPath": "process-management/equipment-finance.svg"
+        },
+        "fsgbu-ob-clmo-ds-plant-machinery": {
+            "id": "equipment-details",
+            "imgPath": "process-management/equipment-finance.svg"
+        },
+        "fsgbu-ob-clmo-ds-document-upload": {
+            "id": "document-upload",
+            "imgPath": "process-management/file-upload-identifier.svg"
+        },
+        "fsgbu-ob-clmo-ds-facility-application": {
+            "id": "facility-application",
+            "imgPath": "dashboard/quick-access/new-facility-application.svg"
+        },
+        "fsgbu-ob-clmo-ds-facility-application-create": {
+            "id": "apply-new-facility",
+            "imgPath": "dashboard/quick-access/new-facility-application.svg"
+        },
+        "fsgbu-ob-clmo-ds-collaterals": {
+            "id": "amend-facility",
+            "imgPath": "credit-facility/ownership.svg"
+        },
+        "fsgbu-ob-clmo-ds-upload-documents": {
+            "id": "upload-documents",
+            "imgPath": "credit-facility/file-upload-identifier.svg"
+        },
+        "fsgbu-ob-clmo-ds-collateral-evaluation-details": {
+            "id": "collateral-evaluation-details",
+            "imgPath": "credit-facility/collateral-evaluation.svg"
+        },
+        "fsgbu-ob-clmo-ds-collateral-evaluation-ownership-details": {
+            "id": "collateral-evaluation-ownership-details",
+            "imgPath": "credit-facility/ownership.svg"
+        },
+        "fsgbu-ob-clmo-ds-collateral-evaluation-seniority-details": {
+            "id": "collateral-evaluation-seniority-details",
+            "imgPath": "credit-facility/seniority.svg"
+        },
+        "fsgbu-ob-clmo-ds-collateral-evaluation-documents-upload": {
+            "id": "collateral-evaluation-documents-upload",
+            "imgPath": "credit-facility/file-upload-identifier.svg"
+        }
+    },
+    "product": {
+        "loan": {
+            "module": "process-management",
+            "confirmPage": "loan-origination-confirm",
+            "partySelector": "corporate-details",
+            "rests": {
+                "review": {
+                    "url": "obclpm/initiateLoanApplication",
+                    "version": "ext/v1"
+                },
+                "draft": {
+                    "url": "processManagement"
+                }
+            },
+            "defaultSegments": []
+        },
+        "facility": {
+            "module": "process-management",
+            "confirmPage": "facility-origination-confirm",
+            "partySelector": "corporate-details-facility",
+            "rests": {
+                "review": {
+                    "url": "liabilities/{liabilityId}/facilities",
+                    "version": "v1"
+                },
+                "draft": {
+                    "url": "processManagement"
+                }
+            },
+            "defaultSegments": [ "fsgbu-ob-clmo-ds-facility-application-create","fsgbu-ob-clmo-ds-collaterals","fsgbu-ob-clmo-ds-upload-documents"]
+        },
+        "facilityAmend": {
+            "module": "process-management",
+            "confirmPage": "facility-origination-confirm",
+            "partySelector": "corporate-details-facility-amend",
+            "rests": {
+                "review": {
+                    "url": "liabilities/{liabilityId}/facilities/{facilityId}",
+                    "version": "v1",
+                    "mode":"update"
+                },
+                "draft": {
+                    "url": "processManagement"
+                }
+            },
+            "defaultSegments": [ "fsgbu-ob-clmo-ds-facility-application","fsgbu-ob-clmo-ds-collaterals","fsgbu-ob-clmo-ds-upload-documents"]
+        },
+        "collateralEvaluation": {
+            "module": "credit-facility",
+            "confirmPage": "collateral-evaluation-confirm",
+            "partySelector": "collateral-evaluation-party-selector",
+            "rests": {
+                "review": {
+                    "url": "collateralApplications",
+                    "version": "v1"
+                },
+                "draft": {
+                    "url": "processManagement"
+                }
+            },
+            "defaultSegments": [ "fsgbu-ob-clmo-ds-collateral-evaluation-details", "fsgbu-ob-clmo-ds-collateral-evaluation-ownership-details", "fsgbu-ob-clmo-ds-collateral-evaluation-seniority-details", "fsgbu-ob-clmo-ds-collateral-evaluation-documents-upload"]
+        }
+    }
+}

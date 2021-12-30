@@ -1,0 +1,8 @@
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+            <oj-train class="oj-train-stretch" on-selected-step-changed="[[updateLabelText]]"
+                selected-step="{{selectedStepValue}}" :id="[['train72']]" steps="[[stepArray]]"></oj-train>
+        </div>
+    </div>
+</page-section>

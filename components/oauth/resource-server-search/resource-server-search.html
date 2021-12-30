@@ -1,0 +1,76 @@
+<div class="oj-flex">
+    <div class="oj-flex design-dashboard">
+        <div class="oj-flex-item oj-sm-9">
+            <div class="form-main-container">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading :''">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3 label">
+                            <oj-label for="resourceServerName">
+                                <span data-bind="text:$component.Nls.name"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-5 label">
+                            <oj-input-text id="resourceServerName" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.Nls.invalidResourceServerName,{type: 'length',options: {min: 0, max: 40}})]]" value="{{resServerName}}" aria-labelledby="resourceServerName">
+                            </oj-input-text>
+                        </div>
+                    </div>
+            <div class="oj-flex-item oj-md-6 oj-sm-12" data-bind="descendantsComplete : $component.renderDomainList">
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                            <oj-label for="identityDomain">
+                                <span data-bind="text:$component.Nls.domainName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-9 label">                                
+                            <!-- ko if:$component.isIdentityDomainListLoaded() -->                            
+                            <oj-select-one id="identityDomain" value="{{identityDomainName}}" :placeholder="[[$component.Nls.select]]" translations="[[{'required':{messageDetail:$component.Nls.selectIdentityDomain}}]]" required="[[true]]">
+                                <!-- ko foreach:$component.identityDomainList -->
+                                <oj-option value="{{name}}"><span data-bind="text:name"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+                    <div class="oj-flex-item button-container">
+                        <oj-button id="search" class="action-button-primary" on-click="[[searchResourceServer]]">
+                            <span data-bind="text:$component.Nls.search"></span>
+                        </oj-button>
+                        <!-- ko ifnot:$component.isResourceServerListLoaded() -->
+                        <oj-button class="action-button-secondary" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                            <span data-bind="text:$component.Nls.cancel"></span>
+                        </oj-button>
+                        <!-- /ko -->
+                        <oj-button id="dialogtopupButton" class="action-button-tertiary" on-click="[[reset]]">
+                            <span data-bind="text:$component.Nls.clear"></span>
+                        </oj-button>
+                    </div>
+                </page-section>
+                <!-- ko if:$component.isResourceServerListLoaded() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.searchResults">
+                            <oj-table id="table" :aria-label="[[$component.Nls.details]]" on-oj-sort="[[sortListener]]" columns="[[[{headerText:$component.Nls.name,field:'data.name','renderer': $oj.KnockoutTemplateUtils.getRenderer('resName', true)},{headerText:$component.Nls.description,field:'data.description'}]]]" selection-mode="[[{row:'single',column:'single'}]]" data="[[pagingdatasource]]" on-value-changed="[[onResourceServerSelected]]" translations="[[{msgNoData:$component.Nls.noData}]]">
+                                <caption class="hide-label" data-bind="text:$component.Nls.details"></caption>
+                                <oj-paging-control id="paging" slot="bottom" :page-size="[[8]]" data="[[pagingdatasource]]">
+                                </oj-paging-control>
+                            </oj-table>
+                            <script type="text/html" id="resName">
+                                <td>
+                                    <a href="#" data-bind="text:$context.row.name, click: $component.onResourceServerSelected.bind($context.row.name)"></a>
+                                </td>
+                            </script>
+                        </page-section>
+                    </div>
+                </div>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                    <span data-bind="text:$component.Nls.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-3 help-panel">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'resource-server-search'"></help>
+        </div>
+   </div>
+</div>

@@ -1,0 +1,128 @@
+.cust-details {
+    background: var(--banner-background);
+    color: var(--banner-text-secondary);
+    padding: var(--banner-padding);
+    justify-content: center;
+    align-items: center;
+    .label,
+    label {
+        color: var(--banner-text-primary);
+        font-size: var(--base-font-size-medium);
+    }
+    .payeeName{
+    @include single-padding(left,0.5rem);
+    }
+}
+   .paymentDetailDeleteIcon {
+       .iconSize {
+           font-size: 1.3rem;
+       }
+
+       padding-top:1rem;
+   }
+
+.payments-money-transfer {
+&__section {
+    border: 0.05rem solid var(--base-border-default);
+    @include margin(0.2rem, 0, 1.3rem, 0.6rem);
+    padding: 1.3rem 0.6rem 0;
+
+    @include mq(small) {
+        @include margin(0.6rem, 0, 1.9rem, 0);
+        padding: 0.6rem 0 0;
+    }
+}
+    .iconStyling {
+        font-size: 1.1rem;
+        position: relative;
+        top: 0.1rem;
+        color: var(--link-base);
+    }
+    .label_icon{
+        color: var(--base-text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .payee-name {
+        padding-top: 0.25em;
+        &__cancel-icon {
+            @include single-padding(left, 0.6rem);
+        }
+    }
+    .suggested-network{
+        @include single-margin(left, 0.4rem);
+    }
+    .dualdropdown {
+        background-color: var(--form-input-background-base);
+        overflow: auto;
+        cursor: pointer;
+        z-index: 2;
+        border: 0.05rem solid var(--form-input-border-color);
+        box-sizing: border-box;
+
+        .payeeGroupHeader {
+            padding: 0.6rem 0.6rem;
+            border-bottom: 0.05rem solid var(--form-input-border-color) !important;
+
+            .payeeGroupPadding {
+                padding: 0 0.3rem;
+            }
+        }
+
+        ul {
+            margin: auto;
+            list-style-type: none;
+            padding: 0 1.2rem;
+
+            .subPayee {
+                padding: 0.6rem;
+                border-bottom: 0.05rem solid var(--form-input-border-color) !important;
+                background: var(--form-input-background-hover);
+                color: var(--base-text-secondary);
+                font-size: var(--form-input-text);
+
+                .labelPadding {
+                    padding: 0 0.5rem;
+                }
+            }
+        }
+    }
+
+    .also-transfer-today {
+        &__help-icon {
+            display: inline-block;
+            padding-top: 0.2rem;
+            vertical-align: middle;
+            @include single-padding(left, 0.2rem);
+        }
+    }
+
+    .checkbox-option-label {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    &__popup {
+        //display: inline-block;
+        width: 11rem;
+    }
+    .dropdowncancel {
+        position: relative;
+        top: -1.4rem;
+        @include left(93%);
+    }
+    .cust-details {
+        background: var(--banner-background);
+        color: var(--banner-text-secondary);
+        padding: var(--banner-padding);
+        justify-content: center;
+        align-items: center;
+    }
+    .exchange-rate {
+        &.processed {
+            color: var(--base-color-success);
+        }
+    }
+    .currency {
+        line-height: 40px;
+    }
+}

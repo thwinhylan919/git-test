@@ -1,0 +1,16 @@
+{
+  "header": "liquidity-management",
+  "data": [{
+    "id": "create-structure",
+    "module": "create-structure",
+    "parentModule": "liquidity-management",
+    "icon": "new-structure",
+    "class": "oj-sm-12"
+  }, {
+    "id": "list-structure",
+    "module": "list-structure",
+    "parentModule": "liquidity-management",
+    "icon": "list-structure",
+    "class": "oj-sm-12"
+  }]
+}

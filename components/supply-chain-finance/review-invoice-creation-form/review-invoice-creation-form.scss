@@ -1,0 +1,47 @@
+.medium-font {
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-bold);
+}
+
+.calculation-style {
+    padding-top: 1.3rem;
+}
+
+.net-amount-commodity {
+    padding: 0.5rem;
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.text-style {
+    padding-top: 1rem;
+}
+
+.border-style {
+    padding: 0.5rem;
+    @include single-border(top, 0.08rem solid var(--banner-gradient-start-color));
+    @include single-border(bottom, 0.08rem solid var(--base-background-tertiary));
+}
+
+.commodity-style {
+    padding-bottom: 0.5rem;
+    font-weight: var(--base-font-weight-bold);
+    @include single-border(bottom, 0.08rem solid var(--banner-gradient-start-color));
+}
+
+.discount-padding {
+    padding-bottom: 1.5rem;
+}
+
+.total-label {
+    @include padding(0.7rem, 0, 0.7rem, 0.7rem);
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.total-value {
+    @include padding(0.7rem, 0.7rem, 0.7rem, 0);
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.calculation-margin {
+    @include margin(0, 0, 0, 0.7rem);
+}

@@ -1,0 +1,12 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.sms.service.user.credentials.Credentials",
+           "components": [{
+                   "componentName": "force-change-password",
+                   "service": "forceChangePassword",
+                   "perform": ""
+               }
+           ]
+       }
+   ]
+}

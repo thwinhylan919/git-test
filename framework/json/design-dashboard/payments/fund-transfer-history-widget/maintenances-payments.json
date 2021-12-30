@@ -1,0 +1,67 @@
+{
+  "status": {
+    "result": "SUCCESSFUL",
+    "contextID": "005ae_wN_VqFw0H6yvbe6G0002mO00001c,0:1",
+    "message": {
+      "type": "INFO"
+    }
+  },
+  "configurationDetails": [
+    {
+      "propertyId": "CORPORATE_MAX_MULTIPLE_TRANSFER_LIMIT",
+      "propertyValue": "5"
+    },
+    {
+      "propertyId": "CORPORATE_MAX_MULTIPLE_BILL_PAYMENT_LIMIT",
+      "propertyValue": "5"
+    },
+    {
+      "propertyId": "RETAIL_MAX_MULTIPLE_TRANSFER_LIMIT",
+      "propertyValue": "5"
+    },
+    {
+      "propertyId": "RETAIL_MAX_MULTIPLE_BILL_PAYMENT_LIMIT",
+      "propertyValue": "5"
+    },
+    {
+      "propertyId": "CORPORATE_SERVICE_CHARGES_ENABLED",
+      "propertyValue": "N"
+    },
+    {
+      "propertyId": "RETAIL_SERVICE_CHARGES_ENABLED",
+      "propertyValue": "N"
+    },
+    {
+      "propertyId": "CHECK_UPCOMING_PAYMENT",
+      "propertyValue": "N"
+    },
+    {
+      "propertyId": "CHECK_UPCOMING_PAYMENT_FOR_DAYS",
+      "propertyValue": "5"
+    },
+    {
+      "propertyId": "CORPORATE_PAYEE_PHOTO_UPLOAD_ENABLED",
+      "propertyValue": "Y"
+    },
+    {
+      "propertyId": "RETAIL_PAYEE_PHOTO_UPLOAD_ENABLED",
+      "propertyValue": "Y"
+    },
+    {
+      "propertyId": "NETWORK_SUGGESTION_ENABLED",
+      "propertyValue": "Y"
+    },
+    {
+      "propertyId": "UPI_FUND_REQUEST_MAX_VALIDITY_DAYS",
+      "propertyValue": "30"
+    },
+    {
+      "propertyId": "UPI_SPLIT_BILL_MAX_CONTRIBUTORS",
+      "propertyValue": "10"
+    },
+    {
+      "propertyId": "MULTICURRENCY_SUPPORT",
+      "propertyValue": "Y"
+    }
+  ]
+}

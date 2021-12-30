@@ -1,0 +1,196 @@
+<div class="page-section-content">
+	<oj-validation-group id="amendTermsAndConditionsTracker" valid="{{$component.termsAndConditionsValidationTracker}}">
+		<!-- ko ifnot:$component.mode() === 'EDIT' || $component.mode() === 'CREATE'  -->
+		<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+    	<!-- ko ifnot:$baseModel.small() -->
+    	<div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    		        <oj-table id="tncTable" :aria-label="[[$component.resourceBundle.termsAndConditions.labels.tncTable]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_tnc', true)]]" columns="[[[{headerText:$component.resourceBundle.termsAndConditions.labels.srNo,headerClassName:'oj-lg-1'},{headerText:$component.resourceBundle.termsAndConditions.labels.type,headerClassName:'oj-lg-3'},{headerText:$component.resourceBundle.termsAndConditions.labels.description, headerClassName:'oj-lg-8'}]]]" edit-mode="[['rowEdit']]"
+          data="[[$component.datasourceForTermsAndConditionsReview]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.termsAndConditions.labels.tncTable"></caption>
+        </oj-table>
+        <oj-paging-control id="tncTablePaging" data="[[$component.datasourceForTermsAndConditionsReview]]" page-size="5" page-options="[[{orientation:['horizontal']}]]"></oj-paging-control>
+    	</div>
+    	<!-- /ko -->
+      <!-- ko if:$baseModel.small() -->
+      <div class="oj-flex-item oj-sm-12">
+        <oj-list-view id="listview-tnc-card" class="cards" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('tnc_list_card_amend_view',true)}]]" selection-mode="[['single']]" data="[[$component.datasourceForTermsAndConditionsReview]]">
+        </oj-list-view>
+        <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[5]]" data="[[$component.datasourceForTermsAndConditionsReview]]">
+        </oj-paging-control>
+      </div>
+      <!-- /ko -->
+    </div>
+</div>
+		<!-- /ko -->
+    <!-- ko if:$component.mode() === 'EDIT' || $component.mode() === 'CREATE'  -->
+    <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <!-- ko ifnot:$baseModel.small() -->
+      <!-- ko if:$component.termsAndCondsDataSourceLoaded() -->
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                <oj-table id="tncTable" :aria-label="[[$component.resourceBundle.termsAndConditions.labels.tncTable]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_tnc_amend', true)]]" columns="[[[{headerText:$component.resourceBundle.termsAndConditions.labels.srNo,headerClassName:'oj-lg-1'},{headerText:$component.resourceBundle.termsAndConditions.labels.type,headerClassName:'oj-lg-3'},{headerText:$component.resourceBundle.termsAndConditions.labels.description, headerClassName:'oj-lg-8'}]]]" edit-mode="[['rowEdit']]"
+          data="[[$component.datasourceForTermsAndConditionsReview]]">
+          <caption class="hide-label" data-bind="text:$component.resourceBundle.termsAndConditions.labels.tncTable"></caption>
+        </oj-table>
+        <oj-paging-control id="tncTablePaging" data="[[$component.datasourceForTermsAndConditionsReview]]" page-size="5" page-options="[[{orientation:['horizontal']}]]"></oj-paging-control>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if:$baseModel.small() -->
+      <!-- ko if:$component.termsAndCondsDataSourceLoaded() -->
+      <div class="oj-flex-item oj-sm-12">
+        <oj-list-view id="listview-tnc-card" class="cards" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('tnc_list_card_amend',true)}]]" selection-mode="[['single']]" data="[[$component.datasourceForTermsAndConditionsReview]]">
+        </oj-list-view>
+        <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" page-options="[[{layout:['nav']}]]" :page-size="[[5]]" data="[[$component.datasourceForTermsAndConditionsReview]]">
+        </oj-paging-control>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+      <div class="oj-flex oj-flex-items-pad add-draft">
+      <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+        <a href="#" data-bind="attr:{ title: $component.resourceBundle.termsAndConditions.labels.addTermsAndConditions},
+                text:$component.resourceBundle.termsAndConditions.labels.addTermsAndConditions,
+                click:$component.addTermsAndConditions.bind()"><span slot="startIcon" class="icons icon-submit"></span></a>
+      </div>
+    </div>
+    </div>
+  </div>
+    <!-- /ko -->
+		</oj-validation-group>
+
+</div>
+<script type="text/html" id="row_tmpl_tnc">
+      <tr>
+        <td class="draft-no" data-bind="text: $context.rowContext.status.rowIndex + 1">
+        </td>
+        <td>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="">
+              <label class="hide-label" data-bind="text:$component.resourceBundle.termsAndConditions.labels.type, attr : {'for' :'code_' + $context.rowContext.status.rowIndex}"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+              <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.guarantee"></span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex oj-sm-10 oj-md-9 oj-lg-10">
+              <oj-label class="hide-label" data-bind="attr : {'for' :'description_' +  $context.rowContext.status.rowIndex}">
+                <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.description"></span>
+              </oj-label>
+              <span :id="[['description_' + $context.rowContext.status.rowIndex]]"  data-bind="text:description"></span>
+            </div>
+            <!-- ko if:$component.guaranteeDetails.termsAndConditions && $component.bgAmendmentDetails.termsAndConditions -->
+            <!-- ko if:ko.utils.unwrapObservable($component.guaranteeDetails.termsAndConditions)[$context.rowContext.status.rowIndex] &&  ko.utils.unwrapObservable($component.bgAmendmentDetails.termsAndConditions)[$context.rowContext.status.rowIndex] -->
+            <!-- ko ifnot:ko.utils.unwrapObservable($component.guaranteeDetails.termsAndConditions)[$context.rowContext.status.rowIndex].description === ko.utils.unwrapObservable(ko.utils.unwrapObservable($component.bgAmendmentDetails.termsAndConditions)[$context.rowContext.status.rowIndex].description) -->
+              <a href="#" data-bind="attr : {'id' :'previous' + $context.rowContext.status.rowIndex}, click:$component.showDescriptionPreviousValue.bind($data, $context.rowContext.status.rowIndex)">
+              <span class="icons icon-received"></span>
+              </a>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+            <oj-popup :id="[['popup-descriptionPrevious'+ $context.rowContext.status.rowIndex]]" tail="simple" modality="modeless" position.my.horizontal="left" positfion.my.vertical="center" position.at.horizontal="right" position.at.vertical="center">
+  <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+    <span id="descriptionPrevious" class="align-right info-text-small previous-value-span" data-bind="html: $component.descriptionPreviousValue()"></span>
+  </div>
+</oj-popup>
+          </div>
+        </td>
+      </tr>
+    </script>
+    <script type="text/html" id="row_tmpl_tnc_amend">
+      <tr>
+        <td class="draft-no" data-bind="text: $context.rowContext.status.rowIndex + 1">
+        </td>
+        <td>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="">
+              <label class="hide-label" data-bind="text:$component.resourceBundle.termsAndConditions.labels.type, attr : {'for' :'code_' + $context.rowContext.status.rowIndex}"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+              <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.guarantee"></span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex oj-sm-10 oj-md-9 oj-lg-10">
+              <oj-label class="hide-label" data-bind="attr : {'for' :'description_' +  $context.rowContext.status.rowIndex}">
+                <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.description"></span>
+              </oj-label>
+              <oj-text-area :id="[['description_' + $context.rowContext.status.rowIndex]]" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_ALL_SPECIAL',$component.resourceBundle.tradeFinanceErrors.guarantees.invalidDescription,{
+                                      type:'length',options:{
+                    min:0,max:35000}})]]" value="{{description}}"></oj-text-area>
+            </div>
+            <div class="oj-flex oj-sm-2 oj-md-3 oj-lg-2 flex-right">
+              <a href="#" data-bind="attr : {'id' :'delete_' + $context.rowContext.status.rowIndex}, click:$component.remove.bind($data)">
+              <span class="icons icon-delete delete-draft icon-2x" data-bind="attr:{ title: $component.resourceBundle.generic.common.delete}"></span>
+          </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </script>
+    <script type="text/html" id="tnc_list_card_amend_view">
+  <li>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12">
+        <label data-bind="text: $component.resourceBundle.termsAndConditions.labels.type"></label>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <span data-bind="text: $component.resourceBundle.termsAndConditions.labels.guarantee"></span>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <label data-bind="text: $component.resourceBundle.termsAndConditions.labels.description"></label>
+      </div>
+      <div class="oj-flex-item oj-sm-12">
+        <span data-bind="text: $data.description"></span>
+      </div>
+    </div>
+  </li>
+</script>
+<script type="text/html" id="tnc_list_card_amend">
+      <li data-bind="attr: {id: $data.srNo}">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-9" data-bind="text: $baseModel.format($component.resourceBundle.termsAndConditions.labels.tncWithSrNo,
+            {srNo: $data.srNo})">
+              </div>
+              <div class="oj-flex-item oj-sm-3 right">
+                <a href="#" data-bind="click:$component.remove.bind($data)">
+                  <span class="icons icon-delete icon-2x icon-padding-right" data-bind="attr:{ title: $component.resourceBundle.generic.common.delete}"></span>
+              </a>
+              </div>
+            </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+            <div class="oj-flex-item oj-sm-12">
+              <oj-label>
+                <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.type"></span>
+              </oj-label>
+              </div>
+            <div class="oj-flex-item oj-sm-12">
+              <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.guarantee"></span>
+            </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item oj-sm-12">
+                <oj-label data-bind="attr : {'for' :'description_' +  $context.index}">
+                  <span data-bind="text:$component.resourceBundle.termsAndConditions.labels.description"></span>
+                </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <oj-text-area :id="[['description_' + $context.index]]" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_ALL_SPECIAL',$component.resourceBundle.tradeFinanceErrors.guarantees.invalidDescription,{
+                                          type:'length',options:{
+                        min:0,max:6500}})]]" value="{{description}}"></oj-text-area>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </li>
+    </script>
+    

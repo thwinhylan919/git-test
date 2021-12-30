@@ -1,0 +1,34 @@
+.label{
+  font-weight:500;
+  font-size: 13px;
+}
+.progress{
+  padding:10px;
+progress-bar-property {
+  width: 50%;
+  height: 0.625rem;
+  margin: 0.625rem;
+
+}
+}
+.utilizedAmount{
+  color:var(--base-color-warning);
+}
+.availableAmount{
+  color:var(--base-color-success);
+}
+
+.amount{
+  font-size: 1rem;
+}
+.amount1{
+background: var(--base-color-warning);
+height: 6px;
+color: var(--base-color-warning);
+display: inline;
+}
+.amount2{   display: inline;
+   background: var(--base-color-success);
+   height: 6px;
+   color: var(--base-color-success);
+}

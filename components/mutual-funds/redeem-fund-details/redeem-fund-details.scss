@@ -1,0 +1,23 @@
+.redeem-fund-container {
+  .margin-box {
+    margin-top: 0.5rem;
+  }
+
+  .scheme-color {
+    background-color: var(--banner-background);
+  }
+
+  .heading-pad {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .note-mobile {
+    font-weight: var(--base-font-weight-light);
+    font-size: var(--base-font-size-medium);
+  }
+
+  .medium-text {
+    font-size: var(--base-font-size-medium);
+  }
+}

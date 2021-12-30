@@ -1,0 +1,21 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.accountrelationship.service.mapping.TaskToAccountRelationshipMapping",
+        "components": [{
+            "componentName": "relationship-matrix-mapping",
+            "service": "listAllowedTaskMapping",
+            "perform": "relationship-matrix-base",
+            "approve": "relationship-matrix-base"
+        }, {
+            "componentName": "relationship-matrix-mapping",
+            "service": "create",
+            "perform": "relationship-matrix-base",
+            "approve": "relationship-matrix-base"
+        }, {
+            "componentName": "relationship-matrix-mapping",
+            "service": "update",
+            "perform": "relationship-matrix-base",
+            "approve": "relationship-matrix-base"
+        }]
+    }]
+}

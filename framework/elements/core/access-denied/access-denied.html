@@ -1,0 +1,18 @@
+<div class="oj-flex access-denied">
+    <div class="msgContainer">
+        <div class="msgContents">
+            <div>
+                <span class="header center" data-bind="text:$component.resourceBundle.headerTxt"></span>
+            </div>
+            <div class="oj-flex oj-sm-12 bodyTxt">
+                <span class="oj-sm-12 center" data-bind="text:$component.resourceBundle.bodyTxt"></span>
+                <span class="oj-sm-12 center" data-bind="text:$component.resourceBundle.goBack"></span>
+            </div>
+            <div class="oj-flex-item oj-sm-12 help-item center homePageBtn">
+                <oj-button class="help-button" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.resourceBundle.homePage"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</div>

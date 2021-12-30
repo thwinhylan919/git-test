@@ -1,0 +1,14 @@
+{
+	"modules": [
+		{
+			"moduleName": "com.ofss.digx.app.security.service.authentication.oob.CounterBasedToken",
+			"components": [
+				{
+					"componentName": "push-out-of-band",
+					"service": "checkStatus",
+					"perform": ""
+				}
+			]
+		}
+	]
+}

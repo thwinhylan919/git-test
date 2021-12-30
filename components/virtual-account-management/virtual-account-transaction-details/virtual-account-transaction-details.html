@@ -1,0 +1,95 @@
+<div class="cashPosition">
+  <div class="oj-flex oj-flex-items-pad cashPosition__wrapper">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+      <oj-navigation-list id="navigationList" :aria-label="[[$component.resource.labels.navigation]]"
+        selection="{{$component.selectedItem}}" edge="top" on-selection-changed="[[$component.selectedRange]]">
+        <ul>
+          <!-- ko foreach: menuOptions -->
+          <!-- ko if: $index() === 0 -->
+          <li data-bind="attr:{id :$data.code}">
+            <div data-bind="text: $baseModel.format($component.resource.labels.aboveRange, {value: $data.description})">
+            </div>
+          </li>
+          <!-- /ko -->
+          <!-- ko if: $data.description.length === 2 -->
+          <li data-bind="attr:{id :$data.code}">
+            <div
+              data-bind="text: $baseModel.format($component.resource.labels.amountRange, {from:$data.description[0], to:$data.description[1]})">
+            </div>
+          </li>
+          <!-- /ko -->
+          <!-- ko if: $index() === ($component.groups().length - 1)  -->
+          <li data-bind="attr:{id :$data.code}">
+            <div data-bind="text: $baseModel.format($component.resource.labels.belowRange, {value: $data.description})">
+            </div>
+          </li>
+          <!-- /ko -->
+          <!-- /ko -->
+        </ul>
+      </oj-navigation-list>
+
+      <div class="virtual-accounts-panel oj-flex">
+        <!-- ko if: $component.tabsTemplateLoaded -->
+        <div id="tabs-container" class="oj-flex-item oj-sm-4 oj-md-4 oj-lg-4">
+          <oj-tab-bar id="tabGroups" :aria-label="[[$component.resource.title]]" data="[[tabDataSource]]"
+            selection="{{$component.selectedComponent}}" on-selection-changed="[[$component.selectedTabChangeHandler]]"
+            as="item">
+            <template slot="itemTemplate">
+              <li :id="[[item.data.code]]">
+                <a href="#">
+                  <span value="[[item.data.code]]" data-bind="text: item.data.displayValue"></span>
+                </a>
+              </li>
+            </template>
+          </oj-tab-bar>
+        </div>
+        <!-- /ko -->
+        <div class="transaction-table oj-flex-item oj-sm-8 oj-md-8 oj-lg-8">
+          <!-- ko if: balanceTemplateLoaded -->
+          <div class="oj-flex oj-flex-items-pad cashPosition__wrapper-header">
+            <div class="oj-flex-item oj-sm-12" data-bind="text: $component.resource.labels.balance"></div>
+            <div class="oj-flex-item oj-sm-12"
+              data-bind="text:$formatter.formatCurrency($component.individualBalance(),$component.currency())"></div>
+          </div>
+          <!-- /ko -->
+          <!-- ko if: viewTable -->
+          <div class="oj-flex oj-flex-items-pad">
+            <oj-table id="table" :aria-label="[[$component.resource.cancel]]" data="[[transactionDataSource]]"
+              columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns='[[[
+              {
+                "headerText":$component.resource.labels.date,
+                "template":"transactionDate",
+                "field":"transactionDate",
+                "sortable":"none",
+                "headerClassName": "break-word",
+                "className": "break-word"
+              },
+              {
+                "headerText":$component.resource.labels.amount,
+                "template":"amountIdentifier",
+                "field":"amount",
+                "sortable":"none",
+                "headerClassName": "break-word",
+                "className": "break-word"
+              }
+              ]]]'>
+              <caption class="hide-label" data-bind="text:$component.resource.cancel"></caption>
+              <template slot="transactionDate">
+                <span data-bind="text: $formatter.formatDate($current.row.transactionDate,'dateFormat')"></span>
+              </template>
+              <template slot="amountIdentifier">
+                <span
+                  data-bind="text:$formatter.formatCurrency($current.row.transactionAmount, $current.row.currency)"></span>
+                <span
+                  data-bind="css:($current.row.drCr === 'Cr')?'credit-status':'debit-status',text:$current.row.drCr"></span>
+              </template>
+            </oj-table>
+            <oj-paging-control id="paging" data="[[transactionDataSource]]" page-size="4" slot="bottom">
+            </oj-paging-control>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

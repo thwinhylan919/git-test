@@ -1,0 +1,7 @@
+{
+    "fileNameExclusionArray": [
+        "addon", "admin", "api", "signup", "td", "topup", "sms", "lm",
+        "pfm", "obdx", "otp", "param", "locator", "nav", "lc", "hotp", "fatca", "facebook", "casa", "hotlisting",
+        "img", "txn", "app", "kyc", "aggregator", "atm", "linkedin", "uk", "sepa", "smtp", "deregister", "inbox", "vpa", "upi", "init", "re-evaluate"
+    ]
+}

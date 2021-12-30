@@ -1,0 +1,12 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+  <div class="oj-sm-12 help-item center">
+    <img data-bind="loadImage : 'info-icon/note.svg'" alt="" />
+  </div>
+  <h4 class="oj-sm-12 help-content-title help-item" data-bind="text:$component.Nls.note"></h4>
+  <span class="oj-sm-12 help-item" data-bind="text:$component.Nls.description1"></span>  
+  <div class="oj-flex-item oj-sm-12 help-item center">
+    <oj-button class="help-button" on-click="[[$component.create]]">
+      <span data-bind="text:$component.Nls.create"></span>
+    </oj-button>
+  </div>
+</div>

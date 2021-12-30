@@ -1,0 +1,192 @@
+$actions-color:#000;
+.design-dashboard-container {
+    margin-top: 10px;
+}
+
+.listView>ul>li>ul>li {
+    width: auto;
+    border-width: 0;
+    padding: 5px;
+    margin: 0 !important;
+    margin-bottom: 20px !important;
+}
+
+.componentListView {
+    border-width: 0;
+    display: inline-block;
+    width: 100%;
+}
+
+.listView {
+    display: inline-block;
+    width: 100%;
+    border-width: 0;
+}
+
+.right-actions,
+.left-actions {
+    position: absolute;
+    background-color: transparent;
+    top: 3px;
+    z-index: 1;
+}
+
+.right-actions {
+    @include right(0);
+}
+
+.left-actions {
+    @include left(-5px);
+}
+
+.designWidgetContainer {
+    overflow: hidden;
+    height: calc(100% - 0px);
+}
+
+.widgetDescription {
+    text-align: center;
+    padding-top: 5px;
+    display: block;
+    @include float(left);
+    width: 100%;
+}
+
+.widgetDetails {
+    font-size: 1rem;
+}
+
+.drag-control {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 0px);
+    top: 0;
+}
+
+.dashboardView {
+    border: 1px solid;
+    border-color: var(--base-border-default);
+    padding: 10px;
+    position: relative;
+}
+
+.dashboardView {
+    min-height: 378px;
+}
+
+.plzWait {
+    top: 50%;
+    position: relative;
+    @include single-margin(left, calc(50% - 105px));
+    font-size: 2rem;
+    opacity: 0.9;
+}
+
+.liContainer {
+    height: 350px;
+}
+
+.liwidgetContainer {
+    height: 100%;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.liwidgetContainer2 {
+    height: 100%;
+    border: 0px solid var(--base-border-default);
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    top: 25px;
+}
+
+.widgetListContainer {
+    height: 75vh;
+    width: 210px;
+    overflow-y: scroll;
+}
+
+.widget-panel {
+    padding: 0px;
+    border-width: 0px;
+    overflow: visible;
+    background-color: var(--color-white);
+    height: 100%;
+}
+
+.newActions {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    @include right(0px);
+    border: 1px solid var(--base-border-default);
+    @include single-border(bottom-color, var(--color-white));
+    @include padding(2px, 3px, 5px, 3px);
+    width: 75px;
+    background-color: var(--color-white);
+    @include single-border(top-right-radius, 6px);
+    @include single-border(top-left-radius, 6px);
+    box-sizing: border-box;
+    .icons {
+        font-size: 10px;
+    }
+    a {
+        @include float(right);
+        @include single-margin(right, 8px);
+        .icon-compress {
+            font-size: 13px;
+        }
+    }
+}
+
+.deleteIcon,
+.expandIcon,
+.compressIcon {
+    color: $actions-color;
+    border-radius: 50%;
+    background: var(--base-background-primary);
+}
+
+.disableIcon {
+    color: var(--base-background-tertiary);
+}
+
+.compressIcon {
+    .icons {
+        font-size: 12px;
+    }
+}
+
+.widgetListFieldset {
+    border-width: 0;
+    padding: 0;
+}
+
+.searchComponentSection {
+    position: relative;
+    .searchComponent {
+        width: 100%;
+        height: 25px;
+        border-bottom-width: 1px;
+        @include padding(4px, 30px, 0px, 4px);
+        margin-bottom: 5px;
+        @include single-border(left, 0px);
+        @include single-border(right, 0px);
+        @include single-border(top, 0px);
+    }
+    .icon-search {
+        position: absolute;
+        @include right(7px);
+        top: 5px;
+    }
+}
+
+.leftContainer {
+    width: 100%;
+    border: 1px solid;
+    border-color: var(--base-border-default);
+    height: inherit;
+}

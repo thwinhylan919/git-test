@@ -1,0 +1,39 @@
+{
+    "default": [{
+        "name": "makers.ownAccountTransfer",
+        "img": "account-transfer.svg",
+        "id": "payments-money-transfer",
+        "module": "payments",
+        "action": "ownAccountTransfer",
+        "taskCode": ""
+    }, {
+        "name": "makers.adhocPayments",
+        "img": "loan-repayment.svg",
+        "id": "adhoc-payments",
+        "module": "payments",
+        "action": "",
+        "taskCode": ""
+    },{
+        "name": "makers.bulkFileUpload",
+        "img": "file-upload-identifier.svg",
+        "id": "file-upload",
+        "module": "file-upload",
+        "action": "",
+        "taskCode": ""
+    }, {
+        "name": "makers.payments",
+        "img": "domestic-payment.svg",
+        "id": "payments-money-transfer",
+        "module": "payments",
+        "action": "domesticPayments",
+        "taskCode": ""
+    }, {
+        "name": "makers.bulkFileView",
+        "img": "uploaded-file-inquiry.svg",
+        "id": "file-view",
+        "module": "file-upload",
+        "action": "",
+        "taskCode": ""
+    }
+  ]
+}

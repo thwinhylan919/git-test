@@ -1,0 +1,108 @@
+.username-container {
+    background: var(--base-color-primary);
+    padding: 0 0.6rem 1.3rem;
+    @include margin(0, 0.6rem, 0.6rem, 0);
+    color: var(--color-white);
+    @include mq(large) {
+        height: 2.5rem;
+        line-height: 2.5rem;
+    }
+    @include mq(medium) {
+        height: 2rem;
+        line-height: 2rem;
+    }
+    @include mq(small) {
+        height: 3.3rem;
+        line-height: 1.6rem;
+    }
+}
+
+.login-icon {
+    @include mq(large) {
+        width: 4rem;
+    }
+    @include mq(medium) {
+        width: 3rem;
+    }
+    @include mq(small) {
+        width: 2rem;
+    }
+}
+
+.username-link-container {
+    font-size: 1.1rem;
+    @include mq(large) {
+        @include padding(1.5rem, 0, 1rem, 0, !important);
+    }
+    @include mq(medium) {
+        @include padding(1rem, 0, 1rem, 0, !important);
+    }
+    @include mq(small) {
+        @include padding(0.5rem, 1rem, 0.5rem, 1rem, !important);
+    }
+}
+
+.emailHeader label {
+    font-size: var(--base-font-size-large);
+    color: var(--base-color-primary);
+    font-weight: var(--base-font-weight-regular);
+}
+
+.confirm-screen {
+    position: relative;
+    padding: 0;
+    @include mq(small) {
+        padding: 0.5rem 0;
+    }
+    &__header {
+        border-bottom: var(--confirm-screen-border-bottom-width) solid var(--confirm-screen-border-bottom-color);
+        border-radius: var(--confirm-screen-border-radius);
+        margin: 0 0 0.8rem;
+        padding: 0.6rem;
+    }
+    .successHeader {
+        @include single-border(left, var(--confirm-screen-success-border-width) solid var(--confirm-screen-success-border-color));
+        border-radius: var(--confirm-screen-success-border-radius);
+        background-color: var(--base-color-success-light);
+        background: linear-gradient(to var(--confirm-screen-success-gradient-direction), var(--confirm-screen-success-gradient-start-color), var(--confirm-screen-success-gradient-end-color));
+    }
+    .errorHeader {
+        @include single-border(left, var(--confirm-screen-error-border-width) solid var(--confirm-screen-error-border-color));
+        border-radius: var(--confirm-screen-error-border-radius);
+        background: linear-gradient(to var(--confirm-screen-error-gradient-direction), var(--confirm-screen-error-gradient-start-color), var(--confirm-screen-error-gradient-end-color));
+    }
+    &-header {
+        &__text {
+            text-transform: uppercase;
+            font-size: var(--confirm-screen-text-font-size);
+            font-weight: var(--confirm-screen-text-font-weight);
+            color: var(--confirm-screen-text-foreground-color);
+            display: flex;
+            align-items: center;
+        }
+        &-text {
+            &__image {
+                height: 1.3rem;
+                width: 1.3rem;
+            }
+            &__message {
+                padding: 0.3rem;
+            }
+        }
+        &__successMessage {
+            @include single-padding(left, 1.6rem);
+            display: inline-block;
+        }
+    }
+    &__eReceipt-top {
+        cursor: pointer;
+        position: absolute;
+        @include right(1rem);
+        @include mq(small) {
+            top: 5.6rem;
+        }
+        &-text:hover {
+            text-decoration: underline;
+        }
+    }
+}

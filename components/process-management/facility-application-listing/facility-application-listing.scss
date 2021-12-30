@@ -1,0 +1,262 @@
+$submitted-background-color: #0A8BE6;
+$draft-background-color: #5F2D61;
+$inProgress-background-color: #FD6A02;
+$approved-background-color: #FD6A02;
+$rejected-background-color: #FD6A02;
+$box-background-color: #D3D3D3;
+$drf-panel-hover-color: #E6E6FA;
+$sub-panel-hover-color: #c8e2f5;
+$inp-panel-hover-color: #f9dfcc;
+$app-panel-hover-color: #f9dfcc;
+$rej-panel-hover-color: #f9dfcc;
+.application-tracker-header {
+    padding-bottom: 0.5rem;
+    font-size: var(--form-header-font-size);
+    .img-customizations {
+        height: 2.5rem;
+        @include single-padding(left, 1rem);
+    }
+    .header-customizations {
+        @include single-margin(top, 0.7rem);
+    }
+}
+
+.demo-panel-customizations-sub {
+    width: 22rem;
+    cursor: pointer;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: .3rem;
+    @include single-border(left, 0.3rem solid $submitted-background-color);
+}
+
+.demo-panel-customizations-drf {
+    width: 22rem;
+    cursor: pointer;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: .3rem;
+    @include single-border(left, 0.3rem solid $draft-background-color);
+}
+
+.demo-panel-customizations-inp {
+    width: 22rem;
+    cursor: pointer;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: .3rem;
+    @include single-border(left, 0.3rem solid $inProgress-background-color);
+}
+
+.demo-panel-customizations-app {
+    width: 22rem;
+    cursor: pointer;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: .3rem;
+    @include single-border(left, 0.3rem solid $approved-background-color);
+}
+
+.demo-panel-customizations-rej {
+    width: 22rem;
+    cursor: pointer;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: .3rem;
+    @include single-border(left, 0.3rem solid $rejected-background-color);
+}
+
+.filter-margin {
+    @include mq(large) {
+        @include single-padding(left, 1rem);
+    }
+    @include mq(small) {
+        @include single-margin(top, 1rem);
+    }
+    @include mq(medium) {
+        @include single-margin(left, 0rem);
+    }
+    margin-top: .6rem;
+}
+
+div.demo-panel-customizations-sub:hover {
+    background-color: $sub-panel-hover-color;
+}
+
+div.demo-panel-customizations-drf:hover {
+    background-color: $drf-panel-hover-color;
+}
+
+div.demo-panel-customizations-inp:hover {
+    background-color: $inp-panel-hover-color;
+}
+
+div.demo-panel-customizations-app:hover {
+    background-color: $inp-panel-hover-color;
+}
+
+div.demo-panel-customizations-rej:hover {
+    background-color: $inp-panel-hover-color;
+}
+
+.demo-panel-customizations-small-sub {
+    width: 90%;
+    height: 5.5rem;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    @include single-border(left, 0.3rem solid $submitted-background-color);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.demo-panel-customizations-small-drf {
+    width: 90%;
+    height: 5.5rem;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    @include single-border(left, 0.3rem solid $draft-background-color);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.demo-panel-customizations-small-inp {
+    width: 90%;
+    height: 5.5rem;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    @include single-border(left, 0.3rem solid $inProgress-background-color);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.demo-panel-customizations-small-app {
+    width: 90%;
+    height: 5.5rem;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    @include single-border(left, 0.3rem solid $approved-background-color);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.demo-panel-customizations-small-rej {
+    width: 90%;
+    height: 5.5rem;
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    @include single-border(left, 0.3rem solid $rejected-background-color);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+div.demo-panel-customizations-small-sub:hover {
+    background-color: $sub-panel-hover-color;
+}
+
+div.demo-panel-customizations-small-drf:hover {
+    background-color: $drf-panel-hover-color;
+}
+
+div.demo-panel-customizations-small-inp:hover {
+    background-color: $inp-panel-hover-color;
+}
+
+div.demo-panel-customizations-small-app:hover {
+    background-color: $app-panel-hover-color;
+}
+
+div.demo-panel-customizations-small-rej:hover {
+    background-color: $rej-panel-hover-color;
+}
+
+.panel-child1-customizations {
+    color: rgba(44, 50, 81, 0.8);
+    font-size: 0.65rem;
+}
+
+.panel-child2-customizations {
+    @include single-padding(left, 0.6rem);
+    color: var(--base-text-primary);
+}
+
+.panel-child3-customizations {
+    color: rgba(44, 50, 81, 0.8);
+    font-size: 0.7rem;
+}
+
+.submitted {
+    @include single-border(left, 0.3rem solid $submitted-background-color);
+}
+
+.draft {
+    @include single-border(left, 0.3rem solid $draft-background-color);
+}
+
+.inProgress {
+    @include single-border(left, 0.3rem solid $inProgress-background-color);
+}
+
+.approved {
+    @include single-border(left, 0.3rem solid var(--base-color-success));
+}
+
+.rejected {
+    @include single-border(left, 0.3rem solid var(--base-color-danger));
+}
+
+.action-reqd {
+    @include float(left);
+    width: 0.5rem;
+    height: 0.5rem;
+    @include single-margin(left, 3px);
+    @include single-margin(top, 2.5px);
+    border-radius: 50%;
+}
+
+.align {
+    @include text-align(right);
+}
+
+.filterMargin {
+    @include single-margin(right, 0.5rem);
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--base-border-default));
+}
+
+.amountAlign {
+    @include padding(0.5rem, 0, 0, 0);
+}
+
+.txnClass {
+    @include single-margin(right, -1rem);
+}
+
+.img-customizations {
+    width: 2.4rem;
+    height: 2rem;
+}
+
+.img-style {
+    margin: -0.5rem 0.1rem 0rem -0.3rem;
+}
+
+.search-customizations {
+    @include single-padding(top, 0.5rem);
+}
+
+.customer-header {
+    font-size: 0.9rem;
+    @include single-padding(left, 2rem);
+}

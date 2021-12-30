@@ -1,0 +1,31 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.sms.service.segment.Segment",
+			"components": [{
+					"componentName": "review-create-segments",
+					"service": "read",
+					"perform": ""
+				},
+				{
+					"componentName": "search-segments",
+					"service": "list",
+					"perform": ""
+				},
+				{
+                    
+					"componentName": "create-segments",
+					"service": "create",
+					"perform": "",
+					"approve": "review-create-segments",
+					"view": ""
+				}, {
+					"componentName": "create-segments",
+					"service": "update",
+					"perform": "",
+					"approve": "",
+					"view": ""
+				}
+			]
+		}	
+	]
+}

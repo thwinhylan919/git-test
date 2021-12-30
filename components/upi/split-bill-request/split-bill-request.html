@@ -1,0 +1,95 @@
+<div class="form-main-container">
+    <oj-validation-group :id="[['splitBillTracker']]">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : '', headerTemplate : ''">
+            <!-- ko if : $component.contributorsLoaded() -->
+            <div class="oj-flex-item oj-lg-12">
+                <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                    <oj-label for="VPAList" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.nls.SplitMoney.ReceiveIn"></span>
+                    </oj-label>
+                    <oj-select-one id="VPAList" class="oj-flex-item oj-md-6 oj-lg-7 oj-sm-12" value="{{$component.modelInstance.creditVPAId}}" required>
+                        <!-- ko foreach : vpaIdArray -->
+                        <oj-option value="[[id]]"><span data-bind="text:value"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- ko if : $component.modelInstance.creditVPAId() -->
+                    <div class="oj-label oj-flex-item oj-md-12 oj-lg-12 oj-sm-12 labelSize" data-bind="text:
+                                       $baseModel.format($component.nls.SplitMoney.AccountNumberaccountNumber,{accountNumber:$component.vpaArrayMap[$component.modelInstance.creditVPAId()].account.displayValue})">
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-sm-9">
+                    <amount-input params="amount :$component.modelInstance.totalAmount.amount,currency : $component.modelInstance.totalAmount.currency, label :$component.nls.SplitMoney.EnterAmount,validator:$component.validation,isMandatory:true,currencyListRequired : '',currencyURL:'',currencyParser:'',rootId:'totalAmount',rootClass:'form-input'"></amount-input>
+                </div>
+                <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-6">
+                    <oj-label for="date" class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="text:$component.nls.SplitMoney.ValidTill"></span>
+                    </oj-label>
+                    <oj-input-date id="date" class="oj-flex-item oj-lg-4 oj-sm-6" min="[[$oj.IntlConverterUtils.dateToLocalIso($component.currentDate())]]" max="[[$oj.IntlConverterUtils.dateToLocalIso($component.maxDate())]]" value="{{$component.modelInstance.expiryDate}}"
+                        converter="[[$formatter.dateConverter]]" required>
+                    </oj-input-date>
+                </div>
+                <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                    <oj-label class="oj-flex-item oj-sm-12" for="remarks">
+                        <span data-bind="text:$component.nls.note"></span>
+                    </oj-label>
+                    <oj-input-text class="oj-flex-item oj-sm-12" id="remarks" :aria-label="[[$component.nls.note]]" validators="[[$baseModel.getValidator('COMMENTS')]]" value="{{$component.modelInstance.remarks}}" required></oj-input-text>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-2">
+                        <oj-avatar role="img" size="[['xs']]" initials="[[$component.userInitials()]]" data-bind="attr:{'aria-label': $component.userName()}"></oj-avatar>
+                    </div>
+                    <div class="oj-sm-5 oj-label-inline">
+                        <span data-bind="text:$component.userName()[0]"></span>
+                        <span data-bind="text:$component.userName()[1]"></span>
+                    </div>
+                    <div class="oj-sm-4">
+                        <div>
+                            <div data-bind="component:{name: 'amount-input', params:{amount :$component.myAmount,currency : $component.modelInstance.totalAmount.currency, label :$component.nls.SplitMoney.EnterAmount,validator:$component.validation,isMandatory:true,currencyListRequired : '',currencyURL:'',currencyParser:'',rootId:'bill-amount',rootClass:'myAmount',isLabelHidden: true}}"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ko foreach : $component.modelInstance.upFundRequestDTOs -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-2">
+                        <oj-avatar role="img" size="[['xs']]" initials="[[$component.payeeMap[$data.debitVPAId()].initials]]" src="[[$component.payeeMap[$data.debitVPAId()].contentId]]" data-bind="attr:{'aria-label': $data.debitVPAId()}"></oj-avatar>
+                    </div>
+                    <!-- ko if: $component.payeeMap[$data.debitVPAId()].name -->
+                    <div class="oj-sm-5">
+                        <div>
+                            <div data-bind="text:$component.payeeMap[$data.debitVPAId()].name"></div>
+                            <div data-bind="text:$data.debitVPAId()"></div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.payeeMap[$data.debitVPAId()].name -->
+                    <div class="oj-sm-5 oj-label-inline">
+                        <div data-bind="text:$data.debitVPAId()"></div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-sm-4">
+                        <div>
+                            <div data-bind="component:{name: 'amount-input', params:{amount :amount.amount,currency : amount.currency, label :$component.nls.SplitMoney.EnterAmount,validator:$component.validation,isMandatory:true,currencyListRequired : '',currencyURL:'',currencyParser:'',rootId:$data.debitVPAId() +'amountInput',rootClass:'form-input',isLabelHidden: true}}"></div>
+                        </div>
+                    </div>
+                    <div class="oj-sm-1 oj-label-inline">
+                        <a href="#" class="oj-label-inline form-button-link" data-bind="attr:{'id':'cancel' + $data.debitVPAId(),'alt':$component.nls.SplitMoney.DeleteContributor,'title':$component.nls.SplitMoney.DeleteContributorTitle},click:$component.onClickDeleteContributor60">
+                            <div class="icons icon-cancel iconSize"></div>
+                        </a>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                    <div class="oj-flex-item oj-md-12 oj-lg-12 oj-sm-12">
+                        <a href="#" data-bind="attr:{alt:$component.nls.SplitMoney.altBacktoContributors,title:$component.nls.SplitMoney.BacktoContributors},text:$component.nls.SplitMoney.BacktoContributors,click:$component.back"></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </page-section>
+    </oj-validation-group>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickProceed57]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.SplitMoney.Proceed"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.nls.SplitMoney.cancel"></span></oj-button>
+    </div>
+</div>

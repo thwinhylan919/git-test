@@ -1,0 +1,102 @@
+<div class="form-main-container confirm-screen">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class=" oj-sm-12 confirm-screen__header confirm-screen-header successHeader">
+            <div class="banner-content">
+                <img class="confirm-screen-header-text__image" 
+                data-bind="loadImage : 'dashboard/confirmation.svg'"></img>
+                <span class="confirm-screen-header-text__message"
+                 data-bind="text:$baseModel.format($component.nls.ApplicationTracker.acceptedText,{txnId : $component.midOfficeRefNo})"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-main-container details-screen">
+        <div>
+            <div class="oj-lg-12">
+                <div class="cust-details">
+                    <div class="paddingBottom">
+                            <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-6 no-pad-cols">
+                                            <span>
+                                                    <img class="img-customizations1" src="/images/process-management/new-facility.svg">
+                                                </span>
+                                                <span data-bind="text:$component.payload.collateralDetails ? $component.payload.collateralDetails.collateralCategory:$component.payload.category || $component.payload.collateralCode">
+                                                </span>
+                                    </div>
+                                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-6 right">
+                                            <div data-bind="text:$component.partyName()">
+                                                </div>
+                                    </div>
+                            </div>
+                    </div>
+
+                    <div>
+                        <div class="paddingBottom oj-lg-12">
+                            <div data-bind="text:$component.payload.collateralDesc ? $component.payload.collateralDesc: $component.payload.categoryDesc" class="fontDescription">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="oj-lg-12 paddingBottom">
+                            <span data-bind="text:$component.midOfficeRefNo" class="fontSmall"></span>
+                            <span class="pipe"></span>
+                            <!-- ko if: $component.status==="SUBMITTED"-->
+                            <span class="dot dot1"></span>
+                            <!-- /ko -->
+                            <!-- ko if: $component.status==="IN_PROGRESS"-->
+                            <span class="dot dot2"></span>
+                            <!-- /ko -->
+                            <span data-bind="text:$component.nls.processStatus[status]" class="fontSmall"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class=" oj-lg-12">
+                            <!-- ko if: $component.type === "New Facility Application" || $component.type === "Facility Amendment" -->
+                            <div data-bind="text:$baseModel.format($component.nls.ApplicationTracker.facilityApplied,{facilityAmount : $formatter.formatCurrency($component.payload.availableAmount ? $component.payload.availableAmount.amount : $component.payload.utilizationAmount,$component.payload.availableAmount ? $component.payload.availableAmount.currency : $component.payload.currencyCode)})" class="fontSmall">
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $component.type === "Collateral Revaluation" || $component.type === "Collateral Evaluation" -->
+                            <div data-bind="text:$baseModel.format($component.nls.ApplicationTracker.collateralApplied,{collateralAmount : $formatter.formatCurrency($component.payload.collateralValue.amount, $component.payload.collateralValue.currency)})" class="fontSmall">
+                    </div>
+                            <!-- /ko -->
+                        </div>
+                        <div class=" oj-lg-12">
+                            <span class="fontSmall" data-bind="text:$baseModel.format($component.nls.ApplicationTracker.appliedOn,{ondate:$formatter.formatDate($data.creationDate,'dateMonthFormat')})"></span>
+                            <span class="fontSmall" data-bind="text:$formatter.formatDate($data.creationDate,'timeFormat')"></span>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="oj-lg-12">
+                        <a href="#" data-bind="click: $component.applicantDetails , attr: { alt: $component.nls.ApplicationTracker.applicantDetails }">
+                            <div class="oj-panel oj-sm-margin-2x" data-bind="css:$baseModel.large() ? 'module-panel-customizations': 'module-panel-customizations-small'">
+                                <div class=" s-pad">
+                                    <img class=" img-customizations" data-bind="attr:{'aria-label': $component.nls.ApplicationTracker.applicantDetails}, loadImage: 'process-management/application-details.svg'" />
+                                    <div class=" center dataPadding" data-bind="text:$component.nls.ApplicationTracker.applicantDetails"></div>
+                                    <div class=" center description" data-bind="text:$component.nls.ApplicationTracker.applicantDetailsDesc"></div>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="button-container oj-lg-12">
+                        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span>
+                            <span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]">
+                            <span slot="startIcon" class="icons icon-back-arrow"></span>
+                            <span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,42 @@
+<!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+    <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-6">
+            <row params="baseModel : $baseModel, rootModel : $parent, label : $component.confirmScreenExtensions.resourceBundle.remittanceListId , value :remitterListId"></row>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <row params="baseModel : $baseModel, rootModel : $parent, label :$component.confirmScreenExtensions.resourceBundle.remittanceName , value :remitterDesc"></row>
+        </div>
+    </div>
+    <!-- /ko -->
+</page-section>
+<!-- /ko -->
+<div class="oj-flex-item">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,$root.currentRole())">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,'virtual-account-management')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resourceBundle.goToOverview},loadImage:'dashboard/quick-access/account-details.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resourceBundle.goToOverview"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'create-remittance','virtual-account-management')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenExtensions.resourceBundle.remittanceActionCardText},loadImage:'dashboard/quick-access/multiple-transfer.svg'">
+                    <div data-bind="text:$component.confirmScreenExtensions.resourceBundle.remittanceActionCardText"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

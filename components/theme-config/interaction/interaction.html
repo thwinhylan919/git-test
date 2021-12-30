@@ -1,0 +1,19 @@
+<div class="oj-flex interaction">
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-6">
+            <oj-label for="interactionType">
+                <span data-bind="text:$component.resourceBundle.interactionType"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+            <oj-select-one disabled="[[$component.readOnly]]" id="interactionType" value="{{$component.bindvariable[$component.parameters.type]}}" :placeholder="[[$component.resourceBundle.interactionType]]">
+                <oj-option value="collapsible">
+                    <span data-bind="text:$component.resourceBundle.collapsible"></span>
+                </oj-option>
+                <oj-option value="sliding">
+                    <span data-bind="text:$component.resourceBundle.sliding"></span>
+                </oj-option>
+            </oj-select-one>
+        </div>
+    </div>
+</div>

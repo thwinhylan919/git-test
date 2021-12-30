@@ -1,0 +1,36 @@
+require.config({
+    paths: {
+        ojs: "empty:",
+        ojtranslations: "empty:",
+        jquery: "empty:",
+        knockout: "empty:",
+        "knockout-helper": "empty:",
+        "knockout-mapping": "empty:",
+        "jqueryui-amd": "empty:",
+        paperAccordion: "empty:",
+        baseService: "empty:",
+        abstractBaseModel: "empty:",
+        baseLogger: "empty:",
+        baseModel: "empty:",
+        "base-model": "empty:",
+        "base-models": "empty:",
+        promise: "empty:",
+        hammerjs: "empty:",
+        ojdnd: "empty:",
+        customElements: "empty:",
+        "resources/nls/generic": "empty:",
+        thirdPartyLibs: "empty:",
+        platform: "empty:",
+        webAnalytics: "empty:",
+        "framework/js": "empty:",
+        fetch: "empty:",
+        touchr: "empty:",
+
+        text: "../_build/tmp/text",
+        ojL10n: "../_build/tmp/ojL10n",
+        css: "../_build/tmp/css",
+        "css-builder": "../_build/tmp/css-builder",
+        normalize: "../_build/tmp/normalize",
+        load: "framework/js/plugins/load"
+    }
+});

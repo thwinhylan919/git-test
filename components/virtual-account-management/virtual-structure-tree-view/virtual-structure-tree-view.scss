@@ -1,0 +1,99 @@
+$sweep-background-color: #1E7C9F;
+$pool-background-color: #1E7C9F;
+$icon-visited-color: #0B0080;
+
+.extra-padding {
+  @include single-padding(left, 7.8125rem);
+}
+
+.icon-size {
+  font-size: 1.5625rem;
+}
+
+.icon-color {
+  color: $icon-visited-color;
+}
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+
+  .label,
+  label {
+    color: var(--banner-text-primary);
+    font-size: var(--base-font-size-medium);
+  }
+}
+
+.icon-size {
+  font-size: 1.4rem;
+}
+
+.node-bold {
+  font-size: 1rem;
+}
+
+.node-text {
+  font-size: 0.8rem;
+}
+
+.flex-override {
+  flex: inherit;
+  @include single-margin(left, 0.5rem);
+}
+
+.structure {
+  &__nodeHeader {
+    padding: 0.6rem 0;
+    font-size: var(--base-font-size-large);
+  }
+
+  &__parentNodeHeader {
+    padding: 0.3rem 0 0.6rem;
+    font-size: var(--base-font-size-large);
+  }
+
+  &__tree-width {
+    width: 65rem;
+  }
+
+  &__node {
+    height: 100%;
+  }
+
+  &__structureFillParent {
+    height: 100%;
+    padding: 0.6rem 0;
+    width: 100%;
+
+    &__structureFillSweep {
+      background-color: $sweep-background-color;
+      color: var(--color-white);
+      @include single-padding(left, 0.6rem);
+    }
+
+    &__structureFillPool {
+      background-color: $pool-background-color;
+      color: var(--color-white);
+      padding-top: 1rem;
+      @include single-padding(left, 0.6rem);
+    }
+  }
+
+  &__structureFill {
+    padding-bottom: 0.5rem;
+    width: 100%;
+    @include single-padding(left, 0.6rem);
+
+    &__structureFillPool {
+      border-top: 0.6rem solid $pool-background-color;
+      width: 100%;
+      padding-top: 1rem;
+      @include single-padding(left, 0.6rem);
+    }
+  }
+}

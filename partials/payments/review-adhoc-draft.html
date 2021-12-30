@@ -1,0 +1,16 @@
+<div class="row-group">
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domesticDraft.domestic.drafttype , value :$component.draftType()"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domesticDraft.domestic.draftfavouring , value :$component.inFavourOf()"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domesticDraft.domestic.draftpayableatcity , value :$component.payeeDetails().payAtCity"></row>
+    <!-- ko if:$component.payeeDetails().payAtCountry-->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.internationalDraft.international.draftpayableatcountry , value :$component.payeeDetails().payAtCountry"></row>
+     <!-- /ko -->
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.demanddraft.deliverymode , value :$component.payments.payee.demanddraft[$component.payeeDetails().demandDraftDeliveryDTO.deliveryMode]"></row>
+    <!-- ko if:$component.addressDetails-->
+     <div data-bind="template: { name: 'common/review/address',data: {label: $component.common.DeliveryLocation,details: $component.addressDetails.postalAddress}}"></div>
+     <!-- /ko -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.amount , value :$formatter.formatCurrency($component.transferDetails().amount.amount, $component.transferDetails().amount.currency)"></row>
+     <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.scheduledon , value :$formatter.formatDate($component.transferDetails().startDate? $component.transferDetails().startDate : $component.transferDetails().valueDate)"></row>
+     <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.transferfrom , value :$component.transferDetails().debitAccountId.displayValue"></row>
+     <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.moneytransfer.note , value :$component.transferDetails().remarks"></row>
+</div>

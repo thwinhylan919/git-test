@@ -1,0 +1,124 @@
+$sweep-background-color: #2C446E;
+$pool-background-color: #90722C;
+$hybrid-background-color: #1E7C9F;
+
+top-data {
+    padding-bottom: 1rem;
+}
+
+.ie-text {
+    &__header {
+        font-weight: var(--base-font-weight-bold);
+        font-size: var(--base-font-size-larger);
+        color: var(--form-foreground-color);
+        text-align: center;
+        padding-top: 4rem;
+    }
+
+    &__detail-message {
+        text-align: center;
+        padding-top: 0.5rem;
+    }
+}
+
+.confirm-screen {
+    &__list {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        @include single-margin(left, auto);
+        @include single-margin(right, auto);
+
+        li {
+            padding: 3.5rem;
+            @include float(left);
+            text-align: center;
+            justify-content: space-between;
+
+            img {
+                height: 6rem;
+            }
+        }
+    }
+}
+
+.structure-details-banner {
+    background: var(--banner-background);
+    color: var(--banner-text-secondary);
+    padding: var(--banner-padding);
+
+    .description {
+        @include single-margin(right, 0.8rem);
+        @include single-padding(right, 0.8rem);
+        @include single-border(right, 0.05rem solid);
+    }
+
+    label {
+        color: var(--banner-text-primary);
+        font-size: var(--base-font-size-medium);
+    }
+}
+
+.structure {
+    &__accountType {
+        background-color: var(--banner-background);
+        color: var(--banner-text-secondary);
+    }
+
+    &__nodeHeader {
+        padding: 0.6rem 0;
+        font-size: var(--base-font-size-large);
+    }
+
+    &__parentNodeHeader {
+        padding: 0.3rem 0 0.6rem;
+        font-size: var(--base-font-size-large);
+    }
+
+    &__tree-width {
+        width: 65rem;
+    }
+
+    &__node {
+        height: 100%;
+
+        .priority {
+            font-size: var(--base-font-size-small);
+        }
+    }
+
+    &__structureFillParent {
+        height: 100%;
+        padding: 0.6rem 0;
+
+        &__structureFillSweep {
+            background-color: $sweep-background-color;
+            color: var(--color-white);
+        }
+
+        &__structureFillPool {
+            background-color: $pool-background-color;
+            color: var(--color-white);
+        }
+    }
+
+    &__structureFill {
+        padding-bottom: 0.5rem;
+
+        &__structureFillSweep {
+            border-top: 0.6rem solid $sweep-background-color;
+        }
+
+        &__structureFillPool {
+            border-top: 0.6rem solid $pool-background-color;
+        }
+    }
+}
+
+.structureFillSweep {
+    fill: $sweep-background-color;
+}
+
+.structureFillPool {
+    fill: $pool-background-color;
+}

@@ -1,0 +1,22 @@
+<div class="form-main-container">
+  <div data-bind="template: { name: 'review-screen/review-banner-template',
+    data: {header : $component.nls.generic.common.review , reviewHeader : $component.nls.headers.reviewRequestMoneyUpi}}"></div>
+  <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : ''">
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.headers.creditVPAId, value : [($component.params.modelInstance.upiRequestMoneyDetails.creditVPAId),($component.params.accountNumber)]"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.headers.accountTransferDetails, value : [($component.params.receiverName),($component.params.modelInstance.upiRequestMoneyDetails.debitVPAId)]"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.headers.amount, value : $formatter.formatCurrency($component.params.modelInstance.upiRequestMoneyDetails.amount.amount,$component.params.modelInstance.upiRequestMoneyDetails.amount.currency)"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.headers.expiryDate, value : $component.params.modelInstance.upiRequestMoneyDetails.expiryDate"></row>
+    <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.headers.remarks, value : $component.params.modelInstance.upiRequestMoneyDetails.remarks"></row>
+
+  </page-section>
+  <div id="button-container" class="oj-flex-item button-container">
+    <oj-button class="action-button-primary" id="confirmButton" on-click="[[confirmRequest]]">
+      <span slot="startIcon" class="icons icon-confirm"></span>
+      <span data-bind="text: $component.nls.generic.common.confirm"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+      <span slot="startIcon" class="icons icon-back-arrow"></span>
+      <span data-bind="text: $component.nls.generic.common.back"></span>
+    </oj-button>
+  </div>
+</div>

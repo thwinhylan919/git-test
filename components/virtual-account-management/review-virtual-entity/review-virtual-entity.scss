@@ -1,0 +1,50 @@
+.header-underline {
+  border-bottom: 0.0625rem solid var(--base-border-default);
+  display: inherit;
+
+  div {
+    &:first-child {
+      @include single-margin(left, 0.5rem);
+    }
+  }
+
+  .section-header-title {
+    color: var(--form-header-foreground-color);
+    margin: 0.6rem;
+    font-size: var(--form-header-font-size);
+    font-weight: var(--form-header-font-weight);
+  }
+
+  .icon-container {
+    line-height: calc(var(--form-line-height) *1.5);
+  }
+}
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.search-entity-container {
+  padding-top: 0.625rem;
+  @include single-padding(left, 0.625rem);
+}
+
+.align-feedback {
+  @include single-margin(left, 1rem);
+}
+
+.icon-property {
+  font-size: 1.2rem;
+}
+
+.separator-for-banner {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+  @include single-margin(top, 1rem);
+  @include single-padding(left, 0.625rem);
+  @include single-padding(bottom, 1.1rem);
+}

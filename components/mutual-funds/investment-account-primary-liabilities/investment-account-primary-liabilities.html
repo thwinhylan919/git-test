@@ -1,0 +1,99 @@
+<oj-validation-group id="tracker">
+  <div class="form-main-container">
+    <!-- ko if: $component.showLiabilities -->
+    <!-- ko foreach : $component.dummyModal.additionalDetails.liability -->
+    <page-section params="baseModel : $baseModel, rootModel : $component">
+        <div class="oj-flex oj-flex-items-pad ">
+          <div class="oj-flex-item heading">
+            <div class="oj-flex-item oj-lg-8 oj-sm-8 oj-md-8">
+              <span data-bind="text: $baseModel.format($component.nls.Primaryliabilities.LiabilityNumber,{index : $index()+1})"></span>
+            </div>
+          </div>
+          <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4">
+            <a href="#" data-bind="attr:{id: 'delete_'+$index(),alt:$component.nls.Primaryliabilities.clickToDelete,title:$component.nls.Primaryliabilities.deleteLiability}, click:$component.deleteLiability.bind($data,$index())">
+              <div class="icons icon-delete" aria-hidden="true"></div>
+            </a>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label :for="[['Liabilities'+ $index()]]">
+              <span data-bind="text:$component.nls.Primaryliabilities.Liabilities"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+            <!-- ko if: $component.liabilitiesLoaded() -->
+            <oj-select-one :id="[['Liabilities'+ $index()]]" :placeholder="[[$component.nls.Primaryliabilities.select]]" value="{{$component.dummyModal.additionalDetails.liability[$index()].liabilityType}}"
+            on-value-changed="[[$component.liabilitySelectedHandler.bind($data,$index())]]">
+              <!-- ko foreach : $component.liabilitiesList -->
+              <oj-option :id="[['code'+$baseModel.incrementIdCount()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+              <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+          </div>
+        </div>
+          <div data-bind="component: {
+                    name: 'amount-input', params: {
+                      amount :$component.dummyModal.additionalDetails.liability[$index()].original.amount,
+                      label : $component.nls.Primaryliabilities.TotalAmout,
+                      currency:$component.dummyModal.additionalDetails.liability[$index()].original.currency,
+                      converter:$formatter.formatCurrency,
+                      isMandatory:$component.dummyModal.additionalDetails.liability[$index()].liabilityRequired,
+                      currencyListRequired : true,
+                      currencyURL : 'currency',
+                      currencyParser : $component.currencyParser,
+                      rootId:'amount-investment'+ $baseModel.incrementIdCount(),
+                      rootClass:'form-input',
+                      valueClasses : 'oj-lg-12 oj-md-12 oj-sm-12'
+                }
+              }"></div>
+          <div data-bind="component: {
+                    name: 'amount-input', params: {
+                      amount :$component.dummyModal.additionalDetails.liability[$index()].outstanding.amount,
+                      label : $component.nls.Primaryliabilities.BalanceDue,
+                      currency:$component.dummyModal.additionalDetails.liability[$index()].outstanding.currency,
+                      converter:$formatter.formatCurrency,
+                      isMandatory:$component.dummyModal.additionalDetails.liability[$index()].liabilityRequired,
+                      currencyListRequired : true,
+                      currencyURL : 'currency',
+                      currencyParser : $component.currencyParser,
+                      rootId:'amount-BalanceDue'+ $baseModel.incrementIdCount(),
+                      rootClass:'form-input',
+                      valueClasses : 'oj-lg-12 oj-md-12 oj-sm-12'
+                }
+              }"></div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label :for="[['RepaymentFrequency'+$index()]]">
+              <span data-bind="text:$component.nls.Primaryliabilities.RepaymentFrequency"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+        <!-- ko if: $component.repaymentFrequencyListLoaded() -->
+        <oj-select-one :id="[['RepaymentFrequency'+$index()]]" :placeholder="[[$component.nls.Primaryliabilities.select]]" value="{{$component.dummyModal.additionalDetails.liability[$index()].repaymentFrequency}}"
+        :required="[[$component.dummyModal.additionalDetails.liability[$index()].liabilityRequired]]">
+          <!-- ko foreach : $component.repaymentFrequencyList -->
+          <oj-option :id="[['code'+$baseModel.incrementIdCount()]]" value="{{description}}"><span data-bind="text: description"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+        <!-- /ko -->
+        </div>
+      </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <a href="#" data-bind="click:$component.addLiability">
+              <span class="icons icon-add" slot="startIcon"></span>
+              <span data-bind="text:$component.nls.Primaryliabilities.addLiability"></span>
+            </a>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickSave]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.Primaryliabilities.Save"></span></oj-button>
+      </div>
+    </div>
+  </div>
+</oj-validation-group>

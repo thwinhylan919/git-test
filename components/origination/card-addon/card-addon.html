@@ -1,0 +1,148 @@
+<!-- ko if: $component.existingAddOnLoaded() -->
+<!-- ko2 if: $component.productDetails().offers.standardFeatureDTO.balanceTransferAllowed-->
+<div class="oj-flex oj-flex-items-pad margin-top-20">
+	<div class="oj-flex-item oj-lg-offset-1 oj-md-offset-1 oj-lg-10">
+		<h4 class="form-heading" data-bind="text:$component.resource.heading"></h4>
+	</div>
+</div>
+<div class="oj-flex oj-flex-items-pad application-form-text cust-label ">
+	<div class="oj-flex-item oj-lg-offset-1 oj-md-offset-1 oj-lg-10">
+
+		<div class="oj-flex oj-flex-items-pad">
+			<oj-label class="oj-flex-item label"><span
+					data-bind="text:$baseModel.format($component.resource.heading2,{noOfAddOns:$component.productDetails().offers.standardFeatureDTO.maximumAddOnCard})"></span>
+			</oj-label>
+		</div>
+		<div class="oj-flex oj-flex-items-pad">
+			<oj-label class="oj-flex-item label"><span data-bind="text:$component.resource.heading3"></span></oj-label>
+		</div>
+	</div>
+</div>
+
+<div class="oj-flex oj-flex-items-pad">
+	<div class="oj-flex-item label oj-sm-12 oj-md-4 oj-lg-3 oj-md-offset-1  oj-lg-offset-2">
+		<div class="oj-label ">
+			<oj-label :for="[['isAddOnAllowed']]"><span data-bind="text:$component.resource.choice"></span></oj-label>
+		</div>
+	</div>
+
+	<div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+		<oj-buttonset-one id="isAddOnAllowed" on-value-changed="[[$component.saveAddon]]"
+			value="{{$component.optedForAddOnHolder}}">
+			<oj-option name="isAddOnAllowed" class="isAddOnAllowed" value="{{'OPTION_YES'}}"
+				:id="[['isAddOnAllowedYes']]"><span
+					data-bind="attr: {for: 'isAddOnAllowedYes'}, text: $component.resource.generic.common.yes"></span>
+			</oj-option>
+			<oj-option name="isAddOnAllowed" class="isAddOnAllowed" value="{{'OPTION_NO'}}"
+				:id="[['isAddOnAllowedNo']]"><span
+					data-bind="attr: {for: 'isAddOnAllowedNo'}, text: $component.resource.generic.common.no"></span>
+			</oj-option>
+		</oj-buttonset-one>
+	</div>
+</div>
+<!-- /ko -->
+
+<page-section params="baseModel : $baseModel, rootModel : $data">
+	<div class="employments-financial-info">
+
+		<!-- ko if: isAddOnTransaction() -->
+
+		<!-- ko if : redrawAddonCards -->
+		<div class="employments-financial-info">
+			<!-- ko foreach : addonCards -->
+
+			<div class="form-heading-strip oj-flex oj-flex-items-pad">
+				<div class="oj-flex-item oj-lg-offset-1 oj-md-offset-1 oj-sm-9 oj-md-6 oj-lg-6 padding-top">
+
+					<h4 class="form-heading additional-label page-section-heading__text"
+						data-bind="text:$baseModel.format($component.resource.addOn,{index:($index()+1)})"></h4>
+
+				</div>
+				<div class="oj-flex-item oj-sm-2 oj-md-1 oj-lg-1">
+
+					<!-- ko if: !temp_isActive() -->
+					<a href="#" class="icons icon pull-right icon-edit"
+						data-bind="click : $component.editCard.bind($data, $index()) ,attr:{alt: $component.resource.editCardClick, title: $component.resource.editCardClickInfo}"></a>
+					<!-- /ko -->
+										
+					<!-- ko if: temp_isActive() -->
+					<a href="#" class="icons icon pull-right icon-delete"
+						data-bind="click : $component.removeCard.bind($data, $index()) ,attr:{alt: $component.resource.removeCardClick, title: $component.resource.removeCardClickInfo}"></a>
+					<!-- /ko -->
+				</div>
+
+
+			</div>
+			<!-- ko if : temp_isActive() -->
+			<div class="">
+				<div class="">
+					<div
+						data-bind="template: { name: 'origination/card-addon-input', params: { rootModel: $parent, id: $index()}}">
+					</div>
+
+				</div>
+			</div>
+			<!-- ko if: $component.isAddOnTransaction() -->
+			<div class="oj-flex oj-flex-items-pad button-container">
+				<div class="oj-md-10 oj-lg-10">
+					<oj-button class="help-button" on-click="[[$component.submitAddOn.bind($data,$index())]]">
+						<span data-bind="text:$component.resource.generic.common.add"></span></oj-button>
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if : !temp_isActive() -->
+			<div class="">
+				<div class="">
+					<div
+						data-bind="template: { name: 'origination/review/card-addon', data: { addOn: $data,resource:$component.resource}}">
+					</div>
+
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- /ko -->
+		</div>
+		<!-- /ko -->
+		<!-- /ko  -->
+
+	</div>
+</page-section>
+
+
+<!-- ko if: isAddOnTransaction() -->
+<!-- ko if: showAdd() -->
+<!-- ko ifnot: $baseModel.small() -->
+
+<div class="employments-financial-info">
+
+	<div class="form-heading-strip oj-flex oj-flex-items-pad">
+		<span for="addAdditionalCard"
+			class="oj-flex-item oj-lg-offset-1 oj-md-offset-1 oj-sm-7 oj-md-4 oj-lg-3 additional-label"
+			data-bind="text: $component.resource.addAnotherCard"></span>
+		<div class="oj-flex-item oj-sm-2 oj-md-2 oj-lg-2">
+			<a id="addAdditionalCard" href="#" class=" icons icon icon-plus-circle section-icon"
+				data-bind="click : $component.addCard ,attr:{alt: $component.resource.addCardClick, title: $component.resource.addCardClickInfo}"></a>
+		</div>
+	</div>
+</div>
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+
+<div class="employments-financial-info">
+
+	<div class="form-heading-strip oj-flex oj-flex-items-pad">
+		<span for="addAdditionalCard"
+			class="oj-flex-item oj-lg-offset-1 oj-md-offset-1 oj-sm-7 oj-md-4 oj-lg-3 additional-label"
+			data-bind="text: $component.resource.addAnotherCard"></span>
+		<div class="oj-flex-item oj-sm-2 oj-md-2 oj-lg-2">
+			<a id="addAdditionalCard" href="#" class=" icons icon icon-plus-circle section-icon"
+				data-bind="click : $component.addCard ,attr:{alt: $component.resource.addCardClick, title: $component.resource.addCardClickInfo}"></a>
+		</div>
+	</div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko2 -->
+
+<!-- /ko -->

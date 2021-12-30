@@ -1,0 +1,56 @@
+$status-accepted: #006ab5;
+
+.details {
+    &__failed {
+        color: var(--base-color-danger);
+        padding-bottom: 0.3125rem;
+
+    }
+
+    &__successful {
+        color: var(--base-color-success);
+        padding-bottom: 0.3125rem;
+    }
+
+    &__accepted {
+        color: $status-accepted;
+        padding-bottom: 0.3125rem;
+    }
+}
+
+.filter {
+    padding-top: 0.3rem;
+}
+
+.transactionHeader {
+    font-size: var(--form-header-font-size);
+}
+
+.detailsData {
+    font-size: var(--form-font-size) !important;
+}
+
+.requestType {
+    font-size: var(--base-font-size-large);
+}
+
+.structure {
+    &__accountType {
+        background-color: var(--nav-selected-border-color);
+        color: var(--base-background-secondary);
+    }
+}
+
+.payeeIdSize {
+    font-size: var(--base-font-size-medium);
+    color: var(--base-text-secondary);
+}
+
+.noRequests {
+    text-align: center;
+    margin: 2rem;
+}
+
+.initiatorName{
+  margin-top: 0.6rem;
+}

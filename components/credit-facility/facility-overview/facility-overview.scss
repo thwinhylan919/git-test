@@ -1,0 +1,129 @@
+.progress-bar-property {
+    width: 50%;
+    height: 0.625rem;
+    margin: 0.625rem;
+    opacity: .3;
+    background-color: var(--oj-neutral-color13);
+}
+
+.label {
+    font-weight: 500
+}
+
+.data {
+    font-weight: 500
+}
+
+.headingLine {
+    @include padding(1rem, 1rem, 1rem, 0rem);
+}
+
+.panel-heading {
+    font-size: 17px;
+}
+
+.box {
+    @include margin(0, 0, 0, 0.625rem);
+    a {
+        font-size: 18px;
+    }
+}
+
+.items {
+    border-bottom: none;
+}
+
+.icon-more-vertical {
+    @include margin(0.4rem, 0, 0, 0);
+}
+
+.divider {
+    margin: 0 0.3rem;
+    position: relative;
+    bottom: 0.2rem;
+    @include single-border(left, var(--base-text-primary) solid var(--base-text-primary));
+    @include padding(0rem, .3rem, 0rem, 0.5rem);
+}
+
+.facilitybox {
+    border-radius: 6px;
+    background: var(--link-hover);
+    color: var(--oj-neutral-color1);
+    @include padding(0rem, 0.5rem, 0rem, 0.5rem);
+    @include margin(0rem, 0rem, 0rem, 0.3rem);
+}
+
+.childfacilitybox {
+    border-radius: 6px;
+    background: var(--review-banner-border-color);
+    color: var(--oj-neutral-color1);
+    @include padding(0rem, 0.5rem, 0rem, 0.5rem);
+    @include margin(0rem, 0rem, 0rem, 0.3rem);
+}
+
+.mainline {
+    a {
+        font-size: 12px;
+    }
+}
+
+.filterMargin {
+    @include single-margin(right, 0.5rem);
+}
+
+.title1 {
+    @include padding(2rem, 0rem, 0rem, 0rem);
+}
+
+.button {
+    padding: 1.5rem !important;
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--base-border-default));
+    @include single-padding(right, 0.3rem);
+}
+
+.filterAlign {
+    @include single-margin(left, -4rem);
+    @include single-margin(top, 0.6rem);
+}
+
+.partyClass {
+    font-size: 1.2rem;
+}
+
+.mainLine {
+    @include padding(0.6rem, 0rem, 0rem, 0rem);
+}
+
+.marginLeft {
+    @include single-margin(left, -0.6rem);
+}
+
+.structure {
+    color: var(--oj-neutral-color1);
+    background: var(--link-hover);
+}
+
+.structure1 {
+    color: var(--oj-neutral-color1);
+    background: var(--review-banner-border-color);
+}
+
+.marginTop {
+    @include single-margin(top, -0.6rem);
+    @include single-margin(left, 0.7rem);
+}
+
+.gapPadding {
+    @include single-padding(top, 0.4rem);
+}
+
+.buttonTop {
+    margin-top: 0.25rem;
+}
+
+.amount {
+    @include float(right);
+}

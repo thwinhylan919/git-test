@@ -1,0 +1,22 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.spendanalysis.service.category.SpendCategory",
+        "components": [
+        {
+            "componentName": "spend-category-landing",
+            "service": "read",
+            "perform": "spend-category-landing"
+        },
+        {
+            "componentName": "spend-category-landing",
+            "service": "create",
+            "perform": "spend-category-create"
+        },
+        {
+            "componentName": "spend-category-landing",
+            "service": "update",
+            "perform": "spend-category-edit"
+        }]
+    }]
+}

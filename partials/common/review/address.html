@@ -1,0 +1,72 @@
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+        <oj-label>
+            <span data-bind="text:$data.label"></span>
+        </oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 addressfields">
+        <!-- ko if:$data.details.addressTypeDescription -->
+        <div class="address-type" data-bind="text:$data.details.addressTypeDescription"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.branchName -->
+        <div data-bind="text:$data.details.branchName"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line1 -->
+        <div data-bind="text:$data.details.line1"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line2 -->
+        <div data-bind="text:$data.details.line2"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line3 -->
+        <div data-bind="text:$data.details.line3"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line4 -->
+        <div data-bind="text:$data.details.line4"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line5 -->
+        <div data-bind="text:$data.details.line5"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line6 -->
+        <div data-bind="text:$data.details.line6"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line7 -->
+        <div data-bind="text:$data.details.line7"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line8 -->
+        <div data-bind="text:$data.details.line8"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line9 -->
+        <div data-bind="text:$data.details.line9"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.line10 -->
+        <div data-bind="text:$data.details.line10"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.city -->
+        <div data-bind="text:$data.details.city"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.state -->
+        <div data-bind="text:$data.details.state"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.country -->
+        <div data-bind="text:$data.details.country"></div>
+        <!-- /ko -->
+
+        <!-- ko if:$data.details.postalCode -->
+        <div data-bind="text:$data.details.postalCode"></div>
+        <!-- /ko -->
+    </div>
+</div>

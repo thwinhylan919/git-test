@@ -1,0 +1,15 @@
+{
+  "componentName": "notification",
+  "module": "corporateDashboard",
+  "segment": ["common"],
+  "width": {
+    "large":"4",
+    "medium":"6"
+  },
+  "height": "274",
+  "icon": "",
+  "template": "",
+  "type": "",
+  "isVisible": true,
+  "isWidget": true
+}

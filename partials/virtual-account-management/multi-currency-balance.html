@@ -1,0 +1,23 @@
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    <div data-bind="text: $component.realCustomerName"></div>
+    <div data-bind="html: $component.realCustomerNo"></div>
+  </div>
+</div>
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    <oj-table id="mcaAccountBalance" :aria-label="[[$component.resource.balanceDetails]]" data="[[mcaAccountBalance]]"
+      columns-default.sortable="disabled" selection-mode='{"row":"single","column":"single"}'
+      columns='[[[{"headerText":$component.resource.currency,"template":"currency","field":"currency","headerClassName":"break-word","className":"break-word","id":"currency"},{"headerText":$component.resource.amount,"template":"amount","field":"amount","headerClassName":"break-word","className":"break-word","id":"amount"}]]]'>
+      <caption class="hide-label" data-bind="text:$component.resource.balanceDetails"></caption>
+      <template slot="currency">
+        <div data-bind="text:$current.row.currency"></div>
+      </template>
+      <template slot="amount">
+        <div data-bind="text: $formatter.formatCurrency($current.row.amount, $current.row.currency)"></div>
+      </template>
+    </oj-table>
+    <oj-paging-control id="paging" slot="bottom" page-size="[[$component.pageSize]]" data="[[mcaAccountBalance]]">
+    </oj-paging-control>
+  </div>
+</div>

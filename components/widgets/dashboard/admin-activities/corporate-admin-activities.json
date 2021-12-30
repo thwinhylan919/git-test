@@ -1,0 +1,91 @@
+{
+    "module": [{
+            "Name": "OnBoarding",
+            "transactionDetails": [{
+                "name": "UserManagement",
+                "img": "user-management.svg",
+                "module": "user-management",
+                "component": "users"
+
+            }, {
+                "name": "PartyPreferences",
+                "img": "party-preferences.svg",
+                "module": "customer-preference",
+                "component": "preference-base"
+
+            }]
+        }, {
+            "Name": "Approvals",
+            "transactionDetails": [{
+                "name": "WorkflowManagement",
+                "img": "work-flow.svg",
+                "module": "approvals",
+                "component": "workflow",
+                "type": "Workflow"
+            }, {
+                "name": "ApprovalRules",
+                "img": "approver-rules.svg",
+                "module": "approvals",
+                "component": "rules",
+                "type": "Rules"
+
+            }]
+        },
+
+        {
+            "Name": "AccountAccess",
+            "transactionDetails": [{
+                "name": "PartyAccountAccess",
+                "img": "party-account-access.svg",
+                "module": "account-access-management",
+                "component": "access-management-base",
+                "targetComponent": "PARTY"
+
+            }, {
+                "name": "UserAccountAccess",
+                "img": "user-account-access.svg",
+                "module": "account-access-management",
+                "component": "user-access-management-base",
+                "targetComponent": "USER"
+
+            }]
+        }, {
+            "Name": "ResourceAccess",
+            "transactionDetails": [{
+                "name": "PartyResourceAccess",
+                "img": "party-account-access.svg",
+                "module": "corporate-resource-access",
+                "component": "party-base",
+                "class": "transaction"
+
+            }, {
+                "name": "UserResourceAccess",
+                "img": "user-account-access.svg",
+                "module": "corporate-resource-access",
+                "component": "user-base",
+                "class": "transaction"
+
+            }]
+        },
+
+        {
+            "Name": "FileUpload",
+            "transactionDetails": [{
+                "name": "FileIdentifierMaintenance",
+                "img": "file-identifier.svg",
+                "component": "file-identifier-search",
+                "module": "file-upload"
+
+
+            }, {
+                "name": "UserFileIdentifierMapping",
+                "img": "user-file-identifier.svg",
+                "component": "user-search",
+                "module": "file-upload"
+
+            }]
+        }
+
+    ]
+
+}

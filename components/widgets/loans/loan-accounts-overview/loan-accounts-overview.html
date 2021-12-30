@@ -1,0 +1,35 @@
+<div class="oj-panel loans-overview">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-8">
+            <h3 data-bind="text: $component.nls.accountDetails.labels.loansOverview"></h3>
+        </div>
+        <!-- ko if : dataLoaded() -->
+        <div class="oj-flex-item oj-sm-4" data-bind="visible: conventionalAccountsAvailable() && islamicAccountsAvailable()">
+            <oj-select-one value="{{$component.selectedValue}}" required on-value-changed="[[selectedAccountTypeChangedHandler]]" data-bind="attr:{id:$component.nls.accountDetails.labels.myAccountType + $baseModel.currentIdCount(),'aria-label':$component.nls.accountDetails.labels.myAccountType}">
+                <!-- ko foreach: typeOfAccounts -->
+                <oj-option value="[[id]]"><span data-bind="text: label"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if: loanSeriesValue().length -->
+        <div id="chart-container" class="oj-flex-item oj-sm-12">
+            <oj-chart id="loanbarChart" class="loans-overview__chart" type="bar" series="[[loanSeriesValue]]" groups="[[[$baseModel.format($component.nls.accountDetails.labels.currentOutstanding, {amount: $formatter.formatCurrency($component.totalOutstanding(), $component.currency())}), $baseModel.format($component.nls.accountDetails.labels.totalBorrowing, {amount: $formatter.formatCurrency($component.totalBorrowings(), $component.currency())})]]]"
+                animation-on-data-change="auto" orientation="horizontal" style-defaults="[[defaultStyle]]" legend.position="auto">
+            </oj-chart>
+            <!-- ko if: $baseModel.small() -->
+            <!-- ko if: $component.legendloaded() -->
+            <oj-legend id="legend1" orientation="vertical" sections="[[legendSections]]" hAlign="center" vAlign="middle">
+            </oj-legend>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: loanSeriesValue().length > 0 -->
+        <div class="oj-flex-item noData" data-bind="text: $component.nls.accountDetails.labels.noData"></div>
+        <!-- /ko -->
+    </div>
+
+</div>

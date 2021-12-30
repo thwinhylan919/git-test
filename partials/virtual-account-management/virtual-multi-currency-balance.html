@@ -1,0 +1,39 @@
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    <div class="label" data-bind="text: $component.resource.virtualMultiCurrencyAccount"></div>
+    <div data-bind="html: $component.virtualMCA"></div>
+  </div>
+</div>
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    <oj-table :id="vmcaAccountBalance" :aria-label="[[$component.resource.vmcaBalanceDetails]]"
+      data="[[vmcaAccountBalance]]" columns-default.sortable="disabled"
+      selection-mode='{"row":"single","column":"single"}' columns='[[[
+      {"headerText":$component.resource.realAccountName,"template":"realAccountName","field":"realAccountName","sortable":"none","headerClassName": "break-word",
+              "className": "break-word",id:"realAccountName"},
+      {"headerText":$component.resource.realAccountNumber,"template":"realAccountNo","field":"realAccountNo","sortable":"none","headerClassName": "break-word",
+              "className": "break-word",id:"realAccountNo"},
+      {"headerText":$component.resource.currency,"template":"currency","field":"currency","sortable":"none","headerClassName": "break-word",
+              "className": "break-word",id:"currency"},
+      {"headerText":$component.resource.amount,"template":"amount","field":"amount","sortable":"none","headerClassName": "break-word",
+              "className": "break-word"}
+              ]]]'>
+      <caption class="hide-label" data-bind="text:$component.resource.vmcaBalanceDetails"></caption>
+      <template slot="realAccountName">
+        <div :aria-label="[[$current.row.realAccountName]]" data-bind="text:$current.row.realAccountName"></div>
+      </template>
+      <template slot="realAccountNo">
+        <div :aria-label="[[$current.row.realAccountNo]]" data-bind="text:$current.row.realAccountNo"></div>
+      </template>
+      <template slot="currency">
+        <div :aria-label="[[$current.row.currency]]" data-bind="text:$current.row.currency"></div>
+      </template>
+      <template slot="amount">
+        <div :aria-label="[[$formatter.formatCurrency($current.row.amount, $current.row.currency)]]"
+          data-bind="text:$formatter.formatCurrency($current.row.amount, $current.row.currency)"></div>
+      </template>
+    </oj-table>
+    <oj-paging-control :id="pagingAccountBalances" data="[[vmcaAccountBalance]]" page-size="5" slot="bottom">
+    </oj-paging-control>
+  </div>
+</div>

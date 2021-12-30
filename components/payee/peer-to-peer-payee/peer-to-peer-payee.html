@@ -1,0 +1,108 @@
+<oj-validation-group id="tracker">
+    <div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between peer-to-peer-payee">
+
+        <!-- ko if:stageOne() -->
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="p2ppayeename"><span data-bind="text:$component.payments.payee.peertopeer.payeename"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-input-text id="p2ppayeename" disabled="[[!isNew()]]" value="{{p2pPayeeModel.name}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'peerToPeerPayee.name', [['#p2ppayeename']] )]]]"></oj-input-text>
+                    </div>
+                </div>
+                <!-- ko if:$component.imageUploadFlag() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <image-upload params="baseModel : $baseModel, rootModel:$component, dashboard: $dashboard,
+                          preview: $component.payeeImageAvailable() ? $component.preview : $component.defaultPreview,
+                          label: $component.payments.payee.image,
+                          contentId:$component.contentId,
+                          fileId:$component.fileId,
+                          defaultImagePath :'nominee/add-another-nominee.svg',
+                          imageId:$component.imageId,
+                          file:$component.file,
+                          fileTypeArray :$component.fileTypeArray,
+                          isRemoveAllowed: $component.payeeImageAvailable,
+                          imageCallBackHandler: $component.imageCallBackHandler,
+                          maxFileSize:$component.maxFileSize,
+                          isThumbnail:true">
+                        </image-upload>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="p2pvalue"><span data-bind="text:$component.payments.payee.peertopeer.payeevalue"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-input-text id="p2pvalue" disabled="[[!$component.params.isEdit ? true : false]]" value="{{p2pPayeeModel.transferValue}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'peerToPeerPayee.transferValue', [['#p2pvalue']] )]]]"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label for="p2pnickname"><span data-bind="text:$component.payments.payee.peertopeer.payeenickname"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-input-text id="p2pnickname" value="{{p2pPayeeModel.nickName}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'peerToPeerPayee.nickName', [['#p2pnickname']] )]]]"></oj-input-text>
+                    </div>
+                </div>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="button-add" on-click="[[uploadImage]]"><span slot="startIcon" class="icons" data-bind="css: !($component.params.isEdit) ? 'icon-add' : 'icon-save'"></span>
+                    <span data-bind="text:!($component.params.isEdit) ? $component.common.add : $component.common.save"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="button-cancel" on-click="[[cancel]]"><span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if:stageTwo() -->
+        <div class="oj-flex-item oj-sm-12">
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.common.review , reviewHeader : !$component.params.isEdit ? $component.payments.payee.reviewHeaderMsg : $component.payments.payee.editReviewHeaderMsg}}"></div>
+            <page-section class="review" params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="row-group" data-bind="with:p2pData">
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.peertopeer.payeename , value :name"></row>
+
+                    <!-- ko if:($component.preview() || $component.defaultPreview()) && $component.imageUploadFlag() -->
+                    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+                        <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+                            <span data-bind="text: $component.payments.payee.image"></span>
+                        </oj-label>
+                        <div class="oj-flex-item">
+                            <oj-avatar role="img" size="sm" data-bind="attr:{'id': $component.imageId(),'aria-label':$component.payments.payee.image}" src="[[$component.payeeImageAvailable() ? $component.preview() : $component.defaultPreview()]]">
+                            </oj-avatar>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.peertopeer.payeevalue ,
+                         value :transferValue,dataClass :'highlight-text'"></row>
+                    <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.peertopeer.payeenickname ,
+                         value :nickName"></row>
+                </div>
+            </page-section>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary " id="button-confirm" on-click="[[verifyPayee]]"><span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.common.confirm"></span>
+                </oj-button>
+
+                <oj-button class="action-button-secondary" id="button-cancel" on-click="[[$dashboard.switchModule.bind($data,true)]]"><span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.common.cancel"></span>
+                </oj-button>
+
+                <oj-button class="action-button-tertiary" id="button-back" on-click="[[stageTwo()?back:$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.common.back"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $baseModel.large() && stageOne() -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: 'peer-to-peer-payee'"></help>
+        </div>
+        <!-- /ko -->
+    </div>
+</oj-validation-group>

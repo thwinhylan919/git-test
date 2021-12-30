@@ -1,0 +1,17 @@
+<!-- ko if: $component.visible -->
+<div class="oj-flex oj-flex-items-pad">
+  <!-- ko if: $component.bannerMessages.length > 1 -->
+  <div class="oj-flex-item oj-sm-12">
+    <div data-bind="htmlBound: $component.bannerMessages[0].content"></div>
+    <a href="#" data-bind="click: showAll">
+      <div class="right" data-bind="text: $component.resource.showAll"></div>
+    </a>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: $component.bannerMessages.length > 1 -->
+  <div class="oj-flex-item oj-sm-12">
+    <div data-bind="htmlBound: $component.bannerMessages[0].content"></div>
+  </div>
+  <!-- /ko -->
+</div>
+<!-- /ko -->

@@ -1,0 +1,55 @@
+<!-- Account number -->
+<oj-validation-group id="tracker">
+    <!-- ko if: $data.paymentType === "INTERNAL" -->
+    <div class="oj-sm-12 oj-lg-12 oj-md-6">
+        <internal-account-input class="oj-sm-12" params="{
+   baseModel:$baseModel,
+   dashboard: $dashboard,
+   account : $component.accountNumber,
+   label:$component.payments.payee.accountnumber,
+   confirmStyleAccount: true,
+   taxonomyValidator: {
+      dto: !$component.isEdit ? 'com.ofss.digx.app.payment.dto.payee.InternalPayeeCreateRequestDTO' : 'com.ofss.digx.app.payment.dto.payee.InternalPayeeUpdateRequestDTO',
+      idField: 'internalPayee.accountNumber'
+    },
+   required:true
+  }">
+        </internal-account-input>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $data.paymentType !== "INTERNAL" -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+        <div class="oj-flex-item oj-sm-12 ">
+            <oj-label for="accNumber"><span data-bind="text:$component.payments.payee.accountnumber"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-6">
+            <oj-input-password ondrop="return false" id="accNumber" value="{{$component.accountNumber}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.validateDTO(), $component.validateField(ko.utils.unwrapObservable($data.currentAccountType) === 'DOMESTIC' && ko.utils.unwrapObservable($data.region) === 'SEPA' ? 'iban' : 'accountNumber'), '#accNumber')]]]"
+                validators="[[$component.accountNoValidator]]"></oj-input-password>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: $data.paymentType !== "INTERNAL" -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+        <div class="oj-flex-item oj-sm-12">
+            <oj-label for="confirmAccNumber"><span data-bind="text:$component.payments.payee.confirmAccountNumber"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-6">
+            <oj-input-text ondragstart="return false" ondrop="return false" id="confirmAccNumber" async-validators="[[[$baseModel.getTaxonomyValidator($component.validateDTO(), $component.validateField(ko.utils.unwrapObservable($data.currentAccountType) === 'DOMESTIC' && ko.utils.unwrapObservable($data.region) === 'SEPA' ? 'iban' : 'accountNumber'), '#confirmAccNumber')]]]"
+                value="{{$component.ConfirmaccountNumber}}" validators="[[$component.confirmAccountNoValidator]]"></oj-input-text>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- Account name -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+        <div class="oj-flex-item oj-sm-12 ">
+            <oj-label for="accName"> <span data-bind="text:$component.payments.payee.accountname"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-6">
+            <oj-input-text id="accName" async-validators="[[[$baseModel.getTaxonomyValidator($component.validateDTO(), $component.validateField('accountName'), '#accName')]]]" value="{{$component.accountName}}"></oj-input-text>
+        </div>
+    </div>
+    <!-- ko descendantsComplete : $component.restrictedEvent  -->
+    <!-- /ko -->
+</oj-validation-group>

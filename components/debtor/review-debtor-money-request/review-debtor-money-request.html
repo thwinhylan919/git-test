@@ -1,0 +1,48 @@
+<!-- ko if:$component.dataLoaded() -->
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : $component.resource.debtors.reviewHeaderMsg}}"></div>
+    <page-section class="review" params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <!-- ko if:$component.imageUploadFlag() -->
+        <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+            <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+                <span data-bind="text: $component.resource.debtors.requstFrom"></span>
+            </oj-label>
+            <div class="oj-flex">
+                <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[$component.initials]]' src='[[$component.preview()]]' data-bind="attr:{'aria-label':customDebtorName()}">
+                </oj-avatar>
+                <div class="oj-label-inline">
+                    <span data-bind="text:customDebtorName()"></span>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="row-group">
+            <!-- ko ifnot:$component.imageUploadFlag() -->
+            <row class="highlight-text " params="baseModel : $baseModel, rootModel : $component, label : $component.resource.debtors.requstFrom , value :customDebtorName()"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.debtors.amount , value :$formatter.formatCurrency(RequestMoneyModel.amount.amount(),RequestMoneyModel.amount.currency()) ,dataClass :'highlight-text'"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.debtors.requestIn , value :RequestMoneyModel.sepaDomestic.nominatedAccount.displayValue"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.debtors.receivedOn , value :$formatter.formatDate(receivedDate())"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.debtors.note ,value :RequestMoneyModel.remarks"></row>
+        </div>
+    </page-section>
+    <!-- ko if:$component.params.reviewMode -->
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" id="confirm" on-click="[[confirmRequest]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <!-- ko ifnot: $baseModel.small() -->
+        <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.generic.common.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary" id="back" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

@@ -1,0 +1,33 @@
+<div data-bind="descendantsComplete : $component.loadModal">
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$dashboard.switchModule,id:'selectRoleContainer', header : $component.nls.heading.SelectRole">
+    <oj-form-layout>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12">
+                <oj-label :for="[['SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables83']]">
+                    <span
+                        data-bind="text:$component.nls.SelectRole.SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables"></span>
+                </oj-label>
+            </div>
+            <div class="oj-flex-item">
+
+                <oj-radioset class="oj-choice-direction-row"
+                    :id="[['SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables83']]"
+                    value="{{$component.role}}">
+                    <oj-option value="{{'B'}}"><span data-bind="text:$component.nls.SelectRole.Buyer"></span>
+                    </oj-option>
+                    <oj-option value="{{'S'}}"><span data-bind="text:$component.nls.SelectRole.Supplier"></span>
+                    </oj-option>
+                </oj-radioset>
+            </div>
+        </div>
+    </oj-form-layout>
+    <oj-button class="action-button-primary" on-click="[[$component.onClickProceed52]]"><span slot="startIcon"
+            class="icons icon-forward-arrow"></span><span data-bind="text:$component.nls.SelectRole.Proceed"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" on-click="[[$dashboard.switchModule.bind($data,$root.currentRole())]]">
+        <span slot="startIcon" class="icons icon-cancel"></span><span
+            data-bind="text:$component.nls.SelectRole.Cancel"></span></oj-button>
+</modal-window>
+</div>

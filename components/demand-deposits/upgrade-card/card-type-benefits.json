@@ -1,0 +1,123 @@
+{
+  "cardTypes": [{
+    "debitCardType": "silverDebitCard",
+    "offers": [{
+      "offer": "offerName1",
+      "offerText": "offer1",
+      "discount": "discount1",
+      "company": "company1",
+      "amount": "amount1"
+    }, {
+      "offer": "offerName2",
+      "offerText": "offer2",
+      "discount": "discount2",
+      "company": "company2"
+    }, {
+      "offer": "offerName3",
+      "offerText": "offer3",
+      "discount": "discount3",
+      "company": "company3"
+    }, {
+      "offer": "offerName4",
+      "offerText": "offer4",
+      "discount": "discount4",
+      "company": "company4"
+    }],
+    "rewards": [{
+      "reward": "reward1",
+      "rewardsText": "reward1",
+      "paybackPoints": "paybackPoints",
+      "expenditureAmount": "expenditureAmount"
+    }]
+  }, {
+    "debitCardType": "goldDebitCard",
+    "offers": [{
+      "offer": "offerName1",
+      "offerText": "offer1",
+      "discount": "discount1",
+      "company": "company1",
+      "amount": "amount1"
+    }, {
+      "offer": "offerName2",
+      "offerText": "offer2",
+      "discount": "discount2",
+      "company": "company2"
+    }, {
+      "offer": "offerName3",
+      "offerText": "offer3",
+      "discount": "discount3",
+      "company": "company3"
+    }, {
+      "offer": "offerName4",
+      "offerText": "offer4",
+      "discount": "discount4",
+      "company": "company4"
+    }],
+    "rewards": [{
+      "reward": "reward1",
+      "rewardsText": "reward1",
+      "paybackPoints": "paybackPoints",
+      "expenditureAmount": "expenditureAmount"
+    }]
+  }, {
+    "debitCardType": "platinumDebitCard",
+    "offers": [{
+      "offer": "offerName1",
+      "offerText": "offer1",
+      "discount": "discount1",
+      "company": "company1",
+      "amount": "amount1"
+    }, {
+      "offer": "offerName2",
+      "offerText": "offer2",
+      "discount": "discount2",
+      "company": "company2"
+    }, {
+      "offer": "offerName3",
+      "offerText": "offer3",
+      "discount": "discount3",
+      "company": "company3"
+    }, {
+      "offer": "offerName4",
+      "offerText": "offer4",
+      "discount": "discount4",
+      "company": "company4"
+    }],
+    "rewards": [{
+      "reward": "reward1",
+      "rewardsText": "reward1",
+      "paybackPoints": "paybackPoints",
+      "expenditureAmount": "expenditureAmount"
+    }]
+  }, {
+    "debitCardType": "coralDebitCard",
+    "offers": [{
+      "offer": "offerName1",
+      "offerText": "offer1",
+      "discount": "discount1",
+      "company": "company1",
+      "amount": "amount1"
+    }, {
+      "offer": "offerName2",
+      "offerText": "offer2",
+      "discount": "discount2",
+      "company": "company2"
+    }, {
+      "offer": "offerName3",
+      "offerText": "offer3",
+      "discount": "discount3",
+      "company": "company3"
+    }, {
+      "offer": "offerName4",
+      "offerText": "offer4",
+      "discount": "discount4",
+      "company": "company4"
+    }],
+    "rewards": [{
+      "reward": "reward1",
+      "rewardsText": "reward1",
+      "paybackPoints": "paybackPoints",
+      "expenditureAmount": "expenditureAmount"
+    }]
+  }]
+}

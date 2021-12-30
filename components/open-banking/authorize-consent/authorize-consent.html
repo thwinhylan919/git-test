@@ -1,0 +1,9 @@
+<oj-validation-group :id="[['tracker']]">
+<div data-bind="descendantsComplete : $component.afterRender.bind($data,$root)">
+    <!-- ko if : dataLoaded() -->
+    <div class="form-main-container">
+        <div data-bind="template: { name: $component.template.templateId }"></div>
+    </div>
+    <!-- /ko -->
+</div>
+</oj-validation-group>

@@ -1,0 +1,18 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.security.service.role.preferences.RolePreferencesMap",
+        "components": [{
+                "componentName": "system-rules-map",
+                "service": "list",
+                "perform": "",
+                "approve": ""
+            },
+            {
+                "componentName": "review-system-rules-map",
+                "service": "update",
+                "perform": "",
+                "approve": ""
+            }
+        ]
+    }]
+}

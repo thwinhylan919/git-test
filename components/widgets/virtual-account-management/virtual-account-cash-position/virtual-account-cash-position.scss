@@ -1,0 +1,95 @@
+.cashPosition {
+  max-height: 27rem;
+  padding: 0;
+
+  &__links {
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--form-line-height) + .5rem);
+    line-height: calc(var(--form-line-height) + .5rem);
+    border-top: 0.05rem solid var(--base-border-default);
+    position: relative;
+    text-align: center;
+  }
+
+  &__container {
+    max-height: 15rem;
+    position: relative;
+
+    .balance-content {
+      padding: 1.5rem;
+    }
+  }
+
+  &__wrapper {
+    &-header {
+      background: linear-gradient(
+        to var(--banner-gradient-direction),
+        var(--banner-gradient-start-color),
+        var(--banner-gradient-end-color)
+      );
+      color: var(--banner-foreground-color);
+      font-size: var(--banner-font-size);
+      font-weight: var(--banner-font-weight);
+      padding: var(--banner-padding);
+      align-items: center;
+      height: 3.5rem;
+      @include single-margin(top, 0.4rem);
+    }
+    &-label,
+    label {
+      color: var(--banner-text-primary);
+      font-size: var(--base-font-size-medium);
+    }
+
+    &-chart-container {
+      height: 14.8rem;
+      width: 100%;
+    }
+  }
+}
+
+.noData {
+  padding-bottom: 0.5rem;
+  max-height: 20.8rem;
+  height: -webkit-fill-available;
+  height: -moz-fill-available;
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 10rem;
+      width: 100%;
+    }
+  }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--base-font-size-larger);
+}
+
+.subText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.widgetSummary {
+  font-size: var(--base-font-size-default);
+  color: var(--base-text-secondary);
+}
+
+.entityNameText {
+  font-size: var(--form-info-txt-font-size);
+  color: var(--form-info-txt-foreground-color);
+  font-weight: var(--form-info-txt-font-weight);
+  line-height: calc(#{var(--form-line-height)} - 0.9rem);
+}

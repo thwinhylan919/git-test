@@ -1,0 +1,12 @@
+.banner-design {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    color: var(--banner-foreground-color);
+    font-size: var(--banner-font-size);
+    font-weight: var(--banner-font-weight);
+    padding: var(--banner-padding);
+    align-items: center;
+}
+
+.landline-text {
+    font-size: var(--base-font-size-medium);
+}

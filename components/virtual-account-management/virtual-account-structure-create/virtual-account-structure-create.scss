@@ -1,0 +1,17 @@
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.balance-wrapper {
+  font-size: var(--base-font-size-default);
+  color: var(--base-text-secondary);
+}
+
+.bottom-padding {
+  @include single-padding(bottom, 0.5rem);
+}

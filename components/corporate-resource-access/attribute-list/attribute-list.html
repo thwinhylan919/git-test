@@ -1,0 +1,51 @@
+<page-section
+    params="baseModel : $baseModel, rootModel : $data, heading :  $baseModel.format($component.nls.heading.ResourceMappingSummary,{attributeName:$component.attributeName}), headerTemplate : ''">
+    <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if : $component.isUserSelected -->
+        <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-12">
+            <oj-checkboxset class="oj-choice-direction-row" :id="[['applyPartyLevelChangesAutomatically']]"
+                value="{{partyLevelChangesAuto}}" disabled="[[$component.disabled()]]">
+                <oj-option value="{{'true'}}"><span
+                        data-bind="text:$component.nls.ResourceMapping.applyPartyLevel"></span>
+                </oj-option>
+            </oj-checkboxset>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-2 oj-md-4 oj-sm-12">
+            <oj-checkboxset class="oj-choice-direction-row" disabled="[[$component.disabled()]]"
+                :id="[['MapAllPrograms4']]" on-value-changed="[[$component.handleCheckboxMapAll]]" value="{{mapAll}}">
+                <oj-option value="{{'true'}}">
+                    <span data-bind="text:$component.mapAllCheckboxMsg"></span>
+                </oj-option>
+            </oj-checkboxset>
+        </div>
+    </div>
+    <oj-table :id="[['AttributeList48']]"
+        :aria-label="[[$baseModel.format($component.nls.heading.ResourceMappingSummary,{attributeName:$component.attributeName})]]"
+        data="[[dataSource14]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('attributeDataList')]]"
+        columns="[[columnArray]]">
+    </oj-table>
+    <div id="scriptContainer">
+        <script type="text/html" id="attributeDataList">
+            <td>
+                <oj-checkboxset class="oj-choice-direction-row" on-value-changed="[[$component.checkboxListener]]"
+                    disabled="[[$component.disabled()]]" :id="[[$context.row.id]]" value="{{$context.row.allowed}}">
+                    <oj-option value=true
+                        :aria-label="[[$baseModel.format($component.nls.attributeCheckbox,{attributeName:$context.row.name})]]">
+                    </oj-option>
+                </oj-checkboxset>
+            </td>
+            <td>
+                <div data-bind="text:$context.row.id"></div>
+            </td>
+            <td>
+                <div data-bind="text:$context.row.name"></div>
+            </td>
+            <td>
+                <div data-bind="text:$context.row.status"></div>
+            </td>
+        </script>
+    </div>
+</page-section>

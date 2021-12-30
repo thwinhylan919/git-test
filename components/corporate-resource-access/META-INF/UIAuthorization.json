@@ -1,0 +1,55 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.access.service.attribute.party.PartyAttributeAccess",
+			"components": [{
+					"componentName": "party-base",
+					"service": "read",
+					"perform": "access-type#attribute-details#attribute-list#attribute-transaction-mapping#attribute-transaction-tree#entity-details#mapping-summary-details#mapping-train#module-search#transaction-details"
+				},
+				{
+					"componentName": "review-party-base",
+					"service": "create",
+					"perform": "review-transaction-details",
+					"approve": "review-party-base"
+				},
+				{
+					"componentName": "review-party-base",
+					"service": "update",
+					"perform": "review-transaction-details",
+					"approve": "review-party-base"
+				}, {
+					"componentName": "party-base",
+					"service": "delete",
+					"approve": "review-party-base"
+				}
+			]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.access.service.attribute.user.UserAttributeAccess",
+			"components": [{
+					"componentName": "user-base",
+					"service": "read",
+					"perform": "user-list-resource-access#access-type#attribute-details#attribute-list#attribute-transaction-mapping#attribute-transaction-tree#entity-details#mapping-summary-details#mapping-train#module-search#transaction-details"
+				},
+				{
+					"componentName": "review-user-base",
+					"service": "create",
+					"perform": "review-transaction-details",
+					"approve": "review-user-base"
+				},
+				{
+					"componentName": "review-user-base",
+					"service": "update",
+					"perform": "review-transaction-details",
+					"approve": "review-user-base"
+				},
+				{
+					"componentName": "user-base",
+					"service": "delete",
+					"approve": "review-user-base"
+				}
+			]
+		}
+
+	]
+}

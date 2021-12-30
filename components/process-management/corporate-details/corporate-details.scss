@@ -1,0 +1,7 @@
+.dropDownPadding {
+    @include padding(0, 0, 1rem, 5rem);
+}
+
+.productLabel {
+    @include text-align(right);
+}

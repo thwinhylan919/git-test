@@ -1,0 +1,134 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.card.service.Credit",
+      "components": [{
+          "componentName": "card-details",
+          "service": "fetchRewardPoints",
+          "perform": ""
+        },
+        {
+          "componentName": "card-details",
+          "service": "list",
+          "perform": ""
+        },
+        {
+          "componentName": "creditcard-reset-pin",
+          "service": "resetPin",
+          "perform": "reset-pin#review-reset-pin"
+        }, {
+          "componentName": "e-statement",
+          "service": "fetchEStatementPreferences",
+          "perform": ""
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.Limit",
+      "components": [{
+          "componentName": "add-on-card",
+          "service": "fetchCardLimit",
+          "approve": "review-add-on-card",
+          "perform": "review-add-on-card"
+        },
+        {
+          "componentName": "card-details",
+          "service": "updateCardLimit",
+          "approve": ""
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.BillCycle",
+      "components": [{
+          "componentName": "card-details",
+          "service": "fetchCreditCardBillCycle",
+          "perform": ""
+        }
+
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.Status",
+      "components": [{
+          "componentName": "block-card",
+          "service": "update",
+          "perform": "review-block-card#cancellation#review-cancellation"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.ReplaceCard",
+      "components": [{
+          "componentName": "block-card",
+          "service": "ReplaceCard",
+          "perform": "review-block-card"
+        }
+
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.AutoRepayment",
+      "components": [{
+          "componentName": "auto-pay",
+          "service": "fetchAutoRepayment",
+          "perform": "review-auto-pay"
+        },
+        {
+          "componentName": "auto-pay",
+          "service": "registerAutoRepayment",
+          "perform": "review-auto-pay"
+        },
+        {
+          "componentName": "auto-pay",
+          "service": "updateAutoRepayment",
+          "perform": "review-auto-pay"
+        },
+        {
+          "componentName": "auto-pay",
+          "service": "deRegisterAutoRepayment",
+          "perform": "review-auto-pay"
+        }, {
+          "componentName": "card-pay",
+          "service": "create",
+          "perform": "review-card-pay"
+        }
+
+
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.Statement",
+      "components": [{
+          "componentName": "card-statement",
+          "service": "fetchStatement",
+          "perform": ""
+        },
+        {
+          "componentName": "download-statement",
+          "service": "downloadStatement",
+          "perform": ""
+        }
+
+      ]
+    }, {
+      "moduleName": "com.ofss.digx.app.payment.service.transfer.CreditCardPayment",
+      "components": [{
+          "componentName": "card-pay",
+          "service": "updateStatus",
+          "perform": "review-card-pay"
+        }
+
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.card.service.Credentials",
+      "components": [
+      {
+        "componentName": "request-pin",
+        "service": "setCredentials",
+        "perform": "review-request-pin"
+      }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-lg-12">
+        <div class="form-main-container payee-restriction-landing-container">
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : $component.resource.payeeCount.reviewHeader}}"></div>
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <div class="oj-lg-6">
+                    <row params="baseModel : $baseModel, rootModel :  $component, label : $component.resource.payeeCount.userType , value :$component.enterpriseRole"></row>
+                </div>
+                <div class="oj-lg-6">
+                    <!-- ko if: $component.targetType!=="ROLE" -->
+                    <row params="baseModel : $baseModel, rootModel :  $component, label : $component.resource.payeeCount.userSegment , value :$component.segmentSelectedForRole"></row>
+                    <!-- /ko -->
+                </div>
+            </page-section>
+            <!-- ko foreach: $component.payeeRestrictionModel.payeeCountLimitList -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : $data.payeeType ==='ALL'? '' : $component.resource.payeeCount[$data.payeeType]">
+                <!-- ko if: $parent.accountPayee.length >0 -->
+                <!-- ko foreach: $parent.accountPayee -->
+                <!-- ko if:$data.payeeType!=='ALL' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item" data-bind="text:$component.resource.payeeCount.accountpayee"></div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex">
+                    <div class="oj-lg-6">
+                        <row params="baseModel : $baseModel, rootModel :  $component, label : $data.payeeType==='ALL'? $component.resource.payeeCount.totalpayeecount:$component.resource.payeeCount.payeeRestriction , value :$data.payeeCountLimitStatus?$component.resource.generic.common.yes:$component.resource.generic.common.no"></row>
+                    </div>
+                    <!-- ko if:$data.payeeCountLimitStatus -->
+                    <div class="oj-lg-6">
+                        <row params="baseModel : $baseModel, rootModel :  $component, label : $data.payeeType==='ALL'? $component.resource.payeeCount.totalpayeepermittedperday:$component.resource.payeeCount.payeepermittedperday , value :$data.payeesPerDay"></row>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $parent.draftpayee.length >0 -->
+                <!-- ko foreach: $parent.draftpayee -->
+                <!-- ko if:$data.payeeType!=='ALL' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item" data-bind="text:$component.resource.payeeCount.draftpayee"></div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex">
+                    <div class="oj-lg-6">
+                        <row params="baseModel : $baseModel, rootModel :  $component, label : $data.payeeType==='ALL'? $component.resource.payeeCount.totalpayeecount:$component.resource.payeeCount.payeeRestriction , value :$data.payeeCountLimitStatus?$component.resource.generic.common.yes:$component.resource.generic.common.no"></row>
+                    </div>
+                    <!-- ko if:$data.payeeCountLimitStatus -->
+                    <div class="oj-lg-6">
+                        <row params="baseModel : $baseModel, rootModel :  $component, label : $data.payeeType==='ALL'? $component.resource.payeeCount.totalpayeepermittedperday:$component.resource.payeeCount.payeepermittedperday , value :$data.payeesPerDay"></row>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </page-section>
+            <!-- /ko -->
+            <div class="button-container">
+                <oj-button id="createButton" class="action-button-primary " on-click="[[confirm]]">
+                    <span data-bind="text:$component.resource.generic.common.save"></span>
+                </oj-button>
+                <!-- ko if: $baseModel.large() -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                    <span data-bind="text: $component.resource.generic.common.back"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</div>

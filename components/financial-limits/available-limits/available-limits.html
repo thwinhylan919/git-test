@@ -1,0 +1,88 @@
+<div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+  <!-- ko ifnot:noLimitsAttached() -->
+  <oj-list-view id="listview" selection-mode="single" drill-mode="none">
+    <ul>
+      <li id="a">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 title"
+          data-bind="text:$component.nls.limit.limitsAvailabilityTitle">
+        </div>
+        <ul>
+          <li id="amount">
+            <div class="container">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-3 oj-md-3 oj-lg-3 image">
+                  <div class="icons icon-payments"></div>
+                </div>
+                <div class="oj-flex-item oj-sm-3 oj-md-3 oj-lg-3 text1" data-bind="text:$component.nls.limit.Amount">
+                </div>
+                <!-- ko ifnot:isAmountSpent() -->
+                <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-7 text"
+                  data-bind="text:$baseModel.format($component.nls.limit.msg,{minAmount:$formatter.formatCurrency($component.responseMinAmount(),$component.currency()),maxAmount:$formatter.formatCurrency($component.responseMaxAmount(),$component.currency())})">
+                </div>
+                <!-- /ko -->
+                <!-- ko if:isAmountSpent() -->
+                <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-7 text2" data-bind="text:$component.nls.limit.Spent">
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+          </li>
+          <!-- ko ifnot:isApprovalRequired() -->
+          <li id="count">
+            <div class="container">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-3 oj-md-3 oj-lg-3 image">
+                  <div class="icons icon-request-parameters"></div>
+                </div>
+                <div class="oj-flex-item oj-sm-3 oj-md-3 oj-lg-3 text1" data-bind="text:$component.nls.limit.count">
+                </div>
+                <!-- ko ifnot:isCountSpent() -->
+                <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-7 text" data-bind="text:$component.count">
+                </div>
+                <!-- /ko -->
+                <!-- ko if:isCountSpent() -->
+                <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-7 text2" data-bind="text:$component.nls.limit.Spent">
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+          </li>
+          <!-- /ko -->
+        </ul>
+      </li>
+    </ul>
+  </oj-list-view>
+  <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12 view-limits__knowmore">
+    <div class="view-limits__knowmore__iconStylingKnowMore">
+      <div class="icon icon-2x icon-information" aria-hidden="true"></div>
+    </div>
+    <!-- ko if:isApprovalRequired() -->
+    <div class="oj-flex-item oj-sm-11 oj-md-11 oj-lg-11 labels">
+      <oj-label id="msg" class="labels">
+        <span class="msg" data-bind="text:$component.nls.limit.knowMoreInfoCorporate"></span>
+      </oj-label>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot:isApprovalRequired() -->
+    <div class="oj-flex-item oj-sm-11 oj-md-11 oj-lg-11 labels">
+      <oj-label id="msg" class="labels">
+        <span class="msg" data-bind="text:$component.nls.limit.knowMoreInfoRetail"></span>
+      </oj-label>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko if:noLimitsAttached() -->
+  <div class="oj-flex oj-flex-items-pad center">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+      <img class="no-limit-image" data-bind="loadImage:'dashboard/reports.svg'">
+    </div>
+
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 center-note">
+      <div data-bind="text:$component.nls.limit.nolimits">
+      </div>
+    </div>
+
+  </div>
+  <!-- /ko -->
+</div>

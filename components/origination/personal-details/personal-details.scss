@@ -1,0 +1,29 @@
+.personal-details {
+.side-padding{
+  @include mq(medium) {
+        padding : 0rem .5rem;
+      }
+}
+  .document {
+    a {
+      font-size: var(--base-font-size-medium) !important;
+    }
+
+    .document-button {
+      margin-bottom: 1rem;
+
+      @include mq(medium) {
+        padding-top: 1rem;
+      }
+
+      @include mq(small) {
+        padding-bottom: 0rem;
+      }
+    }
+  }
+  .customer-prefilled-section{
+   @include mq(small) {
+             padding-bottom: 1rem;
+      }
+  }
+}

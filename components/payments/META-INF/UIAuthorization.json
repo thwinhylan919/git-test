@@ -1,0 +1,243 @@
+{
+    "modules": [{
+            "moduleName": "com.ofss.digx.app.payment.service.transfer.PeerToPeerPayment",
+            "components": [{
+                "componentName": "payments-money-transfer",
+                "service": "updateStatusReceiver",
+                "perform": "payment-peer-to-peer-existing#payment-peer-to-peer#peer-to-peer-payee#review-payment-peer-to-peer#social-media#warning-message-dialog#available-limits#review-payment-peer-to-peer-existing#payment-landing#facebook-friend-list"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.transfer.SelfTransfer",
+            "components": [{
+                "componentName": "payments-money-transfer",
+                "service": "updateStatus",
+                "perform": "payment-self#review-payment-self#warning-message-dialog#available-limits#forex-deal-utilization#payment-landing",
+                "approve": "transaction-journey#review-payment-self"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.transfer.InternalTransfer",
+            "components": [{
+                "componentName": "payments-money-transfer",
+                "service": "updateStatus",
+                "perform": "multiple-payments#payment-internal#review-multiple-payments#review-payment-internal#warning-message-dialog#available-limits#forex-deal-utilization#multiple-payments-status#payment-landing",
+                "approve": "transaction-journey#review-payment-internal#review-multiple-payments"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.payout.InternationalPayout",
+            "components": [{
+                "componentName": "payments-money-transfer",
+                "service": "updateStatus",
+                "perform": "multiple-payments#review-multiple-payments#payment-international#review-payment-international#warning-message-dialog#available-limits#forex-deal-utilization#multiple-payments-status#payment-landing",
+                "approve": "transaction-journey#review-payment-international#review-multiple-payments"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.payout.DomesticPayout",
+            "components": [{
+                "componentName": "payments-money-transfer",
+                "service": "updateStatus",
+                "perform": "multiple-payments#payment-domestic#review-multiple-payments#review-payment-domestic#warning-message-dialog#available-limits#multiple-payments-status#payment-landing#payment-uk#payment-sepa",
+                "approve": "transaction-journey#review-payment-domestic#review-multiple-payments"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.generic.GenericPayment",
+            "components": [{
+                    "componentName": "adhoc-payments",
+                    "service": "updateInternalTransferStatus",
+                    "perform": "review-adhoc-payments#warning-message-dialog#available-limits#payment-landing",
+                    "approve": "transaction-journey#review-adhoc-payments"
+                },
+                {
+                    "componentName": "adhoc-payments",
+                    "service": "updateDomesticPayoutStatus",
+                    "perform": "review-adhoc-payments#warning-message-dialog#available-limits#payment-landing",
+                    "approve": "transaction-journey#review-adhoc-payments"
+                },
+                {
+                    "componentName": "adhoc-payments",
+                    "service": "updateInternationalPayoutStatus",
+                    "perform": "review-adhoc-payments#warning-message-dialog#available-limits#payment-landing",
+                    "approve": "transaction-journey#review-adhoc-payments"
+                },
+                {
+                    "componentName": "adhoc-draft",
+                    "service": "updateDomesticDraftStatus",
+                    "perform": "review-adhoc-draft#demand-draft-address#payment-landing",
+                    "approve": "transaction-journey#review-adhoc-draft"
+                },
+                {
+                    "componentName": "adhoc-draft",
+                    "service": "updateInternationalDraftStatus",
+                    "perform": "review-adhoc-draft#demand-draft-address#payment-landing",
+                    "approve": "transaction-journey#review-adhoc-draft"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.draft.InternationalDraft",
+            "components": [{
+                "componentName": "issue-demand-draft",
+                "service": "updateStatus",
+                "perform": "review-international-demand-draft#warning-message-dialog#available-limits#payment-landing",
+                "approve": "transaction-journey#review-international-demand-draft"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.draft.DomesticDraft",
+            "components": [{
+                "componentName": "issue-demand-draft",
+                "service": "updateStatus",
+                "perform": "review-domestic-demand-draft#warning-message-dialog#available-limits#payment-landing",
+                "approve": "transaction-journey#review-domestic-demand-draft"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.favorite.PaymentFavorite",
+            "components": [{
+                    "componentName": "favorites",
+                    "service": "delete"
+                },
+                {
+                    "componentName": "add-to-favorite-base",
+                    "service": "create",
+                    "perform": "payments-money-transfer"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.instruction.cancellation.PaymentInstructionCancellation",
+            "components": [{
+                "componentName": "scheduled-payments",
+                "service": "updateStatus",
+                "perform": "standing-instructions-list#standing-instruction-detail#review-scheduled-payments#review-cancel-standing-instruction#cancel-standing-instruction#warning-message-dialog#available-limits",
+                "approve": "transaction-journey#review-scheduled-payments#review-cancel-standing-instruction"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.instruction.PaymentInstruction",
+            "components": [{
+                "componentName": "standing-instructions-landing",
+                "service": "read",
+                "perform": "scheduled-payments#standing-instructions-list#standing-instruction-detail"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.transfer.BillPayment",
+            "components": [{
+                "componentName": "bill-payments",
+                "service": "updateStatus",
+                "perform": "multiple-bill-payments#review-multiple-bill-payments#review-bill-payments#warning-message-dialog#available-limits#multiple-bill-payments-status",
+                "approve": "transaction-journey#review-multiple-bill-payments#review-bill-payments#multiple-bill-payments-status"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.remittance.InwardRemittance",
+            "components": [{
+                "componentName": "inward-remittance",
+                "service": "read"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.remittance.OutwardRemittance",
+            "components": [{
+                "componentName": "outward-remittance",
+                "service": "read"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.remittance.OutwardRemittance",
+            "components": [{
+                "componentName": "add-money-to-wallet-stage1",
+                "service": "list",
+                "perform": "add-money-to-wallet-review"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.remittance.OutwardRemittance",
+            "components": [{
+                "componentName": "payment-status-inquiry",
+                "service": "read"
+            }]
+        },
+        
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.biller.Biller",
+            "components": [{
+                "componentName": "biller-list",
+                "service": "read",
+                "perform": "biller-details-edit#add-biller-main#biller-details#review-add-biller-main#manage-payees-billers"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.biller.Biller",
+            "components": [{
+                "componentName": "biller-list",
+                "service": "delete",
+                "perform": "biller-details#manage-payees-billers",
+                "approve": "transaction-journey#biller-details"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.biller.Biller",
+            "components": [{
+                "componentName": "biller-list",
+                "service": "updateStatus",
+                "perform": "add-biller-main#review-add-biller-main#manage-payees-billers",
+                "approve": "transaction-journey#review-add-biller-main"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.biller.Biller",
+            "components": [{
+                "componentName": "biller-list",
+                "service": "updatePartyBillerRelationship",
+                "perform": "biller-details-edit#manage-payees-billers",
+                "approve": "transaction-journey#biller-details-edit"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.payment.service.core.Payment",
+            "components": [{
+                "componentName": "fund-transfer-history",
+                "service": "list",
+                "perform": "fund-transfer-view-details"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.wallet.service.transfer.Transfer",
+            "components": [{
+                "componentName": "external-funding-verification",
+                "service": "fundingFromExternal",
+				"perform": "add-money-to-wallet-stage1#add-money-to-wallet"
+            }]
+        },
+        {
+            "moduleName": "",
+            "components": [{
+                "componentName": "payment-landing",
+                "service": "",
+                "perform": ""
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.wallet.service.payin.Payin",
+            "components": [{
+                "componentName": "add-money-to-wallet-stage1",
+                "service": "create",
+                "perform": "add-money-to-wallet-review#requested-funds-summary"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.wallet.service.transfer.SelfTransfer",
+            "components": [{
+            "componentName": "add-money-to-wallet-stage1",
+            "service": "updateStatus",
+            "perform": "add-money-to-wallet-review#add-money-to-wallet"
+            }]
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.config.service.usersegment.product.UserSegmentProductMap",
+			"components": [{
+					"componentName": "user-segments-product-list",
+					"service": "read",
+					"perform":"user-segments-product-map"
+				}]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.config.service.usersegment.product.UserSegmentProductMap",
+			"components": [{
+					"componentName": "user-segments-product-list",
+					"service": "update",
+					"perform":"user-segments-product-map",
+					"approve" :"user-segments-product-map"
+				}]
+		},
+		{
+			"moduleName": "com.ofss.digx.app.config.service.usersegment.product.UserSegmentProductMap",
+			"components": [{
+					"componentName": "user-segments-product-list",
+					"service": "create",
+					"perform":"user-segments-product-map",
+					"approve" :"user-segments-product-map"
+				}]
+		}
+	]
+}

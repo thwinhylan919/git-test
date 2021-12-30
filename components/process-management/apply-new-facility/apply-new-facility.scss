@@ -1,0 +1,98 @@
+.headingLine {
+    @include padding(1rem, 0rem, 0.2rem, 0.7rem);
+}
+
+.secondLine {
+    @include padding(0rem, 0rem, 0.2rem, 0.7rem);
+}
+
+.icon-more-vertical {
+    @include margin(0.4rem, 0, 0, 0);
+}
+
+.panel-heading {
+    font-size: 17px;
+}
+
+.paddingBottom {
+    padding-bottom: 0.5rem;
+}
+
+.paddingLeft {
+    @include padding(0rem, 0rem, 0rem, 0.8rem);
+}
+
+.addFacility {
+    padding: 1rem !important;
+}
+
+.letters {
+    font-size: 16px;
+}
+
+.items {
+    border-bottom: none;
+}
+
+.amendedDetailsHeading {
+    color: var(--base-color-warning);
+}
+
+.nodata {
+    img {
+        height: 26rem;
+    }
+    &__message {
+        font-size: var(--base-font-size-larger);
+        font-weight: var(--base-font-weight-bold);
+    }
+}
+
+.description {
+    font-size: 13px;
+}
+
+.paddingRight {
+    @include padding(0rem, 1rem, 0rem, 0rem);
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--oj-neutral-color11));
+    @include margin(0rem, 1rem, 0rem, 1rem);
+}
+
+.clt,
+.clt ul,
+.clt li {
+    position: relative;
+}
+
+.clt ul {
+    list-style: none;
+    @include single-padding(left, 1%);
+}
+
+.clt li::before,
+.clt li::after {
+    content: "";
+    position: absolute;
+    left: -4%;
+}
+
+.clt li::before {
+    border-top: 1px dotted black;
+    top: 25%;
+    width: 26%;
+    height: 0;
+}
+
+.clt li::after {
+    @include single-border(left, 1px dotted var(--oj-neutral-color17));
+    height: 100%;
+    width: 0%;
+    top: 1%;
+}
+
+.clt ul>li:last-child::after {
+    height: 24%;
+}

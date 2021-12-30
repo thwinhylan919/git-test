@@ -1,0 +1,13 @@
+@import "utils";
+.td-open{
+  &__exchangeRate{}
+  &-exchangeRate{
+    &__amount{
+      font-size: var(--base-font-size-medium);
+    }
+  }
+  &__divider{
+    @include single-border(left,0.05rem solid var(--base-border-default));
+  }
+
+}

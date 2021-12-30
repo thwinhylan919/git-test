@@ -1,0 +1,63 @@
+<div class="oj-flex oj-flex-items-pad">
+  <div class="oj-flex-item oj-sm-4 wrapper">
+    <ul class="StepProgress">
+      <!-- ko foreach: $component.steps -->
+      <li class="StepProgress-item" data-bind="css: {'is-done': $data.isVisited() , 'current': $data.isCurrent()}">
+        <!-- ko if : $data.clickable() && $data.isVisited() -->
+        <a href="#" data-bind="click: $component.jump.bind($data,$index(), null)">
+          <span data-bind="text:$data.label"></span>
+        </a>
+        <div data-bind="text: $data.description"></div>
+        <!-- /ko -->
+        <!-- ko ifnot : $data.clickable() && $data.isVisited() -->
+        <span data-bind="text:$data.label"></span>
+        <div data-bind="text: $data.description"></div>
+
+        <ul class="stepProgressSubList">
+          <!-- ko foreach: $data.children -->
+          <li class="stepProgressSubList-item" data-bind="css: {'is-inner-done': $data.isVisited(), 'inner-current': $data.isCurrent()}">
+            <!-- ko if : $data.isVisited() -->
+            <a href="#" data-bind="click: $component.jump.bind($data,$parentContext.$index(),$index())">
+                  <span data-bind="text:$data.label"></span>
+              </a>
+            <!-- /ko -->
+            <!-- ko ifnot : $data.isVisited() -->
+            <span data-bind="text:$data.label"></span>
+            <div data-bind="text: $data.description"></div>
+            <!-- /ko -->
+            <div data-bind="text: $data.description"></div>
+          </li>
+          <!-- /ko -->
+        </ul>
+        <!-- /ko -->
+      </li>
+      <!-- /ko -->
+    </ul>
+  </div>
+  <div class="oj-flex-item oj-sm-8">
+    <oj-validation-group id="form-wizard" valid="{{$component.validationTracker}}">
+    <div data-bind="component: {name:$component.currentComponent, params : {data :$component.currentData }}">
+    </div>
+  </oj-validation-group>
+    <div class="oj-flex oj-flex-items-pad button-container">
+      <!-- ko if : !isLast() -->
+      <oj-button class="action-button-primary" on-click="[[$component.next]]">
+        <span slot="startIcon" class="icons icon-next"></span>
+        <span data-bind="text: resources.next"></span>
+      </oj-button>
+      <!-- /ko -->
+      <!-- ko if : isLast() -->
+      <oj-button class="action-button-primary" on-click="[[$component.previous]]">
+        <span slot="startIcon" class="icons icon-done"></span>
+        <span data-bind="text: resources.submit"></span>
+      </oj-button>
+      <!-- /ko -->
+      <!-- ko if : !isFirst() -->
+      <oj-button class="action-button-tertiary" on-click="[[$component.previous]]">
+        <span slot="startIcon" class="icons icon-back"></span>
+        <span data-bind="text: resources.back"></span>
+      </oj-button>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>

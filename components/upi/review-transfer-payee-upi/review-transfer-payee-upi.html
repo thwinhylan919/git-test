@@ -1,0 +1,64 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : $component.params.iseditable ? $component.resource.reviewTransferUpi.reviewHeaderMsg:$component.resource.reviewTransferUpi.reviewHeaderMsg}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : ''">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+                <oj-label class="oj-flex-item oj-lg-12 oj-sm-12 ">
+                    <span data-bind="text: $component.resource.reviewTransferUpi.transferTo"></span>
+                </oj-label>
+                <div class="oj-flex oj-flex-item">
+                    <!-- ko if:$component.imageUploadFlag -->
+                    <oj-avatar class="" role="img" size="xs" initials='[[$component.params.payeeData.initials]]' src='[[$component.params.payeeData.preview ? $component.params.payeeData.preview : null]]' data-bind="attr:{'aria-label': $component.params.payeeData.nickName}">
+                    </oj-avatar>
+                    <!-- /ko -->
+                    <div class="oj-flex-item" data-bind="css: $component.imageUploadFlag ? 'oj-label-inline' : 'no-pad-cols'">
+                        <span data-bind="text:$component.params.payeeData.nickName"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- ko if: $component.params.payeeData.payeeType === "VPA" -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewTransferUpi.payeeVpa, value : $component.params.transferPayeeUpiModel.creditVPAId"></row>
+            <!-- /ko -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewTransferUpi.accountName, value : $component.params.payeeData.accountName"></row>
+            <!-- ko if: $component.params.payeeData.payeeType === "DOMESTIC" -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewTransferUpi.accountType, value : $component.params.transferPayeeUpiModel.accountTransferDetails.accountType"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewTransferUpi.payeeAccountNo, value : $component.params.transferPayeeUpiModel.accountTransferDetails.accountNumber"></row>
+            <!-- ko if: $component.params.transferPayeeUpiModel.accountTransferDetails.bankDetails.name -->
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+                <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text: $component.resource.reviewTransferUpi.bankDetails"></span>
+                </oj-label>
+                <div class="oj-flex-item oj-flex" data-bind="with: $component.params.transferPayeeUpiModel.accountTransferDetails.bankDetails">
+                    <span class="oj-sm-12" data-bind="text: name"></span>
+                    <span class="oj-sm-12" data-bind="text: branch"></span>
+                    <span class="oj-sm-12" data-bind="text: address"></span>
+                    <span class="oj-sm-12" data-bind="text: city"></span>
+                    <span class="oj-sm-12" data-bind="text: country"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+                <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text: $component.resource.reviewTransferUpi.transferFrom"></span>
+                </oj-label>
+                <div class="oj-flex-item oj-flex">
+                    <span class="oj-sm-12" data-bind="text: $component.params.transferPayeeUpiModel.debitVPAId"></span>
+                    <span class="oj-sm-12" data-bind="text: $component.params.transferPayeeUpiModel.sourceAccount.displayValue"></span>
+                </div>
+            </div>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewTransferUpi.amount, value : $formatter.formatCurrency($component.params.transferPayeeUpiModel.amount.amount, $component.params.transferPayeeUpiModel.amount.currency)"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewTransferUpi.note, value : $component.params.transferPayeeUpiModel.remarks"></row>
+        </div>
+    </page-section>
+    <div id="button-container" class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="confirmButton" on-click="[[confirmTransfer]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text: $component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text: $component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

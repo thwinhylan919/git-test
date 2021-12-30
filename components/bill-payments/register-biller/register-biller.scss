@@ -1,0 +1,21 @@
+.bill-payments {
+	background: var(--base-background-primary);
+	.category-list {
+		padding-top: 1rem;
+	}
+
+	.edit-category {
+		&__text {
+			@include single-padding(right,1rem);
+		}
+		&__icon{
+			position:relative;
+			top:0.2rem;
+		}
+	}
+
+}
+
+.sample-bill {
+	width: 100%;
+}

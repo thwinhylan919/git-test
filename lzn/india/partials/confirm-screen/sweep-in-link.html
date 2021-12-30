@@ -1,0 +1,8 @@
+<!-- ko if: $component.showSweepinIcon -->
+<li>
+  <a href="#" data-bind="click:$component.openTransaction.bind($data,'sweep-in-instruction', 'demand-deposits', 'demandDeposit')">
+<img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.createSweepIn}),'title':$component.confirmScreenResources.confirm.actions.createSweepIn},loadImage:'index/icons/savings.svg'">
+<div data-bind="text:$component.confirmScreenResources.confirm.actions.createSweepIn"></div>
+</a>
+</li>
+<!-- /ko -->

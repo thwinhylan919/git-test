@@ -1,0 +1,15 @@
+.justify-content-center {
+    justify-content: center;
+}
+
+.application-cancelled-header {
+    letter-spacing: 0.03rem;
+    font-size: var(--form-page-title-font-size);
+    font-weight: var(--form-page-title-font-weight);
+    color: var(--form-page-title-foreground-color);
+    margin: var(--form-title-margin);
+}
+
+.mobile-padding {
+    padding: 0 0.6rem 0 0.6rem;
+}

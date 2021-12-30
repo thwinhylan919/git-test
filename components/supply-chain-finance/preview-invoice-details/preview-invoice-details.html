@@ -1,0 +1,218 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container preview-invoice">
+        <div class="oj-flex oj-flex-items-pad">
+            <!--  ko if : $component.showPage()  -->
+            <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $baseModel.format($component.nls.heading.InvoiceNo,{invoiceValue : $component.invoicegetVar().invoiceNumber}), headerTemplate : 'supply-chain-finance/download-invoice-link'">
+                    <!--  ko if : $component.showNote()  -->
+                    <div class="download_note">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-10 oj-md-10 note-header">
+                                <span class="icons icon-success"></span>
+                                <span data-bind="text:$component.nls.downloadTitle"></span>
+                            </div>
+                            <div class="oj-flex-item oj-lg-2 right"><a href="#" class="form-button-link"
+                                    data-bind="attr:{'id':'closeNote','alt':$component.nls.closeNoteAlt,'title':$component.nls.closeNoteTitle},click:$component.closeNote">
+                                    <div class="icon-size icon-cross"></div>
+                                </a></div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12">
+                                <span data-bind="text:$component.nls.downloadNote"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-9 oj-md-9">
+                            <div>
+                                <oj-avatar role="img" size="[['md']]" initials="[[initials]]"></oj-avatar><span
+                                    data-bind="attr:{'class':'company-name'},text:$component.invoicegetVar().buyerName"></span>
+                            </div>
+                        </div>
+                        <!--  ko if : $component.invoicegetVar().invoiceId  -->
+                        <div class="oj-flex-item oj-lg-3 oj-md-3">
+                            <div data-bind="attr:{'class':'external-reference-padding'}">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.ExternalInvoiceRefNo, value : $component.invoicegetVar().invoiceId">
+                                </row>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div data-bind="attr:{'class':'seperation-line'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-5 oj-md-5">
+                                <div data-bind="attr:{'class':'buyer-address-design'}">
+                                    <span
+                                        data-bind="html:$baseModel.format($component.nls.InvoiceNo.supplierDetails,{supplierName : $component.invoicegetVar().supplierName, supplierAddress: $component.supplierAddress()})"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4 oj-md-4">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.InvoiceDate, value : $formatter.formatDate($component.invoicegetVar().invoiceDueDate)">
+                                </row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-3">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.ProgramName, value : $component.invoicegetVar().programName">
+                                </row>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="attr:{'class':'seperation-line'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-5 oj-md-5">
+                                <div>
+                                    <label data-bind="text:$component.nls.InvoiceNo.To"></label>
+                                </div>
+                                <div data-bind="attr:{'class':'supplier-address-design'}">
+                                    <span
+                                        data-bind="html:$baseModel.format($component.nls.InvoiceNo.buyerDetails,{buyerName : $component.invoicegetVar().buyerName, buyerAddress: $component.buyerAddress()})"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4 oj-md-4">
+                                <div>
+                                    <!-- ko if: $component.invoicegetVar().poNumber -->
+                                    <row
+                                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.PurchaseOrderNo, value : $component.invoicegetVar().poNumber">
+                                    </row>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: $component.invoicegetVar().poNumber -->
+                                    <row
+                                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.PurchaseOrderNo, value : $component.nls.notApplicable">
+                                    </row>
+                                    <!-- /ko -->
+                                    <!-- ko if: $component.invoicegetVar().purchaseOrderDate -->
+                                    <row
+                                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.PurchaseOrderDate, value : $formatter.formatDate($component.invoicegetVar().purchaseOrderDate)">
+                                    </row>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: $component.invoicegetVar().purchaseOrderDate -->
+                                    <row
+                                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.PurchaseOrderDate, value : $component.nls.notApplicable">
+                                    </row>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-3">
+                                <div>
+                                    <row
+                                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.BalanceDue, value : $formatter.formatCurrency($component.balanceDue(),$component.currencyValue())">
+                                    </row>
+                                    <row
+                                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.InvoiceNo.DueDate, value : $formatter.formatDate($component.invoicegetVar().invoiceDueDate)">
+                                    </row>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </page-section>
+            </div><!--  /ko  -->
+            <!--  ko if : $component.showPage()  -->
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.CommodityDetails, headerTemplate : ''">
+                    <oj-table :id="[['CommodityDetails55']]" data="[[dataSource39]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('commodityRendererOverlay')]]"
+                        columns="[[[{'headerText':$component.nls.CommodityDetails.Name, field:'name', sortable: false},{'headerText':$component.nls.CommodityDetails.Description, field:'description', sortable: false},{'headerText':$component.nls.CommodityDetails.Quantity, field:'quantity', sortable: false},{'headerText':$component.nls.CommodityDetails.Costperunit, field:'costPerUnit',headerClassName:'oj-lg-2 right', sortable: false},{'headerText':$component.nls.CommodityDetails.Amount, field:'totalCost', headerClassName:'right', sortable: false}]]]">
+                    </oj-table>
+                </page-section>
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <!-- ko if : $component.commodityDetails() -->
+                    <div data-bind="attr:{'class':'invoice-seperation-line'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-9 oj-md-9 right"><span
+                                    data-bind="text:$component.nls.CommodityDetails.InvoiceAmount"></span></div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-3 right"><span
+                                    data-bind="text:$formatter.formatCurrency($component.invoicegetVar().amount.amount,$component.invoicegetVar().amount.currency)"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot : $component.commodityDetails() -->
+                    <div data-bind="attr:{'class':'invoice-no-list'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-9 oj-md-9 right"><span
+                                    data-bind="text:$component.nls.CommodityDetails.InvoiceAmount"></span></div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-3 right"><span
+                                    data-bind="text:$formatter.formatCurrency($component.invoicegetVar().amount.amount,$component.invoicegetVar().amount.currency)"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div data-bind="attr:{'class':'common-padding'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-4 oj-md-4">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CommodityDetails.TaxPercentage, value : $baseModel.format($component.nls.CommodityDetails.TaxPercentValue,{taxPercent : $component.invoicegetVar().taxPercentage})">
+                                </row>
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CommodityDetails.DiscountPercentage, value : $baseModel.format($component.nls.CommodityDetails.DiscountPercentValue,{discountPercent : $component.discountPercentage})">
+                                </row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-5 oj-md-5 right">
+                                <div>
+                                    <div
+                                        data-bind="attr:{'class':'amount-weight'},text:$component.nls.CommodityDetails.TaxValue">
+                                    </div><span
+                                        data-bind="attr:{'class':'percent-weight'},text:$component.nls.CommodityDetails.Percent"></span>
+                                </div>
+                                <div>
+                                    <div
+                                        data-bind="attr:{'class':'discount-padding'},text:$component.nls.CommodityDetails.DiscountValue">
+                                    </div><span
+                                        data-bind="attr:{'class':'percent-weight'},text:$component.nls.CommodityDetails.Percent"></span>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-3 right">
+                                <div>
+                                    <span
+                                        data-bind="attr:{'class':'amount-weight'},text:$formatter.formatCurrency($component.invoicegetVar().taxAmount,$component.invoicegetVar().amount.currency)"></span>
+                                </div>
+                                <div data-bind="attr:{'class':'discountvalue-padding right'}">
+                                    <span
+                                        data-bind="attr:{'class':'amount-weight'},text:$formatter.formatCurrency($component.discountAmount,$component.invoicegetVar().amount.currency)"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="attr:{'class':'invoice-background'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-9 oj-md-9 right"><span
+                                    data-bind="text:$component.nls.CommodityDetails.NetInvoiceAmount"></span></div>
+                            <div class="oj-flex-item oj-lg-3 oj-md-3 right"><span
+                                    data-bind="text:$formatter.formatCurrency($component.invoicegetVar().totalAmount.amount,$component.invoicegetVar().amount.currency)"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="attr:{'class':'common-padding'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12 oj-md-12">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CommodityDetails.PaymentTerms, value : $component.invoicegetVar().paymentTerms">
+                                </row>
+                            </div>
+                        </div>
+                    </div>
+                </page-section>
+            </div><!--  /ko  -->
+        </div>
+    </div>
+</oj-validation-group>
+<script type="text/html" id="commodityRendererOverlay">
+    <td><span data-bind="text:$context.row.name"></span></td>
+    <td><span data-bind="text:$context.row.description"></span></td>
+    <td><span data-bind="text:$context.row.quantity"></span></td>
+    <td>
+        <div class="right"><span
+                data-bind="text:$formatter.formatCurrency($context.row.costPerUnit,$component.invoicegetVar().amount.currency)"></span>
+        </div>
+    </td>
+    <td>
+        <div class="right"><span
+                data-bind="text:$formatter.formatCurrency($context.row.totalCost,$component.invoicegetVar().amount.currency)"></span>
+        </div>
+    </td>
+</script>

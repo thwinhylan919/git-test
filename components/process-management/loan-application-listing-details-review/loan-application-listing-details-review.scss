@@ -1,0 +1,105 @@
+$panal-border-color: #FFFFFF;
+$submitted-background-color: #0A8BE6;
+$draft-background-color: #ffd70b;
+$inProgress-background-color: var(--base-color-warning);
+$img-border-color: #0A8BE6;
+$box-background-color: #D3D3D3;
+.panelInternal {
+    width: 100% !important;
+    border-color: $panal-border-color !important;
+}
+
+.externalPanel {
+    width: 100% !important;
+}
+
+.sectionTop {
+    @include padding(1rem, 0, 1rem, 0, !important);
+}
+
+.childpanel {
+    display: none;
+}
+
+.basepanel {
+    padding-top: 0.8rem;
+    height: inherit;
+}
+
+.expand-button {
+    justify-content: center;
+    .help-button {
+        button {
+            border-radius: 1rem !important;
+        }
+    }
+}
+
+.editSize {
+    font-size: 1.3rem;
+}
+
+.draft-Name-customizations {
+    font-size: 0.7rem;
+    @include margin(0.4rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.party-custimizations {
+    @include margin(0.4rem, 0.5rem, 0.5rem, 0.5rem);
+    @include mq(small) {
+        @include margin(0.4rem, 0.5rem, 0.5rem, 1rem);
+    }
+}
+
+.img-style {
+    height: 2rem;
+    @include margin(0.0rem, 0.0rem, 0.5rem, 0.8rem);
+    zoom: 200%;
+}
+
+.customer-details {
+    background-color: var(--banner-background);
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.status_bar {
+    @include single-padding(right, 0.5rem);
+    @include single-border(right, 0.05rem solid var(--base-text-secondary));
+}
+
+.panel-child-customizations {
+    color: rgba(44, 50, 81, 0.8);
+    font-size: 0.7rem;
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+}
+
+.customer-header {
+    font-size: 1rem;
+    margin-top: 0.4rem;
+}
+
+.inProgress {
+    background-color: $inProgress-background-color;
+}
+
+.submit {
+    background-color: $submitted-background-color;
+}
+
+.draft {
+    background-color: $draft-background-color;
+}
+
+.completed {
+    background-color: var(--base-color-success);
+}
+
+.status_tag {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    @include margin(0.0rem, 0.0rem, 0.0rem, 0.5rem);
+}

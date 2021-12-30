@@ -1,0 +1,15 @@
+.icon-property {
+  font-size: 1.2rem;
+}
+.remittance-bar {
+  background: var(--banner-background);
+  color: var(--banner-text-secondary);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+.extra-padding{
+  padding-top: 0.625rem;
+}
+.search-remitter-container-edit{
+  @include single-padding(left,0.625rem);
+}

@@ -1,0 +1,17 @@
+<!-- ko if:$component.confirmScreenExtensions.customFields.fromDetailView -->
+<div class="oj-flex">
+    <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-12">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.confirmScreenExtensions.customFields.resourceBundle.confirmScreen.invoiceNumber, value : $component.confirmScreenExtensions.customFields.invoiceNumber"></row>
+    </div>
+    <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-12">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.confirmScreenExtensions.customFields.resourceBundle.confirmScreen.invoiceRefNumber, value : $component.confirmScreenExtensions.customFields.invoiceRefNumber"></row>
+    </div>
+  </div>
+  <div class="oj-flex">
+    <!-- ko if:$component.confirmScreenExtensions.customFields.comments && $component.confirmScreenExtensions.customFields.comments !== ''-->
+    <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-12">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.confirmScreenExtensions.customFields.resourceBundle.confirmScreen.comments, value : $component.confirmScreenExtensions.customFields.comments"></row>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->

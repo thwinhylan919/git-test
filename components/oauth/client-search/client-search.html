@@ -1,0 +1,114 @@
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-9">
+        <div class="form-main-container">
+            <div class=" oj-flex-item oj-lg-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <oj-label for="clientId" class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+                            <span data-bind="text:$component.Nls.clientId"></span>
+                        </oj-label>
+                        <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-4 label">
+                            <oj-input-text id="clientId" type="text" value="{{$component.clientId}}"
+                                validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.Nls.invalidClientId,{type: 'length',options: {min: 0, max: 255}})]]"
+                                aria-labelledby="clientId"></oj-input-text>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <oj-label for="clientName" class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+                            <span data-bind="text:$component.Nls.clientName"></span>
+                        </oj-label>
+                        <div class="oj-flex-item oj-sm-12 oj-md-7 oj-lg-4 label">
+                            <oj-input-text id="clientName" type="text" value="{{$component.clientName}}"
+                                validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.Nls.invalidClientName,{type: 'length',options: {min: 0, max: 40}})]]"
+                                aria-labelledby="clientName"></oj-input-text>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2">
+                            <oj-label :for="[['identityDom'+$baseModel.currentIdCount()]]"><span
+                                    data-bind="text:$component.Nls.identityDomain"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-6 label">
+                            <!-- ko if:$component.isIdentityDomainListLoaded() -->
+                            <oj-select-one :id="[['identityDom'+$baseModel.currentIdCount()]]"
+                                :placeholder="[[$component.Nls.select]]" value="{{$component.identityDomain}}"
+                                required="[[true]]"
+                                translations="[[{'required':{messageDetail:$component.Nls.selectIdentityDomain}}]]"
+                                :aria-label="identityDom">
+                                <!-- ko foreach:$component.identityDomains -->
+                                <oj-option value="{{name}}"><span data-bind="text:name"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-2">
+                                <oj-label :for="[['clientTyp'+$baseModel.currentIdCount()]]"><span
+                                        data-bind="text:$component.Nls.clientType"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-6 label">
+                                <!-- ko if:$component.isClientTypeListLoaded() -->
+                                <oj-select-one :id="[['clientTyp'+$baseModel.currentIdCount()]]"
+                                    :aria-label="[[$component.Nls.select]]" :placeholder="[[$component.Nls.select]]"
+                                    value="{{$component.clientType}}">
+                                    <oj-option value="CONFIDENTIAL_CLIENT"><span
+                                            data-bind="text:$component.Nls.clientTypes.CONFIDENTIAL_CLIENT"></span></oj-option>
+                                    <oj-option value="PUBLIC_CLIENT"><span
+                                            data-bind="text:$component.Nls.clientTypes.PUBLIC_CLIENT"></span></oj-option>
+                                    <oj-option value="MOBILE"><span data-bind="text:$component.Nls.clientTypes.MOBILE"></span>
+                                    </oj-option>
+                                </oj-select-one>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="oj-row button-container">
+                        <oj-button class="action-button-primary" on-click="[[search]]">
+                            <span data-bind="text:$component.Nls.search"></span>
+                        </oj-button>
+                        <!-- ko ifnot :showSearchData()  -->
+                        <oj-button class="action-button-secondary" on-click="[[$dashboard.openDashboard]]">
+                            <span data-bind="text:$component.Nls.cancel"></span>
+                        </oj-button>
+                        <!-- /ko -->
+                        <oj-button class="action-button-tertiary" on-click="[[clear]]">
+                            <span data-bind="text:$component.Nls.clear"></span>
+                        </oj-button>
+                    </div>
+                    <!-- ko if :showSearchData()  -->
+                    <div class="oj-flex oj-flex-items-pad ">
+                        <div class="oj-flex-item oj-sm-12">
+                            <oj-table id="searchResults" :aria-label="[[$component.Nls.searchResults]]"
+                                data="[[pagingDatasource]]" columns-default.sortable="enabled" columns="[[headerText]]">
+                                <caption class="hide-label" data-bind="text:$component.Nls.searchResults"></caption>
+                                <oj-paging-control id="paging" data="[[pagingDatasource]]" page-size="10" slot="bottom">
+                                </oj-paging-control>
+                            </oj-table>
+                        </div>
+                    </div>
+                    <script type="text/html" id="clientIdLink">
+                        <td>
+                            <div>
+                                <a href="#"
+                                    data-bind="text:$context.row.clientId,click:$component.view.bind($data,$context.row)"></a>
+                            </div>
+                        </td>
+                    </script>
+                    <div class="oj-row button-container">
+                        <oj-button class="action-button-secondary" on-click="[[$dashboard.openDashboard]]">
+                            <span data-bind="text:$component.Nls.cancel"></span>
+                        </oj-button>
+                    </div>
+                    <!-- /ko -->
+                </page-section>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'client-search-maintenance'"></help>
+    </div>
+</div>

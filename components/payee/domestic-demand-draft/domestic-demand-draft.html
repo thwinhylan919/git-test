@@ -1,0 +1,46 @@
+<!-- ko if:$component.stageOne() -->
+    <!-- Account nick name -->
+    <oj-validation-group id="dd-payee-tracker">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label for="nickName"><span data-bind="text:$component.payments.payee.domestic.draftfavouring"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 ">
+            <oj-input-text id="nickName" value="{{$component.domestic.nickName}}" :placeholder="[[$component.payments.payee.domestic.accountnickname]]" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'demandDraftPayeeDTO.nickName', [['#nickName']] )]]]"></oj-input-text>
+        </div>
+    </div>
+    <!-- draft payable at -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label :for="[['draftpayableatcity'+$baseModel.incrementIdCount()]]"> <span data-bind="text:$component.payments.payee.domestic.draftpayableatcity"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 ">
+            <!-- ko if:isCitiesLoaded() -->
+            <oj-select-one required :id="[['draftpayableatcity'+$baseModel.currentIdCount()]]" value="{{$component.domestic.payAtCity}}" :placeholder="[[$component.payments.common.select]]">
+                <!-- ko foreach:cities -->
+                <oj-option value="{{value}}" async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition, 'demandDraftPayeeDTO.payAtCity', [['#draftpayableatcity'+$baseModel.currentIdCount()]] )]]]"><span data-bind="text:text"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="required oj-flex-item oj-sm-12 label">
+            <oj-label for="DeliveryLocation"><span data-bind="text:$component.payments.common.DeliveryLocation"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 ">
+            <div id="DeliveryLocation" data-bind="component: {name: 'demand-draft-address', params:{rootModel: $parent, data:$data,
+            typeOfDraft:'domestic',address:$component.addressDetails}}">
+            </div>
+        </div>
+    </div>    
+    </oj-validation-group>
+
+<!-- /ko -->
+
+<!-- ko if:$component.stageTwo() -->
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.payments.payee.review">
+    <div data-bind="template: { name: 'payee/review-domestic-demand-draft' }"></div>
+</page-section>
+
+<!-- /ko -->

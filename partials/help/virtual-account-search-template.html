@@ -1,0 +1,16 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+  <div class="oj-flex-item help-item">
+    <img data-bind="loadImage : 'info-icon/note.svg'">
+  </div>
+  <div class="oj-flex-item oj-sm-12">
+    <h4 class="oj-sm-12 help-content-title help-item" data-bind="text:$component.resource.tips"></h4>
+  </div>
+  <div class="oj-flex-item oj-sm-12">
+    <p data-bind="text:$component.resource.helpInfo"></p>
+  </div>
+  <div class="oj-flex-item oj-sm-12 center help-item">
+    <oj-button class="help-button" on-click="[[$component.openCreate]]">
+      <span data-bind="text: $component.resource.createNewAccount"></span>
+    </oj-button>
+  </div>
+</div>

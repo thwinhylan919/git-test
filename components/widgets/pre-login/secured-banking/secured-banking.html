@@ -1,0 +1,40 @@
+<div class="secured-banking">
+    <div class="movingbox">
+        <div class="oj-flex-items-pad oj-flex">
+            <div class="oj-flex-item oj-sm-12 header-block">
+                <div class="oj-flex-item left oj-sm-8">
+                    <div data-bind="component: {name: 'product-header-text',
+                        params:{rootModel: resource.header}}">
+                    </div>
+                    <div class="quote">
+                        <div class="icons-title_desc" data-bind="html:resource.description"></div>
+                    </div>
+                </div>
+                <div class="oj-flex-item center oj-sm-4">
+                    <div class="secured-icon-block">
+                        <img class="icon-easy-banking" data-bind="loadImage: 'home/easy-banking.png', attr:{alt: resource.alt.easyBanking}">
+                        <img class="icon-easy-notification" data-bind="loadImage: 'home/notification1.png', attr:{alt: resource.alt.notification}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="features-list-block oj-flex-item">
+            <ul class="oj-flex" data-bind="foreach: features, attr:{'aria-label': resource.features}">
+                <li class="center oj-flex-item oj-sm-4 oj-md-3">
+                    <span data-bind="class: $data.icon"></span>
+                    <div class="feature-heading">
+                        <div class="icons-title_desc"  data-bind="text: $component.resource.tools.title[$data.type]"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="lower-block">
+            <div class="download-block">
+                <p data-bind="text: resource.tools.title.download.description"></p>
+                <oj-button class="action-button-primary" id="download">
+                    <span data-bind="text: resource.tools.title.download.label"></span>
+                </oj-button>
+             </div>
+        </div>
+    </div>
+</div>

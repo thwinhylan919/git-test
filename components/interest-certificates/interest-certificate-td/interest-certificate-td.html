@@ -1,0 +1,12 @@
+<div class="interest-certificate-container">
+  <oj-label class="hide oj-label oj-component oj-complete" :for="deposits"></oj-label>
+  <div class="oj-flex cust-details">
+    <div class="oj-flex-item oj-sm-12">
+      <oj-radioset class="oj-choice-direction-row" id="deposits" value="{{deposit}}" on-value-changed="{{$component.depositTypeChanged}}">
+        <oj-option id="termDeposits" value="TD"><span data-bind="text:$component.resource.termDeposits"></span></oj-option>
+        <oj-option id="recurringDeposits" value="RD"><span data-bind="text:$component.resource.recurringDeposits"></span></oj-option>
+      </oj-radioset>
+    </div>
+  </div>
+</div>
+<div class="oj-lg-12" data-bind="template: { name: 'interest-certificate/interest-certificate' }"></div>

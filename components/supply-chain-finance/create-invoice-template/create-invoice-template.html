@@ -1,0 +1,40 @@
+<oj-validation-group :id="[['tracker1']]">
+  <div class="form-main-container">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-8 oj-sm-12 oj-md-8">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+          <!--  ko if : $component.templatesLoaded() -->
+          <div :aria-label="[[$component.nls.search]]" class="oj-lg-5" data-bind="component: {
+           name: 'search-box',
+           params: {searchFields : ['templateName'], rootModel:$component ,data:dataSource73(), searchBy: $component.nls.search}
+            }">
+            </div>
+          <oj-table :id="[['templates1']]" :aria-label="[[$component.nls.componentHeader]]"  data="[[dataSource73]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('templateRenderer')]]" columns="[[[{'headerText':$component.nls.templatesearch.TemplateName, field:'templateName'},{'headerText':$component.nls.templatesearch.NoofInvoicesSaved, field:'noOfInvoices'},{'headerText':$component.nls.templatesearch.CreatedBy, field:'createdBy'},{'headerText':$component.nls.templatesearch.LastUpdated, field:'lastUpdated'}]]]"></oj-table>
+          <!-- /ko -->
+          <div id="scriptContainer">
+            <script type="text/html" id="templateRenderer">
+              <td><a href="#" class="form-button-link" id="templateId47" data-bind="attr:{'alt':$component.nls.templatesearch.templateId,'title':$component.nls.templatesearch.templateIdTitle},click:$component.onClicktemplateId47.bind($data,$context.row.invoices)"><span data-bind="text:$context.row.templateName"></span></a></td>
+              <td><span data-bind="text:$context.row.noOfInvoices"></span></td>
+              <td><span data-bind="text:$context.row.createdBy"></span></td>
+              <td><span data-bind="text:$formatter.formatDate($context.row.lastUpdatedDate)"></span></td>
+            </script>
+          </div>
+        </page-section>
+      </div>
+      <div class="oj-flex-item oj-lg-4">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+          <help params="baseModel : $baseModel, rootModel : $component, transaction: 'create-invoice-template-help'"></help>
+        </page-section>
+      </div>
+    </div>
+    <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.nls.cancel"></span></oj-button>
+  </div>
+</oj-validation-group>
+<modal-window params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeHandler,id:'dataDecision', header : $component.nls.createInvoice">
+  <div class="oj-flex-item oj-sm-12 message-text scroll" data-bind="html:$component.nls.popUpText"></div>
+  <div class="oj-flex-item oj-sm-12 message-btn button-container">
+    <oj-button class="action-button-primary" on-click="[[$component.onClickYes]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.yes"></span></oj-button>
+    <oj-button class="action-button-secondary" on-click="[[$component.onClickNo]]"><span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.nls.no"></span></oj-button>
+    <oj-button class="action-button-tertiary" on-click="[[$component.onClickCancelPopUp]]"><span slot="startIcon" class="icons icon-back-arrow"></span><span data-bind="text:$component.nls.cancel"></span></oj-button>
+  </div>
+</modal-window>

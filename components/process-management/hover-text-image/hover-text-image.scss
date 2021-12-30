@@ -1,0 +1,127 @@
+$main-title-color:#2d2d2d;
+$hover-container-color:#1a1a1a;
+$image-hover-color:rgba(0, 0, 0, 0.7);
+.main-title {
+    color: $main-title-color;
+    @include text-align(left);
+    padding: 0.7em 0;
+}
+
+.hover_container {
+    padding: 1em 0;
+    @include float(right);
+    color: var(--base-text-secondary);
+}
+
+.hover_container .title {
+    color: $hover-container-color;
+    @include text-align(left);
+    @include single-margin(bottom, 10px);
+}
+
+.text-color {
+    color: var(--base-text-primary);
+}
+
+.content {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.content .content-overlay {
+    background: $image-hover-color;
+    position: absolute;
+    height: 99%;
+    width: 100%;
+    opacity: 0;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay {
+    opacity: 1;
+}
+
+.content-image {
+    width: 100%;
+}
+
+.content-details {
+    position: absolute;
+    @include single-padding(left, 1em);
+    @include single-padding(right, 1em);
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details {
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+}
+
+.content-details h3 {
+    color: var(--base-color-secondary-text);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+
+.content-details p {
+    color: var(--base-color-secondary-text);
+    font-size: 0.8em;
+}
+
+.fadeIn-bottom {
+    color: var(--base-color-secondary-text);
+    top: 80%;
+}
+
+.fadeIn-top {
+    top: 20%;
+}
+
+.fadeIn-left {
+    left: 20%;
+}
+
+.fadeIn-right {
+    left: 80%;
+}
+
+.dataPadding {
+    padding: 0.5rem 0rem;
+    font-weight: 500;
+}
+
+.click-text {
+    text-align: center;
+    border: .1rem solid;
+    padding: 0.5rem;
+    @include single-margin(left, 1em);
+}
+
+.content-text {
+    @include margin(0.5rem, 0.5rem, 1rem, 0.5rem);
+    @include text-align(left);
+    font-weight: 300;
+}
+
+.smallScreenDiscription {
+    width: 17rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}

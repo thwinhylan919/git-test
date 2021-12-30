@@ -1,0 +1,102 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}"></div>
+    <!-- ko if: $component.products().length -->
+    <div class="review oj-lg-8">
+        <div class="card">
+            <div class="oj-flex oj-flex-items-pad card-header">
+                <h3 class="card-title oj-flex-item oj-sm-8 oj-md-9 oj-lg-11" data-bind="text:$component.stepArray()[0].label"></h3>
+                <div class="pull-right oj-flex-item oj-sm-2 oj-md-2 oj-lg-1">
+                    <a href="#" class="icon-remarks pull-right edit-info edit" data-bind="click : $component.editMaintenanceDetails.bind(0, $component.stepArray()[0].id)">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+            <!-- ko foreach: products() -->
+            <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                <oj-label :for="[['switch' + $baseModel.incrementIdCount()]]" class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-label oj-label-inline"><span data-bind="text:description"></span></oj-label>
+                <oj-switch :id="[['switch' + $baseModel.incrementIdCount()]]" disabled="true" class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2" value="{{value}}"></oj-switch>
+            </div>
+            <!-- /ko -->
+        </page-section>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.dealerData.dealerId() -->
+    <div class="review oj-lg-8">
+        <div class="card ">
+            <div class="oj-flex oj-flex-items-pad card-header">
+                <h3 class="card-title oj-flex-item oj-sm-8 oj-md-9 oj-lg-11" data-bind="text:$component.stepArray()[1].label"></h3>
+                <div class="pull-right oj-flex-item oj-sm-2 oj-md-2 oj-lg-1">
+                    <a href="#" class="icon-remarks pull-right edit-info edit" data-bind="click : $component.editMaintenanceDetails.bind(1, $component.stepArray()[1].id)">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+                    <oj-label :for="[['dealerId']]"><span data-bind="text:$component.resource.dealerDetails.dealerId"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4">
+                    <oj-input-text name="dealerId" :id="[['dealerId']]" disabled="true" :invalidcomponenttracker="[[$component.validationTracker]]" value="{{$component.dealerData.dealerId}}"></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+                    <oj-label :for="[['dealerName']]"><span data-bind="text:$component.resource.dealerDetails.dealerName"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+                    <oj-input-text name="dealerName" :id="[['dealerName']]" disabled="true" :invalidcomponenttracker="[[$component.validationTracker]]" value="{{$component.dealerData.dealerName}}"></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+                    <oj-label :for="[['dealerUrl']]"><span data-bind="text:$component.resource.dealerDetails.dealerUrl"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+                    <oj-input-text name="dealerUrl" :id="[['dealerUrl']]" disabled="true" :invalidcomponenttracker="[[$component.validationTracker]]" value="{{$component.dealerData.dealerUrl}}"></oj-input-text>
+                </div>
+            </div>
+        </page-section>
+    </div>
+    <!-- /ko -->
+    <div class="review oj-lg-8">
+        <div class="card ">
+            <div class="oj-flex oj-flex-items-pad card-header">
+                <h3 class="card-title oj-flex-item oj-sm-8 oj-md-9 oj-lg-11" data-bind="text:$component.stepArray()[2].label"></h3>
+                <div class="pull-right oj-flex-item oj-sm-2 oj-md-2 oj-lg-1">
+                    <a href="#" class="icon-remarks pull-right edit-info edit" data-bind="click : $component.editMaintenanceDetails.bind(2, $component.stepArray()[2].id)">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+            <!-- ko foreach: selectedValuesTable() -->
+            <!-- ko if: selectedArray.length > 0 -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-md-offset-1 oj-lg-offset-1 oj-md-10 oj-lg-10">
+                    <h4 class="card-title oj-flex-item oj-sm-8 oj-md-9 oj-lg-9" data-bind="text:label"></h4>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-sm-12 oj-md-6 oj-lg-8">
+                    <oj-table id="table" data="[[$component.getdataProvider($index())]]" columns="[[$component.columnArray]]">
+                    </oj-table>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </page-section>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container product-button-panel">
+        <oj-button raised="" id="personalInfoSubmit" class="action-button-primary first-3" on-click="[[confirmMaintenanceDetails]]">
+            <span data-bind="text:$component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button raised="" id="cancel" class="action-button-secondary last-3" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span data-bind="text:$component.resource.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button raised="" id="saveForLater" class="action-button-tertiary" on-click="[[$component.backFromReview]]">
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

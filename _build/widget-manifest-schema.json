@@ -1,0 +1,84 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "Widget Manifest Schema",
+    "required": [
+        "componentName",
+        "module",
+        "segment",
+        "width"
+    ],
+    "properties": {
+        "componentName": {
+            "$id": "#/properties/componentName",
+            "type": "string",
+            "title": "The name of the component/widget.",
+            "examples": [
+                "investment-details-widget"
+            ],
+            "pattern": "^([\\w-]*)$"
+        },
+        "module": {
+            "$id": "#/properties/module",
+            "type": "string",
+            "title": "The name of the module in which the specified component exists.",
+            "examples": [
+                "mutual-funds"
+            ],
+            "pattern": "^([\\w-]*)$"
+        },
+        "segment": {
+            "$id": "#/properties/segment",
+            "type": "array",
+            "title": "The enterprise roles in which the widget is available",
+            "items": {
+                "$id": "#/properties/segment/items",
+                "type": "string",
+                "title": "The items Schema",
+                "examples": [
+                    "retailuser", "corporateuser", "common"
+                ],
+                "pattern": "^([\\w-]*)$"
+            }
+        },
+        "width": {
+            "$id": "#/properties/width",
+            "type": "object",
+            "title": "The width property of the widget.",
+            "required": [
+                "large",
+                "medium"
+            ],
+            "properties": {
+                "large": {
+                    "$id": "#/properties/width/properties/large",
+                    "type": "string",
+                    "title": "Width of the widget in large layout in units from 1-12.",
+                    "examples": [
+                        "4"
+                    ],
+                    "pattern": "^(\\d*)$"
+                },
+                "medium": {
+                    "$id": "#/properties/width/properties/medium",
+                    "type": "string",
+                    "title": "Width of the widget in medium layout in units from 1-12.",
+                    "examples": [
+                        "6"
+                    ],
+                    "pattern": "^(\\d*)$"
+                },
+                "small": {
+                    "$id": "#/properties/width/properties/small",
+                    "type": "string",
+                    "title": "Width of the widget in small layout in units from 1-12.",
+                    "examples": [
+                        "12"
+                    ],
+                    "pattern": "^(\\d*)$"
+                }
+            }
+        }
+    }
+}

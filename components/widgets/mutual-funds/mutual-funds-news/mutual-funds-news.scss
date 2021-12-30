@@ -1,0 +1,23 @@
+.marquee {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.marquee oj-list-view {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.marquee oj-list-view:hover {
+  animation-play-state: paused;
+}

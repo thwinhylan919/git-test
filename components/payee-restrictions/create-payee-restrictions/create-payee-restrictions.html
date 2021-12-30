@@ -1,0 +1,112 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-lg-9">
+        <div class="form-main-container payee-restriction-landing-container">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <row params="baseModel : $baseModel, rootModel :  $component, label : $component.resource.payeeCount.userType , value :$component.enterpriseRole"></row>
+                <!-- ko if: $component.targetType()!=="ROLE" -->
+                <row params="baseModel : $baseModel, rootModel :  $component, label : $component.resource.payeeCount.userSegment , value :$component.segmentSelectedForRole"></row>
+                <!-- /ko -->
+            </page-section>
+            <!-- ko foreach: $component.payeeRestrictionModel.payeeCountLimitList -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : $data.payeeType() ==='ALL'? '' : $component.resource.payeeCount[$data.payeeType()]">
+                <!-- ko if: $parent.accountPayee().length >0 -->
+                <!-- ko foreach: $parent.accountPayee -->
+                <!-- ko if:$data.payeeType()!=='ALL' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item" data-bind="text:$component.resource.payeeCount.accountpayee"></div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3 label"><span data-bind="text:$data.payeeType()==='ALL'? $component.resource.payeeCount.totalpayeecount:$component.resource.payeeCount.payeeRestriction"></span></oj-label>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2">
+                        <oj-buttonset-one :id="[[$data.payeeType]]" value="{{$data.payeeCountLimitStatus}}">
+                            <!-- ko foreach: $component.payeeLimitStatus -->
+                            <oj-option name="payeeLimitStatus" value="[[id]]" :id="[[id+$baseModel.currentIdCount()]]" :name="[[$data.payeeType]]">
+                                <span data-bind="attr: {for: id + $data.payeeType+$baseModel.incrementIdCount()},text: label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-buttonset-one>
+                    </div>
+                    <!-- ko if:$data.payeeCountLimitStatus() -->
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 label">
+                        <oj-label :for="[['payeecount'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$data.payeeType()==='ALL'? $component.resource.payeeCount.totalpayeepermittedperday:$component.resource.payeeCount.payeepermittedperday"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2">
+                        <oj-input-number :id="[['payeecount'+ $baseModel.currentIdCount()]]" :aria-label="[['payeecount'+ $baseModel.currentIdCount()]]" maxlength="5" validators="[[$baseModel.getValidator('NUMBERS',
+                                  $component.resource.payeeCount.messageDetail,
+                                  {
+                                    })]]" value="{{$data.payeesPerDay}}" min="0" max="999" step="1" required></oj-input-number>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $parent.draftpayee().length >0 -->
+                <!-- ko foreach: $parent.draftpayee -->
+                <!-- ko if:$data.payeeType()!=='ALL' -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item" data-bind="text:$component.resource.payeeCount.draftpayee"></div>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <oj-label class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3 label"><span data-bind="text:$data.payeeType()==='ALL'? $component.resource.payeeCount.totalpyeecount:$component.resource.payeeCount.payeeRestriction"></span></oj-label>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2">
+                        <oj-buttonset-one :id="[[$data.payeeType]]" value="{{$data.payeeCountLimitStatus}}">
+                            <!-- ko foreach: $component.payeeLimitStatus -->
+                            <oj-option name="payeeLimitStatus" value="[[id]]" :id="[[id +$baseModel.currentIdCount()]]" :name="[[$data.payeeType]]">
+                                <span data-bind="attr: {for: id + $data.payeeType+$baseModel.incrementIdCount()},text: label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-buttonset-one>
+                    </div>
+                    <!-- ko if:$data.payeeCountLimitStatus() -->
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 label">
+                        <oj-label :for="[['payeecount'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$data.payeeType()==='ALL'? $component.resource.payeeCount.totalpayeepermittedperday:$component.resource.payeeCount.payeepermittedperday"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-2">
+                        <oj-input-number :id="[['payeecount'+ $baseModel.currentIdCount()]]" :aria-label="[['payeecount'+ $baseModel.currentIdCount()]]" maxlength="5" validators="[[$baseModel.getValidator('NUMBERS',
+                                  $component.resource.payeeCount.messageDetail,
+                                  {
+                                    })]]" value="{{$data.payeesPerDay}}" max="999" min="0" step="1" required></oj-input-number>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </page-section>
+            <!-- /ko -->
+            <div class="button-container">
+                <oj-button id="createButton" class="action-button-primary " on-click="[[$component.showWarning]]">
+                    <span data-bind="text:$component.resource.generic.common.save"></span>
+                </oj-button>
+                <!-- ko if: $baseModel.large() -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                    <span data-bind="text: $component.resource.generic.common.back"></span>
+                </oj-button>
+            </div>
+            <modal-window params="baseModel : $baseModel, rootModel : $component,id:'effectivedate', header: $component.resource.payeeCount.info">
+                <div class=" oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12" data-bind="text:$component.resource.payeeCount.effectiveDateWarning">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <oj-button class="action-button-primary" id="button-ok" on-click="[[save]]">
+                        <span data-bind="text:$component.resource.generic.common.ok"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" id="button-cancel" on-click="[[hideWarning]]">
+                        <span data-bind="text:$component.resource.generic.common.cancel"></span>
+                    </oj-button>
+                </div>
+            </modal-window>
+        </div>
+    </div>
+    <!-- ko if: $baseModel.large()-->
+    <div class="oj-flex-item oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'payee-maintenance'"></help>
+    </div>
+    <!-- /ko -->
+</div>

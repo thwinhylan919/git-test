@@ -1,0 +1,12 @@
+{
+	"status": {
+		"result": "SUCCESSFUL",
+		"contextID": "005coyGBtzrFw0H6yvnZ6G0004Rm0000rL,0:1",
+		"message": {
+			"type": "INFO"
+		}
+	},
+	"countDTOList": [{
+		"transactionType": "PARTY_MAINTENANCE"
+	}]
+}

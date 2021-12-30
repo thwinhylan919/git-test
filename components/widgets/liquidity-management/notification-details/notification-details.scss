@@ -1,0 +1,45 @@
+$footer-background-color: #e7e7e9;
+
+.notification {
+    padding: 0;
+
+    &__table {
+        height: 19.8rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__quickLink {
+        @include view-all;
+        @include single-border(right, 0.05rem solid var(--base-border-default));
+    }
+
+    &__noData {
+        padding-bottom : 0.5rem;
+        &__image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                height: 8rem;
+            }
+        }
+
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: var(--base-font-size-larger);
+    }
+
+    &__subText {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}

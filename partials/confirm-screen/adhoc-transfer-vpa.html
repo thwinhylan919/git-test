@@ -1,0 +1,107 @@
+<div class="oj-flex-item">
+    <!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails && $component.params.confirmScreenExtensions.confirmScreenDetails.length>0 -->
+    <page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+        <div class="oj-lg-12">
+            <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko foreach: $data -->
+                <!-- ko if: $data.value && !$data.currency -->
+                <row class="oj-sm-12" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $data.value"></row>
+                <!-- /ko -->
+                <!-- ko if: $data.value && $data.currency -->
+                <row class="oj-sm-12" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $formatter.formatCurrency($data.value, $data.currencyType)"></row>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,true)">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <!-- ko if: !$component.params.isAdhoc && !$component.params.fromPayeeCreation -->
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'transfer-payee-upi',{})">
+                    <img alt="" data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.makeAnotherTransfer}),'title':$component.confirmScreenResources.confirm.actions.makeAnotherTransfer},loadImage:'dashboard/quick-access/transfer-money.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.makeAnotherTransfer"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: !$component.params.isAdhoc && $component.params.fromPayeeCreation -->
+            <li>
+                <a href="#" data-bind="click:$component.makeTransfer">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.pay}),'title':$component.confirmScreenResources.confirm.actions.pay},loadImage:'dashboard/quick-access/request-money.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.makeTransfer"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: $component.params.isAdhoc -->
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'adhoc-transfer-vpa',{})">
+                    <img alt="" data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.makeAnotherTransfer}),'title':$component.confirmScreenResources.confirm.actions.makeAnotherTransfer},loadImage:'dashboard/quick-access/transfer-money.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.makeAnotherTransfer"></div>
+                </a>
+            </li>
+            <li class="oj-sm-6 oj-flex-item">
+                <a href="#" data-bind="click:$component.addAdhocPayee">
+                    <img alt="" data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.adhocPayee}),'title':$component.confirmScreenResources.confirm.actions.adhocPayee},loadImage:'dashboard/quick-access/manage-recipients.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.adhocPayee"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+    <modal-window class="payee-card-dialog" params="baseModel : $baseModel, rootModel : $component,id:'p2p-payee',header : $component.confirmScreenResources.confirm.actions.p2pPayee">
+        <div class="oj-flex oj-flex-items-pad question-text">
+            <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.wheretoadd"></div>
+        </div>
+        <!-- ko if:$component.params.isAdhoc-->
+        <oj-validation-group id="createpayee">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-radioset value="{{$component.p2pAddPayeeAs}}" class="oj-choice-direction-row">
+                        <oj-option id="existing-payee" name="acctype" value="{{'existing-payee'}}" :data-id="[['existing-payee']]"><span class="label" for="existing-payee" data-bind="text: $component.confirmScreenResources.confirm.actions.existingp2ppayee"></span></oj-option>
+                        <oj-option id="new-payee" name="acctype" value="{{'new-payee'}}" :data-id="[['new-payee']]"><span class="label" for="new-payee" data-bind="text: $component.confirmScreenResources.confirm.actions.newp2ppayee"></span></oj-option>
+                    </oj-radioset>
+                </div>
+                <!-- ko if:$component.p2pAddPayeeAs() === 'existing-payee' && payeeListExpandAll().length>0 -->
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label for="payee-groups"> <span data-bind="text:$component.common.payee"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-select-one id="payee-groups" required :placeholder="[[$component.common.pleaseSelect]]" value="{{$component.addPayeeInGroup}}">
+                        <!-- ko foreach:payeeListExpandAll() -->
+                        <oj-option value="{{groupId}}">
+                            <div class="oj-flex-item">
+                                <!-- ko if:$component.imageUploadFlag() -->
+                                <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[initials]]' src='[[preview ? preview() : ""]]' data-bind="attr:{'aria-label':payeeGroupName}">
+                                </oj-avatar>
+                                <!-- /ko -->
+                                <span data-bind="text: payeeGroupName"></span>
+                            </div>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="button-add" on-click="[[$component.createPayee]]">
+                    <span data-bind="text:$component.confirmScreenResources.generic.common.ok"></span>
+                </oj-button>
+            </div>
+        </oj-validation-group>
+        <!-- /ko -->
+    </modal-window>
+
+</div>

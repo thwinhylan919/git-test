@@ -1,0 +1,69 @@
+<div class="oj-flex-item">
+    <!-- ko if: $component.params.confirmScreenExtensions.isSwap -->
+    <row params="baseModel : $baseModel, dataClass: 'oj-sm-12', rootModel : $parent, label : $component.params.confirmScreenExtensions.swapReferencenceNumberLabel , value: $component.params.confirmScreenExtensions.swapReferencenceNumber"></row>
+    <!-- /ko -->
+    <!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails && $component.params.confirmScreenExtensions.confirmScreenDetails.length>0 -->
+    <page-section params="baseModel : $baseModel, rootModel : $component,heading : ($component.params.confirmScreenExtensions.isSwap ? $component.params.confirmScreenExtensions.header1:'')">
+        <div class="oj-lg-6">
+            <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko foreach: $data -->
+                <!-- ko if: $data.value && $data.complexDate -->
+                <row class="oj-sm-6" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $baseModel.format($data.value, {
+                  bookingDate: $formatter.formatDate($data.bookingDate),
+                  valueDate: $formatter.formatDate($data.valueDate),
+                  noOfDays: $data.noOfDays
+                })"></row>
+                <!-- /ko -->
+                <!-- ko if: $data.value && !($data.complexDate) -->
+                <row class="oj-sm-6" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $data.value"></row>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- ko if: $component.params.confirmScreenExtensions.isSwap -->
+    <page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.params.confirmScreenExtensions.header2">
+        <div class="oj-lg-6">
+            <!-- ko foreach: $component.params.confirmScreenExtensions.swapDetails -->
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko foreach: $data -->
+                <!-- ko if: $data.value && $data.complexDate -->
+                <row class="oj-sm-6" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $baseModel.format($data.value, {
+                  bookingDate: $formatter.formatDate($data.bookingDate),
+                  valueDate: $formatter.formatDate($data.valueDate),
+                  noOfDays: $data.noOfDays
+                })"></row>
+                <!-- /ko -->
+                <!-- ko if: $data.value && !($data.complexDate) -->
+                <row class="oj-sm-6" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $data.value"></row>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li class="oj-flex-item oj-sm-6">
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,true)">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToAccountDetails}),'title':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li class="oj-flex-item oj-sm-6">
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'forex-deal-create','forex-deal')">
+                    <img data-bind="attr:{'alt':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.bookAnotherForex}),'title':$component.confirmScreenResources.confirm.actions.bookAnotherForex},loadImage:'forex-deal/forex-booking.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.bookAnotherForex"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

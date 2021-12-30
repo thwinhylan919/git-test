@@ -1,0 +1,43 @@
+<div data-bind="with:$component.domestic">
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.recipientname,value :name()"></row>
+    </div>
+    <!-- ko if:ko.utils.unwrapObservable($component.preview) &&  $component.imageUploadFlag() -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12 ">
+        <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+            <span data-bind="text: $component.payments.payee.image"></span>
+        </oj-label>
+        <div class="oj-flex-item">
+            <oj-avatar role="img" size="sm"
+                        data-bind="attr:{'id': $component.target(),'aria-label':$component.payments.payee.image}" src="[[$component.preview()]]">
+            </oj-avatar>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.drafttype , value :$component.payments.payee.accdomestic"></row>
+        <row class="highlight-text" params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.draftfavouring ,  value :nickName()"></row>
+        <row class="highlight-text" params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.draftpayableatcity ,  value :payAtCity()"></row>
+    </div>
+    <div class="">
+        <!-- ko if:demandDraftDeliveryDTO.deliveryMode ==='BRN' -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.deliverdraftto ,value :$component.payments.payee.domestic.msgtype.branchaddress"></row>
+        <!-- /ko -->
+        <!-- ko if:demandDraftDeliveryDTO.deliveryMode ==='OTHADD' -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.deliverdraftto ,value :$component.payments.payee.domestic.msgtype.otherAddress"></row>
+        <!-- /ko -->
+        <!-- ko if:demandDraftDeliveryDTO.deliveryMode==='MAI' -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.domestic.deliverdraftto ,value :$component.payments.payee.domestic.msgtype.myaddress"></row>
+        <!-- /ko -->
+        <!-- ko if:$component.addressDetails -->
+        <div class="address" data-bind="template: { name: 'common/review/address',data:{
+                                                                label: $component.payments.payee.labels.addressDetails,
+                                                                details: $component.addressDetails && $component.addressDetails.postalAddress} }"></div>
+        <!-- /ko -->
+    </div>
+    <!-- ko if:$dashboard.appData.segment === "CORP" -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.payeeaccesstype , value :$component.payments.payee.isShared[$component.payeeAccessType]"></row>
+    </div>
+    <!-- /ko -->
+</div>

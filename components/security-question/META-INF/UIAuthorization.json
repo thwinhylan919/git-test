@@ -1,0 +1,16 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.security.service.authentication.securityquestion.SecurityQuestion",
+    "components": [{
+        "componentName": "create-security-question-maintenance",
+        "service": "create",
+        "perform": "view-security-question-maintenance#review-security-question-maintenance"
+      },
+      {
+        "componentName": "update-security-question-maintenance",
+        "service": "update",
+        "perform": "view-security-question-maintenance#review-security-question-maintenance"
+      }
+    ]
+  }]
+}

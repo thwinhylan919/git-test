@@ -1,0 +1,438 @@
+{
+	"category": "WIDGETS",
+	"subCategories": [{
+		"subcategoryName": "ANONYMOUS",
+		"entitlements": [{
+			"widgetName": "Banking at your fingertips",
+			"widget": "banking",
+			"requiredUI": "product-header-text"
+		}, {
+			"widgetName": "Company Links",
+			"widget": "company-links"
+		}, {
+			"widgetName": "Login Form",
+			"widget": "login-form",
+			"requiredUI": "product-header-text#bot-client"
+		}, {
+			"widgetName": "Goals",
+			"widget": "goals",
+			"requiredUI": "product-header-text"
+		}, {
+			"widgetName": "Page Banner",
+			"widget": "page-banner",
+			"requiredUI": "product-header-text"
+		}, {
+			"widgetName": "Secured banking",
+			"widget": "secured-banking",
+			"requiredUI": "product-header-text"
+		}, {
+			"widgetName": "Bank Products",
+			"widget": "bank-products"
+		}, {
+			"widgetName": "Wallet",
+			"widget": "wallet"
+		}, {
+			"widgetName": "Tools and Calculators",
+			"widget": "tools-and-calculators",
+			"requiredUI": "product-header-text"
+		},{
+			"widgetName": "Loan Calculator",
+			"widget": "loan-calculator"
+		},{
+			"widgetName": "Loan Eligibility Calculator",
+			"widget": "loan-eligibility-calculator"
+		},
+		{
+			"widgetName": "Term Deposit Calculator",
+			"widget": "td-calculator"
+		}, {
+			"widgetName": "Forex Calculator",
+			"widget": "forex-calculator"
+		}	
+	]
+	}, {
+		"subcategoryName": "COMMON",
+		"entitlements": [{
+				"widgetName": "Notification",
+				"widget": "notification"
+			},
+			{
+				"widgetName": "Loan Calculator",
+				"widget": "loan-calculator"
+			},
+			{
+				"widgetName": "Loan Eligibility Calculator",
+				"widget": "loan-eligibility-calculator"
+			},
+			{
+				"widgetName": "Term Deposit Calculator",
+				"widget": "td-calculator"
+			}, {
+				"widgetName": "Forex Calculator",
+				"widget": "forex-calculator"
+			}, {
+				"widgetName": "Quick Links",
+				"widget": "quick-links"
+			}
+		]
+	}, {
+		"subcategoryName": "RETAIL",
+		"entitlements": [{
+				"widgetName": "Net Worth Graph",
+				"widget": "net-worth-graph"
+			}, {
+				"widgetName": "My Accounts",
+				"widget": "financial-summary",
+				"requiredUI": "flip-account"
+			}, {
+				"widgetName": "Recent Activity",
+				"widget": "recent-account-transactions"
+			}, {
+				"widgetName": "Spend Summary",
+				"widget": "spend-summary"
+			}, {
+				"widgetName": "My Bills",
+				"widget": "my-bills"
+			}, {
+				"widgetName": "Scheduled Payment Widget",
+				"widget": "scheduled-payments-widget"
+			}, {
+				"widgetName": "Fund Transfer History Widget",
+				"widget": "fund-transfer-history-widget"
+			}, {
+				"widgetName": "Banner",
+				"widget": "bank-promotional-offers"
+			}, {
+				"widgetName": "Wealth Management Promotional Offers",
+				"widget": "wealth-management-promotional-offers"
+			}, {
+				"widgetName": "Dashboard Quick Links",
+				"widget": "dashboard-quick-links"
+			}, {
+				"widgetName": "Service Request",
+				"widget": "demand-deposit-service-request"
+			}, {
+				"widgetName": "Link Account",
+				"widget": "link-account"
+			}, {
+				"widgetName": "Service Advisors",
+				"widget": "service-advisors"
+			}, {
+				"widgetName": "Demand Deposits Analysis",
+				"widget": "demand-deposit-analysis"
+			}, {
+				"widgetName": "Term Deposits Analysis",
+				"widget": "td-analysis"
+			}, {
+				"widgetName": "Loan Analysis",
+				"widget": "loan-analysis"
+			}, {
+				"widgetName": "Goal Dashboard Card",
+				"widget": "goals-dashboard-card"
+			}, {
+				"widgetName": "Budget Dashboard Card",
+				"widget": "budgets-dashboard-card"
+			}, {
+				"widgetName": "External Financial Summary",
+				"widget": "external-financial-summary",
+				"requiredUI": "flip-external-account"
+			}, {
+				"widgetName": "External Accounts Net Worth Graph",
+				"widget": "external-accounts-net-worth-graph"
+			}, {
+				"widgetName": "Recent Account Activity",
+				"widget": "recent-account-activity"
+			}, {
+				"widgetName": "Link Customer Account",
+				"widget": "link-customer-account"
+			}, {
+				"widgetName": "Link Account Payment",
+				"widget": "link-account-payment"
+			},
+			{
+				"widgetName": "Mutual Funds Reports",
+				"widget": "fund-reports-widget"
+			},
+			{
+				"widgetName": "Mutual Funds Top and Bottom Funds",
+				"widget": "top-bottom-funds-widget"
+			},
+			{
+				"widgetName": "Mutual Funds Portfolio Summary",
+				"widget": "portfolio-summary-widget"
+			},
+			{
+				"widgetName": "Mutual Funds Investment Allocation",
+				"widget": "investment-allocation-widget"
+			},
+			{
+				"widgetName": "Mutual Funds Investment Account Details",
+				"widget": "investment-details-widget"
+			},
+			{
+				"widgetName": "Mutual Funds News",
+				"widget": "mutual-funds-news"
+			},
+			{
+				"widgetName": "Mutual Funds Performance Analysis",
+				"widget": "performance-analysis-widget"
+			},
+			{
+				"widgetName": "Wallet Widget",
+				"widget": "wallet-widget"
+			}
+		]
+	}, {
+		"subcategoryName": "CORPORATE",
+		"entitlements": [{
+				"widgetName": "Account Financial Summary",
+				"widget": "account-financial-summary",
+				"requiredUI": "accounts-action-card#corporate-account-details#account-summary#td-summary#loan-summary"
+			}, {
+				"widgetName": "Account Quick Links",
+				"widget": "account-quick-links"
+			}, {
+				"widgetName": "Sweep Log",
+				"widget": "sweep-log",
+				"requiredUI": "view-sweep-log"
+			}, {
+				"widgetName": "LM Position By Region",
+				"widget": "position-by-region"
+			}, {
+				"widgetName": "LM Assets and Liabilities",
+				"widget": "assets-and-liabilities"
+			}, {
+				"widgetName": "LM Position By Currency",
+				"widget": "position-by-currency"
+			}, {
+				"widgetName": "Liquidity Management Notifications",
+				"widget": "notification-details",
+				"requiredUI": "view-notification-details"
+			}, {
+				"widgetName": "LM Cross Border Currency Sweeps",
+				"widget": "cross-border-sweeps"
+			}, {
+				"widgetName": "LM Top Five Sweeps",
+				"widget": "top-five-sweeps"
+			}, {
+				"widgetName": "Credit Line",
+				"widget": "credit-line"
+			}, {
+				"widgetName": "Bulk File Upload",
+				"widget": "bulk-file-upload",
+				"requiredUI": "file-input"
+			}, {
+				"widgetName": "Financial Overview",
+				"widget": "financial-overview"
+			}, {
+				"widgetName": "Financial Position Currency",
+				"widget": "financial-position-currency"
+			}, {
+				"widgetName": "Latest Pending Approvals",
+				"widget": "latest-pending-approvals",
+				"requiredUI": "batch-process-approvals#transaction-detail#transaction-journey"
+			}, {
+				"widgetName": "Limits Widget",
+				"widget": "limits-widget",
+				"requiredUI": "limits-graph"
+			}, {
+				"widgetName": "My Approved List",
+				"widget": "my-approved-list",
+				"requiredUI": "transaction-detail#accounts-financial#amount-financial#accounts-non-financial#beneficiary#bulk#payment-transactions#biller-registration-approval#electronic-bill-payments#bulk-record#non-account-bulk-record#record-approval#file-approval#bulk-record-non-financial#bulk-file-non-financial#trade-finance-approval#other-transactions-approval#forex-deal-transactions#liquidity-management-approval#transaction-journey"
+			}, {
+				"widgetName": "Payable Receivable Bills",
+				"widget": "payable-receivable-bills"
+			}, {
+				"widgetName": "Pending For Action",
+				"widget": "pending-for-action"
+			}, {
+				"widgetName": "Pending For Action Viewer",
+				"widget": "pending-for-action-viewer"
+			}, {
+				"widgetName": "Pending For Action Mailbox",
+				"widget": "pending-for-action-mail-box"
+			}, {
+				"widgetName": "Recent Payments",
+				"widget": "recent-payments"
+			}, {
+				"widgetName": "Reports",
+				"widget": "reports"
+			}, {
+				"widgetName": "Trade Instruments",
+				"widget": "trade-instruments"
+			}, {
+				"widgetName": "Work Box Maker",
+				"widget": "work-box-maker",
+				"requiredUI": "work-box-corporate#accounts-financial#amount-financial#accounts-non-financial#beneficiary#biller-registration-approval#bulk#payment-transactions#electronic-bill-payments#bulk-record#non-account-bulk-record#record-approval#file-approval#bulk-file-non-financial#bulk-record-non-financial#trade-finance-approval#other-transactions-approval#transaction-detail#forex-deal-transactions#liquidity-management-approval#transaction-journey"
+			},
+			{
+				"widgetName": "Work Box Viewer",
+				"widget": "work-box-viewer",
+				"requiredUI": "work-box-maker#work-box-corporate#accounts-financial#amount-financial#accounts-non-financial#beneficiary#biller-registration-approval#bulk#payment-transactions#electronic-bill-payments#bulk-record#non-account-bulk-record#record-approval#file-approval#bulk-file-non-financial#bulk-record-non-financial#trade-finance-approval#other-transactions-approval#transaction-detail#forex-deal-transactions#liquidity-management-approval#transaction-journey"
+
+
+			},
+			{
+				"widgetName": "Work Snapshot",
+				"widget": "work-snapshot"
+			},
+			{
+				"widgetName": "Virtual Entity Summary",
+				"widget": "virtual-entity-summary"
+			},
+			{
+				"widgetName": "Move Money",
+				"widget": "virtual-account-move-money"
+			},
+			{
+				"widgetName": "Virtual Accounts Structure",
+				"widget": "virtual-account-structure"
+			},
+			{
+				"widgetName": "Remitter ID Information",
+				"widget": "remittance-identifier-information"
+			},
+			{
+				"widgetName": "Top 5 Virtual Account Balances",
+				"widget": "virtual-account-balances-top-four"
+			},
+			{
+				"widgetName": "Cash Position",
+				"widget": "virtual-account-cash-position"
+			},
+			{
+				"widgetName": "Accounts & Balances",
+				"widget": "virtual-account-balance"
+			},
+			{
+				"widgetName": "Balance Trends of Virtual Accounts",
+				"widget": "virtual-account-balance-trends"
+			}, {
+				"widgetName": "Position By Currency",
+				"widget": "virtual-account-position-by-currency"
+			}, {
+				"widgetName": "Dashboard Quick Links",
+				"widget": "dashboard-quick-links"
+			}, {
+				"widgetName": "Demand Deposit Overview",
+				"widget": "demand-deposits-overview",
+				"requiredUI": "account-overview"
+			}, {
+				"widgetName": "Demand Deposit Summary",
+				"widget": "account-summary",
+				"requiredUI": "account-details"
+			}, {
+				"widgetName": "Demand Deposit Offers",
+				"widget": "offers"
+			}, {
+				"widgetName": "Overdue Invoices",
+				"widget": "overdue-invoices-widget"
+			}, {
+				"widgetName": "Overdue Finances",
+				"widget": "overdue-finances-widget"
+			}, {
+				"widgetName": "Invoice Timeline",
+				"widget": "invoices-timeline-widget"
+			}, {
+				"widgetName": "Top Programs",
+				"widget": "top-programs-widget"
+			}, {
+				"widgetName": "Finance Maturing",
+				"widget": "finance-maturing-widget"
+			}, {
+				"widgetName": "Supply Chain Finance Promotional Offers",
+				"widget": "supply-chain-finance-banner"
+			}, {
+				"widgetName": "Term Deposits Overview",
+				"widget": "term-deposits-overview",
+				"requiredUI": "account-overview"
+			}, {
+				"widgetName": "Term Deposit Summary",
+				"widget": "td-summary",
+				"requiredUI": "td-corporate-details"
+			}, {
+				"widgetName": "Term Deposit Accounts Overview",
+				"widget": "td-accounts-overview"
+			}, {
+				"widgetName": "Loans Overview",
+				"widget": "loans-overview",
+				"requiredUI": "account-overview"
+			}, {
+				"widgetName": "Loan Accounts Overview",
+				"widget": "loan-accounts-overview",
+				"requiredUI": "account-overview"
+			}, {
+				"widgetName": "Loan Portfolio",
+				"widget": "loan-portfolio",
+				"requiredUI": "account-overview"
+			}, {
+				"widgetName": "Loans Summary",
+				"widget": "loan-summary",
+				"requiredUI": "loan-corporate-details"
+			}, {
+				"widgetName": "Installments Due",
+				"widget": "loan-installments-due",
+				"requiredUI": "loan-details#loan-repayment"
+			}, {
+				"widgetName": "Finance Application Tracker",
+				"widget": "loan-application-tracker",
+				"requiredUI": "loan-application-listing"
+			}, {
+				"widgetName": "Facility Synopsis",
+				"widget": "facility-synopsis"
+			}, {
+				"widgetName": "Collateral Synopsis",
+				"widget": "collateral-synopsis"
+			}, {
+				"widgetName": "Facility Allocation",
+				"widget": "facility-allocation"
+			}, {
+				"widgetName": "Corporate Loans Overview",
+				"widget": "corp-loans-overview"
+			}, {
+				"widgetName": "Corporate Loan Application Tracker",
+				"widget": "corp-loan-application-tracker"
+			}, {
+				"widgetName": "Corporate Loan Accounts Summary",
+				"widget": "corp-loan-accounts-summary"
+			}, {
+				"widgetName": "Corporate Loan Quick Links",
+				"widget": "corp-loan-quick-links"
+			}, {
+				"widgetName": "Corporate Loan Origination Links",
+				"widget": "corp-loan-origination-links"
+			}, {
+				"widgetName": "Corporate Installments Due",
+				"widget": "corp-installments-due"
+			}, {
+				"widgetName": "Trade Finance Links",
+				"widget": "trade-finance-links"
+			}, {
+				"widgetName": "Currency Exposure",
+				"widget": "currency-exposure",
+				"requiredUI": "forex-deal-create"
+			}
+		]
+	}, {
+		"subcategoryName": "ADMINISTRATOR",
+		"entitlements": [{
+			"widgetName": "Pending For Approval",
+			"widget": "pending-for-approvals",
+			"requiredUI": "pending-approvals#batch-process-approvals#transaction-detail#transaction-journey"
+		}, {
+			"widgetName": "Dashboard Admin Action Card",
+			"widget": "dashboard-admin-action-card",
+			"role": "AUTHADMIN"
+		}, {
+			"widgetName": "System Administration",
+			"widget": "system-admin"
+		}, {
+			"widgetName": "Admin Activities",
+			"widget": "admin-activities"
+		}, {
+			"widgetName": "Activity Log",
+			"widget": "activity-log",
+			"requiredUI": "transactions-log#transaction-detail#accounts-financial#accounts-non-financial#beneficiary#bulk#payment-transactions#bulk-record#non-account-bulk-record#record-approval#file-approval#bulk-file-non-financial#bulk-record-non-financial#trade-finance-approval#corporate-activity-log#other-transactions-approval#admin-activity-log#bulk-file-admin#bulk-record-admin#forex-deal-transactions#liquidity-management-approval#transaction-journey"
+		}]
+	}]
+}

@@ -1,0 +1,54 @@
+<div class="oj-flex border">
+    <!-- ko if:$component.parameters.color -->
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-9">
+            <oj-label>
+                <span data-bind="text:$component.resourceBundle.bordercolor"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-3">
+            <a href="#" class="colorBox" data-bind="click:$component.showPaleteBox,style:{'background-color':$component.bindvariable[$component.parameters.color]}"></a>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.parameters.width -->
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-6">
+            <oj-label for="width">
+                <span data-bind="text:$component.resourceBundle.borderwidth"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+            <oj-input-number disabled="[[$component.readOnly]]" id="width" max=15 min=0 step="0.1" value="{{$component.bindvariable[$component.parameters.width]}}" converter="[[{type:'number',options:{style: 'decimal',pattern: '#.#rem'}}]]">
+            </oj-input-number>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.parameters.radius -->
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-6">
+            <oj-label for="radius">
+                <span data-bind="text:$component.resourceBundle.borderradius"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+            <oj-input-number disabled="[[$component.readOnly]]" id="radius" max=15 min=0 step="0.1" value="{{$component.bindvariable[$component.parameters.radius]}}"
+                converter="[[{type:'number',options:{style: 'decimal',pattern: '#.#rem'}}]]">
+            </oj-input-number>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<div class="message" data-bind="component:{name:'modal-window',params:{baseModel : $baseModel, rootModel : $component,id:$component.modalWindowId(),header:$component.resourceBundle.labels.pickColor}}">
+    <div class="form-main-container message-text">
+        <div data-bind="component:{name:'color-picker',params:{color:$component.colorValue,selectedColors:$component.selectedColors}}"></div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.saveSelectedColor.bind($data)]]">
+                <span data-bind="text:resourceBundle.generic.common.done"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.hideColorPalete]]">
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+            </oj-button>
+        </div>
+    </div>
+</div>

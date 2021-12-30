@@ -1,0 +1,36 @@
+<div class="oj-panel align-div">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12">
+      <h3 data-bind="text:$component.nls.Overdue.Overdue"></h3>
+    </div>
+    <!-- ko if : $component.listLoaded() && $component.financesList().length > 0 -->
+    <!-- ko ifnot: $baseModel.small() -->
+    <oj-table :id="[['finance_overdue']]" :aria-label="[[$component.nls.Overdue.overdueTable]]" class="table-height"
+      data="[[dataSource26]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('overdueFinanceTable')]]"
+      columns="[[tableColumns]]">
+    </oj-table>
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
+  <!-- ko if : $component.listLoaded() && $component.financesList().length === 0 -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="align-img"><img alt=""
+        data-bind="loadImage:'dashboard/quick-access/upcoming-payment-new.svg'"></div>
+    <h3 data-bind="attr:{'class':'center text-style oj-flex-item oj-lg-12'},text:$component.nls.nooverdueMessage"></h3>
+  </div>
+  <!-- /ko -->
+  <!-- ko if : $component.listLoaded() && $component.financesList().length > 0 -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item center align-link"><a href="#" class="form-button-link" id="view_finances"
+        data-bind="attr:{'alt':$component.nls.Overdue.ViewAllInvoices,'title':$component.nls.Overdue.ViewAllInvoicesTitle},click:$component.viewAll,text:$component.nls.Overdue.ViewAllInvoices"></a>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<script type="text/html" id="overdueFinanceTable">
+  <td><span data-bind="text:$context.row.id"></span></td>
+  <td><span
+      data-bind="text:$formatter.formatCurrency($context.row.outstandingAmount.amount,$context.row.outstandingAmount.currency)"></span>
+  </td>
+  <td><span data-bind="text:$context.row.noOfDaysOverdue"></span></td>
+</script>

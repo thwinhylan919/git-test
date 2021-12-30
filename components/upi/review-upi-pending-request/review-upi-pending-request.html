@@ -1,0 +1,40 @@
+<oj-validation-group :id="[['tracker']]">
+  <div class="form-main-container">
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+      <div data-bind="template:{name: 'review-screen/review-banner-template', data:{header : $component.nls.review , reviewHeader : $component.nls.reviewUpiPendingRequest}}"></div>
+      <div>
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-sm-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.SendMoneyto, value : [($component.reviewData.receiverName),($component.reviewData.creditVPAId)]"></row>
+          </div>
+          <div class="oj-flex-item oj-sm-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.SendFrom, value : [($component.reviewData.debitVPAId),($component.reviewData.account.displayValue)]"></row>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-sm-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.DateofRequest, value : $formatter.formatDate($component.reviewData.requestDate)"></row>
+          </div>
+          <div class="oj-flex-item oj-sm-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.ExpiryDate, value : $formatter.formatDate($component.reviewData.expiryDate)"></row>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-sm-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.Amount, value : $formatter.formatCurrency($component.reviewData.amount.amount,$component.reviewData.amount.currency)"></row>
+          </div>
+          <div class="oj-flex-item oj-sm-6">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.TransactionID, value : $component.reviewData.transferId"></row>
+          </div>
+        </div>
+      </div>
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.PendingRequests.Note, value : $component.reviewData.remarks"></row>
+      <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm73]]"><span slot="startIcon" class="icon-confirm"></span><span data-bind="text:$component.nls.PendingRequests.Confirm"></span></oj-button>
+      <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack86]]"><span slot="startIcon" class="icon-back-arrow"></span><span data-bind="text:$component.nls.PendingRequests.Back"></span></oj-button>
+    </page-section>
+  </div>
+</oj-validation-group>

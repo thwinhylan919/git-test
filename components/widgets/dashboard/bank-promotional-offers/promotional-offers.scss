@@ -1,0 +1,11 @@
+.promotional-offer{
+
+  &-item{
+    width:99%;
+  }
+  img{
+    width:100%;
+    height: calc((17.4rem / 2) - 0.6rem);
+  }
+
+}

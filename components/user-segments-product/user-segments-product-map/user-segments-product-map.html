@@ -1,0 +1,127 @@
+<div class="oj-flex oj-sm-flex-items-initial">
+    <div class="form-main-container " data-bind="css:$component.mode() !== 'REVIEW' ? 'oj-sm-12' : 'oj-sm-12'">
+        <!-- ko if :$component.mode() === 'REVIEW' && !$component.approvalView() -->
+        <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.common.review , reviewHeader : $component.resource.common.initiateHeader}}"></div>
+        <!-- /ko -->
+        <!-- ko if : $component.tasksLoaded() && $component.segmentDataLoaded ()-->
+        <div class="oj-flex oj-flex-item">
+            <div class="oj-flex-items-pad oj-sm-12 oj-md-8 oj-lg-8">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.productMapping.userType , value :$component.resource.productMapping[$component.userSegmentId]"></row>
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.productMapping.productModuleLabel , value :$component.productModule"></row>
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.productMapping.productType , value :$component.productType"></row>
+                    <!-- ko if : $component.entityName-->
+                    <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.productMapping.userSegment , value :$component.entityName"></row>
+                    <!-- /ko -->
+                </page-section>
+            </div>
+        </div>
+
+
+        <page-section params="baseModel : $baseModel, rootModel : $component">
+            <oj-validation-group id="tracker" valid="{{groupValid}}">
+                <oj-table id="table" :aria-label="[[$component.resource.productMapping.productTable]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer($component.productsTemplateId, true)]]" columns="[[[{headerText:'Select'},
+     {headerText:$component.resource.tableHeader.productName,sortable:'disabled',style:'vertical-align: middle'},
+     {headerText:$component.resource.tableHeader.expiryDate,sortable:'disabled',style:'vertical-align: middle'},
+     {headerText:$component.resource.tableHeader.status,sortable:'disabled',style:'vertical-align: middle'},
+     {headerText:$component.resource.tableHeader.currency,sortable:'disabled',style:'vertical-align: middle'},
+     {headerText:$component.resource.tableHeader.minAmount,sortable:'disabled',style:'vertical-align: middle'},
+     {headerText:$component.resource.tableHeader.maxAmount,sortable:'disabled',style:'vertical-align: middle'}]]]" data="[[$component.datasource]]">
+                    <caption class="hide-label" data-bind="text:$component.resource.productMapping.productTable"></caption>
+                </oj-table>
+            </oj-validation-group>
+        </page-section>
+
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <!-- ko if:($component.mode() === "CREATE" || $component.mode() === "EDIT") -->
+            <oj-button class="action-button-primary" on-click="[[$component.save]]">
+                <span data-bind="text:$component.resource.generic.common.save"></span>
+            </oj-button>
+
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span data-bind="text:$component.resource.generic.common.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+
+            <!-- ko if:($component.mode() === "REVIEW") -->
+            <!-- ko ifnot:$component.approverReview() -->
+            <oj-button class="action-button-primary" disabled="[[$component.confirmClicked()]]" on-click="[[$component.confirm]]">
+                <span data-bind="text:$component.resource.generic.common.confirm"></span>
+            </oj-button>
+
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span data-bind="text:$component.resource.generic.common.cancel"></span>
+            </oj-button>
+
+            <oj-button class="action-button-tertiary" on-click="[[$component.edit]]">
+                <span data-bind="text:$component.resource.generic.common.back"></span>
+            </oj-button>
+            <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if:$component.mode() === "VIEW" -->
+            <oj-button class="action-button-primary" on-click="[[$component.edit]]">
+                <span data-bind="text:$component.resource.generic.common.edit"></span>
+            </oj-button>
+
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span data-bind="text:$component.resource.generic.common.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+
+            <!-- ko ifnot:$component.approverReview() ||  $component.mode() === "REVIEW" -->
+            <oj-button class="action-button-tertiary" on-click="[[$component.back]]">
+                <span data-bind="text:$component.resource.generic.common.back"></span>
+            </oj-button>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<script type="text/html" id="row_Template_products_read">
+    <tr>
+        <td>
+            <!-- ko if:name !== "" -->
+            <oj-checkboxset :id="[[productId]]" disabled="[[($component.mode() === 'VIEW' || $component.mode() === 'REVIEW' || expiredFlag !== 'Active')  ? true:false]]" on-value-changed="[[$component.checkBoxHandler]]" class="oj-choice-direction-row" value="{{productsMapped.product}}">
+                <oj-option value="checked" :id="[['checkbox-' + productId+currency]]" :aria-label="[[$component.resource.productMapping.selectProduct]]">
+                    <span class="hide-label" data-bind="attr:{
+                         for: 'checkbox-' + productId},text:name"></span>
+                </oj-option>
+            </oj-checkboxset>
+            <!-- /ko -->
+        </td>
+
+        <td data-bind="text:name">
+        </td>
+        <!-- ko if:$data.productExpiryDate !=="NA" -->
+        <td data-bind="text:$formatter.formatDate(productExpiryDate)">
+        </td>
+        <!-- /ko -->
+        <!-- ko if:$data.productExpiryDate === "NA" -->
+        <td data-bind="text:(productExpiryDate)">
+        </td>
+        <!-- /ko -->
+        <td>
+            <!-- ko if:$data.expiredFlag === "Active" -->
+            <span class="new-tag" data-bind="text:expiredFlag"></span>
+            <!-- /ko -->
+            <!-- ko if:$data.expiredFlag !== "Active" -->
+            <span class="fail-tag" data-bind="text:expiredFlag"></span>
+            <!-- /ko -->
+        </td>
+        <td data-bind="text:currency">
+        </td>
+        <td>
+            <oj-input-text disabled="[[($component.showMode() || checkedValue() === 'false' || expiredFlag !== 'Active') ? true:false]]" aria-hidden="true" value="{{minAmount}}" required validators="[[$baseModel.getValidator('NUMBERS',$component.resource.productMapping.validateAmount,{
+                     type: 'numberRange', options: {
+                       min: $component.editArray()[$context.rowContext.status.rowIndex].minimumValue.amount,
+                       max: $data.maxAmount()}})]]"></oj-input-text>
+        </td>
+        <td>
+            <oj-input-text disabled="[[($component.showMode() || checkedValue() === 'false' || expiredFlag !== 'Active') ? true:false]]" aria-hidden="true" value="{{maxAmount}}" validators="[[$baseModel.getValidator('NUMBERS',$component.resource.productMapping.validateAmount,{
+               type: 'numberRange', options: {
+                   min: $data.minAmount(),
+                   max: $component.editArray()[$context.rowContext.status.rowIndex].maximumValue.amount}})]]"></oj-input-text>
+        </td>
+    </tr>
+</script>

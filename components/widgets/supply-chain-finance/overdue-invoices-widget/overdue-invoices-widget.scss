@@ -1,0 +1,30 @@
+.header-background {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.align-link {
+  padding-top: 0.6rem;
+  border-top: 0.05rem solid var(--base-border-default);
+}
+
+.align-buttonset {
+  @include float(right);
+}
+
+.align-img {
+  width: 15rem;
+  height: 15rem;
+  margin: auto;
+}
+
+.align-div{
+  min-height:calc(100% - 2rem);
+}
+
+.cell-background {
+  font-size : 0.8rem;
+}
+
+.text-style {
+  margin: auto;
+}

@@ -1,0 +1,75 @@
+{
+
+    "modules": [{
+            "moduleName": "com.ofss.digx.app.mobile.service.client.MobileClient",
+            "components": [{
+                    "componentName": "generic-settings",
+                    "service": "read",
+                    "perform": "device-unbinding#wearable-device-unbinding#push-unbinding"
+                },
+                {
+                    "componentName": "generic-settings",
+                    "service": "deRegisterDevice",
+                    "perform": "device-unbinding#wearable-device-unbinding"
+
+                },
+                {
+                    "componentName": "generic-settings",
+                    "service": "deRegisterPushToken",
+                    "perform": "push-unbinding"
+                },
+                {
+                    "componentName": "set-wearable-pin",
+                    "service": "register",
+                    "perform": "set-wearable-pin#confirm-wearable-pin#wearable-instructions#wearable-instructions-next"
+
+                }
+            ]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.sms.service.userpreferences.UserPreferences",
+            "components": [{
+                    "componentName": "generic-settings",
+                    "service": "read",
+                    "perform": "oracle-live-preference#feedback-preference#sms-primary-account#otp-preference"
+                },
+                {
+                    "componentName": "generic-settings",
+                    "service": "update",
+                    "perform": "oracle-live-preference#feedback-preference#sms-primary-account"
+
+                }
+            ]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.user.service.User",
+            "components": [{
+                "componentName": "side-menu",
+                "service": "fetchProfile",
+                "perform": "configuration-base#terms-and-conditions#security-question-option#login-form-mobile#account-snapshot-registration#mobile-landing#login-options#alternate-login#pin-login#pattern-login#set-pin#set-pattern#confirm-pin#confirm-pattern#profile#security-menu#security-landing#view-user-security-question#scan-qr#scan-to-pay#review-scan-to-pay#user-login-configuration-header#pattern-visibility"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.mobile.smsbanking.service.SMSBankingPINRegistration",
+            "components": [{
+                "componentName": "sms-and-missed-call-banking",
+                "service": "register",
+                "perform": "sms-and-missed-call-banking#set-sms-banking-pin"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.security.service.keyPair.KeyPair",
+            "components": [{
+                "componentName": "security-keys",
+                "service": "generateKeyPair"
+            }]
+        },
+        {
+            "moduleName": "com.ofss.digx.app.sms.service.jwtoken.JWToken",
+            "components": [{
+                "componentName": "security-keys",
+                "service": "generateJWTEncryptionKey"
+            }]
+        }
+    ]
+}

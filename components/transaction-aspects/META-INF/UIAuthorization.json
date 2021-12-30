@@ -1,0 +1,11 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.common.resource.task.service.Task",
+    "components": [{
+      "componentName": "task-aspects",
+      "service": "enableTaskAspect",
+       "perform": "review-task-aspects",
+       "approve": "review-task-aspects"
+    }]
+  }]
+}

@@ -1,0 +1,26 @@
+.header-text {
+    width: 100%;
+    margin-bottom: 30px;
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: var(--base-font-weight-light);
+        
+        @include mq(small) {
+            font-size: 1.8rem;
+        }
+    }
+    .border {
+        border: 1.5px solid var(--button-primary-border-color);
+        width: 50%;
+        animation: 1s ease-out 0s 1 slideInFromLeft;
+    }
+    @keyframes slideInFromLeft {
+        0% {
+            width: 0%;
+        }
+        100% {
+            width: 50%;
+        }
+    }
+}

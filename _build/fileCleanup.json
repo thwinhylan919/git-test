@@ -1,0 +1,9 @@
+{
+    "postBuildCleanUp": [
+        "./.sass-cache",
+        "./requirejs-config.json",
+        "../destInt/tmp/",
+        "../dist/components/widgets/META-INF/",
+        "../dist/framework/js/libs/ckeditor/samples/"
+    ]
+}

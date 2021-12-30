@@ -1,0 +1,14 @@
+@import "utils";
+
+.link-account {
+  padding:0;
+  &__content{
+    height:100%;
+  }
+  &-content{
+    img{
+    width:100%;
+    height:100%;
+    }
+  }
+}

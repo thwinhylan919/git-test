@@ -1,0 +1,25 @@
+<div class="oj-flex oj-flex-items-pad help-content center">
+
+  <div class="oj-flex-item oj-sm-12 help-item">
+     <img alt="" data-bind="loadImage : 'info-icon/goals.svg'">
+  </div>
+  <!-- ko if:$baseModel.large() && $component.categories().length > 0 -->
+  <div class="oj-flex-item oj-sm-12">
+      <h4 class="oj-sm-12 help-content-title help-item">Let's begin! Choose your dream Goal</h4>
+      <div class="oj-sm-12 oj-label-inline">
+        <span data-bind="text: $component.goal.calculator.categoryTitle2"></span>
+      </div>
+  </div>
+  <!-- /ko -->
+
+  <!-- ko ifnot: $baseModel.large() && $component.categories().length > 0 -->
+  <div class="oj-flex-item oj-sm-12">
+      <h4 class="oj-sm-12 help-content-title help-item">Note</h4>
+  </div>
+  <!-- /ko -->
+  <div class="oj-flex-item oj-sm-12 ">
+    <p class="">Setup short term, mid term and long term goals</p>
+    <p class="">Upload images which you can link to your goal, and start saving for it</p>
+    <p class="">People having set standing instructions for regular payments have higher probability to achieve their goals on time</p>
+  </div>
+</div>

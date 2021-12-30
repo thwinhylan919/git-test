@@ -1,0 +1,34 @@
+{
+  "header": "mutualFunds",
+  "data": [{
+    "id": "purchase",
+    "module": "purchase-mutual-fund-train",
+    "parentModule": "mutual-funds",
+    "icon": "purchase"
+  }, {
+    "id": "redeem",
+    "module": "redeem-funds-global",
+    "parentModule": "mutual-funds",
+    "icon": "redeem"
+  }, {
+    "id": "switch",
+    "module": "switch-funds-global",
+    "parentModule": "mutual-funds",
+    "icon": "switch-funds"
+  }, {
+    "id": "riskProfiling",
+    "module": "risk-profile-account-selection",
+    "parentModule": "mutual-funds",
+    "icon": "risk-profiling"
+  }, {
+    "id": "orderStatus",
+    "module": "order-status",
+    "parentModule": "mutual-funds",
+    "icon": "status"
+  }, {
+    "id": "viewCancel",
+    "module": "order-status",
+    "parentModule": "mutual-funds",
+    "icon": "view-cancel"
+  }]
+}

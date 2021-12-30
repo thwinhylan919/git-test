@@ -1,0 +1,19 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+  <div class="oj-flex-item help-item">
+    <img alt="" data-bind="loadImage : 'info-icon/note.svg'">
+  </div>
+  <div class="oj-flex-item oj-sm-12">
+    <h4 class="oj-sm-12 help-content-title help-item" data-bind="text:$component.nls.segments.landingHelpTitle"></h4>
+  </div>
+  <div class="oj-flex-item">
+    <p data-bind="text:$component.nls.segments.landingHelpDescription1"></p>
+    <p data-bind="text:$component.nls.segments.landingHelpDescription2"></p>
+  </div>
+  <!-- ko if : $component.mode === 'search' -->
+  <div class="oj-flex-item oj-sm-12 help-item center">
+    <oj-button class="help-button" on-click="[[$component.create]]">
+      <span data-bind="text:$component.nls.segments.create"></span>
+    </oj-button>
+  </div>
+  <!-- /ko -->
+</div>

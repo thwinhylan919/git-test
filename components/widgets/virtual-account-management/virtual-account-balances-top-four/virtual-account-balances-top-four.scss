@@ -1,0 +1,54 @@
+.virtualAccountBalances {
+  padding: 0;
+
+  &__chartStyle {
+    width: 100%;
+    padding: 0.625rem 0 0;
+    max-height: 18rem;
+  }
+
+  &__widgetSummary {
+    font-size: var(--base-font-size-default);
+    color: var(--base-text-secondary);
+  }
+}
+
+.noData {
+  padding-bottom: 0.5rem;
+  max-height: 18rem;
+  height: -webkit-fill-available;
+  height: -moz-fill-available;
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 10rem;
+      width: 100%;
+    }
+  }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--base-font-size-larger);
+}
+
+.subText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.entityNameText {
+  font-size: var(--form-info-txt-font-size);
+  color: var(--form-info-txt-foreground-color);
+  font-weight: var(--form-info-txt-font-weight);
+  line-height: calc(#{var(--form-line-height)} - 0.9rem);
+}

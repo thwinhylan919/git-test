@@ -1,0 +1,9 @@
+{
+    "virtual-account-management": [{
+        "name": "virtual-identifiers-create",
+        "module": "virtual-account-management"
+    }, {
+        "name": "remittance-search",
+        "module": "virtual-account-management"
+    }]
+}

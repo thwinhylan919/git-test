@@ -1,0 +1,149 @@
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-9">
+        <div class="form-main-container system-rules-map">
+            <page-section params="baseModel : $baseModel, rootModel : $data">
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label class="" for="roles"><span data-bind="text:$component.resource.rolePreferences.enterpriseRoles"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                        <!-- ko if:isEnterpriseRolesLoaded -->
+                        <oj-select-one id="roles" required="[[true]]" :placeholder="[[$component.resource.common.selectRole]]" value="{{selectedRole}}" on-value-changed="[[getRolePreferences]]">
+                            <!-- ko foreach:enterpriseRolesList -->
+                            <oj-option value="{{value}}"><span data-bind="text:text"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- ko if:isEnterpriseRoleSelected -->
+                <!-- ko foreach: preferencesList -->
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label :for="[['options_'+$index()]]"><span data-bind="text:$data.text"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                        <!-- ko if:preferenceId === 'LIMITS_CHECK' -->
+                        <oj-switch :id="[['options_'+$index()]]" value="{{value}}" on-value-changed=[[$component.showLimitPackage]]></oj-switch>
+                        <!-- /ko -->
+                        <!-- ko if:preferenceId === 'LOGIN_FLOW_REQUIRED'  -->
+                        <oj-switch :id="[['options_'+$index()]]" value="{{value}}" on-value-changed=[[$component.showLoginConfig]]></oj-switch>
+                        <!-- /ko -->
+                        <!-- ko if:preferenceId !== 'LIMITS_CHECK' && preferenceId !== 'LOGIN_FLOW_REQUIRED' -->
+                        <oj-switch :id="[['options_'+$index()]]" value="{{value}}"></oj-switch>
+                        <!-- /ko -->
+                    </div>
+
+
+                </div>
+                <!-- ko if:$component.showLoginConfigSelectOptions() &&  preferenceId === 'LOGIN_FLOW_REQUIRED'  -->
+                <!-- ko if: $component.showTable()  -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <oj-table id='loginConfigTable' :aria-label="[[$component.resource.info.loginConfigTable]]" data="[[$parentContext.$parent.statusDatasource]]" columns-default='{"sortable": "disabled"}' columns='[[[
+          {
+      "headerText": $component.resource.info.select,
+      "template": "component_selection",
+      "field": "enabled",
+      "className" : ""
+    }, {
+      "headerText": $component.resource.info.componentName,
+      "template": "component_name",
+      "field": "id",
+      "className" : ""
+    },
+    {
+      "headerText": $component.resource.info.isMandatory,
+    "template": "component_isMandatory",
+      "className" : ""
+    },
+    {
+      "headerText": $component.resource.info.reorder,
+      "template": "component_reordering",
+      "className" : ""
+    }
+    ]]]'>
+                        <template slot="component_selection">
+              <td>
+                <oj-checkboxset :id="[['checkboxSetId_'+$baseModel.incrementIdCount()]]" value="{{$current.row.enabled}}"
+                  :aria-label="[[$component.resource.info.isMandatory]]" on-value-changed="[[$component.holdingPatternChangeHandler.bind($data,$current.row)]]">
+                  <oj-option value="true" data-bind="attr:{id: $current.row.id+ $baseModel.incrementIdCount(), 'aria-label':$current.row.id}"></oj-option>
+                </oj-checkboxset>
+              </td>
+            </template>
+                        <template slot="component_name">
+              <td>
+                <div data-bind="text : $current.row.description"></div>
+              </td>
+            </template>
+                        <template slot="component_isMandatory">
+              <td>
+                <oj-switch :id="[['mandatory_'+$baseModel.incrementIdCount()]]" value="{{$current.row.mandatory}}"
+                  disabled="[[$current.row.mandatoryDisabled]]"></oj-switch>
+              </td>
+            </template>
+                        <template slot="component_reordering">
+              <td>
+                <div class="oj-flex oj-flex-items-pad">
+                  <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <a href="#" data-bind=" click:$component.displayOrderUp.bind($data, $current.row, $current.index), attr:{'alt':$component.resource.common.upArrowAlt, 'title' : $component.resource.common.upArrow}">
+                      <span class="oj-lg-3 oj-flex-item icon icon-upward-arrow"></span>
+                    </a>
+                  </div>
+                  <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <a href="#" data-bind=" click:$component.displayOrderDown.bind($data, $current.row, $current.index), attr:{'alt':$component.resource.common.downArrowAlt, 'title' : $component.resource.common.downArrow}">
+                      <span class="oj-lg-3 oj-flex-item icon icon-downward-arrow"></span>
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </template>
+                    </oj-table>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:$component.showLimitPackageSearchSection() &&  preferenceId === 'LIMITS_CHECK'-->
+                <!-- ko if:$component.limitPackageDataLoaded() -->
+                <!-- ko foreach: $component.entityLimitPackageMapArray -->
+                <div data-bind="component: {name: 'access-point-mapping', params:{rootModel: $parent,listLimitPackageArray:$component.entityLimitPackageMapArray()[$index()].limitPackages,limitPackageDetails:$component.entityLimitPackageMapArray()[$index()].limitPackageDetails,header:$component.entityLimitPackageMapArray()[$index()].entityName,businessEntity:$component.entityLimitPackageMapArray()[$index()].entityId,selectedLimitPackages:$component.entityLimitPackageMapArray()[$index()].selectedLimitPackages,accessPointType:$component.accessPointType}}"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+
+                <!-- ko if:isInitialScreenLoaded-->
+                <!-- ko foreach: preferencesList -->
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label : for="[['options1_'+$index()]]"><span data-bind="text:$data.text"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8">
+                        <oj-switch :id="[['options1_'+$index()]]" value="{{value}}" disabled="[[!$component.isEnterpriseRoleSelected()]]"></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+
+            </page-section>
+
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                    <oj-button id="submitButton" class="action-button-primary" on-click="[[$component.submit]]" disabled="[[!$component.isEnterpriseRoleSelected()]]">
+                        <span data-bind="text:$component.resource.common.submit"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                        <span data-bind="text:$component.resource.common.cancel"></span>
+                    </oj-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="oj-flex-item oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'system-rules'"></help>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="oj-panel entitySummary">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 entitySummaryheaderClass">
+      <h3 data-bind="text:$component.resource.header.entitySummary">
+      </h3>
+    </div>
+  </div>
+  <div class="oj-flex">
+    <!-- ko if: viewTable -->
+    <div class="oj-flex-item oj-sm-12  entitySummary__table">
+      <oj-table id="tableEntitySummary" :aria-label="[[$component.resource.header.entitySummary]]" data="[[dataSource]]"
+        columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}' columns='[[[
+                  {headerTemplate:"entityHeader","headerText":$component.resource.header.virtualEntity, "template":"entityName","field":"entityName","sortable":"none","headerClassName": "table-header-style","className": "break-word",id:"entityName"},
+                  {headerTemplate:"accountHeader","headerText":$component.resource.header.virtualAccount, "template":"mappedAccounts","field":"mappedAccounts","sortable":"none","headerClassName": "table-header-style",
+                                                   "className": "break-word"}
+                  ]]]'>
+
+        <caption class="hide-label" data-bind="text:$component.resource.header.entitySummary"></caption>
+        <template slot="entityName">
+          <a href="#"
+            data-bind="text:$current.row.entityName, click:$component.onSelectedInTable.bind($data,$current.row)"></a>
+        </template>
+        <template slot="mappedAccounts">
+          <span class="icon icon-accounts entitySummary__iconStyle"></span>
+          <span data-bind="text:$current.row.mappedAccounts"></span>
+        </template>
+        <template slot="entityHeader">
+          <div>
+            <span class="" data-bind="text:$component.resource.header.virtualEntity"></span>
+            <!-- ko if:!isNaN(ko.utils.unwrapObservable($component.virtualEntityCount)) -->
+            <span class="count" data-bind="text:$component.virtualEntityCount"></span>
+            <!-- /ko -->
+          </div>
+        </template>
+        <template slot="accountHeader">
+          <div>
+            <span class="" data-bind="text:$component.resource.header.virtualAccount"></span>
+            <!-- ko if:!isNaN(ko.utils.unwrapObservable($component.mappedAccountsCount)) -->
+            <span class="count" data-bind="text:$component.mappedAccountsCount"></span>
+            <!-- /ko -->
+          </div>
+        </template>
+      </oj-table>
+      <oj-paging-control class="paddingClass" id="pagingEntitySummary" data="[[dataSource]]" page-size="5"
+        slot="bottom">
+      </oj-paging-control>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: viewTable -->
+    <div class="oj-flex-item oj-sm-12">
+      <div class="oj-flex oj-flex-items-pad noData">
+        <div class="oj-flex-item oj-sm-12 noData__image">
+          <img
+            data-bind="attr:{'alt': $component.resource.labels.notifications,'title':$component.resource.labels.noData},loadImage:'virtual-account-management/service-request.svg'">
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: viewTable && ($component.authorizedLinks().length > 0) -->
+  <div class="oj-flex oj-flex-items-pad oj-sm-12 bottom-links">
+    <!-- ko foreach:$component.authorizedLinks -->
+    <div class="oj-flex-item entitySummary__links center" data-bind="css: $data.cssClass">
+      <a href="#" attr="{'id': $data.id}" data-bind="click: $component.onClickLink.bind($data, name)">
+        <span data-bind="text: $data.label"></span>
+      </a>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+</div>

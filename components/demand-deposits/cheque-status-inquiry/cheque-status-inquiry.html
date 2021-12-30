@@ -1,0 +1,128 @@
+<div class="form-main-container">
+  <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <oj-validation-group id="chequeStatus" valid="{{validInquiry}}">
+          <account-input params="baseModel : $baseModel, rootModel: $data ,label : $component.locale.chequeStatusInquiry.selectAccount,
+			account : $component.accountNumber,
+      type: 'balance',
+			additionalDetails : $component.additionalDetails,
+      readOnly: !!$component.params.id,
+      taskCode:'CH_I_CSE'">
+          </account-input>
+
+          <div data-bind="template:{name:'demand-deposits/cheque-details-input', data: $data}"></div>
+
+        </oj-validation-group>
+
+      </page-section>
+      <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button data-id="submitButton" id="menuButton5" class="action-button-primary " on-click="[[getChequeSatus]]">
+          <span slot="startIcon" class="icons icon-submit"></span>
+          <span data-bind="text:$component.locale.generic.common.submit"></span>
+        </oj-button>
+        <oj-button data-id="cancelButton" class="action-button-secondary " on-click="[[$dashboard.hideDetails]]"><span
+            slot="startIcon" class="icons icon-back-arrow"></span>
+          <span data-bind="text:$component.locale.generic.common.back"></span>
+        </oj-button>
+      </div>
+    </div>
+
+
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+      <help params="baseModel : $baseModel, rootModel : $component, transaction: 'cheque-status-inquiry'"></help>
+    </div>
+    <!-- /ko -->
+  </div>
+  <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+
+    <div class="oj-flex-item oj-sm-12 oj-lg-8">
+      <!-- ko if:$component.chequeStatusLoaded -->
+      <!-- ko if:!$baseModel.small() -->
+
+      <oj-table id="chequeStatusInquiry" columns="[[columnNames]]" data="[[pagingDataSource]]">
+
+      </oj-table>
+      <script type="text/html" id="cheque_amount">
+             <td data-bind="text: $formatter.formatCurrency($context.row.chequeAmount.amount, $context.row.chequeAmount.currency)">
+             </td>
+        </script>
+      <oj-paging-control class="oj-flex-item" id="paging" slot="bottom" :page-size="[[10]]" data="[[pagingDataSource]]">
+      </oj-paging-control>
+
+
+      <!-- /ko -->
+
+      <!-- ko if:$baseModel.small() -->
+      <div>
+        <hr>
+        <!-- ko foreach:chequeStatus -->
+        <div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-6">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                  <label data-bind="text: $component.locale.chequeStatusInquiry.chequeNumber"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <span class="value" data-bind="text:chequeNumber"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="oj-flex-item oj-sm-6 ">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                  <label data-bind="text: $component.locale.chequeStatusInquiry.status"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <span class="value" data-bind="text:chequeStatus"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ko if: $component.selectedStatusValue()[0] !== 'N'  -->
+          <div class="oj-flex oj-sm-12 oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-6 left">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                  <label data-bind="text: $component.locale.chequeStatusInquiry.reason"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <!-- ko if:reason -->
+                  <span class="value" data-bind="text:reason"></span>
+                  <!-- /ko -->
+
+                  <!-- ko if:!reason  -->
+                  <span class="value">-</span>
+                  <!-- /ko -->
+                </div>
+              </div>
+
+
+            </div>
+            <div class="oj-flex-item oj-sm-6 ">
+              <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                  <label data-bind="text: $component.locale.chequeStatusInquiry.amount"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <span class="value right"
+                    data-bind="text: $formatter.formatCurrency(chequeAmount.amount, chequeAmount.currency)"></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+        <hr>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+    </div>
+  </page-section>
+</div>

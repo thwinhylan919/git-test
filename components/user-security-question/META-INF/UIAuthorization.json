@@ -1,0 +1,21 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.security.service.authentication.securityquestion.UserSecurityQuestion",
+    "components": [{
+        "componentName": "security-menu",
+        "service": "listUserSecurityQuestionAnswer",
+        "perform": "view-user-security-question#create-user-security-question#edit-user-security-question#review-user-security-question"
+      },
+      {
+        "componentName": "create-user-security-question",
+        "service": "create",
+        "perform": "view-user-security-question#review-user-security-question"
+      },
+      {
+        "componentName": "edit-user-security-question",
+        "service": "update",
+        "perform": "view-user-security-question#review-user-security-question"
+      }
+    ]
+  }]
+}

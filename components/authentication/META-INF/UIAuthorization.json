@@ -1,0 +1,23 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.security.service.authentication.maintenance.AuthenticationMaintenance",
+    "components": [{
+        "componentName": "segment-authentication-mapping",
+        "service": "search",
+        "perform": "view-authentication-maintenance#create-authentication-maintenance#confirm-authentication-maintenance#create-authentication-maintenance"
+      },
+      {
+
+        "componentName": "create-authentication-maintenance",
+        "service": "create",
+        "perform": "confirm-authentication-maintenance",
+        "approve": "view-authentication-maintenance"
+      }, {
+        "componentName": "create-authentication-maintenance",
+        "service": "update",
+        "perform": "confirm-authentication-maintenance",
+        "approve": "view-authentication-maintenance"
+      }
+    ]
+  }]
+}

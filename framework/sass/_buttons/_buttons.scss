@@ -1,0 +1,138 @@
+    %action-button {
+        border-width: var(--button-border-width);
+        border-radius: var(--button-border-radius);
+        box-shadow: none;
+        text-shadow: none;
+    }
+    
+    %help-button {
+        border-width: var(--button-border-width);
+        border-radius: var(--button-border-radius);
+        box-shadow: none;
+        text-shadow: none;
+    }
+    
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: var(--button-align);
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            /* IE10+ CSS styles go here */
+        }
+        padding: 1.3rem 0.6rem;
+        @include mq(small) {
+            padding: 0 0.6rem 1.3rem;
+        }
+        &.flex-right {
+            justify-content: flex-end;
+        }
+    }
+    
+    .oj-button.oj-button-full-chrome,
+    .oj-button.oj-button-half-chrome {
+        margin: 0 0.5rem;
+        @include mq(small) {
+            margin: 0.5rem;
+        }
+        &:first-child {
+            @include single-margin(left, 0);
+        }
+        &:last-child {
+            @include single-margin(right, 0);
+        }
+        &.action-button {
+            &-primary {
+                @extend %action-button;
+                @include btn-variant(var(--button-primary-foreground-color), var(--button-primary-gradient-start-color), var(--button-primary-gradient-end-color), var(--button-primary-gradient-direction), var(--button-primary-border-color), var(--button-primary-border-width), var(--button-primary-border-radius), var(--button-primary-font-size), var(--button-primary-font-weight));
+            }
+            &-secondary {
+                @extend %action-button;
+                @include btn-variant(var(--button-secondary-foreground-color), var(--button-secondary-gradient-start-color), var(--button-secondary-gradient-end-color), var(--button-secondary-gradient-direction), var(--button-secondary-border-color), var(--button-secondary-border-width), var(--button-secondary-border-radius), var(--button-secondary-font-size), var(--button-secondary-font-weight));
+            }
+            &-tertiary {
+                @extend %action-button;
+                @include btn-variant(var(--button-tertiary-foreground-color), var(--button-tertiary-gradient-start-color), var(--button-tertiary-gradient-end-color), var(--button-tertiary-gradient-direction), var(--button-tertiary-border-color), var(--button-tertiary-border-width), var(--button-tertiary-border-radius), var(--button-tertiary-font-size), var(--button-tertiary-font-weight));
+                @include mq(small) {
+                    @include single-margin(left, 0);
+                }
+            }
+        }
+        &.help-button {
+            @extend %help-button;
+            @include btn-variant(var(--button-help-foreground-color), var(--button-help-gradient-start-color), var(--button-help-gradient-end-color), var(--button-help-gradient-direction), var(--button-help-border-color), var(--button-help-border-width), var(--button-help-border-radius), var(--button-help-font-size), var(--button-help-font-weight));
+        }
+        &.oj-hover {
+            .oj-button-button {
+                color: var(--link-hover);
+                background-color: transparent;
+                border: none;
+            }
+        }
+    }
+    
+    .oj-buttonset {
+        padding: 0.6rem 0;
+        .oj-button-jqui.oj-button-full-chrome {
+            border-width: var(--buttonset-border-width);
+            border-radius: var(--buttonset-border-radius);
+            border-color: var(--buttonset-border-color);
+            box-shadow: none;
+            text-shadow: none;
+            background-image: none;
+            &.oj-default,
+            &.oj-hover {
+                .oj-button-label {
+                    color: var(--buttonset-label-foreground-color);
+                    font-size: var(--buttonset-label-font-size);
+                    font-weight: var(--buttonset-label-font-weight);
+                }
+                background: linear-gradient(to var(--buttonset-gradient-direction), var(--buttonset-gradient-start-color), var(--buttonset-gradient-end-color));
+            }
+            &.oj-selected {
+                .oj-button-label {
+                    color: var(--buttonset-selected-label-foreground-color);
+                    font-size: var(--buttonset-selected-label-font-size);
+                    font-weight: var(--buttonset-selected-label-font-weight);
+                }
+                background: linear-gradient(to var(--buttonset-selected-gradient-direction), var(--buttonset-selected-gradient-start-color), var(--buttonset-selected-gradient-end-color));
+                //border-color: var(--buttonset-selected-border-color);
+                border-width: var(--buttonset-selected-border-width);
+                border-radius: var(--buttonset-selected-border-radius);
+            }
+        }
+        .oj-button-text-icon-end .oj-button-icon.oj-end,
+        html:not([dir="rtl"]) .oj-button-text-icon-end .oj-button-icon.oj-end,
+        html:not([dir="rtl"]) .oj-button-text-icons .oj-button-icon.oj-end,
+        html:not([dir="rtl"]) .oj-buttonset .oj-button-text-icons .oj-button-icon.oj-end {
+            @include single-margin(left, 0.42857rem);
+            @include single-margin(right, 0.42857rem);
+        }
+    }
+    
+    .floating-button {
+        border: none;
+        border-radius: 50%;
+        color: var(--color-white); //box-shadow: 0.2rem 0.2rem 0.3rem rgba(0,0,0,.3);
+        box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.14), 0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.12), 0 0.2rem 0.1rem -0.1rem rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        position: fixed;
+        background: linear-gradient(to var(--button-primary-gradient-direction), var(--button-primary-gradient-start-color), var(--button-primary-gradient-end-color));
+        bottom: 5rem;
+        @include right(0.61rem);
+        @include float(right);
+        z-index: 2;
+        width: 2.8rem;
+        height: 2.8rem;
+        line-height: 3.2rem;
+        text-align: center;
+        &:focus {
+            outline: none;
+        }
+        .icons {
+            color: var(--color-white);
+        }
+    }
+    
+    .oj-inputnumber .oj-buttonset .oj-button.oj-default {
+        border-color: var(--form-input-border-color);
+    }

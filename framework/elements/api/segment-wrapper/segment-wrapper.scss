@@ -1,0 +1,26 @@
+.segment-hamburger {
+  .form-button-container{
+    max-width: 4rem;
+  }
+  align-items: center;
+  padding-left: 0.6rem;
+
+  .segment-selector {
+    margin-top: 0.3rem;
+    padding-left: 0.3rem;
+  }
+}
+
+.party-display {
+  font-weight: var(--base-font-weight-regular);
+  font-size: var(--base-font-size-larger);
+}
+
+.detailsFontSize {
+  font-size: 0.8rem;
+}
+
+.heading-msg {
+  margin-bottom: 1rem;
+  padding-left:  0.6rem;
+}

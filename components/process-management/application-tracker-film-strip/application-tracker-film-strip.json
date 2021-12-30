@@ -1,0 +1,26 @@
+{
+    "modules":
+    {
+        "OBCLPM":
+        {  
+            "description": "loans",
+            "img": "process-management/working-capital.jpg",
+            "loadComponent": "loan-application-listing",
+            "moduleName":"process-management"
+        },
+        "TFPM":
+        {   
+            "description": "tradeFinance",
+            "img": "process-management/trade.jpg",
+            "loadComponent": "trade-finance-application-tracker",
+            "moduleName":"trade-finance"
+        },
+        "OBCFPM":
+        {   
+            "description": "creditFacility",
+            "img": "process-management/facility.jpg",
+            "loadComponent": "facility-application-listing",
+            "moduleName":"process-management"
+        }
+    }
+}

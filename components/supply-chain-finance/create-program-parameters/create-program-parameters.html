@@ -1,0 +1,199 @@
+<oj-validation-group :id="[['form_tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <!--  ko if : $component.programTypesLoaded() && !$component.isEditMode  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['TypeofProgram']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.TypeofProgram"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-select-one placeholder="[[$component.nls.selectPlaceholder]]" :id="[['TypeofProgram']]"
+                                value="{{$component.modelInstance.programProduct.productCode}}" required="[[true]]">
+                                <!-- ko foreach : $component.fetchedProgramTypes -->
+                                <oj-option :aria-label="[[$component.nls.CreateProgram.TypeofProgram]]"
+                                    value="[[productCode]]"><span data-bind="text:productDescription"></span>
+                                </oj-option><!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div><!--  /ko  -->
+                    <!--  ko if : !$component.isEditMode  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['ProgramName']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.ProgramName"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-text :id="[['ProgramName']]" value="{{$component.modelInstance.programName}}"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'programName','#ProgramName')]]]">
+                            </oj-input-text>
+                        </div>
+                    </div><!--  /ko  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['ProgramCode']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.ProgramCode"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-text :id="[['ProgramCode']]" value="{{$component.modelInstance.programCode}}"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'programCode','#ProgramCode')]]]"
+                                disabled="[[$component.isDisabled]]"></oj-input-text>
+                        </div>
+                    </div><!--  ko if : !$component.isEditMode  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['ValidityFrom']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.ValidityFrom"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-date converter="[[$formatter.dateConverter]]" min="[[$component.startDate()]]"
+                                :id="[['ValidityFrom']]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'effectiveDate','#ValidityFrom')]]]"
+                                value="{{$component.modelInstance.effectiveDate}}">
+                            </oj-input-date>
+                        </div>
+                    </div><!--  /ko  -->
+                    <!--  ko if : $component.isEditMode && ($component.startDate() > $component.dateToCompare())  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['ValidityFromEditNotAllowed']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.ValidityFrom"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-date converter="[[$formatter.dateConverter]]" readonly="[[true]]"
+                                :id="[['ValidityFromEditNotAllowed']]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'effectiveDate','#ValidityFromEditNotAllowed')]]]"
+                                value="{{$component.modelInstance.effectiveDate}}">
+                            </oj-input-date>
+                        </div>
+                    </div><!--  /ko  -->
+                    <!--  ko if : $component.isEditMode && ($component.startDate() < $component.dateToCompare())  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['ValidityFromEditAllowed']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.ValidityFrom"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-date converter="[[$formatter.dateConverter]]" min="[[$component.startDate()]]"
+                                :id="[['ValidityFromEditAllowed']]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'effectiveDate','#ValidityFromEditAllowed')]]]"
+                                value="{{$component.modelInstance.effectiveDate}}">
+                            </oj-input-date>
+                        </div>
+                    </div><!--  /ko  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['ValidityTo']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.ValidityTo"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-date converter="[[$formatter.dateConverter]]"
+                                min="[[$component.validityToStartDate]]" :id="[['ValidityTo']]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'expiryDate','#ValidityTo')]]]"
+                                validators="[[[validateToDate]]]" value="{{$component.modelInstance.expiryDate}}">
+                            </oj-input-date>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label :for="[['AutoAcceptInvoice']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.AutoAcceptInvoice"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-2 oj-md-1 oj-lg-1">
+                            <oj-switch :id="[['AutoAcceptInvoice']]" value="{{$component.invoiceSwitch}}"></oj-switch>
+                        </div>
+                        <div class="oj-flex-item oj-sm-4 oj-md-4 oj-lg-4 upper-margin"><span
+                                data-bind="text:$component.autoAcceptInvoice"></span></div>
+                    </div><!--  ko if : $component.showNumberPicker()  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['NumberofdaysforAutoAcceptance']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.NumberofdaysforAutoAcceptance"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-input-number :id="[['NumberofdaysforAutoAcceptance']]"
+                                value="{{$component.modelInstance.acceptanceDays}}" step="[[1]]" required="[[true]]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'acceptanceDays','#NumberofdaysforAutoAcceptance')]]]">
+                            </oj-input-number>
+                        </div>
+                    </div><!--  /ko  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <oj-label :for="[['AutoFinance']]" class="oj-label-inline"><span
+                                    data-bind="text:$component.nls.CreateProgram.AutoFinance"></span></oj-label>
+                            <a class="oj-label-inline" id="autofin-tooltip-holder" href="#"
+                                data-bind="attr:{alt:$component.nls.CreateProgram.autoFinanceText,title:$component.nls.CreateProgram.autoFinanceTitle},click:$component.autoFinancePopup.bind($data,true)">
+                                <span class="icons icon-information"></span>
+                            </a>
+                        </div>
+                        <div class="oj-flex-item oj-lg-1 oj-sm-2">
+                            <oj-switch :id="[['AutoFinance']]" value="{{$component.financeSwitch}}"></oj-switch>
+                        </div>
+                        <div class="oj-flex-item upper-margin"><span data-bind="text:$component.autoFinance"></span>
+                        </div>
+                    </div>
+                    <!--  ko if : $component.showDisbursementDetails()  -->
+                    <!--  ko if : $component.currencyLoaded()  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['DisbursementCurrency']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.DisbursementCurrency"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-select-one placeholder="[[$component.nls.selectPlaceholder]]"
+                                :id="[['DisbursementCurrency']]"
+                                value="{{$component.modelInstance.disbursementCurrency}}" required="[[true]]">
+                                <!-- ko foreach : $component.currencyList -->
+                                <oj-option :aria-label="[[$component.nls.CreateProgram.DisbursementCurrency]]"
+                                    value="[[code]]"><span data-bind="text:description"></span>
+                                </oj-option><!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div><!--  /ko  -->
+                    <!--  ko if : $component.disbursementModeLoaded()  -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                            <oj-label :for="[['DisbursementMode']]"><span
+                                    data-bind="text:$component.nls.CreateProgram.DisbursementMode"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-6 oj-sm-12">
+                            <oj-select-one placeholder="[[$component.nls.selectPlaceholder]]"
+                                :id="[['DisbursementMode']]" value="{{$component.modelInstance.disbursementMode}}"
+                                required="[[true]]">
+                                <!-- ko foreach : $component.fetchedDisbursementMode -->
+                                <oj-option :aria-label="[[$component.nls.CreateProgram.DisbursementMode]]"
+                                    value="[[code]]"><span data-bind="text:description"></span>
+                                </oj-option><!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div><!--  /ko  -->
+                    <!--  /ko  -->
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickNext]]"><span
+                                slot="startIcon" class="icons icon-forward-arrow"></span><span
+                                data-bind="text:$component.nls.CreateProgram.Next"></span></oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span
+                                slot="startIcon" class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.CreateProgram.Cancel"></span></oj-button>
+                    </div>
+                </page-section>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <help
+                        params="baseModel : $baseModel, rootModel : $component, transaction: 'create-program-parameters-help'">
+                    </help>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>
+<oj-popup id="isAutoFinanced" modality="modeless" tail="simple" position.my.horizontal="start"
+    position.my.vertical="top" position.at.horizontal="right" position.at.vertical="bottom">
+    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+        <div class="oj-flex-item oj-sm-12" data-bind="text:$component.nls.CreateProgram.autoFinanceDetails"></div>
+    </div>
+</oj-popup>

@@ -1,0 +1,37 @@
+<div class="form-main-container full-width">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.Nls.reviewHeading , reviewHeader : $component.Nls.editReviewMessage}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.clientDefn">
+        <div data-bind="with:$component.params.clientDTO">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientId, value : id "></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientName, value : name ">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientDesc, value : description ">
+            </row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.identityDomain, value : idDomain"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.clientType, value : $component.clType"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.grantType, value : grant_types"></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.redirectURLs">
+        <!-- ko foreach:$component.params.redirectURLArray -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.redirectURL, value : url "></row>
+        <!-- /ko -->
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.Nls.scopes">
+        <!-- ko foreach:$component.params.scopesArray -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.resourceServer, value : resourceServer "></row>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.scopes, value : selectedScopes "></row>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.Nls.defaultScope, value : $component.params.clientDTO.defaultScope"></row>
+    </page-section>
+    <div class="oj-row button-container">
+        <!-- ko if:$component.params.isEdit -->
+        <oj-button class="action-button-primary" on-click="[[$component.onClickUpdate]]"><span data-bind="text:$component.Nls.confirm"></span></oj-button>
+        <!-- /ko -->
+        <!-- ko ifnot:$component.params.isEdit -->
+        <oj-button class="action-button-primary" on-click="[[$component.onClickCreate]]"><span data-bind="text:$component.Nls.confirm"></span></oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span data-bind="text:$component.Nls.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span data-bind="text:$component.Nls.back"></span></oj-button>
+    </div>
+</div>

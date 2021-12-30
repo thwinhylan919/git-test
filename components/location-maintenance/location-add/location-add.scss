@@ -1,0 +1,11 @@
+.search-box-input {
+    padding: 0.2rem !important;
+    font-family: inherit;
+    font-size: var(--form-input-text);
+    box-sizing: border-box;
+    width: 80%;
+    border: 0;
+    outline: 0;
+    background: var(--form-input-background-base);
+    border-bottom: .05rem solid var(--form-input-border-color);
+}

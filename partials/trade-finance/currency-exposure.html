@@ -1,0 +1,9 @@
+<!--  ko if : $component.currencyListloaded  -->
+<span class="oj-lg-2 pull-right">
+    <oj-select-one :id="[['CurrencyOptions12']]" value="{{currencySelected}}"
+        on-value-changed="[[$component.currencyChanged]]">
+        <!-- ko foreach : currencyListOptions -->
+        <oj-option value="[[value]]"><span data-bind="text:label"></span></oj-option>
+        <!-- /ko -->
+    </oj-select-one>
+</span><!--  /ko  -->

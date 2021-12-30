@@ -1,0 +1,118 @@
+<!-- ko ifnot: $baseModel.small() -->
+<!-- ko if:$component.details -->
+<div class="scheme-details-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+  <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-3">
+
+    <div id="marketvalue1">
+      <div class="oj-flex oj-lg-12">
+        <div class="oj-flex-item oj-lg-4">
+          <div class="large-text" data-bind="text: $component.diffValue"></div>
+        </div>
+        <div class="oj-flex-item oj-lg-8">
+          <oj-legend id="legend-up1" orientation="vertical" sections="[[legendSections]]" text-style="[[textStyle]]"
+            class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8 legend-height">
+          </oj-legend>
+        </div>
+        <div data-bind="text:$baseModel.format($component.resource.navAsOn,{currentDate:$formatter.formatDate($component.currentDate())})"
+          id="assets1"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="oj-flex-item oj-lg-3 oj-md-3">
+    <div id="schemename1" data-bind="text: $component.resource.fundRating"></div>
+    <oj-rating-gauge id="gauge1" value="{{ratingValue}}" max="{{maxRating}}" class="rating-icons" readonly></oj-rating-gauge>
+  </div>
+  <div class="oj-flex-item oj-lg-2 oj-md-3">
+    <oj-label for="assets">
+      <span data-bind="text: $component.resource.schemeDetailsBar.assets"></span>
+    </oj-label>
+    <div data-bind="text:$formatter.formatCurrency($component.assets().amount,$component.assets().currency)" id="assetamount"></div>
+    <div data-bind="text:$baseModel.format($component.resource.asOn,{assetDate:$formatter.formatDate($component.assetDate())})"
+      id="assetDate"></div>
+  </div>
+  <div class="oj-flex-item oj-lg-3 oj-md-3">
+    <oj-label for="fundManager">
+      <span data-bind="text: $component.resource.schemeDetailsBar.fundManager"></span>
+    </oj-label>
+    <div class="padding-two-mobile" data-bind="text:$component.fundManager()" id="fundManager"></div>
+
+    <!-- ko if: $component.subscriptionStatus() -->
+    <label data-bind="text: $component.resource.schemeDetailsBar.yes" id="suitability4"></label>
+    <span class="status" data-bind="text:$component.resource.schemeDetailsBar.open"></span>
+    <!-- /ko -->
+    <!-- ko ifnot: $component.subscriptionStatus() -->
+    <label data-bind="text: $component.resource.schemeDetailsBar.no" id="suitability1"></label>
+    <span class="status" data-bind="text: $component.resource.schemeDetailsBar.close" id="suitability1"></span>
+    <!-- /ko -->
+  </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+
+<!-- ko if: $baseModel.small() -->
+<!-- ko if:$component.details -->
+<div class="scheme-details-bar">
+  <div class="oj-flex-items-pad oj-flex padding-one-mobile">
+    <div class="oj-flex-item oj-sm-12">
+      <div id="marketvalue1">
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-sm-3">
+            <div class="diff-value-fontsize" data-bind="text: $component.diffValue"></div>
+          </div>
+          <div class="oj-flex-item oj-sm-9">
+            <oj-legend id="legend-up1" orientation="vertical" sections="[[legendSections]]" text-style="[[textStyle]]"
+              class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-8 legend-height">
+            </oj-legend>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex-items-pad oj-flex padding-one-mobile">
+    <div class="oj-flex-item oj-sm-12">
+      <div id="schemename1" data-bind="text: $component.resource.fundRating"></div>
+      <oj-rating-gauge id="gauge" value="{{ratingValue}}" max="{{maxRating}}" class="rating-icons" readonly></oj-rating-gauge>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad padding-two-mobile">
+    <div class="oj-flex-item oj-sm-6">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item  oj-sm-12 banner-item-height">
+          <oj-label>
+              <span data-bind="text:$component.resource.schemeDetailsBar.assets"></span>
+          </oj-label>
+        </div>
+        <div class="oj-flex-item  oj-sm-12">
+          <span data-bind="text:$formatter.formatCurrency($component.assets().amount,$component.assets().currency)"></span>
+        </div>
+        <div class="oj-flex-item  oj-sm-12 small-text">
+          <span data-bind="text:$baseModel.format($component.resource.asOn,{assetDate:$formatter.formatDate($component.assetDate())})"
+            id="assetDate"></span>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-sm-6">
+      <div class="oj-flex">
+        <div class="oj-flex-item  oj-sm-12">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.schemeDetailsBar.fundManager , value : $component.fundManager()"></row>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item  oj-sm-12">
+      <!-- ko if: $component.subscriptionStatus() -->
+
+      <label data-bind="text: $component.resource.schemeDetailsBar.yes" id="suitability2"></label>
+      <span class="status" data-bind="text:$component.resource.schemeDetailsBar.open"></span>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.subscriptionStatus() -->
+      <label data-bind="text: $component.resource.schemeDetailsBar.no" id="suitability3"></label>
+      <span class="status" data-bind="text: $component.resource.schemeDetailsBar.close" id="suitability3"></span>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->

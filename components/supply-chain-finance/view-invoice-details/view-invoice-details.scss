@@ -1,0 +1,23 @@
+.modal-text {
+  font-size: var(--base-font-size-medium);
+}
+
+.modal-padding {
+  @include single-padding(top, 1rem);
+}
+
+.party-name-style {
+  font-size: var(--base-font-size-large);
+}
+
+.party-id-style {
+  font-weight: var(--base-font-weight-light);
+  font-size: var(--base-font-size-medium);
+}
+
+.banner-design {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  padding: var(--banner-padding);
+  align-items: center;
+}

@@ -1,0 +1,13 @@
+.moveMoney {
+  max-height: 27rem;
+  padding: 0;
+
+  &__widgetBodyHeight {
+    max-height: 20rem;
+
+    .balance-text {
+      font-size: var(--base-font-size-default);
+      color: var(--base-text-secondary);
+    }
+  }
+}

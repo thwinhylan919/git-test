@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 150 150" xml:space="preserve">
+<g>
+	
+		<rect x="110.025" y="19.065" fill="#FFFFFF" stroke="#171C28" stroke-width="4.7446" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8.066" height="8.066"/>
+	
+		<path fill="#FFFFFF" stroke="#171C28" stroke-width="4.7446" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M100.062,79.796H64.714c-1.661,0-2.847-1.423-2.847-2.847l0,0c0-7.117-5.931-13.285-13.285-13.285h-32.5
+		c-1.661,0-2.847,1.423-2.847,2.847v54.8c0,1.661,1.423,2.847,2.847,2.847H55.7c0.712,0,1.423,0.237,1.898,0.237
+		c0.949,0.237,1.661,0.712,2.135,1.423c1.186,1.186,1.898,2.61,1.898,4.507c0,3.084-2.135,6.405-5.693,6.642 M61.63,129.377V77.898
+		 M33.4,128.665v3.084c0,2.847,2.135,5.219,5.219,5.219h13.285h0.237h81.844c2.847,0,5.219-2.135,5.219-5.219v-52.19l0,0h-8.066
+		c-1.186,0-1.898,0.949-1.898,1.898v1.898"/>
+	<path fill="#253874" d="M17.269,117.278V70.544c0-1.661,1.423-2.847,2.847-2.847h28.467c4.982,0,9.252,4.033,9.252,9.252v45.311
+		c-1.898-1.423-3.796-1.898-5.931-1.898H20.353C18.692,120.125,17.269,118.938,17.269,117.278z"/>
+	
+		<polyline fill="#FFFFFF" stroke="#171C28" stroke-width="4.7446" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		105.992,27.131 93.894,27.131 93.894,61.529 	"/>
+	
+		<path fill="#FFFFFF" stroke="#171C28" stroke-width="4.7446" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M105.992,31.401v83.979l5.931,4.033v6.88h4.507v-6.88l5.931-4.033V31.401v-4.27V15.032h-16.369V31.401L105.992,31.401z"/>
+	<rect x="79.897" y="94.029" fill="#171C28" width="20.164" height="4.033"/>
+	<rect x="67.798" y="94.029" fill="#171C28" width="8.066" height="4.033"/>
+	<rect x="67.798" y="119.887" fill="#171C28" width="20.164" height="4.27"/>
+	
+		<line fill="none" stroke="#171C28" stroke-width="4.7446" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="105.992" y1="27.131" x2="122.124" y2="27.131"/>
+</g>
+</svg>

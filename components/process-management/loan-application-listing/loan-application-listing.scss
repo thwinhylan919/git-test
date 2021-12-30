@@ -1,0 +1,138 @@
+$submitted-background-color: #0A8BE6;
+$draft-background-color: #ffd70b;
+$inProgress-background-color:var(--base-color-warning);
+$box-background-color: #D3D3D3;
+$panel-hover-color:#e6faff;
+.search-box-customizations {
+    @include margin(0.4rem, 0.0rem, 0.0rem, 0.0rem);
+}
+
+.application-tracker-header {
+    font-size: var(--form-header-font-size);
+    .img-customizations {
+        height: 3rem;
+        width: 3rem;
+        @include padding(0.2rem, 0.0rem, 0.0rem, 1.0rem);
+    }
+    .header-customizations {
+        @include single-margin(top, 1rem);
+    }
+}
+
+.demo-panel-customizations {
+    @include mq(large) {
+        width: 22rem;
+        height: 6.3rem;
+    }
+    @include mq(medium) {
+        width: 19rem;
+        height: 6.3rem;
+    }
+    @include float(left);
+    @include padding(0.6rem, 0.6rem, 0.6rem, 0.6rem);
+    box-shadow: 0 0 5px $box-background-color;
+    border-radius: .3rem;
+}
+
+.panel-beneficiaryName-customizations {
+    @include single-padding(bottom, 0.3rem);
+    color: rgba(0, 0, 0, 1);
+}
+
+.panel-amount-customizations {
+    @include single-margin(top, 0.3rem);
+}
+
+.customize-status {
+    @include single-padding(left, 0.5rem);
+    @include mq(large) {
+        @include single-margin(left, 0.8rem);
+    }
+    @include mq(medium) {
+        @include single-margin(left, 0.8rem);
+    }
+    @include mq(small) {
+        @include single-margin(left, 0.6rem);
+    }
+    @include single-border(left, 0.05rem solid var(--base-background-tertiary));
+}
+
+.panel-child3-customizations {
+    color: rgba(44, 50, 81, 0.8);
+    font-size: 0.7rem;
+}
+
+.delete-div-customizations {
+    @include mq(small) {
+        zoom: 80%;
+    }
+}
+
+.delete-icon-customizations {
+    font-size: 1rem;
+}
+
+.delete-status-customizations {
+    color: var(--link-base);
+    font-size: 0.7rem;
+}
+
+.submit {
+    @include single-border(left, 0.3rem solid $submitted-background-color);
+}
+
+.in-progress {
+    @include single-border(left, 0.3rem solid $inProgress-background-color);
+}
+
+.draft {
+    @include single-border(left, 0.3rem solid $draft-background-color);
+}
+
+.completed {
+    @include single-border(left, 0.3rem solid var(--base-color-success));
+}
+
+.filter-margin {
+    @include mq(large) {
+        @include single-padding(left, 4.5rem);
+        @include single-margin(right, 1rem);
+    }
+    @include mq(small) {
+        @include single-margin(top, 0.6rem);
+        @include single-margin(right, 1rem);
+    }
+    margin-top: .6rem;
+}
+
+.panel:hover {
+    background-color: $panel-hover-color;
+    cursor: pointer;
+}
+
+.party-selection {
+    @include mq(small) {
+        @include single-margin(left, 1rem);
+        @include padding(0.6rem, 0.4rem, 0.0rem, 0.0rem);
+    }
+}
+
+.img-customizations {
+    width: 1.4rem;
+    height: 1rem;
+}
+
+.img-style {
+    font-size: calc(var(--base-font-size-default) + .4rem);
+}
+
+.pipe {
+    @include single-border(left, 0.05rem solid var(--base-border-default));
+}
+
+.confirm-strip {
+    @include margin(0.0rem, 0.5rem, 0.5rem, 0.5rem);
+    background-color: var(--confirm-screen-success-gradient-end-color);
+    padding-block-start: 0.8rem;
+    @include single-border(left, 0.5rem solid var(--confirm-screen-success-border-color));
+}

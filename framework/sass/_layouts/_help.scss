@@ -1,0 +1,30 @@
+.help-panel {
+  background: linear-gradient(to var(--help-panel-gradient-direction), var(--help-panel-gradient-start-color), var(--help-panel-gradient-end-color));
+  color: var(--help-panel-foreground-color);
+  font-size: var(--help-panel-font-size);
+  font-weight: var(--help-panel-font-weight);
+
+  .help-content {
+    border: 0.05rem solid var(--base-border-default);
+
+    &-title {
+      color: var(--help-panel-header-foreground-color);
+      font-size: var(--help-panel-header-font-size);
+      font-weight: var(--help-panel-header-font-weight);
+      text-align: center;
+    }
+
+    padding: 1rem;
+
+    @at-root & .help-item {
+      margin: 1rem 0 0;
+
+      img {
+        height: var(--help-panel-icon-size);
+        width: var(--help-panel-icon-size);
+        @include margin(0, 0, 0, calc(50% - var(--help-panel-icon-size)/2));
+        @include float(left);
+      }
+    }
+  }
+}

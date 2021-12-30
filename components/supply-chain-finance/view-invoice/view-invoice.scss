@@ -1,0 +1,132 @@
+$party-color:#e0e1e1;
+$raised-color:#006ab5;
+$accepted-color:#2E7D32;
+$partially-accepted: #FFE45C;
+$financed-color:#006ab5;
+$partially-financed: #FFE45C;
+$cancelled: #2C3251;
+$rejected: #b71c1c;
+$disputed: #b71c1c;
+$unpaid:#006ab5;
+$paid-color:#2E7D32;
+$partially-paid:#FFE45C;
+$overdue: #b71c1c;
+$other:#FFE45C;
+$background: #ebecec;
+$bgcolor:#FFFFFF;
+$bgcolor2:#2c3251;
+
+.align-switch {
+  margin-top: 1rem;
+}
+
+.raised-Color {
+  background-color: $raised-color;
+  color: $bgcolor;
+
+}
+
+.accepted-Color {
+  background-color: $accepted-color;
+  color: $bgcolor;
+
+}
+
+.partiallyAccepted-Color {
+  color: $bgcolor2;
+  background-color: $partially-accepted;
+
+}
+
+.financed-Color {
+  background-color: $financed-color;
+  color: $bgcolor;
+
+}
+
+.partiallyFinanced-Color {
+  color: $bgcolor2;
+  background-color: $partially-financed;
+
+}
+
+.cancelled-Color {
+  background-color: $cancelled;
+  color: $bgcolor;
+  opacity:70;
+}
+
+.rejected-Color {
+  background-color: $rejected;
+  color: $bgcolor;
+
+}
+
+.disputed-Color {
+  background-color: $disputed;
+  color: $bgcolor;
+
+}
+
+.unpaid-Color {
+  background-color: $unpaid;
+  color: $bgcolor;
+
+}
+
+.paid-Color {
+  background-color: $paid-color;
+  color: $bgcolor;
+
+}
+
+.partiallyPaid-Color {
+  color: $bgcolor2;
+  background-color: $partially-paid;
+
+}
+
+.overdue-Color {
+  background-color: $overdue;
+  color: $bgcolor;
+
+}
+
+.other-Color {
+  background-color: $other;
+  color: $bgcolor2;
+
+}
+
+.center-align {
+  text-align: center;
+}
+
+.list-view-header {
+  padding-bottom: 0.8rem;
+}
+
+.list-view-item {
+  padding-bottom: 0.3rem;
+}
+
+.banner-design {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.link-font {
+  font-size: var(--base-font-size-default);
+}
+
+.more-search-options {
+  @include padding(2.5rem, 0, 0, 0);
+}
+
+.less-search-options {
+  @include padding(3.5rem, 0, 0, 0);
+}

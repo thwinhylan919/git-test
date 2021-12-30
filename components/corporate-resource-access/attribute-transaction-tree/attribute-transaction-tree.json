@@ -1,0 +1,63 @@
+[{
+	"attr": {
+		"title": "programCode1",
+		"id": "programName1"
+	},
+	"children": [{
+		"attr": {
+			"title": "Generic Service",
+			"id": "GR_M"
+		},
+		"children": [{
+				"attr": {
+					"title": "Fetch Account Activity",
+					"id": "GR_M_FAC"
+				}
+			},
+			{
+				"attr": {
+					"title": "View Virtual Account Internal Transactions",
+					"id": "GR_M_VAT"
+				}
+			},
+			{
+				"attr": {
+					"title": "View Virtual Account Internal Transactions A",
+					"id": "GR_M_VATA"
+				}
+			}
+
+		]
+	}]
+}, {
+	"attr": {
+		"title": "programCode2",
+		"id": "programName2"
+	},
+	"children": [{
+		"attr": {
+			"title": "Generic Service",
+			"id": "GR_M"
+		},
+		"children": [{
+				"attr": {
+					"title": "Fetch Account Activity 2",
+					"id": "GR_M_FAC2"
+				}
+			},
+			{
+				"attr": {
+					"title": "View Virtual Account Internal Transactions 2",
+					"id": "GR_M_VAT2"
+				}
+			},
+			{
+				"attr": {
+					"title": "View Virtual Account Internal Transactions A 2",
+					"id": "GR_M_VATA2"
+				}
+			}
+
+		]
+	}]
+}]

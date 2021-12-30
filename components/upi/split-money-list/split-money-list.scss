@@ -1,0 +1,40 @@
+.iconPadding {
+    padding-top: 0.5rem;
+}
+
+.iconSize {
+    font-size: 1.3rem;
+}
+
+.cancelSize {
+    font-size: 1rem;
+    background: var(--base-background-secondary);
+    border-radius: 0.9rem;
+    position: relative;
+    line-height: 0.7;
+}
+
+.contributorsName {
+    font-size: 0.7rem;
+}
+
+.abbrevation {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.linkPadding {
+    padding-top: 0.5rem;
+}
+
+.backToContributor {
+    padding-top: 1.04rem;
+}
+
+.buttonPadding {
+    padding-top: 1rem;
+}
+
+.conveyor-item {
+    width: 5rem;
+}

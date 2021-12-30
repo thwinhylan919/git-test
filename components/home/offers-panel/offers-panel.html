@@ -1,0 +1,81 @@
+<div class="form-main-container">
+  <!-- ko if:dataLoaded()-->
+  <div class="offer-container">
+    <!-- ko foreach: $component.offers -->
+    <div class="oj-flex oj-flex-items-pad offer-panel">
+      <div class="oj-sm-12 oj-md-5 oj-lg-3">
+        <img id="image" longdesc="" class="card-icon offers-strip-image"
+          data-bind="attr:{'id':'image_'+$index(),'alt':$baseModel.format($component.resource.alt.offerImageAlt,{offer:offerName})},loadImage:'origination/offers/'+$component.params.productGroupData.productTypeConstants+'/offer'+$index()%4+'.jpg'">
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-6 offer-data">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item offer-details">
+            <div class="oj-flex oj-flex-items-pad offer-name">
+              <div class="oj-flex-item oj-lg-5 offer-code">
+                <h3 class="card-title" data-bind="text: offerName ? offerName : offerId"></h3>
+              </div>
+            </div>
+            <div class="oj-flex-items-pad oj-flex">
+              <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-12 label">
+                <oj-label for="currencyType">
+                  <span data-bind="text:$component.resource.offerCurrency"></span>
+                </oj-label>
+              </div>
+              <!-- ko if: $data.allowedCurrencies.length > 1 -->
+              <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-12">
+                <oj-select-one :id="{{'currencyType'+$index()}}" value="{{$data.selectedCurrency}}"
+                  minimum-results-for-search="2" on-value-changed="[[$component.currencyChangedHandler]]" required>
+                  <!-- ko foreach: $data.allowedCurrencies -->
+                  <oj-option value="[[$data]]"><span data-bind="text: $data"></span></oj-option>
+                  <!-- /ko -->
+                </oj-select-one>
+              </div>
+              <!-- /ko -->
+              <!-- ko if: $data.allowedCurrencies.length === 1 -->
+              <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-12 label">
+                <span class="" data-bind="text:$data.selectedCurrency"></span>
+              </div>
+              <!-- /ko -->
+            </div>
+            <div class="oj-flex-items-pad oj-flex">
+              <div class="offer-panel__link oj-flex-item">
+                <span>
+                  <a href="#"
+                    data-bind="click:$component.showMoreDetails.bind($data,$data,$index()),
+                  attr:{'id':'moreDetails_'+$index(),'title':$component.offers()[$index()].showOffers}, text:$component.offers()[$index()].showOffers">
+                  </a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ko if:isOfferDetails -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 offer-details"
+          data-bind="attr:{'id':$index()}, template: { name: 'origination/fcubs/offers/'+$component.productClass(), data: $component.offerAdditionalDetails[offerCode] }">
+        </div>
+        <!-- /ko -->
+      </div>
+      <div class="oj-flex-item oj-sm-12 oj-lg-2 oj-md-2 center">
+        <!-- ko ifnot:$baseModel.small() -->
+        <div class="offers-button">
+          <oj-button class="action-button-primary" id="applyBtn" :id="[['applyBtn_'+$index()]]"
+            :aria-label="[[$baseModel.format($component.resource.applyForLoan,{offer:offerName})]]"
+            on-click="[[$component.submitOffer.bind($data,$index(),$data)]]">
+            <span data-bind="text:$component.resource.generic.common.apply"></span>
+          </oj-button>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$baseModel.small() -->
+        <div class="center offers-button">
+          <oj-button class="action-button-primary" id="applyBtn" :id="[['applyBtn_'+$index()]]"
+            :aria-label="[[$baseModel.format($component.resource.applyForLoan,{offer:offerName})]]"
+            on-click="[[$component.submitOffer.bind($data,$index(),$data)]]">
+            <span data-bind="text:$component.resource.generic.common.apply"></span>
+          </oj-button>
+        </div>
+        <!-- /ko -->
+      </div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+</div>

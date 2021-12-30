@@ -1,0 +1,39 @@
+<div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item ">
+                <oj-list-view :id="[['newCollaterals']]" data="[[$component.newCollateralsDataSource]]"
+                        item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('NewCollateralList',true)]]">
+                </oj-list-view>
+        </div>
+</div>
+
+<script type="text/html" id="NewCollateralList">
+        <li class="items">
+            <div class="oj-panel box">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-3">
+                    <div data-bind="text:collateralDesc"></div>
+                </div>
+            </div>
+            <br>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item ">
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-2">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.collateralResourceBundle.AmendFacility.type, value : collateralType"></row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-3 center">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.collateralResourceBundle.AmendFacility.currency, value : collateralValue.currency"></row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-4 right">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.collateralResourceBundle.AmendFacility.EstimatedValue, value : collateralValue.amount"></row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-3 right">
+                                <row params="baseModel : $baseModel, rootModel : $component, label : $component.collateralResourceBundle.AmendFacility.purpose, value :purpose"></row>
+                            </div>
+            </div>
+        </div>
+    </li>
+        </script>

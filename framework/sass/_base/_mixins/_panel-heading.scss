@@ -1,0 +1,6 @@
+@mixin panel-title {
+	font-size: var(--widget-header-font-size);
+	color: var(--base-text-primary);
+	margin: 0.6rem 0;
+	font-weight: var(--base-font-weight-regular);
+}

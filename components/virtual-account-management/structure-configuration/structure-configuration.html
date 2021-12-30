@@ -1,0 +1,201 @@
+<div class="oj-flex oj-flex-items-pad structure-details-banner">
+    <div class="oj-flex-item oj-lg-2">
+        <div data-bind="text: $component.realCustomerName"></div>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+    <div class="oj-flex-item oj-lg-2">
+        <div class="label" data-bind="text: $component.resources.structureCode"></div>
+        <div data-bind="text: $component.virtualStructureCreateDTO.code"></div>
+    </div>
+    <div class="oj-flex-item oj-lg-2">
+        <div class="label" data-bind="text: $component.resources.structureName"></div>
+        <div data-bind="text: $component.virtualStructureCreateDTO.name"></div>
+    </div>
+
+    <div class="oj-flex-item oj-lg-3">
+        <!-- ko ifnot:$component.showDisplayGroupId() -->
+        <div class="label" data-bind="text: $component.resources.realAccountNumber"></div>
+        <div data-bind="text: $component.displayAccountNumber"></div>
+        <!-- /ko -->
+        <!-- ko if:$component.showDisplayGroupId() -->
+        <div class="label" data-bind="text: $component.resources.virtualMultiCurrencyAccountNo"></div>
+        <div data-bind="text: $component.displayGroupId"></div>
+        <!-- /ko -->
+    </div>
+
+    <div class="oj-flex-item oj-lg-1">
+    </div>
+    <div class="oj-flex oj-lg-2">
+        <!-- ko ifnot: ($component.mode === "REVIEW" || $component.mode === "UPDATE")-->
+        <div class="oj-flex-item vertical-align-middle right">
+            <a href="#" data-bind="attr:{alt:$component.resources.treeView,
+                  title:$component.resources.treeViewTitlemsg},click:$component.setTreeView" id="treeIcon">
+                <span class="icon icon-tree icon-size"></span>
+            </a>
+        </div>
+        <div class="oj-flex-item vertical-align-middle flex-override right">
+            <a href="#" data-bind="attr:{id:'tableView', alt:$component.resources.tabularView,
+                  title:$component.resources.tableViewTitlemsg},click:$component.setTabularView">
+                <span class="icon icon-tabular-view icon-size" id="tableIcon"></span>
+            </a>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div class="form-main-container listStructure">
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <!-- ko ifnot:($component.mode === "UPDATE") -->
+        <!-- ko if:$component.headerAccountDetailsLoaded() && $component.refreshTree() && $component.displayMode() === "tree" -->
+        <tree-view params="
+         treeDetails :ko.mapping.toJS($component.structureDetails()),
+         id:'childAccountId.value',
+         maxChildNodesToRender : Infinity,
+         nodeIdjsonPath:'childAccountId.value',
+         nodeShortDescValue : 'childAccountId.displayValue',
+         treePanning:'auto',
+         treeZooming:'auto',
+         baseModel : $baseModel,
+         rootModel : $component">
+            <div class="oj-flex-items-pad structure__node">
+                <!-- ko if:!$data.nodeData.headerAccountNo -->
+                <div class="structure__structureFill"
+                    data-bind="css : ($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep':'structure__structureFill__structureFillPool'">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-10 structure__nodeHeader node-bold"
+                            data-bind="text:$data.nodeData.childAccountId.displayValue"></div>
+                        <!-- ko ifnot: ($component.mode === "REVIEW") -->
+                        <div class="oj-flex-item oj-lg-2">
+                            <a href="#" openprofile="true" data-bind="click:$component.openMenu,
+                       attr : {id:'menuLauncher-viewStructure-' + $data.nodeData.childAccountId.value,alt:$component.resources.moreOptionsAlt,
+                       'aria-label': $component.resources.moreOptionsAlt,
+                       title:$component.resources.moreOptionsTitle}">
+                                <div class="icons icon-more-vertical"></div>
+                            </a>
+                        </div>
+                        <oj-menu class="hide" data-bind="click:$component.openMenu,
+            attr : {id:'menuLauncher-viewStructure-contents-' + $data.nodeData.childAccountId.value,alt:$component.resources.moreOptionsAlt,
+            'aria-label': $component.resources.moreOptionsAlt,
+            title:$component.resources.moreOptionsTitle}" open-options.position.at.horizontal="center"
+                            on-oj-action="[[$component.menuItemSelect.bind($data,$data.nodeData.childAccountId.value)]]"
+                            open-options.launcher="[['menuLauncher-viewStructure-' + $data.nodeData.childAccountId.value]]">
+                            <!-- ko foreach: $component.menuItems -->
+                            <oj-option :id="[[id+$context.data.nodeData.childAccountId.value+$index()]]"
+                                :value="[[id]]">
+                                <span data-bind="text : label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-menu>
+                        <!-- /ko -->
+                        <div class="oj-flex-item oj-sm-10 structure__nodeHeader node-text"
+                            data-bind="text:$data.nodeData.childAccountName"></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$data.nodeData.headerAccountNo -->
+                <div class="structure__structureFillParent"
+                    data-bind="css :'structure__structureFillParent__structureFillPool'">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-sm-10 structure__nodeHeader node-bold"
+                            data-bind="text:$data.nodeData.headerAccountNo.displayValue"></div>
+                        <!-- ko ifnot: ($component.mode === "REVIEW")-->
+                        <div class="oj-flex-item oj-sm-2">
+                            <a href="#" class="link-color" openprofile="true" data-bind="click:$component.openMenu,
+                         attr : {id:'menuLauncher-viewStructure-' + $data.nodeData.parentAccountId.value,alt:$component.resources.moreOptionsAlt,
+                         'aria-label': $component.resource.moreOptionsAlt,
+                         title:$component.resources.moreOptionsTitle}">
+                                <div class="icons icon-more-vertical link-color"></div>
+                            </a>
+                        </div>
+                        <oj-menu class="hide" open-options.position.at.horizontal="center"
+                            :id="[['menuLauncher-viewStructure-contents-' + $data.nodeData.headerAccountNo.value]]"
+                            on-oj-action="[[$component.menuItemSelect.bind($data,$data.nodeData.headerAccountNo.value)]]"
+                            open-options.launcher="[['menuLauncher-viewStructure-' + $data.nodeData.headerAccountNo.value]]">
+                            <!-- ko foreach: $component.menuItems -->
+                            <!-- ko if:$index() === 1 -->
+                            <oj-option :id="[[id+$context.data.nodeData.headerAccountNo.value+$index()]]"
+                                :value="[[id]]" disabled="true">
+                                <span data-bind="text : label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                            <!-- ko ifnot:$index() === 1 -->
+                            <oj-option :id="[[id+$context.data.nodeData.headerAccountNo.value+$index()]]"
+                                :value="[[id]]">
+                                <span data-bind="text : label"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </oj-menu>
+                        <!-- /ko -->
+                        <div class="oj-flex-item oj-lg-10 structure__nodeHeader node-text"
+                            data-bind="text:$data.nodeData.childAccountName"></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </tree-view>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if:($component.displayMode() === "table" || $component.mode === "UPDATE") && $component.refreshTree() -->
+        <virtual-structure-tab
+            params="structureDetails : $component.structureDetails() ,tabularData : $component.structureDetails(),mode:$component.mode,rootModel : $component, dashboard : $dashboard, baseModel:$baseModel">
+        </virtual-structure-tab>
+        <!-- /ko -->
+        <!-- ko if:!($component.mode === "REVIEW")  -->
+        <div class="oj-flex-item button-container">
+            <oj-button class="action-button-primary" id="validateButton" on-click="[[$component.validateStructure]]">
+                <span slot="startIcon" class="icons icon-success"></span>
+                <span data-bind="text: $component.resources.validate"></span>
+            </oj-button>
+
+            <oj-button class="action-button-secondary" id="cancelButton"
+                on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text: $component.resources.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" id="backButton" on-click="[[$component.backToCreate]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text: $component.resources.back"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if:$component.mode === "REVIEW"  -->
+        <div class="oj-flex-item button-container">
+            <oj-button class="action-button-primary" id="confirmButton" on-click="[[$component.confirm]]">
+                <span slot="startIcon" class="icons icon-success"></span>
+                <span data-bind="text: $component.resources.confirm"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="cancelButton"
+                on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text: $component.resources.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text: $component.resources.back"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+
+        <modal-window
+            params="baseModel : $baseModel, rootModel : $data, id:'removeNodeDialog', header : $component.resources.remove">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text: $component.resources.removeMessage1"></span>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span data-bind="text: $component.resources.removeMessage2"></span>
+                </div>
+            </div>
+            <div class="oj-flex button-container">
+                <oj-button id="confirm" class="action-button-primary" on-click="[[$component.remove]]">
+                    <span data-bind="text:$component.resources.ok"></span>
+                </oj-button>
+                <oj-button id="cancel" class="action-button-secondary" on-click="[[$component.closeModal]]">
+                    <span data-bind="text:$component.resources.cancel"></span>
+                </oj-button>
+            </div>
+        </modal-window>
+    </page-section>
+</div>

@@ -1,0 +1,28 @@
+.service-request-view {
+    .build-form {
+        border: 0.02rem solid var(--base-border-default);
+        overflow-y: auto;
+    }
+    .demo-panel-customizations {
+        width: 23.8rem;
+        height: 17.2rem;
+        margin: 2.9rem;
+    }
+    .upload-font-size {
+        font-size: 2.8rem;
+        padding: 1.1rem 0;
+    }
+    .header-underline {
+        display: inherit;
+        @include single-margin(left, 1rem);
+    }
+    .header-icon {
+        @include margin(0.5rem, 0.5rem, 0.2rem, 0);
+    }
+    .header-icon-size {
+        font-size: 1.5rem;
+    }
+    .section-padding {
+        @include padding(2rem, 0, 0.5rem, 0);
+    }
+}

@@ -1,0 +1,212 @@
+<div class="form-main-container full-width">
+    <oj-validation-group id="tracker">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading :  $component.nls.IdentityDomain.IdentityDomainDefinition">
+            <div data-bind="with:$component.identityDomainData">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="identityDomainName" data-bind="text:$component.nls.IdentityDomain.IdentityDomainName"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-3">
+                        <oj-input-text id="identityDomainName" :aria-label="[[$component.nls.IdentityDomain.IdentityDomainName]]" label-hint="{{$component.nls.IdentityDomain.IdentityDomainName}}" validators="[[$baseModel.getValidator('APPLICATION_NAME')]]" value="{{name}}" required="true"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="identityDomainDesc" data-bind="text:$component.nls.IdentityDomain.IdentityDomainDescription"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-3">
+                        <oj-input-text id="identityDomainDesc" :aria-label="[[$component.nls.IdentityDomain.IdentityDomainDescription]]" label-hint="{{$component.nls.IdentityDomain.IdentityDomainDescription}}" validators="[[$baseModel.getValidator('APPLICATION_DESCRIPTION')]]" value="{{description}}" required="true"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+            <!-- ko if:$component.updateDomain -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <label for="identityProviderId" data-bind="text:$component.nls.IdentityDomain.identityStore"></label>
+                </div>
+                <div class="oj-col oj-sm-12 oj-md-8 oj-lg-6">
+                    <oj-select-one id="identityProviderId" placeholder="[[$component.nls.IdentityDomain.identityStore]]" value="{{$component.identityDomainData.identityProvider}}" required="[[true]]">
+                        <!-- ko foreach: $component.identityStore -->
+                        <oj-option value="[[id]]"><span data-bind="text: label"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot:$component.updateDomain -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <label for="identityProviderId" data-bind="text:$component.nls.IdentityDomain.identityStore"></label>
+                </div>
+                <div class="oj-col oj-sm-12 oj-md-8 oj-lg-6">
+                    <oj-select-one id="createIdentityProviderId" placeholder="[[$component.nls.IdentityDomain.identityStore]]" value="{{$component.identityDomainData.identityProvider}}" required="[[true]]">
+                        <!-- ko foreach: $component.identityStore -->
+                        <oj-option value="[[id]]"><span data-bind="text: label"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div data-bind="with:$component.identityDomainData">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="identityDomainConscURL" data-bind="text: $component.nls.IdentityDomain.ConsentPageURL"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-3">
+                        <oj-input-text id="identityDomainConscURL" :aria-label="[[$component.nls.IdentityDomain.ConsentPageURL]]" value="{{consentPageURL}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+            <div data-bind="with:$component.identityDomainData">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="errorURL" data-bind="text: $component.nls.IdentityDomain.errPageURL"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-3">
+                        <oj-input-text id="errorURL" :aria-label="[[$component.nls.IdentityDomain.errPageURL]]" value="{{errorPageURL}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </page-section>
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.IdentityDomain.tokenSettings">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label for="accessTokenId">
+                            <span data-bind="text: $component.nls.IdentityDomain.TokenType"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-3 label">
+                        <span id="accessTokenId" data-bind="text: $component.nls.IdentityDomain.accessToken"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="accessTokenExpiry" data-bind="text:$component.nls.IdentityDomain.AccessTokenExpiry"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-1 label">
+                        <oj-input-text id="accessTokenDay" :aria-label="[[$component.nls.IdentityDomain.day]]" placeholder="[[$component.nls.IdentityDomain.day]]" value="{{$component.accessTokenDay}}" required="true"></oj-input-text>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-2 label">
+                        <oj-input-time id="accessTokenExpiryId" :aria-label="[[$component.nls.IdentityDomain.time]]" placeholder="[[$component.nls.IdentityDomain.time]]" name="time" value="{{$component.accessTokenExpiry}}" time-picker="[[{
+            timeIncrement:'00:01:00:00'}]]" disabled="[[false]]" min="T00:00:00.000-00:00" required></oj-input-time>
+                    </div>
+                </div>
+                <!-- ko if:$component.updateDomain -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label data-bind="text:$component.nls.IdentityDomain.IsRefreshToken"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+                        <oj-switch id="updateDomainSwitch" value="{{$component.accessTokenDetail.refreshTokenEnabled}}" on-value-changed="[[$component.updateRefreshTokenChanged]]"></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot:$component.updateDomain -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label data-bind="text:$component.nls.IdentityDomain.IsRefreshToken"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+                        <oj-switch id="createDomainSwitch" value="{{$component.accessTokenDetail.refreshTokenEnabled}}" on-value-changed="[[$component.refreshTokenChanged]]"></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$component.refreshTokenEnabledflag -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="refreshTokenExpiry" data-bind="text:$component.nls.IdentityDomain.RefreshTokenExpiry"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-1 label">
+                        <oj-input-text id="refreshTokenExpiry" :aria-label="[[$component.nls.IdentityDomain.day]]" placeholder="[[$component.nls.IdentityDomain.day]]" value="{{$component.refreshTokenDay}}" required="true"></oj-input-text>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-2 label">
+                        <oj-input-time id="refreshTokenExpiryId" :aria-label="[[$component.nls.IdentityDomain.time]]" placeholder="[[$component.nls.IdentityDomain.time]]" name="time" value="{{$component.refreshTokenExpiry}}" time-picker="[[{
+            timeIncrement:'00:01:00:00'}]]" disabled="[[false]]" min="T00:00:00.000-00:00" required></oj-input-time>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <oj-label for="authCodeId">
+                            <span data-bind="text: $component.nls.IdentityDomain.TokenType"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-3 label">
+                        <span id="authCodeId" data-bind="text: $component.nls.IdentityDomain.authCode"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="accessTokenExpiry" data-bind="text:$component.nls.IdentityDomain.AccessTokenExpiry"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-1 label">
+                        <oj-input-text id="azAccessTokenDay" :aria-label="[[$component.nls.IdentityDomain.day]]" placeholder="[[$component.nls.IdentityDomain.day]]" value="{{$component.azAccessTokenDay}}" required="true"></oj-input-text>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-2 label">
+                        <oj-input-time id="azAccessTokenExpiryId" :aria-label="[[$component.nls.IdentityDomain.time]]" placeholder="[[$component.nls.IdentityDomain.time]]" name="time" value="{{$component.azAccessTokenExpiry}}" time-picker="[[{
+            timeIncrement:'00:01:00:00'}]]" disabled="[[false]]" min="T00:00:00.000-00:00" required></oj-input-time>
+                    </div>
+                </div>
+                <!-- ko if:$component.updateDomain -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label data-bind="text:$component.nls.IdentityDomain.IsRefreshToken"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+                        <oj-switch id="azUpdateDomainSwitch" value="{{$component.authCodeDetail.refreshTokenEnabled}}" on-value-changed="[[$component.azUpdateRefreshTokenChanged]]"></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot:$component.updateDomain -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label data-bind="text:$component.nls.IdentityDomain.IsRefreshToken"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-4 label">
+                        <oj-switch id="azCreateDomainSwitch" value="{{$component.authCodeDetail.refreshTokenEnabled}}" on-value-changed="[[$component.azRefreshTokenChanged]]"></oj-switch>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$component.azRefreshTokenEnabledflag -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                        <label for="azRefreshTokenExpiry" data-bind="text:$component.nls.IdentityDomain.RefreshTokenExpiry"></label>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-1 label">
+                        <oj-input-text id="azRefreshTokenExpiry" :aria-label="[[$component.nls.IdentityDomain.day]]" placeholder="[[$component.nls.IdentityDomain.day]]" value="{{$component.azRefreshTokenDay}}" required="true"></oj-input-text>
+                    </div>
+                    <div class="oj-col oj-sm-12 oj-md-8 oj-lg-2 label">
+                        <oj-input-time id="azRefreshTokenExpiryId" :aria-label="[[$component.nls.IdentityDomain.time]]" placeholder="[[$component.nls.IdentityDomain.time]]" name="time" value="{{$component.azRefreshTokenExpiry}}" time-picker="[[{
+            timeIncrement:'00:01:00:00'}]]" disabled="[[false]]" min="T00:00:00.000-00:00" required></oj-input-time>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+        </page-section>
+        <div class="oj-row button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.save]]"><span data-bind="text:$component.nls.IdentityDomain.save"></span></oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.cancel]]"><span data-bind="text:$component.nls.IdentityDomain.cancel"></span></oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.back]]"><span data-bind="text:$component.nls.IdentityDomain.back"></span></oj-button>
+        </div>
+    </oj-validation-group>
+    <modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'reviewCancel',header:$component.nls.IdentityDomain.reviewwarning">
+        <div class="message-box">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <div class="dialog-text"><span data-bind="text:$component.nls.IdentityDomain.cancelMessage"></span></div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="yesBtn" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                    <span data-bind="text:$component.nls.IdentityDomain.yes"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="noBtn" on-click="[[no]]">
+                    <span data-bind="text:$component.nls.IdentityDomain.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+</div>

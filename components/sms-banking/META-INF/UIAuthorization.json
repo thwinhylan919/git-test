@@ -1,0 +1,33 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.mobile.smsbanking.service.EventTemplateMap",
+		"components": [{
+				"componentName": "sms-banking-search",
+				"service": "read",
+				"perform": "sms-banking-view#sms-banking-edit#sms-banking-review"
+			},
+			{
+				"componentName": "sms-banking-search",
+				"service": "update",
+				"perform": "sms-banking-view#sms-banking-edit#sms-banking-review",
+				"approve": "sms-banking-review"
+			}
+		]
+	},
+	{
+		"moduleName": "com.ofss.digx.app.mobile.smsbanking.service.Event",
+		"components": [{
+				"componentName": "sms-banking-search",
+				"service": "listRequestEventAttributes",
+				"perform": "sms-banking-view#sms-banking-edit#sms-banking-review"
+			},
+			{
+				"componentName": "sms-banking-search",
+				"service": "listResponseEventAttributes",
+				"perform": "sms-banking-view#sms-banking-edit#sms-banking-review"
+			}
+		]
+
+	}
+]
+}

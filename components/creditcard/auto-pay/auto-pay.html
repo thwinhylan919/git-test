@@ -1,0 +1,243 @@
+<div class="form-main-container">
+  <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-5">
+      <!-- ko if: $baseModel.small -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <!-- ko if: $component.moduleURL() -->
+        <!-- ko ifnot: $component.addonCardFlag() -->
+        <account-input params="baseModel : $baseModel, rootModel: $data ,label : $component.resource.autopay.selectedCard,
+        account : $component.creditCardId,
+        type: 'nodeValue',
+        additionalDetails : $component.additionalCardDetails,
+        validator:$component.validationTracker,
+        customURL : $component.moduleURL,
+        accountsParser: $component.creditCardParser,
+        readOnly: !!$component.params.id">
+        </account-input>
+        <!-- /ko -->
+        <!-- ko if: $component.addonCardFlag() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12">
+            <oj-label for="cardNumber" class="">
+              <span data-bind="text:resource.autopay.inactiveCard"></span>
+            </oj-label>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko ifnot: $component.moduleURL() -->
+        <!-- ko ifnot: $component.addonCardFlag() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label for="cardNumber" class="">
+              <span data-bind="text:resource.autopay.cardNumber"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12">
+            <span data-bind="text:$component.creditCardIdDisplay"></span>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.addonCardFlag() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12">
+            <oj-label for="cardNumber" class="">
+              <span data-bind="text:resource.autopay.inactiveCard"></span>
+            </oj-label>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+      </page-section>
+      <!-- /ko -->
+     
+      <!-- ko ifnot: $component.addonCardFlag() -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12 label ">
+            <oj-label for="cardNumber" class="">
+              <span data-bind="text:resource.autopay.cardNumber"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-sm-12">
+            <span data-bind="text:$component.creditCardIdDisplay"></span>
+          </div>
+        </div>
+      </page-section>
+      <!-- /ko -->
+      <!-- ko if: $component.addonCardFlag() -->
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+          <oj-label for="cardNumber" class="">
+            <span data-bind="text:resource.autopay.inactiveCard"></span>
+          </oj-label>
+        </div>
+      </div>
+      <!-- /ko -->
+
+      <!-- ko if:registerCancel() -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <div class="row-group">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+              <oj-label>
+                <span data-bind="text:resource.autopay.regMsgLine1"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+              <oj-label>
+                <span data-bind="text:resource.autopay.regMsgLine2"></span>
+              </oj-label>
+            </div>
+          </div>
+        </div>
+      </page-section>
+      <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button id="autoPayRegisterButton" class="action-button-primary " on-click="[[autoPayRegister]]">
+          <span slot="startIcon" class="icons icon-yes"></span>
+          <span data-bind="text:resource.autopay.yes"></span>
+        </oj-button>
+        <oj-button id="autoPayCancelRegisterButton" class="action-button-secondary " on-click="[[autoPayCancelRegister]]">
+          <span slot="startIcon" class="icons icon-no"></span>
+          <span data-bind="text:resource.autopay.no"></span>
+        </oj-button>
+      </div>
+      <!-- /ko -->
+
+      <!-- ko if:initiateCancel() -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading :''">
+        <div class="row-group">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+              <oj-radioset id="dueTypeSet" aria-labelledby="mainlabelid" value="{{$component.payAmtType}}" class="oj-choice-direction-row">
+                <oj-option value="TAD" :id="totalD" name="due">
+                  <span for="totalD" data-bind="text:$component.resource.autopay.TAD"></span>
+                </oj-option>
+                <oj-option value="MAD" :id="minimumD" name="due">
+                  <span for="minimumD" data-bind="text:$component.resource.autopay.MAD"></span>
+                </oj-option>
+                <oj-option value="SAD" :id="specificD" name="due">
+                  <span for="specificD" data-bind="text:$component.resource.autopay.SAD"></span>
+                </oj-option>
+              </oj-radioset>
+            </div>
+          </div>
+          <!-- ko if: $component.payAmtType() === "SAD" -->
+          <div class="oj-lg-8 oj-sm-10 oj-md-5" data-bind="component: {
+              name: 'amount-input', params: {
+              amount :$component.repaymentAmount,
+              label : $component.resource.autopay.amount,
+              currency: $component.currency,
+              currencyListRequired : false,
+              validator:$component.validationTracker,
+              isMandatory:true,
+              rootId:'specific-amount',
+              rootClass:'form-input'
+            }
+          }"></div>
+          <!-- /ko -->
+          <account-input class="auto-pay__dropdown  " params="baseModel : $baseModel, rootModel: $data ,label : $component.resource.autopay.sourceAccount, type : 'balance' , account : selectedAccount ,additionalDetails : additionalDetails ,validator : validationTracker"></account-input>
+        </div>
+      </page-section>
+      <div class="oj-flex oj-flex-items-pad button-container">
+        <!-- ko if:$component.currentRepayMode() === 'M' -->
+        <oj-button id="autoPayVerifyButton" class="action-button-primary " on-click="[[autoPayVerify.bind($data,'reg')]]">
+          <span slot="startIcon" class="icons icon-update"></span>
+          <span data-bind="text:resource.autopay.update"></span>
+        </oj-button>
+        <!-- ko if: !$baseModel.small() -->
+        <oj-button id="autoPayCancelButton" class="action-button-secondary " on-click="[[$dashboard.hideDetails]]">
+          <span slot="startIcon" class="icons icon-cancel"></span>
+          <span data-bind="text:resource.autopay.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button data-id="cancelButton" class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+          <span slot="startIcon" class="icons icon-back-arrow"></span>
+          <span data-bind="text:$component.resource.autopay.back"></span>
+        </oj-button>
+        <!-- /ko -->
+        <!-- ko if:$component.currentRepayMode() === 'A' -->
+        <oj-button id="autoPayVerifyButton" class="action-button-primary " on-click="[[autoPayVerify.bind($data,'upd')]]">
+          <span slot="startIcon" class="icons icon-update"></span>
+          <span data-bind="text:resource.autopay.update"></span>
+        </oj-button>
+        <oj-button id="autoPayDegisterVerifyButton" class="action-button-secondary " on-click="[[autoPayVerify.bind($data,'dereg')]]">
+          <span slot="startIcon" class="icons icon-issue"></span>
+          <span data-bind="text:resource.autopay.deregister"></span>
+        </oj-button>
+        <!-- ko if: !$baseModel.small() -->
+        <oj-button id="autoPayCancelButton" class="action-button-tertiary " on-click="[[$dashboard.hideDetails]]">
+          <span slot="startIcon" class="icons icon-cancel"></span>
+          <span data-bind="text:resource.autopay.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button data-id="cancelButton" class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+          <span slot="startIcon" class="icons icon-back-arrow"></span>
+          <span data-bind="text:$component.resource.autopay.back"></span>
+        </oj-button>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+    </div>
+
+    <!-- ko ifnot: $baseModel.small() -->
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+      <help params="baseModel : $baseModel, rootModel : $component, transaction: 'auto-pay'"></help>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: $baseModel.small() -->
+  <a href="#" data-bind="click: $component.showFloatingPanel">
+    <div class="floating-button">
+      <span class="icons icon-more-vertical"></span>
+    </div>
+  </a>
+  <floating-panel params="baseModel : $baseModel, panelId: 'panelCreditCard6', rootModel: $component">
+    <ul>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'card-statement')">
+          <span class="icons icon-view-statement"></span>
+          <span data-bind="text: $component.resource.cardLinks.viewStatement"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'card-pay')">
+          <span class="icons icon-limit"></span>
+          <span data-bind="text: $component.resource.cardLinks.cardPayment"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'request-pin')">
+          <span class="icons icon-request-pin"></span>
+          <span data-bind="text: $component.resource.cardLinks.requestPin"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'block-card')">
+          <span class="icons icon-cancel-card"></span>
+          <span data-bind="text: $component.resource.cardLinks.blockCard"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'auto-pay')">
+          <span class="icons icon-pay"></span>
+          <span data-bind="text: $component.resource.cardLinks.autoPay"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'creditcard-reset-pin')">
+          <span class="icons icon-refresh"></span>
+          <span data-bind="text: $component.resource.cardLinks.resetPin"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bind="click: $component.loadFloatingPanel.bind($data,'add-on-card')">
+          <span class="icons icon-card-preference"></span>
+          <span data-bind="text: $component.resource.cardLinks.addOnCard"></span>
+        </a>
+      </li>
+    </ul>
+  </floating-panel>
+  <!-- /ko -->
+</div>

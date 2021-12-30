@@ -1,0 +1,110 @@
+<!-- ko if : $component.dataLoaded -->
+<div class="oj-flex">
+  <div data-bind="css: $component.mode === 'review' ? 'oj-flex-item oj-sm-12' : 'oj-flex-item oj-sm-9'">
+    <div class="form-main-container">
+      <!-- ko if : $component.mode === 'review' -->
+      <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header:$component.nls.SegmentDefinition.review, reviewHeader: $component.reviewHeader}}"></div>
+      <!-- /ko -->
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.SegmentDefinition.SegmentCode, value : $component.reviewData.code"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.SegmentDefinition.SegmentName, value : $component.reviewData.name"></row>
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.SegmentDefinition.UserType, value : $component.enterpriseRoleDTO.enterpriseRoleName"></row>
+
+        <!-- ko if: $component.appRoles().length > 0 -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="AppRole">
+              <span data-bind="text:$component.nls.SegmentDefinition.approle"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-3">
+            <!-- ko foreach: $component.appRoles -->
+            <div>
+              <span data-bind="text:$data.applicationRoleName"></span>
+            </div>
+            <!-- /ko -->
+          </div>
+        </div>
+        <!-- /ko -->
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.SegmentDefinition.SegmentStatus, value : $component.status"></row>
+      </page-section>
+
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : nls.SegmentDefinition.limitHeader">
+        <!-- ko if: $component.limitArray().length > 0 -->
+        <!-- ko foreach: $component.limitArray -->
+        <oj-accordion :id="[['segmentAccordion'+$index()]]">
+          <oj-collapsible :id="[['segmentcollapsible'+$index()]]" expanded="[['true']]" disabled="[['true']]">
+            <h4 slot="header">
+              <span>
+                <span data-bind="text: name"></span>
+              </span>
+            </h4>
+          </oj-collapsible>
+        </oj-accordion>
+        <!-- ko if: $component.limitArray()[$data.id].packages.length >0 -->
+        <!-- ko foreach: $component.limitArray()[$data.id].packages -->
+        <row params="baseModel : $baseModel, rootModel : $parent, label : $data.description, value :$data.value"></row>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko ifnot: $component.limitArray()[$data.id].packages.length >0 -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12">
+            <span class="oj-choice-item" data-bind="text: $component.nls.SegmentDefinition.noLimitsAssigned"></span>
+          </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko ifnot: $component.limitArray().length > 0 -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-sm-12">
+            <span class="oj-choice-item" data-bind="text: $component.nls.SegmentDefinition.noLimitsAssigned"></span>
+          </div>
+        </div>
+        <!-- /ko -->
+
+        <modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'reviewCancel',header:$component.nls.SegmentDefinition.reviewwarning">
+          <div class="message-box">
+            <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item">
+                <div class="dialog-text"><span data-bind="text:$component.nls.SegmentDefinition.cancelMessage"></span></div>
+              </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+              <oj-button class="action-button-primary" id="yesBtn" on-click="[[yes]]">
+                <span data-bind="text:$component.nls.SegmentDefinition.yes"></span>
+              </oj-button>
+              <oj-button class="action-button-secondary" id="noBtn" on-click="[[no]]">
+                <span data-bind="text:$component.nls.SegmentDefinition.no"></span>
+              </oj-button>
+            </div>
+          </div>
+        </modal-window>
+      </page-section>
+
+      <!-- ko ifnot : $component.mode === 'approval' -->
+      <div class="button-container">
+        <!-- ko ifnot : $component.mode === 'review' -->
+        <oj-button class="action-button-primary" id="editbtn" on-click="[[$component.edit]]"><span data-bind="text:$component.nls.SegmentDefinition.edit"></span></oj-button>
+        <!-- /ko -->
+        <!-- ko if : $component.mode === 'review' -->
+        <oj-button class="action-button-primary" id="confirmbtn" on-click="[[$component.confirm]]"><span data-bind="text:$component.nls.SegmentDefinition.confirm"></span></oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-secondary" id="cancelbtn" on-click="[[$component.cancel]]"><span data-bind="text:$component.nls.SegmentDefinition.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" id="backbtn" on-click="[[$dashboard.hideDetails]]"><span data-bind="text:$component.nls.SegmentDefinition.back"></span></oj-button>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+
+  <!-- ko ifnot : $component.mode === 'review' || $component.mode === 'approval' -->
+  <div class="oj-flex-item oj-sm-3 oj-sm-only-hide oj-md-only-hide">
+    <help params="baseModel : $baseModel, rootModel : $component, transaction: 'segments'"></help>
+  </div>
+  <!-- /ko -->
+
+</div>
+<!-- /ko -->

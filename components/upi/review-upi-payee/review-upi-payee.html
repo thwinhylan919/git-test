@@ -1,0 +1,40 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.nls.generic.common.review , reviewHeader : $component.nls.upiPayee.reviewHeaderMsg}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : ''">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <!-- ko if:!$component.imageUploadFlag() -->
+            <div class="">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.upiPayee.payeeName, value : $component.payeeName()"></row>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$component.imageUploadFlag() -->
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.upiPayee.payeeName"></row>
+            <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12 ">
+                <div class="oj-flex-item oj-sm-2 oj-md-2">
+                <oj-avatar class="oj-lg-1" href="#" role="img" size="[[$component.avatarSize()]]" initials='[[initials]]'
+                    src='[[preview()]]' data-bind="attr:{'aria-label':name}">
+                </oj-avatar>
+                </div>
+                <div class="oj-label-inline">
+                    <div class="payee-accordian-container-heading" data-bind="text:$component.payeeName()"></div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.upiPayee.payeeVpa, value : $component.vpaId()"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.upiPayee.accountName, value : $component.accountName()"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.upiPayee.nickName, value : $component.nickName()"></row>
+            </div>
+        </div>
+    </page-section>
+    <div id="button-container" class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="confirmButton" on-click="[[uploadImage]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text: $component.nls.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text: $component.nls.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

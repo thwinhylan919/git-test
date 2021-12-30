@@ -1,0 +1,9 @@
+<!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails -->
+<page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+  <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+          <a href="#" data-bind="text: $component.confirmScreenExtensions.confirmScreenres, click: $component.params.viewPurchaseConfirm"></a>
+      </div>
+  </div>
+</page-section>
+<!-- /ko -->

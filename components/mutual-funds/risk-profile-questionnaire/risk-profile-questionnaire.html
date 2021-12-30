@@ -1,0 +1,63 @@
+<div class="form-main-container">
+  <div class="oj-flex question">
+    <div class="oj-flex-item oj-lg-8">
+      <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <div class="oj-flex">
+          <div class="oj-flex-item oj-lg-12 left-padding">
+            <span data-bind="text:$component.resource.questionnaireDetailsLabel1"></span>
+            <oj-label><span data-bind="text:$baseModel.format($component.resource.questionnaireDetailsLabel2,{noOfQuestions: $component.noOfQuestions()})"></span></oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-12 risk-profile-questionnaire-container left-padding">
+            <ol class="list-padding">
+              <!-- ko if: $component.dataLoaded() -->
+              <!-- ko foreach: $component.questionsList -->
+              <li class="questionSpace">
+                <div class="oj-flex-item oj-sm-12">
+                  <div>
+                    <span data-bind="text:questionDescription"></span>
+                  </div>
+                  <oj-radioset :id="[[$data.questionId]]" :aria-label="[[$component.resource.investAccountLabel2]]"
+                    on-value-changed="[[$component.optionChangeHandler.bind($data)]]" value="{{$data.selectedAnswer}}">
+                    <!-- ko foreach: $data.options -->
+                    <oj-option :name="[[$parent.questionId]]" value="[[$data.optionId]]">
+                      <span data-bind="text:optionDesc"></span>
+                    </oj-option>
+                    <!-- /ko -->
+                  </oj-radioset>
+                </div>
+              </li>
+              <!-- /ko -->
+              <!-- /ko -->
+            </ol>
+          </div>
+          <div class="oj-flex-item oj-sm-12 button-container">
+            <!-- ko if: showNextButton()-->
+            <oj-button class="action-button-primary " id="nextButtonId"  on-click="[[$component.next]]">
+                <span slot="startIcon" class="icons icon-forward-arrow"></span>
+              <span data-bind="text:$component.resource.nextButton"></span>
+            </oj-button>
+            <!-- /ko -->
+             <!-- ko if: showCalculateButton()-->
+             <oj-button class="action-button-primary" id="saveButtonId"  on-click="[[calculateRiskProfile]]">
+                <span slot="startIcon" class="icons icon-submit"></span>
+                <span data-bind="text:$component.resource.crpButton"></span>
+              </oj-button>
+              <!-- /ko -->
+            <!-- ko if: showPrevButton()-->
+            <oj-button class="action-button-tertiary" id="prevButtonId"  on-click="[[$component.prev]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+              <span data-bind="text:$component.resource.prevButton"></span>
+            </oj-button>
+            <!-- /ko -->
+          </div>
+        </div>
+      </page-section>
+    </div>
+    <div class="oj-sm-4">
+      <help params="baseModel : $baseModel, rootModel : $component, transaction: 'risk-profile-help'"></help>
+    </div>
+  </div>
+</div>
+<!-- ko if : !$baseModel.small() -->
+<a class="back-link" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->

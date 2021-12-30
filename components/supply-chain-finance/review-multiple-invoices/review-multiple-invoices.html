@@ -1,0 +1,72 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div
+                data-bind="template:{name: 'review-screen/review-banner-template', data:{header: $component.nls.reviewScreen.reviewCaption, reviewHeader: $component.nls.reviewScreen.reviewHeader}}">
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-1"><a href="#" class="form-button-link" id="ExpandAll4"
+                        data-bind="attr:{'class':'text-size','alt':$component.nls.CreateInvoice.ExpandAll,'title':$component.nls.CreateInvoice.ExpandAllTitle},click:$component.onClickExpandAll4,text:$component.nls.CreateInvoice.ExpandAll"></a>
+                </div>
+                <div class="oj-flex-item oj-lg-11"><a href="#" class="form-button-link" id="CollapseAll33"
+                        data-bind="attr:{'class':'text-size','alt':$component.nls.CreateInvoice.CollapseAll,'title':$component.nls.CreateInvoice.CollapseAllTitle},click:$component.onClickCollapseAll33,text:$component.nls.CreateInvoice.CollapseAll"></a>
+                </div>
+            </div>
+            <oj-accordion id="invoices-accordian" multiple="[['true']]" expanded="{{$component.expandedAccordians()}}"
+                on-oj-before-expand="[[$component.beforeExpandAccordian]]"
+                on-oj-before-collapse="[[$component.collapseAccordian]]">
+                <!-- ko foreach : $component.invoicesArray() -->
+                <oj-collapsible id="hello" :id="[['invoice-' + formId]]" :class="[['invoice-element']]">
+                    <div data-bind="attr:{'slot':'header'}">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-11">
+                                <a href="#" id="ViewAttributes90"
+                                    data-bind="attr:{'alt':$component.nls.CreateInvoice.PreviewInvoice,'title':$component.nls.CreateInvoice.PreviewInvoiceTitle},click:$component.preview.bind($data,payload.program.programName,payload)">
+                                    <span slot="startIcon" class="icons icon-eye oj-button-icon oj-start"></span>
+                                    <span data-bind="text:$component.nls.CreateInvoice.PreviewInvoice"></span></a>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-6">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.CustomerInvoiceNo, value : payload.invoiceNumber">
+                                </row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.BuyerName, value : payload.associatedParty.name">
+                                </row>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-6">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.NameofProgram, value : payload.program.programName">
+                                </row>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <row
+                                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PaymentTerms, value : payload.paymentTerms">
+                                </row>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        data-bind="component:{name: 'review-invoice-creation-form', params:{rootModel: $component, referenceData: $data}}">
+                    </div>
+                </oj-collapsible><!-- /ko -->
+            </oj-accordion>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm43]]"><span
+                        slot="startIcon" class="icons icon-confirm"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Confirm"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel99]]"><span
+                        slot="startIcon" class="icons icon-cancel"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Cancel"></span></oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack52]]"><span slot="startIcon"
+                        class="icons icon-back-arrow"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Back"></span></oj-button>
+            </div>
+        </page-section>
+    </div>
+</oj-validation-group>

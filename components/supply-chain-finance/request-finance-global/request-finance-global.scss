@@ -1,0 +1,28 @@
+.party-details {
+    background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+    padding: var(--banner-padding);
+    align-items: center;
+}
+
+.party-name-style {
+    color: var(--banner-foreground-color);
+    font-size: var(--base-font-size-large);
+    font-weight: var(--banner-font-weight);
+}
+
+.banner-label {
+    color: var(--banner-text-secondary);
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--base-font-weight-light);
+}
+
+.banner-value {
+    font-size: var(--base-font-size-medium);
+    font-weight: var(--banner-font-weight);
+}
+
+.banner-padding {
+    @include mq(medium) {
+        padding-top: 0.5rem;
+    }
+}

@@ -1,0 +1,22 @@
+<div class="goals">
+    <div class="movingbox">
+        <!-- <h3 class="oj-flex-item goal-tile-heading" data-bind="text:resource.header"></h3> -->
+        <div class="oj-flex-items-pad oj-flex">
+            <div class="oj-flex-item left oj-sm-12 oj-lg-8">
+                <img class="dreams-image" data-bind="loadImage: 'home/goals.png', attr:{alt: resource.alt}"/>
+            </div>
+            <div class="oj-flex-item left oj-sm-12 oj-lg-4">
+                <div data-bind="component: {name: 'product-header-text',
+            params:{rootModel: resource.header}}">
+                </div>
+                <div class="icon-title_desc">
+                    <div data-bind="html:resource.quote"></div>
+                    <!-- <div class="author" data-bind="html:resource.author"></div> -->
+                </div>
+                <oj-button class="action-button-primary" on-click="[[openGoalCalculator]]">
+                    <span data-bind="text:resource.proceed"></span>
+                </oj-button>
+            </div>
+        </div>
+    </div>
+</div>

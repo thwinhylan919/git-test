@@ -1,0 +1,12 @@
+{
+   "modules": [{
+           "moduleName": "com.ofss.digx.app.user.session.service.SessionSummary",
+           "components": [{
+                   "componentName": "session-summary",
+                   "service": "read",
+                   "perform": "session-summary-details"
+               }
+           ]
+       }
+   ]
+}

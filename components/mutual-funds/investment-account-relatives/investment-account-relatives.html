@@ -1,0 +1,88 @@
+<oj-validation-group id="tracker">
+  <div class="form-main-container">
+    <!-- ko if: $component.showRelatives-->
+    <!-- ko foreach : $component.dummyModal.additionalDetails.relatives -->
+    <page-section params="baseModel : $baseModel, rootModel : $component">
+      <div class="oj-flex oj-flex-items-pad ">
+        <div class="oj-flex-item heading ">
+          <div class="oj-flex-item oj-lg-8 oj-sm-8 oj-md-8">
+            <span data-bind="text: $baseModel.format($component.nls.Relatives.RelativeNumber,{index : $index()+1})"></span>
+          </div>
+        </div>
+        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-4">
+          <a href="#" data-bind="attr:{id: 'delete_'+$index(),alt:$component.nls.Relatives.clickToDelete,title:$component.nls.Relatives.deleteRelative}, click:$component.deleteRelative.bind($data,$index())">
+            <div class="icons icon-delete" aria-hidden="true"></div>
+          </a>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+          <oj-label :for="[['RelationType'+ $index()]]">
+            <span data-bind="text:$component.nls.Relatives.RelationType"></span>
+          </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+          <!-- ko if: $component.relationshipListLoaded() -->
+          <oj-select-one :id="[['RelationType'+ $index()]]" :placeholder="[[$component.nls.Relatives.select]]" value="{{$component.dummyModal.additionalDetails.relatives[$index()].relationship}}" on-value-changed="[[$component.relativesSelectedHandler.bind($data,$index())]]">
+            <!-- ko foreach : $component.relationship -->
+            <oj-option :id="[['code'+$baseModel.incrementIdCount()]]" value="{{code}}"><span data-bind="text: description"></span></oj-option>
+            <!-- /ko -->
+          </oj-select-one>
+          <!-- /ko -->
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+          <oj-label :for="[['Name'+$index()]]">
+            <span data-bind="text:$component.nls.Relatives.Name"></span>
+          </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-8 oj-sm-12 oj-md-12">
+          <oj-input-text :id="[['Name'+$index()]]" value="{{$component.dummyModal.additionalDetails.relatives[$index()].name}}"
+          validators="[[$baseModel.getValidator('ALPHABETS_WITH_SPACE',$component.nls.Relatives.nameError,{
+                                  type:'length',options:{
+                                    min:1,max:50}})]]" :required="[[$component.dummyModal.additionalDetails.relatives[$index()].relativeRequired]]"></oj-input-text>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+          <oj-label :for="[['Age'+$index()]]">
+            <span data-bind="text:$component.nls.Relatives.Age"></span>
+          </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-4">
+          <oj-input-text :id="[['Age'+$index()]]" value="{{$component.dummyModal.additionalDetails.relatives[$index()].age}}" validators="[[$baseModel.getValidator('NUMBERS',$component.nls.Relatives.AgeError,{type: 'length',options: {min: 1, max: 3}})]]"
+          :required="[[$component.dummyModal.additionalDetails.relatives[$index()].relativeRequired]]"></oj-input-text>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+          <oj-label :for="[['Dependent'+$index()]]">
+            <span data-bind="text:$component.nls.Relatives.Dependent"></span>
+          </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-6 oj-sm-12 oj-md-12">
+          <oj-radioset class="oj-choice-direction-row" :id="[['Dependent'+$index()]]" labelled-by="accessTypeLabel" value="{{$component.dummyModal.additionalDetails.relatives[$index()].dependent}}" :required="[[$component.dummyModal.additionalDetails.relatives[$index()].relativeRequired]]">
+            <oj-option :id="[['yes'+$index()]]" value="Yes"><span data-bind="text:  $component.nls.Relatives.yes"></span></oj-option>
+            <oj-option :id="[['no'+$index()]]" value="No"><span data-bind="text:  $component.nls.Relatives.no"></span></oj-option>
+          </oj-radioset>
+        </div>
+      </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <a href="#" data-bind="click:$component.addRelative">
+              <span class="icons icon-add" slot="startIcon"></span>
+              <span data-bind="text:$component.nls.Relatives.addRelative"></span>
+            </a>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.onClickSave]]"><span slot="startIcon" class="icons icon-confirm"></span><span data-bind="text:$component.nls.Relatives.Save"></span></oj-button>
+      </div>
+    </div>
+  </div>
+</oj-validation-group>

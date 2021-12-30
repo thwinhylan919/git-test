@@ -1,0 +1,25 @@
+.bank-custom-limits {
+    &__grid {
+
+        background: var(--base-background-primary);
+
+        &__text {
+            color: var(--form-input-color-disable);
+        }
+
+    }
+
+    &__new-value {
+        color: var(--base-color-danger);
+    }
+
+    &__dropdown-container {
+        background: var(--base-background-tertiary);
+        margin: 0 0.5rem;
+        padding: 0.3rem 0;
+
+        
+    }
+
+
+}

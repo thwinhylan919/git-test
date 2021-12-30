@@ -1,0 +1,27 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.party.service.nominee.Nominee",
+        "components": [
+        {
+            "componentName": "casa-nominee-list",
+            "service": "read",
+            "perform": "read-nominee#td-nominee-list#rd-nominee-list#nominee"
+        },
+        {
+            "componentName": "casa-nominee-list",
+            "service": "delete",
+            "perform": "read-nominee#td-nominee-list#rd-nominee-list"
+        },
+        {
+            "componentName": "casa-nominee-list",
+            "service": "create",
+            "perform": "add-edit-nominee#td-nominee-list#rd-nominee-list#review-add-edit-nominee"
+        },
+        {
+            "componentName": "casa-nominee-list",
+            "service": "update",
+            "perform": "add-edit-nominee#td-nominee-list#rd-nominee-list#review-add-edit-nominee"
+        }]
+    }]
+}

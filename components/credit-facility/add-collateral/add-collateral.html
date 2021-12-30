@@ -1,0 +1,109 @@
+<oj-validation-group :id="addCollateralTracker">
+    <div class="form-main-container overlay">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 label">
+                    <oj-label>
+                        <span data-bind="text:$component.nls.addcollateral.PleasespecifycollateralType"></span>
+                    </oj-label>
+                </div>
+                <!-- ko if: $component.areTypesLoaded -->
+
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <oj-select-one :id="[['PleasespecifycollateralType62']]"
+                        value="{{$component.collateralPayload.collateralType}}"
+                        :placeholder="[[$component.nls.generic.common.select]]" required="[[true]]">
+                        <!-- ko foreach: $component.collateralTypeListOptions -->
+                        <oj-option value="[[value]]"><span data-bind="text:label"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 label">
+                    <oj-label>
+                        <span data-bind="text:$component.nls.addcollateral.Whatwouldyoudescribethiscollateralas"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <oj-input-text :id="[['Whatwouldyoudescribethiscollateralas50']]"
+                        :placeholder="[[$component.nls.addcollateral.description]]"
+                        value="{{$component.collateralPayload.collateralDesc}}" required="[[true]]">
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 label">
+                    <oj-label>
+                        <span
+                            data-bind="text:$component.nls.addcollateral.Whatistheestimatedvalueofthiscollateral"></span>
+                    </oj-label>
+                </div>
+                <!-- ko if: $component.isCurrencyLoaded -->
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 ">
+                    <oj-select-one id="currency" value="{{$component.collateralPayload.collateralValue.currency}}"
+                        placeholder="{{$component.nls.generic.common.select}}" required="[[true]]">
+                        <!-- ko foreach:currencyListOptions -->
+                        <oj-option value="[[value]]"><span data-bind="text: value"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-8 data1">
+                    <oj-input-text  :id="[['Whatistheestimatedvalueofthiscollateral27']]"
+                        :placeholder="[[$component.nls.addcollateral.Enterestimatedcollateralvalue]]"
+                        value="{{$component.collateralPayload.collateralValue.amount}}"  maxlength="16" validators="[[$baseModel.getValidator('AMOUNT')]]" required="[[true]]">
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 label">
+                    <oj-label>
+                        <span data-bind="text:$component.nls.addcollateral.Whatisthepurposeofthiscollateral"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <oj-input-text :id="[['Whatisthepurposeofthiscollateral48']]"
+                        :placeholder="[[$component.nls.addcollateral.purpose]]"
+                        value="{{$component.collateralPayload.purpose}}" required="[[true]]">
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 label">
+                    <oj-label>
+                        <span data-bind="text:$component.nls.addcollateral.Anyothercomments"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <oj-input-text :id="[['Anyothercomments75']]"
+                        :placeholder="[[$component.nls.addcollateral.comments]]" value="{{$component.collateralPayload.remarks}}"   required="[[true]]" >
+                    </oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                    <!-- ko ifnot: $component.mode && $component.mode.mode()==="edit" -->
+
+                    <oj-button class="action-button-primary" on-click="[[onClickAdd77]]"><span
+                            data-bind="text:$component.nls.addcollateral.Add"></span>
+                            <span slot="startIcon" class="icons icon-add"></span>
+                        </oj-button>
+                    <!-- /ko -->
+
+                    <!-- ko if: $component.mode && $component.mode.mode()==="edit" -->
+
+                    <oj-button class="action-button-primary" on-click="[[onClickEdit77]]">
+                            <span slot="startIcon" class="icons icon-remarks"></span>
+                        <span
+                            data-bind="text:$component.nls.addcollateral.update"></span></oj-button>
+                    <!-- /ko -->
+
+                </div>
+            </div>
+        </page-section>
+    </div>
+</oj-validation-group>

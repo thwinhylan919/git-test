@@ -1,0 +1,163 @@
+<!-- ko if:isPayeesLoaded() -->
+<div class=" oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between form-main-container">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-5">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+            <div data-bind="component:{name:'account-type-dialog', params:{rootModel: $component, modalCloseHandler : $component.closeModal}}"></div>
+            <!-- ko ifnot:$baseModel.large() -->
+            <!-- ko ifnot:$component.choiseBoxOpened() -->
+            <a href="#" data-bind="attr:{ title: $baseModel.format($component.payments.common.title,{reference: $component.payments.payee.labels.openChoiseBox}), alt : $baseModel.format($component.payments.common.alt,{reference: $component.payments.payee.labels.openChoiseBox}) }, click: $component.openChoiseBox" >
+                <div class="floating-button"><span class="icons icon-plus"></span></div>
+            </a>
+            <!-- /ko -->
+            <!-- ko if:$component.choiseBoxOpened() -->
+            <a href="#" data-bind="attr:{ title: $baseModel.format($component.payments.common.title,{reference: $component.payments.payee.labels.closeChoiseBox}), alt : $baseModel.format($component.payments.common.alt,{reference: $component.payments.payee.labels.closeChoiseBox}) }, click: $component.closeModal">
+                <div class="floating-button"><span class="icons icon-cross"></span></div>
+            </a>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-sm-12 oj-flex-item" data-bind="component: {
+             name: 'search-box',
+             params: { rootModel:$component ,arrayReference:payees,searchFields:['name'],refreshReference : refreshPayeeList,
+               searchBy:$component.payments.payee.payeename}
+         }">
+                </div>
+            </div>
+            <!-- ko if:refreshPayeeList() -->
+            <div class="oj-flex payee-accordian-container">
+                <oj-accordion id="payee-group-accordian" multiple="true" expanded="{{$component.expandedAccordians()}}" class="oj-sm-12">
+                    <!-- ko foreach:$component.payees-->
+                    <oj-collapsible :id="[['payee-' + $index()]]" class="payment-element">
+                        <span slot="header">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                                    <!-- ko if:$component.imageUploadFlag() -->
+                                    <oj-avatar href="#" role="img" size="[[$component.avatarSize()]]" initials='[[initials]]' src='[[preview()]]'
+                                            data-bind="attr:{'aria-label':name}">
+                                    </oj-avatar>
+                                    <!-- /ko -->
+                                    <div class="oj-flex-item oj-label-inline">
+                                        <div class="payee-accordian-container-heading" data-bind="text:name"></div>
+                                    </div>
+                                </div>
+                                <!-- ko if:$component.imageUploadFlag() -->
+                                <div class="oj-datepicker-week-col">
+                                    <a href="#" class="form-button-link" data-bind="attr:{ title: $baseModel.format($component.payments.common.title,{reference: $component.payments.payee.labels.edit}), alt : $baseModel.format($component.payments.common.alt,{reference: $component.payments.payee.labels.edit}) }, text : $component.payments.payee.labels.edit, click : $component.openEditBox.bind($data, $data) "></a>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </span>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-12 payee-accordian-list">
+                            <oj-list-view :id="[[id]]" :aria-label="[[$component.payments.managerecipients_header]]" selection-mode="[['single']]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('payee_list_template',true)]]" data="[[dataSource()]]">
+                            </oj-list-view>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad oj-sm-flex-items-initial payee-accordian-list-links bottom-nav">
+                                <div data-bind="css:$baseModel.small() ? 'oj-sm-6 oj-flex-item':'addAccount oj-flex-item'">
+                                    <a href="#" class="form-button-link" data-bind="attr:{ title: $baseModel.format($component.payments.common.title,{reference: $component.payments.payee.acctype.bankpayee}), alt : $baseModel.format($component.payments.common.alt,{reference: $component.payments.payee.acctype.bankpayee}) }, text : $component.payments.payee.acctype.bankpayee, click : $component.createPayeeInExistingGroup.bind($data,'bank-account-payee',$data)">
+                            </a>
+                                </div>
+                                <!-- <div data-bind="css:$baseModel.small() ? 'oj-sm-6 oj-flex-item linkPad':'oj-flex-item linkPad'">
+                                    <a href="#" class="form-button-link" data-bind="attr:{ title: $baseModel.format($component.payments.common.title,{reference: $component.payments.payee.acctype.ddpayee}), alt : $baseModel.format($component.payments.common.alt,{reference: $component.payments.payee.acctype.ddpayee}) }, text : $component.payments.payee.acctype.ddpayee, click : $component.createPayeeInExistingGroup.bind($data,'demand-draft-payee',$data)">
+                            </a>
+                                </div> -->
+                            </div>
+                    </oj-collapsible>
+                    <!-- /ko -->
+                </oj-accordion>
+            </div>
+            <!-- /ko -->
+        </page-section>
+        <modal-window params="baseModel : $baseModel, rootModel : $component,id:'edit-payeeGroupImage', header : $component.payments.payee.view, closeHandler : $component.closeModal">
+            <!-- ko if: ko.utils.unwrapObservable($component.imageUploadSuccessMsg) -->
+            <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 payee-accordian__success-bar">
+                    <span class="success-icon icons" data-bind="css: 'icon-success'"></span>
+                    <span class="success-msg" id="confirm" data-bind="text:$component.imageUploadSuccessMsg()"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="form-main-container">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.payments.payee.labels.editPayeeGroupPhoto">
+                    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-11">
+                        <div class="oj-flex-item">
+                            <!-- ko if:editPayeeGroupImage() -->
+                            <image-upload params="baseModel : $baseModel, rootModel:$component,
+                              preview:$component.currentPayeeGroup().preview,
+                              typeOfImage:'PAYEE',
+                              configType:'PayeeConfig',
+                              fileId:$component.fileId,
+                              imageId:$component.imageId,
+                              initials: $component.currentPayeeGroup().initials,
+                              imageUploaded : ko.utils.unwrapObservable($component.currentPayeeGroup().preview) ? 0 : 1,
+                              defaultImagePath: null,
+                              contentId: $component.payeeGroupContentId,
+                              uploadHandlerRequired: true,
+                              file:$component.file,
+                              fileTypeArray :$component.fileTypeArray, 
+                              maxFileSize:$component.maxFileSize,
+                              isThumbnail:true">
+                            </image-upload>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[closeModal]]">
+                            <span class="icons icon-ok" slot="startIcon"></span><span data-bind="text:$component.payments.common.ok"></span>
+                        </oj-button>
+                    </div>
+                </page-section>
+            </div>
+        </modal-window>
+        <modal-window params="baseModel : $baseModel, rootModel : $component,id:'delete-payee', header: $component.payments.payee.labels.deletePayee">
+            <div class="confirm-dialog">
+                <div class="confirm-dialog__container confirm-dialog-container">
+                    <div class="oj-flex oj-flex-items-pad confirm-dialog-container__message">
+                        <!-- ko if:$component.payeeData()-->
+                        <div class="oj-flex-item oj-sm-12" data-bind="text : $baseModel.format($component.payments.payee.message.delete, {group : $component.payeeData().name, payee : $component.payeeData().nickName})"></div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="confirm-dialog-container__buttons button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.confirmDeletePayee]]">
+                            <span class="icons icon-delete" slot="startIcon"></span><span data-bind="text:$component.payments.generic.common.proceed"></span>
+                        </oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.closeModal]]">
+                            <span class="icons icon-cancel" slot="startIcon"></span><span data-bind="text:$component.payments.generic.common.cancel"></span>
+                        </oj-button>
+                    </div>
+                </div>
+            </div>
+        </modal-window>
+    </div>
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'manage-payees'"></help>
+    </div>
+    <!-- /ko -->
+    <script type="text/html" id="payee_list_template">
+        <li data-bind="attr: {id: $data.name + id}">
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko if:$component.imageUploadFlag() -->
+                <oj-avatar class="oj-lg-1" role="img" size="[[$component.avatarSize()]]" initials='[[initials]]' src='[[preview() || defaultPreview()]]' data-bind="attr:{'aria-label':nickName}">
+                </oj-avatar>
+                <!-- /ko -->
+                <div class="oj-flex-item oj-sm-5 oj-lg-5 oj-label-inline" data-bind="text : nickName"></div>
+                <div class="oj-flex-item oj-sm-4 oj-lg-5 oj-label-inline" data-bind="text : payeeType ==='DOMESTIC' && domesticPayeeType === 'INDIA' ?$baseModel.format($component.payments.payee.labels.typeOfAccount, {
+                 'payeeAccountType': $component.payments.payee.type[payeeType],
+                 'accountType': $component.getAccountTypeDescription(indiaDomesticPayee.accountType)}):$component.payments.payee.type[payeeType]"></div>
+                <div class="oj-flex-item oj-lg-1 oj-sm-1 oj-label-inline right" data-bind="attr:{id:'menuLauncher-' + id}">
+                    <a href="#" openprofile="true" data-bind="attr:{id : 'menuLauncher-payeelist-' + id , alt : $component.payments.openmenualt , title : $component.payments.openmenutitle}, click: $component.openMenu">
+                        <div class="icons icon-more-vertical"></div>
+                    </a>
+                    <oj-menu :id="[['menuLauncher-payeelist-contents-' + id]]" on-oj-action="[[$component.menuItemSelect.bind($data,$data)]]" open-options.launcher="[['menuLauncher-payeelist-' + id]]" open-options.display="dropDown" class="accounts-overview-launcher hide">
+                        <!-- ko foreach: $component.menuItems -->
+                        <oj-option value="[[id]]" data-bind="attr:{id: $parent.nickName + id, 'aria-label':$parent.nickName + id}">
+                            <span data-bind="text : label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-menu>
+                </div>
+            </div>
+        </li>
+    </script>
+</div>
+<!-- /ko -->

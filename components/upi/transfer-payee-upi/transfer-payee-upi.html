@@ -1,0 +1,158 @@
+<oj-validation-group id="transferPayeeUpiTracker" valid="{{groupValid}}">
+    <div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between transfer-payee-upi">
+        <div class="oj-flex-item oj-sm-12 oj-lg-8">
+            <!-- ko if:!$baseModel.large() -->
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label :for="[['transferto'+ $baseModel.incrementIdCount()]]"><span data-bind="text:$component.payments.moneytransfer.recipient"></span></oj-label>
+                    </div>
+                    <!-- ko if: $component.dropdownLevelOne() -->
+                    <div class="oj-flex-item oj-sm-12">
+                        <!-- ko if: $component.payeeListExpandAll().length && !dropDownActive() -->
+                        <oj-select-one data-id="transferTo" required :id="[['transferto'+ $baseModel.currentIdCount()]]" :aria-label="[[$component.payments.moneytransfer.recipient]]" on-value-changed="[[payeeChanged]]" :placeholder="[[$component.payments.common.pleaseSelect]]"
+                            value="{{selectedPayee}}">
+                            <!-- ko foreach:payeeListExpandAll() -->
+                            <oj-option value="{{{groupId: groupId, listPayees: listPayees, groupIndex: $index()}}}">
+                                <div class="oj-flex-item">
+                                    <!-- ko if:$component.imageUploadFlag() -->
+                                    <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[initials]]' src='[[preview?preview():""]]' data-bind="attr:{'aria-label':name}">
+                                    </oj-avatar>
+
+                                    <!-- /ko -->
+                                    <span class="oj-collapsible-header-icon" data-bind="text: name"></span>
+                                </div>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                        <!-- /ko -->
+                        <!-- ko if:dropDownActive() -->
+                        <div class="dualdropdown">
+                            <div class="payeeGroupHeader oj-flex-item">
+                                <!-- ko if:$component.imageUploadFlag() -->
+                                <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[$component.payeeListExpandAll()[groupIndex()].initials]]' src='[[ko.utils.unwrapObservable($component.payeeListExpandAll()[groupIndex()].preview)]]' data-bind="attr:{'aria-label':$component.payeeListExpandAll()[groupIndex()].name}">
+                                </oj-avatar>
+                                <!-- /ko -->
+                                <span class="payeeGroupPadding" data-bind="text: $component.payeeListExpandAll()[groupIndex()].name"></span>
+                            </div>
+                            <!-- ko if:payeeListExpandAll()[groupIndex()].listPayees.length -->
+                            <ul>
+                                <!-- ko foreach:payeeListExpandAll()[groupIndex()].listPayees -->
+                                <a href="#" data-bind="click:$component.setPayee.bind($data, {data: $data, payeeIndex: $index()})">
+                                    <div class="subPayee oj-flex">
+                                        <!-- ko if:$component.imageUploadFlag() -->
+                                        <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[ko.utils.unwrapObservable(preview)]]' data-bind="attr:{'aria-label':nickName}">
+                                        </oj-avatar>
+                                        <!-- /ko -->
+                                        <div class="labelPadding oj-label-inline">
+                                            <li data-bind="text:nickName,value:id"></li>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- /ko -->
+                            </ul>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: !$component.dropDownActive() && !$component.dropdownLevelOne() && payeeListExpandAll()[groupIndex()] && payeeListExpandAll()[groupIndex()].listPayees[payeeIndex()] -->
+                    <div data-bind="with: payeeListExpandAll()[groupIndex()].listPayees[payeeIndex()]" class="oj-sm-12">
+                        <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                            <div class="payee-name oj-flex-item oj-sm-12">
+                                <span data-bind="text : nickName"></span>
+                                <span class="payee-name__cancel-icon">
+                  <a href="#" data-bind="attr:{'alt':$baseModel.format($component.resource.transferPayeeUpi.alt, {reference: $component.resource.transferPayeeUpi.refresh}),'title':$baseModel.format($component.resource.transferPayeeUpi.title, {reference: $component.resource.transferPayeeUpi.refresh})},click:$component.refreshDropDown.bind($data, payeeType)">
+                    <span class="icon icon-cancel"></span>
+                                </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item">
+                                <div class="cust-details">
+                                    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                                        <div class="oj-flex-item" data-bind="value: $component.transferPayeeUpiModel.payeeDetails.id(id)">
+                                            <!-- ko if:$component.imageUploadFlag() -->
+                                            <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[ko.utils.unwrapObservable(preview)]]' data-bind="attr:{'aria-label': nickName}">
+                                            </oj-avatar>
+                                            <!-- /ko -->
+                                            <div class="oj-flex-item" data-bind="text: $baseModel.format($component.payments.payee.displayName,{group : name, payee : nickName}), value: $component.transferPayeeUpiModel.payeeDetails.nickName(nickName), css: $component.imageUploadFlag() ? 'oj-label-inline payeeName' : 'oj-sm-12'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ko if: payeeType === "DOMESTIC" -->
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-6">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="accountNumber"><span data-bind="text:$component.payments.payee.domestic.accountnumber"></span></oj-label>
+                                                </div>
+                                                <div id="accountNumber" class="oj-flex-item oj-sm-12" data-bind="text:accountNumber, value: $component.transferPayeeUpiModel.accountTransferDetails.accountNumber(accountNumber)"></div>
+                                                <span data-bind="value: $component.transferPayeeUpiModel.accountTransferDetails.transferMode('ACC')"></span>
+                                            </div>
+                                        </div>
+                                        <div class="oj-flex-item oj-sm-6">
+                                            <div class="oj-flex-items-pad">
+                                                <div class="oj-flex-item oj-sm-12">
+                                                    <oj-label for="accountType"><span data-bind="text:$component.payments.payee.domestic.accounttype"></span></oj-label>
+                                                </div>
+                                                <div id="accountType" class="oj-flex-item oj-sm-12" data-bind="text: payeeType, value: $component.transferPayeeUpiModel.accountTransferDetails.accountType('10')"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                                        <!-- ko if: payeeType === "VPA" -->
+                                        <div class="oj-flex-item oj-sm-6">
+                                            <div class="oj-sm-12">
+                                                <oj-label for="payeeVpaId"><span data-bind="text:$component.resource.transferPayeeUpi.vpa"></span></oj-label>
+                                            </div>
+                                            <div id="payeeVpaId" class="oj-flex-item oj-sm-12" data-bind="text:vpaId, value: $component.transferPayeeUpiModel.creditVPAId(vpaId)"></div>
+                                        </div>
+                                        <!-- /ko -->
+                                        <div class="oj-flex-item oj-sm-6">
+                                            <div class="oj-sm-12">
+                                                <oj-label for="accountName"><span data-bind="text:$component.resource.transferPayeeUpi.accountName"></span></oj-label>
+                                            </div>
+                                            <div id="accountName" class="oj-flex-item oj-sm-12" data-bind="text:accountName"></div>
+                                        </div>
+                                    </div>
+                                    <!-- ko if: payeeType === "DOMESTIC" -->
+                                    <div class="oj-flex oj-flex-items-pad">
+                                        <div class="oj-flex-item oj-sm-12">
+                                            <div class="oj-sm-12">
+                                                <oj-label for="bankDetails"><span data-bind="text:$component.payments.payee.bankdetails"></span></oj-label>
+                                            </div>
+                                            <div id="bankDetails" class="oj-flex-item oj-sm-12">
+                                                <span data-bind="text: bankDetails.name, value: $component.transferPayeeUpiModel.accountTransferDetails.bankDetails.name(bankDetails.name)"></span>
+                                                <span data-bind="text: bankDetails.branch, value: $component.transferPayeeUpiModel.accountTransferDetails.bankDetails.branch(bankDetails.branch)"></span>
+                                                <span data-bind="text: bankDetails.address, value: $component.transferPayeeUpiModel.accountTransferDetails.bankDetails.address(bankDetails.address)"></span>
+                                                <span data-bind="text: bankDetails.city, value: $component.transferPayeeUpiModel.accountTransferDetails.bankDetails.city(bankDetails.city)"></span>
+                                                <span data-bind="value: $component.transferPayeeUpiModel.accountTransferDetails.bankDetails.code(bankDetails.code)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-sm-12" data-bind="template: {name: 'upi/transfer-vpa-details', data: {payloadModel: $component.transferPayeeUpiModel}}"></div>
+                </div>
+            </page-section>
+            <div id="button-container1" class="oj-flex-item button-container">
+                <oj-button class="action-button-primary" id="transfer-button" on-click="[[reviewTransfer]]">
+                    <span slot="startIcon" class="icons icon-transfer"></span>
+                    <span data-bind="text: $component.resource.transferPayeeUpi.transfer"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text: $component.resource.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</oj-validation-group>

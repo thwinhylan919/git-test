@@ -1,0 +1,65 @@
+{
+    "info":
+    {
+        "metadataVersion": "V2",
+        "version": "4.2.7",
+        "creationDate": 1571032987127,
+        "lastModified": 1571032987127
+    },
+    "componentType": "SINGLE_PAGE",
+    "formLayout":
+    {
+        "labelEdge": "start",
+        "maxColumns": 1
+    },
+    "swaggerUrls": [
+    {
+        "url": "http://mum00boa.in.oracle.com:18777/swagger/json/openapi.json",
+        "version": "v1",
+        "nickName": "Default_API"
+    }],
+    "components": [
+    {
+        "restFlow": "[{\"rests\":[\"/me/party get Default_API v1\"],\"child\":[]}]",
+        "data":
+        {
+            "externalMappedParams": [],
+            "initRests": ["/me/party get Default_API v1"],
+            "css": "",
+            "componentHeader": "",
+            "validationTrackerID": "",
+            "stageName": ""
+        },
+        "layout": [
+        {
+            "nameholder": "Collateral Evaluation",
+            "hidePageHeading": true,
+            "valueClasses": "''",
+            "grid":
+            {
+                "flexItemsPad": true
+            },
+            "componentID": "CollateralEvaluation59",
+            "type": "PageSection",
+            "children": [
+            {
+                "nameholder": "Collateral Evaluation",
+                "formatLabel":
+                {
+                    "isFormatLabel": true,
+                    "formattedVariables": "key1: selectedParty()",
+                    "formattedLabel": "Collateral Evaluation for {key1}"
+                },
+                "valueClasses": "''",
+                "tagType": "Span",
+                "textBindingOption": "NLS",
+                "grid":
+                {
+                    "flexItemsPad": true
+                },
+                "componentID": "CollateralEvaluation26",
+                "type": "Text"
+            }]
+        }]
+    }]
+}

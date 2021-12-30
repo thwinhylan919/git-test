@@ -1,0 +1,33 @@
+<!-- ko if: $component.accountInfo.length > 0 -->
+<div class="oj-panel accounts-overview" data-bind="css: $component.accountInfo[0].type">
+  <div class="oj-flex oj-flex-items-pad accounts-overview__content accounts-overview-content">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 accounts-overview-content__section accounts-overview-content-section">
+      <div class="accounts-overview-content-section__account-info" data-bind="text:$component.accountInfo[0].count">
+      </div>
+      <div class="accounts-overview-content-section__account-value" data-bind="text: $component.resource.accountDetails.labels.noOfAccounts">
+      </div>
+      <div class="accounts-overview-content-section__image">
+        <img data-bind="attr:{'alt': $component.resource.balanceLabel[$component.type]},loadImage: $component.accountInfo[0].loadImage ? $component.accountInfo[0].loadImage : ''">
+      </div>
+      <div class="accounts-overview-content-section__account-info" data-bind="text:$formatter.formatCurrency($component.accountInfo[0].amount, $component.accountInfo[0].currency)">
+      </div>
+      <div class="accounts-overview-content-section__account-value" data-bind="text: $component.resource.balanceLabel[$component.type]">
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- /ko -->
+
+
+<!-- ko ifnot: $component.accountInfo.length > 0 -->
+<div class="oj-panel accounts-overview" data-bind="css:$component.type">
+  <div class="oj-flex oj-flex-items-pad accounts-overview__content accounts-overview-content">
+    <div class="oj-flex-item oj-sm-12 accounts-overview-content__icon accounts-overview-content-icon">
+      <img class="accounts-overview-content-icon__img" data-bind="attr:{'alt': $component.resource.balanceLabel[$component.type]},loadImage: $component.type ==='demand-deposits' ? 'dashboard/casa-icon.svg' : $component.type ==='term-deposits' ? 'dashboard/td-icon.svg' : 'dashboard/loans-icon.svg'">
+    </div>
+      <div class="oj-flex-item accounts-overview-content-icon__note" data-bind="text: $component.type ==='demand-deposits' ?  $component.resource.accountDetails.labels.noCASAAccount : $component.type === 'term-deposits' ?  $component.resource.accountDetails.labels.noTdAccount :  $component.resource.accountDetails.labels.noLoan">
+      </div>
+  </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,38 @@
+<oj-validation-group :id="[['tracker']]">
+    <!-- ko if : $component.dataLoaded() -->
+    <div class="oj-flex oj-flex-items-pad party-details oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-lg-3 oj-md-12">
+            <div class="party-name-style"><span data-bind="text:$component.partyName()"></span></div>
+            <div class="banner-label"><span
+                    data-bind="text:$baseModel.format($component.nls.requestFinance.PartyIDpartyId,{partyId : $component.partyId()})"></span>
+            </div>
+        </div>
+        <!-- ko if : $component.selectedComponent() === "request-finance-invoice-list" -->
+        <div class="oj-flex-item oj-lg-3 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text: $component.nls.requestFinance.programNameLabel"></span>
+            </div>
+            <div class="banner-value"><span data-bind="text: $component.modelInstance.navData.program.name"></span>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-3 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text: $component.nls.requestFinance.counterPartyName"></span>
+            </div>
+            <div class="banner-value"><span
+                    data-bind="text: $component.modelInstance.navData.associatedParty.name"></span></div>
+        </div>
+        <div class="oj-flex-item oj-lg-3 oj-md-6 banner-padding">
+            <div class="banner-label"><span data-bind="text: $component.nls.requestFinance.disbursementCurrency"></span>
+            </div>
+            <div class="banner-value"><span data-bind="text: $component.modelInstance.payLoad.totalAmount.currency"></span>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div data-bind="component:{name: $component.selectedComponent(), params:{rootModel: $component}}">
+            </div>
+        </page-section>
+    </div>
+    <!-- /ko -->
+</oj-validation-group>

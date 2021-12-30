@@ -1,0 +1,28 @@
+  <oj-buttonset-one id="" value="{{$component.selectedResourceType}}" on-value-changed="[[$component.buttonChange]]">
+    <oj-option class="action-button-secondary" value="SVC"><span data-bind="text:$component.nls.headings.service"></span></oj-option>
+    <oj-option class="action-button-secondary" value="UCN"><span data-bind="text:$component.nls.headings.uiComponent"></span></oj-option>
+  </oj-buttonset-one>
+<div class="oj-flex oj-flex-items-pad" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: menuOptions, uiOptions:$component.uiOptions, navBarDescription:"ActionTypes"}}'>
+</div>
+<!-- ko foreach: actions -->
+<!-- ko if: $component.selectedResourceType()=== "SVC"  -->
+<!-- ko if: entitlmentId === $component.menuSelection()  -->
+<!-- ko foreach: resources -->
+<!-- ko if: resourceType === "SVC"  -->
+<div class="oj-flex oj-flex-items-pad" data-bind="text: resourceName"> </div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: actions -->
+<!-- ko if: $component.selectedResourceType()=== "UCN"  -->
+<!-- ko if: entitlmentId === $component.menuSelection()  -->
+<!-- ko foreach: resources -->
+<!-- ko if: resourceType === "UCN"  -->
+<div class="oj-flex oj-flex-items-pad" data-bind="text: resourceName"> </div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->

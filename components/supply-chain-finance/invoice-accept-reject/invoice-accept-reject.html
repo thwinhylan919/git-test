@@ -1,0 +1,103 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="oj-flex oj-flex-items-pad party-details oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-lg-12 oj-md-12">
+            <div class="party-name-style"><span data-bind="text:$component.partyName()"></span></div>
+            <div class="banner-label"><span
+                    data-bind="text:$baseModel.format($component.nls.partyLabel,{partyId : $component.partyId()})"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item ">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <!-- ko if : $component.showInvoices() -->
+                    <div class="oj-lg-5"
+                        data-bind="component:{name: 'search-box', params:{searchFields : ['program.programName','supplierName','invoiceNumber'],rootModel:$component,data:dataSource58,searchBy:$component.nls.searchName}}">
+                    </div><!-- /ko -->
+                </page-section>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+                <page-section
+                    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.InvoiceList, headerTemplate : ''">
+                    <!-- ko if : $component.showInvoices() -->
+                    <oj-table :id="[['InvoiceList44']]" data="[[dataSource58]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('listViewRender')]]"
+                        columns="[[columnsArray]]">
+                    </oj-table>
+                    <oj-paging-control :id="[['invoice-paging']]" data="[[dataSource58]]" page-size="10">
+                    </oj-paging-control>
+                    <!-- /ko -->
+                    <div id="scriptContainertable">
+                        <script type="text/html" id="listViewRender">
+                            <td>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item ">
+                                        <oj-checkboxset class="oj-choice-direction-row"
+                                            :id="[['SelectBox56'+$context.data.invoiceId]]"
+                                            value="{{$context.data.selectBox}}"
+                                            on-value-changed="[[$component.acceptComments]]">
+                                            <oj-option :aria-label="[[$component.nls.InvoiceList.InvoiceNumberTitle]]"
+                                                value="{{'selected'}}"></oj-option>
+                                        </oj-checkboxset>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span data-bind="text:$context.data.supplierName"></span></td>
+                            <td><span data-bind="text:$context.data.program.programName"></span></td>
+                            <td><a href="#" class="form-button-link" data-bind="attr:{'alt':$component.nls.InvoiceList.InvoiceNumber,'title':$component.nls.InvoiceList.InvoiceNumberTitle,
+                        'id':'checkbox'+$context.data.invoiceId},click:$component.onClickInvoiceNumber13"><span
+                                        data-bind="text:$context.data.invoiceNumber"></span></a></td>
+                            <td><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.totalAmount.amount,$context.data.totalAmount.currency)"></span>
+                            </td>
+                            <td><span data-bind="text:$formatter.formatDate($context.data.invoiceDueDate)"></span></td>
+                            <td>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item "><span
+                                            data-bind="attr:{'class':'tags raised-color'},text:$context.data.invoiceStatus"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <oj-input-text value="{{$context.data.remarks}}"
+                                    :id="[['remarks' + $context.data.invoiceId]]"
+                                    required="[[true]]"
+                                    placeholder="[[$component.nls.typeComments]]" disabled="[[$context.data.disabled]]"
+                                    validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.nls.nameError,{
+                                        type:'length',options:{
+                                          min:0,max:100}})]]" :aria-label="[[$component.nls.Remarks]]"></oj-input-text>
+                            </td>
+                        </script>
+                    </div>
+                    <div id="scriptContainer">
+                        <script type="text/html" id="checkbox_hdr_tmpl">
+                            <td>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item ">
+                                        <oj-checkboxset class="oj-choice-direction-row" :id="[['SelectAll50']]"
+                                            value="{{$component.selectAll}}">
+                                            <oj-option value="{{'selectAll'}}"
+                                                :aria-label="[[$component.nls.InvoiceList.InvoiceNumberTitle]]">
+                                            </oj-option>
+                                        </oj-checkboxset>
+                                    </div>
+                                </div>
+                            </td>
+                        </script>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickAccept29]]">
+                            <span slot="startIcon" class="icons icon-confirm"></span><span
+                                data-bind="text:$component.nls.InvoiceList.Accept"></span></oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickReject51]]">
+                            <span slot="startIcon" class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.InvoiceList.Reject"></span></oj-button>
+                    </div>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

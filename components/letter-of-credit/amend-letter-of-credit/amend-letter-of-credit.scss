@@ -1,0 +1,50 @@
+.amendLC{
+  .tnc-div{
+    
+		@include mq(small) {
+			padding-bottom: 1.3rem !important;
+		}
+		.tnc-checkbox {
+			max-width: 1.3rem;
+			vertical-align: text-bottom;
+		}
+	}
+  .tncContent{
+    div{
+      padding: 0.6rem;
+    }
+  }
+
+  .tolerance-input, .tenor-input{
+		min-width: 3em;
+	}
+
+	.tolerance-input {
+		@include single-margin(left,0.6rem);
+	}
+
+	.tolerance-label {
+		padding: 0.6rem;
+	}
+
+	.tolerance-percent-span {
+		padding: 0.6rem 0rem !important;
+	}
+	.condition-input {
+    @include padding(0rem, 0.4rem, 0rem, 0.4rem);
+    width: 2.5rem;
+    min-width: initial;
+		}
+		.doc-days-div {
+			.doc-presented {
+				@include padding(0.7rem, 0, 0, 0);
+			}
+	
+			.shipment-days {
+				@include padding(0.7rem, 0, 0, 0);
+				@include mq(small) {
+					padding: 0;
+				}
+			}
+		}
+}

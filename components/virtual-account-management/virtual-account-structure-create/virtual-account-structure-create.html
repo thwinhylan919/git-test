@@ -1,0 +1,193 @@
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text: $dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <div class="form-main-container">
+        <page-section
+            params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.accountDetailHeader ">
+            <div class="oj-flex">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+                    <!-- ko ifnot:$component.methodType ==="UPDATE" -->
+                    <div class="oj-flex oj-flex-items-pad bottom-padding">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="structureCode"><span
+                                    data-bind="text:$component.resource.structureCode"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-4">
+                            <oj-input-text id="structureCode" value="{{$component.structureCode}}"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'code','#structureCode')]]]">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:$component.methodType ==="UPDATE" -->
+                    <div class="oj-flex bottom-padding">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 label">
+                                <oj-label for="structureCode"><span
+                                        data-bind="text:$component.resource.structureCode"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-4">
+                                <span data-bind="text:$component.structureCode"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex oj-flex-items-pad bottom-padding">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="structureName"><span
+                                    data-bind="text:$component.resource.structureName"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-4">
+                            <oj-input-text id="structureName" value="{{$component.structureName}}"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'name','#structureName')]]]">
+                            </oj-input-text>
+                        </div>
+                    </div>
+
+                    <!-- ko if: $component.realAccountNumberDisplay() -->
+                    <div class="oj-flex oj-flex-items-pad bottom-padding">
+                        <div class="oj-flex oj-lg-12 oj-sm-12 oj-md-12">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12 label">
+                                    <oj-label for="realAccountSelection"><span
+                                            data-bind="text:$component.resource.realAccountHeader"></span></oj-label>
+                                </div>
+                                <!-- ko if:$component.methodType ==="UPDATE" -->
+                                <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-4">
+                                    <span data-bind="text:$component.selectedAccountDisplay"></span>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-8">
+                            <!-- ko ifnot: $component.methodType ==="UPDATE" -->
+                            <oj-select-one id="realAccountSelection" :placeholder="[[$component.resource.pleaseSelect]]"
+                                :aria-label="[[$component.resource.realAccountNumber]]"
+                                value="{{$component.selectedValue}}" on-value-changed="[[accountNumberSelection]]"
+                                required>
+                                <oj-optgroup label="[[$component.resource.singleCurrencyText]]">
+                                    <!-- ko foreach: $component.singleCurrencyAccountsList() -->
+                                    <oj-option value="{{$data.realAccountNo.value}}"><span
+                                            data-bind="text: $data.realAccountNo.displayValue"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-optgroup>
+                                <oj-optgroup label="[[$component.resource.multiCurrencyText]]">
+                                    <!-- ko foreach: $component.multipleCurrencyAccountsList -->
+                                    <oj-option value="{{value}}"><span data-bind="text: displayValue"></span>
+                                    </oj-option>
+                                    <!-- /ko -->
+                                </oj-optgroup>
+                                <oj-optgroup label="[[$component.resource.virtualMultiCurrencyAccount]]">
+                                    <!-- ko foreach: $component.multipleCurrencyAccountGroupList -->
+                                    <oj-option value="{{groupId}}"><span data-bind="text: groupId"></span>
+                                    </oj-option>
+                                    <!-- /ko -->
+                                </oj-optgroup>
+                            </oj-select-one>
+                            <!-- /ko -->
+                            <!-- ko if: $component.singleCurrencyBalanceDisplay() -->
+                            <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <span class="balance-text" data-bind="text:$component.resource.balanceText"></span>
+                                    <span
+                                        data-bind="text:$formatter.formatCurrency($component.availableBalanceAmount(),$component.availableBalanceCurrency())"></span>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $component.showViewBalanceLink -->
+                            <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                                <div class="oj-flex-item oj-lg-12 label">
+                                    <a href="#"
+                                        data-bind="attr:{'id':'viewBalance','aria-label':$component.resource.viewBalance,'title':$component.resource.viewBalance},click: $component.showViewBalance">
+                                        <span data-bind="text: $component.resource.viewBalance"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <modal-window class=""
+                        params="baseModel:$baseModel,rootModel:$data,id:'multi-currency-account-number',header:$component.resource.balanceDetails">
+                        <!-- ko if: $component.viewTable() -->
+                        <div data-bind="template: { name: 'virtual-account-management/virtual-multi-currency-balance'}">
+                        </div>
+                        <!-- /ko -->
+                    </modal-window>
+                    <div class="oj-flex bottom-padding">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <!-- ko ifnot:$component.methodType ==="UPDATE" -->
+                            <div class="">
+                                <!-- ko if:$component.virtualAccountLoaded -->
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-sm-12 label">
+                                        <oj-label for="virtualAccount"><span
+                                                data-bind="text:$component.resource.headerAccountNo"></span></oj-label>
+                                    </div>
+                                    <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-8">
+                                        <oj-select-one id="virtualAccount" value="{{$component.selectedVirtualAccount}}"
+                                            :placeholder="{{$component.resource.selectVirtualAccount}}"
+                                            on-value-changed="{{$component.selectedVirtualAccountHandler}}" required>
+                                            <!-- ko foreach: $component.virtualAccountData -->
+                                            <oj-option :id="[[id.value]]" value=[[id.value]]><span data-bind="text:id.displayValue"></span>
+                                            </oj-option>
+                                            <!-- /ko -->
+                                        </oj-select-one>
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if:$component.methodType ==="UPDATE" -->
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-sm-12 label">
+                                    <oj-label for="virtualAccount"><span
+                                            data-bind="text:$component.resource.headerAccountNo"></span></oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-4">
+                                    <span data-bind="text:$component.selectedVirtualAccountDisplay"></span>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad bottom-padding">
+                        <div class="oj-flex-item oj-sm-12 label">
+                            <oj-label for="intrestCalculation"><span
+                                    data-bind="text:$component.resource.intrestCalculation"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-4">
+                            <oj-switch id="intrestCalculation" value="{{$component.intrestCalculationReq}}"></oj-switch>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item  button-container">
+                            <oj-button class="action-button-primary" on-click="[[$component.buildStructure]]">
+                                <span slot="startIcon" class="icons icon-submit"></span>
+                                <span data-bind="text:$component.resource.buildStructure"></span></oj-button>
+                            <oj-button class="action-button-secondary"
+                                on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                                <span slot="startIcon" class="icons icon-cancel"></span>
+                                <span data-bind="text:$component.resource.cancel"></span></oj-button>
+                            <!-- ko if:$component.methodType ==="UPDATE" -->
+                            <oj-button class="action-button-tertiary" on-click="[[ $component.backToTreeView]]">
+                                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                                <span data-bind="text:$component.resource.back"></span></oj-button>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+                    <help
+                        params="baseModel : $baseModel, rootModel : $component, transaction: 'virtual-structure-create'">
+                    </help>
+                </div>
+            </div>
+        </page-section>
+    </div>
+</oj-validation-group>

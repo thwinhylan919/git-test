@@ -1,0 +1,80 @@
+<div class="form-main-container">
+    <!-- ko if: $component.fromApproval -->
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.mode !== "UPDATE" && $component.mode !== "approval" -->
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.reviewHeader}}">
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.mode === "UPDATE" -->
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.updateReviewHeader}}">
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot:$component.fromApproval -->
+    <div class="oj-flex separator-for-banner">
+        <div class="oj-flex-items-pad search-account-container">
+            <div class="oj-flex-item oj-sm-12 oj-lg-12 oj-md-12">
+                <div data-bind="text:$component.realCustomerName"></div>
+                <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.deleteFlag -->
+    <div class="oj-flex top-padding ">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.accountDetailHeader ">
+                <div class="row-group">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label :$component.resource.structureCode , value :$component.virtualStructureCreateDTO.code">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label :$component.resource.structureName , value :$component.virtualStructureCreateDTO.name">
+                    </row>
+                    <!-- ko ifnot: $component.showDisplayGroupId();  -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.realAccountNo , value : $component.displayAccountNumber">
+                    </row>
+                    <!-- /ko -->
+                    <!-- ko if: $component.showDisplayGroupId();  -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.virtualMultiCurrencyAccountNo , value : $component.displayGroupId">
+                    </row>
+                    <!-- /ko -->
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label :$component.resource.headerAccountNo, value :$component.headerVirtualAccount.displayValue">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.intrestCalculation , value :$component.interestCalcRequired">
+                    </row>
+                </div>
+            </page-section>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: $component.fromApproval  -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item  button-container">
+            <oj-button class="action-button-primary" id="validateButton" on-click="[[$component.previewStructure]]">
+                <span slot="startIcon" class="icons icon-eye"></span>
+                <span data-bind="text: $component.resource.previewStructure"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.backtoConfiguration]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span></oj-button>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

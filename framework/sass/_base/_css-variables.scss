@@ -1,0 +1,565 @@
+$properties : (
+base : (
+  dimension :(
+    docked-menu-height : 5.5rem,
+    menu-width : 18rem
+  ),
+  color : (
+    success: #2E7D32,
+    warning: #c35409,
+    warning-light : #fdf4e3,
+    success-light: #e7f6e8,
+    danger-light: #fdefef,
+    danger: #dc2518
+  ),
+  border : (
+    default :  rgba(#2c3251, .1)
+  ),
+  background : (
+    primary :  #fff,
+    tertiary :#e7e7e9,
+    secondary : #fafafa
+  ),
+  text : (
+    primary : #171c28,
+    secondary : rgba(#171c28,.8),
+    tertiary  : #171c28
+  ),
+  font : (
+    family: #{'Roboto, sans-serif'},
+    url: 'https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap',
+    weight : (
+      regular : 400,
+      light : 300,
+      bold : 700
+    ),
+    size : (
+      small: 0.7rem,
+      large: 1rem,
+      larger: 1.1rem,
+      default : 0.9rem,
+      medium : 0.8rem
+    )
+  )
+),
+link : (
+  hover : #02629f,
+  base : #02629f,
+  font-size:0.9rem,
+  font-weight:300
+),
+
+button : (
+  height: 2.3rem,
+  padding: 0 0.5rem,
+  align: flex-start,
+  icon: none,
+  font-weight:400,
+  color:#000,
+  font-size : (
+  text : 0.9rem,
+  icon : 1.1rem
+  ),
+  primary : (
+    gradient-start-color:#C74634,
+    gradient-end-color:#C74634,
+    gradient-direction:bottom,
+    foreground-color:#fff,
+    font-size:0.9rem,
+    font-weight:400,
+    border : (
+      radius: 0.32rem,
+      width : 0rem,
+      color:#C74634
+    )
+  ),
+  secondary : (
+    gradient-start-color:rgba(#171c28, .8),
+    gradient-end-color:rgba(#171c28, .8),
+    gradient-direction:bottom,
+    foreground-color:#fff,
+    font-size:0.9rem,
+    font-weight:400,
+    border : (
+      radius: 0.32rem,
+      width : 0rem,
+      color:rgba(#171c28, .8)
+    )
+  ),
+  tertiary : (
+    gradient-start-color:transparent,
+    gradient-end-color:transparent,
+    gradient-direction:bottom,
+    foreground-color:#02629f,
+    font-size:0.9rem,
+    font-weight:300,
+    border : (
+      radius: 0.32rem,
+      width : 0rem,
+      color:transparent
+    )
+  ),
+  help : (
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    gradient-direction:bottom,
+    foreground-color:#C74634,
+    font-size:0.9rem,
+    font-weight:400,
+    border : (
+      radius: 0.32rem,
+      width : 0.055rem,
+      color:#C74634
+    )
+   )
+  ),
+form : (
+  line-height : 1.8rem,
+  padding : 1.3rem 0.6rem,
+  padding-small : 0.6rem 0,
+  border-width : 0.1rem,
+  shadow : none,
+  header:(
+    foreground-color:#171c28,
+    font-size:1.1rem,
+    font-weight:400
+  ),
+  input : (
+    background : (
+      base : transparent,
+      hover :transparent,
+      focus :transparent,
+      disable :transparent
+    ),
+    text : 0.9rem,
+    color : (
+      base : #171c28,
+      hover :#fff,
+      focus :#171c28,
+      disable :rgba(#171c28, 0.7)
+    ),
+    border : (
+      radius :0,
+      color :#d8d8d8
+    )
+  ),
+  gradient-start-color:#fff,
+  gradient-end-color:#fff,
+  gradient-direction:bottom,
+  foreground-color:#171c28,
+  font-size:0.9rem,
+  font-weight:400,
+  icon-size:8rem,
+  label:(
+    foreground-color:rgba(#171c28,0.8),
+    font-size:0.8rem,
+    font-weight:400
+  ),
+  info-txt:(
+    foreground-color:#171c28,
+    font-size:0.8rem,
+    font-weight:400
+  ),
+  page-title:(
+  
+    foreground-color:#171c28,
+    font-size:1.1rem,
+    font-weight:400
+  )
+),
+banner : (
+  padding : 0.6rem,
+  text : (
+    primary : rgba(#171c28,.8),
+    secondary :#171c28
+  ),
+  gradient-start-color:#e7e7e9,
+  gradient-end-color:#e7e7e9,
+  gradient-direction:bottom,
+  foreground-color:#171c28,
+  font-size:0.9rem,
+  font-weight:400
+),
+review-banner:(
+  gradient-start-color:#fff,
+  gradient-end-color:#fff,
+  gradient-direction:bottom,
+  border-color:#B86200,
+  border-width:0.4rem,
+  border-radius:0.01rem,
+  foreground-color:#B86200,
+  font-size:0.8rem,
+  font-weight:700
+),
+nav : (
+  hover : (
+    text: #006c75,
+    border: #006c75,
+    background: #e7e7e9,
+    gradient-start-color:#EDEDED,
+    gradient-end-color:#e7e7e9,
+    gradient-direction:bottom,
+    border-color:#171c28,
+    border-width:0.2rem,
+    border-radius:0.01rem,
+    foreground-color:#171c28,
+    font-size:1rem,
+    font-weight:400
+  ),
+  selected : (
+    text: #C74634,
+    border: #C74634,
+    background: #fff,
+    background-gradient-start-color: #fff,
+    background-gradient-end-color: #fff,
+    background-gradient-direction: bottom,
+    border-color:#C74634,
+    border-width:0.2rem,
+    border-radius:0.01rem,
+    foreground-color:#C74634,
+    font-size:1rem,
+    font-weight:400
+  ),
+  default : (
+    text: #2c3251,
+    border: none,
+      background: #fff,
+    foreground-color:#171c28,
+    font-size: 0.9rem,
+    font-weight:400
+  )
+),
+table : (
+  header :(
+    background: darken(#fff, 4%),
+    color : #333,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    gradient-direction:bottom,
+    foreground-color:#333,
+    font-size:0.9rem,
+    font-weight:400
+  ),
+  body:(
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    gradient-direction:bottom,
+    foreground-color:#171c28,
+    font-size:0.9rem,
+    font-weight:300,
+    icon-size:8rem,
+  ),
+  tr:(
+    hover:(
+      color:rgba(231,231,231,0.6)
+    )
+  ),
+  border:(
+    color:#fff,
+    width:0.05rem,
+    radius:0
+  )
+),
+list : (
+  drop :(
+    background: #c2eaf3
+  )
+),
+scroll : (
+  track : #e7e7e9,
+  thumb : #C74634
+),
+menu : (
+  gradient-start-color:#333,
+  gradient-end-color:#333,
+  gradient-direction:bottom,
+  foreground-color:#fff,
+  font-size:0.9rem,
+  font-weight:300,
+  hover-color:#fff,
+  hover-background:#000,
+  selected-color:#C74634,
+  icon:(
+    font-size:1.3rem
+  )
+
+),
+welcome-box:(
+  gradient-start-color:#333,
+  gradient-end-color:#333,
+  gradient-direction:bottom,
+  font-size:0.9rem,
+  font-weight:400,
+  foreground-color:#fff
+),
+color : (
+  "white" : #fff,
+  deep-yellow : #fbce4a,
+  deep-yellow-darken : #F3b705
+),
+header:(
+  foreground-color:#171c28,
+  height:3.4rem,
+  small-height:3rem,
+  gradient-start-color:#fff,
+  gradient-end-color:#fff,
+  border-bottom-color:rgba(0, 0, 0, 0.05),
+  gradient-direction:bottom,
+  font-size:1rem,
+  font-weight:300,
+  icon-size:1.1rem
+),
+top-header:(
+  foreground-color:#fff,
+  height:2.5rem,
+  gradient-start-color:#333,
+  gradient-end-color:#333,
+  gradient-direction:bottom,
+  font-size:1rem,
+  font-weight:300
+),
+footer:(
+  gradient-start-color:#fafafa,
+  gradient-end-color:#fafafa,
+  gradient-direction:bottom,
+  font-size:0.8rem,
+  foreground-color:#171c28,
+  height:2rem
+),
+help-panel:(
+  gradient-start-color:#fff,
+  gradient-end-color:#fff,
+  gradient-direction:bottom,
+  foreground-color:#171c28,
+  font-size:0.9rem,
+  font-weight:400,
+  icon-size:5rem,
+  header-foreground-color:#171c28,
+  header-font-size:1.05rem,
+  header-font-weight:300
+),
+app-background:(
+    gradient-direction:bottom,
+    gradient-start-color:#fafafa,
+    gradient-end-color:#fafafa
+),
+modal-window:(
+  header:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#C74634,
+    font-size:1rem,
+    font-weight:300
+  ),
+  body:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size:0.9rem,
+    font-weight:300
+  )
+),
+buttonset:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    border-color:#cbcccd,
+    border-width:0.05rem,
+    border-radius:0.01rem,
+    label:(
+      foreground-color:#C74634,
+      font-size:0.8rem,
+      font-weight:400
+    ),
+    selected:(
+      gradient-direction:bottom,
+      gradient-start-color:#C74634,
+      gradient-end-color:#C74634,
+      border-color:#fff,
+      border-width:0.0155rem,
+      border-radius:0.1rem,
+      label:(
+        foreground-color:#fff,
+        font-size:0.8rem,
+        font-weight:400
+      )
+    )
+),
+disabledinput:(
+    gradient-direction:bottom,
+    gradient-start-color:#f7f7f8,
+    gradient-end-color:#f7f7f8,
+    foreground-color:#b9b9b9,
+    font-size:0.9rem,
+    font-weight:300
+),
+confirm-screen:(
+  border-color:#00838f,
+  border-width:0.4rem,
+  border-bottom-color:rgba(44,50,81,0.1),
+  border-bottom-width:0,
+  border-radius:0.01rem,
+  text:(
+    foreground-color:#171c28,
+    font-size:0.9rem,
+    font-weight:700
+  ),
+  success:(
+    border-color:#759c6c,
+    border-width:0.4rem,
+    border-radius:0.01rem,
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff
+  ),
+  error:(
+    border-color:#e42323,
+    border-width:0.4rem,
+    border-radius:0.01rem,
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff
+  )
+),
+expandable-preview:(
+  background-color: #fff,
+  border-color:rgba(#2c3251, .1),
+  border-width:0.05rem,
+  border-radius:0.1rem,
+  header:(
+    color:#171c28,
+    font-size:1rem,
+    font-weight:400
+  )
+),
+widget:(
+  border-color:#171c28,
+  border-width:0.05rem,
+  border-radius:0.1rem,
+  header:(
+    foreground-color:#fff,
+    font-size:1rem,
+    font-weight:400
+  )
+),
+widget1:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size:1rem,
+    font-weight:400
+),
+widget2:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size:1rem,
+    font-weight:400
+),
+widget3:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size:1rem,
+    font-weight:400
+),
+widget4:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size:1rem,
+    font-weight:400
+),
+accordion:(
+  border-color:#e7e7e9,
+  border-width:0.0556rem,
+  border-radius:0,
+  header:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size:1rem,
+    font-weight:300,
+    icon-size:4rem
+  ),
+  body:(
+    gradient-direction:bottom,
+    gradient-start-color:#fff,
+    gradient-end-color:#fff,
+    foreground-color:#171c28,
+    font-size: 0.9rem,
+    font-weight:300
+  ),
+  disabled:(
+    header:(
+      gradient-direction:bottom,
+      gradient-start-color:#fafafa,
+      gradient-end-color:#fafafa,
+      foreground-color:#171c28,
+      font-size:1rem,
+      font-weight:300
+    )
+  )
+),
+overlay:(
+  gradient-direction:bottom,
+  gradient-start-color:#fff,
+  gradient-end-color:#fff,
+  header:(
+    foreground-color:#171c28,
+    font-size:1.1rem,
+    font-weight:300
+  )
+),
+alert-notification:(
+  gradient-direction:bottom,
+  gradient-start-color:#fff,
+  gradient-end-color:#fff,
+  header:(
+    foreground-color:#444954,
+    font-size:0.785rem,
+    font-weight:400
+  ),
+  body:(
+    foreground-color:#444954,
+    font-size:0.8rem,
+    font-weight:400
+  )
+),
+graph:(
+  color1:#33C5CF,
+  color2:#14BA92,
+  color3:#FAC85A,
+  color4:#256c9a,
+  color5:#A65496
+)
+);
+$var : '--';
+:root {
+  @each $prefix, $property in $properties {
+    @if type-of($property) == "map" {
+      @each $nameLevel1, $mapLevel1 in $property {
+          @if type-of($mapLevel1) == "map" {
+              @each $nameLevel2, $mapLevel2 in $mapLevel1 {
+                @if type-of($mapLevel2) == "map" {
+                   @each $nameLevel3, $mapLevel3 in $mapLevel2 {
+                   #{$var}#{$prefix}-#{$nameLevel1}-#{$nameLevel2}-#{$nameLevel3}: $mapLevel3;
+                   }
+                }@else {
+                  #{$var}#{$prefix}-#{$nameLevel1}-#{$nameLevel2}: $mapLevel2;
+                }
+              }
+          } @else {
+          #{$var}#{$prefix}-#{$nameLevel1}: $mapLevel1;
+          }
+      }
+    }
+  }
+}

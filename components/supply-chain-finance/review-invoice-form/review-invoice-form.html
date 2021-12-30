@@ -1,0 +1,278 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <!-- ko ifnot: $component.hideButtons() -->
+            <!-- ko if: $component.isEdit() -->
+            <div
+                data-bind="template:{name: 'review-screen/review-banner-template', data:{header: $component.nls.reviewScreen.reviewCaption, reviewHeader: $component.nls.reviewScreen.reviewHeader}}">
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.isEdit() -->
+            <div
+                data-bind="template:{name: 'review-screen/review-banner-template', data:{header: $component.nls.reviewScreen.reviewCaption, reviewHeader: $component.nls.reviewScreen.createHeader}}">
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.CustomerInvoiceNo, value : invoiceData.invoiceNumber">
+                    </row>
+                </div>
+                <!-- ko if: $component.invoiceData.fileName -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.BuyerName, value : invoiceData.buyerName">
+                    </row>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.invoiceData.fileName -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.BuyerName, value : invoiceData.associatedParty.name">
+                    </row>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko if: $component.invoiceData.fileName -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.NameofProgram, value : invoiceData.programName">
+                    </row>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.invoiceData.fileName -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.NameofProgram, value : invoiceData.program.programName">
+                    </row>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: $component.invoiceData.paymentTerms -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PaymentTerms, value : invoiceData.paymentTerms">
+                    </row>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: $component.invoiceData.paymentTerms -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PaymentTerms, value : $component.nls.NA">
+                    </row>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.InvoiceDate, value : $formatter.formatDate(invoiceData.invoiceDate)">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.InvoiceDueDate, value : $formatter.formatDate(invoiceData.invoiceDueDate)">
+                    </row>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <!--  ko if : $component.invoiceData.poNumber  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PurchaseOrderNo, value : invoiceData.poNumber">
+                    </row>
+                </div><!--  /ko  -->
+                <!--  ko ifnot : $component.invoiceData.poNumber  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PurchaseOrderNo, value : $component.nls.NA">
+                    </row>
+                </div>
+                <!--  /ko  -->
+                <!--  ko if : $component.invoiceData.shipmentDate  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.ShipmentDate, value : $formatter.formatDate(invoiceData.shipmentDate)">
+                    </row>
+                </div><!--  /ko  -->
+                <!--  ko ifnot : $component.invoiceData.shipmentDate  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.ShipmentDate, value : $component.nls.NA">
+                    </row>
+                </div><!--  /ko  -->
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <!--  ko if : $component.invoiceData.purchaseOrderDate  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PurchaseOrderDate, value : $formatter.formatDate(invoiceData.purchaseOrderDate)">
+                    </row>
+                </div><!--  /ko  -->
+                <!--  ko ifnot : $component.invoiceData.purchaseOrderDate  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.PurchaseOrderDate, value : $component.nls.NA">
+                    </row>
+                </div><!--  /ko  -->
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.AddCommodityDetails, value : addCommodity">
+                    </row>
+                </div>
+            </div><!-- ko if : $component.isCommodityAdded === "N" -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.InvoiceAmount, value : $formatter.formatCurrency(invoiceAmount(),$component.invoiceData.amount.currency())">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad calculation-style">
+                        <div class="oj-flex-item oj-lg-3"><span
+                                data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.InvoiceAmount"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right"><span
+                                data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceAmount(),$component.invoiceData.amount.currency())"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.DiscountPercentage, value : invoiceData.discountPercentage">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad calculation-style">
+                        <div class="oj-flex-item oj-lg-3"><span
+                                data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.DiscountValue"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right"><span
+                                data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceData.discountAmount(),$component.invoiceData.amount.currency())"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.TaxPercentage, value : invoiceData.taxPercentage">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-6 discount-padding">
+                    <div class="oj-flex oj-flex-items-pad calculation-style">
+                        <div class="oj-flex-item oj-lg-3"><span
+                                data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.TaxValue"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right"><span
+                                data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceData.taxAmount(),$component.invoiceData.amount.currency())"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                </div>
+                <div class="oj-flex-item oj-lg-6">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-3 total-label"><span
+                                data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.NetInvoiceAmount"></span>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 right total-value"><span
+                                data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceData.totalAmount.amount(),$component.invoiceData.amount.currency())"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if : $component.isCommodityAdded === "Y" -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-11 commodity-style">
+                    <div data-bind="text:$component.nls.CreateInvoice.CommodityDetails"></div>
+                </div>
+            </div>
+            <oj-table :class="[['oj-lg-11']]" :id="[['CommodityDetailsTable43']]" data="[[dataSource23]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('commodity_template')]]"
+                columns="[[[{'headerText':$component.nls.CreateInvoice.Name, field:'name',
+            sortable: false},{'headerText':$component.nls.CreateInvoice.Description, field:'description',sortable: false},{'headerText':$component.nls.CreateInvoice.Quantity, field:'quantity',sortable: false},{'headerText':$component.nls.CreateInvoice.Costperunit, field:'costPerUnit',headerClassName:'right',sortable: false},{'headerText':$component.nls.CreateInvoice.Amount, field:'totalCost',headerClassName:'right',sortable: false}]]]">
+            </oj-table>
+            <div data-bind="attr:{'class':'oj-lg-11'}">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-9 right border-style"><span
+                            data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.TotalInvoiceAmount"></span>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3 right border-style"><span
+                            data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(totalAmount(),$component.invoiceData.amount.currency())"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.DiscountPercentage, value : invoiceData.discountPercentage">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-5 right text-style"><span
+                        data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceData.discountAmount(),$component.invoiceData.amount.currency())"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-6">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.CreateInvoice.TaxPercentage, value : invoiceData.taxPercentage">
+                    </row>
+                </div>
+                <div class="oj-flex-item oj-lg-5 right text-style"><span
+                        data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceData.taxAmount(),$component.invoiceData.amount.currency())"></span>
+                </div>
+            </div>
+            <div data-bind="attr:{'class':'net-amount-commodity oj-lg-11'}">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-9 right"><span
+                            data-bind="attr:{'class':'medium-font'},text:$component.nls.CreateInvoice.NetInvoiceAmount"></span>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3 right"><span
+                            data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceData.totalAmount.amount(),$component.invoiceData.amount.currency())"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.hideButtons() -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm16]]"><span
+                        slot="startIcon" class="icons icon-confirm"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Confirm"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel81]]"><span
+                        slot="startIcon" class="icons icon-cancel"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Cancel"></span></oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack37]]"><span slot="startIcon"
+                        class="icons icon-back-arrow"></span><span
+                        data-bind="text:$component.nls.CreateInvoice.Back"></span></oj-button>
+            </div>
+            <!-- /ko -->
+            <div id="scriptContainer">
+                <script type="text/html" id="commodity_template">
+                    <td class="oj-lg-2"><span data-bind="text:$context.row.name"></span></td>
+                    <td class="oj-lg-3"><span data-bind="text:$context.row.description"></span></td>
+                    <td class="oj-lg-2"><span data-bind="text:$context.row.quantity"></span></td>
+                    <td class="oj-lg-2">
+                        <div class="right"><span
+                                data-bind="text:$formatter.formatCurrency($context.row.costPerUnit(),$context.row.currency)"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="right"><span
+                                data-bind="text:$formatter.formatCurrency($context.row.totalCost(),$context.row.currency)"></span>
+                        </div>
+                    </td>
+                </script>
+            </div>
+        </page-section>
+    </div>
+</oj-validation-group>

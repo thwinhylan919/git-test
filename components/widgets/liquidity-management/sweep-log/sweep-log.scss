@@ -1,0 +1,51 @@
+$footer-background-color: #e7e7e9;
+.sweepLog{
+	padding:0;
+	&__table {
+	    height: 18.7rem;
+      overflow-y: auto;
+      overflow-x: auto;
+	}
+	&__footer{
+      @include view-all;
+      @include single-border(right, 0.05rem solid var(--base-border-default));
+      @include single-padding(bottom, .5rem);
+	}
+	&__download{
+	    @include single-padding(left, .6rem);
+	}
+	&__noData{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        height:8rem;
+      }
+    }
+  	&__text{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      text-align:center;
+      font-size:var(--base-font-size-larger);
+    }
+  	&__subText{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      text-align:center;
+    }
+    &__refresh{
+      @include single-padding(right, 1rem);
+    }
+    &__icons{
+      @include single-padding(right, .5rem);
+      position:relative;
+      top: 0.3rem;
+      font-size: 1.1rem;
+    }
+}
+.description {
+    @include single-padding(right, 0.6rem);
+    @include single-border(right, 0.05rem solid);
+  }

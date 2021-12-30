@@ -1,0 +1,138 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-md-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <div class="large-text" data-bind="text:$component.nls.heading.SelectInvoices"></div>
+                    <!-- ko if : $component.showInvoices() -->
+                    <div class="bottom-border"
+                        data-bind="text:$baseModel.format($component.nls.heading.SubHeading,{percent: $component.maxPercent()})">
+                    </div>
+
+                    <oj-table :id="[['InvoiceList44']]" data="[[dataSource58]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('listViewRender')]]"
+                        columns="[[columnsArray]]"></oj-table>
+                    <oj-paging-control :id="[['invoice-paging']]" data="[[dataSource58]]" page-size="10">
+                    </oj-paging-control>
+                    <!-- /ko -->
+                    <div id="scriptContainertable">
+                        <script type="text/html" id="listViewRender">
+                            <td>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item ">
+                                        <oj-checkboxset class="oj-choice-direction-row"
+                                            :id="[['SelectBox56'+$context.data.invoiceId]]"
+                                            value="{{$context.data.selectBox}}"
+                                            on-value-changed="[[$component.acceptComments]]">
+                                            <oj-option :aria-label="[[$component.nls.InvoiceList.InvoiceNumberTitle]]"
+                                                value="{{'selected'}}"></oj-option>
+                                        </oj-checkboxset>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a href="#" class="form-button-link" data-bind="attr:{'alt':$component.nls.InvoiceList.InvoiceNumber,'title':$component.nls.InvoiceList.InvoiceNumberTitle,
+                                'id':'checkbox'+$context.data.invoiceId},click:$component.onClickInvoiceNumber13"><span
+                                        data-bind="text:$context.data.invoiceNumber"></span></a>
+                                <div data-bind="text:$baseModel.format($component.nls.invoiceDueDate,{dueDate: $formatter.formatDate($context.data.invoiceDueDate)})"
+                                    class="medium-text"></div>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.totalAmount.amount,$context.data.totalAmount.currency)"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.acceptanceAmount.amount,$context.data.acceptanceAmount.currency)"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.acceptanceAmount.amount*$context.data.maxFinancePercentage/100,$context.data.acceptanceAmount.currency)"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.outstandingAmount.amount,$context.data.outstandingAmount.currency)"></span>
+                            </td>
+                            <td class="right"><span
+                                    data-bind="text:$formatter.formatCurrency(Math.min($context.data.outstandingAmount.amount, $context.data.acceptanceAmount.amount*$context.data.maxFinancePercentage/100),$context.data.acceptanceAmount.currency)"></span>
+                            </td>
+                        </script>
+                    </div>
+                    <div id="scriptContainer">
+                        <script type="text/html" id="checkbox_hdr_tmpl">
+                            <td>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item ">
+                                        <oj-checkboxset class="oj-choice-direction-row" :id="[['SelectAll50']]"
+                                            value="{{$component.selectAll}}">
+                                            <oj-option value="{{'selectAll'}}"
+                                                :aria-label="[[$component.nls.InvoiceList.InvoiceNumberTitle]]">
+                                            </oj-option>
+                                        </oj-checkboxset>
+                                    </div>
+                                </div>
+                            </td>
+                        </script>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad invoices-details">
+                        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-6">
+                            <div data-bind="text:$component.nls.totalSelectedInvoices"></div>
+                            <div data-bind="text:$component.modelInstance.navData.totalInvoicesSelected"></div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-6 right">
+                            <div data-bind="text:$component.nls.totalAmountSelectedDisbursementCurrency"></div>
+                            <div>
+                                <!-- ko if : $component.modelInstance.navData.midRate() && $component.modelInstance.navData.totalAmountSelected() > 0-->
+                                <span class="currency-rate"
+                                    data-bind="text:$baseModel.format($component.nls.currencyRate,{rate : $component.modelInstance.navData.midRate()})">
+                                </span>
+                                <!-- /ko -->
+                                <!-- ko if : $component.modelInstance.payLoad.totalAmount.currency() -->
+                                <span
+                                    data-bind="text:$formatter.formatCurrency($component.modelInstance.navData.totalAmountSelected(),$component.modelInstance.payLoad.totalAmount.currency())">
+                                </span>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-4 oj-sm-6 right">
+                            <div data-bind="text:$component.nls.totalAmountSelectedInvoiceCurrency"></div>
+                            <!-- ko if : $component.modelInstance.navData.invoiceCurrency() -->
+                            <div
+                                data-bind="text:$formatter.formatCurrency($component.modelInstance.navData.totalAmountSelectedInvCurrency(),$component.modelInstance.navData.invoiceCurrency())">
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad amount-padding">
+                        <amount-input params="amount :$component.modelInstance.payLoad.totalAmount.amount,currency : $component.modelInstance.payLoad.totalAmount.currency(), label :$component.nls.requestedAmount,maximumAmount: $component.modelInstance.navData.totalAmountSelected,isMandatory:false,
+                            rootId:'amount_finance' + $component.formId,rootClass:''">
+                        </amount-input>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.onSubmit]]"><span
+                                slot="startIcon" class="icons icon-confirm"></span><span
+                                data-bind="text:$component.nls.InvoiceList.Accept"></span></oj-button>
+                        <oj-button class="action-button-secondary"
+                            on-click="[[$dashboard.switchModule.bind($data, null)]]"><span slot="startIcon"
+                                class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.InvoiceList.Reject"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.returnStepOne]]"><span
+                                slot="startIcon" class="icons icon-back-arrow"></span><span
+                                data-bind="text:$component.nls.InvoiceList.Back"></span></oj-button>
+                    </div>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, id:'currencyInfoText', header : $component.nls.currencyNotification">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <span data-bind="text: $component.nls.differentCurrencyMessage"></span>
+            </div>
+        </div>
+        <div class="oj-flex button-container">
+            <oj-button id="ok" class="action-button-primary" on-click="[[$component.closeModal]]">
+                <span data-bind="text:$component.nls.ok"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

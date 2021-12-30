@@ -1,0 +1,26 @@
+{
+	"modules": [{
+			"moduleName": "com.ofss.digx.app.access.service.account.accesspoint.AccessPointAccount",
+			"components": [{
+					"componentName": "third-party-consents",
+					"service": "create",
+					"perform": "account-access"
+				},
+				{
+					"componentName": "third-party-consents",
+					"service": "read",
+					"perform": "account-access"
+				},
+				{                   
+					"componentName": "third-party-consents",
+					"service": "update",
+					"perform": "account-access"
+				}, {
+					"componentName": "third-party-consents",
+					"service": "listAccounts",
+					"perform": "account-access"
+				}
+			]
+		}	
+	]
+}

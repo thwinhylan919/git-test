@@ -1,0 +1,12 @@
+<div class="oj-flex oj-flex-items-pad oj-lg-12">
+    <oj-label for="depositType" class="oj-flex-item oj-lg-12 oj-sm-12">
+        <span data-bind="text:$component.locale.openTermDeposit.depositDetails.products"></span>
+    </oj-label>
+    <!-- ko if:$parent.depositTypeLoaded -->
+        <oj-select-one id="depositType" class="oj-flex-item oj-lg-12 oj-sm-12" required="[[true]]" :placeholder="[[$component.locale.openTermDeposit.placeholder.pleaseSelect]]" value="{{$parent.rootModelInstance.createTDData.productDTO.productId}}" on-value-changed="[[$parent.productChangeHandler]]">
+  			<!-- ko foreach: $parent.depositTypeList -->
+    			<oj-option value="{{productId}}"><span data-bind="text:name"></span></oj-option>
+  			<!-- /ko -->
+		</oj-select-one>
+	<!-- /ko -->
+</div>

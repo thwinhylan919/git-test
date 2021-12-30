@@ -1,0 +1,14 @@
+{
+    "componentName": "fund-transfer-history-widget",
+    "module": "payments",
+    "segment": ["corporateuser","retailuser"],
+    "width": {
+        "large": "4",
+        "medium": "6"
+    },
+    "height": "275",
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+}

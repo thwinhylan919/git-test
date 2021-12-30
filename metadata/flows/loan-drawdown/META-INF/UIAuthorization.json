@@ -1,0 +1,13 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.loanapplication.service.loandrawdown.LoanApplication",
+        "components": [
+        {
+            "componentName": "loan-drawdown-stage1",
+            "service": "create",
+            "perform": "loan-drawdown#loan-drawdown-stage2#loan-drawdown-review#loan-facility-details",
+            "approve": "loan-drawdown-review"
+        }]
+    }]
+}

@@ -1,0 +1,27 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.common.taskgroup.service.TaskGroup",
+		"components": [{
+				"componentName": "transaction-group-read",
+				"service": "read",
+				"perform": "transaction-group-search"
+			},
+			{
+				"componentName": "transaction-group-create",
+				"service": "create",
+				"perform": "transaction-group-search#review-transaction-group-create",
+				"approve": "review-transaction-group-create"
+			},
+			{
+				"componentName": "transaction-group-read",
+				"service": "delete"
+			},
+			{
+				"componentName": "transaction-group-update",
+				"service": "update",
+				"perform": "transaction-group-read#transaction-group-search#review-transaction-group-update",
+				"approve": "review-transaction-group-update"
+			}
+		]
+	}]
+}

@@ -1,0 +1,12 @@
+<div data-bind="childrenComplete : $component.afterRender.bind($root,$root)">
+    <!-- ko if: $component.show() -->
+    <!-- ko ifnot: $component.showInModalWindow() -->
+    <div data-bind="component:{name:$component.showComponent,params: {rootModel : $component.twoFactorViewModel}}"></div>
+    <!-- /ko -->
+    <!-- ko if: $component.showInModalWindow() -->
+    <modal-window params="baseModel : $baseModel, rootModel : $data, id:'verification', header : $component.nls.verification, closeHandler: $component.twoFactorViewModel.cancelAuthenticationScreen, modalWindowReady: $component.openModal">
+        <div data-bind="component:{name:$component.showComponent,params: {rootModel : $component.twoFactorViewModel}}"></div>
+    </modal-window>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>

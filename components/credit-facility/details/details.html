@@ -1,0 +1,59 @@
+<oj-validation-group id="tracker">
+    <div class="form-main-container">
+
+        <page-section params="baseModel : $baseModel, rootModel : $data,  heading : ''">
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+                    <oj-form-layout label-edge="top" max-columns="3">
+
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.FundingType, value : $component.facilityData().facilityDTO.categoryDesc"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.FacilityType, value : $component.facilityData().facilityDTO.facilityType"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.RevolvingLine, value : $component.facilityData().facilityDTO.revolvingLine ? $component.nls.generic.common.yes : $component.nls.generic.common.no"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.BlockAmount, value : $formatter.formatCurrency($component.facilityData().facilityDTO.blockAmount.amount, $component.facilityData().facilityDTO.blockAmount.currency)"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.Status, value : $component.facilityData().facilityDTO.limitStatus"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.StartDate, value :$formatter.formatDate($component.facilityData().facilityDTO.lineStartDate)"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.ExpiryDate, value : $formatter.formatDate($component.facilityData().facilityDTO.expiryDate)"></row>
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.ReviewFrequency, value : $component.facilityData().facilityDTO.reviewFrequency"></row>
+                        <!-- ko if: $component.facilityData().facilityDTO.nextReviewDate -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.NextReviewDate, value : $formatter.formatDate($component.facilityData().facilityDTO.nextReviewDate)"></row>
+                        <!-- /ko -->
+                        <!-- ko ifnot: $component.facilityData().facilityDTO.nextReviewDate -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.nls.CreditFacilityDetails.NextReviewDate, value :$component.blank()"></row>
+                        <!-- /ko -->
+                    </oj-form-layout>
+                    <oj-button class="action-button-primary" on-click="[[$component.onClickAmendFacility59]]"><span slot="startIcon" class="icon-remarks"></span><span data-bind="text:$component.nls.CreditFacilityDetails.AmendFacility" on-click="[[amendFacility]]"></span></oj-button>
+                    <oj-button class="action-button-primary" on-click="[[$component.createSubFacility]]"><span slot="startIcon" class=" icon-add"></span><span data-bind="text:$component.nls.CreditFacilityDetails.AddSubFacility"></span></oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]"><span slot="startIcon" class="icon-cancel"></span><span data-bind="text:$component.nls.generic.common.cancel"></span></oj-button>
+                    <oj-button class="action-button-tertiary" on-click="[[back]]"><span slot="startIcon" class="icon-back-arrow"></span><span data-bind="text:$component.nls.generic.common.back"></span></oj-button>
+                </div>
+
+                <!-- ko if: $component.displaySchedule -->
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-4">
+                    <div class="wrapper">
+                        <div class="scheduleHeading" data-bind="text: $component.nls.CreditFacilityDetails.facilitySchedule"></div>
+                        <div>
+
+                            <ul class="StepProgress">
+                                <!-- ko foreach: $component.componentSequenceArray -->
+                                <li data-bind="css: { 'StepProgress-itemOne': $data.date > $component.currentDate(), 'StepProgress-item': $data.date < $component.currentDate()}">
+                                    <!-- ko ifnot: isVisited -->
+                                    <span class="dateClass" data-bind="text:$formatter.formatDate(date)"></span>
+                                    <span class="group2" data-bind="text:$formatter.formatCurrency(amount,currency), css: { 'group2': $data.date > $component.currentDate(), 'group1': $data.date < $component.currentDate()}"></span>
+                                    <!-- /ko -->
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </page-section>
+
+
+        </div>
+</oj-validation-group>

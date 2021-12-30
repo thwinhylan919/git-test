@@ -1,0 +1,14 @@
+{
+    "componentName": "external-financial-summary",
+    "module": "link-account-dashboard",
+    "segment":["retailuser"],
+    "width": {
+       "large":"4",
+       "medium":"6"
+     },
+    "height": "220",
+    "icon": "",
+    "template": "",
+    "isVisible":true,
+    "isWidget":true
+}

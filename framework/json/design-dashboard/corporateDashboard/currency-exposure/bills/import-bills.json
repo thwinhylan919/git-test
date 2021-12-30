@@ -1,0 +1,27 @@
+{
+
+    "billDTOs": [{
+        "determinantValue": "OBDX_BU",
+        "id": "AT3ICSC190810501",
+        "contractStatus": "ACTIVE",
+        "billType": "IMPORT",
+        "productId": "ICSC",
+        "transactionDate": "2020-04-30T00:00:00",
+        "amount": {
+            "currency": "GBP",
+            "amount": 23000.0
+        },
+        "counterPartyName": "test",
+        "maturityDate": "2020-05-30T00:00:00",
+        "tenor": 0,
+        "productName": "INCOMING CLEAN USANCE BILLS UNDER LC ON COLLECTION",
+        "userId": "adiCorp308",
+        "userName": "Aditya Ramnathkar",
+        "lcCustomer": {
+            "displayValue": null,
+            "value": null
+        },
+        "currentUser": false,
+        "authStatus": "AUTHORIZED"
+    }]
+}

@@ -1,0 +1,81 @@
+<page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.fundDetails.switchOutHeader">
+    <!-- ko if: fundHousesLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label for="fund-houses">
+                <span data-bind="text:$component.resource.fundDetails.fundHouse"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-8 oj-md-8 oj-sm-12">
+            <oj-select-one id="fund-houses" :aria-label="[[$component.resource.fundDetails.fundHouse]]" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}"
+                on-value-changed="[[$component.fundHouseChange]]" value="{{$component.modelData.switchFund.switchOutDetails.fundHouseCode}}"
+                required>
+                <!-- ko foreach: $component.fundHouseData -->
+                <oj-option value="[[code]]">
+                    <span data-bind="text: label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: schemesLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label for="schemeName">
+                <span data-bind="text: $component.resource.fundDetails.schemeName"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-select-one id="schemeName" :aria-label="[[$component.resource.fundDetails.schemeName]]" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}"
+                on-value-changed="[[schemeOutListener]]" value="{{$component.modelData.switchFund.switchOutDetails.scheme.schemeCode}}"
+                required>
+                <!-- ko foreach: $component.schemeData -->
+                <oj-option value="[[code]]">
+                    <span data-bind="text: label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+        <!-- ko if: switchOutSchemeShow -->
+        <div class="oj-flex-item">
+            <a href="#" data-bind="click:$component.showInfoPanel"><span class="medium-text" data-bind="text:$component.resource.fundDetails.viewNav"></span></a>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if: suitabilityLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label for="suitability">
+                <span data-bind="text: $component.resource.fundDetails.schemeSuitability"></span>
+            </oj-label>
+            <!-- ko if: $component.isSuitableSwitchOut -->
+            <div data-bind="text: $component.resource.fundDetails.yes" id="suitability"></div>
+            <!-- /ko -->
+            <!-- ko ifnot: $component.isSuitableSwitchOut -->
+            <div data-bind="text: $component.resource.fundDetails.no" id="suitability"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: folioLoaded -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+            <oj-label for="folio">
+                <span data-bind="text:$component.resource.fundDetails.folio"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-6">
+            <oj-select-one id="folio" placeholder="{{$component.resource.orderDetails.selectPlaceHolder}}" value="{{$component.modelData.switchFund.switchOutDetails.folioNumber}}"
+                required>
+                <!-- ko foreach: $component.folioData -->
+                <oj-option value="[[code]]">
+                    <span data-bind="text: label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+        </div>
+    </div>
+    <!-- /ko -->
+</page-section>

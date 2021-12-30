@@ -1,0 +1,202 @@
+<oj-validation-group id="tracker">
+  <div class="oj-flex oj-flex-items-pad party-details oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-lg-3 oj-md-12">
+      <div class="party-name-style"><span data-bind="text:$component.partyName()"></span></div>
+      <div class="banner-label"><span
+          data-bind="text:$baseModel.format($component.nls.partyid,{partyId : $component.partyId()})"></span></div>
+    </div>
+    <!-- ko if : $component.programDetails() -->
+    <div class="oj-flex-item oj-lg-3 oj-md-6 banner-padding">
+      <div class="banner-label"><span data-bind="text:$component.nls.ProgramType"></span></div>
+      <div class="banner-value">
+        <!-- ko if : $component.programDetails().programProduct --><span
+          data-bind="text:$component.programDetails().programProduct.productDescription"></span><!-- /ko -->
+        <!-- ko ifnot : $component.programDetails().programProduct --><span data-bind="text:'-'"></span><!-- /ko -->
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-6 banner-padding">
+      <div class="banner-label"><span data-bind="text:$component.nls.ProgramName"></span></div>
+      <div class="banner-value"><span data-bind="text:$component.programDetails().programName"></span></div>
+    </div>
+    <div class="oj-flex-item oj-lg-2 oj-md-6 banner-padding">
+      <div class="banner-label"><span data-bind="text:$component.nls.ProgramId"></span></div>
+      <div class="banner-value"><span data-bind="text:$component.programDetails().programCode"></span></div>
+    </div>
+    <div class="oj-flex-item oj-lg-1 oj-md-6 banner-padding">
+      <div class="banner-label"><span data-bind="text:$component.nls.status"></span></div>
+      <div class="banner-value"><span data-bind="text:$component.programDetails().statusDesc"></span></div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if : $component.showPage() -->
+  <div class="form-main-container">
+    <div class="oj-flex oj-flex-items-pad">
+      <div class="oj-flex-item oj-lg-4">
+        <page-section
+          params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.ProgramDetails, headerTemplate : ''">
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.ValidFrom, value : $formatter.formatDate($component.programDetails().effectiveDate)">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.ValidTo, value : $formatter.formatDate($component.programDetails().expiryDate)">
+          </row>
+          <!-- ko if : $component.programDetails().autoAcceptance -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoAcceptanceInvoiceApplicability, value : $component.nls.ProgramDetails.yes">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoAcceptanceDays, value : $component.programDetails().acceptanceDays">
+          </row>
+          <!-- /ko -->
+          <!-- ko ifnot : $component.programDetails().autoAcceptance -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoAcceptanceInvoiceApplicability, value : $component.nls.ProgramDetails.no">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoAcceptanceDays, value : $component.nls.noData">
+          </row>
+          <!-- /ko -->
+          <!-- ko if : $component.programDetails().autoFinance -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoFinanceApplicability, value : $component.nls.ProgramDetails.yes">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementCurrency, value : $component.programDetails().disbursementCurrency">
+          </row>
+          <!-- ko if : $component.disbursementModeLoaded() -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementMode, value : $component.disbursementModeValue">
+          </row>
+          <!-- /ko -->
+          <!-- ko ifnot : $component.disbursementModeLoaded() -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementMode, value : $component.nls.noData">
+          </row>
+          <!-- /ko -->
+          <!-- /ko -->
+          <!-- ko ifnot : $component.programDetails().autoFinance -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.AutoFinanceApplicability, value : $component.nls.ProgramDetails.no">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementCurrency, value : $component.nls.noData">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.DisbursementMode, value : $component.nls.noData">
+          </row>
+          <!-- /ko -->
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramDetails.Comments, value : $component.nls.NotApplicable">
+          </row>
+        </page-section>
+      </div>
+      <div class="oj-flex-item oj-lg-4">
+        <page-section
+          params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.ProgramAttributes, headerTemplate : ''">
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.MinTenorAllowed, value : '-'">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.MaxTenorAllowed, value : '-'">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.ProgramTenor, value : '-'">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.MinFinance, value : '-'">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.MaxFinance, value : '-'">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.WithRecourse, value : '-'">
+          </row>
+          <row
+            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ProgramAttributes.NumberofCounterparties, value : $component.programDetails().noOfAssociatedParties">
+          </row>
+        </page-section>
+      </div>
+      <script type="text/html" id="disclaimerText">
+        <div class="oj-flex">
+          <span class="disclaimer-text-currency oj-flex-item"
+            data-bind="text:$component.nls.LocalCurrencyInformation"></span>
+        </div>
+      </script>
+      <!-- ko if : $component.showGraph() -->
+      <div class="oj-flex-item oj-lg-4">
+        <page-section
+          params="baseModel : $baseModel, rootModel : $data, heading : $baseModel.format($component.counterPartyHeading(),{count:$component.cpCount()}), headerTemplate : 'disclaimerText'">
+          <!-- ko if : $component.counterPartyList().length > 0 -->
+          <oj-chart orientation="[['horizontal']]" type="[['bar']]" series="[[pieSeriesValue]]"
+            groups="[[pieGroupsValue]]" style-defaults="[[styleDefaults]]"
+            value-formats.label.converter="[[numberformatter]]" value-formats.value.converter="[[numberformatter]]">
+          </oj-chart>
+          <!-- /ko -->
+          <!-- ko ifnot : $component.counterPartyList().length > 0  -->
+          <div class="align-img">
+            <img data-bind="loadImage:'virtual-account-management/account-balance.svg'">
+          </div>
+          <div class="noDataText">
+            <span data-bind="text:$component.nls.noInvoiceValue"></span>
+          </div>
+          <!-- /ko -->
+        </page-section>
+      </div>
+      <!-- /ko -->
+      <script type="text/html" id="disclaimer">
+        <div>
+          <span class="note-text" data-bind="text:$component.nls.Note"></span>
+          <span class="disclaimer-text" data-bind="text:$component.nls.Disclaimer"></span>
+        </div>
+      </script>
+      <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <page-section
+          params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.AssociatedPrograms, headerTemplate : 'disclaimer'">
+          <!-- ko if : $component.isTableLoaded() -->
+          <oj-table :id="[['LinkedParties93']]" data="[[dataSource15]]"
+            row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('rendererId')]]"
+            :aria-label="[[$component.nls.linkedParties]]"
+            columns="[[[{'headerText':$component.nls.Table.PartyNameandId, field:'partyNameAndId'},{'headerText':$component.nls.Table.PartyRole, field:'partyRole'},{'headerText':$component.nls.Table.OutstandingInvoicesNo, field:'invoices'},{'headerText':$component.nls.Table.OutstandingInvoicesValue, field:'invoiceValue'},{'headerText':$component.nls.Table.Status, field:'status'}]]]">
+            <caption class="hide-label" data-bind="text:$component.nls.linkedParties"></caption>
+          </oj-table>
+          <oj-paging-control :id="[['LinkedParties93Paging']]" data="[[dataSource15]]" page-size="10">
+          </oj-paging-control>
+          <!-- /ko -->
+          <div id="scriptContainer">
+            <script type="text/html" id="rendererId">
+              <td class="party-background">
+                <a href="#" class="form-button-link"
+                  data-bind="attr:{'alt':$component.nls.Table.Party,'title':$component.nls.Table.PartyTilte,'id':'partyName_'+$context.row.tableId},click:$component.onClickGoToPartyDetails">
+                  <div data-bind="text:$context.data.partyNameAndId"></div><label
+                    data-bind="text:$context.data.partyIdDisplayValue"></label></div>
+                </a>
+              </td>
+              <td><span data-bind="text:$context.row.partyRole"></span></td>
+              <td><a href="#" class="form-button-link"
+                  data-bind="attr:{'alt':$component.nls.Table.invoices,'title':$component.nls.Table.invoicesTitle,'id':'invoice_'+$context.row.tableId},click:$component.onClickGoToInvoices"><span
+                    data-bind="text:$context.row.invoices"></span></a></td>
+              <td><span
+                  data-bind="text:$formatter.formatCurrency($context.row.invoiceValue,$context.row.invoiceCurrency)"></span>
+              </td>
+              <td>
+                <span class="tags active-color" data-bind="text:$context.row.status"></span>
+              </td>
+            </script>
+          </div>
+        </page-section>
+      </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad button-container">
+      <!-- ko if : $component.programDetails() && $component.programDetails().relation === "A" && ($component.programDetails().status === 'ACTIVE' || $component.programDetails().status === 'MODIFIED') -->
+      <oj-button class="action-button-primary" on-click="[[$component.onClickEdit]]"><span slot="startIcon"
+          class="icons icon-remarks"></span><span data-bind="text:$component.nls.Table.Edit"></span></oj-button>
+      <!-- /ko -->
+      <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span slot="startIcon"
+          class="icons icon-cancel"></span><span data-bind="text:$component.nls.Table.Cancel"></span></oj-button>
+      <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span slot="startIcon"
+          class="icons icon-back-arrow"></span><span data-bind="text:$component.nls.Table.Back"></span>
+      </oj-button>
+    </div>
+  </div>
+  <!-- /ko -->
+</oj-validation-group>

@@ -1,0 +1,19 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <page-section
+            params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.tableHeader, headerTemplate : ''">
+            <!-- ko if : $component.response() -->
+            <div>
+                <oj-table :id="[['VirtualAccountRecordList11']]" data="[[dataSource72]]"
+                    columns="[[[{'headerText':$component.nls.referenceNumber, field:'recRefId', template:'record_link'},{'headerText':$component.nls.invoiceNumber, field:'invoiceNumber'},{'headerText':$component.nls.recordStatus, field:'statusDescription'}]]]">
+                    <template slot="record_link">
+                        <a href="#" data-bind="text:$current.row.recRefId,click:$component.onRecordSelected.bind($data,$current.row)"></a>
+                    </template>
+                </oj-table>
+                <oj-paging-control :id="[['VirtualAccountRecordList11Paging']]" data="[[dataSource72]]" page-size="10">
+                </oj-paging-control>
+            </div><!-- /ko -->
+        </page-section>
+
+    </div>
+</oj-validation-group>

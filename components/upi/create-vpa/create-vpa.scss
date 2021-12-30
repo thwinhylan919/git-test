@@ -1,0 +1,11 @@
+.create-vpa {
+    .checkAvailability {
+    	.success {
+    		color: var(--base-color-success);
+    	}
+    	.danger {
+    		color: var(--base-color-failure);
+    	}
+        
+    }
+}

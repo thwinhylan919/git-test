@@ -1,0 +1,114 @@
+<div class="page-section-content">
+  <!-- first row -->
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- first row first col -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if: $component.params.guaranteeTransactionType === "OUTWARD" -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="beneRefNo"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.beneficiaryRefNo"></span></oj-label>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.params.guaranteeTransactionType === "OUTWARD" -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="appRefNo"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.applicantRefNo"></span></oj-label>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <div id="beneRefNo" data-bind="text:$component.guaranteeDetails.beneContractReferenceNo"></div>
+        </div>
+      </div>
+    </div>
+    <!-- end of first row first col -->
+    <!-- first row second col -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="amount"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.guaranteeAmount"></span></oj-label>
+        </div>
+
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <span id="amount" data-bind="text: $formatter.formatCurrency($component.guaranteeDetails.contractAmount.amount,$component.guaranteeDetails.contractAmount.currency)"></span>
+        </div>
+      </div>
+    </div>
+    <!-- end of first row second col -->
+  </div>
+  <!-- end of first row -->
+
+  <!-- second row -->
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- second row first col -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="effectiveDate"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.effectiveDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <div id="effectiveDate" data-bind="text:$formatter.formatDate($component.guaranteeDetails.effectiveDate)"></div>
+        </div>
+      </div>
+    </div>
+    <!-- end of second row first col -->
+    <!-- second row second col -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="expiryDate"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.expiryDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <div id="expiryDate" data-bind="text:$formatter.formatDate($component.guaranteeDetails.expiryDate)"></div>
+        </div>
+      </div>
+    </div>
+    <!-- end of second row second col -->
+  </div>
+  <!-- end of second row -->
+
+  <!-- third row -->
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- third row first col -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="closureDate"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.closureDate"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <span id="closureDate" data-bind="text:$formatter.formatDate($component.guaranteeDetails.closureDate)"></span>
+        </div>
+      </div>
+    </div>
+    <!-- end of third row first col -->
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <!-- fourth row first col -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="validityType"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.validityType"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <span id="validityType" data-bind="text:$component.guaranteeDetails.validityType ==='LIMITED' ?  $component.resourceBundle.commitmentDetails.labels.limited:$component.resourceBundle.commitmentDetails.labels.unlimited"></span>
+        </div>
+      </div>
+    </div>
+    <!-- end of fourth row first col -->
+    <!-- fourth row second col -->
+    <!-- ko if:$component.guaranteeDetails.validityType ==='UNLIMITED' -->
+    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6" data-bind="css: { 'no-pad-cols': $baseModel.small() || $baseModel.medium() }">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+          <oj-label for="expiryCondition"><span data-bind="text:$component.resourceBundle.commitmentDetails.labels.expiryCondition"></span></oj-label>
+        </div>
+
+        <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-7">
+          <span id="expiryCondition" data-bind="text: $component.guaranteeDetails.expiryCondition"></span>
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+    <!-- end of fourth row second col -->
+  </div>
+
+  <!-- end of third row -->
+</div>

@@ -1,0 +1,25 @@
+<!-- ko if:$component.loadDetails() -->
+<div class="form-main-container">
+    <!-- ko if:!$component.params.data -->
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.payments.generic.common.review , reviewHeader : $baseModel.format($component.payments.common.reviewHeaderMsg, {txnName : $component.payments.common.transfers.adhocDemandDraft})}}"></div>
+    <!-- /ko -->
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+        <div data-bind="template: { name: 'payments/review-adhoc-draft' }"></div>
+    </page-section>
+    <!-- ko if:!$component.params.data -->
+    <div class="oj-flex oj-flex-items-pad  button-container">
+        <oj-button class="action-button-primary " disabled="[[disableConfirmButton]]" on-click="[[confirmDDIssue]]"><span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.payments.generic.common.confirm"></span>
+        </oj-button>
+        <!-- ko if:$baseModel.large() -->
+        <oj-button class="action-button-secondary " id="cancel" on-click="[[$dashboard.switchModule.bind($data, true)]]"><span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.payments.generic.common.cancel"></span>
+        </oj-button>
+        <!-- /ko -->
+        <oj-button class="action-button-tertiary " id="button" on-click="[[$dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.payments.generic.common.back"></span>
+        </oj-button>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

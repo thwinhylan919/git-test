@@ -1,0 +1,106 @@
+<div data-bind="descendantsComplete: ($component.pageRendered && $component.pageRendered.bind(null, $root))">
+<div class=" form-main-container">
+  <!-- ko if: clickedSignUp -->
+  <!-- ko ifnot: $baseModel.large() -->
+  <div class="oj-sm-12 oj-md-12 oj-lg-5  oj-flex-item">
+    <div data-bind='component:{name: "password-validation", params:{rootModel:$component,data:$data}}'>
+    </div>
+  </div>
+  <!-- /ko -->
+  <page-section
+    params="baseModel : $baseModel, rootModel : $data, heading :$component.nls.registration.messages.logInDetails ">
+    <oj-validation-group id="tracker" valid="{{validationTracker}}">
+      <div class="oj-flex oj-flex-items-pad  ">
+        <div class="oj-sm-12 oj-md-12 oj-lg-7  oj-flex-item">
+
+
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-4">
+              <oj-label for="uname"><span data-bind="text:$component.nls.registration.logIn.nameLabel"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-5">
+              <oj-input-text id="uname" required  validators="[[$baseModel.getValidator('USER_ID')]]"
+                :placeholder="[[$component.nls.registration.messages.usernamePlaceholder]]"
+                :invalidcomponenttracker="[[$component.validationTracker]]" value="{{$component.payload().username}}">
+              </oj-input-text>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-4">
+              <oj-label for="pwd"><span data-bind="text:$component.nls.registration.logIn.passwordLabel"></span>
+              </oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+              <oj-input-password id="pwd" autocomplete="off" maxlength="16" required
+                value="{{newPassword}}" :invalidcomponenttracker="[[$component.validationTracker]]"></oj-input-password>
+              <virtual-keyboard params="{baseModel : $baseModel,value: newPassword, element: 'pwd'}"></virtual-keyboard>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-4">
+              <oj-label for="newpwd"><span
+                  data-bind="text:$component.nls.registration.logIn.reEnterPasswordLabel"></span></oj-label>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+              <oj-input-password id="newpwd"  autocomplete="off" maxlength="16" required
+                validators="[[[equalToPassword]]]" value="{{confirmPassword}}"
+                :invalidcomponenttracker="[[$component.validationTracker]]"></oj-input-password>
+              <virtual-keyboard params="{baseModel : $baseModel,value:confirmPassword, element: 'newpwd'}">
+              </virtual-keyboard>
+            </div>
+          </div>
+
+          <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button  class="action-button-primary" on-click="[[signUp]]">
+              <span data-bind="text:$component.nls.registration.buttons.finishButton"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[cancel]]">
+              <span data-bind="text:$component.nls.registration.buttons.cancelButton"></span>
+            </oj-button>
+          </div>
+        </div>
+        <!-- ko if: $baseModel.large() -->
+        <div class="oj-sm-12 oj-md-12 oj-lg-5  oj-flex-item">
+          <div data-bind='component:{name: "password-validation", params:{rootModel:$component,data:$data}}'>
+          </div>
+        </div>
+        <!-- /ko -->
+      </div>
+
+    </oj-validation-group>
+  </page-section>
+
+  <!-- /ko -->
+
+  <!-- ko if: showFinalMessage -->
+  <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+    <div class="confirm-container">
+      <div class="oj-flex-item center ">
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 video-container">
+          <img class="oj-lg-2 oj-sm-8 oj-md-6" data-bind="loadImage:'password-policy/confirmation.gif'" autoplay
+            loop></img>
+
+          <div class="oj-flex-item center create-header">
+            <div class="confirm-text-heading"
+              data-bind="text : $component.nls.registration.messages.userRegistrationSuccessMessage"></div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="center">
+        <span data-bind="text : $component.nls.registration.messages.userRegistrationConfirmationMessage"></span>
+      </div>
+      <div class="oj-flex oj-sm-flex-items-initial
+                      oj-lg-justify-content-center oj-sm-justify-content-center">
+        <div class="oj-flex-item button-container oj-lg-justify-content-center">
+          <oj-button  class="action-button-primary" on-click="[[logIn]]">
+            <span data-bind="text:$component.nls.registration.logIn.login"></span>
+          </oj-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+</div>

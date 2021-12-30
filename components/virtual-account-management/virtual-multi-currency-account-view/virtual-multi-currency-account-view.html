@@ -1,0 +1,150 @@
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2">
+        <div data-bind="text: $component.realCustomerName"></div>
+        <div data-bind="text: $component.realCustomerNoDisplay"></div>
+    </div>
+    <!-- ko if: $component.virtualMCADetailsLoaded() -->
+    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2">
+        <div class="label" data-bind="text: $component.resource.creationDate"></div>
+        <div data-bind="text: $formatter.formatDate($component.virtualMultiCurrencyListDTO().creationDate)"></div>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2">
+        <div class="label" data-bind="text: $component.resource.status"></div>
+        <div data-bind="text: $component.getRecordStatus()"></div>
+    </div>
+    <!-- /ko -->
+</div>
+<div class="oj-flex form-main-container">
+    <!-- ko if: $component.virtualMCADetailsLoaded() -->
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading :''">
+            <!-- ko ifnot:$baseModel.small() -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-6 label">
+                    <oj-label for="virtualMCA"><span data-bind="text:$component.resource.virtualMCA"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-lg-8 oj-md-6 label">
+                    <oj-label for="virtualMCADesc"><span data-bind="text:$component.resource.virtualMCADesc"></span>
+                    </oj-label>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-6">
+                    <span data-bind="text:$component.virtualMultiCurrencyListDTO().groupId">
+                    </span>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-lg-8 oj-md-6">
+                    <span data-bind="text:$component.virtualMultiCurrencyListDTO().name">
+                    </span>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$baseModel.small() -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item  oj-sm-12 oj-md-6 label">
+                    <oj-label for="virtualMca"><span data-bind="text:$component.resource.virtualMCA"></span></oj-label>
+                </div>
+                <div class="oj-flex-item  oj-sm-12 oj-md-6">
+                    <span data-bind="text:$component.virtualMultiCurrencyListDTO().groupId">
+                    </span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 label">
+                    <oj-label for="virtualMca"><span data-bind="text:$component.resource.virtualMCA"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6">
+                    <span data-bind="text:$component.virtualMultiCurrencyListDTO().name">
+                    </span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </page-section>
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resource.title">
+            <!-- ko if: $component.balanceLoaded() -->
+            <div class="oj-flex oj-flex-items-pad padding-card-division" id="MultiCurrencyGroupCard">
+                <!-- ko foreach:$component.virtualMultiCurrencyListDTO().accounts -->
+                <div class="oj-flex oj-lg-3 oj-md-5 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-11 oj-md-11 oj-sm-12 card-style">
+                        <div class="oj-flex padding-card">
+                            <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-3 text-alignment">
+                                    <span class="icon-size" data-bind="text: $data.currencyCode"></span>
+                                </div>
+                                <div class="oj-flex-item oj-lg-9 oj-md-9 oj-sm-9 card-text-style">
+                                    <div class="card-title">
+                                        <span data-bind="text: $component.realCustomerName">
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span data-bind="text: $data.id.displayValue"></span>
+                                    </div>
+                                    <div class="balance-text">
+                                        <span
+                                            data-bind="text: $formatter.formatCurrency($data.balance,$data.currencyCode)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 padding-card">
+                                <!-- ko if:$data.defaultAccount -->
+                                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 default-style">
+                                    <span data-bind="text: $component.resource.defaultCurrency"></span>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko ifnot:$data.defaultAccount -->
+                                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 default-style">
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </page-section>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item button-container search-buttons">
+            <!-- ko if: $component.virtualMCADetailsLoaded() && $component.virtualMultiCurrencyListDTO().status === "O" -->
+            <oj-button class="action-button-primary" on-click="[[$component.edit]]">
+                <span slot="startIcon" class="icons icon-remarks"></span>
+                <span data-bind="text:$component.resource.edit"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$component.deleteConfirm]]">
+                <span slot="startIcon" class="icons icon-delete"></span>
+                <span data-bind="text:$component.resource.delete"></span>
+            </oj-button>
+            <!-- /ko -->
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.backToSearch]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resource.back"></span>
+            </oj-button>
+        </div>
+    </div>
+</div>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $component, id:'virtualMultiCcyDelete', header: $component.resource.delete">
+    <div class="message-box">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <div class="dialog-text"><span data-bind="text:$component.resource.askForDelete"></span></div>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button id="yesButton" class="action-button-primary" on-click="[[deleteVirtualMultiCurrencyAccount]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resource.yes"></span>
+            </oj-button>
+            <oj-button id="noButton" class="action-button-secondary" on-click="[[doNotDelete]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.no"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

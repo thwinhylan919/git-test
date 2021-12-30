@@ -1,0 +1,95 @@
+<div class="form-main-container">
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading:$component.resource.labels.publicPrivateKeys">
+
+                <div class="oj-flex" data-bind="text:$component.resource.labels.publicKeyDescription">
+                </div>
+            </page-section>
+        </div>
+        <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading: $component.resource.labels.jwtKeys">
+
+                <div class="oj-flex" data-bind="text:$component.resource.labels.jwtDescription">
+                </div>
+
+            </page-section>
+        </div>
+    </div>
+    <page-section params="baseModel : $baseModel, rootModel : $component">
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6">
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary" on-click="[[$component.generateKeyPair]]">
+                        <span data-bind="text:$component.resource.labels.generate"></span>
+                    </oj-button>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6">
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary" on-click="[[$component.conformation]]">
+                        <span data-bind="text:$component.resource.labels.generate"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $component">
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-6 oj-md-6 oj-sm-6">
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-secondary" on-click="[[$component.cancel]]">
+                        <span data-bind="text:$component.resource.labels.ok"></span>
+                    </oj-button>
+                </div>
+            </div>
+        </div>
+    </page-section>
+    <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'keyPairGenerationModal',header: $component.resource.labels.confirmation, closeHandler: $component.closeDialog">
+        <div class="form-main-container message-text">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text: $component.resource.labels.confirmationMessageKeyPair"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button id="backYes" class="action-button-primary" on-click="[[$component.closeDialog]]">
+                    <span data-bind="text:$component.resource.labels.ok"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+
+    <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'askToGenerateJwtKeyModal',header: $component.resource.labels.confirmation, closeHandler: $component.closeDialog">
+        <div class="form-main-container message-text">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text: $component.resource.labels.yesNoMessgeJwtKey"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button id="backYes" class="action-button-primary" on-click="[[$component.generateJwtKey]]">
+                    <span data-bind="text:$component.resource.labels.yes"></span>
+                </oj-button>
+                <oj-button id="no" class="action-button-primary" on-click="[[$component.cancel]]">
+                    <span data-bind="text:$component.resource.labels.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+
+    <modal-window class="message" params="baseModel : $baseModel, rootModel : $component,id:'jwtKeyGenerationModal',header: $component.resource.labels.confirmation, closeHandler: $component.closeDialog">
+        <div class="form-main-container message-text">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text: $component.resource.labels.confirmationMessgeJwtKey"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button id="backYes" class="action-button-primary" on-click="[[$component.closeDialog]]">
+                    <span data-bind="text:$component.resource.labels.ok"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+</div>

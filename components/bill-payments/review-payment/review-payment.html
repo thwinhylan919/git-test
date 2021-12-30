@@ -1,0 +1,9 @@
+    <!-- ko if: $component.params.data.billerType === "QUICK_PAY" -->
+        <div data-bind="component:{name: 'review-quick-bill-payment', params:{rootModel: $component,data:$component.params.data, mode:'APPROVAL'}}"></div>
+    <!-- /ko -->
+    <!-- ko if: $component.params.data.billerType === "QUICK_RECHARGE" -->
+        <div data-bind="component:{name: 'review-quick-recharge', params:{rootModel: $component,data:$component.params.data, mode:'APPROVAL'}}"></div>
+    <!-- /ko -->
+    <!-- ko if: $component.params.data.billerType !== "QUICK_PAY" && $component.params.data.billerType !== "QUICK_RECHARGE" -->
+        <div data-bind="component:{name: 'review-bill-payment', params:{rootModel: $component,data:$component.params.data, mode:'APPROVAL'}}"></div>
+    <!-- /ko -->

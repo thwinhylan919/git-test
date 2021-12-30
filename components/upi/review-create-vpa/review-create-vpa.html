@@ -1,0 +1,19 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.resource.generic.common.review , reviewHeader : !$component.params.isEdit ? $component.resource.createVpa.reviewHeaderMsg : $component.resource.createVpa.reviewEditHeaderMsg}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, dashboard : $dashboard, heading : ''">
+        <div class="oj-flex-item oj-sm-12 oj-md-5 oj-lg-4">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.createVpa.vpa, value : $component.createVpaModel.id"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.createVpa.accountNo, value : $component.createVpaModel.accountId.displayValue "></row>
+        </div>
+    </page-section>
+    <div id="button-container" class="oj-flex-item button-container">
+        <oj-button class="action-button-primary" id="confirmButton" on-click="[[confirmCreateVpa]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text: $component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text: $component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

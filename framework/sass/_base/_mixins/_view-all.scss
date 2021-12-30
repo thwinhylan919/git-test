@@ -1,0 +1,10 @@
+@mixin view-all {
+    height: var(--form-line-height);
+    line-height: calc(var(--form-line-height) + 0.5rem);
+    border-top: 0.05rem solid var(--base-border-default);
+    text-align: center;
+}
+
+@mixin view-all-alternate {
+    @include view-all;
+}

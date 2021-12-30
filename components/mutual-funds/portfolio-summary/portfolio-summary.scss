@@ -1,0 +1,73 @@
+.portfolio-summary-container {
+    .big-text {
+        font-size: var(--base-font-size-larger);
+    }
+    .font-total {
+        font-weight: var(--base-font-weight-bold);
+    }
+    .medium-text {
+        font-size: var(--base-font-size-default);
+    }
+    .small-text {
+        font-size: var(--base-font-size-small);
+    }
+    .corner-border {
+        @include single-border(right, 0.05rem solid var(--banner-background));
+    }
+    .top-border {
+        @include single-border(top, 0.05rem solid var(--banner-background));
+    }
+    .legend-height {
+        height: 1.4rem;
+        width: 5.8rem;
+    }
+    .margin-box {
+        margin-top: 0.5rem;
+    }
+    .row-color {
+        background-color: var(--banner-background);
+    }
+    .column-color {
+        background-color: var(--base-background-secondary);
+    }
+    .rating-icons {
+        width: 5rem;
+    }
+    .menu-icon {
+        @include right(0);
+    }
+    .search-scheme {
+        @include margin(0, 0, 1rem, 0);
+    }
+    .heading-pad {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .card-heading {
+        padding: 0.6rem 0;
+        font-size: var(--base-font-size-large);
+        font-weight: var(--base-font-weight-bold);
+    }
+    .card-layout {
+        border: 0.05rem solid var(--banner-background);
+        background-color: var(--banner-background);
+    }
+    .category-padding {
+        padding: 0.5rem;
+    }
+    .buy-value {
+        background-color: var(--base-color-success);
+        color: var(--base-background-primary);
+        height: 70%;
+    }
+    .hold-value {
+        background-color: var(--review-banner-gradient-start-color);
+        color: var(--base-color-secondary-text);
+        height: 70%;
+    }
+    .sell-value {
+        background-color: var(--base-color-danger);
+        color: var(--base-background-primary);
+        height: 70%;
+    }
+}

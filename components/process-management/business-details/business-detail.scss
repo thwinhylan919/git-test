@@ -1,0 +1,7 @@
+.paddingBottom {
+    padding-bottom: 0.5rem;
+}
+
+.pageDescription1 {
+    @include padding(0, 0, 0.7rem, 0.6rem);
+}

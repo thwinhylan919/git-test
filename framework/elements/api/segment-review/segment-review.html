@@ -1,0 +1,83 @@
+<oj-validation-group id="tracker">
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <!-- ko if: $component.productData().data && !($component.productData().data.mode === "approval") -->
+            <div
+                data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.nls.review , reviewHeader : $baseModel.format($component.nls.reviewEditMessage[$component.productData().productId],{productType: $component.productData().data.productName ? $component.productData().data.productName:''})}}">
+            </div>
+            <!-- /ko -->
+            <!-- ko foreach: $component.productData().dataSegments -->
+            <div id="panel" class="oj-panel oj-sm-margin-2x basepanel">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <span data-bind="text:$component.nls.segment[id]"></span>
+                    </div>
+                    <!-- ko if: $component.productData().data && !($component.productData().data.mode === "approval") -->
+                    <div class="oj-flex-item">
+                        <a href="#"
+                            data-bind="attr:{'alt':$component.nls.segmentEditAlt,'title':$component.nls.segmentEditTitle},click:$component.goToSegment"
+                            class="icon icon-remarks pull-right editSize"></a>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div
+                    data-bind="component:{name:id, params:{rootModel:$component, payload:$component.productData().payload, review:true, data:$component.productData().data}}">
+                </div>
+                <div class="oj-flex expand-button">
+                    <oj-button class="help-button"
+                        on-oj-action='[[$component.buttonClick.bind($data,"segment"+$index())]]'>
+                        <span data-bind="text:$component.nls.showMore"></span>
+                    </oj-button>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: $component.productData().data && !($component.productData().data.mode === "approval") -->
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+
+                    <a href="#"
+                        data-bind="click: $component.showTermAndConditions.bind(), attr:{title: $component.nls.termsNConditionLinkTitle}">
+                        <span data-bind="text: $component.nls.termsAndCondition"></span>
+                    </a>
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                    <oj-checkboxset id="checkboxSetId" value={{flagTermAndCondition}}>
+                        <oj-option id="termsNCondition" value="checked">
+                            <span data-bind="text: $component.nls.iAgree"></span>
+                        </oj-option>
+                    </oj-checkboxset>
+
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.confirm]]">
+                    <span slot="startIcon" class="icons icon-submit"></span>
+                    <span data-bind="text:$component.nls.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.nls.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" on-click="[[$component.back]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.nls.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </page-section>
+    </div>
+</oj-validation-group>
+<modal-window
+    params="baseModel : $baseModel, rootModel : $data, closeHandler:$component.closeTermAndConditionDialog,  id:'termsAndConditons', header : $component.nls.termsAndConditionHeader">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class=" oj-flex-item oj-lg-12">
+            <div data-bind="text:$component.nls.termsAndConditionText"></div>
+        </div>
+    </div>
+    <div class="button-container">
+        <oj-button class="action-button-primary" on-click='[[$component.closeTermAndConditionDialog]]'>
+            <span data-bind="text:$component.nls.ok"></span>
+        </oj-button>
+    </div>
+</modal-window>

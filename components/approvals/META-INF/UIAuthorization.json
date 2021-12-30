@@ -1,0 +1,75 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.approval.service.workflow.Workflow",
+		"components": [{
+				"componentName": "approvals-nav-bar",
+				"service": "read",
+				"perform": "workflow#workflow-list#workflow-type#party-validate#workflow-admin#workflow-admin-list#workflow-admin-view#workflow-view#user-input#workflow-review"
+			},
+			{
+
+				"componentName": "approvals-nav-bar",
+				"service": "create",
+				"perform": "workflow#workflow-list#user-input#workflow-type#party-validate#workflow-admin#workflow-admin-list#workflow-admin-view#workflow-view#workflow-review",
+				"approve": "workflow-view#workflow-admin-view",
+				"view": ""
+			}, {
+				"componentName": "approvals-nav-bar",
+				"service": "update",
+				"perform": "",
+				"approve": "workflow-view#workflow-admin-view#workflow-review",
+				"view": ""
+			}
+		]
+	}, {
+		"moduleName": "com.ofss.digx.app.approval.service.rule.Rule",
+		"components": [{
+				"componentName": "approvals-nav-bar",
+				"service": "read",
+				"perform": "rule-type#rules#rules-search#user-input#party-validate#rules-admin#rules-admin-search#rules-admin-create#rules-create#rules-review"
+			},
+			{
+				"componentName": "approvals-nav-bar",
+				"service": "delete",
+				"perform": "",
+				"approve": "rules-create#rules-admin-create"
+			},
+			{
+
+				"componentName": "approvals-nav-bar",
+				"service": "create",
+				"perform": "rule-type#rules#rules-search#user-input#party-validate#rules-create#rules-admin-create#rules-admin#rules-admin-search",
+				"approve": "rules-create#rules-admin-create",
+				"view": ""
+			}, {
+				"componentName": "approvals-nav-bar",
+				"service": "update",
+				"perform": "",
+				"approve": "rules-create#rules-admin-create",
+				"view": ""
+			}
+		]
+	}, {
+		"moduleName": "com.ofss.digx.app.approval.service.usergroup.UserGroup",
+		"components": [{
+				"componentName": "user-group-type",
+				"service": "read",
+				"perform": "admin-user-group-list#admin-user-group#admin-user-group-view#party-validate#user-group-list#user-group#user-group-view#user-group-review"
+			},
+			{
+
+				"componentName": "user-group-type",
+				"service": "create",
+				"perform": "admin-user-group#admin-user-group-view#party-validate#user-group-list#user-group#user-group-view",
+				"approve": "admin-user-group-view#user-group-view",
+				"view": ""
+			}, {
+				"componentName": "user-group-type",
+				"service": "update",
+				"perform": "",
+				"approve": "admin-user-group-view#user-group-view",
+				"view": ""
+			}
+		]
+	}]
+}

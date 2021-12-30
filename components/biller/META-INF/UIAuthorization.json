@@ -1,0 +1,27 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.biller.BillerCategory",
+        "components": [
+        {
+            "componentName": "biller-category-landing",
+            "service": "read",
+            "perform": "spend-category-landing"
+        },
+        {
+            "componentName": "biller-category-landing",
+            "service": "delete",
+            "perform": "biller-category-landing"
+        },
+        {
+            "componentName": "biller-category-landing",
+            "service": "create",
+            "perform": "biller-category-add"
+        },
+        {
+            "componentName": "biller-category-landing",
+            "service": "update",
+            "perform": "biller-category-maintenance"
+        }]
+    }]
+}

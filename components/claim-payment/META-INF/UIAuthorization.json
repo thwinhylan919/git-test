@@ -1,0 +1,12 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.payment.service.transfer.PeerToPeerPayment",
+        "components": [
+        {
+            "componentName": "claim-payment-dashboard",
+            "service": "validateSecurityCode",
+            "perform": "security-code-verification#user-onboarding#receive-payment#claim-payment-existing-user-dashboard#bank-details#social-media"
+        }]
+    }]
+}

@@ -1,0 +1,29 @@
+.myButtons {
+    margin-top: 60px;
+    padding-bottom: 0.5rem;
+}
+
+.selectedBrand .tick {
+    display: block;
+    border-radius: 10rem;
+    background: var(--base-color-success);
+    color: var(--base-color-secondary-text);
+    height: 1em;
+    text-align: center;
+    position: relative;
+    @include right (0.5rem);
+    top: 0.3rem;
+}
+
+.revertToDefault {
+    @include padding(2rem, 0.6rem, 0, 0.6rem);
+}
+
+.informationHeader {
+    text-align: center;
+    color: var(--form-header-foreground-color);
+    margin: 0.6rem;
+    padding-bottom: 2rem;
+    font-size: var(--form-header-font-size);
+    font-weight: var(--form-header-font-weight);
+}

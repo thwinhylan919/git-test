@@ -1,0 +1,159 @@
+<div class="oj-panel sweepLog">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-3">
+            <h3 data-bind="text:$component.resource.header.sweepLog">
+            </h3>
+        </div>
+        <div class="oj-flex-item oj-lg-5 center">
+            <oj-buttonset-one id="sweepStatusType" value="{{$component.selectedSweepStatus}}"
+            on-value-changed="[[sweepStatusChanged]]">
+                <oj-option id="upcoming" name="sweepType" value="{{'Upcoming'}}">
+                    <span for="upcoming" data-bind="text:$component.resource.statusTypes.upcoming"></span>
+                </oj-option>
+                <oj-option id="executed" name="sweepType" value="{{'Executed'}}">
+                    <span for="executed" data-bind="text:$component.resource.statusTypes.executed"></span>
+                </oj-option>
+                <oj-option id="exceptions" name="sweepType" value="{{'Exception'}}">
+                    <span for="exceptions" data-bind="text:$component.resource.statusTypes.exception"></span>
+                </oj-option>
+            </oj-buttonset-one>
+        </div>
+        <div class="oj-flex-item oj-lg-4 vertical-align-middle right">
+            <a href="#" class="padding-tb sweepLog__refresh" data-bind="attr:{'alt':$component.resource.refreshMessage,'title':$component.resource.refreshTitle},click:$component.refreshTable">
+                <span class="icons icon-refresh icon-2x icon-padding-right"></span>
+                <span data-bind="text:$component.resource.refresh"></span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ko if:sweepLogLoaded() -->
+    <div class="oj-flex oj-flex-items-pad sweepLog__table">
+    <div class="oj-flex-item oj-lg-12">
+    <oj-table id="sweepLog" :aria-label="[[$component.resource.sweepLogDetails.sweeplogdetailTable]]" columns='[[[
+        {
+            "headerText":$component.resource.sweepLogDetails.dateTime,
+            "template":"dateTime",
+            "sortProperty":"sortDate"
+        },{
+            "headerText":$component.resource.sweepLogDetails.structureDetails,
+            "template":"structureDetail",
+            "sortProperty":"structureId"
+        },{
+            "headerText":$component.resource.sweepLogDetails.instructionDesc,
+            "template":"instructionDesc",
+            "sortProperty":"instructionDesc"
+        }].concat($component.sweepType() === "S" ? [{
+            "headerText":$component.resource.sweepLogDetails.sweepOutAccount,
+            "field":"sweepOutAccount",
+            "sortProperty":"sweepOutAccount"
+
+        },{
+            "headerText":$component.resource.sweepLogDetails.sweepOutAmount,
+            "template":"sweepOutAmount",
+            "sortProperty":"sweepOutAmount",
+            "headerClassName":"right",
+            "className" :"right"
+        },{
+            "headerText":$component.resource.sweepLogDetails.exchangeRate,
+            "field":"exchangeRate",
+            "sortProperty":"exchangeRate"
+        },{
+            "headerText":$component.resource.sweepLogDetails.sweepInAccount,
+            "field":"sweepInAccount",
+            "sortProperty":"sweepInAccount"
+        },{
+            "headerText":$component.resource.sweepLogDetails.sweepInAmount,
+            "template":"sweepInAmount",
+            "sortProperty":"sweepInAmount",
+            "headerClassName":"right",
+            "className" :"right"
+        }]:[{
+            "headerText":$component.resource.sweepLogDetails.sourceAccount,
+            "field":"sourceAccount",
+            "sortProperty":"sourceAccount"
+        },{
+            "headerText":$component.resource.sweepLogDetails.destinationAccount,
+            "field":"destinationAccount",
+            "sortProperty":"destinationAccount"
+        }]).concat($component.sweepType() === "E"?[{
+            "headerText":$component.resource.sweepLogDetails.exception,
+            "field":"exception",
+            "sortProperty":"exception"
+        }]:[])]]' columns-default="[[{'sortable':'enabled'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[sweepLogDetailsDataSource]]">
+        <caption class="hide-label" data-bind="text:$component.resource.sweeplogdetailTable">
+        </caption>
+        <template slot="dateTime">
+               <date-time params="{date : $current.row.datetime, baseModel : $baseModel}"></date-time>
+        </template>
+        <template slot="instructionDesc">
+               <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.instructionDesc?$current.row.instructionDesc : '-'"></div>
+        </template>
+        <template slot="structureDetail">
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.structureId"></div>
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.structureDesc"></div>
+        </template>
+        <template slot="type">
+            <!-- ko if: $component.sweepType() === "S" || $component.sweepType() === "E" -->
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:($current.row.type ==='No' ?$component.resource.type.sweep:$component.resource.type.reverseSweep)"></div>
+            <!-- /ko -->
+            <!-- ko if:$component.sweepType() === "P" -->
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.type"></div>
+            <!-- /ko -->
+        </template>
+        <template slot="sweepInAmount">
+               <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$formatter.formatCurrency($current.row.sweepInAmount,$current.row.sweepInCurrency)"></div>
+        </template>
+        <template slot="sweepOutAmount">
+               <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$formatter.formatCurrency($current.row.sweepOutAmount,$current.row.sweepOutCurrency)"></div>
+        </template>
+    </oj-table>
+    </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad sweepLog__footer">
+        <div class="oj-flex-item oj-lg-12 right">
+            <a href="#" class="padding-tb description" data-bind="attr:{'alt':$component.resource.viewAllMessage,'title':$component.resource.viewAllTitle},click:$component.viewAll">
+                <span data-bind="text:$component.resource.viewAll"></span>
+            </a>
+            <a href="#" class="padding-tb sweepLog__download" data-bind="attr:{'alt':$component.resource.downloadMessage,'title':$component.resource.downloadTitle, id:'menuLauncher-downloadMenu'},click:$component.openDownloadMenu">
+                <span data-bind="text:$component.resource.downloadPdf"></span>
+                <span class="icons icon-arrow-down sweepLog__icons"></span>
+            </a>
+            <oj-menu class="hide" :id="[['menuLauncher-downloadMenu-contents']]" on-oj-action="[[$component.downloadStatement.bind($data)]]" open-options.launcher="[['menuLauncher-downloadMenu']]">
+                <!-- ko foreach: $component.menuItems -->
+                <oj-option :id="[[id]]" :value="[[id]]">
+                    <span data-bind="text: value"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-menu>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko ifnot:sweepLogLoaded() -->
+    <div class="oj-flex oj-flex-items-pad sweepLog">
+        <div class="oj-flex-item oj-sm-12 sweepLog__noData">
+            <img data-bind="attr:{'alt': $component.resource.sweepDetails,'title':$component.resource.sweepDetailsTitle},loadImage:'dashboard/sweep-log.svg'">
+        </div>
+        <div class="oj-flex-item oj-sm-12 sweepLog__text" data-bind="text:$component.resource.noData"></div>
+        <div class="oj-flex-item oj-sm-12 sweepLog__subText info-text-small" data-bind="text:$component.resource.subData"></div>
+    </div>
+    <!-- /ko -->
+
+</div>
+<modal-window params="baseModel : $baseModel, rootModel : $data, id:'passwordDialog', header : $component.resource.passwordNotification">
+     <div class="oj-flex oj-flex-items-pad">
+       <div class="oj-flex-item">
+         <span data-bind="text: $component.resource.passCombination"></span>
+       </div>
+     </div>
+     <div class="oj-flex oj-flex-items-pad">
+       <div class="oj-flex-item">
+         <span data-bind="text: $component.resource.passwordExample"></span>
+       </div>
+     </div>
+     <div class="oj-flex button-container">
+       <oj-button id="ok" class="action-button-primary" on-click="[[$component.closeModal]]">
+         <span data-bind="text:$component.resource.generic.common.ok"></span>
+       </oj-button>
+     </div>
+</modal-window>

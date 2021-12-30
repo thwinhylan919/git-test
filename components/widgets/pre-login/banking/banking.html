@@ -1,0 +1,17 @@
+<div class="banking">
+    <div class="movingbox">
+        <div class="oj-flex-items-pad oj-flex">
+            <div class="oj-flex-item center oj-sm-12 oj-lg-8">
+                <img class="banking-fingertip-img" data-bind="loadImage: 'home/banking-fingertip.png'">
+            </div>
+            <div class="oj-flex-item left oj-sm-12 oj-lg-4 description-block">
+                <div data-bind="component: {name: 'product-header-text',
+                    params:{rootModel: resource.header}}">
+                </div>
+                <div class="icon-title_desc">
+                    <div data-bind="html:resource.description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

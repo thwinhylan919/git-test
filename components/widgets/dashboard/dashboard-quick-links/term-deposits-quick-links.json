@@ -1,0 +1,36 @@
+{
+    "default": [{
+        "name": "td.openTD",
+        "img": "open-term-deposit.svg",
+        "id": "td-open",
+        "module": "term-deposits",
+        "taskCode": ""
+    }, {
+        "name": "td.partFull",
+        "img": "part-full-redemption.svg",
+        "id": "td-redeem",
+        "module": "term-deposits",
+        "taskCode": "TD_F_RTD"
+    },{
+        "name": "td.topUp",
+        "img": "top-up.svg",
+        "id": "td-topup",
+        "module": "term-deposits",
+        "taskCode": ""
+    }, 
+    {
+        "name": "td.statementRequest",
+        "img": "statement-request.svg",
+        "id": "statement-request",
+        "module": "accounts",
+        "taskCode": "TD_N_RAS",
+        "type": "TRD"
+    } ,{
+        "name": "td.editMaturity",
+        "img": "edit-maturity.svg",
+        "id": "td-amend",
+        "module": "term-deposits",
+        "taskCode": "TD_N_ATD"
+    }  
+]
+}

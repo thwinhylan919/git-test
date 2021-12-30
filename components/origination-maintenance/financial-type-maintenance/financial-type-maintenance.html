@@ -1,0 +1,31 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+  <div class="oj-flex oj-flex-items-pad oj-lg-flex-items-initial oj-lg-justify-content-space-between">
+    <div class="oj-flex-item oj-lg-4">
+      <oj-navigation-list selection="{{selectedItem}}">
+        <ul data-bind="foreach: listItems">
+          <li data-bind="attr: {id: id}">
+            <div class="oj-flex oj-flex-items-pad">
+              <span>
+                <a href="#" data-bind="text:label,click:$component.loadStage.bind($data)"></a>
+              </span>
+              <span data-bind="text:$baseModel.format($component.resource.count,{selected: $component.tabledata()[tab].initialSelectedCount(), total: $component.tabledata()[tab].initialMasterCount()})">
+              </span>
+            </div>
+          </li>
+        </ul>
+      </oj-navigation-list>
+    </div>
+    <!-- ko if:$component.masterTableDataLoaded() -->
+    <div class="oj-flex-item oj-lg-4">
+      <oj-table id="masterTable" :aria-label="[[resource.masterSet]]" columns="[[$component.masterColumnArray]]" selection-mode="[[{row:'single'}]]" selection="{{masterTableSelection}}" data="[[masterTableDataProvider]]" dnd.drag.rows.data-types='["application/ojtablerows+json"]'
+        dnd.drag.rows.drag-end="[[masterTableHandleDragEnd]]" dnd.drop.rows.data-types='["application/ojtablerows+json"]' dnd.drop.rows.drop="[[masterTableHandleDrop]]" draggable="true"></oj-table>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.selectedValuesTableDataLoaded() -->
+    <div class="oj-flex-item oj-lg-4">
+      <oj-table id="selectedValuesTable" :aria-label="[[resource.selectedValuesTable]]" columns="[[$component.selectedValuesColumnArray]]" selection-mode="[[{row:'single'}]]" selection="{{selectedValuesTableSelection}}" data="[[selectedValuesTableDataProvider]]"
+        dnd.drag.rows.data-types='["application/ojtablerows+json"]' dnd.drag.rows.drag-end="[[selectedValuesTableHandleDragEnd]]" dnd.drop.rows.data-types='["application/ojtablerows+json"]' dnd.drop.rows.drop="[[selectedValuesTableHandleDrop]]" draggable="true"></oj-table>
+    </div>
+    <!-- /ko -->
+  </div>
+</page-section>

@@ -1,0 +1,13 @@
+<div class="oj-flex icon">
+    <div class="oj-flex oj-sm-12 oj-flex-items-pad ">
+        <div class="oj-flex-item oj-sm-6">
+            <oj-label for="size">
+                <span data-bind="text:$component.resourceBundle.size"></span>
+            </oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+            <oj-input-number disabled="[[$component.readOnly]]" id="size" max=15 min=0 step="0.1" value="{{$component.bindvariable[$component.parameters.size]}}" converter="[[{type:'number',options:{style: 'decimal',pattern: '#.#rem'}}]]">
+            </oj-input-number>
+        </div>
+    </div>
+</div>

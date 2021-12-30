@@ -1,0 +1,105 @@
+<div class="oj-flex redeem-order-details">
+    <div class=" oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <div class="form-main-container">
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewScreen.reviewCaption, reviewHeader: $component.resource.reviewScreen.reviewHeader}}">
+            </div>
+            <!-- ko foreach:$component.payLoadArray -->
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : redeemFund.scheme.schemeName">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.unitsHeld , value : navigationData.unitsHeld"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.marketValue , value : $formatter.formatCurrency(navigationData.marketValue, navigationData.currency)"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.redeemBy , value : navigationData.redeemTypeLabel"></row>
+                <!-- ko if: navigationData.redeemType === "UN" -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.enterUnits , value : redeemFund.txnUnits"></row>
+                <!-- /ko -->
+                <!-- ko if: navigationData.redeemType === "AUN" -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.allUnits , value : redeemFund.txnUnits"></row>
+                <!-- /ko -->
+                <!-- ko if: navigationData.redeemType === "AMT" -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.enterAmount , value : $formatter.formatCurrency(redeemFund.txnAmount.amount, redeemFund.txnAmount.currency)"></row>
+                <!-- /ko -->
+                <!-- ko if: navigationData.redeemType === "SWP" -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.swpAmountLabel , value : $formatter.formatCurrency(redeemFund.txnAmount.amount, redeemFund.txnAmount.currency)"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.frequency , value : redeemFund.frequency"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.startDate , value : $formatter.formatDate(redeemFund.startDate)"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.noOfRedemptions , value : redeemFund.installments"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.endDate , value : $formatter.formatDate(estimatedDate)"></row>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                        <oj-label>
+                            <span data-bind="text:$parentContext.$component.resource.orderDetails.cutOffPeriod"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+                        <span data-bind="text:$parentContext.$component.resource.orderDetails.time"></span>
+                        <span data-bind="text: $formatter.formatDate(navigationData.cutOffDate, 'timeFormat')"></span>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-6">
+                        <span data-bind="text:$parentContext.$component.resource.orderDetails.date"></span>
+                        <span data-bind="text: $formatter.formatDate(navigationData.cutOffDate)"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: navigationData.redeemType === "SWP" -->
+                <!-- ko if: navigationData.when === "NOW" -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.when , value : $parentContext.$component.resource.orderDetails.now"></row>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                        <oj-label>
+                            <span data-bind="text:$parentContext.$component.resource.orderDetails.cutOffPeriod"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-2 oj-md-3 oj-sm-6">
+                        <span data-bind="text:$parentContext.$component.resource.orderDetails.time"></span>
+                        <span data-bind="text: $formatter.formatDate(navigationData.cutOffDate, 'timeFormat')"></span>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-6">
+                        <span data-bind="text:$parentContext.$component.resource.orderDetails.date"></span>
+                        <span data-bind="text: $formatter.formatDate(navigationData.cutOffDate)"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: navigationData.when === "LATER" -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.when , value : $parentContext.$component.resource.orderDetails.later"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.resource.orderDetails.purchaseDate , value : $formatter.formatDate(redeemFund.scheduledDate)"></row>
+                <!-- /ko -->
+                <!-- /ko -->
+            </page-section>
+            <!-- /ko -->
+            <!-- ko ifnot:$baseModel.small()-->
+            <div class="oj-flex button-container">
+                <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.redeem]]" disabled="[[$component.disabled()]]">
+                    <span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.resource.reviewScreen.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary" id="back"  on-click="[[$component.details]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:$baseModel.small()-->
+            <div class="oj-flex button-padding">
+                <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.redeem]]" disabled="[[$component.disabled()]]">
+                    <span slot="startIcon" class="icons icon-confirm"></span>
+                    <span data-bind="text:$component.resource.reviewScreen.confirm"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary back-margin" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <oj-button class="action-button-tertiary back-margin" id="back"  on-click="[[$component.details]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text:$component.resource.back"></span>
+                </oj-button>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- ko if : !$baseModel.small() -->
+<a class="button-container" href="#" data-bind="text: $component.resource.backToDashboard, click: $dashboard.switchModule.bind($data, 'mutual-funds')"></a>
+<!-- /ko -->

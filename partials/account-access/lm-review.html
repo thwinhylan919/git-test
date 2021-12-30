@@ -1,0 +1,103 @@
+<!-- ko if: $component.parentAccessLevel() ==="PARTY" -->
+
+
+<page-section params="baseModel : $baseModel, rootModel : $data, heading :nls.headers.newAccounts">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3">
+            <label class="pull-left" data-bind="text: nls.fieldname.mapAccts"></label>
+            <span class="icons icon-help tool-tip">
+                  <div class="tooltip-content talign-left"
+            data-bind=" html:$baseModel.format($component.nls.messages.tooltip.autoManualMessage,
+            {accountType:$component.transactionNames.lm,accountType1:$component.transactionNames.lm})"></div>
+            </span>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-9">
+            <oj-buttonset-one disabled="[[showEditableForm]]"
+            on-value-changed="[[$component.lmDefaultPolicyChangeHandler]]"
+            value="{{$component.selectedLMPolicy}}"><oj-option name="lmPolicy"
+            value="{{'lmAuto'}}" :id="[['lmAuto']]"><span data-bind="attr: {for: 'lmAuto'},text:$component.nls.common.auto"></span>
+          </oj-option><oj-option name="lmPolicy" value="{{'lmManual'}}" :id="[['lmManual']]">
+            <span data-bind="attr: {for: 'lmManual'},text:$component.nls.common.manual"></span>
+          </oj-option></oj-buttonset-one>
+    
+        </div>
+    </div>
+    </page-section>
+    <h4 data-bind=" text:  nls.headers.existingAccounts"></h4>
+    
+    <!-- /ko -->
+    
+    <!-- ko if: $component.parentAccessLevel()==="USER" -->
+    
+    <oj-checkboxset class=" oj-flex oj-flex-items-pad " disabled="[[$parent.showEditableForm]]"
+     value="{{$component.selectedLMPolicyChecked}}"
+      on-value-changed="[[$component.lmDefaultPolicyChangeHandler]]">
+      <oj-option value="lmAuto" :id="[['lm_review_'+$baseModel.incrementIdCount()]]"><span for="lm_review" data-bind="text:$component.nls.common.ApplyChanges">
+                            </span></oj-option></oj-checkboxset>
+    
+    <!-- /ko -->
+    
+    <oj-checkboxset class=" oj-flex oj-flex-items-pad " disabled="[[showEditableForm]]"
+    value="{{$component.mapAllTransactionsLMFlag}}"><oj-option id="lm_review_map_all"
+    value="{{'MAP_ALL'}}"><span data-bind="text:nls.headings.mapAllTransactionToAllAccnts"
+    for="lm_review_map_all"></span></oj-option></oj-checkboxset>
+    
+    
+    <!-- ko if: reloadLMTable() -->
+    
+    <oj-table id="lmReviewtable" :aria-label="[[$component.nls.headers.lmAccounts]]"
+    columns="[[[{headerText:nls.headers.AccountNumber,field:'accountID'},{headerText:nls.headers.currency,field:'currency'},
+    {headerText:nls.headers.displayName,field:'displayName'},{headerText:nls.headers.accountStatus,field:'accountStatus'}]]]"
+     row-renderer='[[$oj.KnockoutTemplateUtils.getRenderer("lm_template", true)]]'
+      data="[[$parent.lmReviewDatasource]]">
+        <caption class="hide-label"
+        data-bind="text:$component.nls.headers.lmAccounts"></caption>
+    </oj-table>
+    <!-- /ko -->
+    
+    <script type="text/html" id="lm_template">
+        <tr>
+            <!-- ko if: $context.rowContext.depth===1 -->
+            <td>
+                <!-- ko if: ($component.selectedLMAccounts).indexOf(accountNumber.value) > -1 -->
+                  <oj-row-expander context="[[$context.rowContext]]"></oj-row-expander>
+                <!-- /ko -->
+                <input type="checkbox" name="lmTransaction"
+                 data-bind="attr:{'aria-label':'lmcheckbox'+id,
+                 id: 'lmcheckbox'+id },
+                 checked: $parent.selectedLMAccounts,
+                 disable:($parent.showEditableForm && $parent.disableAccountSelection),
+                 value : accountNumber.value ">
+               <span data-bind="attr:{ 'for':'lmcheckbox'+id},
+                text: $context.row.accountNumber.displayValue"></span>
+             </td>
+            <td>
+                <span data-bind="text:$context.row.currency"></span>
+            </td>
+            <td>
+                <span data-bind="text:$context.row.displayName"></span>
+            </td>
+            <td>
+                <span data-bind="text:$context.row.accountStatus"></span>
+            </td>
+    
+            <!-- /ko -->
+    
+            <!-- ko if: $context.rowContext.depth===2 -->
+            <!-- ko if: ($component.selectedLMAccounts).indexOf(accountNumber.value) > -1 -->
+            <td colspan="4">
+                <div data-bind="component:{name: 'transaction-selection',
+                params:{rootModel: $parent,key:'LER', data: $data,
+                 resoureTaskList : $data.resoureTaskList,
+                 selectedResourceTaskList : $data.selectedTask,
+                 showReviewComponent: $component.showReviewComponent,
+                 mapAllTransactionsToAllAccounts:$component.mapAllTransactionsToAllAccountLM,
+                 indicatorArray:$component.lmMapAllTransactionIndicatorArray,
+                 tempTaskArray:$component.tmpTransactionCodeLMArray}}">
+                </div>
+            </td>
+            <!-- /ko -->
+            <!-- /ko -->
+        </tr>
+    </script>
+    

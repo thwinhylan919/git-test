@@ -1,0 +1,293 @@
+<div class="banner-design oj-flex oj-flex-items-pad oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+        <div data-bind="text:$component.partyName"></div>
+        <span
+            data-bind="text:$baseModel.format($component.nls.ViewInvoice.PartyID,{partyId:$component.partyId()})"></span>
+    </div>
+</div>
+<div class="form-main-container">
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.ViewInvoice.SwitchView, headerTemplate : ''">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item "><span
+                    data-bind="text:$component.nls.ViewInvoice.SelectyourroleasaBuyeroraSuppliertoviewyourdataintermsofReceivablesorPayables"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item align-switch ">
+                <oj-buttonset-one :id="[['roleButton98']]" value="{{$component.role}}">
+                    <oj-option value="{{'B'}}"><span data-bind="text:$component.nls.ViewInvoice.Buyer"></span>
+                    </oj-option>
+                    <oj-option value="{{'S'}}"><span data-bind="text:$component.nls.ViewInvoice.Supplier"></span>
+                    </oj-option>
+                </oj-buttonset-one>
+            </div>
+        </div>
+    </page-section>
+
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.Search, headerTemplate : 'supply-chain-finance/view-invoice/create-invoice-link'">
+        <!-- ko if: refresh -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <div class="oj-flex-item oj-lg-12 oj-md-12">
+                    <oj-label :for="[['InvoiceNo76']]"><span data-bind="text:$component.nls.Search.InvoiceNo"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7 oj-md-7">
+                    <oj-input-text :id="[['InvoiceNo76']]" value="{{invoiceRefNo}}"></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-lg-4 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.counterpartiesLoaded()  -->
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['CounterPartyName52']]"><span
+                            data-bind="text:$component.nls.Search.CounterPartyName"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-9">
+                    <oj-select-one placeholder="[[$component.nls.select]]" :id="[['CounterPartyName52']]"
+                        value="{{counterPartiesgetprogramCode}}">
+                        <!-- ko foreach : $component.counterPartyList -->
+                        <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option><!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.invoiceStatusLoaded()  -->
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['InvoiceStatus22']]"><span
+                            data-bind="text:$component.nls.Search.InvoiceStatus"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7">
+                    <oj-select-one placeholder="[[$component.nls.select]]" :id="[['InvoiceStatus22']]"
+                        value="{{invoiceSearchgetinvoiceStatus}}">
+                        <!-- ko foreach : $component.invoiceStatusgetVar -->
+                        <oj-option value="[[code]]"><span data-bind="text:description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex-item oj-lg-4 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.programTypesLoaded()  -->
+
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['ProgramName30']]"><span
+                            data-bind="text:$component.nls.Search.ProgramName"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-9">
+                    <oj-select-one placeholder="[[$component.nls.select]]" :id="[['ProgramName30']]"
+                        value="{{invoiceSearchgetprogramCode}}">
+                        <!-- ko foreach : programNameList -->
+                        <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option><!-- /ko -->
+                    </oj-select-one>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <!--  ko ifnot : $component.showMoreOptionsClicked()  -->
+
+            <div class="oj-flex-item oj-lg-3 right">
+                <div class="more-search-options"><a href="#" class="form-button-link" id="MoreSearchOptions91"
+                        data-bind="attr:{'alt':$component.nls.Search.MoreSearchOptions,'title':$component.nls.Search.MoreSearchOptionsTitle},click:$component.onClickMoreSearchOptions64">
+                        <span data-bind="text:$component.nls.Search.MoreSearchOptions"></span>
+                        <span id="moreOptionId" class="icon-arrow-down"></span></a>
+                </div>
+            </div><!-- /ko -->
+        </div>
+
+        <!--  ko if : $component.showMoreOptionsClicked()  -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6 oj-sm-12">
+                <div class="oj-flex-item oj-lg-12">
+                    <label data-bind="text:$component.nls.Search.InvoiceDueDate"></label>
+                </div>
+
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-4 oj-md-6">
+                        <oj-label for="from-date">
+                            <span data-bind="text:$component.nls.Search.From"></span>
+                        </oj-label>
+                        <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['from-date']]"
+                            value="{{fromDate}}" max="[[toDate]]"></oj-input-date>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-6">
+                        <oj-label for="to-date">
+                            <span data-bind="text:$component.nls.Search.To"></span>
+                        </oj-label>
+                        <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['to-date']]" value="{{toDate}}"
+                            min="[[fromDate]]"></oj-input-date>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="oj-flex-item oj-lg-5 oj-md-7">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12">
+                        <label data-bind="text:$component.nls.Search.InvoiceAmountRange"></label>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-lg-8 oj-md-8 oj-sm-8">
+                        <div>
+                            <amount-input
+                                params="amount :invoiceSearchgetinvoiceAmountFrom,currency : $component.currency, label :$component.nls.Search.From,validator:$component.validation,isMandatory:'',currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'fromAmount',rootClass:''">
+                            </amount-input>
+                        </div>
+                    </div>
+                    <div class="oj-lg-4 oj-md-4 oj-sm-4">
+                        <div>
+                            <amount-input
+                                params="amount :invoiceSearchgetinvoiceAmountTo,currency : $component.currency, label :$component.nls.Search.To,validator:$component.validation,isMandatory:'',currencyListRequired : '',currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'toAmount',rootClass:''">
+                            </amount-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-6">
+                <!--  ko if : $component.paymentStatusLoaded()  -->
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-label :for="[['PaymentStatus74']]"><span
+                            data-bind="text:$component.nls.Search.PaymentStatus"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-lg-7">
+                    <oj-select-one :id="[['PaymentStatus74']]" placeholder="[[$component.nls.select]]"
+                        value="{{invoiceSearchgetpaymentStatus}}">
+                        <!-- ko foreach : $component.paymentStatusgetVar -->
+                        <oj-option value="[[code]]"><span data-bind="text:description"></span></oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                </div><!-- /ko -->
+            </div>
+            <div class="oj-flex-item oj-lg-7 oj-md-7 oj-sm-6 right">
+                <div class="less-search-options"> <a href="#" class="form-button-link" id="LessSearchOptions95"
+                        data-bind="attr:{'alt':$component.nls.Search.LessSearchOptions,'title':$component.nls.Search.LessSearchOptionsTitle},click:$component.onClickLessSearchOptions4"><span
+                            data-bind="text:$component.nls.Search.LessSearchOptions"></span>
+                        <span id="lessOptionId" class="icon-arrow-up"></span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- /ko -->
+        <div class="oj-flex oj-flex-items-pad button-container">
+
+            <oj-button class="action-button-primary" on-click="[[$component.onClickSearch30]]"><span slot="startIcon"
+                    class="icons icon-search"></span><span data-bind="text:$component.nls.Search.Search"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$component.clearResults]]"> <span slot="startIcon"
+                    class="icons icon-refresh"></span><span data-bind="text:$component.nls.Search.Clear"></span>
+            </oj-button>
+        </div><!-- /ko -->
+    </page-section>
+    <!-- ko if : $baseModel.large() && $component.invoiceDataLoaded()-->
+
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+            <page-section
+                params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.listOfInvoices, headerTemplate : 'supply-chain-finance/view-invoice/download-invoice-link'">
+                <oj-table :id="[['buyer-table']]" data="[[dataSource14]]"
+                    row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('invoiceRenderer')]]"
+                    selection-mode='{"row":"single","column":"single"}' columns="[[columnsArray]]">
+                    <oj-paging-control :id="[['OustandingInvoices21Paging']]" data="[[dataSource14]]" page-size="10"
+                    slot="bottom"></oj-paging-control>
+                </oj-table>
+            </page-section>
+        </div>
+    </div> <!-- /ko -->
+</div>
+<script type="text/html" id="invoiceRenderer">
+    <td>
+        <!-- ko if : $context.row.program.role ==="B" -->
+        <div data-bind="text:$context.row.supplierName"></div>
+        <!-- /ko -->
+        <!-- ko if : $context.row.program.role ==="S" -->
+        <div data-bind="text:$context.row.buyerName"></div>
+        <!-- /ko -->
+    </td>
+    <td>
+        <span data-bind="text:$context.row.programName"></span>
+    </td>
+    <td>
+        <a href="#" class="form-button-link"
+            data-bind="attr:{'id':$context.row.invoiceNumber,'alt':$component.nls.InvoiceList.InvoiceNo,'title':$component.nls.InvoiceList.InvoiceNoTitle},click:$component.onClickInvoiceNo62"><span
+                data-bind="text:$context.row.invoiceNumber"></span></a>
+    </td>
+    <td>
+        <div class="right"
+            data-bind="text:$formatter.formatCurrency($context.row.totalAmount.amount,$context.row.totalAmount.currency)">
+        </div>
+    </td>
+    <td>
+        <span data-bind="text:$formatter.formatDate($context.row.invoiceDueDate)"></span>
+    </td>
+    <td>
+        <div class="center-align">
+            <!-- ko if: $context.row.invoiceStatus === "RAISED" -->
+            <span class="tags raised-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "FINANCED" -->
+            <span class="tags financed-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "PARTIAL_FINANCED" -->
+            <span class="tags partiallyFinanced-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "ACCEPTED" -->
+            <span class="tags accepted-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "PARTIAL_ACCEPTED" -->
+            <span class="tags partiallyAccepted-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "CANCELLED" -->
+            <span class="tags cancelled-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "DISPUTED" -->
+            <span class="tags disputed-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "REJECTED" -->
+            <span class="tags rejected-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.invoiceStatus === "OTHERS" -->
+            <span class="tags other-Color" data-bind="text:$context.row.invoiceStatusDescription"></span>
+            <!-- /ko -->
+        </div>
+    </td>
+    <td>
+        <!-- ko if: $context.row.outstandingAmount.amount -->
+        <div class="right"
+            data-bind="text:$formatter.formatCurrency($context.row.outstandingAmount.amount,$context.row.outstandingAmount.currency)">
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $context.row.outstandingAmount.amount -->
+        <div class="right" data-bind="text:$component.noData"></div>
+        <!-- /ko -->
+    </td>
+    <td>
+        <div class="center-align">
+            <!-- ko if: $context.row.paymentStatus  === "PAID" -->
+            <span class="tags paid-Color" data-bind="text:$context.row.paymentStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.paymentStatus  === "PART_PAID" -->
+            <span class="tags partiallyPaid-Color" data-bind="text:$context.row.paymentStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.paymentStatus  === "OVERDUE" -->
+            <span class="tags overdue-Color" data-bind="text:$context.row.paymentStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.paymentStatus  === "OTHERS" -->
+            <span class="tags other-Color" data-bind="text:$context.row.paymentStatusDescription"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.row.paymentStatus  === "UNPAID" -->
+            <span class="tags unpaid-Color" data-bind="text:$context.row.paymentStatusDescription"></span>
+            <!-- /ko -->
+        </div>
+    </td>
+</script>

@@ -1,0 +1,212 @@
+<div class="oj-flex oj-flex-items-pad structure-details-banner oj-lg-12 top-data">
+    <div class="oj-flex-item oj-lg-11">
+        <div class="oj-flex oj-flex-items-pad" data-bind="with : $component.structureDetails().structureList()[0]">
+            <div class="oj-flex-item oj-lg-12 label" data-bind="text:structureKey.structureId">
+            </div>
+            <div class="oj-flex-item oj-lg-12">
+                <span class="description" data-bind="text:desc"></span>
+                <span data-bind="text:$component.resources.structureType[structureType()]"></span>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex-item vertical-align-middle no-pad-cols right">
+        <a href="#" data-bind="attr:{alt:$component.resources.labels.treeView,
+                    title:$component.resources.labels.treeViewTitlemsg},click:$component.setTreeView">
+            <span class="icons icon-tree"></span>
+        </a>
+    </div>
+    <div class="oj-flex-item vertical-align-middle no-pad-cols right">
+        <a href="#" data-bind="attr:{id:'tableView', alt:$component.resources.labels.tabularView,
+                    title:$component.resources.labels.tableViewTitlemsg},click:$component.setTabularView">
+            <span class="icons icon-tabular-view"></span>
+        </a>
+    </div>
+</div>
+<!-- ko if:$component.headerAccountDetailsLoaded() && $component.refreshTree() && $component.viewas() === "tree" && $component.isIEBrowser() -->
+<div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 ie-text__header" data-bind="text:$component.resources.browserMessages.browserNotSupported"></div>
+    <div class="oj-flex-item oj-lg-12 ie-text__detail-message" data-bind="text:$component.resources.browserMessages.browserMessageDetail"></div>
+    <div class="oj-flex-item oj-lg-12">
+        <div class="oj-flex oj-flex-items-pad ">
+            <ul class="confirm-screen__list">
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.edgeTitle,'alt':$component.resources.browserMessages.edge},loadImage:'lm/edge.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.edge"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.firefoxTitle,'alt':$component.resources.browserMessages.firefox},loadImage:'lm/firefox.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.firefox"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.chromeTitle,'alt':$component.resources.browserMessages.chrome},loadImage:'lm/chrome.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.chrome"></div>
+                </li>
+                <li>
+                    <img data-bind="attr:{'title':$component.resources.browserMessages.safariTitle,'alt':$component.resources.browserMessages.safari},loadImage:'lm/safari.svg'">
+                    <div data-bind="text:$component.resources.browserMessages.safari"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="oj-flex-item help-item center">
+        <a href="#" data-bind="attr:{id:'tableView1', alt:$component.resources.tabularView,
+                    title:$component.resources.tableViewTitlemsg},click:$component.setTabularView">
+            <span data-bind="text:$component.resources.browserMessages.switchTabularView"></span>
+        </a>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$component.headerAccountDetailsLoaded() && $component.refreshTree() && $component.viewas() === "tree" && !($component.isIEBrowser()) -->
+<tree-view params="
+         treeDetails: $component.treeData(),
+         id: 'structureId',
+         maxChildNodesToRender : 8,
+         moreClickHandler:$component.setTabularView,
+         nodeIdjsonPath: 'accountDetails.accountKey.accountNo.value',
+         linkShortDescValue:'cashCCMethod',
+         nodeShortDescValue:'accountDetails.accountKey.accountNo.displayValue',
+         moreNodeSvgColor : {
+             lhsKey : 'cashCCMethod',
+             conditions : [{
+                rhs : 'Sweep',
+                value :'structureFillSweep'
+            },{
+                rhs : 'Pool',
+                value :'structureFillPool'
+            }]
+         },
+         treePanning:'auto',
+         treeZooming:'auto',
+         width:240,
+         height:130,
+         overViewRenderer:'on',
+         rootModel: $component,
+         baseModel:$baseModel">
+    <div class="oj-flex oj-flex-items-pad structure__node" data-bind="css : $data.nodeData.level ? (($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep structure__structureFill':'structure__structureFill__structureFillPool structure__structureFill') :  (($component.structureType === 'Sweep') ? 'structure__structureFillParent__structureFillSweep structure__structureFillParent': 'structure__structureFillParent__structureFillPool structure__structureFillParent') ">
+        <!-- ko ifnot:$data.nodeData.level && $component.structureType -->
+        <!-- ko if:$component.structureDetails().structureList()[0].structureKey.versionNo() > 1 -->
+        <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+        <div class="oj-flex-item oj-lg-2 structure__more-icon">
+            <a class="structure__link-color" href="#" data-bind="click:$component.linkAccountClicked.bind($data, $data.nodeData.accountDetails.accountKey.accountNo.value,$data.nodeData.cashCCMethod, $data.nodeData.level),
+                     attr : {id:'linkAccounts-assembleStructure-' + $data.nodeData.accountDetails.accountKey.accountNo.value, alt:$component.resources.labels.moreOptionsAlt,
+                    title:$component.resources.labels.moreOptionsTitle}">
+                <div class="icons icon-plus"></div>
+            </a>
+        </div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData">
+            <span data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+            <span class="structure__accountType tags" data-bind="text : $component.resources.labels.accountCheck[$data.nodeData.accountDetails.isExtAccChk]">
+            </span>
+        </div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance, $data.nodeData.accountDetails.accountKey.ccyId)"></div>
+        <!-- /ko -->
+        <!-- ko if:$component.structureDetails().structureList()[0].structureKey.versionNo() === 1 -->
+        <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+        <div class="oj-flex-item oj-lg-2 structure__more-icon">
+            <a class="structure__link-color" href="#" openprofile="true" data-bind="click:$component.openMenu,
+                     attr : {id:'menuLauncher-viewStructure-' + $data.nodeData.accountDetails.accountKey.accountNo.value, alt:$component.resources.labels.moreOptionsAlt,
+                    title:$component.resources.labels.moreOptionsTitle}">
+                <div class="icons icon-more-vertical"></div>
+            </a>
+            <oj-menu :id="[['menuLauncher-viewStructure-contents-' + $data.nodeData.accountDetails.accountKey.accountNo.value]]" on-oj-action="[[$component.menuItemSelect.bind($data,$data.nodeData)]]" class="hide" open-options.launcher="[['menuLauncher-viewStructure-'  + $data.nodeData.accountDetails.accountKey.accountNo.value]]">
+                <!-- ko foreach: $component.menuItems -->
+                <!-- ko if: id !== "replace" || $component.structureType === "Sweep" -->
+                <oj-option :id="[['id' + $baseModel.incrementIdCount()]]" :value="[[id]]">
+                    <span data-bind="text : label"></span>
+                </oj-option>
+                <!-- /ko -->
+                <!-- /ko -->
+            </oj-menu>
+        </div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData">
+            <span data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+            <!-- ko if:$component.structureType==="Sweep" -->
+            <span class="structure__accountType tags" data-bind="text : $component.resources.labels.accountCheck[$data.nodeData.accountDetails.isExtAccChk]">
+            </span>
+            <!-- /ko -->
+        </div>
+        <!-- ko if:$component.structureType!=="Sweep" -->
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.labels.currency,{currencyCode : ko.utils.unwrapObservable($data.nodeData.accountDetails.accountKey.ccyId)})"></div>
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.labels.branch,{branchCode : ko.utils.unwrapObservable($data.nodeData.accountDetails.accountKey.branchCode)})"></div>
+        <!-- /ko -->
+        <!-- ko if:$component.structureType==="Sweep" -->
+        <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance, $data.nodeData.accountDetails.accountKey.ccyId)"></div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if:$data.nodeData.level -->
+        <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+        <div class="oj-flex-item oj-lg-2 structure__more-icon">
+            <a href="#" openprofile="true" data-bind="click:$component.openMenu,
+                     attr : {id:'menuLauncher-viewStructure-' + $data.nodeData.accountDetails.accountKey.accountNo.value, alt:$component.resources.labels.moreOptionsAlt,
+                    title:$component.resources.labels.moreOptionsTitle}">
+                <div class="icons icon-more-vertical"></div>
+            </a>
+            <oj-menu :id="[['menuLauncher-viewStructure-contents-' + $data.nodeData.accountDetails.accountKey.accountNo.value]]" class="hide" on-oj-action="[[$component.menuItemSelect.bind($data,$data.nodeData)]]" open-options.launcher="[['menuLauncher-viewStructure-'  + $data.nodeData.accountDetails.accountKey.accountNo.value]]">
+                <!-- ko foreach: $component.menuItems -->
+                <oj-option :id="[['id' + $baseModel.incrementIdCount()]]" :value="[[id]]">
+                    <span data-bind="text : label"></span>
+                </oj-option>
+                <!-- /ko -->
+            </oj-menu>
+        </div>
+        <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+        <div class="oj-flex-item oj-lg-12">
+            <span class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+            <span class="structure__accountType tags" data-bind="text : $component.resources.labels.accountCheck[$data.nodeData.accountDetails.isExtAccChk]"></span>
+        </div>
+        <div class="oj-flex-item oj-lg-8" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance,$data.nodeData.accountDetails.accountKey.ccyId)"></div>
+        <!-- ko if:ko.utils.unwrapObservable($data.nodeData.instructionPriority) -->
+        <div class="oj-flex-item oj-lg-4 right priority" data-bind="text:$baseModel.format($component.resources.labels.priority,{
+        number :ko.utils.unwrapObservable($data.nodeData.instructionPriority)})"></div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</tree-view>
+<!-- /ko -->
+<!-- ko if:$component.headerAccountDetailsLoaded() && $component.refreshTree() && $component.viewas() === "table" -->
+<view-structure-tabular params="structureDetails :$component.structureDetails().structureList()[0] , tabularData : $component.treeData(), mode:$component.mode, rootModel : $component, dashboard : $dashboard, baseModel:$baseModel">
+</view-structure-tabular>
+<!-- /ko -->
+<!-- ko if:$component.headerAccountDetailsLoaded() -->
+<div class="oj-flex-item button-container">
+    <!-- ko if:!($component.isIEBrowser()) || ($component.isIEBrowser() && $component.viewas() === "table") -->
+    <oj-button class="action-button-primary" id="validateButton" on-click="[[$component.validateStructure]]">
+        <span slot="startIcon" class="icons icon-ok"></span>
+        <span data-bind="text: $component.resources.labels.validate"></span>
+    </oj-button>
+    <!-- /ko -->
+    <oj-button class="action-button-primary" id="saveButton" on-click="[[$component.next]]" disabled="[[$component.isValidated() ? false : true]]">
+        <span slot="startIcon" class="icons icon-drop-right"></span>
+        <span data-bind="text: $component.resources.generic.common.next"></span>
+    </oj-button>
+    <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+        <span slot="startIcon" class="icons icon-cancel"></span>
+        <span data-bind="text: $component.resources.generic.common.cancel"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" id="backButton" on-click="[[$component.back.bind($data, true)]]">
+        <span slot="startIcon" class="icons icon-back-arrow"></span>
+        <span data-bind="text: $component.resources.generic.common.back"></span>
+    </oj-button>
+</div>
+<!-- /ko -->
+<modal-window params="baseModel : $baseModel, rootModel : $data, id:'removeNodeDialog', header : $component.resources.labels.remove">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+            <span data-bind="text: $component.resources.labels.removeMessage1"></span>
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+            <span data-bind="text: $component.resources.labels.removeMessage2"></span>
+        </div>
+    </div>
+    <div class="oj-flex button-container">
+        <oj-button id="confirm" class="action-button-primary" on-click="[[$component.remove]]">
+            <span data-bind="text:$component.resources.generic.common.ok"></span>
+        </oj-button>
+        <oj-button id="cancel" class="action-button-secondary" on-click="[[$component.closeModal]]">
+            <span data-bind="text:$component.resources.generic.common.cancel"></span>
+        </oj-button>
+    </div>
+</modal-window>

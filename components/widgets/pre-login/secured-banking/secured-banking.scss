@@ -1,0 +1,94 @@
+.secured-banking {
+    .movingbox {
+        position: relative;
+        padding: 5rem 0.6rem;
+        margin: 0 auto;
+        max-width: 75rem;
+        
+        @include mq(small) {
+            padding: 0.5rem;
+        }
+        @include mq(medium) {
+            padding: 0.5rem 1.3rem;
+        }
+        .header-block{
+            display: flex;
+        }
+        .icons-title_desc {
+            padding-top: 1rem;
+            padding-bottom: 0.9375rem;
+            color: var(--base-text-primary);
+            letter-spacing: 0.025rem;
+            font-weight: var(--link-font-weight);
+            @include mq(small){
+                font-size: 0.8rem;
+            }
+        }
+        .features-list-block {
+            width: 65%;
+            @include single-margin(left, 0.625rem);
+            @include mq(small) {
+                display: flex;
+                margin-top: 12rem;
+                width: 100%;
+            }
+            ul {
+                @include single-padding(left, 0);
+                @include mq(small) {
+                    @include single-padding(right, 0.625rem);
+                }
+                li {
+                    padding: 1rem;
+                    list-style-type: none;
+                    border: 1px solid var(--base-border-default);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-bottom: -0.0625rem;
+                    @include single-margin(right, -0.0625rem);
+                    [class*="icon-"] {
+                        font-size: x-large;
+                    }
+                    @include mq(small) {
+                        padding: 1rem 0rem;
+                    }
+                }
+            }
+        }
+        .secured-icon-block {
+            position: relative;
+            .icon-easy-banking {
+                position: absolute;
+                width: 21.875rem;
+                @include left(0rem);
+                @include mq(small) {
+                    width: 13.875rem;
+                }
+            }
+            .icon-easy-notification {
+                position: absolute;
+                @include left(1.5rem);
+                width: 18.75rem;
+                transform: translateY(13rem);
+                @include mq(small) {
+                    @include left(0rem);
+                    width: 10.75rem;
+                    transform: translateY(9rem);
+                }
+            }
+        }
+
+        .download-block{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 6rem;
+            @include mq(small) {
+                margin-top: 2rem;
+            }
+            p {
+              @include single-margin(right, 1rem);
+            }
+        }
+    }
+}

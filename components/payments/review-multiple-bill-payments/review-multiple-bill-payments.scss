@@ -1,0 +1,74 @@
+.multiple-payments {
+    .payment-element {
+        border: 0.05rem solid var(--base-border-default);
+        @include margin(0.6rem, 0, 1.3rem, 0.6rem);
+        @include mq(small) {
+            @include margin(0.6rem, 0, 1.9rem, 0);
+        }
+        .action-icon {
+            font-size: 1.3rem;
+        }
+        .payment-overview {
+            padding-top: 0.6rem;
+            &__delete {
+                @include single-border(left, 0.05rem solid var(--base-border-default));
+                max-height: 1.3rem;
+            }
+
+            &__element {
+                padding-bottom: 0.6rem;
+            }
+            .details {
+                @include mq(small) {
+                    padding-bottom: 0.6rem;
+                }
+            }
+        }
+    }
+
+    .warning-bar {
+        background: var(--base-color-warning);
+        @include single-border(left, 0.4rem solid var(--base-color-warning));
+        display: table;
+        @include single-margin(left, 0.3rem);
+        padding: 0.35rem 0.3rem;
+        @include mq(small) {
+            padding: 0.6rem 0;
+        }
+        .warning-msg {
+            font-size: var(--base-font-size-default);
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .warning-icon {
+            color: var(--base-color-warning);
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            @include single-padding(right, 0.5rem);
+            width: 1.2rem;
+        }
+    }
+    .error-bar {
+        background: var(--base-color-danger);
+        @include single-border(left, 0.4rem solid var(--base-color-danger));
+        padding: 0.35rem 0.3rem;
+        display: table;
+        @include mq(small) {
+            padding: 0.6rem 0;
+        }
+        .error-msg {
+            font-size: var(--base-font-size-default);
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .error-icon {
+            color: var(--base-color-danger);
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            @include single-padding(right, 0.5rem);
+            width: 1.2rem;
+        }
+    }
+}

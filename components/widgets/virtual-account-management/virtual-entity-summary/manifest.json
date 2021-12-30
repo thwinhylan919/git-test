@@ -1,0 +1,14 @@
+{
+    "componentName": "virtual-entity-summary",
+    "module": "virtual-account-management",
+    "segment": ["corporateuser"],
+    "width": {
+      "large": "4",
+      "medium": "4"
+    },
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+}
+  

@@ -1,0 +1,38 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.me.service.businessunit.BusinessUnit",
+      "components": [{
+          "componentName": "system-configuration-home",
+          "service": "read"
+        },
+        {
+          "componentName": "system-configuration-home",
+          "service": "create"
+        },
+        {
+          "componentName": "system-configuration-home",
+          "service": "update"
+        }
+      ]
+    },
+    {
+      "moduleName": "com.ofss.digx.app.config.service.wizard.ConfigurationWizard",
+      "components": [{
+          "componentName": "system-configuration-welcome",
+          "service": "read",
+          "perform": "system-configuration-start#system-configuration-menu#configuration-details-view#configuration-details"
+        },
+        {
+          "componentName": "system-configuration-welcome",
+          "service": "process",
+          "perform": "system-configuration-start#system-configuration-menu#configuration-details#configuration-details-view"
+        },
+        {
+          "componentName": "system-configuration-welcome",
+          "service": "update",
+          "perform": "system-configuration-start#system-configuration-menu#configuration-details-view#configuration-details"
+        }
+      ]
+    }
+  ]
+}

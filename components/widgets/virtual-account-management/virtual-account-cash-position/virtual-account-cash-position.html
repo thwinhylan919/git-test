@@ -1,0 +1,99 @@
+<div class="oj-panel cashPosition">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+      <h3 data-bind="text:$component.resource.header.cashPosition">
+      </h3>
+    </div>
+    <!-- ko if: !$component.viewChart() && $component.entityDetailsLoaded() && $component.currencyDetailsLoaded() -->
+    <span class="oj-flex-item widgetSummary" data-bind="text:$component.resource.labels.selectBoth"></span>
+    <!-- /ko -->
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-7">
+      <div class="oj-sm-9">
+        <!-- ko if:$component.entityDetailsLoaded() -->
+        <oj-select-one :aria-label="[[$component.resource.labels.selectEntity]]" id="SelectEntity" value="{{selectedEntity}}"
+          :placeholder="{{$component.resource.labels.selectEntity}}"
+          on-value-changed="{{$component.selectDifferentEntity}}" required>
+          <!-- ko foreach:$component.entityDetails -->
+          <oj-option value="[[virtualEntityId]]"><span data-bind="text: virtualEntityId"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+        <!-- /ko -->
+      </div>
+    </div>
+    <!-- ko if:$component.currencyDetailsLoaded() -->
+    <div class="oj-flex-item oj-sm-5">
+      <oj-select-one :aria-label="[[$component.resource.labels.selectCurrency]]" id="SelectCurrency" value="{{$component.selectedCurrency}}"
+        :placeholder="{{$component.resource.labels.selectCurrency}}" options="[[$component.currencyDetails]]"
+        on-value-changed="{{$component.selectDifferentCurrency}}" required>
+      </oj-select-one>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if:$component.selectedEntity && $component.showVirtualEntityInfo -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item entityNameText">
+      <span data-bind="text:$component.virtualEnitiyName"></span>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="oj-flex oj-flex-items-pad cashPosition__wrapper">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+      <!-- ko if: $component.viewChart -->
+      <div class="oj-flex oj-flex-items-pad cashPosition__wrapper-header">
+        <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-6">
+          <div class="cashPosition__wrapper-label" data-bind="text: $component.resource.labels.totalAccounts"></div>
+          <div data-bind="html:$component.totalAccounts"></div>
+        </div>
+        <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-6 right">
+          <div class="cashPosition__wrapper-label" data-bind="text: $component.resource.labels.totalBalance"></div>
+          <div data-bind="text:$formatter.formatCurrency($component.totalBalance(),$component.currency())"></div>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <oj-chart id="barChart" class="cashPosition__wrapper-chart-container" type="bar"
+          selection-mode="[[selectionValue]]" series="[[barSeriesValue]]" groups="[[groups]]"
+          orientation="[[orientationValue]]" stack="[[stackValue]]" x-axis="[[yAxis]]" y-axis="[[xAxis]]"
+          stack-label="[[stackLabelValue]]" animation-on-display="auto" animation-on-data-change="auto"
+          on-selection-changed="[[selectionListener]]" style-defaults.data-label-position="outsideBarEdge"
+          style-defaults.bar-gap-ratio="0.3" value-formats.value.converter="[[numberConverter]]">
+        </oj-chart>
+      </div>
+      <!-- /ko -->
+      <!-- ko ifnot: $component.viewChart -->
+      <div class="oj-flex oj-flex-items-pad noData">
+        <div class="oj-flex-item oj-sm-12 noData__image">
+          <img
+            data-bind="attr:{'alt': $component.resource.labels.notifications,'title':$component.resource.labels.noData},loadImage:'virtual-account-management/reports.svg'">
+        </div>
+        <div class="oj-flex-item oj-sm-12">
+          <span class="text" data-bind="text:$component.resource.labels.noData"></span>
+          <span class="subText info-text-small" data-bind="text:$component.resource.labels.subData"></span>
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- ko if: $component.viewChart -->
+  <div class="oj-flex oj-flex-items-pad cashPosition__links">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+      <a href="#" attr="{'id':'viewAll'}"
+        data-bind="click: $component.viewAll, text: $component.resource.labels.viewAll"></a>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<modal-window
+  params="baseModel:$baseModel,rootModel:$component,id:'cashPositionErrorPopUp', header:$component.resource.header.error">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12">
+      <span data-bind="text: $component.resource.labels.errorMsg"></span>
+    </div>
+    <div class="button-container search-buttons">
+      <oj-button class="action-button-primary" on-click="[[closePopUp]]">
+        <span data-bind="text:$component.resource.labels.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>

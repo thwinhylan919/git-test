@@ -1,0 +1,156 @@
+<div class="form-main-container submitted-application">
+    <div class="oj-flex oj-flex-items-pad">
+        <!-- ko if: $component.type !== "Collateral Revaluation" -->
+        <!-- ko ifnot: ($component.mode && $component.mode==="approval") -->
+        <div class="cust-details oj-lg-12">
+            <div class="paddingBottom">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-6 no-pad-cols">
+                        <span data-bind="text:$component.payload.collateralType ? $component.payload.collateralType : $component.payload.category || $component.payload.collateralCode">
+                        </span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-6 right">
+                        <div data-bind="text:$component.partyName()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="paddingBottom oj-lg-12">
+                    <div data-bind="text:$component.payload.collateralDesc ? $component.payload.collateralDesc : $component.payload.categoryDesc" class="fontDescription">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="oj-lg-12 paddingBottom">
+                    <span data-bind="text:$component.midOfficeRefNo" class="fontSmall"></span>
+                    <span class="pipe"></span>
+                    <!-- ko if: $component.status==="SUBMITTED"-->
+                    <span class="dot dot1"></span>
+                    <!-- /ko -->
+                    <!-- ko if: $component.status==="IN_PROGRESS"-->
+                    <span class="dot dot2"></span>
+                    <!-- /ko -->
+                    <span data-bind="text:$component.resourceBundle.processStatus[status]" class="fontSmall"></span>
+                </div>
+            </div>
+            <div>
+                <div class=" oj-lg-12">
+                    <div data-bind="text:$baseModel.format($component.resourceBundle.ApplicationTracker.facilityApplied,{facilityAmount : $formatter.formatCurrency($component.payload.availableAmount ? $component.payload.availableAmount.amount : $component.payload.utilizationAmount,$component.payload.availableAmount ? $component.payload.availableAmount.currency : $component.payload.currencyCode)})" class="fontSmall">
+                    </div>
+                </div>
+                <div class=" oj-lg-12">
+                    <span class="fontSmall" data-bind="text:$baseModel.format($component.resourceBundle.appliedOn,{ondate:$formatter.formatDate($data.creationDate,'dateMonthFormat')})"></span>
+                    <span class="fontSmall" data-bind="text:$formatter.formatDate($data.creationDate,'timeFormat')"></span>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $component.type === "Collateral Revaluation" -->
+        <!-- ko ifnot: ($component.params && $component.params.mode && $component.params.mode === "approval") -->
+        <div class="cust-details oj-lg-12">
+            <div class="paddingBottom">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-6 no-pad-cols">
+                        <span>
+                            <img class="img-customizations1" src="/images/process-management/new-facility.svg">
+                        </span>
+                        <span data-bind="text:$component.payload.collateralCode">
+                        </span>
+                    </div>
+                    <div class="oj-flex-item oj-sm-10 oj-md-8 oj-lg-6 right">
+                        <div data-bind="text:$component.partyName()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="paddingBottom oj-lg-12">
+                    <div data-bind="text:$component.payload.reasonForModification" class="fontDescription">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="oj-lg-12 paddingBottom">
+                    <span data-bind="text:$component.midOfficeRefNo" class="fontSmall"></span>
+                    <span class="pipe"></span>
+                    <!-- ko if: $component.status==="SUBMITTED"-->
+                    <span class="dot dot1"></span>
+                    <!-- /ko -->
+                    <!-- ko if: $component.status==="IN_PROGRESS"-->
+                    <span class="dot dot2"></span>
+                    <!-- /ko -->
+                    <span data-bind="text:$component.resourceBundle.processStatus[status]" class="fontSmall"></span>
+                </div>
+            </div>
+            <div>
+                <div class=" oj-lg-12">
+                    <div data-bind="text:$baseModel.format($component.resourceBundle.ApplicationTracker.facilityApplied,{facilityAmount : $formatter.formatCurrency($component.payload.collateralValue.amount, $component.payload.collateralValue.currency)})" class="fontSmall">
+                    </div>
+                </div>
+                <div class=" oj-lg-12">
+                    <span class="fontSmall" data-bind="text:$baseModel.format($component.resourceBundle.appliedOn,{ondate:$formatter.formatDate($data.creationDate,'dateMonthFormat')})"></span>
+                    <span class="fontSmall" data-bind="text:$formatter.formatDate($data.creationDate,'timeFormat')"></span>
+                </div>
+            </div>
+        </div>
+        <!-- ko if: $component.isFlow() -->
+        <div class=" oj-lg-12">
+            <flow params="{ rootModel: { params: { flowName: $component.loadComponentName(), flowStageRootModel: {data:$component.payload}, flowMode: 'readonly' } }, baseModel: $baseModel, dashboard: $dashboard }"></flow>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko ifnot: $component.type === "Collateral Revaluation" -->
+        <!-- ko foreach:stages -->
+        <!-- ko if: $component.type === "New Facility Application" || $component.type === "Facility Amendment" -->
+        <div id="panel" class="oj-panel oj-sm-margin-2x basepanel oj-flex-item oj-lg-12">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text:$data.templateHeading"></span>
+                </div>
+            </div>
+            <div data-bind="template:$data.templateName"></div>
+            <div class="oj-flex expand-button">
+                <oj-button class="help-button" on-oj-action='[[$component.buttonClick.bind($data,templateName)]]'>
+                    <span data-bind="text:$component.resourceBundle.showMore"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.type === "Collateral Evaluation" -->
+        <div id="panel" class="oj-panel oj-sm-margin-2x basepanel oj-flex-item oj-lg-12">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item">
+                    <span data-bind="text:$data.componentHeading"></span>
+                </div>
+            </div>
+            <div data-bind="component:{name: componentName, params:{
+                rootModel : $component,
+                payload:$component.payload,
+                review: true
+            }}"> </div>
+            <div class="oj-flex expand-button">
+                <oj-button class="help-button" on-oj-action='[[$component.buttonClick.bind($data,componentName)]]'>
+                    <span data-bind="text:$component.resourceBundle.showMore"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- ko ifnot: ($component.mode && $component.mode === "approval") -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="button-container">
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span></oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.back"></span></oj-button>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

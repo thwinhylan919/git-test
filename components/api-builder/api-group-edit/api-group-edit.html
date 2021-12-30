@@ -1,0 +1,112 @@
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-9">
+    <div class="form-main-container  full-width">
+      <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.groupParameters">
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="hostIP">
+              <span data-bind="text:$component.resource.hostIP"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="hostIP" value="{{$component.updatedapiGroupDTO.ip}}" aria-labelledby="hostIP"></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="hostPort">
+              <span data-bind="text:$component.resource.hostPort"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="hostPort" value="{{$component.updatedapiGroupDTO.port}}" aria-labelledby="hostPort"></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="authorizationRequired">
+              <span data-bind="text:$component.resource.authorizationRequired"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-radioset class="oj-choice-direction-row" id="authorizationRequired" labelled-by="authorizationRequired"
+              value="{{$component.authorizationRequiredValue}}" on-value-changed="[[isauthorizationRequire]]" required>
+              <!-- ko foreach: authorizationRequiredArray -->
+              <oj-option value="{{code}}"><span data-bind="text:  description"></span></oj-option>
+              <!-- /ko -->
+            </oj-radioset>
+          </div>
+        </div>
+        <!-- ko if: $component.isauthorizationRequired() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="authorizationRequired">
+              <span data-bind="text:$component.resource.authorizationType"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-radioset class="oj-choice-direction-row" id="authorizationRequired" labelled-by="authorizationRequired"
+              value="{{$component.authorizationTypeValue}}" on-value-changed="[[authorizationType]]" required>
+              <!-- ko foreach: authorizationTypeArray -->
+              <oj-option value="{{code}}"><span data-bind="text:  description"></span></oj-option>
+              <!-- /ko -->
+            </oj-radioset>
+          </div>
+        </div>
+        <!-- ko if: $component.token() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="token">
+              <span data-bind="text:$component.resource.token"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-password id="token" value="{{$component.updatedapiGroupDTO.password}}" aria-labelledby="token"></oj-input-password>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <a href="#" data-bind="attr:{'alt':$component.resource.togglePassword,'aria-label':$component.resource.togglePassword },click:$component.togglePassword">
+              <div id="eyecon" class="icon icon-eye-slash"></div>
+            </a>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.userCredentials() -->
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="userName">
+              <span data-bind="text:$component.resource.userName"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-text id="userName" value="{{$component.updatedapiGroupDTO.userName}}" aria-labelledby="userName"></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-flex-item oj-lg-3 label">
+            <oj-label for="password">
+              <span data-bind="text:$component.resource.password"></span>
+            </oj-label>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <oj-input-password id="password" value="{{$component.updatedapiGroupDTO.password}}" aria-labelledby="password"></oj-input-password>
+          </div>
+          <div class="oj-flex-item oj-lg-4">
+            <a href="#" data-bind="attr:{'alt':$component.resource.togglePassword,'aria-label':$component.resource.togglePassword },click:$component.togglePassword">
+              <div id="eyecon" class="icon icon-eye-slash"></div>
+            </a>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+      </page-section>
+      <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.save]]"><span data-bind="text:$component.resource.save"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel]]"><span data-bind="text:$component.resource.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack]]"><span data-bind="text:$component.resource.back"></span></oj-button>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex-item oj-sm-3 help-panel">
+    <help params="baseModel : $baseModel, rootModel : $component, transaction: 'api-group-create'"></help>
+  </div>
+</div>

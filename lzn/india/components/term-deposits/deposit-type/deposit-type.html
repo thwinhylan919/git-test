@@ -1,0 +1,9 @@
+<div class="oj-flex oj-flex-items-pad oj-lg-12">
+  	<!-- ko if:$component.params.depositTypesLoaded -->
+  	<!-- ko if: $dashboard.appData.segment !== 'CORP' -->
+  	<!-- ko if:$component.filteredDepositTypeList().length > 1 -->
+      	<div data-bind='component: {name: "nav-bar", params:{menuOptions: filteredDepositTypeList, uiOptions: uiOptions, navBarDescription: $component.locale.openTermDeposit.depositTypeDescription}}'></div>
+	<!-- /ko -->
+	<!-- /ko -->
+	<!-- /ko -->
+</div>

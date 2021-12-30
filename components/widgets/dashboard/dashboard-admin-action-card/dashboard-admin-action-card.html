@@ -1,0 +1,22 @@
+<div class="oj-panel admin-card">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+    <h3 data-bind="text:$component.resource.dashboard.titles[cardData.type]"></h3>
+    </div>
+    <div class="oj-flex-item oj-sm-12 no-pad-cols">
+    <ul class="admin-card__container">
+      <!-- ko foreach:cardData.submenus -->
+      <li class="admin-card-container" data-bind="css:'admin-card-container--'+$parent.cardData.type">
+        <a href="#" data-bind="click : $component.onCardClick.bind($data, name, module),attr:{alt:$component.resource.dashboard.others[name],title:$baseModel.format($component.resource.dashboard.commonTitle,{action:$component.resource.dashboard.others[name]})}">
+          <!-- ko if : image -->
+          <img alt="" class="admin-card-container__icon" data-bind="attr:{'title':$component.resource.dashboard.others[name]},
+       loadImage:image">
+          <!-- /ko -->
+          <div class="admin-card-container__text" data-bind="text:$component.resource.dashboard.others[name]"></div>
+        </a>
+      </li>
+      <!-- /ko -->
+    </ul>
+    </div>
+  </div>
+</div>

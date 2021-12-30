@@ -1,0 +1,57 @@
+<div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <!-- ko if:!$component.vpaList().length -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-8">
+        <div class="oj-flex-item oj-sm-12">
+            <span data-bind="text: $component.resource.manageVpa.noVpa"></span>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.vpaList().length -->
+    <oj-list-view class="oj-sm-12 oj-lg-4" id="vpa-list" :aria-label="[[$component.resource.manageVpa.header]]" selection-mode="single" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('vpaListTemplate',true)]]" data="{{vpaListDataSource}}">
+    </oj-list-view>
+    <script type="text/html" id="vpaListTemplate">
+        <li data-bind="attr: {id: $data['id']}">
+            <div class="oj-flex oj-flex-items-pad vpaList">
+                <div class="oj-flex-item oj-lg-9 oj-sm-9">
+                    <div data-bind="text: id"></div>
+                    <oj-label>
+                        <span data-bind="text: accountId.displayValue"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-lg-3 oj-sm-3 oj-flex-bar">
+                    <!-- ko if:$component.editFlag() -->
+                    <div class="oj-flex-item oj-sm-6 edit">
+                        <a href="#" data-bind="attr:{'alt':$baseModel.format($component.resource.manageVpa.alt, {reference: $component.resource.generic.common.edit}),'title':$baseModel.format($component.resource.manageVpa.title, {reference: $component.resource.generic.common.edit})}, click:$component.editVpa.bind($data, $context.data)">
+                        <span class="icons icon-remarks"></span></a>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex-item oj-sm-6 right">
+                        <a href="#" data-bind="attr:{'alt':$baseModel.format($component.resource.manageVpa.alt, {reference: $component.resource.generic.common.delete}),'title':$baseModel.format($component.resource.manageVpa.title, {reference: $component.resource.generic.common.delete})}, click:$component.deleteVpa.bind($data, $context.data)">
+                        <span class="icons icon-delete"></span></a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </script>
+    <modal-window params="baseModel : $baseModel, rootModel : $component, id:'delete-vpa', dashboard : $dashboard, header : $component.resource.manageVpa.deleteVpa, closeHandler : $component.closeModal">
+        <div class="oj-flex oj-flex-items-pad">
+            <div for="validity" class="oj-flex-item oj-sm-12">
+                <span data-bind="text:$component.resource.manageVpa.deleteVpaMsg"></span>
+            </div>
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <oj-button class="action-button-primary" id="ok" on-click="[[$component.confirmDelete.bind($data, $data)]]">
+                    <span slot="startIcon" class="icons icon-ok"></span><span data-bind="text:$component.resource.generic.common.yes"></span>
+                </oj-button>
+                <oj-button class="action-button-primary" id="cancel" on-click="[[closeModal]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span><span data-bind="text:$component.resource.generic.common.no"></span>
+                </oj-button>
+            </div>
+        </div>
+    </modal-window>
+    <!-- /ko -->
+    <!-- ko if:!$baseModel.large() -->
+    <a href="#" id="fabNewVpa" data-bind="attr:{'alt':$baseModel.format($component.resource.manageVpa.alt, {reference : $component.resource.manageVpa.createNewVpa}),'title':$baseModel.format($component.resource.manageVpa.title, {reference : $component.resource.manageVpa.createNewVpa})}, click: $dashboard.loadComponent.bind($data,'create-vpa')">
+        <div class="floating-button"><span slot="startIcon" class="icons icon-plus"></span></div>
+    </a>
+    <!-- /ko -->
+</div>

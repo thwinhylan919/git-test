@@ -1,0 +1,64 @@
+<div class="page-banner">
+    <div class="oj-panel filmStripBlock">
+        <div id="filmStripDiv">
+            <oj-film-strip  id="filmStrip" 
+                max-items-per-page="1"
+                arrow-visibility="hidden">
+            <!-- ko if:$baseModel.large() -->
+            <oj-bind-for-each data="[[features]]" as="feature">
+                <template>
+                   <div class="page-banner-section">
+                        <div class="upper-block oj-flex-items-pad oj-flex">
+                            <div class="oj-flex-item oj-lg-4 left-section">
+                                    <div data-bind="component: {name: 'product-header-text',
+                                    params:{rootModel: $component.nls.pageBanner.labels[feature.data.name]}}">
+                                    </div>
+                                    <div class="icon-title_desc" data-bind="text: $component.nls.pageBanner.labels[feature.data.description]"></div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-2"></div>
+                            <div class="oj-flex-item right oj-lg-6 right-section">
+                                &nbsp;
+                                <div class="image-block" data-bind="foreach: { data: feature.data.image, as: 'image'}">
+                                    <img data-bind="loadImage: 'home/'+ image +'.png', class: image, attr:{alt: $component.nls.pageBanner.alt[feature.data.alt]}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </oj-bind-for-each>
+            <!-- /ko -->
+            <!-- ko if:$baseModel.small() || $baseModel.medium()-->
+            <oj-bind-for-each data="[[featuresSmd]]" as="featureSmd">
+                <template>
+                    <div class="page-banner-section">
+                        <div class="upper-block oj-flex-items-pad oj-flex">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 right-section">
+                                &nbsp;
+                                <div class="image-block right" data-bind="foreach: { data: featureSmd.data.image, as: 'image'}">
+                                    <img data-bind="loadImage: 'home/'+ image +'.png', class: image, attr:{alt: $component.nls.pageBanner.alt[featureSmd.data.alt]}" />
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 left-section">
+                                <div class="oj-sm-8 oj-md-7" data-bind="component: {name: 'product-header-text',
+                                params:{rootModel: $component.nls.pageBanner.labels[featureSmd.data.name]}}">
+                                </div>
+                                <div class="oj-sm-10 oj-md-10 icon-title_desc" data-bind="text: $component.nls.pageBanner.labels[featureSmd.data.description]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </oj-bind-for-each>
+            <!-- /ko -->
+            </oj-film-strip >
+            
+            <div class="overlaid-paging-control">
+                <oj-paging-control id="pagingControl" 
+                    data="[[pagingModel]]"
+                    page-size="0"
+                    page-options='{"type": "dots"}'>
+                </oj-paging-control>
+            </div>
+        </div> <!-- end filmStripDiv -->
+    </div>
+</div>
+

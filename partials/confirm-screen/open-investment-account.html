@@ -1,0 +1,7 @@
+<!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails -->
+<!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+<page-section params="baseModel : $baseModel, rootModel : $data">
+  <row params="baseModel : $baseModel, rootModel : $component, label : $parentContext.$component.confirmScreenResources.confirm.referenceNo, value : referenceNumber"></row>
+</page-section>
+<!-- /ko -->
+<!-- /ko -->

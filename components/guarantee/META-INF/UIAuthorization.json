@@ -1,0 +1,42 @@
+{
+  "modules": [{
+          "moduleName": "com.ofss.digx.app.tradefinance.service.bankguarantee.BankGuarantee",
+          "components": [
+              {
+                "componentName": "initiate-guarantee",
+                "service": "create",
+                "perform": "guarantee-list#initiate-guarantee#bank-guarantee-parties#bank-guarantee-commitment#bank-guarantee-contracts#bank-guarantee-terms-and-conditions#bank-guarantee-instructions#attach-documents#review-guarantee#outward-guarantees#inward-guarantees#guarantee-nav-bar",
+                "approve":"review-guarantee"
+              },
+              {
+                "componentName": "initiate-guarantee",
+                "service": "update",
+                "perform": "guarantee-list#initiate-guarantee#bank-guarantee-parties#bank-guarantee-commitment#bank-guarantee-contracts#bank-guarantee-terms-and-conditions#bank-guarantee-instructions#attach-documents#review-guarantee",
+                "approve":"review-guarantee"
+              },
+              {
+                "componentName": "initiate-guarantee",
+                "service": "delete",
+                "perform": "guarantee-list#initiate-guarantee#bank-guarantee-parties#bank-guarantee-commitment#bank-guarantee-contracts#bank-guarantee-terms-and-conditions#bank-guarantee-instructions#attach-documents#review-guarantee",
+                "approve":"review-guarantee"
+              },
+              {
+                "componentName": "guarantee-list",
+                "service": "read",
+                "perform": "view-bank-guarantee#initiate-guarantee#guarantee-nav-bar#search-credit-line#view-line-limit"
+              }
+          ]
+      },
+      {
+        "moduleName": "com.ofss.digx.app.tradefinance.service.bankguarantee.amendment.BankGuaranteeAmendment",
+        "components": [
+            {
+                "componentName": "amend-bank-guarantee",
+                "service": "create",
+                "perform": "guarantee-list#initiate-guarantee#bank-guarantee-parties#bank-guarantee-commitment#bank-guarantee-contracts#bank-guarantee-terms-and-conditions#bank-guarantee-instructions#attach-documents#review-guarantee#outward-guarantees#inward-guarantees#guarantee-nav-bar",
+				"approve":"review-amendment"
+            }
+        ]
+      }
+  ]
+}

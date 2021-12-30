@@ -1,0 +1,158 @@
+<!-- ko ifnot: $baseModel.small() -->
+<div class="accounts-overview-container oj-panel panel-height">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 class="accounts-overview-container__heading oj-lg-12" data-bind="text: $component.resource.accountsOverview.header">
+      </h3>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-sm-12">
+      <oj-label for="currentvalue">
+        <span data-bind="text:$component.resource.accountsOverview.currentValue"></span>
+      </oj-label>
+    </div>
+    <div class="oj-flex-item oj-lg-8 big-text">
+      <span data-bind="text:$formatter.formatCurrency($component.accountsOverview().marketValue.amount,$component.accountsOverview().marketValue.currency)"></span>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad top-border">
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 corner-border margin-box">
+      <oj-label for="investedvalue">
+        <span data-bind="text:$component.resource.accountsOverview.investedValue"></span>
+      </oj-label>
+      <div class="medium-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.accountsOverview().amountInvested.amount,$component.accountsOverview().amountInvested.currency)"></span>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 margin-box corner-border">
+      <oj-label for="profitloss">
+        <span data-bind="text:$component.resource.accountsOverview.profitLoss"></span>
+      </oj-label>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12">
+        <span class="medium-text" data-bind="text:$formatter.formatCurrency($component.accountsOverview().profitLoss.amount, $component.accountsOverview().profitLoss.currency)"></span>
+        <oj-legend id="legend-prof-loss" orientation='horizontal' data="[[profitLegendDataSource]]" text-style="[[textStyleProfitLoss]]"
+          class="legend-height">
+          <template slot="itemTemplate">
+            <oj-legend-item text="[[$baseModel.format($component.resource.accountsOverview.legendValue,{currency:$formatter.formatCurrency($current.data.text,$component.accountsOverview().amountInvested.currency)})]]" marker-color="[[$current.data.color]]" marker-shape="[[$current.data.markerShape]]"> 
+            </oj-legend-item>
+          </template>
+        </oj-legend>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 margin-box">
+      <oj-label for="returnrate">
+        <span data-bind="text:$component.resource.accountsOverview.returnRate"></span>
+      </oj-label>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12">
+        <span class="medium-text" data-bind="text:$component.accountsOverview().irr"></span>
+        <oj-legend id="legend-up" orientation='horizontal' sections="[[legendSectionsIRR]]" text-style="[[textStyleIRR]]"
+          class="legend-height">
+        </oj-legend>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad top-border">
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 margin-box corner-border">
+      <oj-label for="investedvalue">
+        <span data-bind="text:$component.resource.accountsOverview.realised"></span>
+      </oj-label>
+      <div class="medium-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.accountsOverview().realizedGainLoss.amount, $component.accountsOverview().realizedGainLoss.currency)"></span>
+      </div>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12">
+        <a href="#" data-bind="click: $component.capitalGainReport">
+          <span class="small-text" data-bind="text:$component.resource.accountsOverview.reports"></span></a>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 margin-box corner-border">
+      <oj-label for="profitloss">
+        <span data-bind="text:$component.resource.accountsOverview.dividends"></span>
+      </oj-label>
+      <div class="medium-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text:$formatter.formatCurrency($component.accountsOverview().dividend.amount,$component.accountsOverview().dividend.currency)"></span>
+      </div>
+      <div class="oj-lg-12 oj-sm-12 oj-md-12">
+        <a href="#" data-bind="click: $component.dividendHistoryReport">
+          <span class="small-text" data-bind="text:$component.resource.accountsOverview.reports"></span></a>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-lg-4 oj-sm-4 margin-box">
+      <oj-label for="returnrate">
+        <span data-bind="text:$component.resource.accountsOverview.sips"></span>
+      </oj-label>
+      <div class="medium-text oj-lg-12 oj-sm-12 oj-md-12">
+        <span data-bind="text: $component.accountsOverview().numberOfSIP"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /ko -->
+<!-- ko if: $baseModel.small() -->
+<div class="accounts-overview-container">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 class="accounts-overview-container__heading oj-sm-12" data-bind="text: $component.resource.accountsOverview.header">
+      </h3>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+      <label data-bind="text:$component.resource.accountsOverview.currentValue"></label>
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+      <span class="big-text" data-bind="text:$formatter.formatCurrency($component.accountsOverview().marketValue.amount,$component.accountsOverview().marketValue.currency)"></span>
+    </div>
+  </div>
+  <div class="oj-flex top-border">
+    <div class="oj-flex-item oj-sm-6 margin-box corner-border">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountsOverview.investedValue , value : $formatter.formatCurrency($component.accountsOverview().amountInvested.amount,$component.accountsOverview().amountInvested.currency)"></row>
+    </div>
+    <div class="oj-flex-item oj-sm-6 margin-box">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountsOverview.profitLoss, value : $formatter.formatCurrency($component.accountsOverview().profitLoss.amount, $component.accountsOverview().profitLoss.currency)"></row>
+      <div class="oj-flex oj-flex-items-pad">
+        <oj-legend id="legend-prof-loss" orientation='horizontal' data="[[profitLegendDataSource]]" text-style="[[textStyleProfitLoss]]"
+          class="legend-height oj-flex-item">
+          <template slot="itemTemplate">
+            <oj-legend-item text="[[$baseModel.format($component.resource.accountsOverview.legendValue,{currency:$formatter.formatCurrency($current.data.text,$component.accountsOverview().amountInvested.currency)})]]" marker-color="[[$current.data.color]]" marker-shape="[[$current.data.markerShape]]"> 
+            </oj-legend-item>
+          </template>
+        </oj-legend>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex top-border">
+    <div class="oj-flex-item oj-sm-6 margin-box corner-border">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountsOverview.returnRate, value : $component.accountsOverview().irr"></row>
+      <div class="oj-flex oj-flex-items-pad">
+        <oj-legend id="legend-up" orientation='horizontal' sections="[[legendSectionsIRR]]" text-style="[[textStyleIRR]]"
+          class="legend-height oj-flex-item">
+        </oj-legend>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-sm-6 margin-box">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountsOverview.realised , value : $formatter.formatCurrency($component.accountsOverview().realizedGainLoss.amount+$component.accountsOverview().unrealizedGainLoss.amount,$component.accountsOverview().realizedGainLoss.currency)"></row>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+          <a href="#" data-bind="click: $component.capitalGainReport">
+            <span class="small-text" data-bind="text:$component.resource.accountsOverview.reports"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex top-border">
+    <div class="oj-flex-item oj-sm-6 margin-box corner-border">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountsOverview.dividends , value : $formatter.formatCurrency($component.accountsOverview().dividend.amount,$component.accountsOverview().dividend.currency)"></row>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+          <a href="#" data-bind="click: $component.dividendHistoryReport">
+            <span class="small-text" data-bind="text:$component.resource.accountsOverview.reports"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="oj-flex-item oj-sm-6 margin-box">
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.accountsOverview.sips , value : $component.accountsOverview().numberOfSIP"></row>
+    </div>
+  </div>
+</div>
+<!-- /ko -->

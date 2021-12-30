@@ -1,0 +1,70 @@
+<div class="preview-dashboard-design-container" id="preViewDashboardDesign">
+    <div class="oj-flex oj-flex-items-pad form-main-container design-dashboard">
+        <div class="oj-sm-12">
+            <div data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}">
+            </div>
+        </div>
+        <div class="oj-flex-bar-start oj-sm-12 switchView">
+            <oj-navigation-list id="dashboardSwitchView" :aria-label=[[$component.nls.switchView]] drill-mode="none" data="[[$component.roleSwitcherDataProvider]]" selection="{{viewType}}" edge="top" display="icons" class="oj-sm-condense pull-right">
+                <template slot="itemTemplate" data-oj-as="item">
+                    <li :id="[[item.data.id]]">
+                        <a href="#">
+                            <span class="oj-navigationlist-item-icon">
+                                <img data-bind="loadImage: item.data.icon" alt="[[item.name]]/">
+                            </span>
+                            <span data-bind="text: item.data.name"></span>
+                        </a>
+                    </li>
+                </template>
+            </oj-navigation-list>
+        </div>
+        <!-- ko if:$component.showDesktopView() -->
+        <div id="desktop-review-container" class="oj-flex">
+            <img class="desktop-design-frame" data-bind="loadImage:'dashboard-design/UX/desktop-1280.svg'" alt="">
+            <div class="frame-contents oj-flex oj-flex-items-pad oj-sm-12">
+                <!-- ko foreach:newDesign.layout.layout.large -->
+                <div class="oj-flex-item" data-bind="component:{name:componentName,params:{rootModel:$component,data:{data:JSON.parse($data.data)}}},css:$component.computeStyle(style,'lg')">
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$component.showTabView() -->
+        <div id="tab-review-container" class="oj-flex">
+            <img class="tab-design-frame" data-bind="loadImage:'dashboard-design/UX/tablet-500.svg'" alt="">
+            <div class="frame-contents oj-flex oj-flex-items-pad oj-sm-12">
+                <!-- ko foreach:newDesign.layout.layout.medium -->
+                <div class="oj-flex-item" data-bind="component:{name:componentName,params:{rootModel:$component,data:{data:JSON.parse($data.data)}}},css:$component.computeStyle(style,'md')">
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:$component.showMobileView() -->
+        <div id="mobile-review-container" class="oj-flex">
+            <img class="mobile-design-frame" data-bind="loadImage:'dashboard-design/UX/mobile-320.svg'" alt="">
+            <div class="oj-flex oj-sm-12 oj-flex-items-pad frame-contents">
+                <!-- ko foreach:newDesign.layout.layout.small -->
+                <div class="oj-flex-item" data-bind="component:{name:componentName,params:{rootModel:$component,data:{data:JSON.parse($data.data)}}},css:$component.computeStyle(style,'sm')">
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <div class="oj-sm-12 button-container">
+            <oj-button class="action-button-primary " on-click="[[$component.saveDashboardDesign]]">
+                <span class="icons icon-confirm" slot="startIcon"></span>
+                <span data-bind="text:$component.nls.generic.common.confirm"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span class="icons icon-cancel" slot="startIcon"></span>
+                <span data-bind="text:$component.nls.generic.common.cancel"></span>
+            </oj-button>
+            <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                <span class="icons icon-back-arrow" slot="startIcon"></span>
+                <span data-bind="text:$component.nls.generic.common.back"></span>
+            </oj-button>
+        </div>
+    </div>
+</div>

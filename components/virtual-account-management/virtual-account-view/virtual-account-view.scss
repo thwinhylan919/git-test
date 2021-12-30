@@ -1,0 +1,26 @@
+.icon-property {
+  font-size: 1.2rem;
+}
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+
+  .label,
+  label {
+    color: var(--banner-text-primary);
+    font-size: var(--base-font-size-medium);
+  }
+}
+
+.balance-link {
+  @include single-padding(bottom, 0.8125rem);
+}
+
+.add-lab-class {
+  @include single-padding(bottom, 0.625rem);
+}

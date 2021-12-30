@@ -1,0 +1,20 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.common.service.message.ApplicationMessage",
+        "components": [{
+            "componentName": "application-message-list",
+            "service": "read",
+            "perform": "application-message-list#application-message-view#review-application-message-create#review-application-message-edit"
+        }, {
+            "componentName": "application-message-create",
+            "service": "create",
+            "perform": "application-message-list#review-application-message-create",
+            "approve": "review-application-message-create"
+        }, {
+            "componentName": "application-message-edit",
+            "service": "update",
+            "perform": "application-message-list#application-message-view#review-application-message-update",
+            "approve": "review-application-message-update"
+        }]
+    }]
+}

@@ -1,0 +1,10 @@
+{
+  "modules": [{
+      "moduleName": "com.ofss.digx.app.common.service.helpdesksession.HelpDeskSession",
+      "components": [{
+        "componentName": "help-desk-user-search",
+        "service": "create",
+        "perform": "user-type"
+      }]
+    }]
+}

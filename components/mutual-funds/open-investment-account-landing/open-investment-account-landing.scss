@@ -1,0 +1,56 @@
+.open-investment-account-landing {
+    .panel-height {
+        height: 16rem;
+    }
+    .panel-small {
+        height: 7.5rem;
+    }
+    .widget-border {
+        @include single-border(right, 0.05rem solid var(--banner-background));
+        @include single-border(top, 0.05rem solid var(--banner-background));
+        @include single-border(bottom, 0.05rem solid var(--banner-background));
+        @include single-border(left, 0.05rem solid var(--banner-background));
+    }
+    .account-overview {
+        @include margin(0, 1rem, 0, 0.5rem);
+    }
+    .asset-distribution {
+        @include margin(0, 1rem, 0, 0);
+    }
+    .risk-profile {
+        @include margin(0, 0, 1rem, 0);
+    }
+    .button-padding {
+        padding: 1rem 0;
+    }
+    .small-text {
+        font-size: var(--base-font-size-small);
+    }
+    .details-padding {
+        padding: 1.4rem 0;
+        @include margin(0, 2.6rem, 0, 0);
+    }
+    .download-link {
+        padding: 1.4rem 0;
+    }
+    .icon-size {
+        font-size: 1rem;
+    }
+    .disclaimer-style {
+        font-size: var(--base-font-size-medium);
+        padding: 0.2rem 0.5rem;
+    }
+    .summary-report {
+        @include margin(2rem, 4rem, 0, 0);
+    }
+    .search-scheme {
+        @include margin(0, 4rem, 0, 0);
+    }
+    .content-padding {
+        margin: auto;
+    }
+    .image-size {
+        height: 18.3rem;
+        width: 24rem;
+    }
+}

@@ -1,0 +1,76 @@
+<div class="oj-flex form-main-container">
+    <div class="oj-flex-item oj-sm-12">
+        <!-- ko ifnot: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+        <div class="oj-flex oj-flex-items-pad entity-type-padding">
+            <div class="oj-flex-item oj-sm-12 label">
+                <oj-label for="EntityType"><span data-bind="text:$component.resource.entityType"></span></oj-label>
+            </div>
+            <!-- ko ifnot: $component.editFromViewScreen -->
+            <div class="oj-flex-item oj-sm-12">
+                <oj-radioset id="entityType" labelled-by="mainlabelid" class="oj-choice-direction-row"
+                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'entityType','#entityType')]]]"
+                    value="{{$component.modelInstance.entityType}}" on-value-changed="[[$component.entitySelection]]">
+                    <oj-option value="C"><span data-bind="text:$component.resource.corporate"></span></oj-option>
+                    <oj-option value="I"><span data-bind="text:$component.resource.individual"></span></oj-option>
+                </oj-radioset>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: $component.editFromViewScreen -->
+            <div class="entity-type-padding">
+                <row
+                    params="baseModel : $baseModel, rootModel : $data, value: (($component.modelInstance.entityType() === 'C')? ($component.resource.corporate): ($component.resource.individual))">
+                </row>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $component.showTemplates -->
+        <!-- ko if: $component.modelInstance.entityType() === "C" -->
+        <div
+            data-bind="template: { name: 'virtual-account-management/virtual-entity-information-corporate', afterRender: $component.afterRender}">
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.modelInstance.entityType() === "I" -->
+        <div
+            data-bind="template: { name: 'virtual-account-management/virtual-entity-information-individual', afterRender: $component.afterRender}">
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+        <div class="entity-type-padding">
+            <row
+                params="baseModel : $baseModel, rootModel : $data, label:$component.resource.entityType, value: (($component.viewModel.entityType() === 'C')? ($component.resource.corporate): ($component.resource.individual))">
+            </row>
+        </div>
+        <!-- ko if: $component.viewModel.entityType() === "C" -->
+        <div
+            data-bind="template: { name: 'virtual-account-management/virtual-entity-information-corporate', afterRender: $component.afterRender}">
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $component.viewModel.entityType() === "I" -->
+        <div data-bind="template: { name: 'virtual-account-management/virtual-entity-information-individual'}"></div>
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko ifnot: $component.viewMode() || $component.reviewMode() || $component.fromApproval() -->
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item  button-container">
+                <oj-button class="action-button-primary" on-click="[[$component.nextStep]]"><span
+                        data-bind="text:$component.resource.next"></span><span slot="startIcon"
+                        class="icons icon-forward-arrow"></span></oj-button>
+                <oj-button class="action-button-secondary" on-click="[[ $dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text:$component.resource.cancel"></span>
+                </oj-button>
+                <!-- ko if:$component.editFromViewScreen -->
+                <oj-button class="action-button-tertiary" on-click="[[$component.backToView]]">
+                    <span slot="startIcon" class="icons icon-back-arrow"></span>
+                    <span data-bind="text: $component.resource.back"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

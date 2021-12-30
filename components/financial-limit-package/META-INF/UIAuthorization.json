@@ -1,0 +1,27 @@
+{
+	"modules": [{
+		"moduleName": "com.ofss.digx.app.finlimit.service.limitpackage.LimitPackage",
+		"components": [{
+				"componentName": "review-limit-package",
+				"service": "read",
+				"perform": "limit-package-search"
+			},
+			{
+				"componentName": "limit-package",
+				"service": "create",
+				"perform": "limit-package-search#package-create#cooling-period-limit#cumulative-limit#limits#transaction-limit#transaction-group-read#review-limit-package",
+				"approve": "review-limit-package"
+			},
+			{
+				"componentName": "review-limit-package",
+				"service": "delete"
+			},
+			{
+				"componentName": "limit-package",
+				"service": "update",
+				"perform": "limit-package-search#package-create#cooling-period-limit#cumulative-limit#limits#transaction-limit#transaction-group-read#review-limit-package",
+				"approve": "review-limit-package"
+			}
+		]
+	}]
+}

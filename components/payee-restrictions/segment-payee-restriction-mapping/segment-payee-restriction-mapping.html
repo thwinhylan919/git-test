@@ -1,0 +1,79 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class=" oj-flex-item oj-sm-9">
+        <div class="form-main-container payeeSegment">
+            <!-- ko ifnot:$component.showCreateScreen() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <!-- ko if : $component.userSegmentsLoaded() -->
+                <oj-validation-group id="segmentTracker">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-3 oj-md-8 oj-sm-12 label">
+                            <oj-label for="enterpriseRole"><span data-bind="text:$component.nls.payeeSegment.labels.enterpriseRole"></span></oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-8 oj-sm-12">
+                            <oj-select-one required="[[true]]" id="enterpriseRole" translations="[[{'required':{messageDetail:$component.nls.payeeSegment.messages.pleaseSelect}}]]" :placeholder="[[$component.nls.common.select]]" value="{{enterpriseRole}}" on-value-changed="[[enterpriseRoleChangeHandler]]"
+                                :aria-label="[[$component.nls.payeeSegment.labels.enterpriseRole]]" required>
+                                <!-- ko foreach: $component.userSegmentsList -->
+                                <oj-option value="{{enterpriseRoleId}}"><span data-bind="text:enterpriseRoleName"></span></oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                </oj-validation-group>
+                <!-- /ko -->
+                <!-- ko if : userSegmentsForRoleLoaded() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-3 oj-md-8 oj-sm-12 label">
+                        <oj-label for="userSegments"><span data-bind="text:$component.nls.payeeSegment.labels.userSegments"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-8 oj-sm-12">
+                        <oj-select-one id="userSegments" :placeholder="[[$component.nls.common.select]]" :aria-label="[[$component.nls.payeeSegment.labels.userSegments]]" value="{{segmentSelectedForRole}}" required>
+                            <!-- ko foreach: $component.userSegmentsForRoleList -->
+                            <oj-option value="{{code}}"><span data-bind="text:name"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+            <!-- /ko -->
+            <!-- ko if:$component.showCreateScreen() -->
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                <row params="baseModel : $baseModel, rootModel :  $component, label : $component.nls.payeeSegment.labels.enterpriseRole, value :$component.enterpriseRole"></row>
+                <!-- ko if: $component.segmentSelectedForRole() -->
+                <row params="baseModel : $baseModel, rootModel :  $component, label : $component.nls.payeeSegment.labels.userSegments , value :$component.segmentSelectedForRole"></row>
+                <!-- /ko -->
+                <div class="oj-flex oj-flex-items-pad boxed">
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                        <span data-bind="text:$component.nls.payeeSegment.notMaintained"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary help-button" on-click="[[openCreateMode]]">
+                        <span data-bind="text:$component.nls.payeeSegment.setUpNow"></span>
+                    </oj-button>
+                </div>
+            </page-section>
+            <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <!-- ko ifnot:$component.showCreateScreen() -->
+                <oj-button class="action-button-primary" on-click="[[view]]">
+                    <span data-bind="text:$component.nls.payeeSegment.labels.view"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if: $baseModel.large() -->
+                <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span data-bind="text:$component.nls.common.cancel"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- ko if:$component.showCreateScreen() -->
+                <oj-button class="action-button-tertiary" on-click="[[back]]">
+                    <span data-bind="text:$component.nls.common.back"></span>
+                </oj-button>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-lg-3 oj-sm-only-hide oj-md-only-hide help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction:'segment-payee-restriction-mapping'"></help>
+    </div>
+</div>

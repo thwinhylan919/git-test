@@ -1,0 +1,46 @@
+
+<!-- ko if:dataLoaded() -->
+<div data-bind="with:$component.paymentDetails()">
+  <div class="row-group">
+    <!-- ko if:$component.imageUploadFlag() -->
+      <div class="oj-flex oj-flex-items-pad">
+            <oj-label class="oj-flex-item oj-sm-12"><span data-bind="text:isDraft?$component.resource.reviewUpcomingPayments.favouring:$component.resource.reviewUpcomingPayments.beneficiaryName"></span></oj-label>
+            <div class="oj-flex-item oj-sm-12">
+             <oj-avatar role="img" size="xs" initials='[[$component.initials]]' src='[[$component.preview]]' data-bind="attr:{'aria-label':payeeName}">
+            </oj-avatar>
+            <span class="oj-label-inline" data-bind="text : payeeName"></span>
+            </div>
+        </div>
+        <!-- /ko -->
+      <!-- ko ifnot:$component.imageUploadFlag() -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : isDraft?$component.resource.reviewUpcomingPayments.favouring:$component.resource.reviewUpcomingPayments.beneficiaryName, value :payeeName,dataClass :''"></row>
+      <!-- /ko -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : isDraft?$component.resource.reviewUpcomingPayments.draftType:$component.resource.reviewUpcomingPayments.accountType , value :accountType,dataClass :''"></row>
+
+      <!-- ko if:accountNumber -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.accountNumber , value :accountNumber,dataClass :''"></row>
+      <!-- /ko -->
+
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.fromAccount , value :fromAccount,dataClass :''"></row>
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.amount , value : $formatter.formatCurrency(amount, currency),dataClass :''"></row>
+      <!-- ko if:type === 'REC' -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.transFreq , value :frequency,dataClass :''"></row>
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.startDate , value :startDate,dataClass :''"></row>
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.endDate , value :endDate,dataClass :''"></row>
+      <!-- /ko -->
+      <!-- ko if:type === 'NONREC' -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.transferon , value :endDate,dataClass :''"></row>
+      <!-- /ko -->
+      <!-- ko if:dealId -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.dealId , value :dealId,dataClass :''"></row>
+      <!-- /ko -->
+
+      <!-- ko if:$data.transactionType !== 'SELFFT_SI' && $data.transactionType !== 'SELFFT_PAYLATER' && $data.transactionType !== 'INTERNATIONALDRAFT_PAYLATER' && $data.transactionType !== 'DOMESTICDRAFT_PAYLATER' -->
+      <!-- ko if:purpose -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.purpose , value :purpose,dataClass :''"></row>
+      <!-- /ko -->
+      <!-- /ko -->
+      <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.reviewUpcomingPayments.note , value :remarks,dataClass :''"></row>
+  </div>
+</div>
+<!-- /ko -->

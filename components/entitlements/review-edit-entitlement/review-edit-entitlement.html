@@ -1,0 +1,32 @@
+<div class="form-main-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header : $component.nls.generic.common.review , reviewHeader :$component.nls.common.addResourceHeaderMsg}}"></div>
+    <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.nls.headings.service">
+        <row params="baseModel : $baseModel, rootModel : $data, label :$component.nls.common.moduleName , value :$component.params.module"></row>
+        <row params="baseModel : $baseModel, rootModel : $data, label :$component.nls.common.categoryName , value :$component.params.category"></row>
+        <row params="baseModel : $baseModel, rootModel : $data, label :$component.nls.common.entName , value :$component.params.entdispName"></row>
+        <div class="oj-flex oj-flex-items-pad" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: $component.menuOptions(), uiOptions:$component.uiOptions, navBarDescription:"ActionTypesSVC"}}'>
+        </div>
+        <!-- ko foreach: $component.resourceListSVC() -->
+        <div class="oj-flex oj-flex-items-pad" data-bind="text: text"> </div>
+        <!-- /ko -->
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.headings.uiComponent">
+        <div class="oj-flex oj-flex-items-pad" data-bind='component:{name: "nav-bar", params:{rootModel: $data,menuOptions: $component.menuOptions1(), uiOptions:$component.uiOptions1, navBarDescription:"ActionTypesUCN"}}'>
+        </div>
+        <!-- ko foreach: $component.resourceListUCN() -->
+        <div class="oj-flex oj-flex-items-pad" data-bind="text: text"> </div>
+        <!-- /ko -->
+    </page-section>
+    <div class="oj-flex oj-flex-items-pad button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.params.confirm]]">
+            <span data-bind="text:$component.nls.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span data-bind="text:$component.nls.generic.common.cancel"></span>
+        </oj-button>
+
+        <oj-button class="action-button-tertiary" on-click="[[$component.backToEdit]]">
+            <span data-bind="text:$component.nls.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

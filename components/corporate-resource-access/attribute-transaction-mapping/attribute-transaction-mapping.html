@@ -1,0 +1,70 @@
+<page-section
+    params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.heading.TransactionMapping, headerTemplate : ''">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-3 oj-md-4 oj-sm-12">
+            <oj-checkboxset class="oj-choice-direction-row" :id="[['MapAllTransactionstoAllPrograms92']]"
+                value="{{partyLevelAccessAllowed}}" on-click="[[openRowExpander]]"
+                disabled="[[$component.disableTree]]">
+                <oj-option value="{{'true'}}">
+                    <span data-bind="text:$component.mapAllToAllCheckboxMsg"></span>
+                </oj-option>
+            </oj-checkboxset>
+        </div>
+    </div>
+    <oj-table :id="[['transactiontable71']]" data="[[dataSource46]]"
+        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('tree-table',true)]]" columns="[[columnArray]]"
+        :aria-label="[[$component.nls.attributeTable]]">
+    </oj-table>
+    <div id="scriptContainer">
+        <script type="text/html" id="tree-table">
+            <tr class="map-accounts-row-expander">
+                <!--  ko if:$context.rowContext.depth===1 -->
+
+                <td>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6 oj-md-4 oj-sm-12 label">
+                            <oj-row-expander context="[[$context.rowContext]]" class="token"
+                                :aria-label="[[$baseModel.format($component.nls.rowExpander,{attributeName:$context.row.name})]]">
+                            </oj-row-expander>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6 oj-md-4 oj-sm-12">
+                            <oj-checkboxset class="oj-choice-direction-row checkBox"
+                                :id="[['select57'+ $baseModel.incrementIdCount()]]" value="{{$context.row.allowed}}"
+                                disabled="[['true']]">
+                                <oj-option value=true
+                                    :aria-label="[[$baseModel.format($component.nls.attributeCheckbox,{attributeName:$context.row.name})]]">
+                                </oj-option>
+                            </oj-checkboxset>
+                        </div>
+                        <div>
+
+                </td>
+                <td>
+                    <div data-bind="text:$context.row.id"></div>
+                </td>
+                <td>
+                    <div data-bind="text:$context.row.name"></div>
+                </td>
+                <td>
+                    <div data-bind="text:$context.row.status"></div>
+                </td>
+
+                <!-- /ko -->
+
+                <!-- ko if:$context.rowContext.depth===2 -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-1.5 oj-md-4 oj-sm-1">
+                    </div>
+                    <div class="oj-flex-item oj-lg-10.5 oj-md-4 oj-sm-11">
+                        <td colspan="4">
+                            <div
+                                data-bind="component:{name: 'attribute-transaction-tree', params:{data: $data,disableTree:$component.disableTree, transactionCount: $component.transactionCount, partyLevelAccessAllowed: $component.partyLevelAccessAllowed, dataLength: $component.dataLength}}">
+                            </div>
+                        </td>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </tr>
+        </script>
+    </div>
+</page-section>

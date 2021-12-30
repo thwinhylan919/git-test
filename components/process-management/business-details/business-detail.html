@@ -1,0 +1,158 @@
+<div class="full-width">
+    <oj-validation-group id="tracker">
+        <!-- ko if: !$component.review -->
+        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label pageDescription1">
+            <oj-label for="businessDetailsDescription">
+                <span data-bind="text:$component.nls.businessDetails.businessDetailsDescription"></span>
+            </oj-label>
+        </div>
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading:''"
+            class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+            <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-items-pad oj-flex">
+                        <div class="oj-flex-item  oj-lg-12 oj-md-12 oj-sm-12 label">
+                            <label for="businessNature" data-bind="text:$component.nls.businessDetails.businessNature">
+                            </label>
+                        </div>
+                        <!-- ko if:$component.businessNatureLoaded() -->
+                        <div class="oj-flex-item oj-lg-3 oj-md-12 oj-sm-12">
+                            <oj-select-one id="businessNature" placeholder="[[$component.nls.businessDetails.select]]"
+                                value="{{$component.path().payload.businessActivity.businessNature}}" required>
+                                <!-- ko foreach: $component.businessNature -->
+                                <oj-option value="[[code]]"><span data-bind="text:description"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- ko if:$component.isCurrencyLoaded() -->
+                    <div class="oj-flex-items-pad oj-flex">
+                        <div class="oj-flex-item  oj-lg-12 oj-md-12 oj-sm-12 label">
+                            <label for="turnoverccy"
+                                data-bind="text:$component.nls.businessDetails.turnoverccy"></label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-3 oj-md-12 oj-sm-12">
+                            <oj-select-one id="turnoverccy" placeholder="[[$component.nls.businessDetails.select]]"
+                                value="{{$component.path().payload.businessActivity.yearWiseDetails()[0].currency}}">
+                                <!-- ko foreach: $component.turnoverccyArray -->
+                                <oj-option value="[[code]]"><span data-bind="text:code"></span>
+                                </oj-option>
+                                <!-- /ko -->
+                            </oj-select-one>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex-items-pad oj-flex oj-lg-6 oj-md-12 oj-sm-12" data-bind="component: {
+                            name: 'amount-input', params: {
+                            amount : $component.path().payload.businessActivity.yearWiseDetails()[0].operatingProfit,
+                            currency : $component.path().payload.businessActivity.yearWiseDetails()[0].currency,
+                            label :$component.nls.businessDetails.OperatingProfit,
+                            labelClasses:'oj-flex-item oj-lg-6 oj-md-12 oj-sm-12',
+                            valueClasses:'oj-flex-item oj-lg-6 oj-md-12 oj-sm-12',
+                            isMandatory:false,
+                            placeholder:$component.nls.businessDetails.placeholderProfit,
+                            rootId:'foreignAmount',
+                            rootClass:'form-input'
+                            }
+                          }">
+                    </div>
+                    <div class="oj-flex-items-pad oj-flex">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                            <label for="exportImportLicenceNo"
+                                data-bind="text:$component.nls.businessDetails.exportImportLicenceNo"></label>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                            <oj-input-text id="exportImportLicenceNo"
+                                placeholder="[[$component.nls.businessDetails.placeholdetExport]]"
+                                value="{{$component.path().payload.businessActivity.exportImportLicenceNo}}"
+                                validators="[[$baseModel.getValidator('ALPHANUMERIC',$component.nls.businessDetails.noSpecialCharecter,{type: 'length',options: {min: 0, max: 50}})]]">
+                            </oj-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-items-pad oj-flex-item oj-lg-6">
+                    <div class="oj-flex-items-pad oj-flex">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                            <oj-label for="currentYear">
+                                <span data-bind="text:$component.nls.businessDetails.currentYear"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item  oj-lg-12 oj-md-12 oj-sm-12 label">
+                            <span data-bind="text:$component.year"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex-items-pad oj-flex oj-lg-6 oj-md-12 oj-sm-12" data-bind="component: {
+                            name: 'amount-input', params: {
+                            amount : $component.path().payload.businessActivity.yearWiseDetails()[0].balanceSheetSize,
+                            currency : $component.path().payload.businessActivity.yearWiseDetails()[0].currency,
+                            label :$component.nls.businessDetails.balanceSheetSize,
+                            labelClasses:'oj-flex-item oj-lg-6 oj-md-12 oj-sm-12',
+                            valueClasses:'oj-flex-item oj-lg-2 oj-md-12 oj-sm-12',
+                            isMandatory:false,
+                            placeholder:$component.nls.businessDetails.placeholderBalance,
+                            rootId:'foreignAmount',
+                            rootClass:'form-input'
+                            }
+                          }">
+                    </div>
+                    <div class="oj-flex-items-pad oj-flex oj-lg-6 oj-md-12 oj-sm-12" data-bind="component: {
+                            name: 'amount-input', params: {
+                            amount : $component.path().payload.businessActivity.yearWiseDetails()[0].netProfit,
+                            currency : $component.path().payload.businessActivity.yearWiseDetails()[0].currency,
+                            label :$component.nls.businessDetails.currentYearNetProfit,
+                            labelClasses:'oj-flex-item oj-lg-6 oj-md-12 oj-sm-12',
+                            valueClasses:'oj-flex-item oj-lg-2 oj-md-12 oj-sm-12',
+                            isMandatory:false,                            
+                            placeholder:$component.nls.businessDetails.placeholderYear,
+                            rootId:'foreignAmount',
+                            rootClass:'form-input'
+                            }
+                          }">
+                    </div>
+                </div>
+            </div>
+        </page-section>
+        <!-- /ko -->
+        <!-- ko if:$component.review -->
+        <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12 sectionTop"
+            data-bind="with:$component.path().payload.businessActivity">
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.businessNature, value : $component.businessName()">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.turnoverccy, value : (('yearWiseDetails' in $data)?yearWiseDetails()[0].currency():'-')">
+                </row>
+            </div>
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.currentYear, value : (('yearWiseDetails' in $data)?yearWiseDetails()[0].year:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.balanceSheetSize, value : (('yearWiseDetails' in $data)?$formatter.formatCurrency(yearWiseDetails()[0].balanceSheetSize(), yearWiseDetails()[0].currency()):'-')">
+                </row>
+            </div>
+        </div>
+        <div data-bind="attr:{id:'segment'+$index()}" class="oj-flex oj-panel oj-panel-alt2 childpanel panelInternal">
+            <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12"
+                data-bind="with:$component.path().payload.businessActivity">
+                <div class="oj-flex-items-pad oj-flex oj-lg-6 oj-md-12 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.OperatingProfit, value : (('yearWiseDetails' in $data)?$formatter.formatCurrency(yearWiseDetails()[0].operatingProfit(), yearWiseDetails()[0].currency()):'-')">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.exportImportLicenceNo, value : (('exportImportLicenceNo' in $data)?exportImportLicenceNo:'-')">
+                    </row>
+                </div>
+                <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.nls.businessDetails.currentYearNetProfit, value : (('yearWiseDetails' in $data)?$formatter.formatCurrency(yearWiseDetails()[0].netProfit(), yearWiseDetails()[0].currency()):'-')">
+                    </row>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </oj-validation-group>
+</div>

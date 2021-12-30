@@ -1,0 +1,15 @@
+.paddingRight {
+    @include padding(0.8rem, 15rem, 0rem, 1rem, !important);
+}
+
+.pageDescription {
+    @include padding(0, 0, 0, 0.6rem);
+}
+
+.notePadding {
+    @include padding(1rem, 0, 0, 0.6rem);
+}
+
+.topPaddingInList {
+    @include padding(0, 0, 0, 1.3rem);
+}

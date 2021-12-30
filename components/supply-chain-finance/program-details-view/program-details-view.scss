@@ -1,0 +1,76 @@
+$active-color:#2E7D32;
+$bgcolor:#FFFFFF;
+
+.party-details {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.party-name-style {
+  color: var(--banner-foreground-color);
+  font-size: var(--base-font-size-large);
+  font-weight: var(--banner-font-weight);
+}
+
+.banner-label {
+  color: var(--banner-text-secondary);
+  font-size: var(--base-font-size-medium);
+  font-weight: var(--base-font-weight-light);
+}
+
+.banner-value {
+  font-size: var(--base-font-size-medium);
+  font-weight: var(--banner-font-weight);
+}
+
+.banner-padding {
+  @include mq(medium) {
+    padding-top: 0.5rem;
+  }
+}
+
+.party-background {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+}
+
+.active-color {
+  background-color: $active-color;
+  color: $bgcolor;
+}
+
+.align-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-img img {
+  height: 12rem;
+}
+
+.noDataText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.disclaimer-text {
+  font-size: var(--base-font-size-medium);
+  color: var(--form-label-foreground-color);
+  font-weight: var(--form-label-font-weight);
+}
+
+.disclaimer-text-currency {
+  font-size: var(--base-font-size-small);
+  color: var(--form-label-foreground-color);
+}
+
+.note-text {
+  font-size: var(--base-font-size-medium);
+}
+
+.counterparty-box {
+  @include single-padding(left, 0.7rem);
+}

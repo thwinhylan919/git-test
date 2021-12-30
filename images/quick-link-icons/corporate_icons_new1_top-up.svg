@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="216px" height="216px" viewBox="0 0 216 216" enable-background="new 0 0 216 216" xml:space="preserve">
+<path fill="#CEE8FA" d="M25.987,118.125h164.7v47.925h-164.7V118.125z"/>
+<path fill="#FFFFFF" stroke="#4C5C68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M190.688,62.438v55.688H25.313V47.25h165.375"/>
+<g>
+	<path fill="none" stroke="#4C5C68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M25.313,124.875h165.375 M25.313,133.313h165.375 M25.313,141.412h165.375 M25.313,149.85h165.375 M25.313,157.95h165.375
+		 M25.313,166.05h165.375"/>
+</g>
+<path fill="#FFFFFF" stroke="#00984A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M60.75,62.438h-13.5L35.438,73.913V94.5l10.8,11.813H60.75 M158.625,62.438h11.813l10.125,11.475V94.5l-9.112,11.813h-16.2"/>
+<ellipse fill="#FFFFFF" stroke="#4C5C68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="109.688" cy="82.688" rx="24.3" ry="23.962"/>
+<ellipse fill="#0D3178" cx="109.688" cy="82.688" rx="18.9" ry="18.9"/>
+<path fill="#FFFFFF" stroke="#4C5C68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M47.25,82.688H67.5 M148.5,82.688h20.25"/>
+<g>
+	<path fill="#FFFFFF" d="M99.097,71.861h2.245v8.386h0.077c0.464-0.671,0.929-1.291,1.368-1.858l5.315-6.528h2.787l-6.296,7.38
+		l6.786,10.011h-2.658l-5.728-8.541l-1.651,1.909v6.631h-2.245V71.861z"/>
+	<path fill="#FFFFFF" d="M112.694,86.93c0.672,0.438,1.858,0.903,2.994,0.903c1.65,0,2.426-0.826,2.426-1.858
+		c0-1.084-0.646-1.677-2.322-2.296c-2.246-0.8-3.303-2.039-3.303-3.535c0-2.013,1.625-3.664,4.309-3.664
+		c1.264,0,2.373,0.361,3.07,0.774l-0.568,1.651c-0.49-0.31-1.393-0.723-2.554-0.723c-1.342,0-2.09,0.774-2.09,1.703
+		c0,1.032,0.748,1.497,2.374,2.116c2.167,0.826,3.276,1.909,3.276,3.767c0,2.193-1.702,3.741-4.67,3.741
+		c-1.368,0-2.632-0.335-3.509-0.851L112.694,86.93z"/>
+</g>
+</svg>

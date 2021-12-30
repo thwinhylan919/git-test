@@ -1,0 +1,21 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+
+    <div class="oj-flex-item help-item">
+        <img alt="" data-bind="loadImage : 'info-icon/tips.svg'">
+    </div>
+
+    <div class="oj-flex-item ">
+        <p>Set up periodic budgets according to different categories, and control your expenses</p>
+    </div>
+
+    <div class="oj-flex-item ">
+        <p>Watch where you are exceeding the budgeted amount and keep them in a check</p>
+    </div>
+
+
+    <div class="oj-flex-item center">
+    <!-- ko if: $baseModel.large() -->
+    <a class="" href="#" data-bind="attr:{alt:$component.resource.budget.createbudget,title:$component.resource.budget.createBudgetTitle},text:$component.resource.budget.controlYourExpenses,click: $component.createBudgetInitiate"></a>
+    <!-- /ko -->
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<!-- ko if: $component.flowParameters.flowMode !== 'readonly' -->
+<div class="form-main-container">
+    <!-- ko if: $component.routerInit() -->
+    <!-- ko if: !$component.noAccess() && $component.flowConfig.props.wrapperType === 'TRAIN' && $component.stepArray().length > 2 -->
+    <oj-train :id="[[$component.flowDOMId + 'train']]" class="oj-train-stretch" selected-step="{{selectedStepValue}}" steps="[[stepArray]]" on-oj-before-deselect="[[selectedTrainStep]]" edge="start">
+    </oj-train>
+    <!-- /ko -->
+    <!-- ko if: $component.flowRouter.currentValue() -->
+    <div class="oj-flex">
+        <div data-bind="css: {'oj-flex-item oj-sm-12 oj-lg-8' : $component.flowRouter.currentValue().helpComponent, 'oj-flex-item oj-sm-12' : !$component.flowRouter.currentValue().helpComponent}">
+            <div :id="[[$component.flowDOMId + 'flow-component']]" data-bind="component:{name: $component.flowRouter.currentValue().component, params: {rootModel: $component.flowParameters.flowStageRootModel, setContractHooks: $component.setContractHooks, setStageState: $component.setStageState, getStageState: $component.getStageState}}"></div>
+            <!-- ko if: !$component.noAccess() -->
+            <div class="oj-flex oj-flex-items-pad button-container">
+                <!-- ko if: $component.resetContracts() -->
+                <!-- ko foreach: $component.flowRouter.currentState().value.contracts -->
+                <oj-button :class="[[$component.computeContractClass($index())]]" on-click="[[$component.computeContractAction]]" on-mouseover="[[$component.triggerPrefetch.bind(null, $data)]]" on-focus="[[$component.triggerPrefetch.bind(null, $data)]]">
+                    <span slot="startIcon" :class="[[$component.computeContractIcon($data)]]"></span>
+                    <span data-bind="text: $component.computeContractLabel($data)"></span>
+                </oj-button>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: $component.resetContracts() -->
+        <!-- ko if: $component.flowRouter.currentValue().helpComponent -->
+        <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+            <help params="baseModel : $baseModel, rootModel : $component, transaction: $component.flowRouter.currentValue().helpComponent"></help>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko if: $component.flowParameters.flowMode === 'readonly' -->
+<!-- ko if: $component.reviewComponent() -->
+<div :id="[[$component.flowDOMId + 'flow-review-component']]" data-bind="component:{name: $component.reviewComponent, params: {setContractHooks: $component.setContractHooks, setStageState: $component.setStageState, getStageState: $component.getStageState}}"></div>
+<!-- /ko -->
+<!-- /ko -->

@@ -1,0 +1,207 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "globals": {
+        "define": false,
+        "require": false,
+        "google": false,
+        "Promise": false
+    },
+    "plugins": ["extra-rules", "no-storage", "requirejs"],
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-undef-init": 2,
+        "no-multi-spaces": 2,
+        "no-continue": 2,
+        "no-array-constructor": 2,
+        "no-undef": 2,
+        "array-callback-return": 2,
+        "no-tabs": 2,
+        "complexity": ["error", {
+            "max": 30
+        }],
+        "no-unneeded-ternary": 2,
+        "no-else-return": 2,
+        "no-useless-call": 2,
+        "no-unused-expressions": 2,
+        "no-unmodified-loop-condition": 2,
+        "no-use-before-define": 2,
+        "no-new-func": 2,
+        "strict": 2,
+        "no-multiple-empty-lines": ["error", {
+            "max": 1,
+            "maxEOF": 1
+        }],
+        "no-mixed-operators": 2,
+        "no-trailing-spaces": 2,
+        "no-useless-concat": 2,
+        "no-console": 2,
+        "no-useless-escape": 0,
+        "no-inline-comments": 2,
+        "for-direction": 2,
+        "no-alert": 2,
+        "guard-for-in": 2,
+        "no-empty-function": 2,
+        "no-eval": 2,
+        "no-multi-str": 2,
+        "no-eq-null": 2,
+        "eqeqeq": 2,
+        "comma-dangle": 2,
+        "semi": 2,
+        "yoda": 2,
+        "no-script-url": 2,
+        "no-extend-native" : 2,
+        "no-caller" : 2,
+        "no-self-compare": 2,
+        "extra-rules/no-commented-out-code": 2,
+        "quotes": ["error", "double"],
+        "object-property-newline": 2,
+        "dot-notation": 2,
+        "no-storage/no-browser-storage": 2,
+        "requirejs/no-js-extension": 2,
+        "requirejs/no-invalid-define": 2,
+        "requirejs/no-multiple-define": 2,
+        "requirejs/no-named-define": 2,
+        "requirejs/no-commonjs-wrapper": 2,
+        "requirejs/no-object-define": 2,
+        "requirejs/no-invalid-require": 2,
+        "requirejs/no-assign-exports": 2,
+        "no-new-object": 2,
+        "no-lonely-if": 2,
+        "no-lone-blocks": 2,
+        "no-proto" : 2,
+        "no-useless-return": 2,
+        "no-prototype-builtins": 2,
+        "getter-return": 2,
+        "no-implicit-globals": 2,
+        "no-shadow-restricted-names": 2,
+        "no-implied-eval" : 2,
+        "no-iterator" : 2,
+        "no-void": 2,
+        "no-floating-decimal": 2,
+        "no-extra-parens": ["error", "all", {
+            "nestedBinaryExpressions": false
+        }],
+        "no-unused-vars": ["error", {
+            "vars": "all",
+            "args": "all",
+            "argsIgnorePattern": "(^_)|(event|data|status)"
+        }],
+        "one-var": ["error", "consecutive"],
+        "no-var": 2,
+        "prefer-const": 2,
+        "curly": 2,
+        "use-isnan": 2,
+        "block-scoped-var": 2,
+        "max-depth": 0,
+        "quote-props": ["error", "as-needed"],
+        "no-whitespace-before-property": 2,
+        "padding-line-between-statements": [2,
+            {
+                "blankLine": "always",
+                "prev": "directive",
+                "next": "*"
+            },
+            {
+                "blankLine": "any",
+                "prev": "directive",
+                "next": "directive"
+            },
+            {
+                "blankLine": "always",
+                "prev": "import",
+                "next": "*"
+            },
+            {
+                "blankLine": "any",
+                "prev": "import",
+                "next": "import"
+            },
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": ["const", "let", "var", "export"]
+            },
+            {
+                "blankLine": "always",
+                "prev": ["const", "let", "var", "export"],
+                "next": "*"
+            },
+            {
+                "blankLine": "any",
+                "prev": ["const", "let", "var", "export"],
+                "next": ["const", "let", "var", "export"]
+            },
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": ["if", "class", "for", "do", "while", "switch", "try"]
+            },
+            {
+                "blankLine": "always",
+                "prev": ["if", "class", "for", "do", "while", "switch", "try"],
+                "next": "*"
+            },
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": "function"
+            },
+            {
+                "blankLine": "always",
+                "prev": "function",
+                "next": "*"
+            },
+            {
+                "blankLine": "always",
+                "prev": "multiline-expression",
+                "next": "*"
+            },
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": "multiline-expression"
+            },
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": "return"
+            }
+        ],
+        "obdx-string-validations": 2,
+        "obdx-disallow-eslint-disable": 2,
+        "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"]
+
+    },
+    "overrides": [{
+        "files": ["model.js"],
+        "rules": {
+            "obdx-string-validations": 0
+        }
+    }, {
+        "files": ["**/resources/nls/en/about.js"],
+        "rules": {
+            "quote-props": 0
+        }
+    }, {
+        "files": [
+            "**/framework/**",
+            "**/extensions/override/extensions.js",
+
+            "**/origination/product-base/**",
+            "**/origination/product/**",
+            "**/origination/orientation/**",
+
+            "**/components/widgets/term-deposits/td-summary/td-summary.js",
+            "**/components/home/search-vehicle/search-vehicle.js"
+        ],
+        "rules": {
+            "obdx-disallow-eslint-disable": 0
+        }
+    }]
+}

@@ -1,0 +1,214 @@
+<div class="form-main-container">
+    <oj-validation-group id="transferPayeeUpiTracker" valid="{{groupValid}}">
+
+        <!-- ko if:!$baseModel.large() -->
+        <!-- ko if: $component.vpaDetailsLoaded() -->
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label for="creditVPAId">
+                        <span data-bind="text:$component.nls.headers.creditVPAId"></span>
+                    </oj-label>
+                    <oj-select-one id="status" required :aria-label="[[$component.nls.headers.creditVPAId]]" :placeholder="[[$component.nls.headers.placeHolder]]" on-value-changed="[[setSourceAccount]]" value="{{$component.modelInstance.upiRequestMoneyDetails.creditVPAId}}">
+                        <!-- ko foreach: $component.creditVPAArray -->
+                        <oj-option value="[[id]]"><span data-bind="text:id"></span> </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- ko if:$component.modelInstance.upiRequestMoneyDetails.creditVPAId -->
+                    <div class="oj-flex-item  oj-label oj-sm-12">
+                        <span id="accountNo" class=" oj-sm-12 oj-label validity" data-bind="text: $baseModel.format($component.nls.headers.accountNo,{accountNumber: $component.accountNumber()})"></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label for="accountTransferDetails">
+                        <span data-bind="text:$component.nls.headers.accountTransferDetails"></span>
+                    </oj-label>
+                </div>
+                <!-- ko if: $component.dropdownLevelOne() -->
+                <div class="oj-flex-item oj-sm-12">
+
+                    <!-- ko if: $component.payeeListExpandAll().length && !dropDownActive() -->
+                    <oj-select-one data-id="accountTransferDetails" required disabled="[[$component.debitVPAIdEnabled()]]" :id="[[$component.nls.headers.accountTransferDetails]]" :aria-label="[[$component.nls.headers.accountTransferDetails]]" on-value-changed="[[payeeChanged]]"
+                        :placeholder="[[$component.nls.headers.placeHolder]]" value="{{selectedPayee}}">
+                        <!-- ko foreach:payeeListExpandAll() -->
+                        <oj-option value="{{{groupId: groupId, listPayees: listPayees, groupIndex: $index()}}}">
+                            <div class="oj-flex-item">
+                                <!-- ko if:$component.imageUploadFlag() -->
+                                <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[initials]]' src='[[preview ? preview() : ""]]' data-bind="attr:{'aria-label':name}">
+                                </oj-avatar>
+                                <!-- /ko -->
+                                <span class="oj-collapsible-header-icon" data-bind="text: name"></span>
+                            </div>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-select-one>
+                    <!-- /ko -->
+
+                    <!-- ko if:dropDownActive() -->
+                    <div class="dualdropdown">
+                        <div class="payeeGroupHeader oj-flex-item">
+                            <!-- ko if:$component.imageUploadFlag() -->
+                            <oj-avatar class="oj-flex-item" role="img" size="xs" initials='[[$component.payeeListExpandAll()[groupIndex()].initials]]' src='[[ko.utils.unwrapObservable($component.payeeListExpandAll()[groupIndex()].preview)]]' data-bind="attr:{'aria-label':$component.payeeListExpandAll()[groupIndex()].name}">
+                            </oj-avatar>
+                            <!-- /ko -->
+                            <span class="payeeGroupPadding" data-bind="text: $component.payeeListExpandAll()[groupIndex()].name"></span>
+                        </div>
+                        <!-- ko if:payeeListExpandAll()[groupIndex()].listPayees.length -->
+                        <ul>
+                            <!-- ko foreach:payeeListExpandAll()[groupIndex()].listPayees -->
+                            <a href="#" data-bind="click:$component.setPayee.bind($data, {data: $data, payeeIndex: $index()})">
+                                <div class="subPayee oj-flex">
+                                    <!-- ko if:$component.imageUploadFlag() -->
+                                    <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[ko.utils.unwrapObservable(preview)]]' data-bind="attr:{'aria-label':nickName}">
+                                    </oj-avatar>
+                                    <!-- /ko -->
+                                    <div class="labelPadding oj-label-inline">
+                                        <li data-bind="text:nickName,value:id"></li>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- /ko -->
+                        </ul>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+
+                </div>
+                <!-- /ko -->
+
+
+                <!-- ko if: !$component.dropDownActive() && !$component.dropdownLevelOne() && payeeListExpandAll()[groupIndex()] && payeeListExpandAll()[groupIndex()].listPayees[payeeIndex()] -->
+                <div data-bind="with: payeeListExpandAll()[groupIndex()].listPayees[payeeIndex()]" class="oj-sm-12">
+                    <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                        <div class="payee-name oj-flex-item oj-sm-12">
+                            <span data-bind="text : nickName"></span>
+                            <span class="payee-name__cancel-icon">
+                  <a href="#" data-bind="attr:{'alt':$baseModel.format($component.nls.headers.alt, {reference: $component.nls.headers.refresh}),'title':$baseModel.format($component.nls.headers.title, {reference: $component.nls.headers.refresh})},click:$component.refreshDropDown.bind($data, payeeType)">
+                    <span class="icon icon-cancel"></span>
+                            </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item">
+                            <div class="cust-details">
+                                <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                                    <div class="oj-flex-item" data-bind="value: $component.modelInstance.upiRequestMoneyDetails.payeeDetails.id(id)">
+                                        <!-- ko if:$component.imageUploadFlag() -->
+                                        <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[ko.utils.unwrapObservable(preview)]]' data-bind="attr:{'aria-label': nickName}">
+                                        </oj-avatar>
+                                        <!-- /ko -->
+                                        <div class="oj-flex-item" data-bind="text: $baseModel.format($component.nls.headers.displayName,{group : name, payee : nickName}), value: $component.modelInstance.upiRequestMoneyDetails.payeeDetails.nickName(nickName), css: $component.imageUploadFlag() ? 'oj-label-inline payeeName' : 'oj-sm-12'">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex oj-flex-items-pad oj-sm-12">
+                                    <!-- ko if: payeeType === "VPA" -->
+                                    <div class="oj-flex-item oj-sm-6">
+                                        <div class="oj-sm-12">
+                                            <oj-label for="payeeVpaId"><span data-bind="text:$component.nls.headers.vpa"></span></oj-label>
+                                        </div>
+                                        <div id="payeeVpaId" class="oj-flex-item oj-sm-12" data-bind="text:vpaId, value: $component.modelInstance.upiRequestMoneyDetails.debitVPAId(vpaId)"></div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <div class="oj-flex-item oj-sm-6">
+                                        <div class="oj-sm-12">
+                                            <oj-label for="accountName"><span data-bind="text:$component.nls.headers.accountName"></span></oj-label>
+                                        </div>
+                                        <div id="accountName" class="oj-flex-item oj-sm-12" data-bind="text:accountName"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <div class="oj-flex-item oj-sm-12">
+
+                    <!-- ko if: $component.isPayeeVPA() -->
+
+                    <oj-checkboxset on-value-changed='[[$component.debitVPAIdHandler.bind($data)]]' value="{{debitVPAIdHandlerEnabled}}">
+                        <oj-option value="check">
+                            <span data-bind="text:$component.nls.headers.debitVPAId"></span>
+                        </oj-option>
+                    </oj-checkboxset>
+
+                    <!-- ko if: $component.debitVPAIdEnabled() -->
+                    <oj-input-text required id="remarks" :aria-label="[[$component.nls.headers.debitVPAId]]" value="{{$component.modelInstance.upiRequestMoneyDetails.debitVPAId}}"></oj-input-text>
+                    <!-- /ko -->
+
+                    <!-- /ko -->
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="oj-sm-9" data-bind="component: {
+                                name: 'amount-input', params: {
+                                amount :$component.modelInstance.upiRequestMoneyDetails.amount.amount,
+                                label : $component.nls.headers.amount,
+                                isLabelHidden:false,
+                                currency: $component.modelInstance.upiRequestMoneyDetails.amount.currency,
+                                converter:$formatter.formatCurrency,
+                                currencyListRequired : false,
+                                validator:$parent.validationTracker,
+                                isMandatory:true,
+                                rootId:'requested-amount' + $baseModel.incrementIdCount(),
+                                rootClass:'form-input',
+                                valueClasses : 'oj-lg-8'
+                            }
+                          }">
+
+            </div>
+
+            <!-- ko if: $component.vpaDetailsLoaded() -->
+            <div class="oj-flex oj-flex-items-pad">
+
+                <div class="oj-flex-item oj-sm-8">
+                    <oj-label for="expiryDate">
+                        <span data-bind="text:$component.nls.headers.expiryDate"></span>
+                    </oj-label>
+                    <oj-input-date :id="expiryDate" required :aria-label="[[$component.nls.headers.expiryDate]]" converter="[[$formatter.dateConverter]]" min="[[$oj.IntlConverterUtils.dateToLocalIso($component.currentDate())]]" max="[[$oj.IntlConverterUtils.dateToLocalIso($component.maxDate())]]"
+                        value="{{$component.modelInstance.upiRequestMoneyDetails.expiryDate}}"></oj-input-date>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="oj-flex oj-flex-items-pad">
+
+                <div class="oj-flex-item oj-sm-12">
+                    <oj-label for="remarks">
+                        <span data-bind="text:$component.nls.headers.remarks"></span>
+                    </oj-label>
+                    <oj-input-text id="remarks" :aria-label="[[$component.nls.headers.remarks]]" value="{{$component.modelInstance.upiRequestMoneyDetails.remarks}}"></oj-input-text>
+                </div>
+            </div>
+        </page-section>
+
+        <div class="oj-flex oj-flex-items-pad">
+
+            <div id="button-container1" class="oj-flex-item button-container">
+                <oj-button class="action-button-primary" id="request-button" on-click="[[reviewRequest]]">
+                    <span slot="startIcon" class="icons icon-transfer"></span>
+                    <span data-bind="text: $component.nls.headers.request"></span>
+                </oj-button>
+                <oj-button class="action-button-secondary" id="cancelButton" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                    <span slot="startIcon" class="icons icon-cancel"></span>
+                    <span data-bind="text: $component.nls.generic.common.cancel"></span>
+                </oj-button>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </oj-validation-group>
+
+</div>

@@ -1,0 +1,71 @@
+{
+    "consents": [{
+        "id": "ACCOUNT",
+        "templateId": "open-banking/account-access-consent",
+        "taskId": "OB_I",
+        "header": "ACCOUNT"
+    }, {
+        "id": "DOMESTICSTANDINGORDER",
+        "templateId": "open-banking/domestic-standing-order-consent",
+        "taskId": "OB_P",
+        "header": "PAYMENT"
+    }, {
+        "id": "DOMESTICPAYMENT",
+        "templateId": "open-banking/domestic-payment-consent",
+        "taskId": "OB_P",
+        "header": "PAYMENT"
+
+    },  {
+        "id": "DOMESTICSCHEDULEPAYMENT",
+        "templateId": "open-banking/domestic-schedule-payment-consent",
+        "taskId": "OB_P",
+        "header": "PAYMENT"
+
+    }, {
+        "id": "FUNDSCONFIRMATION",
+        "templateId": "open-banking/funds-confirmation-consent",
+        "taskId": "OB_I",
+        "header": "ACCOUNT"
+
+    }, {
+        "id": "INTERNATIONALSTANDINGORDER",
+        "templateId": "open-banking/international-standing-order-consent",
+        "taskId": "OB_P",
+        "header": "PAYMENT"
+    }, {
+        "id": "INTERNATIONALPAYMENT",
+        "templateId": "open-banking/international-payment-consent",
+        "taskId": "OB_P",
+        "header": "PAYMENT"
+
+    },  {
+        "id": "INTERNATIONALSCHEDULEDPAYMENT",
+        "templateId": "open-banking/international-schedule-payment-consent",
+        "taskId": "OB_P",
+        "header": "PAYMENT"
+
+    }],
+    "accountAccessDTO" : {
+        "accessPointAccountDTOs": {
+            "accessPointAccountDTOs": [{
+                    "accountType": "CSA",
+                    "accessLevel": "ACCESSPOINT",
+                    "accessStatus": false,
+                    "accountExclusionDTOs": []
+                },
+                {
+                    "accountType": "TRD",
+                    "accessLevel": "ACCESSPOINT",
+                    "accessStatus": false,
+                    "accountExclusionDTOs": []
+                },
+                {
+                    "accountType": "LON",
+                    "accessLevel": "ACCESSPOINT",
+                    "accessStatus": false,
+                    "accountExclusionDTOs": []
+                }
+            ]
+        }
+    }
+}

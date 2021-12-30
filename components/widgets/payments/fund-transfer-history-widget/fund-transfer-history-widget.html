@@ -1,0 +1,93 @@
+<div class="oj-panel funds">
+    <div class="oj-flex oj-flex-items-pad funds__section">
+        <div class="oj-flex-item">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <h3 class="heading" data-bind="text:$component.nls.heading.FundsTransferHistory">
+                    </h3>
+                </div>
+            </div>
+
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko if: paymentListDataLoaded() && paymentDataList().length>0-->
+                <div class="oj-flex-item oj-sm-12 funds__content">
+                    <oj-list-view :id="[['listView58']]" :aria-label="[[$component.nls.FundsTransferHistory.listView]]" min="10" data="[[$component.dataSource4]]" item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('fundsTransferTemplate')]]">
+                    </oj-list-view>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: paymentListDataLoaded() && !paymentDataList().length>0-->
+                <div class="oj-flex-item oj-sm-12 funds-transfers">
+                    <img alt="" data-bind="loadImage:'dashboard/spends.svg'">
+                    <div class="funds-transfers-msg" data-bind="text:$component.nls.FundsTransferHistory.noupcomingmsg"></div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <!-- ko if: paymentListDataLoaded() && paymentDataList().length>0-->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item view">
+            <a href="#" data-bind="click:$component.openTab.bind($data,'payments','fund-transfer-history'),text:$component.nls.FundsTransferHistory.viewAll">
+            </a>
+        </div>
+    </div>
+    <!-- /ko -->
+    <script type="text/html" id="fundsTransferTemplate">
+        <div class="oj-flex">
+            <!-- ko if:$component.imageUploadFlag() -->
+            <div class="oj-flex-item oj-sm-2 oj-md-1 oj-lg-2 center">
+                <!-- ko if:$baseModel.large() -->
+
+                <!-- ko if:initials -->
+                <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[preview()]]' data-bind="attr:{'aria-label':payeeNickName}">
+                </oj-avatar>
+                <!-- /ko -->
+
+                <!-- ko ifnot:initials -->
+                <oj-avatar role="img" size="xs" data-bind="loadImage: $component.defaultImagePath,attr:{'aria-label':externalReferenceNumber}">
+                </oj-avatar>
+                <!-- /ko -->
+
+                <!-- /ko -->
+                <!-- ko ifnot:$baseModel.large() -->
+
+                <!-- ko if:initials -->
+                <oj-avatar role="img" size="xs" initials='[[initials]]' src='[[preview()]]' data-bind="attr:{'aria-label':payeeNickName}">
+                </oj-avatar>
+                <!-- /ko -->
+
+                <!-- ko ifnot:initials -->
+                <oj-avatar role="img" size="xs" data-bind="loadImage: $component.defaultImagePath,attr:{'aria-label':externalReferenceNumber}">
+                </oj-avatar>
+                <!-- /ko -->
+
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+
+            <div data-bind="css:$component.imageUploadFlag() ? 'oj-flex-item oj-sm-5 oj-md-6 oj-lg-5':'oj-flex-item oj-sm-6 oj-md-6 oj-lg-6'">
+                <div class="funds-transfer-history__title" data-bind="attr:{'aria-label':$component.nls.FundsTransferHistory.accountDetails},text:payeeNickName"></div>
+                <div class="funds-transfer-history__info" data-bind="attr:{'aria-label':$component.nls.FundsTransferHistory.accountDetails},text:payeeAccountId"></div>
+                <div class="funds-transfer-history__info" data-bind="text: $formatter.formatDate(fromDate)"></div>
+            </div>
+            <div data-bind="css:$component.imageUploadFlag() ? 'oj-flex-item oj-sm-4 oj-md-4 oj-lg-4 right':'oj-flex-item oj-sm-5 oj-md-5 oj-lg-5 right'">
+                <div data-bind="text : $formatter.formatCurrency(amount.amount,amount.currency)"></div>
+                <div data-bind="text:"></div>
+                <div data-bind="css:(status==='success')?'funds-transfer-history__successStatus':(status==='failed')?'funds-transfer-history__failedStatus':'funds-transfer-history__inProgressStatus',text:$component.nls.FundsTransferHistory.statusHeaders[status]"></div>
+
+            </div>
+            <div class="oj-flex-item oj-sm-1 oj-md-1 oj-lg-1 right">
+                <a href="#" openprofile="true" data-bind="attr:{'id':'menuLauncher-' + externalReferenceNumber,'aria-label':externalReferenceNumber},click:$component.openMenu.bind($data,externalReferenceNumber)">
+                    <div class="icons icon-more-vertical"></div>
+                </a>
+                <oj-menu class="hide" :id="[[externalReferenceNumber]]" on-oj-action="[[$component.menuItemSelect]]" open-options.launcher="[['menuLauncher-' + externalReferenceNumber]]" open-options.display="dropDown">
+                    <!-- ko foreach: $component.menuItems -->
+                    <oj-option :value="[[id]]">
+                        <span data-bind="text : label"></span>
+                    </oj-option>
+                    <!-- /ko -->
+                </oj-menu>
+            </div>
+        </div>
+    </script>
+</div>

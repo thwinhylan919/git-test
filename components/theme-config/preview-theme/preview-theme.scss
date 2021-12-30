@@ -1,0 +1,172 @@
+.preview-theme {
+    #preview-header .header-container {
+        display: block;
+        @include float(left);
+        width: 100%;
+        height: var(--header-height);
+        font-size: var(--header-font-size);
+        font-weight: var(--header-font-weight);
+        border-bottom: 1px solid var(--header-border-bottom-color);
+    }
+
+    border: 0.05rem solid var(--base-border-default);
+
+    &__menu {
+        height: 20px;
+        @include single-padding(left, 1.9rem);
+        @include float(left);
+    }
+
+    &__menuRight {
+        height: 20px;
+        @include float(right);
+    }
+
+    &__list {
+        display: inline-block;
+        padding: 0rem 0.6rem;
+
+        &>.header-icon {
+            font-size: var(--header-icon-size);
+        }
+    }
+
+    &__list:first {
+        @include single-padding(left, 0);
+    }
+
+    &__body {
+        padding: 0 1.9rem;
+
+        .page-section-heading__text {
+            @include compact-single(margin, left, 0);
+        }
+    }
+
+    &__form {
+        padding: 0 0.6rem;
+        margin-bottom: 1.6rem;
+        background: linear-gradient(to var(--form-gradient-direction), var(--form-gradient-start-color), var(--form-gradient-end-color));
+
+        &>div {
+            margin-top: 0.6rem;
+        }
+
+        &__element {
+            margin-bottom: 0.3rem;
+
+            .basic, input {
+                color: var(--form-foreground-color);
+                font-size: var(--form-font-size);
+                font-weight: var(--form-font-weight);
+            }
+
+            .link {
+                color: var(--link-base);
+                font-size: var(--link-font-size);
+                font-weight: var(--link-font-weight);
+            }
+
+            .label {
+                color: var(--form-label-foreground-color);
+                font-size: var(--form-label-font-size);
+                font-weight: var(--form-label-font-weight);
+            }
+        }
+
+        &__header {
+            padding: 0.6rem;
+        }
+
+        #primary_btn,
+        #secondary_btn,
+        #tertiary_btn {
+            background-image: none;
+            margin: 0;
+        }
+    }
+
+    header,
+    footer {
+        margin: 1px;
+    }
+
+    footer {
+        padding: 0.2rem;
+    }
+
+    .anchroTxt:hover {
+        color: var(--link-hover);
+    }
+
+    .alignHelpPanel {
+        margin: 0 auto;
+    }
+
+    .mb15 {
+        margin-bottom: 1rem;
+    }
+
+    #banner-section {
+        background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+        color: var(--banner-foreground-color);
+        font-size: var(--banner-font-size);
+        font-weight: var(--banner-font-weight);
+        padding: var(--banner-padding);
+
+        .bannerLabel {
+            color: var(--banner-text-primary);
+            font-size: var(--base-font-size-medium);
+            line-height: calc(var(--form-line-height)*1.5);
+        }
+    }
+
+    .confirm-screen {
+        &__header {
+            border-bottom: var(--confirm-screen-border-bottom-width) solid var(--confirm-screen-border-bottom-color);
+            border-radius: var(--confirm-screen-border-radius);
+            margin: 0 0 0.8rem;
+            padding: 0.6rem;
+        }
+
+        .successHeader {
+            @include single-border(left, var(--confirm-screen-success-border-width) solid var(--confirm-screen-success-border-color));
+            border-radius: var(--confirm-screen-success-border-radius);
+            background-color: var(--base-color-success-light);
+            background: linear-gradient(to var(--confirm-screen-success-gradient-direction), var(--confirm-screen-success-gradient-start-color), var(--confirm-screen-success-gradient-end-color));
+        }
+
+        .errorHeader {
+            @include single-border(left, var(--confirm-screen-error-border-width) solid var(--confirm-screen-error-border-color));
+            border-radius: var(--confirm-screen-error-border-radius);
+            background: linear-gradient(to var(--confirm-screen-error-gradient-direction), var(--confirm-screen-error-gradient-start-color), var(--confirm-screen-error-gradient-end-color));
+        }
+
+        &-header {
+            &__text {
+                text-transform: uppercase;
+                padding-bottom: 0.6rem;
+                font-size: var(--confirm-screen-text-font-size);
+                font-weight: var(--confirm-screen-text-font-weight);
+                color: var(--confirm-screen-text-foreground-color);
+                display: flex;
+                align-items: center;
+            }
+
+            &-text {
+                &__image {
+                    height: 1.3rem;
+                }
+
+                &__message {
+                    padding: 0.3rem;
+                }
+            }
+
+            &__successMessage {
+                @include single-padding(left, 1.6rem);
+                display: inline-block;
+            }
+        }
+    }
+}

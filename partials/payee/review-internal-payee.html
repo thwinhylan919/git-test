@@ -1,0 +1,40 @@
+<div data-bind="with:$component.payeeDetails">
+    <div class="">
+        <!-- ko if:!('adhocPaymentFlag' in $component) -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.recipientname , value :name"></row>
+        <!-- /ko -->
+    </div>
+    <!-- ko if:ko.utils.unwrapObservable($component.preview) && $component.imageUploadFlag() -->
+    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-md-12 oj-lg-12">
+        <oj-label class="oj-flex-item oj-lg-12 oj-sm-12">
+            <span data-bind="text: $component.payments.payee.image"></span>
+        </oj-label>
+        <div class="oj-flex-item">
+            <oj-avatar role="img" size="sm" data-bind="attr:{'id': $component.target(),'aria-label':$component.payments.payee.image}" src="[[$component.preview()]]">
+            </oj-avatar>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.accounttype , value :$component.payments.payee.accinternal"></row>
+        <internal-account-input class="oj-flex-items-pad" params="{
+           baseModel:$baseModel,
+           account : ko.observable(accountNumber),
+           label:$component.payments.payee.accountnumber,
+           required:true,
+           readOnly: true
+          }">
+        </internal-account-input>
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.accountname , value :accountName,dataClass :'highlight-text'"></row>
+    </div>
+    <div class="">
+        <!-- ko if:!('adhocPaymentFlag' in $component) -->
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.accountnickname , value :nickName"></row>
+        <!-- /ko -->
+    </div>
+    <!-- ko if:$dashboard.appData.segment === "CORP" && !('adhocPaymentFlag' in $component) -->
+    <div class="">
+        <row params="baseModel : $baseModel, rootModel : $component, label : $component.payments.payee.payeeaccesstype,value :$component.payments.payee.isShared[shared]"></row>
+    </div>
+    <!-- /ko -->
+</div>

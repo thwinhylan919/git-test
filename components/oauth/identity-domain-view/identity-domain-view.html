@@ -1,0 +1,50 @@
+<div class="form-main-container full-width">
+    <!-- ko if:identityDomain -->
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.IdentityDomain.IdentityDomainDefinition">
+        <div data-bind="with:$component.identityDomainData">
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.IdentityDomainName, value : name "></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.IdentityDomainDescription, value : description"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.identityStore, value : $component.eldap"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.ConsentPageURL, value : consentPageURL "></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.errPageURL, value : errorPageURL "></row>
+        </div>
+    </page-section>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.IdentityDomain.tokenSettings">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.nls.IdentityDomain.TokenType, value : $component.nls.IdentityDomain.accessToken"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.nls.IdentityDomain.IsRefreshToken, value : $component.refreshTokenEnabled"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.AccessTokenExpiry, value  : $component.tokenExpiry"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.RefreshTokenExpiry , value : $component.refreshTokenExpiry"></row>
+        </page-section>
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.nls.IdentityDomain.TokenType, value : $component.nls.IdentityDomain.authCode"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label :$component.nls.IdentityDomain.IsRefreshToken, value : $component.azRefreshTokenEnabled"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.AccessTokenExpiry, value  : $component.azTokenExpiry"></row>
+            <row params="baseModel : $baseModel, rootModel : $component, label : $component.nls.IdentityDomain.RefreshTokenExpiry , value : $component.azRefreshTokenExpiry"></row>
+        </page-section>
+    </page-section>
+    <div class="oj-row button-container">
+        <oj-button class="action-button-primary" on-click="[[$component.edit]]"><span data-bind="text:$component.nls.IdentityDomain.Edit"></span></oj-button>
+        <oj-button class="action-button-secondary" on-click="[[$component.cancel]]"><span data-bind="text:$component.nls.IdentityDomain.cancel"></span></oj-button>
+        <oj-button class="action-button-tertiary" on-click="[[$component.back]]"><span data-bind="text:$component.nls.IdentityDomain.back"></span></oj-button>
+    </div>
+    <!-- /ko -->
+
+    <modal-window class="" params="baseModel : $baseModel, rootModel : $component,id:'reviewCancel',header:$component.nls.IdentityDomain.reviewwarning">
+        <div class="message-box">
+          <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+              <div class="dialog-text"><span data-bind="text:$component.nls.IdentityDomain.cancelMessage"></span></div>
+            </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" id="yesBtn" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+              <span data-bind="text:$component.nls.IdentityDomain.yes"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="noBtn" on-click="[[no]]">
+              <span data-bind="text:$component.nls.IdentityDomain.no"></span>
+            </oj-button>
+          </div>
+        </div>
+      </modal-window>
+</div>

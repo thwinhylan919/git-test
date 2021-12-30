@@ -1,0 +1,152 @@
+<!-- ko ifnot: $baseModel.small() -->
+<div class="accounts-overview-container">
+  <div class="oj-sm-12 oj-md-12 oj-lg-12 oj-flex oj-flex-items-pad search-scheme">
+    <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-6">
+      <oj-checkboxset id="check-box-filter" class="oj-choice-direction-row" on-value-changed="[[includeRedeemed]]" value="{{redeemCheckBox}}">
+        <oj-option :aria-label=[[$component.resource.includeRedeemed]] value="REDEEMED"></oj-option>
+      </oj-checkboxset>
+      <span data-bind="text: $component.resource.includeRedeemed"></span>
+    </div>
+    <!-- ko if: $component.redeemedRefresh -->
+    <div class="oj-flex-item oj-sm-6 oj-md-6 oj-lg-6 right">
+      <oj-combobox-one id="search-scheme" :aria-label="[[$component.resource.searchScheme]]" on-value-changed="[[searchScheme]]" placeholder="{{$component.resource.searchScheme}}" value="{{$component.schemeToSearch}}">
+        <span slot="end" class="icons icon-search"></span>
+        <!-- ko foreach: $component.schemesList -->
+        <oj-option value="[[schemeCode]]">
+          <span data-bind="text: schemeName"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-combobox-one>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if: $component.redeemedRefresh -->
+  <oj-table class="table-resize" id="search-recurring" :aria-label="[[$component.resource.pageHeader]]" data="[[dataSource]]" columns-default.sortable="disabled" columns="[[headerText]]" row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('rf_template',true)]]">
+    <caption class="hide-label" data-bind="text: $component.resource.pageHeader"></caption>
+  </oj-table>
+  <script type="text/html" id="rf_template">
+    <tr>
+      <!-- ko if: schemeCode === "HEADINGTEXT" -->
+      <td class="row-color">
+        <span class="big-text" data-bind="text: schemeName"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: amount"></span>
+      </td>
+      <td class="row-color">
+        <div class="date-style">
+          <span data-bind="text: $formatter.formatDate(startDate)"></span>
+        </div>
+      </td>
+      <td class="row-color">
+        <div class="date-style">
+          <span data-bind="text: $formatter.formatDate(endDate)"></span>
+        </div>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: frequency"></span>
+      </td>
+      <td class="row-color center">
+        <span data-bind="text: installmentsRemaining"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: marketValue"></span>
+      </td>
+      <td class="row-color">
+        <span data-bind="text: xirr"></span>
+      </td>
+      <!-- /ko -->
+      <!-- ko ifnot: schemeCode === "HEADINGTEXT" -->
+      <td class="column-color">
+        <a href="#" data-bind="click:$component.showInfoPanel.bind($data,$context.data)">  <span data-bind="text: schemeName"></span></a>
+        <oj-rating-gauge :id="[['gauge'+ $context.rowContext.status.rowIndex]]" value="{{rating}}" max="{{$component.maxRating()}}" class="rating-icons" readonly></oj-rating-gauge>
+      </td>
+      <td class="right">
+        <span data-bind="text: $formatter.formatCurrency(amount,currency)"></span>
+      </td>
+      <td>
+        <div class="date-style">
+          <span data-bind="text: $formatter.formatDate(startDate)"></span>
+        </div>
+      </td>
+      <td>
+        <div class="date-style">
+          <span data-bind="text: $formatter.formatDate(endDate)"></span>
+        </div>
+      </td>
+      <td>
+        <span data-bind="text: frequency"></span>
+      </td>
+      <td class="installments-align">
+        <span data-bind="text: installmentsRemaining"></span>
+      </td>
+      <td class="right">
+        <span data-bind="text:$formatter.formatCurrency(marketValue,currency)"></span>
+      </td>
+      <td class="right">
+        <span data-bind="text: xirr"></span>
+      </td>
+      <!-- /ko -->
+    </tr>
+  </script>
+  <!-- /ko -->
+</div>
+<!-- /ko -->
+
+
+<!-- ko if: $baseModel.small() -->
+<!-- ko if: $component.redeemedRefresh -->
+<div class="accounts-overview-container">
+  <div class="oj-flex oj-flex-items-pad oj-sm-12 category-padding">
+    <div class="oj-flex-item oj-sm-12">
+      <label data-bind="text: $component.resource.transactionCategory"></label>
+    </div>
+    <div class="oj-flex-item oj-sm-12">
+      <oj-select-one id="holdings-category" :aria-label="[[$component.resource.investmentAccount]]" on-value-changed="[[categorySelect]]">
+        <!-- ko foreach : $component.holdingsCategory -->
+        <oj-option value="[[code]]"><span data-bind="text:value"></span> </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+  </div>
+  <!-- ko if: $component.mobileViewTable -->
+  <oj-list-view id="listview-mobile" selection-mode="[['none']]" item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('data-template',true)}]]" data="[[mobileDataSource]]">
+  </oj-list-view>
+  <script type="text/html" id="data-template">
+    <li>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-12 row-color heading-pad">
+          <a href="#" data-bind="click:$component.showInfoPanel.bind($data,$context.row)">  <span data-bind="text: schemeName"></span></a>
+          <oj-rating-gauge :id="[['gauge'+$context.index]]" value="{{rating}}" max="{{$component.maxRating()}}" class="rating-icons" readonly></oj-rating-gauge>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.holdingsSummary.amount , value : $formatter.formatCurrency(amount,currency)"></row>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.holdingsSummary.startDate , value : $formatter.formatDate(startDate)"></row>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.holdingsSummary.endDate , value : $formatter.formatDate(endDate)"></row>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.holdingsSummary.frequency , value : frequency"></row>
+        </div>
+      </div>
+      <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.holdingsSummary.installmentsRemaining , value : installmentsRemaining"></row>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+          <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.holdingsSummary.marketValue , value : $formatter.formatCurrency(marketValue,currency)"></row>
+        </div>
+      </div>
+    </li>
+  </script>
+  <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- /ko -->

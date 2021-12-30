@@ -1,0 +1,213 @@
+$accordion-font-size-small: 1rem;
+
+$review-title-font-color: var(--base-text-primary);
+$review-height-small: 3.1rem;
+$accordions: "account-funding",
+"basic-primary-info",
+"account-holder",
+"primary-registration",
+"occupation-info",
+"contact-info",
+"identity-info",
+"income-info",
+"liabilities-info",
+"assets-info",
+"expense-info",
+"vehicle-info",
+"property-info",
+"offers",
+"funding-table",
+"requirements";
+
+.review {
+  .form-main-container {
+    .form-container {
+      .padding-top-5 {
+        padding-top: 0;
+      }
+    }
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .review-text {
+    @include single-padding(left, 8.8rem);
+    padding-bottom: 1.3rem;
+    font-size: 1.1rem;
+
+    @include mq(small) {
+      @include single-padding(left, 1.3rem);
+      font-size: 1rem;
+      @include single-padding(right, 1.3rem);
+    }
+
+    @include mq(medium) {
+      @include single-padding(left, 2.5rem);
+    }
+  }
+
+  .card {
+    margin-bottom: 1.6rem;
+
+    &.form-container {
+      margin-top: 0.6rem;
+      margin-bottom: 0;
+      padding-top: 0;
+
+      @include mq(small) {
+        padding-top: 0;
+      }
+
+      @include mq(medium) {
+        padding-top: 0;
+      }
+    }
+
+    .card-header {
+      height: 3.5rem;
+
+      @include mq(small) {
+        height: 3rem;
+      }
+
+      @include mq(large) {
+        padding: 0;
+      }
+
+      @include margin(0, 1.9rem, 1.3rem, 0);
+      background: linear-gradient(to var(--accordion-header-gradient-direction), var(--accordion-header-gradient-start-color), var(--accordion-header-gradient-end-color));
+      border-width: 0 0 var(--accordion-border-width) 0 !important;
+      border-bottom:var(--accordion-border-width) solid var(--accordion-border-color);
+      border-radius: var(--accordion-border-radius);
+
+      .card-title {
+        font-size: var(--accordion-header-font-size);
+        font-weight: var(--accordion-header-font-weight);
+        color: var(--accordion-header-foreground-color);
+        @include single-padding(left, 0.5rem !important);
+        padding-top: 1rem;
+        margin: 0;
+
+        @include mq(small) {
+          padding-top: 0.9rem !important;
+          @include single-padding(left, 0.9rem !important);
+          padding-bottom: 0.9rem !important;
+        }
+      }
+
+      .edit {
+        @include float(right);
+        padding-top: 1rem;
+        @include single-padding(right, 1.9rem);
+        font-size: 1.2rem;
+        color: var(--accordion-header-foreground-color);
+
+        @include mq(small) {
+          padding-top: 0.3rem;
+          padding-bottom: 0;
+          @include single-padding(right, 0.6rem);
+          font-size: 1.5rem;
+        }
+      }
+
+      .edit-info {
+        margin-top: 0;
+      }
+
+      .card-icon-container {
+        position: initial;
+        width: 3.5rem;
+        @include single-margin(left, 0.6rem);
+        text-align: center;
+        padding-top: 0.6rem;
+
+        .card-icon {
+          font-size: 2rem;
+          color: var(--accordion-header-foreground-color);
+
+          @each $accordion in $accordions {
+            &.icon-#{$accordion}:before {
+              vertical-align: middle;
+            }
+          }
+
+          @include mq(small) {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .section-info {
+    border-width: 0px;
+    font-size: var(--accordion-body-font-size);
+    font-weight: var(--accordion-body-font-weight);
+    color: var(--accordion-body-foreground-color);
+    background: linear-gradient(to var(--accordion-body-gradient-direction), var(--accordion-body-gradient-start-color), var(--accordion-body-gradient-end-color));
+
+    .section-heading {
+      font-weight: var(--base-font-weight-bold);
+      color: $review-title-font-color;
+      font-size: 1rem;
+    }
+
+    label {
+      line-height: inherit;
+    }
+
+    .link {
+      line-height: inherit;
+    }
+
+    .card-text {
+      padding-bottom: 1.3rem;
+      padding-top: 0;
+    }
+  }
+
+  .disclosures {
+    .card-title {
+      display: inline-block;
+    }
+
+    .card-text {
+      padding-top: 0;
+      display: block;
+      @include single-padding(right, 0.6rem);
+      @include single-padding(left, 0.6rem);
+    }
+
+    .card-text-label {
+      padding-top: 0;
+      display: block;
+      @include single-padding(right, 0.6rem);
+      @include single-padding(left, 0.6rem);
+    }
+
+    .link {
+      @include single-padding(left, 0.25em);
+      @include single-padding(right, 0.25em);
+      padding-top: 0.2rem;
+    }
+
+    .section-heading {
+      font-weight: var(--base-font-weight-bold);
+      color: $review-title-font-color;
+      font-size: 1rem;
+    }
+  }
+}
+
+.conscent {
+  div:nth-child(1) {
+    padding-bottom: 1.3rem !important;
+  }
+
+  div:not(:nth-child(1)) {
+    padding-bottom: 0.6rem;
+  }
+}

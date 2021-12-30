@@ -1,0 +1,70 @@
+ .my-bills {
+     &__section {
+         height: calc(100% - 2rem);
+     }
+     &-heading {
+         &__title {
+             margin: 0.6rem 0 0;
+         }
+     }
+     .biller-details {
+         height: auto;
+         overflow-y: auto;
+         &__title {
+             font-size: var(--base-font-size-large);
+             font-weight: var(--base-font-weight-bold);
+             padding-bottom: 0.3rem;
+         }
+         &__info {
+             font-size: var(--base-font-size-medium);
+             color: var(--base-text-secondary);
+         }
+         .status {
+             font-size: var(--base-font-size-medium);
+             padding: 0.3rem 0;
+         }
+         .success {
+             color: var(--base-color-success);
+         }
+         .danger {
+             color: var(--base-color-danger);
+         }
+         .payBtn {
+             @include single-margin(left, calc(50% - 27px));
+         }
+         .billersList ul {
+             overflow-y: auto;
+             li {
+                 border-bottom-width: 0;
+                 padding-bottom: 0;
+             }
+         }
+         .inline-label {
+             display: inline;
+         }
+     }
+     &__view-all {
+         @include view-all;
+         position: relative;
+         //@include single-border(right, 0.05rem solid var(--base-border-default));
+         &:not(:last-child):after {
+             content: '';
+             display: inline-block;
+             width: 1px;
+             height: 1.5rem;
+             background-color: rgba(0, 0, 0, 0.3);
+             position: absolute;
+             @include right(0.2rem);
+             top: 1.2rem;
+             transform: translateY(-50%);
+         }
+     }
+     &__noData {
+         height: 10rem;
+     }
+     &-noData {
+         &__image {
+             height: 8rem;
+         }
+     }
+ }

@@ -1,0 +1,142 @@
+{
+    "status": {
+        "result": "SUCCESSFUL",
+        "contextID": "005dZg_HaewFw0H6yvqYMG0002FJ0001_D,0:1",
+        "message": {
+            "type": "INFO"
+        }
+    },
+    "creditcards": [
+        {
+            "ownerName": "Amit Sharma",
+            "issuer": "BANK",
+            "validity": {
+                "start": "2014-10-05T00:00:00",
+                "end": "2017-08-05T00:00:00"
+            },
+            "creditCard": {
+                "displayValue": "624700******0001",
+                "value": "CF38BDBAE134A2C29B374EAFA3BF7EF8C2209070824550C87E0383B938EDD16A"
+            },
+            "cardStatus": "ACT",
+            "cardProductDTO": {
+                "id": "2",
+                "description": "Test",
+                "expiryDate": "2018-06-05T00:00:00",
+                "cardBrand": "VISA",
+                "cardCategory": "GOLD"
+            },
+            "currentAuthorizationAmount": {
+                "currency": "INR",
+                "amount": 0
+            },
+            "billingCycleDay": 21,
+            "rewardPoints": 5000,
+            "due": {
+                "billedAmount": {
+                    "currency": "GBP",
+                    "amount": 600
+                },
+                "equivalentBilledAmount": {
+                    "currency": "INR",
+                    "amount": 54000
+                },
+                "unbilledAmount": {
+                    "currency": "GBP",
+                    "amount": 600
+                },
+                "minimumAmount": {
+                    "currency": "GBP",
+                    "amount": 600
+                },
+                "billedDate": "2017-05-05T00:00:00",
+                "expectedPaymentDate": "2017-06-05T00:00:00"
+            },
+            "payment": {
+                "lastPayDate": "2017-05-05T00:00:00",
+                "lastPayAmount": {
+                    "currency": "GBP",
+                    "amount": 600
+                }
+            },
+            "limits": [
+                {
+                    "version": 1,
+                    "generatedPackageId": false,
+                    "auditSequence": 1,
+                    "total": {
+                        "currency": "GBP",
+                        "amount": 10000
+                    },
+                    "available": {
+                        "currency": "GBP",
+                        "amount": 500
+                    },
+                    "type": "CA",
+                    "equivalentTotal": {
+                        "currency": "INR",
+                        "amount": 900000
+                    },
+                    "equivalentAvailable": {
+                        "currency": "INR",
+                        "amount": 45000
+                    }
+                },
+                {
+                    "version": 1,
+                    "generatedPackageId": false,
+                    "auditSequence": 1,
+                    "total": {
+                        "currency": "GBP",
+                        "amount": 10000
+                    },
+                    "available": {
+                        "currency": "GBP",
+                        "amount": 6100
+                    },
+                    "type": "CR",
+                    "equivalentTotal": {
+                        "currency": "INR",
+                        "amount": 900000
+                    },
+                    "equivalentAvailable": {
+                        "currency": "INR",
+                        "amount": 549000
+                    }
+                }
+            ],
+            "cardOwnershipType": "PRIMARY",
+            "primaryCardId": {
+                "displayValue": "624700******0001",
+                "value": "CF38BDBAE134A2C29B374EAFA3BF7EF8C2209070824550C87E0383B938EDD16A"
+            },
+            "cardCurrency": "GBP",
+            "internationalUsageAllowed": true
+        }
+    ],
+    "associatedParty": {
+        "displayValue": "***336",
+        "value": "CF3AB1BEE2328921013763E35EB44A51C5C24B672F8F"
+    },
+    "sumOfEquivalentTotalCreditLimits": {
+        "currency": "INR",
+        "amount": 900000
+    },
+    "sumOfEquivalentAvailableCreditLimits": {
+        "currency": "INR",
+        "amount": 549000
+    },
+    "sumOfEquivalentTotalCashLimits": {
+        "currency": "INR",
+        "amount": 900000
+    },
+    "sumOfEquivalentAvailableCashLimits": {
+        "currency": "INR",
+        "amount": 45000
+    },
+    "sumOfEquivalentDue": {
+        "currency": "INR",
+        "amount": 54000
+    },
+    "domesticCurrency": "INR"
+}

@@ -1,0 +1,43 @@
+<div class="oj-panel fundreports">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+      <h3 data-bind="text:$component.resource.heading.TopFunds">
+                  </h3>
+    </div>
+    <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+      <oj-label>
+        <span class="medium-text" data-bind="text:$baseModel.format($component.resource.TopFunds.asOnDate,{asOnDate: $formatter.formatDate($component.asOnDate())})"></span>
+      </oj-label>
+    </div>
+  </div>
+  <!-- ko if: summaryDataLoaded-->
+  <oj-table  id="portfolio-search":aria-label="[[$component.resource.pageHeader]]"
+    data="[[dataSource]]" columns-default.sortable="disabled" columns="[[headerText]]"  row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('rf_template',true)]]">
+    <caption class="hide-label" data-bind="text: $component.resource.heading.TopFunds"></caption>
+  </oj-table>
+  <script type="text/html" id="rf_template">
+    <tr>
+      <td>
+        <span data-bind="text:fundName"></span>
+      </td>
+      <td class="right">
+        <span data-bind="text:$formatter.formatCurrency(price,currency)"></span>
+      </td>
+      <!-- ko if: change>0 -->
+      <td>
+        <div class="positive-value tags">
+        <span data-bind="text:'+'+change"></span>
+      </div>
+      </td>
+      <!-- /ko -->
+      <!-- ko if: change<0 -->
+      <td>
+        <div class="negative-value tags">
+        <span data-bind="text:'-'+change"></span>
+      </div>
+      </td>
+      <!-- /ko -->
+    </tr>
+</script>
+  <!-- /ko -->
+</div>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="842.35px" height="595.3px" viewBox="0 0 842.35 595.3" enable-background="new 0 0 842.35 595.3" xml:space="preserve">
+<g>
+	
+		<polyline fill="#FFFFFF" stroke="#171C28" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		536.514,93.016 570,93.016 570,534.84 211.89,534.84 211.89,93.016 254.677,93.016 	"/>
+	<g>
+		
+			<path fill="#FFFFFF" stroke="#171C28" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M499.308,85.574h-41.857V55.809c0-2.79-2.79-4.651-4.651-4.651H339.321c-2.79,0-4.651,2.79-4.651,4.651v30.695h-37.206
+			c-10.232,0-17.673,8.371-17.673,17.673v44.647h238.12v-44.647C516.981,93.946,508.61,85.574,499.308,85.574z"/>
+		
+			<polyline fill="#FFFFFF" stroke="#00984A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			281.652,301.371 302.115,321.834 331.88,291.139 		"/>
+		
+			<line fill="none" stroke="#171C28" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="396.991" y1="306.952" x2="507.68" y2="306.952"/>
+		
+			<polyline fill="#FFFFFF" stroke="#00984A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			281.652,223.238 302.115,243.701 331.88,213.006 		"/>
+		
+			<line fill="none" stroke="#171C28" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="396.991" y1="227.888" x2="507.68" y2="227.888"/>
+		
+			<polyline fill="#FFFFFF" stroke="#00984A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			280.721,372.063 301.185,392.526 330.95,361.831 		"/>
+		
+			<line fill="none" stroke="#171C28" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="396.991" y1="376.713" x2="507.68" y2="376.713"/>
+	</g>
+	<path fill="#171C28" d="M413.734,79.993h-39.067c-3.721,0-5.581-2.79-5.581-5.581l0,0c0-3.721,2.79-5.581,5.581-5.581h39.067
+		c3.721,0,5.581,2.79,5.581,5.581l0,0C419.315,77.203,416.524,79.993,413.734,79.993z"/>
+	<g id="XMLID_1730_">
+		<g>
+			
+				<path fill="#FFFFFF" stroke="#171C28" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+				M531.864,346.948c53.949,0,98.597,44.647,98.597,98.597s-44.648,98.597-98.597,98.597s-98.597-44.647-98.597-98.597
+				S476.984,346.948,531.864,346.948"/>
+		</g>
+	</g>
+	<g>
+		<path fill="#0D3178" d="M516.981,446.475v-60.46h16.743v60.46h57.67v15.813h-74.412V446.475z"/>
+	</g>
+</g>
+</svg>

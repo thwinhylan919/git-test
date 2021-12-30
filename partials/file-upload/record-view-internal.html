@@ -1,0 +1,91 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading:$component.Nls.debitDetails">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.debitPartyId"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('partyId' in $data.recordDetails())?$data.recordDetails().partyId:'-')"></span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.debitCurrency"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('debitAccountCurrency' in $data.recordDetails())?$data.recordDetails().debitAccountCurrency:'-')"></span>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.debitAccountNumber"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('debitAccountId' in $data.recordDetails())?$data.recordDetails().debitAccountId:'-')"></span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.debitAccBranch"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('debitAccountBranch' in $data.recordDetails())?$data.recordDetails().debitAccountBranch:'-')"></span>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.debitNarrative"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-9">
+      <span data-bind="text : (('debitNarrative' in $data.recordDetails())?$data.recordDetails().debitNarrative:'-')"></span>
+    </div>
+  </div>
+</page-section>
+<page-section params="baseModel : $baseModel, rootModel : $component, heading:$component.Nls.creditDetails">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.beneName"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('beneficiaryName' in $data.recordDetails())?$data.recordDetails().beneficiaryName:'-')"></span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.valueDt"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('valueDate' in $data.recordDetails())?$formatter.formatDate($data.recordDetails().valueDate):'-')"></span>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.creditAccountNumber"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('creditAccountId' in $data.recordDetails())?$data.recordDetails().creditAccountId:'-')"></span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.creditAccBranch"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('creditAccountBranch' in $data.recordDetails())?$data.recordDetails().creditAccountBranch:'-')"></span>
+    </div>
+
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.paymentAmount"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('amount' in $data.recordDetails().currencyAmount)?$formatter.formatCurrency($data.recordDetails().currencyAmount.amount, $data.recordDetails().currencyAmount.currency):'-')"></span>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.paymentCurrency"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-3">
+      <span data-bind="text : (('currencyAmount' in $data.recordDetails())?$data.recordDetails().currencyAmount.currency:'-')"></span>
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3">
+      <oj-label><span data-bind="text:$component.Nls.creditNarrative"></span></oj-label>
+    </div>
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-9">
+      <span data-bind="text : (('creditNarrative' in $data.recordDetails())?$data.recordDetails().creditNarrative:'-')"></span>
+    </div>
+  </div>
+</page-section>

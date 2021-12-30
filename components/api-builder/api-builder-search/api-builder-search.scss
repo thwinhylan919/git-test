@@ -1,0 +1,61 @@
+$get-background-color: #0f6ab4;
+$put-background-color: #e3ae14;
+$post-background-color: #0c823a;
+$delete-background-color: #a41e22;
+$patch-background-color: #7842b1;
+$char-color: #FFFFFF;
+$char-color-put: #2c3251;
+.methodTypeGet {
+    font-size: .78rem;
+    color: $char-color;
+    background: $get-background-color;
+    border-radius: 3px;
+    margin: 10px;
+    min-width: 56px;
+    display: inline-block;
+    text-align: center;
+}
+
+.methodTypePut {
+    font-size: .78rem;
+    color: $char-color-put;
+    background: $put-background-color;
+    border-radius: 3px;
+    margin: 10px;
+    min-width: 56px;
+    display: inline-block;
+    text-align: center;
+}
+
+.methodTypePost {
+    font-size: .78rem;
+    color: $char-color;
+    background: $post-background-color;
+    border-radius: 3px;
+    margin: 10px;
+    min-width: 56px;
+    display: inline-block;
+    text-align: center;
+}
+
+.methodTypeDelete {
+    font-size: .78rem;
+    color: $char-color;
+    background: $delete-background-color;
+    border-radius: 3px;
+    margin: 10px;
+    min-width: 56px;
+    display: inline-block;
+    text-align: center;
+}
+
+.methodTypePatch {
+    font-size: .78rem;
+    color: $char-color;
+    background: $patch-background-color;
+    border-radius: 3px;
+    margin: 10px;
+    min-width: 56px;
+    display: inline-block;
+    text-align: center;
+}

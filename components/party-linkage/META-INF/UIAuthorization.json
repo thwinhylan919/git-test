@@ -1,0 +1,23 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.party.service.relation.PartyToPartyRelationship",
+        "components": [{
+                "componentName": "linkage-base",
+                "service": "read",
+                "perform": "party-validate"
+            },
+            {
+                "componentName": "create-linkage",
+                "service": "create",
+                "perform": "linkage-base#party-validate#child-party-validate#linkage-review",
+                "approve": "linkage-review"
+            },
+            {
+                "componentName": "linkage-update",
+                "service": "update",
+                "perform": "child-party-validate#linkage-review",
+                "approve": "linkage-review"
+            }
+        ]
+    }]
+}

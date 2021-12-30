@@ -1,0 +1,33 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+  <div class="oj-flex oj-flex-items-pad oj-lg-6" >
+    <div class="oj-flex-item oj-sm-12">
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-md-offset-1 oj-lg-4 label  ">
+          <oj-label :for="[['dealerId']]"><span data-bind="text:$component.resource.dealerDetails.dealerId"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+          <oj-input-text  name="dealerId" :id="[['dealerId']]" :placeholder="[[$component.resource.dealerDetails.typedealerId]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+           value="{{$component.dealerData.dealerId}}"></oj-input-text>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-md-offset-1 oj-lg-4 label  ">
+          <oj-label :for="[['dealerName']]"><span data-bind="text:$component.resource.dealerDetails.dealerName"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+          <oj-input-text  name="dealerName" :id="[['dealerName']]" :placeholder="[[$component.resource.dealerDetails.typedealerName]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+           value="{{$component.dealerData.dealerName}}"></oj-input-text>
+        </div>
+      </div>
+      <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-md-offset-1 oj-lg-4 label  ">
+          <oj-label :for="[['dealerUrl']]"><span data-bind="text:$component.resource.dealerDetails.dealerUrl"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+          <oj-input-text  name="dealerUrl" :id="[['dealerUrl']]" :placeholder="[[$component.resource.dealerDetails.typedealerUrl]]" :invalidcomponenttracker="[[$component.validationTracker]]"
+           value="{{$component.dealerData.dealerUrl}}"></oj-input-text>
+        </div>
+      </div>
+    </div>
+  </div>
+</page-section>

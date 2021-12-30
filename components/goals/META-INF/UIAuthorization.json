@@ -1,0 +1,56 @@
+{
+    "modules": [
+    {
+        "moduleName": "com.ofss.digx.app.goal.service.core.Goal",
+        "components": [
+        {
+            "componentName": "list-goal",
+            "service": "create",
+            "perform": "goal-calculator#goal-category-selection#goal-category-select#closed-goal#create-goal#goal-amount#manage-goal#maturity-details"
+        },
+        {
+            "componentName": "list-goal",
+            "service": "payin",
+            "perform": "goal-calculator#closed-goal#create-goal#goal-amount#manage-goal"
+        },
+        {
+            "componentName": "list-goal",
+            "service": "read",
+            "perform": "goal-calculator#closed-goal#create-goal#goal-amount#manage-goal#goal-data-card"
+        },
+        {
+            "componentName": "list-goal",
+            "service": "update",
+            "perform": "goal-calculator#closed-goal#create-goal#goal-amount#manage-goal"
+        },
+        {
+            "componentName": "list-goal",
+            "service": "reedem",
+            "perform": "goal-calculator#closed-goal#create-goal#goal-amount#manage-goal"
+        },
+        {
+            "componentName": "list-goal",
+            "service": "fetchTransactions",
+            "perform": "goal-calculator#closed-goal#create-goal#goal-amount#manage-goal#goal-transaction-card"
+        }]
+    },
+    {
+        "moduleName": "com.ofss.digx.app.goal.service.category.GoalCategory",
+        "components": [
+        {
+            "componentName": "goal-category-list",
+            "service": "create",
+            "perform": "goal-category-create#goal-category-select#goal-amount#goal-calculator#image-upload"
+        },
+        {
+            "componentName": "goal-category-select",
+            "service": "read",
+            "perform": "goal-amount#goal-calculator"
+        },
+        {
+            "componentName": "goal-category-list",
+            "service": "update",
+            "perform": "goal-category-view#goal-category-create#image-upload"
+        }]
+    }]
+}

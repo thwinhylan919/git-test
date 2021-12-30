@@ -1,0 +1,64 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 oj-sm-12 oj-md-12">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <!-- ko if: $component.isVisible() -->
+                    <div>
+                        <div
+                            data-bind="template:{name: 'review-screen/review-banner-template', data:{header:$component.nls.reviewCaption, reviewHeader:$component.nls.reviewHeader}}">
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <oj-table :id="[['SelectedInvoices6']]" data="[[dataSource97]]"
+                        row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('tableRenderer')]]"
+                        columns="[[columnsArray]]"></oj-table>
+                    <div id="scriptContainer">
+                        <script type="text/html" id="tableRenderer">
+                            <td>
+                                <!-- ko if : $context.data.supplierName --><span
+                                    data-bind="text:$context.data.supplierName"></span><!-- /ko -->
+                                <!-- ko ifnot : $context.data.supplierName --><span
+                                    data-bind="text:$context.data.associatedParty.name"></span><!-- /ko -->
+                            </td>
+                            <td><span data-bind="text:$context.data.program.programName"></span></td>
+                            <td><span data-bind="text:$context.data.invoiceNumber"></span></td>
+                            <td><span
+                                    data-bind="text:$formatter.formatCurrency($context.data.totalAmount.amount,$context.data.totalAmount.currency)"></span>
+                            </td>
+                            <td><span data-bind="text:$formatter.formatDate($context.data.invoiceDueDate)"></span></td>
+                            <td>
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item "><span
+                                            data-bind="attr:{'class':'tags raised-color'},text:$component.nls.ReviewPage.Raised"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- ko if : $context.data.remarks -->
+                                <span data-bind="text:$context.data.remarks"></span>
+                                <!-- /ko -->
+                                <!-- ko ifnot : $context.data.remarks -->
+                                <span data-bind="text:$component.nls.ReviewPage.notApplicable"></span>
+                                <!-- /ko -->
+                            </td>
+                        </script>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <!-- ko if: $component.isVisible() -->
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickConfirm84]]"><span
+                                slot="startIcon" class="icons icon-confirm"></span><span
+                                data-bind="text:$component.nls.ReviewPage.Confirm"></span></oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel28]]"><span
+                                slot="startIcon" class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.ReviewPage.Cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack52]]"><span
+                                slot="startIcon" class="icons icon-back-arrow"></span><span
+                                data-bind="text:$component.nls.ReviewPage.Back"></span></oj-button>
+                        <!-- /ko -->
+                    </div>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

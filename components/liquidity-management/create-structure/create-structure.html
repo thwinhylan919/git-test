@@ -1,0 +1,70 @@
+<div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-lg-2">
+        <!-- ko if: $component.refreshTrain() -->
+        <div class="wrapper">
+            <ul class="StepProgress">
+                <!-- ko foreach: Object.keys($component.componentSequenceArray) -->
+                <!-- ko with: $component.componentSequenceArray[$data] -->
+                <li class="StepProgress-item" data-bind="css:($component.componentToBeLoaded() === $parent ? 'current' : (isVisited ? 'is-done' : ''))">
+                    <!-- ko if: isVisited -->
+                    <a href="#" data-bind="attr:{
+                title: $baseModel.format($component.resource.title,{reference : $baseModel.format($component.resource.jumpto,{stage : label})}),
+                alt : $baseModel.format($component.resource.alt,{reference : $baseModel.format($component.resource.jumpto,{stage : label})})
+                },
+                text:label,
+                click:$component.jumpToStage.bind($data,$parent)">
+                </a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: isVisited -->
+                    <span data-bind="text:label"></span>
+                    <!-- /ko -->
+                </li>
+                <!-- /ko -->
+                <!-- /ko -->
+            </ul>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="oj-flex-item oj-lg-10 form-main-container">
+        <!-- ko if:$component.componentToBeLoaded() === "set-structure-details" -->
+        <set-structure-details params="stageChangeHandler : $component.stageChangeHandler, rootModel : $component, dashboard : $dashboard, baseModel:$baseModel,
+        mode : $component.mode,
+        defaultData : $component.stageDefaultData">
+        </set-structure-details>
+        <!-- /ko -->
+        <!-- ko if:$component.componentToBeLoaded() === "structure-account-mapping" -->
+        <structure-account-mapping params="stageChangeHandler : $component.stageChangeHandler,
+        rootModel : $component,
+        dashboard : $dashboard,
+        baseModel:$baseModel,
+        mode : $component.mode,
+        existingStructureAccountsArray : $component.existingStructureAccountsArray,
+        structureType: $component.createStructureModel.structureList()[0].structureType,
+        defaultData : $component.stageDefaultData">
+        </structure-account-mapping>
+        <!-- /ko -->
+        <!-- ko if:$component.componentToBeLoaded() === "assemble-structure" -->
+        <assemble-structure params="stageChangeHandler : $component.stageChangeHandler,
+        selectedAccountArray: $component.selectedAccountArray,
+        structureDetails: $component.createStructureModel,
+        structureType: $component.createStructureModel.structureList()[0].structureType,
+        existingStructureAccountsArray : $component.existingStructureAccountsArray,
+        rootModel: $component,
+        dashboard: $dashboard,
+        baseModel: $baseModel,
+        defaultData : $component.stageDefaultData">
+        </assemble-structure>
+        <!-- /ko -->
+        <!-- ko if:$component.componentToBeLoaded() === "edit-structure-instructions" -->
+        <edit-structure-instructions params="stageChangeHandler : $component.stageChangeHandler,
+        accountList: $component.treeData,
+        structureDetails : $component.createStructureModel,
+        defaultInstructionDetails : $component.defaultInstructionDetails,
+        rootModel: $component,
+        dashboard: $dashboard,
+        baseModel: $baseModel,
+        defaultData : $component.stageDefaultData">
+        </edit-structure-instructions>
+        <!-- /ko -->
+    </div>
+</div>

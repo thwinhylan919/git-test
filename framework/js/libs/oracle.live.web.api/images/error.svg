@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="288px" height="288px" viewBox="0 0 288 288" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>error</title>
+    <desc>Created with Sketch.</desc>
+    <g id="web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="D---upload-failed" transform="translate(-496.000000, -149.000000)">
+            <g id="content" transform="translate(357.000000, 149.000000)">
+                <g id="error" transform="translate(139.000000, 0.000000)">
+                    <circle id="Oval" fill="#F43535" cx="144" cy="144" r="144"></circle>
+                    <g id="x" transform="translate(70.530612, 70.530612)" stroke="#FFFFFF" stroke-width="16">
+                        <path d="M4.40536496e-13,146.938776 L148.408163,6.39488462e-14" id="checkmark"></path>
+                        <path d="M0,146.938776 L148.408163,6.39488462e-14" id="checkmark" transform="translate(74.204082, 73.469388) scale(1, -1) translate(-74.204082, -73.469388) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

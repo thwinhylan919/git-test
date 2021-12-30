@@ -1,0 +1,530 @@
+<oj-validation-group :id="[['track_update']]">
+    <div class="oj-flex oj-flex-items-pad party-details oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-lg-4">
+            <div class="party-name-style"><span data-bind="text:$component.partyName()"></span></div>
+            <div class="banner-label"><span
+                    data-bind="text:$baseModel.format($component.nls.EditInvoice.PartyIDpartyId,{partyId: $component.partyId()})"></span>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-3 banner-padding">
+            <div class="banner-label"><span data-bind="text:$component.nls.EditInvoice.InvoiceNo"></span></div>
+            <div class="banner-value">
+                <span data-bind="text:$component.modelInstance.invoiceList.invoiceNumber"></span>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-3 banner-padding">
+            <div class="banner-label"><span data-bind="text:$component.nls.EditInvoice.Status"></span></div>
+            <div class="banner-value"><span data-bind="text:$component.modelInstance.invoiceList.invoiceStatus"></span>
+            </div>
+        </div>
+    </div>
+    <!-- ko if : $component.dataLoaded() -->
+    <div class="form-main-container">
+        <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+            <div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6 text-style">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['invoice_no']]"><span
+                                        data-bind="text:$component.nls.EditInvoice.CustomerInvoiceNo"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['invoice_no']]"
+                                    value="{{$component.modelInstance.invoiceList.invoiceNumber}}"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'invoiceNumber','#invoice_no')]]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 text-style">
+                        <!--  ko if : $component.showBuyers()  -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['buyer_name']]"><span
+                                        data-bind="text:$component.nls.EditInvoice.BuyerName"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-select-one :id="[['buyer_name']]"
+                                    placeholder="[[$component.nls.buyerNamePlaceholder]]"
+                                    value="{{$component.modelInstance.invoiceList.associatedParty.id.value}}"
+                                    required="[[true]]">
+                                    <!-- ko foreach : buyerNameList -->
+                                    <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                        </div><!--  /ko  -->
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-6">
+                        <!--  ko if : $component.showPrograms()  -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['program_name']]"><span
+                                        data-bind="text:$component.nls.EditInvoice.NameofProgram"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-select-one :id="[['program_name']]"
+                                    placeholder="[[$component.nls.programNamePlaceholder]]"
+                                    value="{{$component.modelInstance.invoiceList.program.programCode}}"
+                                    required="[[true]]" disabled="[[$component.isEditDisabled]]">
+                                    <!-- ko foreach : programNameList -->
+                                    <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                        </div><!--  /ko  -->
+                    </div>
+                    <div class="oj-flex-item oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-12">
+                                <oj-label :for="[['pay_terms']]"><span
+                                        data-bind="text:$component.nls.EditInvoice.PaymentTerms"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-lg-6">
+                                <oj-input-text :id="[['pay_terms']]"
+                                    value="{{$component.modelInstance.invoiceList.paymentTerms}}"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'paymentTerms','#pay_terms')]]]"
+                                    disabled="[[$component.isEditDisabled]]"></oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="attr:{'id':'child_comp'}">
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['po_no']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.PurchaseOrderNo"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-text :id="[['po_no']]"
+                                        value="{{$component.modelInstance.invoiceList.poNumber}}"
+                                        async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'poNumber','#po_no')]]]"
+                                        disabled="[[$component.isPoNumberDisabled]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['po_date']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.PurchaseOrderDate"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['po_date']]"
+                                        required="[[$component.poDateRequired]]"
+                                        value="{{$component.modelInstance.invoiceList.purchaseOrderDate}}"
+                                        disabled="[[$component.isPoDateDisabled]]">
+                                    </oj-input-date>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['invoice_date']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.InvoiceDate"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['invoice_date']]"
+                                        min="[[$component.startDate]]"
+                                        async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'invoiceDate','#invoice_date')]]]"
+                                        validators="[[[validateInvoiceDate]]]"
+                                        value="{{$component.modelInstance.invoiceList.invoiceDate}}"
+                                        disabled="[[$component.isInvoiceDateDisabled]]">
+                                    </oj-input-date>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['invoice_due_date']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.InvoiceDueDate"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['invoice_due_date']]"
+                                        min="[[$component.minInvoiceDueDate]]"
+                                        async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'invoiceDueDate','#invoice_due_date')]]]"
+                                        validators="[[[validateInvoiceDueDate]]]"
+                                        value="{{$component.modelInstance.invoiceList.invoiceDueDate}}"></oj-input-date>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['ship_date']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.ShipmentDate"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-date converter="[[$formatter.dateConverter]]" :id="[['ship_date']]"
+                                        min="[[$component.minInvoiceDueDate]]" validators="[[[validateShipmenteDate]]]"
+                                        value="{{$component.modelInstance.invoiceList.shipmentDate}}"
+                                        disabled="[[$component.isEditDisabled]]">
+                                    </oj-input-date>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label for="add_comm"><span
+                                            data-bind="text:$component.nls.EditInvoice.AddCommodityDetails"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-radioset class="oj-choice-direction-row" id="add_comm"
+                                        value="{{isCommodityAdded}}" disabled="[[$component.isEditDisabled]]">
+                                        <oj-option value="{{'Y'}}"><span
+                                                data-bind="text:$component.nls.EditInvoice.Yes"></span></oj-option>
+                                        <oj-option value="{{'N'}}"><span
+                                                data-bind="text:$component.nls.EditInvoice.No"></span></oj-option>
+                                    </oj-radioset>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- ko if : isCommodityAdded() === "N" -->
+                    <!-- ko if : $component.modelInstance.invoiceList.amount.currency() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-lg-6">
+                            <!-- ko ifnot : $component.isEditDisabled() -->
+                            <div class="oj-lg-6">
+                                <amount-input
+                                    params="amount :invoiceAmount,currency : $component.modelInstance.invoiceList.amount.currency, label :$component.nls.EditInvoice.InvoiceAmount,validator:$component.validation,isMandatory:true,currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'inv_amount',rootClass:''">
+                                </amount-input>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if : $component.isEditDisabled() -->
+                            <row
+                                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.EditInvoice.InvoiceAmount, value : $formatter.formatCurrency($component.invoiceAmount(),$component.modelInstance.invoiceList.amount.currency())">
+                            </row>
+                            <!-- /ko -->
+                        </div>
+
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad calculation-padding">
+                                <div class="oj-lg-3 label-padding"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.InvoiceAmount"></span>
+                                </div>
+                                <div class="oj-lg-3 right"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(invoiceAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['discount_no_comm']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.DiscountPercentage"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-text :id="[['discount_no_comm']]"
+                                        value="{{$component.modelInstance.invoiceList.discountPercentage}}"
+                                        async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'discountPercentage','#discount_no_comm')]]]"
+                                        validators="[[[validateDiscountPercent]]]"
+                                        disabled="[[$component.isEditDisabled]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6 calculation-padding">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-lg-3 label-padding"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.DiscountValue"></span>
+                                </div>
+                                <div class="oj-lg-3 right"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.discountAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-flex-item oj-lg-12">
+                                    <oj-label :for="[['tax_no_comm']]"><span
+                                            data-bind="text:$component.nls.EditInvoice.TaxPercentage"></span>
+                                    </oj-label>
+                                </div>
+                                <div class="oj-flex-item oj-lg-6">
+                                    <oj-input-text :id="[['tax_no_comm']]"
+                                        value="{{$component.modelInstance.invoiceList.taxPercentage}}"
+                                        async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'taxPercentage','#tax_no_comm')]]]"
+                                        validators="[[[validateTaxPercent]]]" disabled="[[$component.isEditDisabled]]">
+                                    </oj-input-text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-lg-6 discount-padding">
+                            <div class="oj-flex oj-flex-items-pad calculation-padding">
+                                <div class="oj-lg-3 label-padding"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.TaxValue"></span>
+                                </div>
+                                <div class="oj-lg-3 right"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.taxAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item oj-lg-6">
+                        </div>
+                        <div class="oj-flex-item oj-lg-6">
+                            <div class="oj-flex oj-flex-items-pad">
+                                <div class="oj-lg-3 total-label"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.NetInvoiceAmount"></span>
+                                </div>
+                                <div class="oj-lg-3 right total-value"><span
+                                        data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.totalAmount.amount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if : isCommodityAdded() === "Y" -->
+                    <div>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-9 commodity-style"><span
+                                    data-bind="text:$component.nls.EditInvoice.CommodityDetails"></span></div>
+                            <div class="oj-flex-item oj-lg-2 currency-style">
+                                <!--  ko if : $component.currencyList().length > 0  -->
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-lg-4 currency-label">
+                                        <oj-label :for="[['currency_val']]"><span
+                                                data-bind="text:$component.nls.EditInvoice.Currency"></span>
+                                        </oj-label>
+                                    </div>
+                                    <div class="oj-flex-item oj-lg-8 text-style">
+                                        <oj-select-one class="[['right']]" :id="[['currency_val']]"
+                                            value="{{$component.modelInstance.invoiceList.amount.currency}}"
+                                            disabled="[[$component.isEditDisabled]]">
+                                            <!-- ko foreach : currencyList -->
+                                            <oj-option value="[[code]]"><span data-bind="text:description"></span>
+                                            </oj-option><!-- /ko -->
+                                        </oj-select-one>
+                                    </div>
+                                </div><!--  /ko  -->
+                            </div>
+                        </div>
+                        <oj-table :class="[['oj-lg-11']]" :id="[['CommodityDetailsTable73']]" data="[[dataSource23]]"
+                            row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('commodity_template')]]"
+                            columns="[[[{'headerText':$component.nls.EditInvoice.Name, field:'name',sortable: false},{'headerText':$component.nls.EditInvoice.Description, field:'description',sortable: false},{'headerText':$component.nls.EditInvoice.Quantity, field:'quantity',sortable: false},{'headerText':$component.nls.EditInvoice.Costperunit, field:'costPerUnit',headerClassName: 'right',sortable: false},{'headerText':$component.nls.EditInvoice.Amount, field:'amount', headerClassName: 'right',sortable: false},{'headerText':$component.nls.EditInvoice.Actions, field:'actions',sortable: false}]]]">
+                        </oj-table>
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-7 add-row-style">
+                                <!-- ko ifnot : $component.isEditDisabled() --><a href="#" class="form-button-link"
+                                    data-bind="attr:{'id':'add_com_row','alt':$component.nls.EditInvoice.AddRow,'title':$component.nls.EditInvoice.AddRowTitle},click:$component.onClickAddRow98,text:$component.nls.EditInvoice.AddRow"></a>
+                                <!-- /ko -->
+                                <!-- ko if : $component.isEditDisabled() --><span class="icon-disabled"
+                                    data-bind="text: $component.nls.EditInvoice.AddRow"></span><!-- /ko -->
+                            </div>
+                            <div class="oj-flex-item oj-lg-5 add-row-style">
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-lg-3"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.TotalAmount"></span>
+                                    </div>
+                                    <!--  ko if : $component.modelInstance.invoiceList.amount.currency()  -->
+                                    <div class="oj-lg-5 right"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency(totalAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                    </div>
+                                    <!--  /ko  -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ko if : $component.modelInstance.invoiceList.amount.currency() -->
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-7">
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-lg-12">
+                                        <oj-label :for="[['discount_comm']]"><span
+                                                data-bind="text:$component.nls.EditInvoice.DiscountPercentage"></span>
+                                        </oj-label>
+                                    </div>
+                                    <div class="oj-flex-item oj-lg-6">
+                                        <oj-input-text :id="[['discount_comm']]"
+                                            value="{{$component.modelInstance.invoiceList.discountPercentage}}"
+                                            async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'discountPercentage','#discount_comm')]]]"
+                                            validators="[[[validateDiscountPercent]]]"
+                                            disabled="[[$component.isEditDisabled]]">
+                                        </oj-input-text>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-5 calculation-padding">
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-lg-3"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.DiscountValue"></span>
+                                    </div>
+                                    <div class="oj-lg-5 right"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.discountAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-7">
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-flex-item oj-lg-12">
+                                        <oj-label :for="[['tax_comm']]"><span
+                                                data-bind="text:$component.nls.EditInvoice.TaxPercentage"></span>
+                                        </oj-label>
+                                    </div>
+                                    <div class="oj-flex-item oj-lg-6">
+                                        <oj-input-text :id="[['tax_comm']]"
+                                            value="{{$component.modelInstance.invoiceList.taxPercentage}}"
+                                            async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'taxPercentage','#tax_comm')]]]"
+                                            validators="[[[validateTaxPercent]]]"
+                                            disabled="[[$component.isEditDisabled]]">
+                                        </oj-input-text>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oj-flex-item oj-lg-5  discount-padding">
+                                <div class="oj-flex oj-flex-items-pad calculation-padding">
+                                    <div class="oj-lg-3"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.TaxValue"></span>
+                                    </div>
+                                    <div class="oj-lg-5 right"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.taxAmount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-lg-7">
+                            </div>
+                            <div class="oj-flex-item oj-lg-5">
+                                <div class="oj-flex oj-flex-items-pad">
+                                    <div class="oj-lg-3 total-label"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$component.nls.EditInvoice.NetInvoiceAmount"></span>
+                                    </div>
+                                    <div class="oj-lg-5 right total-value"><span
+                                            data-bind="attr:{'class':'medium-font'},text:$formatter.formatCurrency($component.modelInstance.invoiceList.totalAmount.amount(),$component.modelInstance.invoiceList.amount.currency())"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div><!-- /ko -->
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button :id="[['submit_form']]" class="action-button-primary"
+                            on-click="[[$component.onClickSubmit5]]"><span slot="startIcon"
+                                class="icons icon-submit"></span><span
+                                data-bind="text:$component.nls.EditInvoice.Submit"></span></oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel88]]"><span
+                                slot="startIcon" class="icons icon-cancel"></span><span
+                                data-bind="text:$component.nls.EditInvoice.Cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack28]]"><span
+                                slot="startIcon" class="icons icon-back-arrow"></span><span
+                                data-bind="text:$component.nls.EditInvoice.Back"></span></oj-button>
+                    </div>
+                </div>
+            </div>
+            <div id="scriptContainer">
+                <script type="text/html" id="commodity_template">
+                    <td class="oj-lg-2">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item">
+                                <oj-input-text placeholder="[[$component.nls.typeNamePlaceholder]]"
+                                    :id="[['type_name_' + $context.row.id]]"
+                                    :aria-label="[[$component.nls.typeNamePlaceholder]]" value="{{$context.row.name}}"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'commodities.name',('#type_name_' + $context.row.id))]]]"
+                                    required="[[true]]" disabled="[[$component.isEditDisabled]]"></oj-input-text>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="oj-flex">
+                            <div class="oj-flex-item ">
+                                <oj-input-text placeholder="[[$component.nls.descriptionPlaceholder]]"
+                                    :id="[['desc_' + $context.row.id]]"
+                                    :aria-label="[[$component.nls.descriptionPlaceholder]]"
+                                    value="{{$context.row.description}}" required="[[true]]"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'commodities.description',('#desc_' + $context.row.id))]]]"
+                                    disabled="[[$component.isEditDisabled]]"></oj-input-text>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="oj-lg-2">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item ">
+                                <oj-input-text :id="[['quantity_' + $context.row.id]]"
+                                    :aria-label="[[$component.nls.quantityLabel]]"
+                                    on-value-changed="[[$component.computeCommodityAmount]]"
+                                    value="{{$context.row.quantity}}" validators="[[[$component.validateQuantity]]]"
+                                    required="[[true]]" disabled="[[$component.isEditDisabled]]"></oj-input-text>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="oj-lg-2">
+                        <div class="oj-flex">
+                            <div class="oj-flex-item ">
+                                <oj-input-text :id="[['cost_' + $context.row.id]]"
+                                    :aria-label="[[$component.nls.costLabel]]" :class="right"
+                                    on-value-changed="[[$component.computeCommodityAmount]]"
+                                    value="{{$context.row.costPerUnit}}" validators="[[[$component.validateCost]]]"
+                                    required="[[true]]" disabled="[[$component.isEditDisabled]]"></oj-input-text>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="oj-flex">
+                            <div class="oj-flex-item right"><span data-bind="text:$context.row.totalCost"></span></div>
+                        </div>
+                    </td>
+                    <td class="oj-lg-1">
+                        <div>
+                            <div class="oj-flex">
+                                <div class="oj-flex-item oj-lg-5 icon-border">
+                                    <!-- ko ifnot : $component.isEditDisabled() -->
+                                    <a href="#" class="form-button-link"
+                                        data-bind="attr:{'id':'copy_comm_' + $context.row.id,'alt':$component.nls.EditInvoice.CopyCommodity,'title':$component.nls.EditInvoice.CopyCommodityTitle},click:$component.onClickCopyCommodity73">
+                                        <div class="icon-size icon-copy"></div>
+                                    </a><!-- /ko -->
+                                    <!-- ko if : $component.isEditDisabled() -->
+                                    <span class="icon-size icon-copy icon-disabled"></span><!-- /ko -->
+                                </div>
+                                <div class="oj-flex-item oj-lg-6 center">
+                                    <!-- ko ifnot : $component.isEditDisabled() --><a href="#" class="form-button-link"
+                                        data-bind="attr:{'id':'delete_comm_' + $context.row.id,'alt':$component.nls.EditInvoice.DeleteCommodity,'title':$component.nls.EditInvoice.DeleteCommodityTitle},click:$component.onClickDeleteCommodity53"
+                                        disabled="[[$component.isEditDisabled]]">
+                                        <div class="icon-size icon-cancel"></div>
+                                    </a><!-- /ko -->
+                                    <!-- ko if : $component.isEditDisabled() --><span
+                                        class="icon-size icon-cancel icon-disabled"></span><!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </script>
+            </div>
+        </page-section>
+    </div>
+    <!-- /ko -->
+</oj-validation-group>

@@ -1,0 +1,48 @@
+.oj-listview {
+    overflow: hidden;
+    border-color: var(--base-border-default);
+    &.oj-listview-card-layout {
+        border-width: 0;
+    }
+}
+
+.oj-listview-item {
+    background: transparent !important;
+    background-image: none !important;
+    border-bottom: 0.05rem solid var(--base-border-default);
+    &.oj-selected.oj-hover.oj-focus {
+        outline: none;
+    }
+    &.oj-drop {
+        background-color: var(--list-drop-background) !important;
+    }
+}
+
+.oj-listview-empty-text {
+    padding: 0.6rem;
+}
+
+.oj-listview-card-layout {
+    li {
+        border: 0rem !important;
+        &.oj-listview-item {
+            width: auto;
+        }
+    }
+}
+
+.oj-listview-card-layout {
+    li {
+        border: 0rem !important;
+        &.oj-listview-item {
+            width: auto;
+        }
+    }
+}
+
+.design-dashboard-listview .oj-listview-no-data-message {
+    min-height: 300px;
+    text-align: center;
+    padding: 6rem 1rem;
+    font-size: 2rem;
+}

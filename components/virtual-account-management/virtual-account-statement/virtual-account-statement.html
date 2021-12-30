@@ -1,0 +1,144 @@
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-2 oj-lg-2">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <div class="oj-flex form-main-container virtual-structure-search">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <page-section params="baseModel : $baseModel, rootModel : $data">
+                <div class="oj-flex oj-flex-items-pad search-entity-container">
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-12">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <!-- ko if: virtualAccountLoaded -->
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="selectAccountId" id="accountNumber"><span
+                                        data-bind="text: $component.resource.selectAccount"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-3">
+                                <oj-select-one id="selectAccountId"
+                                    :placeholder="[[$component.resource.selectVAccountPlaceHolder]]"
+                                    value="{{$component.selectedAccount}}" required>
+                                    <!-- ko foreach: $component.virtualAccounts -->
+                                    <oj-option value=[[virtualAccountNo]]><span
+                                            data-bind="text:virtualAccountDisplay"></span>
+                                    </oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="referenceNumber"><span
+                                        data-bind="text: $component.resource.referenceNumber"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-6">
+                                <oj-input-text id="referenceNumber" value="{{referenceNumber}}"
+                                    :aria-label="[[$component.resource.referenceNumberPlaceHolder]]">
+                                </oj-input-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="txnType"><span
+                                        data-bind="text: $component.resource.transactionType"></span></oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-6">
+                                <oj-select-one id="txnType" value="{{selectedTransaction}}" required>
+                                    <!-- ko foreach: $component.transactionTypeValue -->
+                                    <oj-option value=[[id]]><span data-bind="text:description"></span></oj-option>
+                                    <!-- /ko -->
+                                </oj-select-one>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="fromDate"><span data-bind="text: $component.resource.fromDate"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-6">
+                                <oj-input-date id="fromDate" max="{{$component.toDate}}" value="{{$component.fromDate}}"
+                                    converter="[[$formatter.dateConverter]]"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'statement.trnDate','#fromDate')]]]">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-6">
+                        <div class="oj-flex oj-flex-items-pad grid-row-group">
+                            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                                <oj-label for="toDate"><span data-bind="text: $component.resource.toDate"></span>
+                                </oj-label>
+                            </div>
+                            <div class="oj-flex-item oj-sm-12 oj-md-10 oj-lg-6">
+                                <oj-input-date id="toDate" min="{{$component.fromDate}}" value="{{$component.toDate}}"
+                                    async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'statement.trnDate','#toDate')]]]"
+                                    converter="[[$formatter.dateConverter]]">
+                                </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container search-buttons">
+                    <oj-button class="action-button-primary" on-click="[[$component.searchResult]]">
+                        <span slot="startIcon" class="icons icon-search"></span>
+                        <span data-bind="text:$component.resource.search"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$component.reset]]">
+                        <span slot="startIcon" class="icons icon-refresh"></span>
+                        <span data-bind="text:$component.resource.reset"></span>
+                    </oj-button>
+                    <oj-button class="action-button-tertiary" on-click="[[$dashboard.hideDetails]]">
+                        <span slot="startIcon" class="icons icon-back-arrow"></span>
+                        <span data-bind="text:$component.resource.back"></span>
+                    </oj-button>
+                </div>
+                <!-- ko if: viewTable -->
+                <div class="oj-flex-item oj-sm-12 right">
+                    <!-- ko if: mediatypeLoaded -->
+                    <oj-menu-button class="action-button-primary" id="menuButton">
+                        <oj-bind-text value="[[$component.resource.downLoad]]">
+                        </oj-bind-text>
+                        <oj-menu id="myMenu" slot="menu" class="hide" on-oj-action="[[downloadStatement]]">
+                            <!-- ko foreach: menuItems -->
+                            <oj-option value="[[id]]"><span data-bind="text:description"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-menu>
+                    </oj-menu-button>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex spacing-table">
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-table id="table" :aria-label="[[$component.resource.back]]" data="[[dataSource]]"
+                            columns-default.sortable="enabled" selection-mode='{"row":"single","column":"single"}'
+                            columns="[[headerText]] ">
+                            <caption class="hide-label" data-bind="text:$component.resource.back"></caption>
+                        </oj-table>
+                        <oj-paging-control id="paging" slot='bottom' page-size='10' data='[[dataSource]]'>
+                        </oj-paging-control>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+        </div>
+    </div>
+    <script type="text/html" id="dateFromIdentifier">
+        <td>
+            <span data-bind="text: $formatter.formatDate($context.row.date,'dateFormat')"></span>
+        </td>
+    </script>
+    <script type="text/html" id="amount">
+        <td>
+            <span data-bind="text:$formatter.formatCurrency($context.row.amount,$context.row.currency)"></span>
+            <span data-bind="text:$component.resource.transactionTypes[$context.row.transactionType]"></span>
+        </td>
+    </script>
+</oj-validation-group>

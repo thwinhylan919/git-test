@@ -1,0 +1,24 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+
+  <div class="oj-flex-item transaction-group">
+    <img alt="" data-bind="loadImage : 'info-icon/create-template.svg'">
+  </div>
+  <div class="oj-flex-item oj-sm-12 help-content center">
+    <h4>No transaction groups Maintained currently</h4>
+  </div>
+
+  <div class="oj-flex-item oj-sm-12 help-item center">
+    <p>You can create new transaction groups by clicking on create.</p>
+  </div>
+  <div class="oj-flex-item oj-sm-12 help-item center">
+    <oj-button class="action-button-primary" on-click="[[$component.openCreatePanel]]">
+      <span data-bind="text:$component.nls.createTransactionGroup"></span>
+    </oj-button>
+  </div>
+
+  <div class="oj-flex-item oj-sm-12 help-item center">
+            <a href="#" data-bind="text:$component.nls.cancel,click:$component.cancel"></a>
+      </div>
+
+</div>
+

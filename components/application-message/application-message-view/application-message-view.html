@@ -1,0 +1,39 @@
+<oj-validation-group :id="[['tracker']]">
+    <div class="form-main-container">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-9">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <!-- ko if : dataLoaded -->
+                    <div>
+                        <row
+                            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ApplicationMessageView.Code, value : $component.applicationMessageslocalecodegetVar().applicationMessageDTO.code">
+                        </row>
+                        <row
+                            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ApplicationMessageView.Locale, value : $component.localeDescription">
+                        </row>
+
+                        <row
+                            params="baseModel : $baseModel, rootModel : $component, label : $component.nls.ApplicationMessageView.Message, value : $component.applicationMessageslocalecodegetVar().applicationMessageDTO.message">
+                        </row>
+                    </div><!-- /ko -->
+
+                    <div class="oj-flex oj-flex-items-pad button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.onClickEdit50]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageView.Edit"></span></oj-button>
+                        <oj-button class="action-button-secondary" on-click="[[$component.onClickCancel41]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageView.Cancel"></span></oj-button>
+                        <oj-button class="action-button-tertiary" on-click="[[$component.onClickBack51]]"><span
+                                data-bind="text:$component.nls.ApplicationMessageView.Back"></span></oj-button>
+                    </div>
+                </page-section>
+            </div>
+            <div class="oj-flex-item oj-lg-3">
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                    <help
+                        params="baseModel : $baseModel, rootModel : $component, transaction: 'application-message-help'">
+                    </help>
+                </page-section>
+            </div>
+        </div>
+    </div>
+</oj-validation-group>

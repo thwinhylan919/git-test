@@ -1,0 +1,32 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.mobile.service.client.MobileClient",
+    "components": [{
+      "componentName": "login-form-mobile",
+      "service": "registerForPush",
+      "perform": ""
+    }, {
+      "componentName": "login-form-mobile",
+      "service": "register",
+      "perform": ""
+    }, {
+      "componentName": "login-form-mobile",
+      "service": "verify",
+      "perform": ""
+    }]
+  }, {
+    "moduleName": "com.ofss.digx.app.common.service.liveexperience.LiveExperience",
+    "components": [{
+      "componentName": "oracle-live",
+      "service": "fetchAccessToken",
+      "perform": ""
+    }]
+  }, {
+    "moduleName": "com.ofss.digx.app.user.service.User",
+    "components": [{
+      "componentName": "login-form",
+      "service": "fetchProfile",
+      "perform": "login-form-mobile#account-snapshot-registration#mobile-landing#login-options#alternate-login#pin-login#pattern-login#set-pin#set-pattern#confirm-pin#confirm-pattern"
+    }]
+  }]
+}

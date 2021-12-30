@@ -1,0 +1,37 @@
+.align-link {
+  padding-top: 0.6rem;
+  border-top: 0.05rem solid var(--base-border-default);
+}
+
+.align-buttonset {
+  @include float(right);
+}
+
+.donut_chart_pie {
+  width: 100%;
+}
+
+.local-currency-text {
+  font-size: var(--base-font-size-small);
+  color: var(--form-label-foreground-color);
+}
+
+.align-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+
+  img {
+    height: 12rem;
+    width: 100%;
+  }
+}
+
+.align-div {
+  min-height: calc(100% - 2rem);
+}
+
+.align-sections {
+  min-height: 25rem;
+}

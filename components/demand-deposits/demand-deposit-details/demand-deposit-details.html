@@ -1,0 +1,138 @@
+<!-- ko if:detailDataFetched -->
+<div data-bind="component:{name: 'account-nickname', params:{rootModel:$data,params:detailViewResponse(),editable:true,module:'demand-deposits'}}">
+</div>
+<!-- /ko -->
+<div>
+    <div class="form-main-container">
+        <div class="oj-flex oj-lg-justify-content-space-around oj-md-justify-space-around oj-sm-justify-content-center">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+                <!-- ko if:detailDataFetched -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.demandDepositDetails.basics">
+                    <div class="row-group">
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.demandDepositDetails.customerId, value :$component.detailViewResponse().partyId.displayValue">
+                        </row>
+                         <!-- ko if: isWalletAccount() -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.demandDepositDetails.HoldingPattern, value :$component.resource.demandDepositDetails.holdingPattern[$component.holdingPattern()]">
+                        </row>
+                        <!-- /ko -->
+                         <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().holdingPattern === 'JOINT' -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.jointAccHolder, value :$component.partyName">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:modeOfOperation -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label : $component.resource.demandDepositDetails.mode, value :$component.resource.demandDepositDetails.modeOfOperation[$component.detailViewResponse().modeOfOperation]">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.Branch, value :$component.branchAddress">
+                        </row>
+                        <!-- /ko -->
+                          <!-- ko if: isWalletAccount() -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.status, value : $component.resource.demandDepositDetails.status[$component.detailViewResponse().status]">
+                        </row>
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().module !== 'ISL' -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.nomination, value : $component.resource.demandDepositDetails.nomineeStatus[$component.detailViewResponse().nomineeRegistered]">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: !isWalletAccount() -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.acccountNumber, value : $component.detailViewResponse().id.displayValue">
+                        </row>
+                        <!-- /ko -->
+                    </div>
+                </page-section>
+                <!-- /ko -->
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+                <!-- ko if:detailDataFetched -->
+                <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.resource.demandDepositDetails.BalNLimits">
+                    <div class="row-group">
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.availableBalance, value : $formatter.formatCurrency($component.detailViewResponse().availableBalance.amount, $component.detailViewResponse().availableBalance.currency)">
+                        </row>
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().holdAmount -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.Amounthold, value : $formatter.formatCurrency($component.detailViewResponse() .holdAmount.amount, $component.detailViewResponse() .holdAmount.currency)">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().averageBalance -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.averageBalance, value : $formatter.formatCurrency($component.detailViewResponse().averageBalance.amount, $component.detailViewResponse().averageBalance.currency)">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().unclearFund -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.Unclearfunds, value : $formatter.formatCurrency($component.detailViewResponse() .unclearFund.amount, $component.detailViewResponse() .unclearFund.currency)">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().overDraftLimit -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.Overdraft[$component.detailViewResponse().module], value :$formatter.formatCurrency($component.detailViewResponse() .overDraftLimit.sanctionedLimitAmount.amount, $component.detailViewResponse() .overDraftLimit.sanctionedLimitAmount.currency)">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isWalletAccount() -->
+                        <!-- ko if:$component.detailViewResponse().fundsAdvanceLimit -->
+                        <row params="baseModel : $baseModel, rootModel : $parent, label :$component.resource.demandDepositDetails.Advance, value :$formatter.formatCurrency($component.detailViewResponse() .fundsAdvanceLimit.amount, $component.detailViewResponse().fundsAdvanceLimit.currency)">
+                        </row>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                </page-section>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- ko if:detailDataFetched -->
+        <!-- ko if:$component.detailViewResponse().status!=="DORMANT" -->
+        <!-- ko if: $baseModel.small() -->
+        <a href="#" data-bind="click: $component.showFloatingPanel">
+            <div class="floating-button right"><span class="icons icon-more-vertical"></span></div>
+        </a>
+        <floating-panel params="baseModel : $baseModel, panelId: 'panelDD', rootModel: {resource : $component.resource, detailViewResponse: $component.detailViewResponse}">
+            <ul>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'account-transactions', $data.detailViewResponse())">
+                        <span class="icons icon-view-statement"></span>
+                        <span data-bind="text:$data.resource.buttons.statement"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'cheque-book-request', $data.detailViewResponse())">
+                        <span class="icons icon-request-chequebook"></span>
+                        <span data-bind="text:$data.resource.buttons.chequeRequest"></span></a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'cheque-stop-unblock', $data.detailViewResponse())">
+                        <span class="icons icon-stop-unblock-cheque"></span>
+                        <span data-bind="text:$data.resource.buttons.stopRequest"></span></a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'cheque-status-inquiry', $data.detailViewResponse())">
+                        <span class="icons icon-cheque-status-enquiry"></span>
+                        <span data-bind="text:$data.resource.buttons.status"></span></a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $dashboard.loadComponent.bind($data,'debit-card-list', $data.detailViewResponse())">
+                        <span class="icons icon-debit-card"></span>
+                        <span data-bind="text:$data.resource.buttons.debitCards"></span></a>
+                </li>
+            </ul>
+        </floating-panel>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>
+<!-- ko if: $component.detailDataFetched -->
+<!-- ko if: $component.detailViewResponse().status !== "ACTIVE" -->
+<a class="back-link" href="#" data-bind="text: $component.resource.generic.common.backToDashboard, click: $dashboard.switchModule.bind($data, null)"></a>
+<!-- /ko -->
+<!-- /ko -->

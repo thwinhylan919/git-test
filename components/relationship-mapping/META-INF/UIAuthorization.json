@@ -1,0 +1,21 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.accountrelationship.service.maintenance.AccountRelationshipMaintenace",
+        "components": [{
+            "componentName": "relationship-mapping-base",
+            "service": "list",
+            "perform": "create-relationship-mapping",
+            "approve": "create-relationship-mapping"
+        }, {
+            "componentName": "review-relationship-mapping",
+            "service": "create",
+            "perform": "",
+            "approve": ""
+        }, {
+            "componentName": "review-relationship-mapping",
+            "service": "update",
+            "perform": "",
+            "approve": ""
+        }]
+    }]
+}

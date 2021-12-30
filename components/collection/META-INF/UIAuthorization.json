@@ -1,0 +1,20 @@
+{
+  "modules": [
+    {
+      "moduleName": "com.ofss.digx.app.tradefinance.service.bill.Bill",
+      "components": [
+        {
+          "componentName": "initiate-collection",
+          "service": "create",
+          "perform": "collection-nav-bar#bill-details#collection-details#collection-documents#collection-filters#collection-instructions#collection-nav-bar#export-bills#import-bills#list-collection#view-bills#attach-documents#review-attach-documents",
+          "approve": "review-collection"
+        },
+        {
+          "componentName": "collection-nav-bar",
+          "service": "read",
+          "perform": "bill-details#collection-details#collection-documents#collection-filters#collection-instructions#collection-nav-bar#export-bills#import-bills#list-collection#view-bills#lc-lookup"
+        }
+      ]
+    }
+  ]
+}

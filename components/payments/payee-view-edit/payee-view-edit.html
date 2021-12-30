@@ -1,0 +1,47 @@
+<div class="form-main-container oj-flex oj-flex-items-pad oj-sm-flex-items-initial oj-sm-justify-content-space-between  payee-view-edit">   
+    <div class="oj-lg-8">
+        <!-- ko if: $component.payeeDataLoaded() -->
+        <div class="oj-lg-12" data-bind="template: { name: 'payee/payee-view-edit', data: $component.payeeData() }"></div>
+        <!-- /ko -->
+        <!-- ko if: !$component.params.fromConfirmScreen -->
+        <div class="oj-flex-item button-container">
+            <oj-button id="pay" class="action-button-primary " on-click="[[$dashboard.loadComponent.bind($data, $component.payeeData().payeeType === 'DEMANDDRAFT' ? 'issue-demand-draft' : 'payments-money-transfer', {
+
+                        transferDataPayee: $component.payeeData()
+                    })]]"><span slot="startIcon" class="icons icon-pay"></span>
+                <span data-bind="text:$component.payments.payee.labels.pay"></span>
+            </oj-button>
+            <!-- ko if: $component.newLimitAmount() || $component.newMonthlyLimitAmount() -->
+            <oj-button id="removeLimits" class="action-button-secondary " on-click="[[$component.removeLimits]]"><span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.payments.payee.labels.removeLimits"></span>
+            </oj-button>
+            <!-- /ko -->
+            <oj-button class="action-button-tertiary " id="back" on-click="[[$component.backButtonHandler || $dashboard.hideDetails]]"><span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.payments.generic.common.back"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+    </div>
+    <modal-window class="favorite-container" params="baseModel : $baseModel, rootModel : $component,id:'remove-limits', header : $component.payments.payee.labels.removeLimits, closeHandler : $component.removeLimitCloseHandler">      
+        <oj-validation-group id="removeLimitTracker">
+            <oj-checkboxset class="oj-choice-direction-row" value="{{$component.removeLimit}}" :required="true" translations="[[{'required':{messageDetail:$component.payments.payee.message.valueRequired}}]]">
+                <oj-option id="daily" disabled="[[$component.newLimitAmount()?false:true]]" value="{{$component.payments.payee.labels.dailylimit}}">
+                    <span for="daily" data-bind="text:$component.payments.payee.labels.dailylimit"></span>
+                </oj-option>
+                <oj-option id="monthly" disabled="[[$component.newMonthlyLimitAmount()?false:true]]" value="{{$component.payments.payee.labels.monthlylimit}}">
+                    <span for="monthly" data-bind="text:$component.payments.payee.labels.monthlylimit"></span>
+                </oj-option>
+            </oj-checkboxset>
+        </oj-validation-group>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" on-click="[[$component.done]]">
+                <span class="icons icon-ok" slot="startIcon"></span><span data-bind="text:$component.payments.common.ok"></span>
+            </oj-button>
+        </div>
+    </modal-window>
+    <!-- ko if: $baseModel.large()-->
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'payee-view-edit'"></help>
+    </div>
+    <!-- /ko -->
+</div>

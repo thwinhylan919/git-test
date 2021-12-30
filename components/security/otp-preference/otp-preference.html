@@ -1,0 +1,27 @@
+<div class="form-main-container device-unbinding">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h3 data-bind="text: $component.nls.heading.preferredDeliveryModeforOTP"></h3>
+    </div>
+  </div>
+
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <oj-label :for="[['dispatchMethod']]"><span data-bind="text: $component.nls.dispatchMethod"></span></oj-label>
+    </div>
+
+    <div class="oj-flex-item">
+      <oj-radioset id="otpPreferenceType" :aria-label="[[$component.nls.otpPreferenceType]]" value="{{payload.otpDeliveryMode}}"
+        on-value-changed="[[$component.otpDeliveryModeSelected]]" class="oj-choice-direction-row">
+        <oj-option :id="[[$component.nls.sms]]" value="{{'SMS'}}"><span data-bind="text: $component.nls.sms"></span></oj-option>
+        <oj-option :id="[[$component.nls.email]]" value="{{'EMAIL'}}"><span data-bind="text: $component.nls.email"></span></oj-option>
+        <oj-option :id="[[$component.nls.both]]" value="{{'BOTH'}}"><span data-bind="text: $component.nls.both"></span></oj-option>
+      </oj-radioset>
+    </div>
+
+    <div class="oj-flex-item top-bottom-border">
+      <span class="note" data-bind="text: $component.nls.note"></span>
+    </div>
+  </div>
+
+</div>

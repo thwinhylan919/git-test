@@ -1,0 +1,72 @@
+<oj-validation-group :id="[['form_tracker']]">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                <!--  ko if : $component.showAssociatedParties()  -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12">
+                        <oj-label :for="[['associated-party']]"><span
+                                data-bind="text:$component.nls.requestFinance.associatedPartyLabel"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4">
+                        <oj-select-one :id="[['associated-party']]"
+                            placeholder="[[$component.nls.requestFinance.selectPlaceholder]]"
+                            value="{{$component.modelInstance.payLoad.counterpartyId}}" required="[[true]]">
+                            <!-- ko foreach : partyList -->
+                            <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div><!--  /ko  -->
+                <!--  ko if : $component.showPrograms()  -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12">
+                        <oj-label :for="[['program_name']]"><span
+                                data-bind="text:$component.nls.requestFinance.programNameLabel"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4">
+                        <oj-select-one :id="[['program_name']]"
+                            placeholder="[[$component.nls.requestFinance.selectPlaceholder]]"
+                            value="{{$component.modelInstance.payLoad.programCode}}" required="[[true]]">
+                            <!-- ko foreach : programNameList -->
+                            <oj-option value="[[code]]"><span data-bind="text:label"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div><!--  /ko  -->
+                <!--  ko if : $component.currencyLoaded() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12">
+                        <oj-label :for="[['currency_select']]"><span
+                                data-bind="text:$component.nls.requestFinance.currencyLabel"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-3">
+                        <oj-select-one :id="[['currency_select']]"
+                            value="{{$component.modelInstance.payLoad.totalAmount.currency}}" required="[[true]]">
+                            <!-- ko foreach : currencyList -->
+                            <oj-option value="[[code]]"><span data-bind="text: description"></span>
+                            </oj-option><!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div><!--  /ko  -->
+                <div class="oj-flex oj-flex-items-pad button-container">
+                    <oj-button class="action-button-primary" on-click="[[$component.submitStepOne]]"><span
+                            slot="startIcon" class="icons icon-submit"></span><span
+                            data-bind="text:$component.nls.submit"></span></oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$component.clearStepOne]]"><span
+                            slot="startIcon" class="icons icon-refresh"></span><span
+                            data-bind="text:$component.nls.clear"></span></oj-button>
+                </div>
+            </page-section>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4">
+            <page-section params="baseModel : $baseModel, rootModel : $data, heading : '', headerTemplate : ''">
+                <help params="baseModel : $baseModel, rootModel : $component, transaction: 'request-finance-help'">
+                </help>
+            </page-section>
+        </div>
+    </div>
+</oj-validation-group>

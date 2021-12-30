@@ -1,0 +1,84 @@
+<div class="oj-panel virtualAccountBalances">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-12">
+      <h3 data-bind="text: $component.resource.title"></h3>
+    </div>
+    <div class="oj-flex-item oj-sm-12 virtualAccountBalances__widgetSummary">
+      <!-- ko if:$component.viewChart() -->
+      <span class="oj-flex-item" data-bind="text:$component.resource.viewChartText"></span>
+      <!-- /ko -->
+      <!-- ko if: !$component.viewChart() && $component.entitiesLoaded() && $component.currenciesLoaded()  -->
+      <span class="oj-flex-item" data-bind="text:$component.resource.selectBoth"></span>
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-sm-7">
+      <div class="oj-sm-9">
+        <!-- ko if: entitiesLoaded -->
+        <oj-select-one :aria-label="[[$component.resource.selectVirtualEntity]]" id="selectVirtualEntity" value="{{selectedEntity}}"
+          :placeholder="{{$component.resource.selectVirtualEntity}}" on-value-changed="[[selectedEntityChangeHandler]]"
+          required>
+          <!-- ko foreach: entityDetails -->
+          <oj-option value="[[virtualEntityId]]"><span data-bind="text: virtualEntityId"></span></oj-option>
+          <!-- /ko -->
+        </oj-select-one>
+        <!-- /ko -->
+      </div>
+    </div>
+    <!-- ko if:currenciesLoaded -->
+    <div class="oj-flex-item oj-sm-5">
+      <oj-select-one :aria-label="[[$component.resource.selectCurrency]]" id="selectCurrency" value="{{currentCurrency}}"
+        :placeholder="[[$component.resource.selectCurrency]]" on-value-changed="[[selectedCurrencyChangeHandler]]"
+        required>
+        <!-- ko foreach: currencyDetails -->
+        <oj-option value="[[ccyCode]]">
+          <span data-bind="text: ccyCode"></span>
+        </oj-option>
+        <!-- /ko -->
+      </oj-select-one>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- ko if:$component.virtualEntityName && $component.showVirtualEntityInfo -->
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item entityNameText">
+      <span data-bind="text: $component.virtualEntityName()"></span>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if:viewChart -->
+  <div class="oj-flex oj-flex-items-pad virtualAccountBalances__widgetSummary">
+    <div class="oj-flex-item oj-sm-12">
+      <oj-chart id="barForVirtualAccount" type="bar" orientation="[[orientationValue]]" series="[[barSeries]]"
+        groups="[[barGroups]]" animation-on-display="auto" animation-on-data-change="auto" hover-behavior="dim"
+        x-axis="[[xAxis]]" y-axis="[[yAxis]]" value-formats.group.tooltip-label="[[resource.groupToolTip]]"
+        value-formats.value.tooltip-label="[[resource.valueToolTip]]"
+        value-formats.value.converter="[[currencyConverter]]" hide-and-show-behavior="withRescale"
+        class="virtualAccountBalances__chartStyle">
+      </oj-chart>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: viewChart -->
+  <div class="oj-flex oj-flex-items-pad noData virtualAccountBalances__widgetSummary">
+    <div class="oj-flex-item oj-sm-12 noData__image">
+      <img
+        data-bind="attr:{'alt': $component.resource.notifications,'title':$component.resource.noData},loadImage:'virtual-account-management/account-balance.svg'">
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<modal-window
+  params="baseModel:$baseModel,rootModel:$component,id:'Top5VirtualAccountBalancesErrorPopUp', header:$component.resource.error">
+  <div class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item oj-lg-12">
+      <span data-bind="text: $component.resource.errorMsg"></span>
+    </div>
+    <div class="button-container search-buttons">
+      <oj-button class="action-button-primary" on-click="[[closePopUp]]">
+        <span data-bind="text:$component.resource.ok"></span>
+      </oj-button>
+    </div>
+  </div>
+</modal-window>

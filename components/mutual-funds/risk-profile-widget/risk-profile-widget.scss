@@ -1,0 +1,21 @@
+.gauge-padding {
+    padding-top: 1rem;
+}
+
+.risk-margin {
+    @include margin(1rem, 0, 0, 0);
+}
+
+.height-panel {
+    height: 9.35rem;
+}
+
+.heading {
+    margin: 0.6rem 0;
+    font-weight: var(--base-font-weight-regular);
+    font-size: var(--base-font-size-larger);
+}
+
+.profile-padding {
+    padding: 1rem 0.7rem;
+}

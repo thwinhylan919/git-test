@@ -1,0 +1,56 @@
+.cashPosition {
+  height: 27rem;
+  padding: 0;
+
+  &__heading {
+    font-weight: var(--base-font-weight-regular);
+    margin: 0.6rem 0;
+  }
+
+  &__links {
+    padding: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--form-line-height) + .5rem);
+    line-height: calc(var(--form-line-height) + .5rem);
+    border-top: 0.05rem solid var(--base-border-default);
+    position: relative;
+    top: 8rem;
+  }
+
+  &__container {
+    height: 15rem;
+    position: relative;
+
+    .balance-content {
+      padding: 1.5rem;
+    }
+  }
+
+  &__wrapper {
+    &-header {
+      background: var(--banner-background);
+      color: var(--banner-text-secondary);
+      padding: var(--banner-padding);
+      height: 4rem;
+    }
+
+    .virtual-accounts-panel {
+      height: 19rem;
+
+      #tabs-container {
+        width: 9rem;
+        max-height: 19rem;
+        overflow: auto;
+      }
+    }
+  }
+
+  .credit-status {
+    color: var(--base-color-success);
+  }
+
+  .debit-status {
+    color: var(--base-color-danger);
+  }
+}

@@ -1,0 +1,76 @@
+.redeem-fund-container {
+    .header-text {
+        font-size: var(--base-font-size-large);
+        font-weight: var(--base-font-weight-bold);
+    }
+    .padding-bar {
+        padding-bottom: 1.5rem;
+    }
+    .redeem-info {
+        padding: 0.5rem;
+    }
+    .redeem-up {
+        padding-top: 0.4rem;
+    }
+    .redeem-info-color-pad {
+        background-color: var(--banner-background);
+        @include padding(0, 0, 0.5rem, 0.5rem);
+    }
+    .redeem-info-color {
+        background-color: var(--banner-background);
+        padding: 0.2rem;
+    }
+    .upper-margin {
+        margin-top: 5.2rem;
+    }
+    .disclaimer {
+        padding: 0.5rem 0.5rem;
+    }
+    .border-color-custom {
+        @include single-border(bottom, 0.05rem solid var(--base-border-default));
+        @include single-border(left, 0.05rem solid var(--base-border-default));
+        @include single-border(right, 0.05rem solid var(--base-border-default));
+    }
+    .max-height {
+        height: 4.64rem;
+    }
+    .disctext {
+        font-size: var(--base-font-size-small);
+    }
+    .scroll-orders {
+        overflow-y: auto;
+        height: 12.5rem;
+    }
+    &__heading {
+        margin: 0.5rem 0;
+        font-weight: var(--base-font-weight-regular);
+        font-size: var(--base-font-size-larger);
+    }
+    .table-header {
+        @include padding(0, 0, 0, 1rem);
+        border-bottom: 0.05rem solid var(--base-border-default);
+    }
+    .table-padding {
+        @include padding(1rem, 0, 0, 0);
+    }
+    .note {
+        font-weight: var(--base-font-weight-light);
+        font-size: var(--base-font-size-medium);
+        margin: 0.7rem;
+    }
+    .action-border {
+        @include single-border(right, 0.05rem solid var(--link-base));
+    }
+    .action-style {
+        width: 4rem;
+    }
+    .action-style-medium {
+        width: 8rem;
+    }
+    .medium-text {
+        font-size: var(--base-font-size-medium);
+    }
+    .icon-padding {
+        @include padding(0, 0, 0, 0.2rem);
+    }
+}

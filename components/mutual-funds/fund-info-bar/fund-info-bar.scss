@@ -1,0 +1,51 @@
+.scheme-details-bar {
+  background: var(--banner-background);
+  color: var(--banner-text-secondary);
+  padding: var(--banner-padding) 0 var(--banner-padding) 0;
+  align-items: flex-start;
+  align-items: center;
+
+  .padding-one {
+    padding-bottom: 1.6rem;
+  }
+
+  .padding-two {
+    padding-bottom: 1rem;
+  }
+
+  .legend-height {
+    height: 1.4rem;
+  }
+
+  .rating-icons {
+    width: 5rem;
+  }
+
+  .large-text {
+    font-size: var(--base-font-size-larger);
+  }
+
+  .padding-one-mobile {
+    padding-bottom: 0.3rem;
+  }
+
+  .padding-two-mobile{
+    padding-bottom: 0.5rem;
+  }
+
+  .diff-value-fontsize {
+    font-size: 1rem;
+  }
+
+  .banner-item-height{
+    padding-bottom: 0.15rem;
+  }
+
+  .status{
+    font-weight: bold;
+  }
+
+  .small-text {
+    font-size: var(--base-font-size-small);
+  }
+}

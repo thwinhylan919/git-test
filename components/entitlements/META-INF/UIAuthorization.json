@@ -1,0 +1,17 @@
+{
+  "modules": [{
+    "moduleName": "com.ofss.digx.app.security.service.policy.entitlement.EntitlementGroup",
+    "components": [{
+      "componentName": "entitlements-base",
+      "service": "list",
+      "perform": "entitlements-details#entitlements-search#entitlements-search-results"
+    }]
+  }, {
+    "moduleName": "com.ofss.digx.app.security.service.policy.entitlement.Entitlement",
+    "components": [{
+      "componentName": "edit-entitlement",
+      "service": "update",
+      "perform": "review-edit-entitlement"
+    }]
+  }]
+}

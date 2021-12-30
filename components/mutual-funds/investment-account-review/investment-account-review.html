@@ -1,0 +1,102 @@
+<div class="form-main-container purchase-fund-container">
+    <div data-bind="template: { name: 'review-screen/review-banner-template', data: {header:$component.resource.review ,reviewHeader:$component.resource.bannerMessage }}">
+    </div>
+    <script type="text/html" id="personal-details-template">
+        <a href="#" class="align-icon" data-bind="attr:{id: 'edit_'+$component.resource.personalDetailsHeading,alt:$component.resource.personalDetailsHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'personal-details')">
+            <span class="icons icon-edit" aria-hidden="true"></span>
+        </a>
+    </script>
+    <script type="text/html" id="contact-details-template">
+        <a href="#" class="align-icon" data-bind="attr:{id: 'edit_'+$component.resource.contactDetailsHeading,alt:$component.resource.contactDetailsHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'contact-details')">
+            <span class="icons icon-edit" aria-hidden="true"></span>
+        </a>
+    </script>
+    <script type="text/html" id="nomination-details-template">
+        <a href="#" class="align-icon" data-bind="attr:{id: 'edit_'+$component.resource.nominationDetailsHeading,alt:$component.resource.nominationDetailsHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'nominee-details')">
+            <span class="icons icon-edit" aria-hidden="true"></span>
+        </a>
+    </script>
+    <script type="text/html" id="fatca-details-template">
+        <a href="#" class="align-icon" data-bind="attr:{id: 'edit_'+$component.resource.fatcaHeading,alt:$component.resource.fatcaHeading,title:$component.resource.clickMessage}, click:$component.editSection.bind($data,'fatca-details')">
+            <span class="icons icon-edit" aria-hidden="true"></span>
+        </a>
+    </script>
+    <div class="oj-flex oj-flex-items-pad ">
+        <div class="oj-flex-item oj-lg-8 ">
+            <page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.personalDetailsHeading, headerTemplate : 'personal-details-template'">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.fullName , value : $component.openInvestmentAccountData().personalDetails.fullName"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.dateOfBirth , value : $formatter.formatDate($component.openInvestmentAccountData().personalDetails.birthDate)"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.gender , value : $component.openInvestmentAccountData().personalDetails.gender"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.taxId , value : $component.openInvestmentAccountData().identityInfo[0].taxId"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.personalId , value : $component.openInvestmentAccountData().identityInfo[0].identificationType"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.personalIdNo , value : $component.openInvestmentAccountData().identityInfo[0].value"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.fatherName , value : $component.openInvestmentAccountData().personalDetails.spouseName"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.personalDetails.motherName , value : $component.openInvestmentAccountData().personalDetails.motherName"></row>
+            </page-section>
+            <page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.contactDetailsHeading, headerTemplate : 'contact-details-template'">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.address1 , value : $component.openInvestmentAccountData().addressDetails[0].address1"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.address2 , value : $component.openInvestmentAccountData().addressDetails[0].address2"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.city , value : $component.openInvestmentAccountData().addressDetails[0].city"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.state , value : $component.openInvestmentAccountData().addressDetails[0].state"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.zipCode , value : $component.openInvestmentAccountData().addressDetails[0].pin"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.country , value : $component.openInvestmentAccountData().addressDetails[0].country"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.contactNo , value : $component.openInvestmentAccountData().contactDetails[0].phoneNumber()"></row>
+                <!-- ko if: $component.openInvestmentAccountData().contactDetails[1] && $component.openInvestmentAccountData().contactDetails[1].phoneNumber -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.alternateContactNumber , value : $component.openInvestmentAccountData().contactDetails[1].phoneNumber"></row>
+                <!-- /ko -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.emailId , value : $component.openInvestmentAccountData().contactDetails[0].email()"></row>
+                <!-- ko if: $component.openInvestmentAccountData().contactDetails[1] && $component.openInvestmentAccountData().contactDetails[1].email -->
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.contactDetails.alternateEmailId , value : $component.openInvestmentAccountData().contactDetails[1].email"></row>
+                <!-- /ko -->
+
+            </page-section>
+            <page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.nominationDetailsHeading, headerTemplate : 'nomination-details-template'">
+                <!-- ko foreach : $component.openInvestmentAccountData().nominees -->
+                <div class="align-header">
+                    <span class="sub-heading" data-bind="text: $baseModel.format($component.resource.nominationDetails.nomineeNumber,{nominee : $index()+1})"></span>
+                </div>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.nominationDetails.name , value : $component.openInvestmentAccountData().nominees[$index()].nomineeName()"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.nominationDetails.relationship , value : $component.openInvestmentAccountData().nominees[$index()].temp_nomrelationship"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.nominationDetails.dateOfBirth , value : $formatter.formatDate($component.openInvestmentAccountData().nominees[$index()].dateOfBirth)"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.nominationDetails.taxId , value : $component.openInvestmentAccountData().nominees[$index()].taxId"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.nominationDetails.share , value : $component.openInvestmentAccountData().nominees[$index()].sharePercentage"></row>
+                <!-- /ko -->
+            </page-section>
+            <page-section params="baseModel : $baseModel, rootModel : $component,heading : $component.resource.fatcaHeading, headerTemplate : 'fatca-details-template'">
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.addressType , value : $component.openInvestmentAccountData().fatcaDetails.addressType"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.nationality , value : $component.openInvestmentAccountData().fatcaDetails.nationality"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.countryOfBirth , value : $component.openInvestmentAccountData().fatcaDetails.countryOfBirth"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.placeOfBirth , value : $component.openInvestmentAccountData().fatcaDetails.cityOfBirth"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.pepStatus , value : $component.openInvestmentAccountData().fatcaDetails.pepStatus"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.incomeSlab , value : $formatter.formatCurrency($component.openInvestmentAccountData().fatcaDetails.grossAnnualIncome.amount(),$component.openInvestmentAccountData().fatcaDetails.grossAnnualIncome.currency())"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.occupation , value : $component.openInvestmentAccountData().fatcaDetails.occupation"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.fatherName, value : $component.openInvestmentAccountData().fatcaDetails.spouseName"></row>
+                <!-- ko foreach : $component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo -->
+                <div class="align-header">
+                    <span class="sub-heading" data-bind="text: $baseModel.format($component.resource.fatcaDetails.sectionHeader,{index : $index()+1})"></span>
+                </div>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.countryOfTaxResidence , value : $component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo[$index()].taxResidenceCountry()"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.taxIdentificationDocuments , value : $component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo[$index()].taxIdentifierType"></row>
+                <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.fatcaDetails.taxIdentificationNo , value : $component.openInvestmentAccountData().fatcaDetails.taxResidencyInfoDTO.nonDomesticTaxResidencyInfo[$index()].taxIdentifier"></row>
+                <!-- /ko -->
+            </page-section>
+            <!-- ko if: $component.showAdditionalDetailsSection() -->
+            <div data-bind="template:{name: 'wealth-management/investment-account-additional-details-review', data: $component}"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="oj-flex button-container">
+        <oj-button class="action-button-primary" id="next-button"  on-click="[[$component.submit]]">
+            <span slot="startIcon" class="icons icon-confirm"></span>
+            <span data-bind="text:$component.resource.generic.common.confirm"></span>
+        </oj-button>
+        <oj-button class="action-button-secondary" id="cancel-button"  on-click="[[$dashboard.switchModule.bind($data, null)]]">
+            <span slot="startIcon" class="icons icon-cancel"></span>
+            <span data-bind="text:$component.resource.generic.common.cancel"></span>
+        </oj-button>
+        <oj-button class="action-button-tertiary" id="back"  on-click="[[$component.editSection.bind($data,'personal-details')]]">
+            <span slot="startIcon" class="icons icon-back-arrow"></span>
+            <span data-bind="text:$component.resource.generic.common.back"></span>
+        </oj-button>
+    </div>
+</div>

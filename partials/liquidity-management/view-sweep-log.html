@@ -1,0 +1,82 @@
+<page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+  <div class="oj-flex oj-flex-items-pad">
+    <oj-table id="sweepLogtable" :aria-label="[[$component.resource.sweepLogDetails.sweeplogdetailTable]]" columns='[[[{
+            "headerText":$component.resource.sweepLogDetails.dateTime,
+            "template":"dateTime",
+            "sortProperty":"sortDate"
+        },{
+            "headerText":$component.resource.sweepLogDetails.structureDetails,
+            "template":"structureDetail",
+            "sortProperty":"structureId"
+        },{
+            "headerText":$component.resource.sweepLogDetails.instructionDesc,
+            "field":"instructionDesc",
+            "sortProperty":"instructionDesc"
+        }].concat($parent.status() === "S" ? [{
+            "headerText":$component.resource.sweepLogDetails.sweepOutAccount,
+            "field":"sweepOutAccount",
+            "sortProperty":"sweepOutAccount"
+        },{
+            "headerText":$component.resource.sweepLogDetails.sweepOutAmount,
+            "template":"sweepOutAmount",
+            "sortProperty":"sweepOutAmount",
+            "headerClassName":"right",
+            "className" :"right"
+        },{
+            "headerText":$component.resource.sweepLogDetails.exchangeRate,
+            "field":"exchangeRate",
+            "sortProperty":"exchangeRate"
+        },{
+            "headerText":$component.resource.sweepLogDetails.sweepInAccount,
+            "field":"sweepInAccount",
+            "sortProperty":"sweepInAccount"
+        },{
+            "headerText":$component.resource.sweepLogDetails.sweepInAmount,
+            "template":"sweepInAmount",
+            "sortProperty":"sweepInAmount",
+            "headerClassName":"right",
+            "className" :"right"
+        }]:[{
+            "headerText": $component.resource.sweepLogDetails.sourceAccount,
+            "field":"sourceAccount",
+            "sortProperty":"sourceAccount"
+        },{
+            "headerText":$component.resource.sweepLogDetails.destinationAccount,
+            "field":"destinationAccount",
+            "sortProperty":"destinationAccount",
+            "headerClassName":"right",
+            "className" :"right"
+        }]).concat($parent.status() === "E"?[{
+            "headerText":$component.resource.sweepLogDetails.exception,
+            "field":"exception",
+            "sortProperty":"exception"
+        }]:[])]]' columns-default="[[{sortable:'enabled'}]]" selection-mode="[[{row:'none',column:'none'}]]" data="[[$parent.dataSource]]">
+      <caption class="hide-label" data-bind="text:$component.resource.sweeplogdetailTable">
+      </caption>
+      <template slot="dateTime">
+               <date-time params="{date : $current.row.datetime, baseModel : $baseModel}"></date-time>
+        </template>
+      <template slot="structureDetail">
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.structureId"></div>
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.structureDesc"></div>
+        </template>
+      <template slot="type">
+            <!-- ko if: $parent.status() === "S" || $parent.status() === "E" -->
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:($current.row.type ==='No' ?$component.resource.type.sweep:$component.resource.type.reverseSweep)"></div>
+            <!-- /ko -->
+
+            <!-- ko if:$parent.status() === "P" -->
+                <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$current.row.type"></div>
+            <!-- /ko -->
+        </template>
+      <template slot="sweepInAmount">
+               <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$formatter.formatCurrency($current.row.sweepInAmount,$current.row.sweepInCurrency)"></div>
+        </template>
+      <template slot="sweepOutAmount">
+               <div class="oj-flex-item oj-sm-12 oj-lg-12" data-bind="text:$formatter.formatCurrency($current.row.sweepOutAmount,$current.row.sweepOutCurrency)"></div>
+        </template>
+    </oj-table>
+    <oj-paging-control class="oj-flex-item oj-sm-12" id="paging" slot="bottom" :page-size="[[10]]" data="[[$parent.dataSource]]">
+    </oj-paging-control>
+  </div>
+</page-section>

@@ -1,0 +1,116 @@
+<div class=" form-main-container risk-profile-review">
+    <div class="oj-flex oj-flex-items-pad padding-left">
+        <div class="oj-flex-item oj-lg-8 oj-sm-12">
+            <page-section params="baseModel : $baseModel, rootModel : $data">
+                <div class="oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+                        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.line1 , value :$component.investmentAccount().name+'-'+$component.investmentAccount().displayValue+'-'+$component.investmentAccount().pattern"></row>
+                    </div>
+                </div>
+                <!-- ko if: profileLoaded -->
+                <div class="oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 pad-bar-mobile">
+                        <row params="baseModel : $baseModel, rootModel : $component, label : $component.resource.line2 , value :$component.riskProfile"></row>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+
+                    <oj-status-meter-gauge id="gauge-risk-profile" tooltip.renderer="[[$component.temp.getRenderer('tooltip')]]" min="0" max="100" thresholds="[[thresholdValues]]" value="{{currentValue}}" metric-label.rendered="off" plot-area.rendered="on" indicator-size="0.2"
+                        threshold-display="all" class="oj-flex-item" readOnly>
+                    </oj-status-meter-gauge>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item  oj-lg-12 oj-sm-12">
+                        <div id='legend-container'>
+                            <oj-legend id="legend1" orientation='vertical' sections="[[legendSections]]">
+                            </oj-legend>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <script type="text/html" id="tooltip">
+                    <div>
+                        <div>
+                            <span data-bind="text:'Risk Profile: ' + $component.riskProfile()" />
+                        </div>
+                        <div id='legend-container'>
+                            <oj-legend id="legend1" orientation='vertical' sections="[[$component.legendSections]]">
+                            </oj-legend>
+                        </div>
+                    </div>
+                </script>
+
+                <div class="oj-flex  oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12 oj-sm-12 item-text">
+                        <span data-bind="text: $component.resource.line3"></span>
+                    </div>
+                </div>
+                <div class="oj-flex  oj-flex-items-pad">
+                    <div class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <span data-bind="attr:{id:'templateId5'}, text: $baseModel.format($component.resource.investor,{investor:$component.riskProfile()})"></span>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <ul>
+                        <!-- ko foreach: $component.investorDescription -->
+                        <li>
+                            <div class="oj-flex-item oj-lg-12 oj-sm-12 list-item">
+                                <span data-bind="attr:{id:'templateId6'+$index()}, text: $data"></span>
+                            </div>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
+                <!-- ko if:$component.loadPie() -->
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-lg-12 oj-sm-12">
+                        <oj-chart id="pieChart" type="pie" series="[[$component.pieSeriesValue]]" animation-on-display="auto" style-defaults.pie-inner-radius="[[$component.innerRadius]]" animation-on-data-change="auto" hover-behavior="dim" legend.position="bottom">
+                        </oj-chart>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="oj-flex-items oj-lg-8 oj-sm-12">
+            <oj-button class="action-button-primary" id="confirm-button"  on-click="[[$component.doAgree]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resource.button1"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="CancelButton"  on-click="[[$component.openDisagreeModal]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.button2"></span>
+            </oj-button>
+            <!-- ko ifnot: $baseModel.small()-->
+            <oj-button class="action-button-tertiary" id="backButton" >
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resource.button3" on-click="[[$dashboard.switchModule.bind($data, null)]]"></span>
+            </oj-button>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<modal-window class="risk-profile-review" params="baseModel : $baseModel, rootModel : $component,id:'disagreePopUp',header:$component.resource.modalWindowHeader">
+    <div class="message-box">
+        <div class="oj-flex oj-flex-items-pad left-padding">
+            <oj-label for="disagreeChoices" id="disagreeChoicesLabel" class="hide-label">
+                <span data-bind="text:$component.resource.modalWindowHeader"></span>
+            </oj-label>
+            <div class="left-padding">
+                <oj-radioset class="oj-choice-direction-row" id="disagreeChoices" labelled-by="disagreeChoicesLabel" value="{{selectedChoicePopUp}}">
+                    <oj-option id="choice1" value="choose"><span data-bind="text: $component.resource.popUpOption1"></span></oj-option>
+                    <oj-option id="choice2" value="assessment"><span data-bind="text: $component.resource.popUpOption2"></span></oj-option>
+                </oj-radioset>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" id="okBtn" on-click="[[$component.processChoice]]">
+                <span data-bind="text:$component.resource.ok"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="cancelBtn" on-click="[[$component.closeDialogBox]]">
+                <span data-bind="text:$component.resource.button3"></span>
+            </oj-button>
+        </div>
+    </div>
+</modal-window>

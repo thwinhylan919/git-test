@@ -1,0 +1,19 @@
+{
+  "header": "credit-facility",
+  "data": [{
+    "id": "application-tracker",
+    "module": "facility-application-listing",
+    "parentModule": "process-management",
+    "icon": "application-tracker"
+  },{
+    "id": "amend-facility",
+    "module": "choose-facility-option",
+    "parentModule": "credit-facility",
+    "icon": "amend-facility"
+  },{
+    "id": "apply-new-facility",
+    "module": "apply-new-facility-landing", 
+    "parentModule": "process-management",
+    "icon": "new-facility-application"
+  }]
+}

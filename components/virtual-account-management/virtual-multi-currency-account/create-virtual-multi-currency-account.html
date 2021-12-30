@@ -1,0 +1,262 @@
+<oj-validation-group id="tracker" valid="{{$component.groupValid}}">
+    <div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+        <div class="oj-flex-item oj-sm-12 oj-md-3 oj-lg-2">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+    </div>
+    <div class="form-main-container">
+        <!-- ko if: $component.realAccountsListAvailable -->
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                        <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-12 label">
+                            <oj-label for="Virtual Multi-Currency Account Id"><span
+                                    data-bind="text:$component.resource.virtualMultiCurrencyAccountId"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-12 label">
+                            <oj-label for="Virtual Multi-Currency Account Name"><span
+                                    data-bind="text:$component.resource.virtualMultiCurrencyAccountName"></span>
+                            </oj-label>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-md-12">
+                            <!-- ko ifnot: $component.mode() === "edit" -->
+                            <oj-input-text id="multiCurrencyAccountId"
+                                value="{{$component.virtualMultiCurrencyAccountId}}"
+                                :aria-label="[[$component.resource.virtualMultiCurrencyAccountIdPlaceholder]]"
+                                placeholder="[[$component.resource.virtualMultiCurrencyAccountIdPlaceholder]]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'groupId','#multiCurrencyAccountId')]]]"
+                                class="oj-lg-7"></oj-input-text>
+                            <!-- /ko -->
+                            <!-- ko if: $component.mode() === "edit" -->
+                            <span data-bind="text:$component.virtualMultiCurrencyAccountId"></span>
+                            <!-- /ko -->
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-lg-6 oj-md-12">
+                            <oj-input-text id="multiCurrencyAccountName"
+                                value="{{$component.virtualMultiCurrencyAccountName}}"
+                                :aria-label="[[$component.resource.virtualMultiCurrencyAccountNamePlaceholder]]"
+                                placeholder="[[$component.resource.virtualMultiCurrencyAccountNamePlaceholder]]"
+                                async-validators="[[[$baseModel.getTaxonomyValidator($component.taxonomyDefinition,'name','#multiCurrencyAccountName')]]]"
+                                class="oj-lg-6"></oj-input-text>
+                        </div>
+                    </div>
+                </page-section>
+            </div>
+        </div>
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                    <div class="oj-flex oj-flex-items-pad oj-lg-8 oj-md-12 oj-sm-12 create-separator">
+                        <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                            <oj-label><span data-bind="text: $component.resource.selectCurrencyAndAccount"></span>
+                            </oj-label>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12 div-margin">
+                        <div class="oj-flex oj-lg-5 oj-md-6 oj-sm-12">
+                            <div id="headerCurrency" class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-3">
+                                <span data-bind="text: $component.resource.selectCurrency"></span>
+                            </div>
+                            <div id="headerAccount" class="oj-flex-item oj-lg-9 oj-md-9 oj-sm-9">
+                                <span data-bind="text: $component.resource.selectAccount"></span>
+                            </div>
+                        </div>
+                        <div id="headerMultiCurrencyGroup" class="oj-flex-item oj-lg-5 oj-md-5 oj-sm-12">
+                            <span data-bind="text: $component.resource.virtualMultiCurrencyAccountGroup"></span>
+                        </div>
+                    </div>
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12 oj-md-12 oj-sm-12">
+                        <div class="oj-flex-item oj-lg-5 oj-md-6 oj-sm-12">
+                            <div class="oj-panel panel-style">
+                                <div class="oj-flex parent-height">
+                                    <div id="navigationList"
+                                        class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-3 separator-border">
+                                        <!-- ko if:currencyDetailsLoaded -->
+                                        <oj-navigation-list :aria-label="[[$component.resource.selectCurrency]]"
+                                            drill-mode="none" selection="{{selectedItem}}"
+                                            on-selection-changed="[[$component.selectDifferentCurrency]]">
+                                            <ul data-bind="foreach: currencyList">
+                                                <li data-bind="attr: {id: id}, css: {'oj-disabled': disabled}">
+                                                    <a href="#" data-bind="text: label"></a>
+                                                </li>
+                                            </ul>
+                                        </oj-navigation-list>
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <div class="oj-flex-item oj-lg-9 oj-md-9 oj-sm-9 ">
+                                        <div id="radioList">
+                                            <!-- ko if:currencyDetailsLoaded -->
+                                            <oj-list-view id="RealAccountList" as='item'
+                                                :aria-label="[[$component.resource.selectAccount]]"
+                                                data="[[dataProvider]]" selection="{{$component.selectedListItems}}"
+                                                selection-mode="single">
+                                                <template slot="itemTemplate">
+                                                    <li :id="[['radioList' + item.data.realAccountNo.value]]">
+                                                        <div class="oj-flex padding-card">
+                                                            <div class="oj-flex-item oj-lg-1 oj-md-1 oj-sm-2">
+                                                                <oj-radioset value="{{$component.selectedRealAccount}}"
+                                                                    :id="[['listview_radioset' + item.index]]"
+                                                                    :data-row-id="{{item.index}}"
+                                                                    on-value-changed="[[$component.createMultiCurrencyCardList]]">
+                                                                    <oj-option :id="[[item.data.realAccountNo.value]]"
+                                                                        value="[[item.data.realAccountNo.value]]"
+                                                                        :aria-label="[[item.data.realAccountNo.displayValue]]">
+                                                                    </oj-option>
+                                                                </oj-radioset>
+                                                            </div>
+                                                            <div class="oj-flex-item oj-lg-11 oj-md-11 oj-sm-10">
+                                                                <div class="oj-flex">
+                                                                    <div
+                                                                        class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 word-wrap">
+                                                                        <span class="card-title"
+                                                                            data-bind="text: item.data.realCustomerName"></span>
+                                                                    </div>
+                                                                    <div
+                                                                        class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 word-wrap">
+                                                                        <span
+                                                                            data-bind="text: item.data.realAccountNo.displayValue"></span>
+                                                                    </div>
+                                                                    <div
+                                                                        class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 balance-text word-wrap">
+                                                                        <span
+                                                                            data-bind="text: $formatter.formatCurrency(item.data.balance,item.data.realAccountCurrency)"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </template>
+                                            </oj-list-view>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-lg-5 oj-md-5 oj-sm-12">
+                            <div class="oj-panel oj-flex-item oj-lg-10 oj-md-12 oj-sm-12 panel-style">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                                        <!-- ko if:multiCurrencyAccountListLoaded -->
+                                        <div id="MultiCurrencyAccountGroupLoaded">
+                                            <oj-list-view id="MultiCurrencyAccountGroup"
+                                                :aria-label="[[$component.resource.virtualMultiCurrencyAccountGroup]]"
+                                                data="[[multiCurrencyAccountGroup]]" as='item' drill-mode="none"
+                                                class="padding-card">
+                                                <template slot="itemTemplate">
+                                                    <li
+                                                        :id="[['MultiCurrencyAccountCard' + item.data.realAccountNo.value]]">
+                                                        <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                                                            <div
+                                                                class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-10 card-style">
+                                                                <div class="oj-flex padding-card">
+                                                                    <div
+                                                                        class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 oj-flex-items-pad">
+                                                                        <div
+                                                                            class="oj-flex-item oj-lg-3 oj-md-3 oj-sm-3 text-alignment">
+                                                                            <span class="card-currency-color"
+                                                                                data-bind="text: item.data.realAccountCurrency"></span>
+                                                                        </div>
+                                                                        <div
+                                                                            class="oj-flex-item oj-lg-7 oj-md-7 oj-sm-7 card-text-style">
+                                                                            <div class="card-title word-wrap">
+                                                                                <span
+                                                                                    data-bind="text: item.data.realCustomerName">
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="word-wrap">
+                                                                                <span
+                                                                                    data-bind="text: item.data.realAccountNo.displayValue"></span>
+                                                                            </div>
+                                                                            <div class="balance-text word-wrap">
+                                                                                <span
+                                                                                    data-bind="text: $formatter.formatCurrency(item.data.balance,item.data.realAccountCurrency)"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="oj-flex-item oj-lg-2 oj-md-2 oj-sm-2 text-alignment-right">
+                                                                            <a href="#" class="icon icon-delete"
+                                                                                data-bind=" attr : {id: 'remove' +item.data.realAccountNo.value,'aria-label': $component.resource.remove, title:$component.resource.remove}"
+                                                                                on-click="[[$component.removeFromMultiCurrencyList]]">
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 padding-card separator-for-no-default">
+                                                                        <div
+                                                                            class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                                                                            <!-- ko if:item.data.defaultAccount -->
+                                                                            <oj-button
+                                                                                class="oj-lg-12 oj-md-12 oj-sm-12  action-button-primary"
+                                                                                data-bind="attr:{
+                                id: 'default' + item.data.realAccountNo.value}" on-click="[[$component.setDefault]]">
+                                                                                <span slot="startIcon"
+                                                                                    class="icons icon-check"></span>
+                                                                                <span
+                                                                                    data-bind="text:$component.resource.defaultCurrency"></span>
+                                                                            </oj-button>
+                                                                            <!-- /ko -->
+                                                                            <!-- ko ifnot:item.data.defaultAccount -->
+                                                                            <oj-button
+                                                                                class="oj-lg-12 oj-md-12 oj-sm-12 button-margin"
+                                                                                data-bind="attr:{
+                                id: 'default' + item.data.realAccountNo.value}" on-click="[[$component.setDefault]]"
+                                                                                chroming="half">
+                                                                                <span class="text-no-default"
+                                                                                    data-bind="text:$component.resource.default"></span>
+                                                                            </oj-button>
+                                                                            <!-- /ko -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>    
+                                                    </li>
+                                                </template>
+                                            </oj-list-view>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </page-section>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item  button-container">
+                    <oj-button class="action-button-primary" on-click="[[$component.loadReview]]">
+                        <span slot="startIcon" class="icons icon-submit"></span>
+                        <span data-bind="text:$component.resource.submit"></span></oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                        <span slot="startIcon" class="icons icon-cancel"></span>
+                        <span data-bind="text:$component.resource.cancel"></span></oj-button>
+                    <!-- ko if: $component.mode() === "edit" -->
+                    <oj-button class="action-button-tertiary" on-click="[[$component.backToView]]">
+                        <span slot="startIcon" class="icons icon-back-arrow"></span>
+                        <span data-bind="text:$component.resource.back"></span></oj-button>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot:$component.realAccountsListAvailable -->
+        <div class="oj-flex">
+            <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                <page-section params="baseModel : $baseModel, rootModel : $component, heading : ''">
+                    <div class="oj-flex oj-flex-items-pad oj-sm-12 oj-lg-12 oj-md-12">
+                        <div class="oj-flex-items">
+                            <span data-bind="text: $component.resource.noRealAccountMessage"></span>
+                        </div>
+                    </div>
+                </page-section>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</oj-validation-group>

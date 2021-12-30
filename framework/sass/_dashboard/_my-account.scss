@@ -1,0 +1,7 @@
+.back-link {
+  line-height: var(--form-line-height);
+
+  @include mq(medium) {
+    @include padding(0, 0, 0, 0.5rem);
+  }
+}

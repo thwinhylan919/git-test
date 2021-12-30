@@ -1,0 +1,20 @@
+<div class="oj-flex oj-flex-items-pad help-content">
+    <div class="oj-flex-item help-item">
+        <img alt="" data-bind="loadImage : 'info-icon/speed.svg'">
+    </div>
+        <!-- ko if:$baseModel.large() && $component.transferData.categoryName -->
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+            <h4 class="oj-sm-12 help-content-title help-item" data-bind="text:$baseModel.format($component.goal.calculator.title, {name:$component.transferData.categoryName})"></h4>
+            <div class="oj-label-inline" data-bind="text:$component.goal.calculator.title1"></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $baseModel.large() && $component.transferData.categoryName -->
+        <div class="oj-flex-item oj-sm-12">
+            <h4 class="oj-sm-12 help-content-title help-item">Note</h4>
+        </div>
+        <!-- /ko -->
+        <div class="oj-flex-item ">
+            <p>Small drops of water make a big sea.</p>
+            <p>Start Small : Dream BIG!</p>
+        </div>
+    </div>

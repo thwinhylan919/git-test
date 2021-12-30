@@ -1,0 +1,113 @@
+$button-selected-color: #01838f;
+$selected-text-color: #ffffff;
+$currency-color: var(--base-color-warning);
+
+.virtual-account-bar {
+  background: linear-gradient(to var(--banner-gradient-direction), var(--banner-gradient-start-color), var(--banner-gradient-end-color));
+  color: var(--banner-foreground-color);
+  font-size: var(--banner-font-size);
+  font-weight: var(--banner-font-weight);
+  padding: var(--banner-padding);
+  align-items: center;
+}
+
+.card-currency-color {
+  color: $currency-color;
+  font-size: 1rem;
+}
+
+.text-alignment {
+  text-align: center;
+  padding: 0.5rem;
+  align-self: center;
+}
+
+.text-alignment-right {
+  @include text-align(right);
+  padding: 0.625rem;
+}
+
+.text-no-default {
+  font-size: 0.9rem;
+}
+
+.separator-for-no-default {
+  @include single-border(top, 0.05rem solid var(--base-border-default));
+  background-color: var(--base-border-default);
+}
+
+.header {
+  font-weight: bold;
+}
+
+.balance-text {
+  font-size: var(--base-font-size-default);
+  color: var(--base-text-secondary);
+}
+
+.card-style {
+  border: 0.05rem solid var(--base-border-default);
+}
+
+.separator-for-banner {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+  @include single-margin(top, 1.1rem);
+  @include single-padding(bottom, 1.1rem);
+}
+
+.create-separator {
+  @include single-border(bottom, 0.05rem solid var(--base-border-default));
+}
+
+.card-text-style {
+  padding: 0.625rem;
+}
+
+.padding-card {
+  @include single-padding(bottom, 0 !important);
+}
+
+.separator-border {
+  @include single-border(right, 0.05rem solid var(--base-border-default));
+}
+
+.card-title {
+  font-size: var(--widget-header-font-size);
+  margin-top: calc(2 * (var(--widget-header-font-size) / 3));
+  font-weight: var(--widget-header-font-weight);
+  color: var(--form-foreground-color);
+}
+
+.button-margin {
+  @include single-margin(bottom, 0);
+}
+
+.panel-style {
+  max-height: 33rem;
+  overflow: auto;
+}
+
+.word-wrap {
+  overflow-wrap: break-word;
+}
+
+.parent-height {
+  height: 100%;
+}
+
+.default-style {
+  background-color: $button-selected-color;
+  color: $selected-text-color;
+  text-align: center;
+  line-height: 2rem;
+  vertical-align: middle;
+  @include single-padding(bottom, 0 !important);
+}
+
+.div-margin {
+  @include single-margin(top, 1.2rem);
+}
+
+.padding-card-division {
+  @include single-padding(left, 0.625rem);
+}

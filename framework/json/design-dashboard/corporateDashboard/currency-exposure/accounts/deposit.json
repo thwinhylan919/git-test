@@ -1,0 +1,99 @@
+{
+    "accounts": [{
+        "id": {
+            "displayValue": "xxxxxxxxxxxx0031",
+            "value": "EC6C01D9B69E3F4CF902E7D71B7924629EBE73727297562B840A2139D0505039CF7C"
+        },
+        "partyId": {
+            "displayValue": "***308",
+            "value": "9D0806AAF8E7616386AF0FF4BB0D7183A0A1A9FE1C46"
+        },
+        "displayName": "Sunrise  coffee",
+        "status": "ACTIVE",
+        "type": "TRD",
+        "currencyCode": "USD",
+        "branchCode": "AT3",
+        "productDTO": {
+            "name": "FD-Floating Rate",
+            "productId": "FDFLOT",
+            "module": "CON",
+            "facilityParameter": {
+                "topupAllowed": true,
+                "partialRedeemAllowed": false
+            },
+            "tenureParameter": {
+                "minTenure": {
+                    "days": 0,
+                    "months": 1,
+                    "years": 0
+                }
+            },
+            "amountParameters": [{
+                "minAmount": {
+                    "currency": "EUR",
+                    "amount": 1000
+                },
+                "maxAmount": {
+                    "currency": "EUR",
+                    "amount": 95000000
+                },
+                "currency": "EUR",
+                "incrementStep": 1000
+            }]
+        },
+        "openingDate": "2019-03-22T00:00:00",
+        "partyName": "Sunrise Coffee",
+        "branchAddressDTO": {
+            "version": 1,
+            "generatedPackageId": false,
+            "auditSequence": 1,
+            "id": "AT3",
+            "workTimings": [null, null],
+            "workDays": [null, null],
+            "additionalDetails": [null, null],
+            "branchName": "AT3 FLEXCUBE UNIVERSAL BANK",
+            "branchAddress": {
+                "version": 1,
+                "generatedPackageId": false,
+                "auditSequence": 1,
+                "postalAddress": {
+                    "line1": "Callister Avenue 115",
+                    "line2": "London",
+                    "city": "GB",
+                    "country": "GREAT BRITAIN"
+                }
+            },
+            "branchPhone": [{}, {}]
+        },
+        "holdingPattern": "SINGLE",
+        "module": "CON",
+        "defaultAccount": false,
+        "maturityAmount": {
+            "currency": "USD",
+            "amount": 5480.399999999999636202119290828704833984375
+        },
+        "maturityDate": "2020-08-22T00:00:00",
+        "principalAmount": {
+            "currency": "USD",
+            "amount": 5000
+        },
+        "currentPrincipalAmount": {
+            "currency": "USD",
+            "amount": 5000
+        },
+        "interestRate": 7,
+        "payoutInstructions": [],
+        "payInInstruction": [],
+        "nomineeRegistered": false,
+        "sweepinProvider": false,
+        "topUpDetails": [],
+        "redemptionDetails": [],
+        "availableBalance": {
+            "currency": "USD",
+            "amount": 5000
+        },
+        "accrualDetails": {}
+
+
+    }]
+}

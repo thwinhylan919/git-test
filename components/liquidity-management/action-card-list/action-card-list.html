@@ -1,0 +1,17 @@
+<!-- ko with: data -->
+<a href="#" data-bind="attr:{'alt':$component.cardDescription ,'title':$component.cardTitle}, click : $component.onCardClick.bind($data,$data)">
+    <div class="accountCard__cardLayout">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-lg-12 accountCard__header">
+                <!-- ko if: header -->
+                <div data-bind="text:header"></div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="accountCard__body">
+            <!-- ko template: { nodes: $componentTemplateNodes}-->
+            <!-- /ko -->
+        </div>
+    </div>
+</a>
+<!-- /ko -->

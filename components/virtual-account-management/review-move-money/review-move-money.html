@@ -1,0 +1,84 @@
+<!-- ko ifnot: $component.fromApproval() -->
+<div>
+    <div
+        data-bind="template: { name: 'review-screen/review-banner-template', data: {header: $component.resource.reviewCaption,reviewHeader:$component.resource.reviewHeader}}">
+    </div>
+    <div class="oj-flex form-main-container">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 virtual-account-bar">
+            <div data-bind="text: $component.realCustomerName"></div>
+            <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 move-money__content">
+            <page-section params="baseModel : $baseModel, rootModel : $component, heading : '' ">
+                <div class="row-group">
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.realAccount , value :$component.realAccountNoDisplay">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.transferFrom , value :$component.moveMoneyPayload().debitAccountId().displayValue">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.transferTo , value :$component.moveMoneyPayload().creditAccountId().displayValue">
+                    </row>
+                    <row
+                        params="baseModel : $baseModel, rootModel : $component, label : $component.resource.amount , value :$formatter.formatCurrency($component.moveMoneyPayload().debitAmount.amount(),$component.moveMoneyPayload().creditAmount.currency())">
+                    </row>
+                </div>
+            </page-section>
+            <div class="oj-flex button-container">
+                <div class="oj-flex-item oj-lg-12">
+                    <oj-button class="action-button-primary" id="confirm-button" on-click="[[$component.confirm]]">
+                        <span slot="startIcon" class="icons icon-confirm"></span>
+                        <span data-bind="text:$component.resource.confirm"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" id="CancelButton"
+                        on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                        <span slot="startIcon" class="icons icon-cancel"></span>
+                        <span data-bind="text:$component.resource.cancel"></span>
+                    </oj-button>
+                    <!-- ko ifnot: $component.widgetFlag() -->
+                    <oj-button class="action-button-tertiary" id="backButton" on-click="[[$dashboard.hideDetails]]">
+                        <span slot="startIcon" class="icons icon-back-arrow"></span>
+                        <span data-bind="text:$component.resource.back"></span>
+                    </oj-button>
+                    <!-- /ko -->
+                    <!-- ko if: $component.widgetFlag() -->
+                    <oj-button class="action-button-tertiary" id="backButton" on-click="[[$component.backToCreate]]">
+                        <span slot="startIcon" class="icons icon-back-arrow"></span>
+                        <span data-bind="text:$component.resource.back"></span>
+                    </oj-button>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: $component.fromApproval() -->
+<div class="virtual-account-bar oj-flex-items-pad oj-flex oj-sm-flex-items-initial">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+        <div data-bind="text: $component.realCustomerName"></div>
+        <div data-bind="text:$dashboard.userData.userProfile.partyId.displayValue"></div>
+    </div>
+</div>
+<div class="oj-flex-items-pad oj-flex">
+    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12 move-money__content">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : '' ">
+            <div class="row-group">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.resource.realAccount , value :$component.moveMoneyPayload().realAccountNo.displayValue">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.resource.transferFrom , value :$component.moveMoneyPayload().debitAccountId.displayValue">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.resource.transferTo , value :$component.moveMoneyPayload().creditAccountId.displayValue">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.resource.amount , value :$formatter.formatCurrency($component.moveMoneyPayload().debitAmount.amount,$component.moveMoneyPayload().creditAmount.currency)">
+                </row>
+            </div>
+        </page-section>
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,17 @@
+
+.footer {
+    position: relative;
+    bottom: 0;
+    z-index: 0;
+    @include left(0);
+    background: linear-gradient(to var(--footer-gradient-direction), var(--footer-gradient-start-color), var(--footer-gradient-end-color));
+    width: 100%;
+    height: var(--footer-height);
+    line-height:var(--form-line-height);
+    text-align: center;
+    display: block;
+    color: var(--footer-foreground-color);
+    font-size: var(--footer-font-size);
+    font-weight: var(--footer-font-weight);
+    overflow: hidden;
+}

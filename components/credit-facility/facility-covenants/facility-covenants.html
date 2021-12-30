@@ -1,0 +1,37 @@
+<!-- ko if: $component.treeDataLoaded3()-->
+
+<oj-list-view selection-mode="multiple" data="[[$component.datasource2]]"
+    item.renderer="[[$oj.KnockoutTemplateUtils.getRenderer('item_template12', true)]]">
+</oj-list-view>
+
+<!-- /ko -->
+<script type="text/html" id="item_template12">
+            <li class="items">
+                <div class="oj-panel box oj-lg-4">
+                    <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-12">
+                            <div class="covenant-font2" data-bind="text:$component.locale.covenantName">
+                            </div>
+                            <div class="covenant-font1" data-bind="text:covenantName">
+                            </div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+                            <oj-label><span data-bind="text:  $component.locale.revisionDate"></span></oj-label>
+                            <div><span data-bind="text:$formatter.formatDate($component.date())"></span></div>
+                        </div>
+                        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6">
+                            <oj-label><span data-bind="text:  $component.locale.description"></span></oj-label>
+                            <div><span data-bind="text:description"></span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+</script>
+
+<div class="oj-flex oj-flex-items-pad button-container">
+    <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data, null)]]"><span slot="startIcon" class="icon-cancel"></span><span data-bind="text:$component.locale.generic.common.cancel"></span>
+    </oj-button>
+    <oj-button class="action-button-tertiary" on-click="[[back]]"><span slot="startIcon" class="icon-back-arrow"></span><span data-bind="text:$component.locale.generic.common.back"></span>
+    </oj-button>
+</div>

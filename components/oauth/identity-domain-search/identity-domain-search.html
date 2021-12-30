@@ -1,0 +1,51 @@
+<div class="oj-flex">
+    <div class="oj-flex-item oj-sm-8 oj-md-8 oj-lg-9">
+        <div class="form-main-container">
+            <div class=" oj-flex-item oj-sm-8 oj-md-8 oj-lg-8">
+                <oj-validation-group id="tracker">
+                    <page-section params="baseModel : $baseModel, rootModel : $data, heading : ''">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                                <label for="identityDomainName" data-bind="text:$component.nls.IdentityDomain.IdentityDomainName"></label>
+                            </div>
+                            <div class="oj-col oj-sm-12 oj-md-8 oj-lg-6">
+                                <oj-input-text id="identityDomainName" :aria-label="[[$component.nls.IdentityDomain.IdentityDomainName]]" label-hint="{{$component.nls.IdentityDomain.IdentityDomainName}}" value="{{$component.domainName}}" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPECIAL',$component.nls.IdentityDomain.invalidIdentityDomainName,{type: 'length',options: {min: 1, max: 40}})]]" required="true"></oj-input-text>
+                            </div>
+                        </div>
+                    </page-section>
+                    <div class="oj-row button-container">
+                        <oj-button class="action-button-primary" on-click="[[$component.search]]"><span data-bind="text:$component.nls.IdentityDomain.Search"></span></oj-button>
+                        <!-- ko ifnot:$component.isIdentityDomainListLoaded() -->
+                        <oj-button class="action-button-secondary" on-click="[[$dashboard.openDashboard]]"><span data-bind="text:$component.nls.IdentityDomain.cancel"></span></oj-button>
+                        <!-- /ko -->
+                        <oj-button class="action-button-tertiary" on-click="[[$component.clear]]"><span data-bind="text:$component.nls.IdentityDomain.clear"></span></oj-button>
+                    </div>
+                    <!-- ko if:$component.isIdentityDomainListLoaded() -->
+                    <div class="oj-flex oj-flex-items-pad">
+                        <div class="oj-flex-item">
+                            <page-section params="baseModel : $baseModel, rootModel : $data, heading : $component.nls.IdentityDomain.searchResults">
+                                <oj-table :id="[['domainTable'+$baseModel.incrementIdCount()]]" :aria-label="[[$component.nls.IdentityDomain.details]]" on-oj-sort="[[sortListener]]" columns="[[[{headerText:$component.nls.IdentityDomain.name,field:'data.name','renderer': $oj.KnockoutTemplateUtils.getRenderer('domName', true)},{headerText:$component.nls.IdentityDomain.description,field:'data.description'}]]]" selection-mode="[[{row:'single',column:'single'}]]" data="[[$component.pagingdatasource()]]" on-value-changed="[[onIdentityDomainSelected]]" translations="[[{msgNoData:$component.nls.IdentityDomain.noData}]]">
+                                    <caption class="hide-label" data-bind="text:$component.nls.IdentityDomain.details"></caption>
+                                    <oj-paging-control id="paging" slot="bottom" :page-size="[[8]]" data="[[$component.pagingdatasource()]]">
+                                    </oj-paging-control>
+                                </oj-table>
+                                <script type="text/html" id="domName">
+                                    <td>
+                                        <a href="#" data-bind="text:$context.row.name, click: $component.onIdentityDomainSelected.bind($context.row.name)"></a>
+                                    </td>
+                                </script>
+                            </page-section>
+                        </div>
+                    </div>
+                    <oj-button class="action-button-secondary" on-click="[[$dashboard.openDashboard.bind(void 0,void 0)]]">
+                        <span data-bind="text:$component.nls.IdentityDomain.cancel"></span>
+                    </oj-button>
+                    <!-- /ko -->
+                </oj-validation-group>
+            </div>
+        </div>
+    </div>
+    <div class="oj-flex-item oj-sm-3 help-panel">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'identity-domain'"></help>
+    </div>
+</div>

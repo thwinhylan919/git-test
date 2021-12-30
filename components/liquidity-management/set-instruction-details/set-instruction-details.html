@@ -1,0 +1,175 @@
+<div class="form-main-container oj-flex oj-flex-items-pad oj-lg-12 overlay">
+    <!-- ko if:dataLoaded() -->
+    <!-- ko if:$component.isIEBrowser() -->
+    <div class="oj-flex-item oj-lg-6 structure__top-padding">
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 structure__openInIE">
+            <div class="oj-flex-item">
+                
+                <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$component.nodeDetails()[0].accountDetails.customerDesc"></div>
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$component.nodeDetails()[0].accountDetails.accountDesc"></div>
+                <div class="oj-flex-item oj-lg-12 structure__nodeData">
+                    <span data-bind="text:$component.nodeDetails()[0].accountDetails.accountKey.accountNo.displayValue"></span>
+                    <!-- ko if:$component.cashCCMethod()==="Sweep" || $component.structureDetails().structureKey.versionNo() > 1 -->
+                    <span class="structure__accountType tags" data-bind="text :$component.resources.instruction.accountCheck[$component.nodeDetails()[0].accountDetails.isExtAccChk]">
+                        </span>
+                    <!-- /ko -->
+                </div>
+                <!-- ko if:$component.cashCCMethod()==="Sweep" || $component.structureDetails().structureKey.versionNo() > 1 -->
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$formatter.formatCurrency($component.nodeDetails()[0].accountDetails.currentBalance, $component.nodeDetails()[0].accountDetails.accountKey.ccyId)"></div>
+                <!-- /ko -->
+                <!-- ko if:$component.cashCCMethod()!=="Sweep" && $component.structureDetails().structureKey.versionNo() === 1 -->
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.currency,{currencyCode : ko.utils.unwrapObservable($component.nodeDetails()[0].accountDetails.accountKey.ccyId)})"></div>
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.branch,{branchCode : ko.utils.unwrapObservable($component.nodeDetails()[0].accountDetails.accountKey.branchCode)})"></div>
+                <!-- /ko -->
+                
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-5 structure__heightBtwnNodeInIE">
+            <div class="structure__cashccmethod" data-bind="text:$component.nodeDetails()[1].account.cashCCMethod || $component.cashCCMethod()"></div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-10 structure__openInIE">
+            <div class="oj-flex-item">
+                <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$component.nodeDetails()[1].account.accountDetails.customerDesc"></div>
+                <div class="oj-flex-item oj-lg-12" data-bind="text:$component.nodeDetails()[1].account.accountDetails.accountDesc"></div>
+                <div class="oj-flex-item oj-lg-12">
+                    <span data-bind="text:$component.nodeDetails()[1].account.accountDetails.accountKey.accountNo.displayValue"></span>
+                    <span class="structure__accountType tags" data-bind="text : $component.resources.instruction.accountCheck[$component.nodeDetails()[1].account.accountDetails.isExtAccChk]">
+                </span>
+                </div>
+                <div class="oj-flex-item oj-lg-8" data-bind="text:$formatter.formatCurrency($component.nodeDetails()[1].account.accountDetails.currentBalance,$component.nodeDetails()[1].account.accountDetails.accountKey.ccyId)"></div>
+                <!-- ko if:$component.nodeDetails()[1].instructionPriority -->
+                <div class="oj-flex-item oj-lg-4 right priority" data-bind="text:$baseModel.format($component.resources.instruction.priority,{
+                number :$component.nodeDetails()[1].account.instructionPriority})"></div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot:$component.isIEBrowser() -->
+    <div class="oj-flex-item oj-lg-6 set-instruction-details-container">
+        <tree-view class="structure" params="
+                 treeDetails :$component.treeJson(),
+                 linkShortDescValue:'cashCCMethod',
+                 nodeShortDescValue:'accountDetails.accountKey.accountNo.displayValue',
+                 nodeIdjsonPath:'accountDetails.accountKey.accountNo.value',
+                 treePanning:'none',
+                 treeZooming:'none',
+                 wrapTree:'true',
+                 width:240,
+                 height:120,
+                 overViewRenderer:'off',
+                 rootModel : $component,
+                 baseModel:$baseModel">
+            <div class="oj-flex oj-flex-items-pad structure__node" data-bind="css : $data.nodeData.level ? (($data.nodeData.cashCCMethod === 'Sweep') ? 'structure__structureFill__structureFillSweep structure__structureFill':'structure__structureFill__structureFillPool structure__structureFill') :  (($component.cashCCMethod() === 'Sweep') ? 'structure__structureFillParent__structureFillSweep structure__structureFillParent': 'structure__structureFillParent__structureFillPool structure__structureFillParent') ">
+                <!-- ko ifnot:$data.nodeData.level -->
+                <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+                <div class="oj-flex-item oj-lg-12 structure__nodeData">
+                    <span data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+                    <!-- ko if:$component.cashCCMethod()==="Sweep" || $component.structureDetails().structureKey.versionNo() > 1 -->
+                    <span class="structure__accountType tags" data-bind="text : $component.resources.instruction.accountCheck[$data.nodeData.accountDetails.isExtAccChk]">
+                </span>
+                    <!-- /ko -->
+                </div>
+                <!-- ko if:$component.cashCCMethod()==="Sweep" || $component.structureDetails().structureKey.versionNo() > 1 -->
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance, $data.nodeData.accountDetails.accountKey.ccyId)"></div>
+                <!-- /ko -->
+                <!-- ko if:$component.cashCCMethod()!=="Sweep" && $component.structureDetails().structureKey.versionNo() === 1 -->
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.instruction.currency,{currencyCode : ko.utils.unwrapObservable($data.nodeData.accountDetails.accountKey.ccyId)})"></div>
+                <div class="oj-flex-item oj-lg-12 structure__nodeData" data-bind="text : $baseModel.format($component.resources.instruction.branch,{branchCode : ko.utils.unwrapObservable($data.nodeData.accountDetails.accountKey.branchCode)})"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:$data.nodeData.level -->
+                <div class="oj-flex-item oj-lg-10 structure__nodeHeader" data-bind="text:$data.nodeData.accountDetails.customerDesc"></div>
+                <div class="oj-flex-item oj-lg-12" data-bind="text:$data.nodeData.accountDetails.accountDesc"></div>
+                <div class="oj-flex-item oj-lg-12">
+                    <span data-bind="text:$data.nodeData.accountDetails.accountKey.accountNo.displayValue"></span>
+                    <span class="structure__accountType tags" data-bind="text : $component.resources.instruction.accountCheck[$data.nodeData.accountDetails.isExtAccChk]">
+                </span>
+                </div>
+                <div class="oj-flex-item oj-lg-8" data-bind="text:$formatter.formatCurrency($data.nodeData.accountDetails.currentBalance,$data.nodeData.accountDetails.accountKey.ccyId)"></div>
+                <!-- ko if:$data.nodeData.instructionPriority -->
+                <div class="oj-flex-item oj-lg-4 right priority" data-bind="text:$baseModel.format($component.resources.instruction.priority,{
+                number :$data.nodeData.instructionPriority})"></div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </tree-view>
+    </div>
+    <!-- /ko -->
+    <div class="oj-flex-item oj-lg-6">
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resources.instruction.specification">
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <oj-label for="instructionType" class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text:$component.resources.instruction.instruction"></span>
+                </oj-label>
+                <oj-select-one id="instructionType" :aria-label="[[$component.resources.instruction.instruction]]" class="oj-flex-item oj-lg-12 oj-sm-12" value="{{$component.instructionDetailModel.instructionDetailKey.instructionDetailId}}" placeholder="[[$component.resources.instruction.pleaseSelect]]" on-value-changed="[[instructionTypeChangeHandler]]">
+                    <!-- ko foreach:instructionTypeList -->
+                    <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <oj-label for="frequency" class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text:$component.resources.instruction.frequency"></span>
+                </oj-label>
+                <oj-select-one id="frequency" :aria-label="[[$component.resources.instruction.frequency]]" class="oj-flex-item oj-lg-12 oj-sm-12" placeholder="[[$component.resources.instruction.pleaseSelect]]" value="{{$component.frequencyListModel.frequencyKeyDTO.frequencyId}}" on-value-changed="[[frequencyChangeHandler]]">
+                    <!-- ko foreach:frequencyList -->
+                    <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <oj-label for="sweepDirection" class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text:$component.resources.instruction.sweepDirection"></span>
+                </oj-label>
+                <oj-select-one id="sweepDirection" :aria-label="[[$component.resources.instruction.sweepDirection]]" class="oj-flex-item oj-lg-6 oj-sm-12" placeholder="[[$component.resources.instruction.pleaseSelect]]" value="{{$component.sweepDirection}}">
+                    <!-- ko foreach:sweepDirectionList -->
+                    <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <oj-label for="revSweepFrequency" class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text:$component.resources.instruction.revSweepFrequency"></span>
+                </oj-label>
+                <oj-select-one id="revSweepFrequency" :aria-label="[[$component.resources.instruction.revSweepFrequency]]" class="oj-flex-item oj-lg-12 oj-sm-12" placeholder="[[$component.resources.instruction.pleaseSelect]]" value="{{$component.revFreq}}">
+                    <!-- ko foreach:frequencyList -->
+                    <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                    <!-- /ko -->
+                </oj-select-one>
+            </div>
+        </page-section>
+        <!-- ko if:$component.instructionParamListLoaded() -->
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : $component.resources.instruction.parameter">
+            <!-- ko if:ko.utils.unwrapObservable($component.instructionParamListModel).length>0 -->
+            <!-- ko foreach : $component.instructionParamListModel -->
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <oj-label :for="[['instructionParam' + $index()]]" class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text:$component.resources.instruction.instructionParamList[ko.utils.unwrapObservable($data.instructionParamKey.paramName)]"></span>
+                </oj-label>
+                <oj-input-text :id="[['instructionParam' + $index()]]" :aria-label="[[$component.resources.instruction.instructionParamList[ko.utils.unwrapObservable($data.instructionParamKey.paramName)]]]" class="oj-flex-item oj-lg-12 oj-sm-12" value="{{$data.paramvalue}}" validators="[[$baseModel.getValidator('NUMBERS',$component.resources.instruction.parameterErrorMessage,{type: 'length',options: {min: 0, max: 50}})]]">
+                </oj-input-text>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot:ko.utils.unwrapObservable($component.instructionParamListModel).length>0 -->
+            <div class="oj-flex oj-flex-items-pad oj-lg-12">
+                <oj-label :for="[['instructionParam']]" class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <span data-bind="text:$component.resources.instruction.instructionParamList[ko.utils.unwrapObservable(instructionParamListModel.instructionParamKey.paramName)]"></span>
+                </oj-label>
+                <oj-input-text :id="[['instructionParam']]" :aria-label="[[$component.resources.instruction.instructionParamList[ko.utils.unwrapObservable(instructionParamListModel.instructionParamKey.paramName)]]]" class="oj-flex-item oj-lg-12 oj-sm-12" value="{{instructionParamListModel.paramvalue}}" validators="[[$baseModel.getValidator('NUMBERS',$component.resources.instruction.parameterErrorMessage,{type: 'length',options: {min: 0, max: 50}})]]">
+                </oj-input-text>
+            </div>
+            <!-- /ko -->
+        </page-section>
+        <!-- /ko -->
+        <div class="oj-flex-item button-container">
+            <oj-button class="action-button-primary" id="updateButton" on-click="[[$component.update]]">
+                <span slot="startIcon" class="icons icon-update"></span>
+                <span data-bind="text: $component.resources.instruction.update"></span>
+            </oj-button>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

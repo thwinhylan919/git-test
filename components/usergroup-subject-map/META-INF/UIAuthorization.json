@@ -1,0 +1,23 @@
+{
+    "modules": [{
+        "moduleName": "com.ofss.digx.app.collaboration.service.mailbox.usergroupsubjectmap.UserGroupSubjectMap",
+        "components": [{
+                "componentName": "read",
+                "service": "read",
+                "perform": "mapping-base#list-mail-categories#mapping-search"
+            },
+            {
+                "componentName": "mapping-create",
+                "service": "create",
+                "perform": "mapping-base#mapping-search#list-mail-categories#review-mapping-create",
+                "approve": "review-mapping-create"
+            },
+            {
+                "componentName": "mapping-update",
+                "service": "update",
+                "perform": "review-mapping-update",
+                "approve": "review-mapping-update"
+            }
+        ]
+    }]
+}

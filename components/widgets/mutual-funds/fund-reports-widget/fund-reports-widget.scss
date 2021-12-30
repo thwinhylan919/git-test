@@ -1,0 +1,9 @@
+.fundreports {
+    &__icon-size {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    &__report-text {
+        @include padding(0.7rem, 0, 0, 0);
+    }
+}

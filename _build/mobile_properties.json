@@ -1,0 +1,8 @@
+{
+    "resource_base_path": "./",
+    "image_resource_path": "./images",
+    "image_css_path_android": "../../images",
+    "image_css_path_ios": "./images",
+    "axe_url": "./axe.js",
+    "oracle_jet_deployment": "local"
+}

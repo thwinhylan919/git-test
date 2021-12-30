@@ -1,0 +1,14 @@
+$hybrid-background-color: #1E7C9F;
+$pool-background-color: #90722C;
+.overlay {
+    width: 25rem;
+}
+.structure {
+	&__accountType{
+        background-color: var(--banner-background);
+        color: var(--banner-text-secondary);
+    }
+}
+.amount{
+    margin-top:0.6rem;
+}

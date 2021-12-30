@@ -1,0 +1,14 @@
+{
+    "componentName": "pending-for-approvals",
+    "module": "dashboard",
+    "segment": ["administrator"],
+    "width": {
+        "large": "12",
+        "medium": "12"
+    },
+    "height": "224",
+    "icon": "",
+    "template": "",
+    "isVisible": true,
+    "isWidget": true
+}

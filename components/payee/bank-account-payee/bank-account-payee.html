@@ -1,0 +1,159 @@
+<div class="form-main-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+    <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-4 bank-account-payee">
+        <!-- ko if:stageOne() -->
+        <page-section params="baseModel : $baseModel, rootModel : $component, heading : ($dashboard.appData.segment === 'CORP')?$component.payments.payee.bankaccount:''">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 label">
+                        <oj-label :for="payeename" class="oj-flex-item oj-lg-12 label">
+                        <span data-bind="text: $component.payments.payee.recipientname"></span>
+                        </oj-label>
+                    </div>
+                    <!-- ko if:isNew() -->
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-validation-group id="payee-name-tracker">
+                            <oj-input-text id="payeename" required validators="[[$baseModel.getValidator('NAME')]]" value="{{payeeName}}"></oj-input-text>
+                        </oj-validation-group>
+                    </div>
+                    <!-- /ko -->
+
+                    <!-- ko ifnot:isNew() -->
+                    <div class="oj-flex-item oj-sm-12 " data-bind="text:$component.payeeName"></div>
+                    <!-- /ko -->
+                </div>
+                <!-- ko if:$component.imageUploadFlag() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item">
+                        <image-upload params="baseModel : $baseModel, rootModel:$component, dashboard: $dashboard,
+                          preview: $component.payeeImageAvailable() ? $component.preview : $component.defaultPreview,
+                          label: $component.payments.payee.image,
+                          fileId:$component.fileId,
+                          contentId:$component.contentId,
+                          defaultImagePath :'nominee/add-another-nominee.svg',
+                          imageId:$component.imageId,
+                          file:$component.file,
+                          fileTypeArray :$component.fileTypeArray,
+                          maxFileSize:$component.maxFileSize,
+                          isRemoveAllowed: $component.payeeImageAvailable,
+                          imageCallBackHandler: $component.imageCallBackHandler,
+                          isThumbnail:true">
+                        </image-upload>
+                    </div>
+                </div>
+                <!-- /ko -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 label ">
+                    <label class="oj-label" for="accType" data-bind="text: $component.payments.payee.accounttype"></label>
+                </div>
+                <!-- ko if: ($component.isEdit && $component.isEdit()) -->
+                <div class="oj-flex-item oj-sm-12  " id="accType">
+                    <span data-bind="text: $component.currentAccountType"></span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: !($component.isEdit && $component.isEdit()) -->
+                <div class="oj-flex-item oj-sm-12  ">
+                    <oj-buttonset-one id="accType" value="{{$component.currentAccountType}}" on-value-changed="[[accountTypeChanged]]">
+                        <!-- ko foreach: accountTypes -->
+                        <oj-option name="accountType" value="[[id]]" :id="[[id]]">
+                            <span data-bind="attr: {for: id},text: text "></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-buttonset-one>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- ko if:isComponentLoaded() -->
+            <div data-bind="component:{name: $component.selectedComponent(), params:{rootModel: $component,model:$component.model()}}">
+            </div>
+            <!-- /ko -->
+            <oj-validation-group id="payee-nickname-tracker">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12  label ">
+                    <oj-label :for="nickName" class="oj-flex-item oj-sm-12 label">
+                        <span data-bind="text: $component.payments.payee.accountnickname"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 ">
+                    <oj-input-text id="nickName"  async-validators="[[[$baseModel.getTaxonomyValidator($component.validateDTO(), $component.validateField('nickName'), '#nickName')]]]" value="{{$component.payeeNickName}}"></oj-input-text>
+                </div>
+            </div>
+            </oj-validation-group>
+            
+            <!-- ko if:$dashboard.appData.segment === "CORP" -->
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12  label">
+                    <label class="oj-label" data-bind="text : payments.payee.payeeaccesstype"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 ">
+                    <oj-buttonset-one id="accessType" value="{{accessType}}">
+                        <!-- ko foreach: accessTypes -->
+                        <oj-option name="accessType" value="{{id}}" :id="[[id]]">
+                            <span data-bind="attr: {for: id},text: label "></span>
+                        </oj-option>
+                        <!-- /ko -->
+                    </oj-buttonset-one>
+                </div>
+            </div>
+            <!-- /ko -->
+        </page-section>
+        <!-- /ko -->
+        <!-- ko if: stageOne() -->
+        <div data-bind='component:{name:"warning-message-dialog", params:{rootModel: $component }}'></div>
+        <div class="oj-flex oj-flex-items-pad button-container">
+            <oj-button class="action-button-primary" data-id="addPayee" on-click="[[$component.uploadImage]]">
+                <span slot="startIcon" class="icons" data-bind="css: !($component.isEdit && $component.isEdit()) ? 'icon-add' : 'icon-save'"></span>
+                <span data-bind="text:!($component.isEdit && $component.isEdit()) ? $component.payments.payee.add : $component.payments.payee.save"></span>
+            </oj-button>
+            <oj-button class="action-button-secondary" id="buttoncancel" on-click="[[$component.cancel]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.payments.common.cancel"></span>
+            </oj-button>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: isCollingPeriodSlot() && stageOne() && $dashboard.appData.segment!=="CORP"-->
+        <!-- ko if: !($component.isEdit && $component.isEdit()) -->
+        <div class="cooling-period__message oj-flex oj-flex-items-pad">
+            <label class="oj-flex-item message" data-bind="text: $component.payments.coolingPeriodmsz"></label>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: ($component.isEdit && $component.isEdit()) -->
+        <div class="cooling-period__message_editpayee oj-flex oj-flex-items-pad">
+            <label class="oj-flex-item message" data-bind="text: $component.payments.coolingPeriodMsgForEditPayee"></label>
+        </div>
+        <!-- /ko -->
+        <div class="cooling-period__header" data-bind="text:$component.payments.coolingPeriod"></div>
+        <page-section params="baseModel : $baseModel, rootModel : $component">
+            <div class="oj-flex oj-flex-items-pad">
+                <div clas="oj-flex-item">
+                    <oj-table id="table" :aria-label="[[$component.payments.coolingPeriod]]" columns="[[[{
+                        headerText:$component.payments.duration,
+                        field:'duration',sortable:'none',
+                        className : 'cooling-period__table__row',
+                        headerClassName : 'cooling-period__table__header'
+                    },{
+                        headerText:$component.payments.cumulativeAmount,
+                        template:'amountTemplate',sortable:'none',
+                        className : 'cooling-period__table__row',
+                        headerClassName : 'cooling-period__table__header'
+                    }]]]" selection-mode="[[{row:'none',column:'none'}]]" columns-default="[[{sortable:'disabled'}]]" data="[[$component.CoolingPeriodDataSource]]">
+                        <caption class="hide-label" data-bind="text:$component.payments.coolingPeriod"></caption>
+                        <template slot="amountTemplate">
+                            <div data-bind="text : $current.row.amount ? $formatter.formatCurrency($current.row.amount.amountVal, $current.row.amount.amountCurrency) : ''"></div>
+                        </template>
+                    </oj-table>
+                </div>
+            </div>
+             <!-- ko if: ($component.isEdit && $component.isEdit()) -->
+        <div class="cooling-period__note oj-flex oj-flex-items-pad">
+            <label class="oj-flex-item message" data-bind="text: $component.payments.coolingPeriodMsgForEditPayeeNote"></label>
+        </div>
+        <!-- /ko -->
+        </page-section>
+       
+        <!-- /ko -->
+    </div>
+    <!-- ko if: $baseModel.large() -->
+    <div class="oj-flex-item oj-lg-4 oj-sm-only-hide oj-md-only-hide">
+        <help params="baseModel : $baseModel, rootModel : $component, transaction: 'bank-account-payee'"></help>
+    </div>
+    <!-- /ko -->
+</div>

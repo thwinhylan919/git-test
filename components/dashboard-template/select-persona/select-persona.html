@@ -1,0 +1,101 @@
+<div class="select-persona-container">
+    <div class="form-main-container dashboard-design">
+        <oj-validation-group id="tracker" valid="{{validationTracker}}">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <oj-label :for="[['dashboard_name']]"><span data-bind="text:$component.nls.labels.templateName"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-5">
+                    <oj-input-text :aria-label="[[$component.nls.labels.templateName]]" required :id="[['dashboard_name']]" validators="[[$baseModel.getValidator('ALPHANUMERIC_WITH_SPACE',$component.nls.invalidTemplateName,{
+                                type:'length',options:{
+                                    min:1,max:30}})]]" value="{{$component.dashboardName}}"></oj-input-text>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad ">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 label">
+                    <oj-label :for="[['dashboard_desc']]"><span data-bind="text:$component.nls.labels.description"></span></oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-8 oj-lg-5">
+                    <oj-input-text required :aria-label="[[$component.nls.labels.description]]" :id="[['dashboard_desc']]" validators="[[$baseModel.getValidator('APPLICATION_DEscriptION')]]" value="{{$component.dashboardDesc}}"></oj-input-text>
+                </div>
+            </div>
+            <div id='checkboxset-container'>
+                <div class='oj-flex-bar oj-flex oj-flex-items-pad'>
+                    <div class='oj-flex-bar-start oj-flex-item oj-sm-3'>
+                        <oj-label id="mainlabelid" class="oj-label-inline"><span data-bind="text:$component.nls.labels.design"></span></oj-label>
+                    </div>
+                    <div class='oj-flex-bar-middle oj-flex-item'>
+                        <oj-checkboxset required labelled-by="mainlabelid" class='oj-choice-direction-row' value="{{designChoice}}">
+                            <oj-option id="large" value="large" disabled="[[disableOthers]]"><span data-bind="text:$component.nls.labels.large"></span></oj-option>
+                            <oj-option id="medium" value="medium" disabled="[[disableOthers]]"><span data-bind="text:$component.nls.labels.medium"></span></oj-option>
+                            <oj-option id="small" value="small" disabled="[[disableOthers]]"><span data-bind="text:$component.nls.labels.small"></span></oj-option>
+                        </oj-checkboxset>
+                    </div>
+                </div>
+            </div>
+            <!-- ko if: $component.enterpriseRolesLoaded() -->
+            <div data-bind='component:{name: "nav-bar",
+        params:{rootModel: $data,menuOptions: menuOptions, uiOptions:uiOptions,navBarDescription:$component.nls.navBarDescription}}'>
+            </div>
+            <!-- /ko -->
+            <page-section params="baseModel : $baseModel,rootModel:$data, heading : ''">
+                <!-- ko ifnot: $component.menuSelection() === "USER_TYPE" -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-2 label">
+                        <oj-label id="mainlabelid2">
+                            <span data-bind="text:nls.userType"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-10">
+                        <!-- ko if: $component.enterpriseRolesLoaded() -->
+                        <oj-radioset labelled-by="mainlabelid2" class="oj-choice-direction-row" value="{{selectedEnterpriseRole}}" :aria-label="[[$component.nls.userType]]">
+                            <!-- ko foreach: $component.segmentList -->
+                            <oj-option :id="[[$data.enterpriseRoleId]]" value="[[$data.enterpriseRoleId]]">
+                                <span data-bind="text:$data.enterpriseRoleName"></span>
+                            </oj-option>
+                            <!-- /ko -->
+                        </oj-radioset>
+
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <!-- /ko -->
+            </page-section>
+            <page-section params="baseModel : $baseModel,rootModel:$data, heading : $component.selectedSegmentHeader">
+                <div class="oj-flex oj-flex-items-pad ">
+                    <!-- ko if: $component.segmentRoles().length > 0 -->
+                    <oj-radioset required value="{{currentSegmentRole}}" class="oj-choice-direction-row">
+                        <oj-bind-for-each data="[[$component.segmentRoles]]">
+                            <template>
+                                <oj-option :id="[[$current.data.code+$current.data.name]]"
+                                    value="[[$current.data.code]]">
+                                    <img data-bind="loadImage:'dashboard-design/personas/dashboard.png'"
+                                        class="oj-sm-12" />
+                                    <span class="radioAlignment" data-bind="text:$current.data.name"></span>
+                                </oj-option>
+                            </template>
+                        </oj-bind-for-each>
+
+                    </oj-radioset>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $component.segmentRoles().length > 0 -->
+                    <div class="oj-flex-item oj-sm-12">
+                        <span data-bind="text: $component.nls.noData"></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex oj-flex-items-pad ">
+                    <oj-button class="action-button-primary " on-click="[[$component.createDashboardDesign]]">
+                        <span data-bind="text:$component.nls.generic.common.next"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                        <span data-bind="text:$component.nls.generic.common.cancel"></span>
+                    </oj-button>
+                    <oj-button class="action-button-secondary" on-click="[[$dashboard.hideDetails]]">
+                        <span data-bind="text:$component.nls.generic.common.back"></span>
+                    </oj-button>
+                </div>
+            </page-section>
+        </oj-validation-group>
+    </div>
+</div>

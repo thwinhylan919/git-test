@@ -1,0 +1,429 @@
+<oj-validation-group id="tracker">
+    <!-- ko if: !$component.review -->
+    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label descriptionDetails">
+        <oj-label for="state">
+            <span data-bind="text:$component.nls.realEstateDetails.realEstateDetailsDescription"></span>
+        </oj-label>
+    </div>
+    <page-section params="baseModel : $baseModel, rootModel : $data, heading:''">
+        <div class="oj-flex-items-pad oj-flex oj-lg-12">
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6">
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyType">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyType"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-select-one id="propertyType" placeholder="[[$component.nls.realEstateDetails.select]]"
+                            value="{{$component.path().payload.realEstateDetails.propertyType}}" required>
+                            <!-- ko foreach: $component.propertyType -->
+                            <oj-option value="[[code]]"><span data-bind="text: description"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="constructionStatus">
+                            <span data-bind="text:$component.nls.realEstateDetails.constructionStatus"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-select-one id="constructionStatus" placeholder="[[$component.nls.realEstateDetails.select]]"
+                            value="{{$component.path().payload.realEstateDetails.constructionStatus}}">
+                            <!-- ko foreach: $component.constructionStatusOptions -->
+                            <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <label for="constructionCompleted"
+                            data-bind="text:$component.nls.realEstateDetails.constructionCompleted"></label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4">
+                        <oj-input-date id="constructionCompleted"
+                            placeholder="[[$component.nls.realEstateDetails.date]]"
+                            converter="[[$formatter.dateConverter]]"
+                            value="{{$component.path().payload.realEstateDetails.expectedCompletionDate}}">
+                        </oj-input-date>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="registrationNumber">
+                            <span data-bind="text:$component.nls.realEstateDetails.registrationNumber"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="registrationNumber"
+                            placeholder="[[$component.nls.realEstateDetails.regNumber]]"
+                            value="{{$component.path().payload.realEstateDetails.registrationNumber}}" required>
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="city">
+                            <span data-bind="text:$component.nls.realEstateDetails.city"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="city" placeholder="[[$component.nls.realEstateDetails.enterCity]]"
+                            value="{{$component.path().payload.realEstateDetails.city}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="country">
+                            <span data-bind="text:$component.nls.realEstateDetails.country"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="country" placeholder="[[$component.nls.realEstateDetails.country]]"
+                            value="{{$component.path().payload.realEstateDetails.country}}" required>
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyArea">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyArea"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="propertyArea" placeholder="[[$component.nls.realEstateDetails.propertyArea]]"
+                            value="{{$component.path().payload.realEstateDetails.propertyArea}}"
+                            validators="[[$baseModel.getValidator('NUMBERS',$component.nls.realEstateDetails.onlyNumber,{type: 'length',options: {min: 1, max: 20}})]]"
+                            required>
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex-items-pad oj-flex oj-lg-9 oj-md-12 oj-sm-12">
+                    <amount-input
+                        params="amount :$component.path().payload.realEstateDetails.marketValue,currency : $component.path().payload.realEstateDetails.marketValueCurrency, label :$component.nls.realEstateDetails.marketValue,validator:$component.validation,placeholder:$component.nls.realEstateDetails.marketValue,isMandatory:true,currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'marketValue',rootClass:''">
+                    </amount-input>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="builderName">
+                            <span data-bind="text:$component.nls.realEstateDetails.builderName"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="builderName" placeholder="[[$component.nls.realEstateDetails.builderName]]"
+                            value="{{$component.path().payload.realEstateDetails.builderName}}" required>
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="ownershipStatus">
+                            <span data-bind="text:$component.nls.realEstateDetails.ownershipStatus"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-select-one id="ownershipStatus" placeholder="[[$component.nls.realEstateDetails.select]]"
+                            value="{{$component.path().payload.realEstateDetails.ownershipStatus}}" required>
+                            <!-- ko foreach: $component.ownershipStatusOptions -->
+                            <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="isSpecialZone">
+                            <span data-bind="text:$component.nls.realEstateDetails.isZone"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="zone" placeholder="[[$component.nls.realEstateDetails.zone]]"
+                            value="{{$component.path().payload.realEstateDetails.zone}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyStatus">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyStatus"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-select-one id="propertyStatus" placeholder="[[$component.nls.realEstateDetails.select]]"
+                            value="{{$component.path().payload.realEstateDetails.propertyStatus}} " required>
+                            <!-- ko foreach: $component.propertyStatusOptions -->
+                            <oj-option value="[[value]]"><span data-bind="text: label"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <label for="constructionCompletion"
+                            data-bind="text:$component.nls.realEstateDetails.constructionCompletion"></label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12">
+                        <oj-input-date id="constructionCompletion"
+                            placeholder="[[$component.nls.realEstateDetails.date]]"
+                            converter="[[$formatter.dateConverter]]"
+                            value="{{$formatter.formatDate($component.path().payload.realEstateDetails.completionDate)}}">
+                        </oj-input-date>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <label for="propertyPurchase"
+                            data-bind="text:$component.nls.realEstateDetails.propertyPurchase"></label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12">
+                        <oj-input-date id="propertyPurchase" placeholder="[[$component.nls.realEstateDetails.date]]"
+                            converter="[[$formatter.dateConverter]]"
+                            value="{{$component.path().payload.realEstateDetails.propertyPurchase}}">
+                        </oj-input-date>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyLocation">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyLocation"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                        <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12 label">
+                            <oj-input-text id="propertyLocation"
+                                placeholder="[[$component.nls.realEstateDetails.addressLine1]]"
+                                value="{{$component.path().payload.realEstateDetails.addressLine1}}"
+                                validators="[[$baseModel.getValidator('ADDRESS')]]" required>
+                            </oj-input-text>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 left">
+                            <a href="#"
+                                data-bind="text:$component.nls.realEstateDetails.addMore,click:$component.addAddressLine"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                    <!-- ko if: $component.addLineNumber() >= 2 -->
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyLocation2" class="hide-label">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyLocation"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                        <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12 label">
+                            <oj-input-text id="propertyLocation2"
+                                placeholder="[[$component.nls.realEstateDetails.addressLine2]]"
+                                value="{{$component.path().payload.realEstateDetails.addressLine2}}"
+                                validators="[[$baseModel.getValidator('ADDRESS')]]">
+                            </oj-input-text>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 left">
+                            <a href="#"
+                                data-bind="text:$component.nls.realEstateDetails.removeAddressLine,click:$component.removeAddressLine"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                    <!-- ko if: $component.addLineNumber() >= 3 -->
+                    <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyLocation3" class="hide-label">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyLocation"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex oj-lg-12">
+                        <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12 label">
+                            <oj-input-text id="propertyLocation3"
+                                placeholder="[[$component.nls.realEstateDetails.addressLine3]]"
+                                value="{{$component.path().payload.realEstateDetails.addressLine3}}"
+                                validators="[[$baseModel.getValidator('ADDRESS')]]">
+                            </oj-input-text>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 left">
+                            <a href="#"
+                                data-bind="text:$component.nls.realEstateDetails.removeAddressLine,click:$component.removeAddressLine"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12">
+                    <!-- ko if: $component.addLineNumber() === 4 -->
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="propertyLocation4" class="hide-label">
+                            <span data-bind="text:$component.nls.realEstateDetails.propertyLocation"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                        <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12 label">
+                            <oj-input-text id="propertyLocation4"
+                                placeholder="[[$component.nls.realEstateDetails.addressLine4]]"
+                                value="{{$component.path().payload.realEstateDetails.addressLine4}}"
+                                validators="[[$baseModel.getValidator('ADDRESS')]]">
+                            </oj-input-text>
+                        </div>
+                        <div class="oj-flex-item oj-lg-4 oj-md-12 oj-sm-12 left">
+                            <a href="#"
+                                data-bind="text:$component.nls.realEstateDetails.removeAddressLine,click:$component.removeAddressLine"></a>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="state">
+                            <span data-bind="text:$component.nls.realEstateDetails.state"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12 label">
+                        <oj-input-text id="state" placeholder="[[$component.nls.realEstateDetails.state]]"
+                            value="{{$component.path().payload.realEstateDetails.state}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="zipCode">
+                            <span data-bind="text:$component.nls.realEstateDetails.zipCode"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="zipCode" placeholder="[[$component.nls.realEstateDetails.zipCode]]"
+                            value="{{$component.path().payload.realEstateDetails.zipCode}}" required>
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="unit">
+                            <span data-bind="text:$component.nls.realEstateDetails.unit"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-select-one id="propertyType" placeholder="[[$component.nls.realEstateDetails.select]]"
+                            value="{{$component.path().payload.realEstateDetails.unit}}" required>
+                            <!-- ko foreach: $component.unitList -->
+                            <oj-option value="[[code]]"><span data-bind="text: description"></span></oj-option>
+                            <!-- /ko -->
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex-items-pad oj-flex oj-lg-8 oj-md-12 oj-sm-12">
+                    <amount-input
+                        params="amount :$component.path().payload.realEstateDetails.eligibleValue,currency : $component.path().payload.realEstateDetails.eligibleValueCurrency, label :$component.nls.realEstateDetails.eligibleValue,validator:$component.validation,placeholder:$component.nls.realEstateDetails.eligibleValue,isMandatory:true,currencyListRequired : true,currencyURL:'currency',currencyParser:$component.currencyParser,rootId:'eligibleValue',rootClass:''">
+                    </amount-input>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="builderClassification">
+                            <span data-bind="text:$component.nls.realEstateDetails.builderClassification"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="builderClassification"
+                            placeholder="[[$component.nls.realEstateDetails.builderClassification]]"
+                            value="{{$component.path().payload.realEstateDetails.builderClassification}}">
+                        </oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-lg-12 oj-md-12 oj-sm-12">
+                    <div class="oj-flex-item oj-lg-12 oj-md-12 oj-sm-12 label">
+                        <oj-label for="isPendingCharges">
+                            <span data-bind="text:$component.nls.realEstateDetails.pendingCharges"></span>
+                        </oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                        <oj-input-text id="pendingCharges"
+                            placeholder="[[$component.nls.realEstateDetails.listPendingCharges]]"
+                            value="{{$component.path().payload.realEstateDetails.pendingCharges}}">
+                        </oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <!-- ko if: $component.review -->
+    <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12 sectionTop"
+        data-bind="with:$component.path().payload.realEstateDetails">
+        <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.propertyType, value : $component.selectedPropertyDesc">
+            </row>
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.constructionStatus, value : $component.statusLabel">
+            </row>
+        </div>
+        <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.propertyStatus, value : $component.propertyStatusLabel">
+            </row>
+            <row
+                params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.constructionCompletion, value : (('completionDate' in $data)?completionDate:'-')">
+            </row>
+        </div>
+    </div>
+    <div data-bind="attr:{id:'segment'+$index()}" class="oj-flex oj-panel oj-panel-alt2 childpanel panelInternal">
+        <div class="oj-flex-items-pad oj-flex oj-lg-12 oj-md-12 oj-sm-12"
+            data-bind="with:$component.path().payload.realEstateDetails">
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.constructionCompleted, value : (('expectedCompletionDate' in $data)?expectedCompletionDate:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.registrationNumber, value : (('registrationNumber' in $data)?registrationNumber:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.city, value : (('city' in $data)?city:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.country, value : (('country' in $data)?country:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.propertyArea, value : (('propertyArea' in $data)?propertyArea:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.marketValue, value : (('marketValue' in $data)?$formatter.formatCurrency(marketValue(), marketValueCurrency()):'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.builderName, value : (('builderName' in $data)?builderName:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.ownershipStatus, value : $component.ownershipStatusLabel">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.isZone, value : (('zone' in $data)?zone:'-')">
+                </row>
+            </div>
+            <div class="oj-flex-items-pad oj-flex-item oj-lg-6 oj-md-12 oj-sm-12">
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.propertyPurchase, value : (('propertyPurchase' in $data)?propertyPurchase:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.propertyLocation, value : (('addressLine1' in $data)?addressLine1():'-') +' '+ (('addressLine2' in $data)?addressLine2():'') +' '+ (('addressLine3' in $data)?addressLine3():'') +' '+ (('addressLine4' in $data)?addressLine4():'')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.state, value : (('state' in $data)?state:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.zipCode, value : (('zipCode' in $data)?zipCode:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.unit, value : $component.unitLabel">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.eligibleValue, value : (('eligibleValue' in $data)?$formatter.formatCurrency(eligibleValue(), eligibleValueCurrency()):'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.builderClassification, value : (('builderClassification' in $data)?builderClassification:'-')">
+                </row>
+                <row
+                    params="baseModel : $baseModel, rootModel : $component, label : $component.nls.realEstateDetails.pendingCharges, value : (('pendingCharges' in $data)?pendingCharges:'-')">
+                </row>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</oj-validation-group>

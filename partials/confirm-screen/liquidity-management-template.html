@@ -1,0 +1,62 @@
+<div class="oj-flex-item">
+    <!-- ko if: $component.params.confirmScreenExtensions && $component.params.confirmScreenExtensions.confirmScreenDetails && $component.params.confirmScreenExtensions.confirmScreenDetails.length>0 -->
+    <page-section params="baseModel : $baseModel, rootModel : $component,heading : ''">
+        <div class="oj-lg-6">
+            <!-- ko foreach: $component.params.confirmScreenExtensions.confirmScreenDetails -->
+            <div class="oj-flex oj-flex-items-pad">
+                <!-- ko foreach: $data -->
+                <!-- ko if: $data.value && $data.isDate -->
+                <row class="oj-sm-6" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $formatter.formatDate($data.value)"></row>
+                <!-- /ko -->
+                <!-- ko if: $data.value && !($data.isDate) -->
+                <row class="oj-sm-6" params="baseModel : $baseModel, rootModel : $component, label : $data.label, value : $data.value"></row>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+    </page-section>
+    <!-- /ko -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item" data-bind="text:$component.confirmScreenResources.confirm.actions.nextAction">
+        </div>
+    </div>
+    <div class="oj-flex oj-flex-items-pad ">
+        <ul class="confirm-screen__list">
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,true)">
+                    <img data-bind="attr:{'title':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.goToDashboard}),'alt':$component.confirmScreenResources.confirm.actions.goToDashboard},loadImage:'dashboard/quick-access/dashboard.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.goToDashboard"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.switchModule.bind($data,'liquidity-management')">
+                    <img data-bind="attr:{'title':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.overview}),'alt':$component.confirmScreenResources.confirm.actions.clickheregoToOverview},loadImage:'dashboard/quick-access/account-details.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.overview"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'list-structure',$component)">
+                    <img data-bind="attr:{'title':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.confirmScreenResources.confirm.actions.listStructure}),'alt':$component.confirmScreenResources.confirm.actions.clickheregoToStructureList},loadImage:'lm/list-structure.svg'">
+                    <div data-bind="text:$component.confirmScreenResources.confirm.actions.listStructure"></div>
+                </a>
+            </li>
+            <!-- ko if: $component.params.confirmScreenExtensions.download && $component.httpStatus === 200 -->
+            <li>
+                <a href="#" data-bind="click:$component.params.confirmScreenExtensions.download.bind($data,$component.params.confirmScreenExtensions.model)">
+                    <img data-bind="attr:{'title':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.params.confirmScreenExtensions.resource.structureDetail.labels.download}),'alt':$component.params.confirmScreenExtensions.resource.structureDetail.labels.download},loadImage:'lm/download-structure.svg'">
+                    <div data-bind="text:$component.params.confirmScreenExtensions.resource.structureDetail.labels.download"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: $component.params.confirmScreenExtensions.taskCode === "GR_M_CNS" -->
+            <li>
+                <a href="#" data-bind="click:$dashboard.loadComponent.bind($data,'create-structure',$component)">
+                    <img data-bind="attr:{'title':$baseModel.format($component.confirmScreenResources.confirm.actions.clickHere,{details:$component.params.confirmScreenExtensions.resource.structureDetail.labels.createNewStructure}),'alt':$component.params.confirmScreenExtensions.resource.structureDetail.labels.createNewStructure},loadImage:'lm/new-structure.svg'">
+                    <div data-bind="text:$component.params.confirmScreenExtensions.resource.structureDetail.labels.createNewStructure"></div>
+                </a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+</div>

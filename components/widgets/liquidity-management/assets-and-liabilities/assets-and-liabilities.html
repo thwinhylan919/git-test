@@ -1,0 +1,37 @@
+<div class="oj-panel currencyAssetChart">
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-8">
+            <h3 data-bind="text:$component.resource.header.assetWidgetHeader">
+            </h3>
+        </div>
+        <div class="oj-flex-item oj-lg-4 ">
+            <!-- ko if:isCurrencyListLoaded() -->
+            <oj-select-one id="currencyAssetsbar" :aria-label="[[$component.resource.labels.assetWidget]]" class="oj-flex-item oj-sm-12" on-value-changed="[[currencyChangedHandler]]" value="{{$component.selectedEquivalentCurrency}}">
+                <!-- ko foreach:currencyList -->
+                <oj-option value="[[value]]"><span data-bind="text:text"></span></oj-option>
+                <!-- /ko -->
+            </oj-select-one>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko if:refreshChart() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-12 currencyAssetChart__chart_data">
+            <oj-chart class="chart" id="asset-liability-bar-chart" series="[[$component.barSeriesValue]]" groups="[[['']]]" animation-on-display="auto" style-defaults.data-item-gaps="2000%" y-axis.tick-label.scaling="none" style-defaults.max-bar-width="75"  animation-on-data-change="auto" hover-behavior="none" translations.label-no-data="[[$component.exchangeRateNotMaintained()?$component.resource.messages.noexchange:$component.resource.messages.nodata]]" legend="[[{
+                rendered : 'on',
+                position : 'bottom'
+            }]]">
+            </oj-chart>
+        </div>
+    </div>
+    <!-- ko if:netPositions -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-lg-6 right">
+            <oj-label :for="equivalent-currency"> <span data-bind="text:$component.resource.labels.netPositions"></span></oj-label>
+        </div>
+        <div class="oj-flex-item oj-lg-6 no-pad-cols" data-bind="text:$formatter.formatCurrency(netPositions().amount,netPositions().currency)">
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>

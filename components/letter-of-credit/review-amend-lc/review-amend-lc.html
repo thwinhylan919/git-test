@@ -1,0 +1,356 @@
+<!-- ko if:$component.reviewDataLoaded() -->
+<div class="form-main-container review-amend-lc">
+
+    <!-- ko if:$component.mode() === 'REVIEW' -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12">
+                    <div
+                        data-bind="template: { name: 'review-screen/review-banner-template', data: $component.reviewTransactionName}">
+                    </div>
+                </div>
+            </div>
+            <!-- ko if: $baseModel.small() -->
+            <div class="oj-flex oj-flex-items-pad review-banner">
+                <div class="oj-flex-item oj-sm-12 oj-md-12">
+                    <oj-label for="amendments"><span data-bind="text:$component.resourceBundle.labels.lcNo"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-12">
+                    <span for="amendments" data-bind="text:$component.letterOfCreditDetails.id"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if:$component.mode() === 'VIEW' || $component.mode() === 'ACCEPTANCE' -->
+    <!-- ko if: $baseModel.small() -->
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 review-banner">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12 oj-md-12">
+                    <oj-label for="amendments"><span data-bind="text:$component.resourceBundle.labels.lcNo"></span>
+                    </oj-label>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-12">
+                    <span for="amendments" data-bind="text:$component.letterOfCreditDetails.id"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <page-section
+        params="baseModel : $baseModel, rootModel : $data, heading : $baseModel.small() === false ? $component.sectionHeading : ''">
+        <oj-accordion id="tradeFinanceAccordion">
+            <!-- ko foreach: $component.amendStages -->
+            <oj-collapsible expanded="[['true']]" disabled="[['true']]">
+                <h4 slot="header">
+                    <span>
+                        <span class="acc-icon icons icon-ok validated"></span>
+                        <span data-bind="text: stageName"></span>
+                    </span>
+                </h4>
+                <div class="stage-content" data-bind="template:{name : templateName}"> </div>
+            </oj-collapsible>
+            <!-- /ko -->
+        </oj-accordion>
+
+        <!-- ko ifnot: $component.mode() ==='approval' -->
+        <div class="button-container">
+            <!-- ko if: $component.mode() ==='ACCEPTANCE' -->
+            <oj-button id="initiateButton" class="action-button-primary" on-click="[[initiateAcceptance]]">
+                <span data-bind="text:$component.resourceBundle.resolution.accept"></span>
+            </oj-button>
+            <oj-button id="rejectButton" class="action-button-primary" on-click="[[rejectAcceptance]]">
+                <span data-bind="text:$component.resourceBundle.resolution.reject"></span>
+            </oj-button>
+            <!-- /ko -->
+
+            <!-- ko if: $component.mode() ==='REVIEW' -->
+            <oj-button id="confirmButton" class="action-button-primary" on-click="[[confirmAmendment]]">
+                <span slot="startIcon" class="icons icon-confirm"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.confirm"></span>
+            </oj-button>
+            <!-- ko ifnot: $baseModel.small() -->
+            <oj-button id="cancelButton" class="action-button-secondary"
+                on-click="[[$dashboard.switchModule.bind($data,true)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+            <oj-button id="backButton" class="action-button-tertiary" on-click="[[goBack]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+            </oj-button>
+            <!-- /ko -->
+
+            <!-- ko ifnot: $component.mode() ==='REVIEW' -->
+            <!-- ko ifnot: $baseModel.small() -->
+            <oj-button id="cancelButton" class="action-button-secondary"
+                on-click="[[$dashboard.switchModule.bind($data, null)]]">
+                <span slot="startIcon" class="icons icon-cancel"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.cancel"></span>
+            </oj-button>
+            <!-- /ko -->
+            <oj-button id="backButton" class="action-button-tertiary" on-click="[[goBack]]">
+                <span slot="startIcon" class="icons icon-back-arrow"></span>
+                <span data-bind="text:$component.resourceBundle.generic.common.back"></span>
+            </oj-button>
+            <!-- /ko -->
+
+        </div>
+
+        <!-- /ko -->
+
+
+    </page-section>
+    <oj-popup id="lc-amendment-popup" tail="simple" modality="modeless" position.my.horizontal="start"
+        position.my.vertical="center" position.at.horizontal="right" position.at.vertical="center">
+        <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+            <span id="popup-text" class="align-right info-text-small previous-value-span"
+                data-bind="html: $component.previousValue()"></span>
+        </div>
+    </oj-popup>
+    <oj-popup id="lc-amendment-popup-goods-table" tail="simple" modality="modeless" position.my.horizontal="start"
+        position.my.vertical="center" position.at.horizontal="right" position.at.vertical="center">
+        <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+            <!-- ko ifnot:$baseModel.small() -->
+            <oj-table id="goodsTable"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_goods_review', true)]]" columns="[[[{headerText:$component.resourceBundle.lcDetails.labels.srNo},{headerText:$component.resourceBundle.shipmentDetails.labels.goods},{headerText:$component.resourceBundle.shipmentDetails.labels.descriptionOfGoods},{headerText:$component.resourceBundle.shipmentDetails.labels.units},{headerText:$component.resourceBundle.shipmentDetails.labels.pricePerUnit
+                    ,headerClassName:'right',className:'right'}]]]"
+                data="[[$component.datasourceForGoodsReviewOriginal]]">
+                <caption class="hide-label" data-bind="text:$component.resourceBundle.documents.labels.drafts">
+                </caption>
+            </oj-table>
+            <!-- /ko -->
+            <!-- ko if:$baseModel.small() -->
+            <oj-list-view id="listview-txn-card" class="cards"
+                item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_goods_review_list',true)}]]"
+                selection-mode="[['single']]" data="[[$component.datasourceForGoodsReviewOriginal]]">
+            </oj-list-view>
+            <!-- /ko -->
+        </div>
+    </oj-popup>
+    <script type="text/html" id="row_tmpl_goods_review">
+      <tr>
+          <td data-bind="text: $component.getRowId($context.rowContext.status.rowIndex)">
+          </td>
+          <td>
+            <span data-bind="text: $data.code"></span>
+          </td>
+          <td>
+            <span data-bind="text: $data.description"></span>
+          </td>
+          <td><span data-bind="text: $data.noOfUnits"></span>
+          </td>
+          <td>
+            <span data-bind="text: $formatter.formatCurrency(ko.utils.unwrapObservable($data.pricePerUnit),$component.lcAmendmentDetails.newAmount.currency())"></span>
+          </td>
+      </tr>
+    </script>
+    <script type="text/html" id="row_tmpl_goods_review_list">
+              <li data-bind="attr: {id: $data.id}">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <label for="srNo" data-bind="text: $component.resourceBundle.lcDetails.labels.srNo"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <span id="srNo" data-bind="text: $component.getRowId($context.index)"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <label for="goodsCode" data-bind="text: $component.resourceBundle.lcDetails.labels.goods"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <span id="goodsCode" data-bind="text: $data.code"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <label for="descriptionOfGoods" data-bind="text: $component.resourceBundle.lcDetails.labels.descriptionOfGoods"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <span id="descriptionOfGoods" data-bind="text: $data.description"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <label for="units" data-bind="text: $component.resourceBundle.lcDetails.labels.units"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <span id="units" data-bind="text: $data.noOfUnits"></span>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <label for="pricePerUnit" data-bind="text: $component.resourceBundle.lcDetails.labels.pricePerUnit"></label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <span id="pricePerUnit" data-bind="text: $formatter.formatCurrency(ko.utils.unwrapObservable($data.pricePerUnit),$component.lcAmendmentDetails.newAmount.currency())"></span>
+                    </div>
+                </div>
+              </li>
+            </script>
+    <oj-popup id="lc-amendment-popup-draft-table" tail="simple" modality="modeless" position.my.horizontal="start"
+        position.my.vertical="center" position.at.horizontal="right" position.at.vertical="center">
+        <!-- ko if: $component.previousValue() -->
+        <div class="oj-flex oj-sm-flex-items-initial">
+            <span id="popup-text" class="align-right info-text-small previous-value-span"
+                data-bind="text: $component.previousValue()"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.previousValue() -->
+        <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+            <!-- ko ifnot:$baseModel.small() -->
+            <oj-table id="draftTable" :aria-label="[[$component.resourceBundle.lcDetails.labels.drafts]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_draft_review', true)]]"
+                columns="[[[{headerText:$component.resourceBundle.lcDetails.labels.srNo,style:'width: 20%'},{headerText:$component.resourceBundle.lcDetails.labels.tenor,style:'width: 20%'},{headerText:$component.resourceBundle.lcDetails.labels.creditDaysFrom,style:'width: 20%'},{headerText:$component.resourceBundle.lcDetails.labels.draweeBank,style:'width: 20%'},{headerText:$component.resourceBundle.lcDetails.labels.draftAmount,style:'width: 20%',headerClassName:'right',className:'right'}]]]"
+                data="[[$component.datasourceForDraftReviewOriginal]]">
+                <caption class="hide-label" data-bind="text:$component.resourceBundle.documents.labels.drafts">
+                </caption>
+            </oj-table>
+            <!-- /ko -->
+            <!-- ko if:$baseModel.small() -->
+            <oj-list-view id="listview-txn-card" class="cards"
+                item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_draft_review_list_orig',true)}]]"
+                selection-mode="[['single']]" data="[[$component.datasourceForDraftReviewOriginal]]">
+            </oj-list-view>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </oj-popup>
+    <script type="text/html" id="row_tmpl_draft_review">
+          <tr>
+              <td data-bind="text: $component.getRowId($context.rowContext.status.rowIndex)">
+              </td>
+              <td>
+                  <span data-bind="text: $data.tenor"></span>
+              </td>
+              <td>
+                  <span data-bind="text: $data.otherInformation"></span>
+              </td>
+              <td>
+                  <span data-bind="text: $data.draweeBankId"></span>
+              </td>
+              <td>
+                  <span data-bind="text: $formatter.formatCurrency(ko.utils.unwrapObservable(amount.amount),$component.letterOfCreditDetails.amount.currency)"></span> 
+              </td>
+          </tr>
+      </script>
+    <script type="text/html" id="row_tmpl_draft_review_list_orig">
+          <li data-bind="attr: {id: $data.id}">
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <label for="srNo" data-bind="text: $component.resourceBundle.lcDetails.labels.srNo"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span id="srNo" data-bind="text: $component.getRowId($context.rowContext.status.rowIndex)"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <label for="tenor" data-bind="text: $component.resourceBundle.lcDetails.labels.tenor"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span id="tenor" data-bind="text: $data.tenor"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <label for="creditDaysFrom" data-bind="text: $component.resourceBundle.lcDetails.labels.creditDaysFrom"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span id="creditDaysFrom" data-bind="text: $data.otherInformation"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <label for="draweeBank" data-bind="text: $component.resourceBundle.lcDetails.labels.draweeBank"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span id="draweeBank" data-bind="text: $data.draweeBankId"></span>
+                </div>
+            </div>
+            <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex-item oj-sm-12">
+                    <label for="draftAmount" data-bind="text: $component.resourceBundle.lcDetails.labels.draftAmount"></label>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                    <span id="draftAmount" data-bind="text: $formatter.formatCurrency(ko.utils.unwrapObservable(amount.amount),$component.letterOfCreditDetails.amount.currency)"></span>
+                </div>
+            </div>
+          </li>
+        </script>
+    <oj-popup id="lc-amendment-popup-document-table" tail="simple" modality="modeless" position.my.horizontal="start"
+        position.my.vertical="center" position.at.horizontal="right" position.at.vertical="center">
+        <!-- ko if: $component.previousValue() -->
+        <div class="oj-flex oj-sm-flex-items-initial">
+            <span id="popup-text" class="align-right info-text-small previous-value-span"
+                data-bind="text: $component.previousValue()"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $component.previousValue() -->
+        <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+            <!-- ko ifnot:$baseModel.small() -->
+            <oj-table id="docTable" :aria-label="[[$component.resourceBundle.documents.labels.documentTable]]"
+                row-renderer="[[$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_doc_review_orig', true)]]"
+                columns="[[$component.docTblColumns]]" data="[[$component.datasourceForDocumentsOriginal]]">
+                <caption class="hide-label"
+                    data-bind="text:$component.resourceBundle.documents.labels.documentsRequired">
+                </caption>
+            </oj-table>
+            <!-- /ko -->
+            <!-- ko if:$baseModel.small() -->
+            <oj-list-view id="listview-txn-card" class="cards"
+                item="[[{renderer:$oj.KnockoutTemplateUtils.getRenderer('row_tmpl_doc_review_list_orig',true)}]]"
+                selection-mode="[['single']]" data="[[$component.datasourceForDocumentsOriginal]]">
+            </oj-list-view>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </oj-popup>
+    <script type="text/html" id="row_tmpl_doc_review_orig">
+      <tr>
+        <td data-bind="text: $data.name">
+        </td>
+        <td data-bind="text: $data.originals">
+        </td>
+        <td data-bind="text: $data.copies">
+        </td>
+      </tr>
+    </script>
+    <script type="text/html" id="row_tmpl_doc_review_list_orig">
+      <li data-bind="attr: {id: $data.id}">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+                <label for="docName" data-bind="text: $component.resourceBundle.documents.labels.docName"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+                <span for="docName" data-bind="text: $data.name"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+                <label for="original" data-bind="text: $component.resourceBundle.documents.labels.original"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+                <span for="original" data-bind="text: $data.originals"></span>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12">
+                <label for="copies" data-bind="text: $component.resourceBundle.documents.labels.copies"></label>
+            </div>
+            <div class="oj-flex-item oj-sm-12">
+                <span for="copies" data-bind="text: $data.copies"></span>
+            </div>
+        </div>
+      </li>
+    </script>
+</div>
+<!-- /ko -->
